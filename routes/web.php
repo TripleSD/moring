@@ -11,6 +11,6 @@
 |
 */
 
-Route::get('/', function () {
-    echo PHP_VERSION;
-});
+Auth::routes();
+
+Route::get('/', 'HomeController@index')->name('home');
