@@ -14,3 +14,4 @@
 Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
+Route::any('/logout','Auth\LoginController@logout')->name('auth.logout');
