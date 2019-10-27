@@ -15,3 +15,4 @@ Auth::routes();
 
 Route::get('/', 'HomeController@index')->name('home');
 Route::any('/logout','Auth\LoginController@logout')->name('auth.logout');
+Route::get('/checks/sites', 'ChecksSitesController@getIndex')->name('checks.sites.getIndex');
