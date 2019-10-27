@@ -56,7 +56,7 @@
 
                 <li class="nav-header">NETWORK</li>
                 <li class="nav-item">
-                    <a href="{{ route('php.versions') }}" class="nav-link">
+                    <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             PHP версии
@@ -68,7 +68,7 @@
 
                 <li class="nav-header">WEB</li>
                 <li class="nav-item">
-                    <a href="{{ route('php.versions') }}" class="nav-link">
+                    <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             PHP версии
@@ -76,7 +76,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a href="{{ route('php.versions') }}" class="nav-link">
+                    <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>
                             SSL сертификаты
