@@ -16,3 +16,5 @@ php artisan moring:install
 php artisan key:generate
 
 # License
+
+.
