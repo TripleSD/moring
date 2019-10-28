@@ -45,7 +45,7 @@ class SitesChecker extends Command
             try {
                 if ($site->control_file != null) {
                     $httpClient = new Client();
-                    $request = $httpClient->request('GET', $site->control_file);
+                    $request = $httpClient->request('GET', $site->control_file,['allow_redirects' => false]);
                     $response = $request->getBody();
                     $responseArray = json_decode($response, true);
                     $phpVersion = $responseArray['php_version'];
@@ -53,7 +53,7 @@ class SitesChecker extends Command
                     $serverInfo = $responseArray['server_info'];
                 } else {
                     $httpClient = new Client();
-                    $response = $httpClient->request('GET', $site->url);
+                    $response = $httpClient->request('GET', $site->url,['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
                     $serverInfo =  $response->getHeader('server');
 
