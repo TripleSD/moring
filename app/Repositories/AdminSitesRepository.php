@@ -4,7 +4,7 @@ namespace App\Repositories;
 
 use App\Models\ChecksSites;
 
-class SitesRepository extends Repository
+class AdminSitesRepository extends Repository
 {
     public function getList()
     {
