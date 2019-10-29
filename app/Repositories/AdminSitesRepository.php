@@ -2,7 +2,7 @@
 
 namespace App\Repositories;
 
-use App\Models\ChecksSites;
+use App\Models\Sites;
 
 class AdminSitesRepository extends Repository
 {
