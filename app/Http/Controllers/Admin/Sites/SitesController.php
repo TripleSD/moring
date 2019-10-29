@@ -14,7 +14,7 @@ class SitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(AdminSiteRepository $adminSiteRepository)
+    public function index(AdminSitesRepository $adminSiteRepository)
     {
         $sites = $adminSiteRepository->getList();
         if(empty($sites)){
@@ -22,7 +22,6 @@ class SitesController extends Controller
         } else {
             return view('admin.sites.index', compact('sites'));
         }
-        dd(__METHOD__);
     }
 
     /**
