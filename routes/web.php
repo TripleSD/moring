@@ -16,3 +16,15 @@ Auth::routes();
 Route::get('/', 'HomeController@index')->name('home');
 Route::any('/logout','Auth\LoginController@logout')->name('auth.logout');
 Route::get('/checks/sites', 'ChecksSitesController@getIndex')->name('checks.sites.getIndex');
+
+$groupData = [
+    'namespace' => 'Admin\Sites',
+    'prefix' => 'admin'
+];
+
+Route::group($groupData, function () {
+    $methods =['index', 'create', 'store', 'edit', 'update', 'destroy'];
+    Route::resource('sites', 'SitesController')
+        ->only($methods)
+        ->names('admin.sites');
+});
