@@ -24,4 +24,4 @@ php artisan key:generate
 
 # License
 
-# Consolidated
+# Consol

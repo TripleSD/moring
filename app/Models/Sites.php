@@ -25,6 +25,14 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ChecksSites whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\ChecksSites whereUrl($value)
  * @mixin \Eloquent
+ * @property string|null $moring_file Контрльный Moring файл
+ * @property string|null $moring_version Версия Moring файла
+ * @property string|null $moring_timestamp Время на сервере где расположен сайт
+ * @property string|null $server_info Информация о веб сервере
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sites whereMoringFile($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sites whereMoringTimestamp($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sites whereMoringVersion($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\App\Models\Sites whereServerInfo($value)
  */
 class Sites extends Model
 {
