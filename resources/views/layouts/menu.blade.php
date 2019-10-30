@@ -96,6 +96,16 @@
                     </a>
                 </li>
 
+                <li class="nav-header">Настройка</li>
+                <li class="nav-item">
+                    <a href="{{ route('settings.users.index') }}" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Пользователи
+                        </p>
+                    </a>
+                </li>
+
                 <li class="nav-header">MISCELLANEOUS</li>
                 <li class="nav-item">
                     <a href="https://adminlte.io/docs/3.0" class="nav-link">

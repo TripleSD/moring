@@ -8,6 +8,5 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="/css/app.css">
 </head>
-
 @include('layouts.page')
 </html>
