@@ -25,6 +25,11 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Добавление нового пользователя</h3>
+                                <div class="card-tools">
+                                    <a href="{{route('settings.users.index')}}"
+                                       class="btn btn-sm bg-gradient-info" title="Вернуться">
+                                        <i class="fa fa-arrow-left"></i></a>
+                                </div>
                             </div>
 
                             <div class="card-body">
@@ -46,7 +51,7 @@
                                         {{ Form::password('password', ['class' => 'form-control','required','placeholder' => 'Пароль']) }}
                                     </div>
 
-                                    <button type="submit" class="btn btn-xs bg-gradient-cyan">Добавить</button>
+                                    <button type="submit" class="btn btn-sm bg-gradient-success">Добавить</button>
                                     {{ Form::close() }}
                                 </div>
                             </div>
