@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Sites;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\AdminSiteRepository;
+use App\Repositories\AdminSitesRepository;
 use Illuminate\Http\Request;
 
 
@@ -31,7 +31,7 @@ class SitesController extends Controller
      */
     public function create()
     {
-        dd(__METHOD__);
+        return view('admin.sites.create');
     }
 
     /**

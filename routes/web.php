@@ -24,7 +24,6 @@ $groupData = [
 
 Route::group($groupData, function () {
     $methods =['index', 'create', 'store', 'edit', 'update', 'destroy'];
-    Route::resource('sites', 'SitesController')
-        ->only($methods)
-        ->names('admin.sites');
+    Route::resource('sites', 'SitesController', ['names' =>'admin.sites'])
+        ->only($methods);
 });
