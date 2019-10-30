@@ -3,7 +3,9 @@
     <div class="wrapper">
         @include('layouts.navbar')
         @include('layouts.menu')
-        @yield('content')
+
+        @include('layouts.includes')
+
         @include('layouts.footer')
         @else
             @yield('content')
