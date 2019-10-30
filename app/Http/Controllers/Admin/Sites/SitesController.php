@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin\Sites;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\AdminSiteRepository;
+use App\Repositories\AdminSitesRepository;
 use Illuminate\Http\Request;
 
 
@@ -14,7 +14,7 @@ class SitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(AdminSiteRepository $adminSiteRepository)
+    public function index(AdminSitesRepository $adminSiteRepository)
     {
         $sites = $adminSiteRepository->getList();
         if(empty($sites)){
@@ -22,7 +22,6 @@ class SitesController extends Controller
         } else {
             return view('admin.sites.index', compact('sites'));
         }
-        dd(__METHOD__);
     }
 
     /**
@@ -32,7 +31,7 @@ class SitesController extends Controller
      */
     public function create()
     {
-        dd(__METHOD__);
+        return view('admin.sites.create');
     }
 
     /**
