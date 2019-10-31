@@ -79,7 +79,7 @@
 
                 <li class="nav-header">INFRASTRUCTURE</li>
                 <li class="nav-item">
-                    <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
+                    <a href="{{ route('servers.index') }}" class="nav-link">
                         <i class="fa fa-server"></i>
                         <p>
                             Серверы
