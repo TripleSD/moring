@@ -1,22 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-4">
-                        <h1 class="m-0 text-dark">New website</h1>
+                        <h1 class="m-0 text-dark">Добавление сайта</h1>
                     </div>
                     <div class="col-sm-8">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v3</li>
+                            <li class="breadcrumb-item active">Добавление сайта</li>
                         </ol>
                     </div>
                 </div>
             </div>
-        </div>
 
         <!-- Main content -->
         <div class="content">
@@ -26,11 +24,16 @@
                         <div class="card">
                             <div class="card-header">
                                 <h3 class="card-title">Добавление нового сайта</h3>
+                                <div class="card-tools">
+                                    <a href="{{route('admin.sites.index')}}"
+                                       class="btn btn-sm bg-gradient-info" title="Вернуться">
+                                        <i class="fa fa-arrow-left"></i></a>
+                                </div>
                             </div>
 
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open(['site' => route('admin.sites.store'),'method' => 'post', 'enctype' => "multipart/form-data"]) }}
+                                    {{ Form::open([ 'action' => 'Admin\Sites\SitesController@store', 'method' => 'post', 'enctype' => "multipart/form-data"]) }}
 
                                     <div class="form-group">
                                         <label>Название сайта</label>

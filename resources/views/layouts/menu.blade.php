@@ -20,18 +20,7 @@
         </div>
 
         <!-- Sidebar Menu -->
-        <nav class="mt-2">
-            <ul class="nav nav-pills nav-sidebar flex-column"  role="menu" data-accordion="false">
-            <li class="nav-item has-treeview menu-open">
-                <a href="{{route('admin.sites.create')}}" class="nav-link active">
-                        <i class="nav-icon fas fa-server"></i>
-                    <p>
-                        Add new site
-                    </p>
-                </a>
-            </li>
-            </ul>
-        </nav>
+
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
                 <!-- Add icons to the links using the .nav-icon class
