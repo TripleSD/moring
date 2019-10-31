@@ -77,6 +77,15 @@
                 </li>
 
 
+                <li class="nav-header">INFRASTRUCTURE</li>
+                <li class="nav-item">
+                    <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
+                        <i class="fa fa-server"></i>
+                        <p>
+                            Серверы
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-header">WEB</li>
                 <li class="nav-item">
