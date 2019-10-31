@@ -80,7 +80,7 @@
                 <li class="nav-header">INFRASTRUCTURE</li>
                 <li class="nav-item">
                     <a href="{{ route('servers.index') }}" class="nav-link">
-                        <i class="fa fa-server"></i>
+                        <i class="nav-icon fa fa-server"></i>
                         <p>
                             Серверы
                         </p>
@@ -108,7 +108,7 @@
                 <li class="nav-header">Настройка</li>
                 <li class="nav-item">
                     <a href="{{ route('settings.users.index') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fa fa-users"></i>
                         <p>
                             Пользователи
                         </p>
