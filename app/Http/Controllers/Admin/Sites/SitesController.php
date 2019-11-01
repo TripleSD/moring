@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\Sites;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Sites\ShowSitesRequest;
 use App\Http\Requests\Sites\StoreSiteRequest;
+use App\Http\Requests\Sites\UpdateSiteRequest;
 use App\Models\Sites;
 use App\Repositories\AdminSitesRepository;
 use Illuminate\Http\Request;
@@ -63,9 +65,10 @@ class SitesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ShowSitesRequest $request, AdminSitesRepository $adminSiteRepository)
     {
-        dd(__METHOD__);
+        $site = $adminSiteRepository->show($request);
+        return view('admin.sites.show', compact('site'));
     }
 
     /**
@@ -74,9 +77,10 @@ class SitesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ShowSitesRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        dd(__METHOD__);
+        $site = $adminSitesRepository->show($request);
+        return view('admin.sites.edit', compact('site'));
     }
 
     /**
@@ -86,9 +90,17 @@ class SitesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        dd(__METHOD__);
+        $id = $request->site;
+        $fillable = $request->validated();
+        $result = $adminSitesRepository->update($fillable, $id);
+        if (!$result) {
+            return back()->withInput($fillable);
+        } else {
+            flash('Запись обновлена')->success();
+            return redirect()->route('admin.sites.index');
+        }
     }
 
     /**
