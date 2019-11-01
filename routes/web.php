@@ -30,9 +30,14 @@ Route::group($groupData, function () {
         ->names('admin.sites');
 });
 
-//  Users management
-Route::group(['prefix' => 'settings', 'namespace' => 'Admin\Sites','as' => 'settings.'], function () {
+Route::group(['prefix' => 'settings', 'namespace' => 'Admin\Settings','as' => 'settings.'], function () {
     $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy','show'];
     Route::resource('users', 'UsersController')
+        ->only($methods);
+})
+
+Route::group(['namespace' => 'Admin\Servers'], function () {
+    $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy','show'];
+    Route::resource('servers', 'ServersController')
         ->only($methods);
 });
