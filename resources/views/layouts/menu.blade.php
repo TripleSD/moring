@@ -77,6 +77,15 @@
                 </li>
 
 
+                <li class="nav-header">INFRASTRUCTURE</li>
+                <li class="nav-item">
+                    <a href="{{ route('servers.index') }}" class="nav-link">
+                        <i class="nav-icon fa fa-server"></i>
+                        <p>
+                            Серверы
+                        </p>
+                    </a>
+                </li>
 
                 <li class="nav-header">WEB</li>
                 <li class="nav-item">
@@ -99,7 +108,7 @@
                 <li class="nav-header">Настройка</li>
                 <li class="nav-item">
                     <a href="{{ route('settings.users.index') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fa fa-users"></i>
                         <p>
                             Пользователи
                         </p>
