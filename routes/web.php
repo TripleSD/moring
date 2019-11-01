@@ -17,6 +17,7 @@ Route::get('/', 'HomeController@index')->name('home');
 Route::any('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 Route::get('/checks/sites', 'ChecksSitesController@getIndex')->name('checks.sites.getIndex');
 
+//  Sites management
 $groupData = [
     'namespace' => 'Admin\Sites',
     'prefix' => 'admin'
@@ -33,7 +34,7 @@ Route::group(['prefix' => 'settings', 'namespace' => 'Admin\Settings','as' => 's
     $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy','show'];
     Route::resource('users', 'UsersController')
         ->only($methods);
-});
+})
 
 Route::group(['namespace' => 'Admin\Servers'], function () {
     $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy','show'];

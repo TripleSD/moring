@@ -1,22 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content-wrapper">
         <div class="content-header">
             <div class="container-fluid">
                 <div class="row mb-2">
-                    <div class="col-sm-6">
-                        <h1 class="m-0 text-dark">Dashboard v3</h1>
-                    </div><!-- /.col -->
-                    <div class="col-sm-6">
+                    <div class="col-sm-2">
+                        <h1 class="m-0 text-dark">Сайты</h1>
+                    </div>
+
+                    <div class="col-sm-10">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Dashboard v3</li>
+                            <li class="breadcrumb-item active">Список сайтов</li>
                         </ol>
                     </div>
                 </div>
             </div>
-        </div>
 
         <!-- Main content -->
         <div class="content">
@@ -25,18 +24,11 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Responsive Hover Table</h3>
-
+                                <h3 class="card-title">Список сайтов</h3>
                                 <div class="card-tools">
-                                    <div class="input-group input-group-sm" style="width: 150px;">
-                                        <input type="text" name="table_search" class="form-control float-right"
-                                               placeholder="Search">
-
-                                        <div class="input-group-append">
-                                            <button type="submit" class="btn btn-default"><i class="fas fa-search"></i>
-                                            </button>
-                                        </div>
-                                    </div>
+                                    <a href="{{route('admin.sites.create')}}"
+                                       class="btn btn-sm bg-gradient-success" title="Добавление нового сайта">
+                                        <i class="fa fa-plus"></i></a>
                                 </div>
                             </div>
                             <!-- /.card-header -->

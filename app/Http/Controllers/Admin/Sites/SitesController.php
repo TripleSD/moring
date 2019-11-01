@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Sites;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Sites\StoreSiteRequest;
+use App\Models\Sites;
 use App\Repositories\AdminSitesRepository;
 use Illuminate\Http\Request;
 
@@ -18,9 +20,9 @@ class SitesController extends Controller
     {
         $sites = $adminSiteRepository->getList();
         if(empty($sites)){
-            return view('admin.sites.index');
+            return view('sites');
         } else {
-            return view('admin.sites.index', compact('sites'));
+            return view('sites', compact('sites'));
         }
     }
 
@@ -40,9 +42,19 @@ class SitesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSiteRequest $request)
     {
-        dd(__METHOD__);
+        $fillable = $request->validated();
+        $result = (new AdminSitesRepository())->store($fillable);
+
+        if($result) {
+            flash('Запись добавлена')->success();
+            return redirect()
+                ->route('admin.sites.index');
+        } else {
+            return back()
+                ->withInput();
+        }
     }
 
     /**

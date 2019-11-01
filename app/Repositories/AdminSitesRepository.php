@@ -10,4 +10,10 @@ class AdminSitesRepository extends Repository
     {
         return Sites::all();
     }
+
+    public function store (array $fillable)
+    {
+        $result = (new Sites())->create($fillable);
+        return $result;
+    }
 }
