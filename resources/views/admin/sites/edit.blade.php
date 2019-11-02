@@ -5,12 +5,12 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                     <div class="col-sm-4">
-                        <h1 class="m-0 text-dark">Добавление сайта</h1>
+                        <h1 class="m-0 text-dark">Редактирование сайта</h1>
                     </div>
                     <div class="col-sm-8">
                         <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Добавление сайта</li>
+                            <li class="breadcrumb-item active">Редактирование сайта</li>
                         </ol>
                     </div>
                 </div>
@@ -23,9 +23,9 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Добавление нового сайта</h3>
+                                <h3 class="card-title">Редактирование сайта</h3>
                                 <div class="card-tools">
-                                    <a href="{{route('admin.sites.index')}}"
+                                    <a href="{{route('admin.sites.show', $site->id)}}"
                                        class="btn btn-sm bg-gradient-info" title="Вернуться">
                                         <i class="fa fa-arrow-left"></i></a>
                                 </div>
@@ -33,29 +33,37 @@
 
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open([ 'route' => 'admin.sites.store', 'method' => 'post', 'enctype' => "multipart/form-data"]) }}
+                                    {{ Form::open([ 'url' => route('admin.sites.update', $site->id), 'method' => 'put', 'enctype' => "multipart/form-data"]) }}
 
                                     <div class="form-group">
                                         <label>Название сайта</label>
-                                        {{ Form::text('name', null , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
+                                        {{ Form::text('name', $site->name , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
                                     </div>
 
                                     <div class="form-group">
                                         <label>Адрес URL</label>
-                                        {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com']) }}
+                                        {{ Form::text('url', $site->url , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com']) }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label>HTTPS</label>
-                                        {{ Form::checkbox('https', null, ['class' => 'form-control']) }}
+                                        <label>HTTPS</label><br>
+                                        <div class="form-check-inline">
+                                        {{Form::text('https', 'no', ['class' => 'form-control', 'hidden'])}}
+                                        @if($site->https === 'on')
+                                            {{ Form::checkbox('https', null, true, ['class' => 'form-check-input']) }}
+
+                                        @else
+                                            {{ Form::checkbox('https', null, false, ['class' => 'form-check-input']) }}
+                                        @endif
+                                        </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Описание</label>
-                                        {{ Form::text('comment', null , ['class' => 'form-control', 'placeholder' => 'My website, that I love to watch on-line, but sometimes ....']) }}
+                                        {{ Form::text('comment', $site->comment, ['class' => 'form-control', 'placeholder' => 'My website, that I love to watch on-line, but sometimes ....']) }}
                                     </div>
 
-                                    <button type="submit" class="btn btn-xs bg-gradient-cyan">Добавить</button>
+                                    <button type="submit" class="btn btn-xs bg-gradient-cyan">Обновить</button>
                                     {{ Form::close() }}
                                 </div>
                             </div>

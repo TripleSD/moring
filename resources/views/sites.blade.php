@@ -42,6 +42,7 @@
                                         <th>PHP Ver.</th>
                                         <th>Moring</th>
                                         <th>HTTP Code</th>
+                                        <th>Info</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -51,8 +52,8 @@
                                         @php
                                             /** @var \App\Models\ChecksSites $site */
                                         @endphp
-                                        <tr>
-                                            <td>{{ $site->id }}</td>
+                                        <tr class="table-row">
+                                            <td class="site-id">{{ $site->id }}</td>
                                             <td>{{ $site->url }}</td>
                                             <td>{{ $site->server_info }}</td>
                                             <td>{{ $site->php_version}}</td>
@@ -81,6 +82,9 @@
                                                 @endif
                                             </td>
                                             <td>Info...</td>
+                                            <td>
+                                                <a href="{{route('admin.sites.show', $site->id)}}" class="btn btn-sm bg-gradient-warning"><i class="fa fa-eye"></i></a>
+                                            </td>
                                         </tr>
                                     @endforeach
                                     </tbody>

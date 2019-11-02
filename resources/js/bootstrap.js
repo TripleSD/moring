@@ -11,7 +11,6 @@ try {
     window.$ = window.jQuery = require('jquery');
 
     require('bootstrap');
-    require('admin-lte');
     require('./adminlte');
     require('./chart.js/Chart');
     require('./demo');
