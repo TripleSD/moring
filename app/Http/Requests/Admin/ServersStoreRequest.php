@@ -4,7 +4,7 @@ namespace App\Http\Requests\Admin;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ServersRequest extends FormRequest
+class ServersStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,8 +25,9 @@ class ServersRequest extends FormRequest
     {
         return [
             'addr' => 'required|ip',
-            'description' => 'alpha_num',
+            'description' => 'alpha_dash',
             'api_token' => 'alpha_num',
+            'enable' => 'nullable|numeric',
         ];
     }
 

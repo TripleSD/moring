@@ -39,6 +39,7 @@
                                     <th>Id</th>
                                     <th>Адрес</th>
                                     <th>Описание</th>
+                                    <th>Статус</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -52,6 +53,13 @@
                                         <td>{{ $server->id }}</td>
                                         <td>{{ long2ip($server->addr) }}</td>
                                         <td>{{ $server->description }}</td>
+                                        <td>
+                                            @if($server->enable == 1)
+                                                <i class="fa fa-server text-success"></i>
+                                            @else
+                                                <i class="fa fa-server text-danger"></i>
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="{{route('servers.show',$server->id)}}"
                                                class="btn btn-sm bg-gradient-info" title="Просмотр сервера">
