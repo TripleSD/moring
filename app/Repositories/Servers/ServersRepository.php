@@ -2,7 +2,8 @@
 
 namespace App\Repositories\Servers;
 
-use App\Http\Requests\Admin\ServersRequest;
+use App\Http\Requests\Admin\ServersStoreRequest;
+use App\Http\Requests\Admin\ServersUpdateRequest;
 use App\Models\Servers;
 use App\Repositories\Repository;
 use Illuminate\Support\Str;
@@ -25,7 +26,7 @@ class ServersRepository extends Repository
         return Str::random('40');
     }
 
-    public function storeServer(ServersRequest $serversRequest)
+    public function storeServer(ServersStoreRequest $serversRequest)
     {
         $fillData = $serversRequest->validated();
 
@@ -34,5 +35,19 @@ class ServersRepository extends Repository
 
         flash('Сервер сохранен')->success();
         return redirect(route('servers.index'));
+    }
+
+    public function updateServer(ServersUpdateRequest $serversRequest, $serverId)
+    {
+        $fillData = $serversRequest->validated();
+        if(!key_exists('enable',$fillData)) {
+            $fillData['enable'] = 0;
+        }
+
+        $server = Servers::find($serverId);
+        $server->update($fillData);
+
+        flash('Данные обновлены')->success();
+        return redirect(route('servers.show',$serverId));
     }
 }
