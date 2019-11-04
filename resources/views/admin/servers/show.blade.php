@@ -43,6 +43,8 @@
                                     <dd>{{ $server->id }}</dd>
                                     <dt> IP адрес сервера:</dt>
                                     <dd>{{ long2ip($server->addr) }}</dd>
+                                    <dt> Краткое описание:</dt>
+                                    <dd>{{ $server->description }}</dd>
                                 </dl>
                             </div>
                         </div>
