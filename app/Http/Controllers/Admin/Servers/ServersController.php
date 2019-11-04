@@ -1,12 +1,10 @@
 <?php
 
-
 namespace App\Http\Controllers\Admin\Servers;
 
-
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ServersRequest;
-use App\Models\Servers;
+use App\Http\Requests\Admin\ServersStoreRequest;
+use App\Http\Requests\Admin\ServersUpdateRequest;
 use App\Repositories\Servers\ServersRepository;
 
 class ServersController extends Controller
@@ -33,9 +31,10 @@ class ServersController extends Controller
         return view('admin.servers.show', compact('server'));
     }
 
-    public function edit()
+    public function edit($serverId)
     {
-
+        $server = $this->serversRepository->getServer($serverId);
+        return view('admin.servers.edit', compact('server'));
     }
 
     public function create()
@@ -44,8 +43,13 @@ class ServersController extends Controller
         return view('admin.servers.create', compact('token'));
     }
 
-    public function store(ServersRequest $serversRequest)
+    public function store(ServersStoreRequest $serversRequest)
     {
         return $this->serversRepository->storeServer($serversRequest);
+    }
+
+    public function update(ServersUpdateRequest $serversRequest, $serverId)
+    {
+        return $this->serversRepository->updateServer($serversRequest, $serverId);
     }
 }
