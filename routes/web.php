@@ -34,7 +34,7 @@ Route::group(['prefix' => 'settings', 'namespace' => 'Admin\Settings','as' => 's
     $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy','show'];
     Route::resource('users', 'UsersController')
         ->only($methods);
-})
+});
 
 Route::group(['namespace' => 'Admin\Servers'], function () {
     $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy','show'];
