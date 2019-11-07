@@ -40,11 +40,13 @@ class ServersRepository extends Repository
     public function updateServer(ServersUpdateRequest $serversRequest, $serverId)
     {
         $fillData = $serversRequest->validated();
-        if(!key_exists('enable',$fillData)) {
-            $fillData['enable'] = 0;
-        }
 
         $server = Servers::find($serverId);
+
+        if(!isset($fillData['enable'])) {
+            $server->setAttribute('enable', 0);
+        }
+
         $server->update($fillData);
 
         flash('Данные обновлены')->success();
