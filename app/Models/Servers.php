@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Servers extends Model
 {
-    protected $fillable = ['addr', 'description', 'api_token','enable'];
+    protected $fillable = ['addr', 'description', 'api_token', 'enable'];
 
     public function setAddrAttribute($ipAddr)
     {
