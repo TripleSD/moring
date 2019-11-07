@@ -6,9 +6,10 @@ use App\Models\Sites;
 
 class AdminSitesRepository extends Repository
 {
-    public function getList()
+    public function getList($perPage = null)
     {
-        return Sites::all();
+        $columns = ['id', 'name', 'url' , 'https', 'active', 'comment'];
+        return Sites::select($columns)->paginate($perPage);
     }
 
     public function store (array $fillable)
@@ -26,6 +27,12 @@ class AdminSitesRepository extends Repository
     {
         $site = Sites::find($id);
         $result = $site->update($request);
+        return $result;
+    }
+
+    public function destroy(int $id)
+    {
+        $result = Sites::destroy($id);
         return $result;
     }
 }

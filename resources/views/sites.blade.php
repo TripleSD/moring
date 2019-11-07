@@ -38,11 +38,11 @@
                                     <tr>
                                         <th>ID</th>
                                         <th>URL</th>
+                                        <th>Status</th>
                                         <th>Web server</th>
                                         <th>PHP Ver.</th>
                                         <th>Moring</th>
                                         <th>HTTP Code</th>
-                                        <th>Info</th>
                                         <th></th>
                                     </tr>
                                     </thead>
@@ -55,6 +55,16 @@
                                         <tr class="table-row">
                                             <td class="site-id">{{ $site->id }}</td>
                                             <td>{{ $site->url }}</td>
+                                            <td>
+                                                @if($site->active == 'on')
+                                                    <span class="badge badge-success">
+                                                        <i class="fa fa-play"></i>
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-warning">
+                                                        <i class="fa fa-pause"></i>
+                                                @endif
+                                            </td>
                                             <td>{{ $site->server_info }}</td>
                                             <td>{{ $site->php_version}}</td>
                                             <td>
@@ -81,7 +91,6 @@
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td>Info...</td>
                                             <td>
                                                 <a href="{{route('admin.sites.show', $site->id)}}" class="btn btn-sm bg-gradient-warning"><i class="fa fa-eye"></i></a>
                                             </td>
@@ -89,13 +98,22 @@
                                     @endforeach
                                     </tbody>
                                 </table>
+
                             </div>
                             <!-- /.card-body -->
                         </div>
                         <!-- /.card -->
                     </div>
                 </div>
+                @if ($sites->lastPage() >= $sites->currentPage())
+                    <div class="card">
+                        <div class="card-body">
+                            {{$sites->links()}}
+                        </div>
+                    </div>
+                @endif
             </div>
         </div>
     </div>
+
 @endsection

@@ -78,6 +78,12 @@
 
                 <li class="nav-header">WEB</li>
                 <li class="nav-item">
+                    <a href="{{ route('admin.sites.index') }}" class="nav-link">
+                        <i class="nav-icon far fa-image"></i>
+                        <p>
+                            Сайты
+                        </p>
+                    </a>
                     <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>

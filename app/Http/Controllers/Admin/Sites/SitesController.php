@@ -20,7 +20,7 @@ class SitesController extends Controller
      */
     public function index(AdminSitesRepository $adminSiteRepository)
     {
-        $sites = $adminSiteRepository->getList();
+        $sites = $adminSiteRepository->getList(2);
         if(empty($sites)){
             return view('sites');
         } else {
@@ -109,8 +109,15 @@ class SitesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, AdminSitesRepository $adminSitesRepository)
     {
-        dd(__METHOD__);
+        $result = $adminSitesRepository->destroy($id);
+        if(!$result){
+            return back()
+                ->withInput();
+        } else {
+            flash('Сайт удален из списка мониторинга')->success();
+            return redirect()->route('admin.sites.index');
+        }
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 /**
  * App\Models\ChecksSites
@@ -36,5 +37,7 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Sites extends Model
 {
-    protected $fillable = ['name', 'url', 'https', 'comment'];
+    protected $fillable = ['name', 'url', 'active', 'https', 'comment'];
+
+    use SoftDeletes;
 }
