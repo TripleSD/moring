@@ -111,7 +111,6 @@ class SitesController extends Controller
      */
     public function destroy($id, AdminSitesRepository $adminSitesRepository)
     {
-        dd(__METHOD__);
         $result = $adminSitesRepository->destroy($id);
         if(!$result){
             return back()

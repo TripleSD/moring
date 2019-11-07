@@ -32,7 +32,6 @@ class AdminSitesRepository extends Repository
 
     public function destroy(int $id)
     {
-        dd($id);
         $result = Sites::destroy($id);
         return $result;
     }
