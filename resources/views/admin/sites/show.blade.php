@@ -24,13 +24,15 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Редактирование профиля</h3>
+                            <h3 class="card-title">
+                                Просмотр профиля
+                            </h3>
                             <span class="float-right">
                                 <a href="{{route('admin.sites.index')}}"
                                    class="btn btn-sm bg-gradient-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i></a>
                                 <a href="{{route('admin.sites.edit', $site->id)}}"
-                                   class="btn btn-sm bg-gradient-warning" title="Редактирование профиля">
+                                   class="btn btn-sm bg-gradient-warning" title="Редактиование профиля">
                                     <i class="fa fa-user-edit"></i></a>
                             </span>
                         </div>
@@ -44,7 +46,9 @@
                                     <dd>{{ $site->name }}</dd>
                                     <dt>URL:</dt>
                                     <dd>{{ $site->url }}</dd>
-                                    <dt>HTTPS:</dt>
+                                    <dt>Status:</dt>
+                                    <dd>{{ $site->active }}</dd>
+                                     <dt>HTTPS:</dt>
                                     <dd>{{ $site->https }}</dd>
                                     <dt>Комментарий:</dt>
                                     <dd>{{ $site->comment }}</dd>

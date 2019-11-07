@@ -14,7 +14,7 @@ class StoreSiteRequest extends FormRequest
 
     public function authorize()
     {
-        return true;
+        return Auth::check();
     }
 
     /**
@@ -27,6 +27,7 @@ class StoreSiteRequest extends FormRequest
         return [
             'name' => 'required | string | min:3 | max:128',
             'url' => 'required | string | min:3 | max:128',
+            'active' => 'string | max:3',
             'https' => 'string | max:3',
             'comment' => 'max:255',
         ];

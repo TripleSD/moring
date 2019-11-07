@@ -46,6 +46,19 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label>Мониторить</label><br>
+                                        <div class="form-check-inline">
+                                        {{Form::text('active', 'no', ['class' => 'form-control', 'hidden'])}}
+                                        @if($site->active === 'on')
+                                            {{ Form::checkbox('active', null, true, ['class' => 'form-check-input']) }}
+
+                                        @else
+                                            {{ Form::checkbox('active', null, false, ['class' => 'form-check-input']) }}
+                                        @endif
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
                                         <label>HTTPS</label><br>
                                         <div class="form-check-inline">
                                         {{Form::text('https', 'no', ['class' => 'form-control', 'hidden'])}}
@@ -62,9 +75,17 @@
                                         <label>Описание</label>
                                         {{ Form::text('comment', $site->comment, ['class' => 'form-control', 'placeholder' => 'My website, that I love to watch on-line, but sometimes ....']) }}
                                     </div>
-
+                                    <div class="form-row ">
+                                        <div class="form-group col-md-6">
                                     <button type="submit" class="btn btn-xs bg-gradient-cyan">Обновить</button>
                                     {{ Form::close() }}
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                    {{Form::open([ 'url' => route('admin.sites.destroy', $site->id), 'method' => 'delete', 'enctype' => "multipart/form-data"])}}
+                                    <button type="submit" class="btn btn-xs bg-gradient-red">Удалить</button>
+                                    {{ Form::close() }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
