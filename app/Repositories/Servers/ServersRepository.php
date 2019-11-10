@@ -47,8 +47,8 @@ class ServersRepository extends Repository
 
         $server = Servers::find($serverId);
 
-        if (!isset($fillData['enable'])) {
-            $server->setAttribute('enable', 0);
+        if (!isset($fillData['enabled'])) {
+            $server->setAttribute('enabled', 0);
         }
 
         $server->update($fillData);

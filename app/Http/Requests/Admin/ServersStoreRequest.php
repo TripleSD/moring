@@ -27,7 +27,7 @@ class ServersStoreRequest extends FormRequest
             'addr' => 'required|ip',
             'description' => 'alpha_dash',
             'api_token' => 'alpha_num',
-            'enable' => 'nullable|numeric',
+            'enabled' => 'nullable|numeric',
         ];
     }
 
