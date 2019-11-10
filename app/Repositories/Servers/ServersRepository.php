@@ -11,9 +11,13 @@ use Illuminate\Support\Str;
 class ServersRepository extends Repository
 {
 
-    public function getServersList()
+    public function getServersList($request)
     {
-        return Servers::all();
+        if ($request->view == 'all') {
+            return Servers::all();
+        } else {
+            return Servers::paginate(10);
+        }
     }
 
     public function getServer($serverId)
@@ -43,13 +47,13 @@ class ServersRepository extends Repository
 
         $server = Servers::find($serverId);
 
-        if(!isset($fillData['enable'])) {
-            $server->setAttribute('enable', 0);
+        if (!isset($fillData['enabled'])) {
+            $server->setAttribute('enabled', 0);
         }
 
         $server->update($fillData);
 
         flash('Данные обновлены')->success();
-        return redirect(route('servers.show',$serverId));
+        return redirect(route('servers.show', $serverId));
     }
 }
