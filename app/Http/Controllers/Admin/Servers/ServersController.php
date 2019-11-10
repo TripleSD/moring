@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Servers;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ServersRequest;
 use App\Http\Requests\Admin\ServersStoreRequest;
 use App\Http\Requests\Admin\ServersUpdateRequest;
 use App\Repositories\Servers\ServersRepository;
@@ -19,9 +20,9 @@ class ServersController extends Controller
         $this->serversRepository = $serversRepository;
     }
 
-    public function index()
+    public function index(ServersRequest $request)
     {
-        $servers = $this->serversRepository->getServersList();
+        $servers = $this->serversRepository->getServersList($request);
         return view('admin.servers.index', compact('servers'));
     }
 
