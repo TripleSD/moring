@@ -36,7 +36,7 @@
                                 <table class="table table-hover">
                                     <thead>
                                     <tr>
-                                        <th>ID</th>
+                                        <th>#</th>
                                         <th>URL</th>
                                         <th>Status</th>
                                         <th>Web server</th>
@@ -47,14 +47,13 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-
                                     @foreach($sites as $site)
                                         @php
                                             /** @var \App\Models\ChecksSites $site */
                                         @endphp
                                         <tr class="table-row">
-                                            <td class="site-id">{{ $site->id }}</td>
-                                            <td>{{ $site->url }}</td>
+                                            <td class="site-id">{{($sites->currentPage() - 1) * $sites->perPage() + $loop->iteration}}</td>
+                                            <td>{{$site->url}}</td>
                                             <td>
                                                 @if($site->active == 'on')
                                                     <span class="badge badge-success">
@@ -105,10 +104,11 @@
                         <!-- /.card -->
                     </div>
                 </div>
-                @if ($sites->lastPage() >= $sites->currentPage())
+                @if ($sites->lastPage() >= $sites->currentPage() && $sites->lastPage() > 1)
                     <div class="card">
                         <div class="card-body">
                             {{$sites->links()}}
+                            <a href="{{route('admin.sites.index', ['view' => 'all'])}}" class="btn btn-primary">View all</a>
                         </div>
                     </div>
                 @endif

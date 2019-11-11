@@ -18,13 +18,14 @@ class SitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(AdminSitesRepository $adminSiteRepository)
+    public function index(AdminSitesRepository $adminSiteRepository, Request $request)
     {
-        $sites = $adminSiteRepository->getList(2);
+        $perPage = (key_exists('view', $request->query())) ? null : 3;
+        $sites = $adminSiteRepository->getList($perPage);
         if(empty($sites)){
-            return view('sites');
+            return view('sites', ['per_page' => $perPage]);
         } else {
-            return view('sites', compact('sites'));
+            return view('sites', compact('sites'), ['per_page' => $perPage]);
         }
     }
 
