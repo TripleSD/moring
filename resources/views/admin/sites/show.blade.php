@@ -47,9 +47,26 @@
                                     <dt>URL:</dt>
                                     <dd>{{ $site->url }}</dd>
                                     <dt>Status:</dt>
-                                    <dd>{{ $site->active }}</dd>
+                                    @if($site->active === 1)
+                                        <span class="badge badge-success">
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="Monitoring is active"></i>
+                                                    </span>
+                                    @else
+                                        <span class="badge badge-warning">
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="Monitoring paused"></i>
+                                        </span>
+                                    @endif
                                      <dt>HTTPS:</dt>
-                                    <dd>{{ $site->https }}</dd>
+                                    @if($site->https === 1)
+                                        <span class="badge badge-success">
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is On"></i>
+                                                    </span>
+                                    @else
+                                        <span class="badge badge-danger">
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
+                                        </span>
+                                    @endif
+
                                     <dt>Комментарий:</dt>
                                     <dd>{{ $site->comment }}</dd>
                                 </dl>
