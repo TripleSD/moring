@@ -26,7 +26,7 @@ class ServersUpdateRequest extends FormRequest
         return [
             'addr' => 'required|ip',
             'description' => 'alpha_dash',
-            'enable' => 'nullable|numeric',
+            'enabled' => 'nullable|numeric',
         ];
     }
 

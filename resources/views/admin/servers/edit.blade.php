@@ -51,7 +51,7 @@
 
                                 <div class="form-group">
                                     <label>Включен/Не включен:</label>
-                                    {{ Form::checkbox('enable', true, $server->enable) }}
+                                    {{ Form::checkbox('enabled', true, $server->enabled) }}
                                 </div>
 
                                 <button type="submit" class="btn btn-sm bg-gradient-success">Сохранить</button>

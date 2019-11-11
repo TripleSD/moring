@@ -27,8 +27,8 @@ class UpdateSiteRequest extends FormRequest
         return [
             'name' => 'required | string | min:3 | max:128',
             'url' => 'required | string | min:3 | max:128',
-            'active' => 'string | max:3',
-            'https' => 'string | max:3',
+            'active' => 'integer | max:1',
+            'https' => 'integer | max:1',
             'comment' => 'max:255',
         ];
     }

@@ -55,7 +55,7 @@
                                             <td class="site-id">{{($sites->currentPage() - 1) * $sites->perPage() + $loop->iteration}}</td>
                                             <td>{{$site->url}}</td>
                                             <td>
-                                                @if($site->active == 'on')
+                                                @if($site->active === 1)
                                                     <span class="badge badge-success">
                                                         <i class="fa fa-play"></i>
                                                     </span>

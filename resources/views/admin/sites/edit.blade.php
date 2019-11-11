@@ -48,24 +48,16 @@
                                     <div class="form-group">
                                         <label>Мониторить</label><br>
                                         <div class="form-check-inline">
-                                            {{Form::text('active', 'off', ['class' => 'form-control', 'hidden'])}}
-                                        @if($site->active === 'on')
-                                            {{ Form::checkbox('active', null, true) }}
-                                        @else
-                                            {{ Form::checkbox('active', null, false) }}
-                                        @endif
+                                            {{Form::text('active', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('active', true, $site->active) }}
                                         </div>
                                     </div>
 
                                     <div class="form-group">
                                         <label>HTTPS</label><br>
                                         <div class="form-check-inline">
-                                        {{Form::text('https', 'off', ['class' => 'form-control', 'hidden'])}}
-                                        @if($site->https === 'on')
-                                            {{ Form::checkbox('https', null, true, ['class' => 'form-check-input']) }}
-                                        @else
-                                            {{ Form::checkbox('https', null, false, ['class' => 'form-check-input']) }}
-                                        @endif
+                                        {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('https', true, $site->https) }}
                                         </div>
                                     </div>
 
