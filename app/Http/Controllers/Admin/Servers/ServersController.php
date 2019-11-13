@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Servers;
 
+use App\Http\Controllers\Admin\Agent\AgentController;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ServersRequest;
 use App\Http\Requests\Admin\ServersStoreRequest;
@@ -26,10 +27,11 @@ class ServersController extends Controller
         return view('admin.servers.index', compact('servers'));
     }
 
-    public function show($serverId)
+    public function show($serverId, AgentController $agentController)
     {
         $server = $this->serversRepository->getServer($serverId);
-        return view('admin.servers.show', compact('server'));
+        $settingsFile = $agentController->getSettings();
+        return view('admin.servers.show', compact('server','settingsFile'));
     }
 
     public function edit($serverId)
