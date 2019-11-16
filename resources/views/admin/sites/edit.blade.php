@@ -48,8 +48,8 @@
                                     <div class="form-group">
                                         <label>Мониторить сайт</label><br>
                                         <div class="form-check-inline">
-                                            {{Form::text('active', '0', ['class' => 'form-control', 'hidden'])}}
-                                            {{ Form::checkbox('active', true, $site->active) }}
+                                            {{Form::text('enabled', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('enabled', true, $site->active) }}
                                         </div>
                                     </div>
 
