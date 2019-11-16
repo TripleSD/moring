@@ -22,7 +22,7 @@ class SitesController extends Controller
     {
         $perPage = (key_exists('view', $request->query())) ? null : 3;
         $sites = $adminSiteRepository->getList($perPage);
-                return view('sites', compact('sites'), ['per_page' => $perPage]);
+                return view('admin.sites.index', compact('sites'), ['per_page' => $perPage]);
     }
 
     /**
