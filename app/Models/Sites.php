@@ -4,7 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-
 /**
  * App\Models\ChecksSites
  *
@@ -37,7 +36,21 @@ use Illuminate\Database\Eloquent\SoftDeletes;
  */
 class Sites extends Model
 {
-    protected $fillable = ['name', 'url', 'active', 'https', 'comment'];
+    protected $fillable = ['name', 'url', 'active', 'comment', 'file_url'];
 
     use SoftDeletes;
+
+    public function checksList(){
+        return $this->hasOne(SitesChecksList::class, 'site_id');
+    }
+
+    public function getPhpVersion()
+    {
+        return $this->hasOne(SitesPhpVersions::class,'site_id');
+    }
+
+    public function getHttpCode()
+    {
+        return $this->hasOne(SitesHttpCodes::class,'site_id');
+    }
 }

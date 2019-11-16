@@ -27,9 +27,15 @@ class UpdateSiteRequest extends FormRequest
         return [
             'name' => 'required | string | min:3 | max:128',
             'url' => 'required | string | min:3 | max:128',
+            'file_url' => 'nullable | string | min:4 | max:128',
             'active' => 'integer | max:1',
             'https' => 'integer | max:1',
-            'comment' => 'max:255',
+            'check_https' => 'integer | max:1',
+            'http_code' => 'integer | max:1',
+            'use_file' => 'integer | max:1',
+            'check_php' => 'integer | max:1',
+            'check_ssl' => 'integer | max:1',
+            'comment' => 'nullable | max:255',
         ];
     }
 

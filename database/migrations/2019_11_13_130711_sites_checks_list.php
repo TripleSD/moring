@@ -1,0 +1,36 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class SitesChecksList extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('sites_checks_list', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('site_id')->comment('ID сайта под наблюдением');
+            $table->smallInteger('check_https')->default(0);
+            $table->smallInteger('http_code')->default(1);
+            $table->smallInteger('check_ssl')->default(0);
+            $table->foreign('site_id')->references('id')->on('sites');
+            $table->softDeletes();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        //
+    }
+}

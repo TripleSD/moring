@@ -1,5 +1,4 @@
 @extends('layouts.app')
-
 @section('content')
     <div class="content-header">
         <div class="container-fluid">
@@ -56,17 +55,48 @@
                                                         <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="Monitoring paused"></i>
                                         </span>
                                     @endif
-                                     <dt>HTTPS:</dt>
+                                    <dt>Используется HTTPS:</dt>
                                     @if($site->https === 1)
                                         <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is On"></i>
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS control is On"></i>
                                                     </span>
                                     @else
                                         <span class="badge badge-danger">
                                                         <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
                                         </span>
                                     @endif
-
+                                    <dt>Контроль HTTPS:</dt>
+                                    @if($site->checksList->https_https === 1)
+                                        <span class="badge badge-success">
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS control is On"></i>
+                                                    </span>
+                                    @else
+                                        <span class="badge badge-danger">
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
+                                        </span>
+                                    @endif
+                                    <dt>Контроль SSL:</dt>
+                                    @if($site->checksList->check_ssl === 1)
+                                        <span class="badge badge-success">
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS control is On"></i>
+                                                    </span>
+                                    @else
+                                        <span class="badge badge-danger">
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
+                                        </span>
+                                    @endif
+                                    <dt>Использование файла мониторинга:</dt>
+                                    @if($site->checksList->use_file === 1)
+                                        <span class="badge badge-success">
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS control is On"></i>
+                                                    </span>
+                                    @else
+                                        <span class="badge badge-danger">
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
+                                        </span>
+                                    @endif
+                                    <dt>Server response:</dt>
+                                    <dd>{{$site->getHttpCode->http_code}}</dd>
                                     <dt>Комментарий:</dt>
                                     <dd>{{ $site->comment }}</dd>
                                 </dl>

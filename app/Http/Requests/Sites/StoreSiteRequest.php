@@ -27,9 +27,15 @@ class StoreSiteRequest extends FormRequest
         return [
             'name' => 'required | string | min:3 | max:128',
             'url' => 'required | string | min:3 | max:128',
-            'active' => 'integet | max:1',
+            'file_url' => 'nullable | string | min:4 | max:128',
+            'active' => 'integer | max:1',
             'https' => 'integer | max:1',
-            'comment' => 'max:255',
+            'check_https' => 'integer | max:1',
+            'http_code' => 'integer | max:1',
+            'use_file' => 'integer | max:1',
+            'check_php' => 'integer | max:1',
+            'check_ssl' => 'integer | max:1',
+            'comment' => 'nullable | max:255',
         ];
     }
 
@@ -40,8 +46,10 @@ class StoreSiteRequest extends FormRequest
           'url.required' => 'Поле "Адрес URL" должно быть заполнено',
           'name.min' => 'Минимальная длина записи в поле "Название сайта" 3 символа',
           'url.min' => 'Минимальная длина записи в поле "Адрес URL" 3 символа',
+          'file_url.min' => 'Минимальная длина записи в поле "Путь к файлу" 4 символа',
           'name.max' => 'Максимальная длина записи в поле "Название сайта" 128 символов',
           'url.max' => 'Максимальная длина записи в поле "Адрес URL" 128 символов',
+          'file_url.max' => 'Максимальная длина записи в поле "Путь к файлуL" 128 символов',
           'comment.max' => 'Максимальная длина записи в поле "Описание" 255 символов',
         ];
     }

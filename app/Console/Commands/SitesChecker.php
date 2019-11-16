@@ -2,7 +2,10 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ChecksSites;
+use App\Models\Sites;
+use App\Models\SitesChecksList;
+use App\Models\SitesHttpCodes;
+use App\Models\SitesPhpVersions;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 
@@ -39,13 +42,14 @@ class SitesChecker extends Command
      */
     public function handle()
     {
-        $sites = ChecksSites::get();
-
+        $sites = Sites::get();
         foreach ($sites as $site) {
             try {
-                if ($site->control_file != null) {
+                if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
-                    $request = $httpClient->request('GET', $site->control_file,['allow_redirects' => false]);
+                    $url = ($site->https === 1) ? "https://" . $site->url : "http://" . $site->url;
+                    echo $url ."\n";
+                    $request = $httpClient->request('GET', $url,['allow_redirects' => false]);
                     $response = $request->getBody();
                     $responseArray = json_decode($response, true);
                     $phpVersion = $responseArray['php_version'];
@@ -53,30 +57,44 @@ class SitesChecker extends Command
                     $serverInfo = $responseArray['server_info'];
                 } else {
                     $httpClient = new Client();
-                    $response = $httpClient->request('GET', $site->url,['allow_redirects' => false]);
+                    $url = ($site->https === 1) ? "https://" . $site->url : "http://" . $site->url;
+                    echo $url ."\n";
+                    $response = $httpClient->request('GET', $url,['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
                     $serverInfo =  $response->getHeader('server');
-
                     if(!empty($phpVersion[0])) {
                         $phpVersion = preg_replace('/[^\d.]/','',$phpVersion[0]);
                     } else {
-                        $phpVersion = '';
+                        $phpVersion = 0;
                     }
-
                     $statusCode = $response->getStatusCode();
                 }
             } catch (\Exception $e) {
                 $statusCode = 999;
-                $phpVersion = $site->php_version;
+                $phpVersion = 0;
                 $serverInfo = $site->server_info;
             }
 
+            //   HTTP code saving proces
+            $http = SitesHttpCodes::where('site_id', '=', $site->id)->first();
+            if (isset($http)) {
+                $http->http_code = $statusCode;
+            } else {
+                $fillable = ['site_id' => $site->id, 'http_code' => $statusCode];
+                $http = new SitesHttpCodes($fillable);
+            }
+            $http->save();
 
-            $site = ChecksSites::find($site->id);
-            $site->php_version = $phpVersion;
-            $site->http_code = $statusCode;
-            $site->server_info = $serverInfo;
-            $site->save();
+            //    PHP version saving process
+            $php = SitesPhpVersions::where('site_id', '=', $site->id)->first();
+            if (isset($php)) {
+                $php->php_version = $phpVersion;
+            } else {
+                $fillable = ['site_id' => $site->id, 'php_version' => $phpVersion];
+                $php = new SitesPhpVersions($fillable);
+            }
+            $php->save();
+
         }
     }
 }

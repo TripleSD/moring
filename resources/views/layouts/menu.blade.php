@@ -75,6 +75,8 @@
                             Сайты
                         </p>
                     </a>
+                </li>
+                <li class="nav-item">
                     <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
                         <p>

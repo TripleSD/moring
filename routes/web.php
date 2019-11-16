@@ -28,7 +28,9 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::group($groupData, function () {
         $methods = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'];
-        Route::resource('sites', 'SitesController', ['names' => 'admin.sites'])
+        Route::resource('sites', 'SitesController',
+            ['names' => 'admin.sites',
+                'parameters' => ['sites' => 'id']])
             ->only($methods)
             ->names('admin.sites');
     });
