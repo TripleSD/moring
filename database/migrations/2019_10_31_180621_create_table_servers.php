@@ -17,6 +17,9 @@ class CreateTableServers extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('addr')
                 ->comment('Server IP');
+            $table->integer('enabled')
+                ->default('1')
+                ->comment('Enable/Disable status');
             $table->string('token')
                 ->comment('Token for auth');
             $table->string('description')
