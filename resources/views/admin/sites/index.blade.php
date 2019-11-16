@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-2">
-                        <h1 class="m-0 text-dark">Сайты</h1>
-                    </div>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-2">
+                    <h1 class="m-0 text-dark">Сайты</h1>
+                </div>
 
-                    <div class="col-sm-10">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Список сайтов</li>
-                        </ol>
-                    </div>
+                <div class="col-sm-10">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Список сайтов</li>
+                    </ol>
                 </div>
             </div>
+        </div>
 
         <!-- Main content -->
         <div class="content">
@@ -56,7 +56,8 @@
                                             <td>
                                                 {{$site->url}}
                                                 @if ($site->https === 1)
-                                                        <i class="fa fa-lock fa-1" data-toggle="tooltip" data-placement="right" title="SSL cetificate OK"></i>
+                                                    <i class="fa fa-lock fa-1" data-toggle="tooltip"
+                                                       data-placement="right" title="SSL cetificate OK"></i>
                                                 @endif
                                             </td>
                                             <td>
@@ -73,10 +74,10 @@
                                             <td>{{ $site->server_info }}</td>
                                             <td>
                                                 @if (isset($site->getPhpVersion->php_version) && $site->getPhpVersion->php_version != 0)
-                                                {{ $site->getPhpVersion->php_version}}</td>
-                                                @else
-                                                    -
-                                                @endif
+                                                    {{ $site->getPhpVersion->php_version}}</td>
+                                            @else
+                                                -
+                                            @endif
                                             <td>
                                                 @if($site->moring_file != '')
                                                     <span class="badge badge-success">
@@ -89,22 +90,25 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($site->getHttpCode->http_code == 200)
-                                                    <span class="badge badge-success">
+                                                @isset($site->getHttpCode)
+                                                    @if($site->getHttpCode->http_code == 200)
+                                                        <span class="badge badge-success">
                                                         {{ $site->getHttpCode->http_code }}
                                                     </span>
-                                                @elseif($site->getHttpCode->http_code == '')
+                                                    @else
+                                                        <span class="badge badge-danger">
+                                                        {{ $site->getHttpCode->http_code }}
+                                                    </span>
+                                                    @endif
+                                                @else
                                                     <span class="badge badge-light">
                                                         <i class="fa fa-exclamation-triangle"></i>
-                                                    </span>
-                                                @else
-                                                    <span class="badge badge-danger">
-                                                        {{ $site->getHttpCode->http_code }}
                                                     </span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{ route('admin.sites.show', $site->id) }}" class="btn btn-sm bg-gradient-warning"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.sites.show', $site->id) }}"
+                                                   class="btn btn-sm bg-gradient-warning"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -121,7 +125,8 @@
                     <div class="card">
                         <div class="card-body">
                             {{$sites->links()}}
-                            <a href="{{route('admin.sites.index', ['view' => 'all'])}}" class="btn btn-primary">View all</a>
+                            <a href="{{route('admin.sites.index', ['view' => 'all'])}}" class="btn btn-primary">View
+                                all</a>
                         </div>
                     </div>
                 @endif
