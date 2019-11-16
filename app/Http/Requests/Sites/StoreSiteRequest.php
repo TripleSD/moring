@@ -25,7 +25,7 @@ class StoreSiteRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | string | min:3 | max:128',
+            'title' => 'required | string | min:3 | max:128',
             'url' => 'required | string | min:3 | max:128',
             'file_url' => 'nullable | string | min:4 | max:128',
             'active' => 'integer | max:1',
@@ -42,7 +42,7 @@ class StoreSiteRequest extends FormRequest
     public function messages()
     {
         return [
-          'name.required' => 'Поле "Название сайта" должно быть заполнено',
+          'title.required' => 'Поле "Название сайта" должно быть заполнено',
           'url.required' => 'Поле "Адрес URL" должно быть заполнено',
           'name.min' => 'Минимальная длина записи в поле "Название сайта" 3 символа',
           'url.min' => 'Минимальная длина записи в поле "Адрес URL" 3 символа',
