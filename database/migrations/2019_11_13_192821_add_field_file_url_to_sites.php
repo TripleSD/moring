@@ -16,7 +16,7 @@ class AddFieldFileUrlToSites extends Migration
         Schema::table('sites', function (Blueprint $table) {
             $table->text('file_url')
                 ->comment('Monitoring file path')
-                ->after('active')
+                ->after('enabled')
                 ->default(null);
         });
     }
