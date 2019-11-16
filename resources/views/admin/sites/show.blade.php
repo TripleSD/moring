@@ -42,11 +42,11 @@
                                     <dt> ID:</dt>
                                     <dd>{{ $site->id }}</dd>
                                     <dt> Наименование:</dt>
-                                    <dd>{{ $site->name }}</dd>
+                                    <dd>{{ $site->title }}</dd>
                                     <dt>URL:</dt>
                                     <dd>{{ $site->url }}</dd>
                                     <dt>Status:</dt>
-                                    @if($site->active === 1)
+                                    @if($site->enabled === 1)
                                         <span class="badge badge-success">
                                                         <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="Monitoring is active"></i>
                                                     </span>
