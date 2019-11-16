@@ -14,7 +14,9 @@ class AddHttpControlFile extends Migration
     public function up()
     {
         Schema::table('sites', function (Blueprint $table) {
-            $table->rename('', 'control_file')->after('https')->default(0);
+            $table->string('control_file')
+                ->after('https')
+                ->default(0);
         });
     }
 

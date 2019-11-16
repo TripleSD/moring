@@ -14,8 +14,12 @@ class SwitchHttpsAndActiveToInt extends Migration
     public function up()
     {
         Schema::table('sites', function (Blueprint $table) {
-            $table->smallInteger('active')->default(1)->change();
-            $table->smallInteger('https')->default(0)->change();
+            $table->smallInteger('active')
+                ->default(1)
+                ->change();
+            $table->smallInteger('https')
+                ->default(0)
+                ->change();
         });
     }
 
