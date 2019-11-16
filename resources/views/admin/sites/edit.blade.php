@@ -37,7 +37,7 @@
 
                                     <div class="form-group">
                                         <label>Название сайта</label>
-                                        {{ Form::text('name', $site->name , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
+                                        {{ Form::text('title', $site->name , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
                                     </div>
 
                                     <div class="form-group">
@@ -48,8 +48,8 @@
                                     <div class="form-group">
                                         <label>Мониторить сайт</label><br>
                                         <div class="form-check-inline">
-                                            {{Form::text('active', '0', ['class' => 'form-control', 'hidden'])}}
-                                            {{ Form::checkbox('active', true, $site->active) }}
+                                            {{Form::text('enabled', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('enabled', true, $site->active) }}
                                         </div>
                                     </div>
 
