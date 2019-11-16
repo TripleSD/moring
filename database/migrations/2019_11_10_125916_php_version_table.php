@@ -15,8 +15,8 @@ class PhpVersionTable extends Migration
     {
         Schema::create('sites_php_versions', function (Blueprint $table) {
             $table->Increments('id');
-            $table->unsignedBigInteger('site_id')->comment('ID сайта под наблюдением');
-            $table->string('php_version')->comment('Текущая версия php');
+            $table->unsignedBigInteger('site_id')->comment('Site ID');
+            $table->string('php_version')->comment('Current PHP version on site');
             $table->timestamps();
             $table->foreign('site_id')->references('id')->on('sites');
         });

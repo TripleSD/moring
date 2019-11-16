@@ -14,7 +14,9 @@ class AddColumnEnableStatusToServersTable extends Migration
     public function up()
     {
         Schema::table('servers', function (Blueprint $table) {
-            $table->integer('enable')->default('1')->comment('Статус включен/отключен');
+            $table->integer('enable')
+                ->default('1')
+                ->comment('Enable/Disable status');
         });
     }
 

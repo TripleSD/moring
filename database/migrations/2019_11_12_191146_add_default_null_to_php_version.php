@@ -14,7 +14,10 @@ class AddDefaultNullToPhpVersion extends Migration
     public function up()
     {
         Schema::table('sites_php_versions', function (Blueprint $table) {
-            $table->string('php_version')->default(NULL)->nullable()->change();
+            $table->string('php_version')
+                ->default(NULL)
+                ->nullable()
+                ->change();
         });
     }
 

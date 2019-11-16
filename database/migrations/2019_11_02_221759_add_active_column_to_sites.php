@@ -14,7 +14,9 @@ class AddActiveColumnToSites extends Migration
     public function up()
     {
         Schema::table('sites', function (Blueprint $table) {
-            $table->addColumn('string', 'active', ['length' => 2])->after('https')->default('on');
+            $table->string('active', 2)
+                ->after('https')
+                ->default('on');
         });
     }
 

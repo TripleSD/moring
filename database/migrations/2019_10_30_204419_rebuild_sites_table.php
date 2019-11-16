@@ -15,10 +15,10 @@ class RebuildSitesTable extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('name')->comment('Наименование для отображения в списке');
-            $table->text('url')->comment('Контролируемый ULR');
-            $table->string('https')->nullable()->comment('Наличие поддержки HTTPS');
-            $table->text('comment')->nullable()->comment('Описание сайта');
+            $table->text('name')->comment('Site\'s title for sites list');
+            $table->text('url')->comment('Site\'s url');
+            $table->string('https')->nullable()->comment('Isset https on site or no');
+            $table->text('comment')->nullable()->comment('Site\'s description');
             $table->timestamps();
         });
     }
