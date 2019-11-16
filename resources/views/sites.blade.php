@@ -53,7 +53,16 @@
                                         @endphp
                                         <tr class="table-row">
                                             <td class="site-id">{{($sites->currentPage() - 1) * $sites->perPage() + $loop->iteration}}</td>
-                                            <td>{{$site->url}}</td>
+                                            <td>
+                                                @if ($site->https === 1 && $site->http_code === 200)
+                                                    {{$site->url}}
+                                                    <span class="badge badge-success">
+                                                        <i class="fa fa-certificate" data-toggle="tooltip" data-placement="right" title="SSL cetificate OK"></i>
+                                                    </span>
+                                                @else
+                                                    {{$site->url}}
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if($site->active === 1)
                                                     <span class="badge badge-success">
@@ -62,10 +71,16 @@
                                                 @else
                                                     <span class="badge badge-warning">
                                                         <i class="fa fa-pause"></i>
+                                                    </span>
                                                 @endif
                                             </td>
                                             <td>{{ $site->server_info }}</td>
-                                            <td>{{ $site->php_version}}</td>
+                                            <td>
+                                                @if (isset($site->getPhpVersion->php_version) && $site->getPhpVersion->php_version != 0)
+                                                {{ $site->getPhpVersion->php_version}}</td>
+                                                @else
+                                                    -- // --
+                                                @endif
                                             <td>
                                                 @if($site->moring_file != '')
                                                     <span class="badge badge-success">
@@ -74,24 +89,26 @@
                                                 @else
                                                     <span class="badge badge-light">
                                                         <i class="fa fa-wifi"></i>
+                                                    </span>
                                                 @endif
                                             </td>
                                             <td>
-                                                @if($site->http_code == 200)
+                                                @if($site->getHttpCode->http_code == 200)
                                                     <span class="badge badge-success">
-                                                        {{ $site->http_code }}
+                                                        {{ $site->getHttpCode->http_code }}
                                                     </span>
-                                                @elseif($site->http_code == '')
+                                                @elseif($site->getHttpCode->http_code == '')
                                                     <span class="badge badge-light">
                                                         <i class="fa fa-exclamation-triangle"></i>
+                                                    </span>
                                                 @else
                                                     <span class="badge badge-danger">
-                                                        {{ $site->http_code }}
+                                                        {{ $site->getHttpCode->http_code }}
                                                     </span>
                                                 @endif
                                             </td>
                                             <td>
-                                                <a href="{{route('admin.sites.show', $site->id)}}" class="btn btn-sm bg-gradient-warning"><i class="fa fa-eye"></i></a>
+                                                <a href="{{ route('admin.sites.show', $site->id) }}" class="btn btn-sm bg-gradient-warning"><i class="fa fa-eye"></i></a>
                                             </td>
                                         </tr>
                                     @endforeach

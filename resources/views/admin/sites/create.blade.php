@@ -42,12 +42,42 @@
 
                                     <div class="form-group">
                                         <label>Адрес URL</label>
-                                        {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com']) }}
+                                        {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Путь к файлу мониторинга (опционально)</label>
+                                        {{ Form::text('file_url', '',['class' => 'form-control', 'placeholder' => 'monitoring.php']) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>HTTP ответ сервера</label>
+                                        {{Form::text('http_code', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('http_code', 1, true) }}
                                     </div>
 
                                     <div class="form-group">
                                         <label>HTTPS</label>
-                                        {{ Form::checkbox('https', null, ['class' => 'form-control']) }}
+                                        {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('https', 1, false) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Мониторинг HTTPS</label>
+                                        {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('check_https', 1, false) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Проверка SSL</label>
+                                        {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('check_ssl', 1, false) }}
+                                    </div>
+
+                                   <div class="form-group">
+                                        <label>Проверка версии PHP</label>
+                                       {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('check_php', 1, true) }}
                                     </div>
 
                                     <div class="form-group">

@@ -42,11 +42,11 @@
 
                                     <div class="form-group">
                                         <label>Адрес URL</label>
-                                        {{ Form::text('url', $site->url , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com']) }}
+                                        {{ Form::text('url', $site->url , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Мониторить</label><br>
+                                        <label>Мониторить сайт</label><br>
                                         <div class="form-check-inline">
                                             {{Form::text('active', '0', ['class' => 'form-control', 'hidden'])}}
                                             {{ Form::checkbox('active', true, $site->active) }}
@@ -54,10 +54,47 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <label>HTTPS</label><br>
+                                        <label>Путь к файлу мониторинга</label>
+                                        {{ Form::text('file_url', $site->file_url , ['class' => 'form-control', 'placeholder' => 'monitoring.php']) }}
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Использовать файл мониторинга</label><br>
                                         <div class="form-check-inline">
-                                        {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
-                                            {{ Form::checkbox('https', true, $site->https) }}
+                                            {{Form::text('use_file', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('use_file', true, $site->checksList->use_file) }}
+                                        </div>
+                                    </div>
+
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label>Поддержка HTTPS</label><br>
+                                            <div class="form-check-inline">
+                                            {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
+                                                {{ Form::checkbox('https', true, $site->https) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Мониторить HTTPS</label><br>
+                                            <div class="form-check-inline">
+                                            {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
+                                                {{ Form::checkbox('check_https', true, $site->checksList->check_https) }}
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-3">
+                                            <label>Мониторить SSL</label><br>
+                                            <div class="form-check-inline">
+                                            {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
+                                                {{ Form::checkbox('check_ssl', true, $site->checksList->check_ssl) }}
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label>Контроль версии PHP</label><br>
+                                        <div class="form-check-inline">
+                                            {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('check_php', true, $site->checksList->check_php) }}
                                         </div>
                                     </div>
 
@@ -66,11 +103,11 @@
                                         {{ Form::text('comment', $site->comment, ['class' => 'form-control', 'placeholder' => 'My website, that I love to watch on-line, but sometimes ....']) }}
                                     </div>
                                     <div class="form-row ">
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                     <button type="submit" class="btn btn-xs bg-gradient-cyan">Обновить</button>
                                     {{ Form::close() }}
                                         </div>
-                                        <div class="form-group col-md-6">
+                                        <div class="form-group col-md-4">
                                     {{Form::open([ 'url' => route('admin.sites.destroy', $site->id), 'method' => 'delete', 'enctype' => "multipart/form-data"])}}
                                     <button type="submit" class="btn btn-xs bg-gradient-red">Удалить</button>
                                     {{ Form::close() }}
