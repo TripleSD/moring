@@ -15,8 +15,8 @@ class AddHttpCodeColumn extends Migration
     {
         Schema::table('sites', function (Blueprint $table) {
             $table->addColumn('integer', 'http_code')
-                ->after('https'
-                )->default(0);
+                ->after('https')
+                ->default(0);
         });
     }
 

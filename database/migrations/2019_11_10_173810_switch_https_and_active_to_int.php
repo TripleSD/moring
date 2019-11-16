@@ -12,7 +12,8 @@ class SwitchHttpsAndActiveToInt extends Migration
      * @return void
      */
     public function up()
-    {        Schema::table('sites', function (Blueprint $table) {
+    {
+        Schema::table('sites', function (Blueprint $table) {
             $table->integer('active')
                 ->default(1)
                 ->change();
