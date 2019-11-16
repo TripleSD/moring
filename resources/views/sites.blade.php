@@ -54,13 +54,9 @@
                                         <tr class="table-row">
                                             <td class="site-id">{{($sites->currentPage() - 1) * $sites->perPage() + $loop->iteration}}</td>
                                             <td>
-                                                @if ($site->https === 1 && $site->http_code === 200)
-                                                    {{$site->url}}
-                                                    <span class="badge badge-success">
-                                                        <i class="fa fa-certificate" data-toggle="tooltip" data-placement="right" title="SSL cetificate OK"></i>
-                                                    </span>
-                                                @else
-                                                    {{$site->url}}
+                                                {{$site->url}}
+                                                @if ($site->https === 1)
+                                                        <i class="fa fa-lock fa-1" data-toggle="tooltip" data-placement="right" title="SSL cetificate OK"></i>
                                                 @endif
                                             </td>
                                             <td>
@@ -79,7 +75,7 @@
                                                 @if (isset($site->getPhpVersion->php_version) && $site->getPhpVersion->php_version != 0)
                                                 {{ $site->getPhpVersion->php_version}}</td>
                                                 @else
-                                                    -- // --
+                                                    -
                                                 @endif
                                             <td>
                                                 @if($site->moring_file != '')
