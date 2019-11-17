@@ -87,7 +87,7 @@
                                         <td>
                                             <div class="btn-group">
                                                 <a href="{{route('servers.show',$server->id)}}"
-                                                   class="btn btn-xs bg-gradient-info" title="Просмотр сервера">
+                                                   class="btn btn-xs bg-gradient-info" title="Просмотр карточки сервера">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             </div>
