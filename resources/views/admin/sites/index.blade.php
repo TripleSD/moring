@@ -169,8 +169,12 @@
                                             @endif
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.sites.show', $site->id) }}"
-                                               class="btn btn-sm bg-gradient-warning"><i class="fa fa-eye"></i></a>
+                                            <div class="btn-group">
+                                                <a href="{{route('admin.sites.show',$site->id)}}"
+                                                   class="btn btn-xs bg-gradient-info" title="Просмотр карточки сайта">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
