@@ -78,12 +78,12 @@
                                             @endif
                                         </td>
                                         <td>
-                                            @if($site->active === 1)
-                                                <span class="badge badge-success">
+                                            @if($site->enabled === 1)
+                                                <span class="badge badge-success" title="Мониторинг включен">
                                                         <i class="fa fa-play"></i>
                                                     </span>
                                             @else
-                                                <span class="badge badge-warning">
+                                                <span class="badge badge-warning" title="Мониторинг отключен">
                                                         <i class="fa fa-pause"></i>
                                                     </span>
                                             @endif
