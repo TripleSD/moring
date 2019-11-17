@@ -20,9 +20,8 @@ class SitesController extends Controller
      */
     public function index(AdminSitesRepository $adminSiteRepository, Request $request)
     {
-        $perPage = (key_exists('view', $request->query())) ? null : 3;
-        $sites = $adminSiteRepository->getList($perPage);
-                return view('admin.sites.index', compact('sites'), ['per_page' => $perPage]);
+        $sites = $adminSiteRepository->getList($request);
+        return view('admin.sites.index', compact('sites'));
     }
 
     /**
@@ -38,7 +37,7 @@ class SitesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreSiteRequest $request)
@@ -46,7 +45,7 @@ class SitesController extends Controller
         $fillable = $request->validated();
         $result = (new AdminSitesRepository())->store($fillable);
 
-        if($result) {
+        if ($result) {
             flash('Запись добавлена')->success();
             return redirect()
                 ->route('admin.sites.index');
@@ -59,7 +58,7 @@ class SitesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(ShowSitesRequest $request, AdminSitesRepository $adminSiteRepository)
@@ -71,7 +70,7 @@ class SitesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(ShowSitesRequest $request, AdminSitesRepository $adminSitesRepository)
@@ -83,8 +82,8 @@ class SitesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
@@ -103,13 +102,13 @@ class SitesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, AdminSitesRepository $adminSitesRepository)
     {
         $result = $adminSitesRepository->destroy($id);
-        if(!$result){
+        if (!$result) {
             return back()
                 ->withInput();
         } else {
