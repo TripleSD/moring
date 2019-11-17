@@ -5,6 +5,7 @@
         @endif
         <a href="https://moring.ru">moring.ru</a>.</strong>
     All rights reserved.
+    <a href="https://github.com/TripleSD/moring" target="_blank"><i class="fab fa-github-square"></i></a>
     <div class="float-right d-none d-sm-inline-block">
         <b>Bridge:</b>
         @if($bridgeInfo['status'] == 1)
