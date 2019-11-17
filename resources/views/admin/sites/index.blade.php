@@ -56,11 +56,11 @@
                                 <thead>
                                 <tr>
                                     <th>URL</th>
-                                    <th>Status</th>
-                                    <th>Web server</th>
-                                    <th>PHP Ver.</th>
-                                    <th>Moring</th>
-                                    <th>Checks</th>
+                                    <th>Статус</th>
+                                    <th>Веб сервер</th>
+                                    <th>Версия PHP</th>
+                                    <th>Moring файл</th>
+                                    <th>Проверки</th>
                                     <th>HTTP Code</th>
                                     <th></th>
                                 </tr>
@@ -79,29 +79,32 @@
                                         </td>
                                         <td>
                                             @if($site->enabled === 1)
-                                                <span class="badge badge-success" title="Мониторинг включен">
+                                                <span class="text-success" title="Мониторинг включен">
                                                         <i class="fa fa-play"></i>
                                                     </span>
                                             @else
-                                                <span class="badge badge-warning" title="Мониторинг отключен">
+                                                <span class="text-warning" title="Мониторинг отключен">
                                                         <i class="fa fa-pause"></i>
                                                     </span>
                                             @endif
                                         </td>
                                         <td>{{ $site->server_info }}</td>
                                         <td>
-                                            @if (isset($site->getPhpVersion->php_version) && $site->getPhpVersion->php_version != 0)
-                                                {{ $site->getPhpVersion->php_version}}</td>
-                                        @else
-                                            -
-                                        @endif
+                                            @empty(!$site->getPhpVersion)
+                                                {{ $site->getPhpVersion->php_version}}
+                                            @else
+                                                <span class="text-gray">
+                                                    <i class="fa fa-exclamation-triangle"></i>
+                                                </span>
+                                            @endif
+                                        </td>
                                         <td>
                                             @empty(!$site->file_url)
-                                                <span class="badge badge-success" title="Путь до Moring файла указан">
+                                                <span class="text-success" title="Путь до Moring файла указан">
                                                         <i class="fa fa-link"></i>
                                                     </span>
                                             @else
-                                                <span class="badge badge-light" title="Путь до moring файла не указан">
+                                                <span class="text-gray" title="Путь до moring файла не указан">
                                                         <i class="fa fa-link"></i>
                                                     </span>
                                             @endif
@@ -109,47 +112,45 @@
                                         <td>
                                             @if($site->checksList->http_code == 1)
                                                 <span class="text-success" title="Мониторинг HTTP кодов включен">
-                                                        <i class="fa fa-circle"></i>
+                                                        <i class="fa fa-square"></i>
                                                     </span>
                                             @else
                                                 <span class="text-warning" title="Мониторинг HTTP кодов отключен">
-                                                        <i class="fa fa-circle"></i>
+                                                        <i class="fa fa-square"></i>
                                                     </span>
                                             @endif
 
                                             @if($site->checksList->use_file == 1)
                                                 <span class="text-success"
                                                       title="Мониторинг через Moring файл включен">
-                                                        <i class="fa fa-circle"></i>
+                                                        <i class="fa fa-square"></i>
                                                     </span>
                                             @else
                                                 <span class="text-gray"
                                                       title="Мониторинг через Moring файл отключен">
-                                                        <i class="fa fa-circle"></i>
+                                                        <i class="fa fa-square"></i>
                                                     </span>
                                             @endif
 
                                             @if($site->checksList->check_php == 1)
                                                 <span class="text-success" title="Мониторинг PHP версии включен">
-                                                        <i class="fa fa-circle"></i>
+                                                        <i class="fa fa-square"></i>
                                                     </span>
                                             @else
                                                 <span class="text-warning" title="Мониторинг PHP версии отключен">
-                                                        <i class="fa fa-circle"></i>
+                                                        <i class="fa fa-square"></i>
                                                     </span>
                                             @endif
 
                                             @if($site->checksList->check_ssl == 1)
                                                 <span class="text-success" title="Мониторинг PHP версии включен">
-                                                        <i class="fa fa-circle"></i>
+                                                        <i class="fa fa-square"></i>
                                                     </span>
                                             @else
                                                 <span class="text-warning" title="Мониторинг SSL сертификата отключен">
-                                                        <i class="fa fa-circle"></i>
+                                                        <i class="fa fa-square"></i>
                                                     </span>
                                             @endif
-
-
                                         </td>
                                         <td>
                                             @isset($site->getHttpCode)
@@ -163,9 +164,9 @@
                                                     </span>
                                                 @endif
                                             @else
-                                                <span class="badge badge-light">
+                                                <span class="text-gray">
                                                         <i class="fa fa-exclamation-triangle"></i>
-                                                    </span>
+                                                </span>
                                             @endif
                                         </td>
                                         <td>
