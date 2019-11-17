@@ -79,13 +79,15 @@
                                         </td>
                                         <td>
                                             @if($site->enabled === 1)
-                                                <span class="text-success" title="Мониторинг включен">
-                                                        <i class="fa fa-play"></i>
-                                                    </span>
+                                                <span class="badge badge-success" title="Мониторинг включен">
+                                                    E
+                                                </span>
+                                                <a href="#" class="btn btn-sm"><i class="fa fa-pause"></i></a>
                                             @else
-                                                <span class="text-warning" title="Мониторинг отключен">
-                                                        <i class="fa fa-pause"></i>
-                                                    </span>
+                                                <span class="badge badge-warning" title="Мониторинг отключен">
+                                                    D
+                                                </span>
+                                                <a href="" class="btn btn-sm"><i class="fa fa-play"></i></a>
                                             @endif
                                         </td>
                                         <td>{{ $site->server_info }}</td>
@@ -134,7 +136,8 @@
                                                     @endforeach
                                                 @endif
                                             @else
-                                                <span class="text-gray" title="Версия PHP не определена. Запрос к серверу не производился.">
+                                                <span class="text-gray"
+                                                      title="Версия PHP не определена. Запрос к серверу не производился.">
                                                     <i class="fa fa-exclamation-triangle"></i>
                                                 </span>
                                             @endif
