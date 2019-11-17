@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
+use App\Console\Commands\SitesChecker;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sites\ShowSitesRequest;
 use App\Http\Requests\Sites\StoreSiteRequest;
@@ -47,6 +48,8 @@ class SitesController extends Controller
         $result = (new AdminSitesRepository())->store($fillable);
 
         if($result) {
+            $check = new SitesChecker();
+            $check->handle();
             flash('Запись добавлена')->success();
             return redirect()
                 ->route('admin.sites.index');
@@ -95,6 +98,8 @@ class SitesController extends Controller
         if (!$result) {
             return back()->withInput($fillable);
         } else {
+            $check = new SitesChecker();
+            $check->handle();
             flash('Запись обновлена')->success();
             return redirect()->route('admin.sites.index');
         }

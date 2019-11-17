@@ -96,7 +96,23 @@
                                         </span>
                                     @endif
                                     <dt>Server response:</dt>
-                                    <dd>{{$site->getHttpCode->http_code}}</dd>
+                                    @if(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == 200)
+                                        <span class="badge badge-success">
+                                                        {{ $site->getHttpCode->http_code }}
+                                                    </span>
+                                    @elseif(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == '')
+                                        <span class="badge badge-light">
+                                                        <i class="fa fa-exclamation-triangle"></i>
+                                                    </span>
+                                    @elseif (isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code > 200)
+                                        <span class="badge badge-danger">
+                                                        {{ $site->getHttpCode->http_code }}
+                                                    </span>
+                                    @else
+                                        <span class="badge badge-danger">
+                                                        -- // --
+                                                    </span>
+                                    @endif
                                     <dt>Комментарий:</dt>
                                     <dd>{{ $site->comment }}</dd>
                                 </dl>
