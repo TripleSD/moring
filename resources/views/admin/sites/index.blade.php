@@ -115,12 +115,12 @@
 
                                                                 @if(version_compare($site->getPhpVersion->version, $versions->version) >= 0)
                                                                     <span class="text-success"
-                                                                          title="Установлена самая последняя версия">
+                                                                          title="Установлена самая последняя версия {{$versions->version}}">
                                                                     {{ $site->getPhpVersion->version }}
                                                                     </span>
                                                                 @else
                                                                     <span class="text-danger"
-                                                                          title="Необходимо установить актуальную версию">
+                                                                          title="Необходимо установить актуальную версию {{$versions->version}}">
                                                                             {{ $site->getPhpVersion->version }}
                                                                             <i class="fas fa-bug"></i>
                                                                     </span>
