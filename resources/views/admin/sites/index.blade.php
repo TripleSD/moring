@@ -91,9 +91,50 @@
                                         <td>{{ $site->server_info }}</td>
                                         <td>
                                             @empty(!$site->getPhpVersion)
-                                                {{ $site->getPhpVersion->php_version}}
+                                                @if($bridgePhpVersion->isEmpty())
+                                                    @if($site->getPhpVersion->version != 0)
+                                                        <span class="text-gray">
+                                                            {{ $site->getPhpVersion->version }}
+                                                        </span>
+                                                        <span class="text-danger"
+                                                              title="Отсутствуют данных бриджа об актуальной версии PHP">
+                                                            <i class="fa fa-exclamation-triangle"></i>
+                                                        </span>
+                                                    @else
+                                                        <span class="text-warning"
+                                                              title="Не был получен ответ сервера об установленной версии">
+                                                                <i class="fa fa-exclamation-triangle"></i>
+                                                        </span>
+                                                    @endif
+                                                @else
+                                                    @foreach($bridgePhpVersion as $versions)
+                                                        @if($site->getPhpVersion->version != 0)
+                                                            @if($versions->branch == $site->getPhpVersion->branch)
+
+                                                                @if(version_compare($site->getPhpVersion->version, $versions->version) >= 0)
+                                                                    <span class="text-success"
+                                                                          title="Установлена самая последняя версия">
+                                                                    {{ $site->getPhpVersion->version }}
+                                                                    </span>
+                                                                @else
+                                                                    <span class="text-danger"
+                                                                          title="Необходимо установить актуальную версию">
+                                                                            {{ $site->getPhpVersion->version }}
+                                                                            <i class="fas fa-bug"></i>
+                                                                    </span>
+                                                                @endif
+                                                            @endif
+                                                        @else
+                                                            <span class="text-warning"
+                                                                  title="Не был получен ответ сервера об установленной версии">
+                                                                <i class="fa fa-exclamation-triangle"></i>
+                                                            </span>
+                                                            @break
+                                                        @endif
+                                                    @endforeach
+                                                @endif
                                             @else
-                                                <span class="text-gray">
+                                                <span class="text-gray" title="Версия PHP не определена. Запрос к серверу не производился.">
                                                     <i class="fa fa-exclamation-triangle"></i>
                                                 </span>
                                             @endif
@@ -112,59 +153,64 @@
                                         <td>
                                             @if($site->checksList->http_code == 1)
                                                 <span class="text-success" title="Мониторинг HTTP кодов включен">
-                                                        <i class="fa fa-square"></i>
+                                                        <i class="fas fa-check-square"></i>
                                                     </span>
                                             @else
                                                 <span class="text-warning" title="Мониторинг HTTP кодов отключен">
-                                                        <i class="fa fa-square"></i>
+                                                        <i class="fas fa-square"></i>
                                                     </span>
                                             @endif
 
                                             @if($site->checksList->use_file == 1)
                                                 <span class="text-success"
                                                       title="Мониторинг через Moring файл включен">
-                                                        <i class="fa fa-square"></i>
+                                                        <i class="fas fa-check-square"></i>
                                                     </span>
                                             @else
                                                 <span class="text-gray"
                                                       title="Мониторинг через Moring файл отключен">
-                                                        <i class="fa fa-square"></i>
+                                                        <i class="fas fa-square"></i>
                                                     </span>
                                             @endif
 
                                             @if($site->checksList->check_php == 1)
                                                 <span class="text-success" title="Мониторинг PHP версии включен">
-                                                        <i class="fa fa-square"></i>
+                                                        <i class="fas fa-check-square"></i>
                                                     </span>
                                             @else
                                                 <span class="text-warning" title="Мониторинг PHP версии отключен">
-                                                        <i class="fa fa-square"></i>
+                                                        <i class="fas fa-square"></i>
                                                     </span>
                                             @endif
 
                                             @if($site->checksList->check_ssl == 1)
                                                 <span class="text-success" title="Мониторинг PHP версии включен">
-                                                        <i class="fa fa-square"></i>
+                                                        <i class="fas fa-check-square"></i>
                                                     </span>
                                             @else
                                                 <span class="text-warning" title="Мониторинг SSL сертификата отключен">
-                                                        <i class="fa fa-square"></i>
+                                                        <i class="fas fa-square"></i>
                                                     </span>
                                             @endif
                                         </td>
                                         <td>
                                             @isset($site->getHttpCode)
                                                 @if($site->getHttpCode->http_code == 200)
-                                                    <span class="badge badge-success">
+                                                    <span class="badge badge-success" title="Сайт полностью рабочий">
+                                                        {{ $site->getHttpCode->http_code }}
+                                                    </span>
+                                                @elseif($site->getHttpCode->http_code == 301)
+                                                    <span class="badge badge-warning"
+                                                          title="На сайте установлен редирект">
                                                         {{ $site->getHttpCode->http_code }}
                                                     </span>
                                                 @else
-                                                    <span class="badge badge-danger">
-                                                        {{ $site->getHttpCode->http_code }}
+                                                    <span class="text-gray" title="Код ответа не был получен">
+                                                        <i class="fa fa-exclamation-triangle"></i>
                                                     </span>
                                                 @endif
                                             @else
-                                                <span class="text-gray">
+                                                <span class="text-gray" title="Код ответа не был получен">
                                                         <i class="fa fa-exclamation-triangle"></i>
                                                 </span>
                                             @endif
