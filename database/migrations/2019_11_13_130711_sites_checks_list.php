@@ -17,8 +17,6 @@ class SitesChecksList extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('site_id')
                 ->comment('Site ID');
-            $table->smallInteger('check_https')
-                ->default(0);
             $table->smallInteger('http_code')
                 ->default(1);
             $table->smallInteger('check_ssl')

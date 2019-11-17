@@ -3,7 +3,7 @@
         <ul class="pagination">
             @if($paginator->currentPage() != 1)
                 <li class="page-item">
-                    <a class="page-link" href="{{ $paginator->url($paginator->lastPage()) }}" rel="prev"
+                    <a class="page-link" href="{{ $paginator->url(1) }}" rel="prev"
                        aria-label="@lang('pagination.previous')">&lsaquo;&lsaquo;</a>
                 </li>
             @else
