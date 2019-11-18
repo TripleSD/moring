@@ -70,7 +70,7 @@
                                         </span>
                                     @endif
                                     <dt>Контроль HTTPS:</dt>
-                                    @if($site->checksList->https_https === 1)
+                                    @if($site->checksList->check_https === 1)
                                         <span class="badge badge-success">
                                                         <i class="fa fa-toggle-on" data-toggle="tooltip"
                                                            data-placement="right" title="HTTPS control is On"></i>
