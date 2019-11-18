@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddHttpControlFile extends Migration
+class CreateBridgePhpVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,13 @@ class AddHttpControlFile extends Migration
      */
     public function up()
     {
-        Schema::table('sites', function (Blueprint $table) {
-            $table->rename('', 'control_file')->after('https')->default(0);
+        Schema::create('bridge_php_versions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->text('version')
+                ->comment('Current PHP version');
+            $table->integer('branch')
+                ->comment('Branch');
+            $table->timestamps();
         });
     }
 

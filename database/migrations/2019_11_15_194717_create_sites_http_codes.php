@@ -15,10 +15,13 @@ class CreateSitesHttpCodes extends Migration
     {
         Schema::create('sites_http_codes', function (Blueprint $table) {
             $table->Increments('id');
-            $table->unsignedBigInteger('site_id')->comment('ID сайта под наблюдением');
-            $table->string('http_code')->comment('Возвращаемый HTTP код');
+            $table->unsignedBigInteger('site_id')
+                ->comment('Site ID');
+            $table->string('http_code')
+                ->comment('Returned HTTP code');
             $table->timestamps();
-            $table->foreign('site_id')->references('id')->on('sites');
+            $table->foreign('site_id')
+                ->references('id')->on('sites');
         });
     }
 

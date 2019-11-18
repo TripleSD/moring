@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Sites\ShowSitesRequest;
 use App\Http\Requests\Sites\StoreSiteRequest;
 use App\Http\Requests\Sites\UpdateSiteRequest;
-use App\Models\Sites;
+use App\Models\BridgePhpVersions;
 use App\Repositories\AdminSitesRepository;
 use Illuminate\Http\Request;
 
@@ -21,9 +21,9 @@ class SitesController extends Controller
      */
     public function index(AdminSitesRepository $adminSiteRepository, Request $request)
     {
-        $perPage = (key_exists('view', $request->query())) ? null : 3;
-        $sites = $adminSiteRepository->getList($perPage);
-                return view('sites', compact('sites'), ['per_page' => $perPage]);
+        $sites = $adminSiteRepository->getList($request);
+        $bridgePhpVersion = BridgePhpVersions::get();
+        return view('admin.sites.index', compact('sites','bridgePhpVersion'));
     }
 
     /**

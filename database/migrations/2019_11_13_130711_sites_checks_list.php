@@ -15,11 +15,15 @@ class SitesChecksList extends Migration
     {
         Schema::create('sites_checks_list', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('site_id')->comment('ID сайта под наблюдением');
-            $table->smallInteger('check_https')->default(0);
-            $table->smallInteger('http_code')->default(1);
-            $table->smallInteger('check_ssl')->default(0);
-            $table->foreign('site_id')->references('id')->on('sites');
+            $table->unsignedBigInteger('site_id')
+                ->comment('Site ID');
+            $table->smallInteger('http_code')
+                ->default(1);
+            $table->smallInteger('check_ssl')
+                ->default(0);
+            $table->foreign('site_id')
+                ->references('id')
+                ->on('sites');
             $table->softDeletes();
         });
     }

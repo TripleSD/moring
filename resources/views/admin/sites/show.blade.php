@@ -42,77 +42,89 @@
                                     <dt> ID:</dt>
                                     <dd>{{ $site->id }}</dd>
                                     <dt> Наименование:</dt>
-                                    <dd>{{ $site->name }}</dd>
+                                    <dd>{{ $site->title }}</dd>
                                     <dt>URL:</dt>
                                     <dd>{{ $site->url }}</dd>
                                     <dt>Status:</dt>
-                                    @if($site->active === 1)
+                                    @if($site->enabled === 1)
                                         <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="Monitoring is active"></i>
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip"
+                                                           data-placement="right" title="Monitoring is active"></i>
                                                     </span>
                                     @else
                                         <span class="badge badge-warning">
-                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="Monitoring paused"></i>
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip"
+                                                           data-placement="right" title="Monitoring paused"></i>
                                         </span>
                                     @endif
                                     <dt>Используется HTTPS:</dt>
                                     @if($site->https === 1)
                                         <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS control is On"></i>
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip"
+                                                           data-placement="right" title="HTTPS control is On"></i>
                                                     </span>
                                     @else
                                         <span class="badge badge-danger">
-                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip"
+                                                           data-placement="right" title="HTTPS contorl is Off"></i>
                                         </span>
                                     @endif
                                     <dt>Контроль HTTPS:</dt>
                                     @if($site->checksList->https_https === 1)
                                         <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS control is On"></i>
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip"
+                                                           data-placement="right" title="HTTPS control is On"></i>
                                                     </span>
                                     @else
                                         <span class="badge badge-danger">
-                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip"
+                                                           data-placement="right" title="HTTPS contorl is Off"></i>
                                         </span>
                                     @endif
                                     <dt>Контроль SSL:</dt>
                                     @if($site->checksList->check_ssl === 1)
                                         <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS control is On"></i>
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip"
+                                                           data-placement="right" title="HTTPS control is On"></i>
                                                     </span>
                                     @else
                                         <span class="badge badge-danger">
-                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip"
+                                                           data-placement="right" title="HTTPS contorl is Off"></i>
                                         </span>
                                     @endif
                                     <dt>Использование файла мониторинга:</dt>
                                     @if($site->checksList->use_file === 1)
                                         <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip" data-placement="right" title="HTTPS control is On"></i>
+                                                        <i class="fa fa-toggle-on" data-toggle="tooltip"
+                                                           data-placement="right" title="HTTPS control is On"></i>
                                                     </span>
                                     @else
                                         <span class="badge badge-danger">
-                                                        <i class="fa fa-toggle-off" data-toggle="tooltip" data-placement="right" title="HTTPS contorl is Off"></i>
+                                                        <i class="fa fa-toggle-off" data-toggle="tooltip"
+                                                           data-placement="right" title="HTTPS contorl is Off"></i>
                                         </span>
                                     @endif
                                     <dt>Server response:</dt>
-                                    @if(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == 200)
-                                        <span class="badge badge-success">
+                                    <dd>
+                                        @if(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == 200)
+                                            <span class="badge badge-success">
                                                         {{ $site->getHttpCode->http_code }}
                                                     </span>
-                                    @elseif(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == '')
-                                        <span class="badge badge-light">
+                                        @elseif(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == '')
+                                            <span class="badge badge-light">
                                                         <i class="fa fa-exclamation-triangle"></i>
                                                     </span>
-                                    @elseif (isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code > 200)
-                                        <span class="badge badge-danger">
+                                        @elseif (isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code > 200)
+                                            <span class="badge badge-danger">
                                                         {{ $site->getHttpCode->http_code }}
                                                     </span>
-                                    @else
-                                        <span class="badge badge-danger">
+                                        @else
+                                            <span class="badge badge-danger">
                                                         -- // --
                                                     </span>
-                                    @endif
+                                        @endif
+                                    </dd>
                                     <dt>Комментарий:</dt>
                                     <dd>{{ $site->comment }}</dd>
                                 </dl>

@@ -29,24 +29,25 @@
                 <!-- Add icons to the links using the .nav-icon class
                      with font-awesome or any other icon font library -->
                 <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link active">
-                        <i class="nav-icon fas fa-tachometer-alt"></i>
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fa fa-newspaper"></i>
                         <p>
-                            Dashboard
+                            Новости
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
                             <a href="./index.html" class="nav-link">
-                                <i class="far fa-circle nav-icon"></i>
-                                <p>Web</p>
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>...</p>
                             </a>
                         </li>
                     </ul>
                 </li>
 
-                <li class="nav-header">NETWORK</li>
+                <li class="nav-header">
+                    <span class="text-uppercase">Сеть</span></li>
                 <li class="nav-item">
                     <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
                         <i class="nav-icon far fa-image"></i>
@@ -57,7 +58,8 @@
                 </li>
 
 
-                <li class="nav-header">INFRASTRUCTURE</li>
+                <li class="nav-header">
+                    <span class="text-uppercase">Инфраструктура</span></li>
                 <li class="nav-item">
                     <a href="{{ route('servers.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-server"></i>
@@ -67,10 +69,11 @@
                     </a>
                 </li>
 
-                <li class="nav-header">WEB</li>
+                <li class="nav-header">
+                    <span class="text-uppercase">Хостинг</span></li>
                 <li class="nav-item">
                     <a href="{{ route('admin.sites.index') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fa fa-link"></i>
                         <p>
                             Сайты
                         </p>
@@ -78,22 +81,15 @@
                 </li>
                 <li class="nav-item">
                     <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
-                        <p>
-                            PHP версии
-                        </p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                        <i class="nav-icon fa fa-shield-alt"></i>
                         <p>
                             SSL сертификаты
                         </p>
                     </a>
                 </li>
 
-                <li class="nav-header">Настройка</li>
+                <li class="nav-header">
+                    <span class="text-uppercase">Настройки</span></li>
                 <li class="nav-item">
                     <a href="{{ route('settings.users.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-users"></i>

@@ -40,6 +40,14 @@
                                             <i class="fa fa-list" aria-hidden="true"></i></a>
                                     @endif
                                 </div>
+                                <div class="btn-group">
+                                    <a href="#" class="btn btn-sm btn-success">
+                                        25</a>
+                                    <a href="#" class="btn btn-sm btn-success">
+                                        50</a>
+                                    <a href="#" class="btn btn-sm btn-success">
+                                        100</a>
+                                </div>
                             </div>
                         </div>
 
@@ -79,7 +87,7 @@
                                         <td>
                                             <div class="btn-group">
                                                 <a href="{{route('servers.show',$server->id)}}"
-                                                   class="btn btn-xs bg-gradient-info" title="Просмотр сервера">
+                                                   class="btn btn-xs bg-gradient-info" title="Просмотр карточки сервера">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             </div>
@@ -98,7 +106,6 @@
                             @endif
                         </ul>
                     @endif
-
 
                 </div>
             </div>

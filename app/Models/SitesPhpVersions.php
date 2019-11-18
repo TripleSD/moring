@@ -7,6 +7,5 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class SitesPhpVersions extends Model
 {
-    protected $fillable = ['site_id', 'php_version'];
-
+    protected $fillable = ['site_id', 'version', 'branch'];
 }

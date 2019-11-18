@@ -25,10 +25,10 @@ class StoreSiteRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required | string | min:3 | max:128',
+            'title' => 'required | string | min:3 | max:128',
             'url' => 'required | string | min:3 | max:128',
             'file_url' => 'nullable | string | min:4 | max:128',
-            'active' => 'integer | max:1',
+            'enabled' => 'integer | max:1',
             'https' => 'integer | max:1',
             'check_https' => 'integer | max:1',
             'http_code' => 'integer | max:1',
@@ -42,12 +42,12 @@ class StoreSiteRequest extends FormRequest
     public function messages()
     {
         return [
-          'name.required' => 'Поле "Название сайта" должно быть заполнено',
+          'title.required' => 'Поле "Название сайта" должно быть заполнено',
           'url.required' => 'Поле "Адрес URL" должно быть заполнено',
-          'name.min' => 'Минимальная длина записи в поле "Название сайта" 3 символа',
+          'title.min' => 'Минимальная длина записи в поле "Название сайта" 3 символа',
           'url.min' => 'Минимальная длина записи в поле "Адрес URL" 3 символа',
           'file_url.min' => 'Минимальная длина записи в поле "Путь к файлу" 4 символа',
-          'name.max' => 'Максимальная длина записи в поле "Название сайта" 128 символов',
+          'title.max' => 'Максимальная длина записи в поле "Название сайта" 128 символов',
           'url.max' => 'Максимальная длина записи в поле "Адрес URL" 128 символов',
           'file_url.max' => 'Максимальная длина записи в поле "Путь к файлуL" 128 символов',
           'comment.max' => 'Максимальная длина записи в поле "Описание" 255 символов',

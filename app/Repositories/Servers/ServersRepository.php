@@ -10,7 +10,6 @@ use Illuminate\Support\Str;
 
 class ServersRepository extends Repository
 {
-
     public function getServersList($request)
     {
         if ($request->view == 'all') {

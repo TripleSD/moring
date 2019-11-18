@@ -15,9 +15,16 @@ class CreateTableServers extends Migration
     {
         Schema::create('servers', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('addr')->comment('IP адрес сервера');
-            $table->string('token')->comment('Token для авторизации в системе');
-            $table->string('description')->nullable()->comment('Краткое описание сервера');
+            $table->bigInteger('addr')
+                ->comment('Server IP');
+            $table->integer('enabled')
+                ->default('1')
+                ->comment('Enable/Disable status');
+            $table->string('token')
+                ->comment('Token for auth');
+            $table->string('description')
+                ->nullable()
+                ->comment('Server\'s description');
             $table->timestamps();
         });
     }

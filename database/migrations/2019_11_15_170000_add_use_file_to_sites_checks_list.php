@@ -14,7 +14,9 @@ class AddUseFileToSitesChecksList extends Migration
     public function up()
     {
         Schema::table('sites_checks_list', function (Blueprint $table) {
-            $table->addColumn('SmallInteger','use_flie')->after('http_code')->default(0);
+            $table->addColumn('SmallInteger','use_flie')
+                ->after('http_code')
+                ->default(0);
         });
     }
 

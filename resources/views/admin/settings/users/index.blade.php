@@ -36,9 +36,10 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Имя</th>
-                                    <th>Email</th>
+                                    <th>ID</th>
+                                    <th>ФИО</th>
+                                    <th>Электронная почта(логин)</th>
+                                    <th>Роль</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -52,6 +53,7 @@
                                         <td>{{ $user->id }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->email }}</td>
+                                        <td>?</td>
                                         <td>
                                             <a href="{{route('settings.users.show',$user->id)}}"
                                                class="btn btn-sm bg-gradient-info" title="Просмотр пользователя">

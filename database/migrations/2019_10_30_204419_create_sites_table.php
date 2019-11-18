@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RebuildSitesTable extends Migration
+class CreateSitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,10 +15,17 @@ class RebuildSitesTable extends Migration
     {
         Schema::create('sites', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->text('name')->comment('Наименование для отображения в списке');
-            $table->text('url')->comment('Контролируемый ULR');
-            $table->string('https')->nullable()->comment('Наличие поддержки HTTPS');
-            $table->text('comment')->nullable()->comment('Описание сайта');
+            $table->text('title')
+                ->comment('Sites title for sites list');
+            $table->text('url')
+                ->comment('Sites url');
+            $table->integer('https')
+                ->default(0);
+            $table->integer('enabled')
+                ->default(1);
+            $table->text('comment')
+                ->nullable()
+                ->comment('Sites description');
             $table->timestamps();
         });
     }

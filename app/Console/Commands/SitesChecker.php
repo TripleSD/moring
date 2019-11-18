@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Models\Sites;
-use App\Models\SitesChecksList;
 use App\Models\SitesHttpCodes;
 use App\Models\SitesPhpVersions;
 use GuzzleHttp\Client;
@@ -48,7 +47,6 @@ class SitesChecker extends Command
                 if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
                     $url = ($site->https === 1) ? "https://" . $site->url : "http://" . $site->url;
-                    echo $url ."\n";
                     $request = $httpClient->request('GET', $url,['allow_redirects' => false]);
                     $response = $request->getBody();
                     $responseArray = json_decode($response, true);
@@ -58,7 +56,6 @@ class SitesChecker extends Command
                 } else {
                     $httpClient = new Client();
                     $url = ($site->https === 1) ? "https://" . $site->url : "http://" . $site->url;
-                    echo $url ."\n";
                     $response = $httpClient->request('GET', $url,['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
                     $serverInfo =  $response->getHeader('server');
@@ -75,8 +72,8 @@ class SitesChecker extends Command
                 $serverInfo = $site->server_info;
             }
 
-            //   HTTP code saving proces
-            $http = SitesHttpCodes::where('site_id', '=', $site->id)->first();
+            //   HTTP code saving process
+            $http = SitesHttpCodes::where('site_id', $site->id)->first();
             if (isset($http)) {
                 $http->http_code = $statusCode;
             } else {

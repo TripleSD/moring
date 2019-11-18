@@ -4,14 +4,16 @@ namespace App\Repositories;
 
 use App\Models\Sites;
 use App\Models\SitesChecksList;
-use App\Models\SitesPhpVersions;
 
 class AdminSitesRepository extends Repository
 {
-    public function getList($perPage = null)
+    public function getList($request)
     {
-        $columns = ['id', 'name', 'url' , 'https', 'active', 'comment', 'http_code'];
-        return Sites::with('getPhpVersion')->paginate($perPage);
+        if ($request->view == 'all') {
+            return Sites::with('getHttpCode','checksList','getPhpVersion')->get();
+        } else {
+            return Sites::with('getHttpCode','checksList','getPhpVersion')->paginate(10);
+        }
     }
 
     public function store (array $fillable)
