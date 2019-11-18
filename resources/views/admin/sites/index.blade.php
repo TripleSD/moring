@@ -148,7 +148,7 @@
                                                         @endif
                                                     </div>
                                                     <div class="small">
-                                                        {{$site->getPhpVersion->updated_at}}
+                                                        {{optional($site->getPhpVersion)->updated_at}}
                                                     </div>
                                             </td>
                                             <td>
@@ -238,7 +238,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="small">
-                                                    {{ $site->getHttpCode->updated_at }}
+                                                    {{ optional($site->getHttpCode)->updated_at }}
                                                 </div>
                                             </td>
                                             <td>
