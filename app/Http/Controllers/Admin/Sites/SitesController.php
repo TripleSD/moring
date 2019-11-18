@@ -46,7 +46,6 @@ class SitesController extends Controller
     {
         $fillable = $request->validated();
         $result = (new AdminSitesRepository())->store($fillable);
-
         if($result) {
             $check = new SitesChecker();
             $check->handle();
@@ -99,7 +98,7 @@ class SitesController extends Controller
             return back()->withInput($fillable);
         } else {
             $check = new SitesChecker();
-            $check->handle();
+            $check->handle($id);
             flash('Запись обновлена')->success();
             return redirect()->route('admin.sites.index');
         }
