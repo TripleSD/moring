@@ -10,9 +10,9 @@ class AdminSitesRepository extends Repository
     public function getList($request)
     {
         if ($request->view == 'all') {
-            return Sites::with('getHttpCode','checksList','getPhpVersion')->get();
+            return Sites::with('getHttpCode','checksList','getPhpVersion', 'getWebServer')->get();
         } else {
-            return Sites::with('getHttpCode','checksList','getPhpVersion')->paginate(10);
+            return Sites::with('getHttpCode','checksList','getPhpVersion', 'getWebServer')->paginate(10);
         }
     }
 

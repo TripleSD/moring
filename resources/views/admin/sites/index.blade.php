@@ -94,7 +94,11 @@
                                                     <a href="" class="btn btn-sm"><i class="fa fa-play"></i></a>
                                                 @endif
                                             </td>
-                                            <td>{{ $site->server_info }}</td>
+                                            <td>
+                                                @if(isset($site->getWebServer->web_server))
+                                                    {{$site->getWebServer->web_server}}
+                                                @endif
+                                            </td>
                                             <td>
                                                 @empty(!$site->getPhpVersion)
                                                     <div>

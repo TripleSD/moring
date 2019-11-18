@@ -53,4 +53,9 @@ class Sites extends Model
     {
         return $this->hasOne(SitesHttpCodes::class,'site_id');
     }
+
+    public function getWebServer()
+    {
+        return $this->hasOne(SitesWebServers::class,'site_id');
+    }
 }

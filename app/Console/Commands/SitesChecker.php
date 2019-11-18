@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use App\Models\Sites;
 use App\Models\SitesHttpCodes;
 use App\Models\SitesPhpVersions;
+use App\Models\SitesWebServers;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
@@ -58,13 +59,13 @@ class SitesChecker extends Command
                     $responseArray = json_decode($response, true);
                     $phpVersion = $responseArray['php-version'];
                     $statusCode = $request->getStatusCode();
-                    $serverInfo = $responseArray['server_info'];
+                    $webServerType = $responseArray['server_info'];
                 } else {
                     $httpClient = new Client();
                     $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
                     $response = $httpClient->request('GET', $url,['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
-                    $serverInfo =  $response->getHeader('server');
+                    $webServerType =  $response->getHeader('server')[0];
                     if(!empty($phpVersion[0])) {
                         $phpVersion = preg_replace('/[^\d.]/','',$phpVersion[0]);
                         $phpBranchRaw = explode('.', $phpVersion);
@@ -80,7 +81,7 @@ class SitesChecker extends Command
                 $statusCode = 999;
                 $phpVersion = 0;
                 $phpBranch = 0;
-                $serverInfo = $site->server_info;
+                $webServerType = "No_name_found";
             }
 
             //   HTTP code saving process
@@ -92,6 +93,17 @@ class SitesChecker extends Command
                 $http = new SitesHttpCodes($fillable);
             }
             $http->save();
+
+
+            //   HTTP code saving process
+            $webServer = SitesWebServers::where('site_id', $site->id)->first();
+            if (isset($webServer)) {
+                $webServer->web_sever = $webServerType;
+            } else {
+                $fillable = ['site_id' => $site->id, 'web_server' => $webServerType];
+                $webServer = new SitesWebServers($fillable);
+            }
+            $webServer->save();
 
             //    PHP version saving process
             $php = SitesPhpVersions::where('site_id', $site->id)->first();

@@ -74,7 +74,11 @@
                                                     </span>
                                                 @endif
                                             </td>
-                                            <td>{{ $site->server_info }}</td>
+                                            <td>
+                                                @if(isset($site->getWebServer->web_server))
+                                                {{$site->getWebServer->web_server}}
+                                                @endif
+                                            </td>
                                             <td>
                                                 @if (isset($site->getPhpVersion->php_version) && $site->getPhpVersion->php_version != 0)
                                                 {{ $site->getPhpVersion->php_version}}</td>
