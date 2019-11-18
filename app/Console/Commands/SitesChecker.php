@@ -40,14 +40,18 @@ class SitesChecker extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(int $site_id = null)
     {
-        $sites = Sites::get();
+        if (is_null($site_id)) {
+            $sites = Sites::get();
+        }   else {
+            $sites[] = Sites::find($site_id);
+        }
         foreach ($sites as $site) {
             try {
                 if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
-                    $url = ($site->https === 1) ? "https://" . $site->url : "http://" . $site->url;
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
                     $request = $httpClient->request('GET', $url,['allow_redirects' => false]);
                     $response = $request->getBody();
                     //TODO тут не подставляется url файла moring
@@ -57,7 +61,7 @@ class SitesChecker extends Command
                     $serverInfo = $responseArray['server_info'];
                 } else {
                     $httpClient = new Client();
-                    $url = ($site->https === 1) ? "https://" . $site->url : "http://" . $site->url;
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
                     $response = $httpClient->request('GET', $url,['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
                     $serverInfo =  $response->getHeader('server');
