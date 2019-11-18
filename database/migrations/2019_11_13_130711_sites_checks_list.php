@@ -19,6 +19,8 @@ class SitesChecksList extends Migration
                 ->comment('Site ID');
             $table->smallInteger('http_code')
                 ->default(1);
+            $table->smallInteger('check_https')
+                ->default(0);
             $table->smallInteger('check_ssl')
                 ->default(0);
             $table->foreign('site_id')
