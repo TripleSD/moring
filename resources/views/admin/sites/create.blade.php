@@ -51,29 +51,35 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <label>Использовать файл мониторинга:</label>
+                                        {{Form::text('use_file', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('use_file', 1, false) }}
+                                    </div>
+
+                                    <div class="form-group">
                                         <label>HTTP ответ сервера</label>
                                         {{Form::text('http_code', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('http_code', 1, true) }}
                                     </div>
+                                    <div class="form-row">
+                                        <div class="form-group col-md-3">
+                                            <label>HTTPS</label>
+                                            {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('https', 1, false) }}
+                                        </div>
 
-                                    <div class="form-group">
-                                        <label>HTTPS</label>
-                                        {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
-                                        {{ Form::checkbox('https', 1, false) }}
+                                        <div class="form-group col-md-3">
+                                            <label>Мониторинг HTTPS</label>
+                                            {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('check_https', 1, false) }}
+                                        </div>
+
+                                        <div class="form-group col-md-3">
+                                            <label>Проверка SSL</label>
+                                            {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('check_ssl', 1, false) }}
+                                        </div>
                                     </div>
-
-                                    <div class="form-group">
-                                        <label>Мониторинг HTTPS</label>
-                                        {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
-                                        {{ Form::checkbox('check_https', 1, false) }}
-                                    </div>
-
-                                    <div class="form-group">
-                                        <label>Проверка SSL</label>
-                                        {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
-                                        {{ Form::checkbox('check_ssl', 1, false) }}
-                                    </div>
-
                                    <div class="form-group">
                                         <label>Проверка версии PHP</label>
                                        {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}

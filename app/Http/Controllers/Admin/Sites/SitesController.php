@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
+use App\Console\Commands\SitesChecker;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sites\ShowSitesRequest;
 use App\Http\Requests\Sites\StoreSiteRequest;
@@ -38,7 +39,7 @@ class SitesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreSiteRequest $request)
@@ -46,7 +47,9 @@ class SitesController extends Controller
         $fillable = $request->validated();
         $result = (new AdminSitesRepository())->store($fillable);
 
-        if ($result) {
+        if($result) {
+            $check = new SitesChecker();
+            $check->handle();
             flash('Запись добавлена')->success();
             return redirect()
                 ->route('admin.sites.index');
@@ -59,7 +62,7 @@ class SitesController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function show(ShowSitesRequest $request, AdminSitesRepository $adminSiteRepository)
@@ -71,7 +74,7 @@ class SitesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function edit(ShowSitesRequest $request, AdminSitesRepository $adminSitesRepository)
@@ -83,8 +86,8 @@ class SitesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param \Illuminate\Http\Request $request
-     * @param int $id
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
@@ -95,6 +98,8 @@ class SitesController extends Controller
         if (!$result) {
             return back()->withInput($fillable);
         } else {
+            $check = new SitesChecker();
+            $check->handle();
             flash('Запись обновлена')->success();
             return redirect()->route('admin.sites.index');
         }
@@ -103,13 +108,13 @@ class SitesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param int $id
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, AdminSitesRepository $adminSitesRepository)
     {
         $result = $adminSitesRepository->destroy($id);
-        if (!$result) {
+        if(!$result){
             return back()
                 ->withInput();
         } else {
