@@ -39,6 +39,9 @@
                                            class="btn btn-sm btn-success" title="Показать весь список">
                                             <i class="fa fa-list" aria-hidden="true"></i></a>
                                     @endif
+                                    <a href="{{route('admin.sites.refresh')}}"
+                                       class="btn btn-sm btn-primary" title="Обновить список">
+                                        <i class="fas fa-sync-alt"></i></a>
                                 </div>
                                 <div class="btn-group">
                                     <a href="#" class="btn btn-sm btn-success">
@@ -95,9 +98,17 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                @if(isset($site->getWebServer->web_server))
+                                                @empty($site->getWebServer->web_server)
+                                                    <span class="text-warning"
+                                                          title="Не был получен ответ сервера об установленной версии">
+                                                                    <i class="fa fa-exclamation-triangle"></i>
+                                                    </span>
+                                                @else
                                                     {{$site->getWebServer->web_server}}
                                                 @endif
+                                                <div class="small">
+                                                    {{optional($site->getPhpVersion)->updated_at}}
+                                                </div>
                                             </td>
                                             <td>
                                                 @empty(!$site->getPhpVersion)
