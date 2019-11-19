@@ -98,7 +98,7 @@ class SitesChecker extends Command
             //   HTTP code saving process
             $webServer = SitesWebServers::where('site_id', $site->id)->first();
             if (isset($webServer)) {
-                $webServer->web_sever = $webServerType;
+                $webServer->web_server = $webServerType;
             } else {
                 $fillable = ['site_id' => $site->id, 'web_server' => $webServerType];
                 $webServer = new SitesWebServers($fillable);
