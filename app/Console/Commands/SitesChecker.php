@@ -45,7 +45,7 @@ class SitesChecker extends Command
     {
         if (is_null($site_id)) {
             $sites = Sites::get();
-        }   else {
+        } else {
             $sites[] = Sites::find($site_id);
         }
         foreach ($sites as $site) {
@@ -53,35 +53,42 @@ class SitesChecker extends Command
                 if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
                     $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
-                    $request = $httpClient->request('GET', $url,['allow_redirects' => false]);
+                    $request = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $response = $request->getBody();
                     //TODO тут не подставляется url файла moring
                     $responseArray = json_decode($response, true);
+
                     $phpVersion = $responseArray['php-version'];
                     $statusCode = $request->getStatusCode();
                     $webServerType = $responseArray['server_info'];
                 } else {
                     $httpClient = new Client();
                     $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
-                    $response = $httpClient->request('GET', $url,['allow_redirects' => false]);
+                    $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
-                    $webServerType =  $response->getHeader('server')[0];
-                    if(!empty($phpVersion[0])) {
-                        $phpVersion = preg_replace('/[^\d.]/','',$phpVersion[0]);
+                    $webServerType = $response->getHeader('server')[0];
+                    if($webServerType == null) {
+                        $webServerType = null;
+                    }
+
+                    if(preg_match('/^[0-9]*/', $response->getStatusCode())) {
+                        $statusCode = $response->getStatusCode();
+                    } else {
+                        $statusCode = 999;
+                    }
+
+                    if(preg_match('/^PHP/', $phpVersion[0])) {
+                        $phpVersion = preg_replace('/[^\d.]/', '', $phpVersion[0]);
                         $phpBranchRaw = explode('.', $phpVersion);
                         $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
-                        $phpBranch = Str::substr($phpBranchRaw,0,3);
+                        $phpBranch = Str::substr($phpBranchRaw, 0, 3);
                     } else {
                         $phpVersion = 0;
                         $phpBranch = 0;
                     }
-                    $statusCode = $response->getStatusCode();
                 }
             } catch (\Exception $e) {
-                $statusCode = 999;
-                $phpVersion = 0;
-                $phpBranch = 0;
-                $webServerType = "No_name_found";
+
             }
 
             //   HTTP code saving process
@@ -92,6 +99,7 @@ class SitesChecker extends Command
                 $fillable = ['site_id' => $site->id, 'http_code' => $statusCode];
                 $http = new SitesHttpCodes($fillable);
             }
+            $http->updated_at = \Carbon\Carbon::now();
             $http->save();
 
 
@@ -103,6 +111,7 @@ class SitesChecker extends Command
                 $fillable = ['site_id' => $site->id, 'web_server' => $webServerType];
                 $webServer = new SitesWebServers($fillable);
             }
+            $webServer->updated_at = \Carbon\Carbon::now();
             $webServer->save();
 
             //    PHP version saving process
@@ -114,8 +123,8 @@ class SitesChecker extends Command
                 $fillable = ['site_id' => $site->id, 'version' => $phpVersion, 'branch' => $phpBranch];
                 $php = new SitesPhpVersions($fillable);
             }
+            $php->updated_at = \Carbon\Carbon::now();
             $php->save();
-
         }
     }
 }

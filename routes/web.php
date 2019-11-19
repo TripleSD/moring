@@ -18,15 +18,12 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::group(['middleware' => 'auth'], function () {
     Route::get('/', 'HomeController@index')->name('home');
     Route::any('/logout', 'Auth\LoginController@logout')->name('auth.logout');
-    Route::get('/checks/sites', 'ChecksSitesController@getIndex')->name('checks.sites.getIndex');
 
 //  Sites management
-    $groupData = [
-        'namespace' => 'Admin\Sites',
-        'prefix' => 'admin'
-    ];
+    Route::group(['prefix' => 'admin', 'namespace' => 'Admin\Sites'], function () {
+        Route::get('/sites/refresh', 'SitesBackendController@refreshList')
+        ->name('admin.sites.refresh');
 
-    Route::group($groupData, function () {
         $methods = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'];
         Route::resource('sites', 'SitesController',
             ['names' => 'admin.sites',
@@ -38,6 +35,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'settings', 'namespace' => 'Admin\Settings', 'as' => 'settings.'], function () {
         $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
         Route::resource('users', 'UsersController')
+            ->only($methods);
+        $methods = ['index'];
+        Route::resource('system', 'SystemController')
             ->only($methods);
     });
 

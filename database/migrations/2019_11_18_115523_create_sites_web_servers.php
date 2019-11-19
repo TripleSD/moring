@@ -17,7 +17,7 @@ class CreateSitesWebServers extends Migration
             $table->Increments('id');
             $table->unsignedBigInteger('site_id')
                 ->comment('Site ID');
-            $table->string('web_server')
+            $table->string('web_server')->nullable()
                 ->comment('Returned web server type');
             $table->timestamps();
             $table->foreign('site_id')
