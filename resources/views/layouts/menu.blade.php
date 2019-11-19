@@ -46,57 +46,103 @@
                     </ul>
                 </li>
 
-                <li class="nav-header">
-                    <span class="text-uppercase">Сеть</span></li>
-                <li class="nav-item">
-                    <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
-                        <i class="nav-icon far fa-image"></i>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-network-wired"></i>
                         <p>
-                            Коммутаторы
+                            Сеть
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="./index.html" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Коммутаторы</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-server"></i>
+                        <p>
+                            Инфраструктура
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('servers.index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Серверы</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-globe"></i>
+                        <p>
+                            Хостинг
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('admin.sites.index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Сайты</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
 
-                <li class="nav-header">
-                    <span class="text-uppercase">Инфраструктура</span></li>
-                <li class="nav-item">
-                    <a href="{{ route('servers.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-server"></i>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-cogs"></i>
                         <p>
-                            Серверы
+                            Настройки
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('settings.users.index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Пользователи</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('settings.system.index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Системные настройки</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
-                <li class="nav-header">
-                    <span class="text-uppercase">Хостинг</span></li>
-                <li class="nav-item">
-                    <a href="{{ route('admin.sites.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-link"></i>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon far fa-question-circle"></i>
                         <p>
-                            Сайты
+                            Помощь
+                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                </li>
-                <li class="nav-item">
-                    <a href="{{ route('checks.sites.getIndex') }}" class="nav-link">
-                        <i class="nav-icon fa fa-shield-alt"></i>
-                        <p>
-                            SSL сертификаты
-                        </p>
-                    </a>
-                </li>
-
-                <li class="nav-header">
-                    <span class="text-uppercase">Настройки</span></li>
-                <li class="nav-item">
-                    <a href="{{ route('settings.users.index') }}" class="nav-link">
-                        <i class="nav-icon fa fa-users"></i>
-                        <p>
-                            Пользователи
-                        </p>
-                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Документация</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
             </ul>
         </nav>
