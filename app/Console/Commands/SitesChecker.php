@@ -67,21 +67,26 @@ class SitesChecker extends Command
                     $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
                     $webServerType = $response->getHeader('server')[0];
-                    if($webServerType == null) {
+                    if ($webServerType == null) {
                         $webServerType = null;
                     }
 
-                    if(preg_match('/^[0-9]*/', $response->getStatusCode())) {
+                    if (preg_match('/^[0-9]*/', $response->getStatusCode())) {
                         $statusCode = $response->getStatusCode();
                     } else {
                         $statusCode = 999;
                     }
 
-                    if(preg_match('/^PHP/', $phpVersion[0])) {
-                        $phpVersion = preg_replace('/[^\d.]/', '', $phpVersion[0]);
-                        $phpBranchRaw = explode('.', $phpVersion);
-                        $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
-                        $phpBranch = Str::substr($phpBranchRaw, 0, 3);
+                    if ($phpVersion != null) {
+                        if (preg_match('/^PHP/', $phpVersion[0])) {
+                            $phpVersion = preg_replace('/[^\d.]/', '', $phpVersion[0]);
+                            $phpBranchRaw = explode('.', $phpVersion);
+                            $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
+                            $phpBranch = Str::substr($phpBranchRaw, 0, 3);
+                        } else {
+                            $phpVersion = 0;
+                            $phpBranch = 0;
+                        }
                     } else {
                         $phpVersion = 0;
                         $phpBranch = 0;
