@@ -125,6 +125,7 @@ class SitesChecker extends Command
             }
             $php->updated_at = \Carbon\Carbon::now();
             $php->save();
+
         }
     }
 }
