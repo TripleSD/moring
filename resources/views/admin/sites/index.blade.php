@@ -105,20 +105,47 @@
                                         <tr class="table-row" bgcolor="#d3d3d3">
                                             @endif
                                             <td>
-                                                {{$site->url}}
-                                                @if ($site->https === 1)
-                                                    <i class="fa fa-lock fa-1" title="SSL cetificate OK"></i>
+                                                <div>
+                                                    <i class="fas fa-globe-americas"></i> {{$site->url}}
+                                                    @isset($site->getSslCertification->expiration_days)
+                                                        @if ($site->getSslCertification->expiration_days >= 10)
+                                                            <i class="fa fa-lock fa-1 text-success"
+                                                               title="Действующий SSL сертификат"></i>
+                                                        @elseif($site->getSslCertification->expiration_days >= 5)
+                                                            <i class="fa fa-lock fa-1 text-warning"
+                                                               title="Действующий SSL сертификат"></i>
+                                                        @elseif($site->getSslCertification->expiration_days >= 1)
+                                                            <i class="fa fa-lock fa-1 text-danger"
+                                                               title="Действующий SSL сертификат"></i>
+                                                        @else
+                                                            <i class="fa fa-lock fa-1 text-gray"
+                                                               title="SSL сертификат истек"></i>
+                                                        @endif
+                                                        <span class="small">
+                                                            ({{ $site->getSslCertification->expiration_days }} дней)</span>
+                                                    @endif
+                                                </div>
+                                                @isset($site->getSslCertification->expiration_days)
+                                                    <div>
+                                                        <span class="small">Поставщик: {{ $site->getSslCertification->issuer }}</span>
+                                                    </div>
+                                                    <div>
+                                                        <span class="small">Последнее обновление: {{ $site->getSslCertification->updated_at }}</span>
+                                                    </div>
                                                 @endif
+                                                <div>
+
+                                                </div>
                                             </td>
                                             <td>
                                                 @if($site->enabled === 1)
                                                     <span class="badge badge-success" title="Мониторинг включен">
-                                                    E
+                                                    Вкл
                                                 </span>
                                                     <a href="#" class="btn btn-sm"><i class="fa fa-pause"></i></a>
                                                 @else
                                                     <span class="badge badge-warning" title="Мониторинг отключен">
-                                                    D
+                                                    Выкл
                                                 </span>
                                                     <a href="" class="btn btn-sm"><i class="fa fa-play"></i></a>
                                                 @endif
