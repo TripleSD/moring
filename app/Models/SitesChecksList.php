@@ -11,4 +11,9 @@ class SitesChecksList extends Model
 
     protected $table = "sites_checks_list";
     protected $fillable = ['site_id', 'check_https', 'http_code', 'check_ssl', 'check_php', 'use_file'];
+
+    public function site()
+    {
+        return $this->belongsTo(Sites::class,'site_id', 'id');
+    }
 }

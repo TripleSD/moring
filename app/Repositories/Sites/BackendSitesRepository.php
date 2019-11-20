@@ -10,6 +10,7 @@ class BackendSitesRepository extends Repository
     public function refreshList()
     {
         Artisan::call('SitesChecker');
+        Artisan::call('SitesSSLChecker');
         return redirect()->route('admin.sites.index');
     }
 

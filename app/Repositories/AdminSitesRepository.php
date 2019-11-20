@@ -10,16 +10,27 @@ class AdminSitesRepository extends Repository
     public function getList($request)
     {
         if ($request->view == 'all') {
-            return Sites::with('getHttpCode','checksList','getPhpVersion', 'getWebServer')->get();
+            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification')->get();
+        } elseif ($request->view == '25') {
+            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification')->paginate(25);
+        } elseif ($request->view == '50') {
+            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification')->paginate(50);
+        } elseif ($request->view == '10') {
+            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification')->paginate(100);
         } else {
-            return Sites::with('getHttpCode','checksList','getPhpVersion', 'getWebServer')->paginate(10);
+            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification')->paginate(25);
         }
     }
 
-    public function store (array $fillable)
+    public function store(array $fillable)
     {
         $first_entry = (new Sites())->create($fillable);
-        $fillable['site_id'] =  $first_entry->id;
+        $fillable['site_id'] = $first_entry->id;
         $result = (new SitesChecksList())->create($fillable);
         return $result;
     }

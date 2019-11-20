@@ -29,4 +29,9 @@ class Sites extends Model
     {
         return $this->hasOne(SitesWebServers::class,'site_id');
     }
+
+    public function getSslCertification()
+    {
+        return $this->hasOne(SitesSslCertifications::class,'site_id');
+    }
 }
