@@ -13,9 +13,15 @@ class ServersRepository extends Repository
     public function getServersList($request)
     {
         if ($request->view == 'all') {
-            return Servers::all();
+            return Servers::get();
+        } elseif ($request->view == '25') {
+            return Servers::paginate(25);
+        } elseif ($request->view == '50') {
+            return Servers::paginate(50);
+        } elseif ($request->view == '10') {
+            return Servers::paginate(100);
         } else {
-            return Servers::paginate(10);
+            return Servers::paginate(25);
         }
     }
 

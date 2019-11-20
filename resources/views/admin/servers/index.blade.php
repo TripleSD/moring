@@ -30,23 +30,50 @@
                                     <a href="{{route('servers.create')}}"
                                        class="btn btn-sm btn-info" title="Создание нового сервера">
                                         <i class="fa fa-plus-square"></i></a>
+                                </div>
+                                <div class="btn-group">
                                     @if($servers instanceof \Illuminate\Pagination\LengthAwarePaginator)
                                         <a href="{{route('servers.index', ['view' => 'all'])}}"
-                                           class="btn btn-sm btn-outline-success" title="Показать весь список">
+                                           class="btn btn-sm btn-outline-primary" title="Показать весь список">
                                             <i class="fa fa-list" aria-hidden="true"></i></a>
                                     @else
                                         <a href="{{route('servers.index')}}"
-                                           class="btn btn-sm btn-success" title="Показать весь список">
+                                           class="btn btn-sm btn-primary" title="Показать весь список">
                                             <i class="fa fa-list" aria-hidden="true"></i></a>
                                     @endif
-                                </div>
-                                <div class="btn-group">
-                                    <a href="#" class="btn btn-sm btn-success">
-                                        25</a>
-                                    <a href="#" class="btn btn-sm btn-success">
-                                        50</a>
-                                    <a href="#" class="btn btn-sm btn-success">
-                                        100</a>
+
+
+                                    @if(request()->view == 25)
+                                        <a href="{{ route('servers.index', ['view' => '25']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            25</a>
+                                    @elseif(request()->view == null)
+                                        <a href="{{ route('servers.index', ['view' => '25']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            25</a>
+                                    @else
+                                        <a href="{{ route('servers.index', ['view' => '25']) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            25</a>
+                                    @endif
+                                    @if(request()->view == 50)
+                                        <a href="{{ route('servers.index', ['view' => '50']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            50</a>
+                                    @else
+                                        <a href="{{ route('servers.index', ['view' => '50']) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            50</a>
+                                    @endif
+                                    @if(request()->view == 100)
+                                        <a href="{{ route('servers.index', ['view' => '100']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            100</a>
+                                    @else
+                                        <a href="{{ route('servers.index', ['view' => '100']) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            100</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -87,7 +114,8 @@
                                         <td>
                                             <div class="btn-group">
                                                 <a href="{{route('servers.show',$server->id)}}"
-                                                   class="btn btn-xs bg-gradient-info" title="Просмотр карточки сервера">
+                                                   class="btn btn-xs bg-gradient-info"
+                                                   title="Просмотр карточки сервера">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                             </div>

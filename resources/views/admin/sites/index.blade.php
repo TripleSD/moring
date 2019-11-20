@@ -28,28 +28,54 @@
                             <div class="card-tools">
                                 <div class="btn-group">
                                     <a href="{{route('admin.sites.create')}}"
-                                       class="btn btn-sm btn-info" title="Создание нового сервера">
+                                       class="btn btn-sm btn-success" title="Создание нового сервера">
                                         <i class="fa fa-plus-square"></i></a>
-                                    @if($sites instanceof \Illuminate\Pagination\LengthAwarePaginator)
-                                        <a href="{{route('admin.sites.index', ['view' => 'all'])}}"
-                                           class="btn btn-sm btn-outline-success" title="Показать весь список">
-                                            <i class="fa fa-list" aria-hidden="true"></i></a>
-                                    @else
-                                        <a href="{{route('admin.sites.index')}}"
-                                           class="btn btn-sm btn-success" title="Показать весь список">
-                                            <i class="fa fa-list" aria-hidden="true"></i></a>
-                                    @endif
                                     <a href="{{route('admin.sites.refresh')}}"
                                        class="btn btn-sm btn-primary" title="Обновить список">
                                         <i class="fas fa-sync-alt"></i></a>
                                 </div>
                                 <div class="btn-group">
-                                    <a href="#" class="btn btn-sm btn-success">
-                                        25</a>
-                                    <a href="#" class="btn btn-sm btn-success">
-                                        50</a>
-                                    <a href="#" class="btn btn-sm btn-success">
-                                        100</a>
+                                    @if($sites instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                                        <a href="{{route('admin.sites.index', ['view' => 'all'])}}"
+                                           class="btn btn-sm btn-outline-primary" title="Показать весь список">
+                                            <i class="fa fa-list" aria-hidden="true"></i></a>
+                                    @else
+                                        <a href="{{route('admin.sites.index')}}"
+                                           class="btn btn-sm btn-primary" title="Показать весь список">
+                                            <i class="fa fa-list" aria-hidden="true"></i></a>
+                                    @endif
+
+                                    @if(request()->view == 25)
+                                        <a href="{{ route('admin.sites.index', ['view' => '25']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            25</a>
+                                    @elseif(request()->view == null)
+                                        <a href="{{ route('admin.sites.index', ['view' => '25']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            25</a>
+                                    @else
+                                        <a href="{{ route('admin.sites.index', ['view' => '25']) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            25</a>
+                                    @endif
+                                    @if(request()->view == 50)
+                                        <a href="{{ route('admin.sites.index', ['view' => '50']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            50</a>
+                                    @else
+                                        <a href="{{ route('admin.sites.index', ['view' => '50']) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            50</a>
+                                    @endif
+                                    @if(request()->view == 100)
+                                        <a href="{{ route('admin.sites.index', ['view' => '100']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            100</a>
+                                    @else
+                                        <a href="{{ route('admin.sites.index', ['view' => '100']) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            100</a>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -113,53 +139,58 @@
                                             <td>
                                                 @empty(!$site->getPhpVersion)
                                                     <div>
-                                                        @if($bridgePhpVersion->isEmpty())
+                                                        @empty($bridgePhpVersion)
                                                             @if($site->getPhpVersion->version != 0)
                                                                 <span class="text-gray">
-                                                            {{ $site->getPhpVersion->version }}
-                                                        </span>
+                                                                {{ $site->getPhpVersion->version }}
+                                                                </span>
                                                                 <span class="text-danger"
-                                                                      title="Отсутствуют данных бриджа об актуальной версии PHP">
-                                                            <i class="fa fa-exclamation-triangle"></i>
-                                                        </span>
+                                                                      title="Отсутствуют данные от бриджа об актуальной версии PHP">
+                                                                    <i class="fa fa-exclamation-triangle"></i>
+                                                                </span>
                                                             @else
                                                                 <span class="text-warning"
                                                                       title="Не был получен ответ сервера об установленной версии">
-                                                                <i class="fa fa-exclamation-triangle"></i>
-                                                        </span>
+                                                                        <i class="fa fa-exclamation-triangle"></i>
+                                                                </span>
                                                             @endif
                                                         @else
-                                                            @foreach($bridgePhpVersion as $versions)
-                                                                @if($site->getPhpVersion->version != 0)
-                                                                    @if($versions->branch == $site->getPhpVersion->branch)
-
-                                                                        @if(version_compare($site->getPhpVersion->version, $versions->version) >= 0)
-                                                                            <span class="text-success"
-                                                                                  title="Установлена самая последняя версия {{$versions->version}}">
-                                                                    {{ $site->getPhpVersion->version }}
-                                                                    </span>
-                                                                        @else
-                                                                            <span class="text-danger"
-                                                                                  title="Необходимо установить актуальную версию {{$versions->version}}">
-                                                                            {{ $site->getPhpVersion->version }}
-                                                                            <i class="fas fa-bug"></i>
-                                                                    </span>
+                                                            @if($site->getPhpVersion->version != 0)
+                                                                @if(in_array($site->getPhpVersion->branch,$bridgeBranchVersion))
+                                                                    @foreach($bridgePhpVersion as $version)
+                                                                        @if($version->branch == $site->getPhpVersion->branch)
+                                                                            @if(version_compare($site->getPhpVersion->version, $version->version) >= 0)
+                                                                                <span class="text-success"
+                                                                                      title="Установлена самая последняя версия {{$version->version}}">
+                                                                                      {{ $site->getPhpVersion->version }}
+                                                                                </span>
+                                                                            @else
+                                                                                <span class="text-danger"
+                                                                                      title="Необходимо установить актуальную версию {{$version->version}}">
+                                                                                      {{ $site->getPhpVersion->version }}
+                                                                                      <i class="fas fa-bug"></i>
+                                                                                </span>
+                                                                            @endif
                                                                         @endif
-                                                                    @endif
+                                                                    @endforeach
                                                                 @else
-                                                                    <span class="text-warning"
-                                                                          title="Не был получен ответ сервера об установленной версии">
-                                                                <i class="fa fa-exclamation-triangle"></i>
-                                                            </span>
-                                                                    @break
+                                                                    <span class="text-danger"
+                                                                          title="Отсутствуют данные от бриджа об актуальной версии PHP">
+                                                                    <i class="fa fa-exclamation-triangle"></i>
+                                                                </span>
                                                                 @endif
-                                                            @endforeach
+                                                            @else
+                                                                <span class="text-warning"
+                                                                      title="Не был получен ответ сервера об установленной версии">
+                                                                        <i class="fa fa-exclamation-triangle"></i>
+                                                                    </span>
+                                                            @endif
                                                         @endif
                                                         @else
                                                             <span class="text-gray"
                                                                   title="Версия PHP не определена. Запрос к серверу не производился.">
-                                                    <i class="fa fa-exclamation-triangle"></i>
-                                                </span>
+                                                            <i class="fa fa-exclamation-triangle"></i>
+                                                            </span>
                                                         @endif
                                                     </div>
                                                     <div class="small">
@@ -234,13 +265,18 @@
                                                         @if($site->getHttpCode->http_code == 200)
                                                             <span class="badge badge-success"
                                                                   title="Сайт полностью рабочий">
-                                                        {{ $site->getHttpCode->http_code }}
-                                                    </span>
+                                                            {{ $site->getHttpCode->http_code }}
+                                                            </span>
                                                         @elseif($site->getHttpCode->http_code == 301)
                                                             <span class="badge badge-warning"
                                                                   title="На сайте установлен редирект">
-                                                        {{ $site->getHttpCode->http_code }}
-                                                    </span>
+                                                            {{ $site->getHttpCode->http_code }}
+                                                            </span>
+                                                        @elseif($site->getHttpCode->http_code == 302)
+                                                            <span class="badge badge-warning"
+                                                                  title="На сайте установлен редирект">
+                                                            {{ $site->getHttpCode->http_code }}
+                                                            </span>
                                                         @else
                                                             <span class="text-gray" title="Код ответа не был получен">
                                                         <i class="fa fa-exclamation-triangle"></i>
