@@ -25,6 +25,19 @@
         </li>
     </ul>
 
+    <ul class="navbar-nav ml-auto">
+        @if($currentVersion < $latestVersion)
+            <span class="badge badge-warning text-sm">
+                <i class="fas fa-info-circle"></i>
+                Доступна новая версия {{ $latestHumanVersion }}
+            </span>
+        @else
+            <span class="badge badge-success text-sm">
+                Установлена последняя версия
+            </span>
+        @endif
+    </ul>
+
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
         <!-- Messages Dropdown Menu -->
