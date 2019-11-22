@@ -5,7 +5,7 @@ namespace App\Repositories\Sites;
 use App\Repositories\Repository;
 use Illuminate\Support\Facades\Artisan;
 
-class BackendSitesRepository extends Repository
+class SitesBackendRepository extends Repository
 {
     public function refreshList()
     {

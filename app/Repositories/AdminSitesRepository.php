@@ -7,7 +7,7 @@ use App\Models\SitesChecksList;
 
 class AdminSitesRepository extends Repository
 {
-    public function getList($request)
+    public function index($request)
     {
         if ($request->view == 'all') {
             return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',

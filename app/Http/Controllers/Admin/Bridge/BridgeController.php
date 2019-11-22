@@ -11,7 +11,7 @@ class BridgeController extends Controller
     {
         try {
             $httpClient = new Client();
-            $request = $httpClient->request('GET', \Config::get('moring.bridgeVersionUrl'), ['allow_redirects' => false]);
+            $request = $httpClient->request('GET', \Config::get('moring.bridgeCurrentVersionUrl'), ['allow_redirects' => false]);
             $response = $request->getBody();
             $responseArray = json_decode($response, true);
             return array('version' => $responseArray[0], 'status' => '1','statusCode' => $request->getStatusCode());

@@ -9,7 +9,9 @@
     <div class="float-right d-none d-sm-inline-block">
         <b>Bridge:</b>
         @if($bridgeInfo['status'] == 1)
-            v.{{$bridgeInfo['version']}}
+            <span class="badge badge-dark">
+                v.{{$bridgeInfo['version']}}
+            </span>
             <span class="badge badge-success">
                 Connected | {{$bridgeInfo['statusCode']}}
             </span>
@@ -18,6 +20,6 @@
                 Disconnected |  Error
             </span>
         @endif
-        <b>Moring</b> <span class="badge badge-dark">v.{{Config::get('moring.version')}}</span>
+        <b>Moring</b> <span class="badge badge-dark">v.{{Config::get('moring.humanVersion')}}</span>
     </div>
 </footer>
