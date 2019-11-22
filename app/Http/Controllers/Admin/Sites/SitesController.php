@@ -21,7 +21,7 @@ class SitesController extends Controller
      */
     public function index(AdminSitesRepository $adminSiteRepository, Request $request)
     {
-        $sites = $adminSiteRepository->getList($request);
+        $sites = $adminSiteRepository->index($request);
 
         //TODO вынести в репозиторий два запроса
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
