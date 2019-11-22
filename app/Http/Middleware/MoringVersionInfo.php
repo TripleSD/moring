@@ -18,14 +18,14 @@ class MoringVersionInfo
      */
     public function handle($request, Closure $next)
     {
-        $latestVersion = new MoringController();
-        $latestVersion = $latestVersion->getInfo();
-        View::share('latestMoringVersion',$latestVersion['currentVersion']);
-        View::share('latestHumanMoringVersion',$latestVersion['currentHumanVersion']);
+        $versions = new MoringController();
+        $versions = $versions->getInfo();
+        View::share('latestVersion',$versions['currentVersion']);
+        View::share('latestHumanVersion',$versions['currentHumanVersion']);
         $currentVersion = Config::get('moring.version');
         $currentHumanVersion = Config::get('moring.humanVersion');
-        View::share('currentMoringVersion',$currentVersion);
-        View::share('currentHumanMoringVersion',$currentHumanVersion);
+        View::share('currentVersion',$currentVersion);
+        View::share('currentHumanVersion',$currentHumanVersion);
         return $next($request);
     }
 }
