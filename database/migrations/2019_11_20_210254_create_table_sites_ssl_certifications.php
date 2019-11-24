@@ -14,8 +14,8 @@ class CreateTableSitesSslCertifications extends Migration
     public function up()
     {
         Schema::create('sites_ssl_certifications', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('site_id')->unsigned()->comment('Site ID');
+            $table->Increments('id');
+            $table->UnsignedbigInteger('site_id')->comment('Site ID');
             $table->foreign('site_id')->references('id')->on('sites');
             $table->string('issuer')->nullable()->comment('Issuer certificate');
             $table->integer('valid_status')->nullable()->comment('Valid status');
