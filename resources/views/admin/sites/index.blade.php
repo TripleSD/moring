@@ -172,7 +172,7 @@
                                                                 {{ $site->getPhpVersion->version }}
                                                                 </span>
                                                                 <span class="text-danger"
-                                                                      title="Отсутствуют данные от бриджа об актуальной версии PHP">
+                                                                      title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
                                                                     <i class="fa fa-exclamation-triangle"></i>
                                                                 </span>
                                                             @else
@@ -205,7 +205,7 @@
                                                                         {{ $site->getPhpVersion->version }}
                                                                     </span>
                                                                     <span class="text-danger"
-                                                                          title="Отсутствуют данные от бриджа об актуальной версии PHP">
+                                                                          title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
                                                                     <i class="fa fa-exclamation-triangle"></i>
                                                                 </span>
                                                                 @endif
