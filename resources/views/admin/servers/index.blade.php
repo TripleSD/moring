@@ -28,8 +28,11 @@
                             <div class="card-tools">
                                 <div class="btn-group">
                                     <a href="{{route('servers.create')}}"
-                                       class="btn btn-sm btn-info" title="Создание нового сервера">
+                                       class="btn btn-sm btn-success" title="Создание нового сервера">
                                         <i class="fa fa-plus-square"></i></a>
+                                    <a href="#"
+                                       class="btn btn-sm btn-primary" title="Обновить список">
+                                        <i class="fas fa-sync-alt"></i></a>
                                 </div>
                                 <div class="btn-group">
                                     @if($servers instanceof \Illuminate\Pagination\LengthAwarePaginator)
@@ -43,11 +46,20 @@
                                     @endif
 
 
-                                    @if(request()->view == 25)
-                                        <a href="{{ route('servers.index', ['view' => '25']) }}"
+                                    @if(request()->view == 10)
+                                        <a href="{{ route('servers.index', ['view' => '10']) }}"
                                            class="btn btn-sm btn-primary">
-                                            25</a>
+                                            10</a>
                                     @elseif(request()->view == null)
+                                        <a href="{{ route('servers.index', ['view' => '10']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            10</a>
+                                    @else
+                                        <a href="{{ route('servers.index', ['view' => '10']) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            10</a>
+                                    @endif
+                                    @if(request()->view == 25)
                                         <a href="{{ route('servers.index', ['view' => '25']) }}"
                                            class="btn btn-sm btn-primary">
                                             25</a>
@@ -64,15 +76,6 @@
                                         <a href="{{ route('servers.index', ['view' => '50']) }}"
                                            class="btn btn-sm btn-outline-primary">
                                             50</a>
-                                    @endif
-                                    @if(request()->view == 100)
-                                        <a href="{{ route('servers.index', ['view' => '100']) }}"
-                                           class="btn btn-sm btn-primary">
-                                            100</a>
-                                    @else
-                                        <a href="{{ route('servers.index', ['view' => '100']) }}"
-                                           class="btn btn-sm btn-outline-primary">
-                                            100</a>
                                     @endif
                                 </div>
                             </div>
@@ -115,9 +118,15 @@
                                             <div class="btn-group">
                                                 <a href="{{route('servers.show',$server->id)}}"
                                                    class="btn btn-xs bg-gradient-info"
-                                                   title="Просмотр карточки сервера">
+                                                   title="Просмотр сервера">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
+                                                <a href="{{route('servers.edit', $server->id)}}"
+                                                   class="btn btn-xs bg-gradient-warning" title="Редактирование сервера">
+                                                    <i class="fa fa-edit"></i></a>
+                                                <a href="#"
+                                                   class="btn btn-xs bg-gradient-danger" title="Удаление сервера">
+                                                    <i class="fa fa-trash"></i></a>
                                             </div>
                                         </td>
                                     </tr>

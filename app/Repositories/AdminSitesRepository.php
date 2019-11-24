@@ -12,18 +12,18 @@ class AdminSitesRepository extends Repository
         if ($request->view == 'all') {
             return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
                 'getSslCertification')->get();
+        } elseif ($request->view == '10') {
+            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification')->paginate(10);
         } elseif ($request->view == '25') {
             return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
                 'getSslCertification')->paginate(25);
         } elseif ($request->view == '50') {
             return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
                 'getSslCertification')->paginate(50);
-        } elseif ($request->view == '10') {
-            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->paginate(100);
         } else {
             return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->paginate(25);
+                'getSslCertification')->paginate(10);
         }
     }
 

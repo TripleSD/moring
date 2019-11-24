@@ -45,11 +45,20 @@
                                             <i class="fa fa-list" aria-hidden="true"></i></a>
                                     @endif
 
-                                    @if(request()->view == 25)
-                                        <a href="{{ route('admin.sites.index', ['view' => '25']) }}"
+                                    @if(request()->view == 10)
+                                        <a href="{{ route('admin.sites.index', ['view' => '10']) }}"
                                            class="btn btn-sm btn-primary">
-                                            25</a>
+                                            10</a>
                                     @elseif(request()->view == null)
+                                        <a href="{{ route('admin.sites.index', ['view' => '10']) }}"
+                                           class="btn btn-sm btn-primary">
+                                            10</a>
+                                    @else
+                                        <a href="{{ route('admin.sites.index', ['view' => '10']) }}"
+                                           class="btn btn-sm btn-outline-primary">
+                                            10</a>
+                                    @endif
+                                    @if(request()->view == 25)
                                         <a href="{{ route('admin.sites.index', ['view' => '25']) }}"
                                            class="btn btn-sm btn-primary">
                                             25</a>
@@ -66,15 +75,6 @@
                                         <a href="{{ route('admin.sites.index', ['view' => '50']) }}"
                                            class="btn btn-sm btn-outline-primary">
                                             50</a>
-                                    @endif
-                                    @if(request()->view == 100)
-                                        <a href="{{ route('admin.sites.index', ['view' => '100']) }}"
-                                           class="btn btn-sm btn-primary">
-                                            100</a>
-                                    @else
-                                        <a href="{{ route('admin.sites.index', ['view' => '100']) }}"
-                                           class="btn btn-sm btn-outline-primary">
-                                            100</a>
                                     @endif
                                 </div>
                             </div>
@@ -201,6 +201,9 @@
                                                                         @endif
                                                                     @endforeach
                                                                 @else
+                                                                    <span class="text-gray">
+                                                                        {{ $site->getPhpVersion->version }}
+                                                                    </span>
                                                                     <span class="text-danger"
                                                                           title="Отсутствуют данные от бриджа об актуальной версии PHP">
                                                                     <i class="fa fa-exclamation-triangle"></i>
@@ -323,9 +326,15 @@
                                                 <div class="btn-group">
                                                     <a href="{{route('admin.sites.show',$site->id)}}"
                                                        class="btn btn-xs bg-gradient-info"
-                                                       title="Просмотр карточки сайта">
+                                                       title="Просмотр сайта">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
+                                                    <a href="{{route('admin.sites.edit', $site->id)}}"
+                                                       class="btn btn-xs bg-gradient-warning" title="Редактирование сайта">
+                                                        <i class="fa fa-edit"></i></a>
+                                                    <a href="#"
+                                                       class="btn btn-xs bg-gradient-danger" title="Удаление сайта">
+                                                        <i class="fa fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
