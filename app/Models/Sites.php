@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sites extends Model
 {
-    protected $fillable = ['title', 'url', 'active', 'comment', 'file_url', 'https'];
+    protected $fillable = ['title', 'url', 'active', 'comment', 'file_url', 'https', 'enabled'];
 
     use SoftDeletes;
 
@@ -32,6 +32,6 @@ class Sites extends Model
 
     public function getSslCertification()
     {
-        return $this->hasOne(SitesSslCertifications::class,'site_id');
+        return $this->hasOne(SitesSslCertificates::class,'site_id');
     }
 }

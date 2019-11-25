@@ -139,15 +139,15 @@
                                             </td>
                                             <td>
                                                 @if($site->enabled === 1)
+                                                    <a href="#" class="btn btn-sm"><i class="fa fa-pause"></i></a>
                                                     <span class="badge badge-success" title="Мониторинг включен">
                                                     Вкл
                                                 </span>
-                                                    <a href="#" class="btn btn-sm"><i class="fa fa-pause"></i></a>
                                                 @else
+                                                    <a href="" class="btn btn-sm"><i class="fa fa-play"></i></a>
                                                     <span class="badge badge-warning" title="Мониторинг отключен">
                                                     Выкл
                                                 </span>
-                                                    <a href="" class="btn btn-sm"><i class="fa fa-play"></i></a>
                                                 @endif
                                             </td>
                                             <td>
@@ -278,7 +278,7 @@
 
                                                     @if($site->checksList->check_ssl == 1)
                                                         <span class="text-success"
-                                                              title="Мониторинг PHP версии включен">
+                                                              title="Мониторинг SSL сертификата включен">
                                                         <i class="fas fa-check-square"></i>
                                                     </span>
                                                     @else

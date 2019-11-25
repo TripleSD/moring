@@ -3,7 +3,7 @@
 namespace App\Console\Commands;
 
 use App\Models\SitesChecksList;
-use App\Models\SitesSslCertifications;
+use App\Models\SitesSslCertificates;
 use Illuminate\Console\Command;
 
 use Spatie\SslCertificate\SslCertificate;
@@ -39,9 +39,13 @@ class SitesSSLChecker extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(int $site_id = null)
     {
-        $checksList = SitesChecksList::where('check_ssl', 1)->with('site')->get();
+        if (is_null($site_id)) {
+            $checksList = SitesChecksList::where('check_ssl', 1)->with('site')->get();
+        } else {
+            $checksList[] = SitesChecksList::where([['check_ssl', 1], ['site_id', $site_id]])->with('site')->get();
+        }
 
         foreach ($checksList as $check) {
             try {
@@ -62,7 +66,7 @@ class SitesSSLChecker extends Command
             }
 
             //   SSL info saving process
-            $ssl = SitesSslCertifications::where('site_id', $check->site->id)->first();
+            $ssl = SitesSslCertificates::where('site_id', $check->site->id)->first();
             if (!empty($ssl)) {
                 $ssl->issuer = $issuer;
                 $ssl->valid_status = $validStatus;
@@ -74,7 +78,7 @@ class SitesSSLChecker extends Command
                 $fillable = ['site_id' => $check->site->id, 'issuer' => $issuer, 'valid_status' => $validStatus,
                     'expiration_date' => $expirationDate, 'expiration_days' => $expirationDays,
                     'algorithm' => $algorithm, 'from_date' => $fromDate];
-                $ssl = new SitesSslCertifications($fillable);
+                $ssl = new SitesSslCertificates($fillable);
             }
             $ssl->updated_at = \Carbon\Carbon::now();
             $ssl->save();
