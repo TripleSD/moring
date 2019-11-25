@@ -2,7 +2,9 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\Admin\Statistics\IdentificatorsController;
 use App\Models\MoringVersions;
+use App\Models\Settings;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
@@ -40,19 +42,33 @@ class MoringVersionChecker extends Command
      */
     public function handle()
     {
+        $identificator = new IdentificatorsController();
+
+        if (empty($identificator)) {
+            $httpClient = new Client();
+            $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCreateIdentificatorUrl'); # Url getting from /config/moring.php
+            $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+
+            $settings = new Settings();
+            $settings->parameter = 'identificator';
+            $settings->value = json_decode($response->getBody(), true);
+            $settings->save();
+        }
+
         # Getting availible Moring versions from bridge
         $httpClient = new Client();
-        $url = Config::get('moring.bridgeCurrentMoringVersionUrl'); # Url getting from /config/moring.php
-        $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+        $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentMoringVersionUrl'); # Url getting from /config/moring.php
+        $response = $httpClient->request('GET', $url,
+            ['query' => ['identificator' => $identificator->getIdentificator()], 'allow_redirects' => false]);
         $versionsBridgeArray = json_decode($response->getBody(), true);
 
-        foreach ($versionsBridgeArray as $versionBridgeItem) {
+        foreach ($versionsBridgeArray as $human_version => $version) {
             try {
                 $localVersionsArray = MoringVersions::pluck('version')->toArray();
-                if(!in_array($versionBridgeItem['version'], $localVersionsArray)) {
+                if (!in_array($version, $localVersionsArray)) {
                     $versions = new MoringVersions();
-                    $versions->version = $versionBridgeItem['version'];
-                    $versions->human_version = $versionBridgeItem['human_version'];
+                    $versions->version = $version;
+                    $versions->human_version = $human_version;
                     $versions->save();
                 }
             } catch (\Exception $e) {
