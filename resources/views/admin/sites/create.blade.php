@@ -36,53 +36,63 @@
                                     {{ Form::open([ 'route' => 'admin.sites.store', 'method' => 'post', 'enctype' => "multipart/form-data"]) }}
 
                                     <div class="form-group">
-                                        <label>Название сайта</label>
+                                        <b>Название сайта</b>
                                         {{ Form::text('title', null , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
+                                        <p class="mt--3 small">(Название проверяемого сайта)</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Адрес URL</label>
+                                        <b>Адрес URL</b>
                                         {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
+                                        <p class="mt--3 small">(URL адрес сайта без указания htttp/https префиксов)</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Путь к файлу мониторинга (опционально)</label>
-                                        {{ Form::text('file_url', '',['class' => 'form-control', 'placeholder' => 'monitoring.php']) }}
+                                        <b>Полный путь к файлу мониторинга (опционально)</b>
+                                        {{ Form::text('file_url', '',['class' => 'form-control', 'placeholder' => 'yourdomain.com/monitoring.php']) }}
+                                        <p class="mt--3 small">(Использовать файл мониторинга (необходимо вводить полный путь))</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>HTTP ответ сервера</label>
-                                        {{Form::text('http_code', '0', ['class' => 'form-control', 'hidden'])}}
-                                        {{ Form::checkbox('http_code', 1, true) }}
+                                        <div>
+                                            <b>HTTP ответ сервера</b>
+                                            {{Form::text('http_code', '0', ['class' => 'form-control', 'hidden'])}}
+                                            {{ Form::checkbox('http_code', 1, true) }}</div>
+                                            <p class="mt--3 small">(Проверка возвращаемого сайтом ответа на HTTP запрос)</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>HTTPS</label>
+                                        <b>HTTPS</b>
                                         {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('https', 1, false) }}
+                                        <p class="mt--3 small">(Сервер с поддержкой HTTPS)</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Мониторинг HTTPS</label>
+                                        <b>Мониторинг HTTPS</b>
                                         {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_https', 1, false) }}
+                                        <p class="mt--3 small">(Проверять HTTPS)</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Проверка SSL</label>
+                                        <b>Проверка SSL</b>
                                         {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_ssl', 1, false) }}
+                                        <p class="mt--3 small">(Проверять состояние SSL сертификата)</p>
                                     </div>
 
                                    <div class="form-group">
-                                        <label>Проверка версии PHP</label>
+                                        <b>Проверка версии PHP</b>
                                        {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_php', 1, true) }}
+                                       <p class="mt--3 small">(Проверять актуальность версии PHP)</p>
                                     </div>
 
                                     <div class="form-group">
-                                        <label>Описание</label>
+                                        <b>Описание</b>
                                         {{ Form::text('comment', null , ['class' => 'form-control', 'placeholder' => 'My website, that I love to watch on-line, but sometimes ....']) }}
+                                        <p class="mt--3 small">(Дополнительное описание)</p>
                                     </div>
 
                                     <button type="submit" class="btn btn-xs bg-gradient-cyan">Добавить</button>

@@ -9,6 +9,7 @@ use App\Models\SitesWebServers;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
+use App\Console\Commands\SitesSSLChecker;
 
 class SitesChecker extends Command
 {
@@ -52,15 +53,14 @@ class SitesChecker extends Command
             try {
                 if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
-                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->file_url : "http://" . $site->file_url;
                     $request = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $response = $request->getBody();
-                    //TODO тут не подставляется url файла moring
                     $responseArray = json_decode($response, true);
-
                     $phpVersion = $responseArray['php-version'];
                     $statusCode = $request->getStatusCode();
-                    $webServerType = $responseArray['server_info'];
+                    $webServerType = $responseArray['web-server'];
+                    $phpBranch = $responseArray['php-branch'];
                 } else {
                     $httpClient = new Client();
                     $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
@@ -91,6 +91,9 @@ class SitesChecker extends Command
                         $phpVersion = 0;
                         $phpBranch = 0;
                     }
+
+                    $ssl = new SitesSSLChecker();
+                    $ssl->handle($site_id);
                 }
             } catch (\Exception $e) {
 
@@ -108,7 +111,7 @@ class SitesChecker extends Command
             $http->save();
 
 
-            //   HTTP code saving process
+            //   WebServer type saving process
             $webServer = SitesWebServers::where('site_id', $site->id)->first();
             if (isset($webServer)) {
                 $webServer->web_server = $webServerType;

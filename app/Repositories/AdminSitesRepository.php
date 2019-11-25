@@ -29,6 +29,17 @@ class AdminSitesRepository extends Repository
 
     public function store(array $fillable)
     {
+        //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
+        if(intval($fillable['https']) === 0){
+            $fillable['check_ssl'] = 0;
+            $fillable['check_https'] = 0;
+        }
+
+        //    Now we activate Moring file usage, if path has been added
+        if(strlen($fillable['file_url']) >= 5){
+            $fillable['use_file'] = 1;
+        }
+
         $first_entry = (new Sites())->create($fillable);
         $fillable['site_id'] = $first_entry->id;
         $result = (new SitesChecksList())->create($fillable);
@@ -43,6 +54,11 @@ class AdminSitesRepository extends Repository
 
     public function update($fillable, int $id)
     {
+        //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
+        if(intval($fillable['https']) === 0){
+            $fillable['check_ssl'] = 0;
+            $fillable['check_https'] = 0;
+        }
         $site = Sites::find($id);
         $result = $site->update($fillable);
 
