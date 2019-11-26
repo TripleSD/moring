@@ -7,4 +7,5 @@ return [
     'bridgeCurrentMoringVersionUrl' => '/moring/version',
     'bridgeCurrentVersionUrl' => '/bridge/version',
     'bridgeCreateIdentificatorUrl' => '/identificators/create',
+    'bridgeCurrentPHPVersionsUrl' => '/php/versions',
 ];
