@@ -2,9 +2,14 @@
 
 namespace App\Console\Commands;
 
-use App\Models\ChecksSites;
+use App\Models\Sites;
+use App\Models\SitesHttpCodes;
+use App\Models\SitesPhpVersions;
+use App\Models\SitesWebServers;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Str;
+use App\Console\Commands\SitesSSLChecker;
 
 class SitesChecker extends Command
 {
@@ -37,46 +42,98 @@ class SitesChecker extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(int $site_id = null)
     {
-        $sites = ChecksSites::get();
-
+        if (is_null($site_id)) {
+            $sites = Sites::get();
+        } else {
+            $sites[] = Sites::find($site_id);
+        }
         foreach ($sites as $site) {
             try {
-                if ($site->control_file != null) {
+                if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
-                    $request = $httpClient->request('GET', $site->control_file,['allow_redirects' => false]);
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->file_url : "http://" . $site->file_url;
+                    $request = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $response = $request->getBody();
                     $responseArray = json_decode($response, true);
-                    $phpVersion = $responseArray['php_version'];
+                    $phpVersion = $responseArray['php-version'];
                     $statusCode = $request->getStatusCode();
-                    $serverInfo = $responseArray['server_info'];
+                    $webServerType = $responseArray['web-server'];
+                    $phpBranch = $responseArray['php-branch'];
                 } else {
                     $httpClient = new Client();
-                    $response = $httpClient->request('GET', $site->url,['allow_redirects' => false]);
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
+                    $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
-                    $serverInfo =  $response->getHeader('server');
-
-                    if(!empty($phpVersion[0])) {
-                        $phpVersion = preg_replace('/[^\d.]/','',$phpVersion[0]);
-                    } else {
-                        $phpVersion = '';
+                    $webServerType = $response->getHeader('server')[0];
+                    if ($webServerType == null) {
+                        $webServerType = null;
                     }
 
-                    $statusCode = $response->getStatusCode();
+                    if (preg_match('/^[0-9]*/', $response->getStatusCode())) {
+                        $statusCode = $response->getStatusCode();
+                    } else {
+                        $statusCode = 999;
+                    }
+
+                    if ($phpVersion != null) {
+                        if (preg_match('/^PHP/', $phpVersion[0])) {
+                            $phpVersion = preg_replace('/[^\d.]/', '', $phpVersion[0]);
+                            $phpBranchRaw = explode('.', $phpVersion);
+                            $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
+                            $phpBranch = Str::substr($phpBranchRaw, 0, 3);
+                        } else {
+                            $phpVersion = 0;
+                            $phpBranch = 0;
+                        }
+                    } else {
+                        $phpVersion = 0;
+                        $phpBranch = 0;
+                    }
+
+                    $ssl = new SitesSSLChecker();
+                    $ssl->handle($site_id);
                 }
             } catch (\Exception $e) {
-                $statusCode = 999;
-                $phpVersion = $site->php_version;
-                $serverInfo = $site->server_info;
+
             }
 
+            //   HTTP code saving process
+            $http = SitesHttpCodes::where('site_id', $site->id)->first();
+            if (isset($http)) {
+                $http->http_code = $statusCode;
+            } else {
+                $fillable = ['site_id' => $site->id, 'http_code' => $statusCode];
+                $http = new SitesHttpCodes($fillable);
+            }
+            $http->updated_at = \Carbon\Carbon::now();
+            $http->save();
 
-            $site = ChecksSites::find($site->id);
-            $site->php_version = $phpVersion;
-            $site->http_code = $statusCode;
-            $site->server_info = $serverInfo;
-            $site->save();
+
+            //   WebServer type saving process
+            $webServer = SitesWebServers::where('site_id', $site->id)->first();
+            if (isset($webServer)) {
+                $webServer->web_server = $webServerType;
+            } else {
+                $fillable = ['site_id' => $site->id, 'web_server' => $webServerType];
+                $webServer = new SitesWebServers($fillable);
+            }
+            $webServer->updated_at = \Carbon\Carbon::now();
+            $webServer->save();
+
+            //    PHP version saving process
+            $php = SitesPhpVersions::where('site_id', $site->id)->first();
+            if (isset($php)) {
+                $php->version = $phpVersion;
+                $php->branch = $phpBranch;
+            } else {
+                $fillable = ['site_id' => $site->id, 'version' => $phpVersion, 'branch' => $phpBranch];
+                $php = new SitesPhpVersions($fillable);
+            }
+            $php->updated_at = \Carbon\Carbon::now();
+            $php->save();
+
         }
     }
 }

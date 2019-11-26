@@ -5,14 +5,37 @@
             <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="index3.html" class="nav-link">Home</a>
+            <a href="index3.html" class="nav-link">
+                <i class="fas fa-home"></i>
+                Главная
+            </a>
         </li>
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
+            <a href="#" class="nav-link">
+                <i class="fas fa-address-book"></i>
+                Контакты
+            </a>
         </li>
+
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('auth.logout')}}" class="nav-link">Выход</a>
+            <a href="{{route('auth.logout')}}" class="nav-link">
+                <i class="nav-icon fas fa-door-open"></i>
+                Выход
+            </a>
         </li>
+    </ul>
+
+    <ul class="navbar-nav ml-auto">
+        @if($currentBuild < $latestBuild)
+            <span class="badge badge-warning text-sm">
+                <i class="fas fa-info-circle"></i>
+                Доступна новая версия {{ $latestBuild }} от {{ $latestBuildDate }}г.
+            </span>
+        @else
+            <span class="badge badge-success text-sm">
+                Установлена последняя версия
+            </span>
+        @endif
     </ul>
 
     <!-- Right navbar links -->
@@ -101,10 +124,6 @@
                 <div class="dropdown-divider"></div>
                 <a href="#" class="dropdown-item dropdown-footer">See All Notifications</a>
             </div>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#"><i
-                        class="fas fa-th-large"></i></a>
         </li>
     </ul>
 </nav>

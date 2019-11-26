@@ -8,5 +8,19 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
     <link rel="stylesheet" href="/css/app.css">
 </head>
-@include('layouts.page')
+
+@auth
+    <body class="hold-transition sidebar-mini">
+    <div class="wrapper">
+        @include('layouts.navbar')
+        @include('layouts.menu')
+        @include('layouts.includes')
+        @include('layouts.footer')
+    </div>
+    @else
+        @yield('content')
+    @endauth
+
+    <script src="/js/app.js"></script>
+    </body>
 </html>

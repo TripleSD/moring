@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
+use App\Console\Commands\SitesChecker;
 use App\Http\Controllers\Controller;
-use App\Repositories\AdminSiteRepository;
+use App\Http\Requests\Sites\ShowSitesRequest;
+use App\Http\Requests\Sites\StoreSiteRequest;
+use App\Http\Requests\Sites\UpdateSiteRequest;
+use App\Models\BridgePhpVersions;
+use App\Repositories\AdminSitesRepository;
 use Illuminate\Http\Request;
 
 
@@ -14,15 +19,14 @@ class SitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(AdminSiteRepository $adminSiteRepository)
+    public function index(AdminSitesRepository $adminSiteRepository, Request $request)
     {
-        $sites = $adminSiteRepository->getList();
-        if(empty($sites)){
-            return view('admin.sites.index');
-        } else {
-            return view('admin.sites.index', compact('sites'));
-        }
-        dd(__METHOD__);
+        $sites = $adminSiteRepository->index($request);
+
+        //TODO вынести в репозиторий два запроса
+        $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
+        $bridgePhpVersion = BridgePhpVersions::get();
+        return view('admin.sites.index', compact('sites','bridgePhpVersion','bridgeBranchVersion'));
     }
 
     /**
@@ -32,7 +36,7 @@ class SitesController extends Controller
      */
     public function create()
     {
-        dd(__METHOD__);
+        return view('admin.sites.create');
     }
 
     /**
@@ -41,9 +45,20 @@ class SitesController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreSiteRequest $request)
     {
-        dd(__METHOD__);
+        $fillable = $request->validated();
+        $result = (new AdminSitesRepository())->store($fillable);
+        if($result) {
+            $check = new SitesChecker();
+            $check->handle();
+            flash('Запись добавлена')->success();
+            return redirect()
+                ->route('admin.sites.index');
+        } else {
+            return back()
+                ->withInput();
+        }
     }
 
     /**
@@ -52,9 +67,10 @@ class SitesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(ShowSitesRequest $request, AdminSitesRepository $adminSiteRepository)
     {
-        dd(__METHOD__);
+        $site = $adminSiteRepository->show($request);
+        return view('admin.sites.show', compact('site'));
     }
 
     /**
@@ -63,9 +79,10 @@ class SitesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(ShowSitesRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        dd(__METHOD__);
+        $site = $adminSitesRepository->show($request);
+        return view('admin.sites.edit', compact('site'));
     }
 
     /**
@@ -75,9 +92,19 @@ class SitesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        dd(__METHOD__);
+        $id = $request->id;
+        $fillable = $request->validated();
+        $result = $adminSitesRepository->update($fillable, $id);
+        if (!$result) {
+            return back()->withInput($fillable);
+        } else {
+            $check = new SitesChecker();
+            $check->handle($id);
+            flash('Запись обновлена')->success();
+            return redirect()->route('admin.sites.index');
+        }
     }
 
     /**
@@ -86,8 +113,15 @@ class SitesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($id, AdminSitesRepository $adminSitesRepository)
     {
-        dd(__METHOD__);
+        $result = $adminSitesRepository->destroy($id);
+        if(!$result){
+            return back()
+                ->withInput();
+        } else {
+            flash('Сайт удален из списка мониторинга')->success();
+            return redirect()->route('admin.sites.index');
+        }
     }
 }

@@ -11,26 +11,39 @@
 |
 */
 
-Auth::routes();
+Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
+Route::post('/login', 'Auth\LoginController@login');
 
-Route::get('/', 'HomeController@index')->name('home');
-Route::any('/logout', 'Auth\LoginController@logout')->name('auth.logout');
-Route::get('/checks/sites', 'ChecksSitesController@getIndex')->name('checks.sites.getIndex');
 
-$groupData = [
-    'namespace' => 'Admin\Sites',
-    'prefix' => 'admin'
-];
+Route::group(['middleware' => 'auth'], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::any('/logout', 'Auth\LoginController@logout')->name('auth.logout');
 
-Route::group($groupData, function () {
-    $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy'];
-    Route::resource('sites', 'SitesController')
-        ->only($methods)
-        ->names('admin.sites');
-});
+//  Sites management
+    Route::group(['prefix' => 'admin', 'namespace' => 'Admin\Sites'], function () {
+        Route::get('/sites/refresh', 'SitesBackendController@refreshList')
+        ->name('admin.sites.refresh');
 
-Route::group(['prefix' => 'settings', 'namespace' => 'Admin\Sites','as' => 'settings.'], function () {
-    $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy','show'];
-    Route::resource('users', 'UsersController')
-        ->only($methods);
+        $methods = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'];
+        Route::resource('sites', 'SitesController',
+            ['names' => 'admin.sites',
+                'parameters' => ['sites' => 'id']])
+            ->only($methods)
+            ->names('admin.sites');
+    });
+
+    Route::group(['prefix' => 'settings', 'namespace' => 'Admin\Settings', 'as' => 'settings.'], function () {
+        $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
+        Route::resource('users', 'UsersController')
+            ->only($methods);
+        $methods = ['index'];
+        Route::resource('system', 'SystemController')
+            ->only($methods);
+    });
+
+    Route::group(['namespace' => 'Admin\Servers'], function () {
+        $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
+        Route::resource('servers', 'ServersController')
+            ->only($methods);
+    });
 });
