@@ -11,12 +11,12 @@ class MoringController extends Controller
     public function getInfo()
     {
         try {
-            $availiblesVersions = MoringVersions::orderBy('version', 'desc')->first();
-            return array('currentVersion' => $availiblesVersions->version,
-                'currentHumanVersion' => $availiblesVersions->human_version);
+            $latestBuild = MoringVersions::orderBy('build','desc')->first();
+            return array('latestBuild' => $latestBuild->build,
+                'latestBuildDate' => $latestBuild->created_at);
         } catch (\Exception $e) {
-            return array('currentVersion' => Config::get('moring.version'),
-                'currentHumanVersion' => Config::get('moring.humanVersion'));
+            return array('latestBuild' => Config::get('moring.build'),
+                'latestBuildDate' => '');
         }
     }
 }
