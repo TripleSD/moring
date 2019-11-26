@@ -10,6 +10,12 @@ class IdentificatorsController extends Controller
     public function getIdentificator()
     {
         $identificator = Settings::where('parameter', 'identificator')->first();
-        return $identificator->value;
+
+        if ($identificator != null) {
+            return $identificator->value;
+        } else {
+            return null;
+        }
+
     }
 }
