@@ -7,10 +7,10 @@
     All rights reserved.
     <a href="https://github.com/TripleSD/moring" target="_blank"><i class="fab fa-github-square"></i></a>
     <div class="float-right d-none d-sm-inline-block">
-        <b>Bridge:</b>
+        <b>Bridge </b>
         @if($bridgeInfo['status'] == 1)
             <span class="badge badge-dark">
-                v.{{$bridgeInfo['version']}}
+                b: {{$bridgeInfo['version']}}
             </span>
             <span class="badge badge-success">
                 Connected | {{$bridgeInfo['statusCode']}}
@@ -20,6 +20,6 @@
                 Disconnected |  Error
             </span>
         @endif
-        <b>Moring</b> <span class="badge badge-dark">v.{{Config::get('moring.humanVersion')}}</span>
+        <b>Moring</b> <span class="badge badge-dark">b: {{Config::get('moring.build')}}</span>
     </div>
 </footer>
