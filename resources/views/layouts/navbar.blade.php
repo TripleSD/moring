@@ -26,10 +26,10 @@
     </ul>
 
     <ul class="navbar-nav ml-auto">
-        @if($currentVersion < $latestVersion)
+        @if($currentBuild < $latestBuild)
             <span class="badge badge-warning text-sm">
                 <i class="fas fa-info-circle"></i>
-                Доступна новая версия {{ $latestHumanVersion }}
+                Доступна новая версия {{ $latestBuild }} от {{ $latestBuildDate }}г.
             </span>
         @else
             <span class="badge badge-success text-sm">
