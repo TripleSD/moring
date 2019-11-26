@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use App\Http\Controllers\Admin\Moring\MoringController;
+use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\View;
@@ -18,14 +19,12 @@ class MoringVersionInfo
      */
     public function handle($request, Closure $next)
     {
-        $versions = new MoringController();
-        $versions = $versions->getInfo();
-        View::share('latestVersion',$versions['currentVersion']);
-        View::share('latestHumanVersion',$versions['currentHumanVersion']);
-        $currentVersion = Config::get('moring.version');
-        $currentHumanVersion = Config::get('moring.humanVersion');
-        View::share('currentVersion',$currentVersion);
-        View::share('currentHumanVersion',$currentHumanVersion);
+        $builds = new MoringController();
+        $builds = $builds->getInfo();
+        View::share('latestBuild',$builds['latestBuild']);
+        View::share('latestBuildDate',Carbon::parse($builds['latestBuildDate'])->format('d-m-Y'));
+        $currentBuild = Config::get('moring.build');
+        View::share('currentBuild',$currentBuild);
         return $next($request);
     }
 }
