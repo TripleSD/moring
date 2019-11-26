@@ -42,18 +42,14 @@ class MoringVersionChecker extends Command
      */
     public function handle()
     {
-        $identificator = new IdentificatorsController();
+        $httpClient = new Client();
+        $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCreateIdentificatorUrl'); # Url getting from /config/moring.php
+        $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
 
-        if (empty($identificator)) {
-            $httpClient = new Client();
-            $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCreateIdentificatorUrl'); # Url getting from /config/moring.php
-            $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
-
-            $settings = new Settings();
-            $settings->parameter = 'identificator';
-            $settings->value = json_decode($response->getBody(), true);
-            $settings->save();
-        }
+        $settings = new Settings();
+        $settings->parameter = 'identificator';
+        $settings->value = json_decode($response->getBody(), true);
+        $settings->save();
 
         # Getting availible Moring versions from bridge
         $httpClient = new Client();
