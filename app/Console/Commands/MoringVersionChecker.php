@@ -42,6 +42,8 @@ class MoringVersionChecker extends Command
      */
     public function handle()
     {
+        $identificator = new IdentificatorsController();
+
         $httpClient = new Client();
         $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCreateIdentificatorUrl'); # Url getting from /config/moring.php
         $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
@@ -58,13 +60,13 @@ class MoringVersionChecker extends Command
             ['query' => ['identificator' => $identificator->getIdentificator()], 'allow_redirects' => false]);
         $versionsBridgeArray = json_decode($response->getBody(), true);
 
-        foreach ($versionsBridgeArray as $human_version => $version) {
+        foreach ($versionsBridgeArray as $created_at => $build) {
             try {
-                $localVersionsArray = MoringVersions::pluck('version')->toArray();
-                if (!in_array($version, $localVersionsArray)) {
+                $localVersionsArray = MoringVersions::pluck('build')->toArray();
+                if (!in_array($build, $localVersionsArray)) {
                     $versions = new MoringVersions();
-                    $versions->version = $version;
-                    $versions->human_version = $human_version;
+                    $versions->build = $build;
+                    $versions->created_at = $created_at;
                     $versions->save();
                 }
             } catch (\Exception $e) {
