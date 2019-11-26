@@ -9,14 +9,14 @@ use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 
-class MoringVersionChecker extends Command
+class BridgeMoringVersionChecker extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'MoringVersionChecker';
+    protected $signature = 'BridgeMoringVersionChecker';
 
     /**
      * The console command description.
