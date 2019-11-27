@@ -88,7 +88,6 @@
                                     <th>Статус</th>
                                     <th>Веб сервер</th>
                                     <th>Версия PHP</th>
-                                    <th>Moring файл</th>
                                     <th>Проверки</th>
                                     <th>HTTP Code</th>
                                     <th></th>
@@ -130,7 +129,10 @@
                                                         <span class="small">Поставщик: {{ $site->getSslCertification->issuer }}</span>
                                                     </div>
                                                     <div>
-                                                        <span class="small">Последнее обновление: {{ $site->getSslCertification->updated_at }}</span>
+                                                        <span class="small">
+                                                            <i class="fas fa-history"></i>
+                                                            Последнее обновление: {{ $site->getSslCertification->updated_at }}
+                                                        </span>
                                                     </div>
                                                 @endif
                                                 <div>
@@ -160,6 +162,7 @@
                                                     {{$site->getWebServer->web_server}}
                                                 @endempty
                                                 <div class="small">
+                                                    <i class="fas fa-history"></i>
                                                     {{optional($site->getPhpVersion)->updated_at}}
                                                 </div>
                                             </td>
@@ -218,23 +221,22 @@
                                                         @endif
                                                     </div>
                                                     <div class="small">
+                                                        <i class="fas fa-history"></i>
                                                         {{optional($site->getPhpVersion)->updated_at}}
                                                     </div>
                                                 @endempty
                                             </td>
                                             <td>
-                                                @empty(!$site->file_url)
-                                                    <span class="text-success" title="Путь до Moring файла указан">
-                                                        <i class="fa fa-link"></i>
-                                                    </span>
-                                                @else
-                                                    <span class="text-gray" title="Путь до moring файла не указан">
-                                                        <i class="fa fa-link"></i>
-                                                    </span>
-                                                @endempty
-                                            </td>
-                                            <td>
                                                 <div class="small">
+                                                    @empty(!$site->file_url)
+                                                        <span class="text-success" title="Путь до Moring файла указан">
+                                                        <i class="fa fa-link"></i>
+                                                    </span>
+                                                    @else
+                                                        <span class="text-gray" title="Путь до moring файла не указан">
+                                                        <i class="fa fa-link"></i>
+                                                    </span>
+                                                    @endempty
                                                     @if($site->checksList->http_code == 1)
                                                         <span class="text-success"
                                                               title="Мониторинг HTTP кодов включен">
@@ -314,6 +316,7 @@
                                                     @endif
                                                 </div>
                                                 <div class="small">
+                                                    <i class="fas fa-history"></i>
                                                     {{ optional($site->getHttpCode)->updated_at }}
                                                 </div>
                                             </td>
