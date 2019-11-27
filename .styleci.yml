@@ -5,9 +5,9 @@ php: true
   disabled:
     - length_ordered_imports
     - unused_use
-  finder:
-    not-name:
-      - index.php
+#  finder:
+#    not-name:
+#      - index.php
 #      - server.php
 js:
   finder:
