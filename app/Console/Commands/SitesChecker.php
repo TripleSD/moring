@@ -49,6 +49,7 @@ class SitesChecker extends Command
         } else {
             $sites[] = Sites::find($site_id);
         }
+
         foreach ($sites as $site) {
             try {
                 if ($site->checksList->use_file === 1) {
@@ -93,7 +94,7 @@ class SitesChecker extends Command
                     }
 
                     $ssl = new SitesSSLChecker();
-                    $ssl->handle($site_id);
+                    $ssl->handle($site->id);
                 }
             } catch (\Exception $e) {
 
