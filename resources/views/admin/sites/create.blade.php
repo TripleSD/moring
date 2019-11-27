@@ -38,19 +38,35 @@
                                     <div class="form-group">
                                         <b>Название сайта</b>
                                         {{ Form::text('title', null , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
-                                        <p class="mt--3 small">(Название проверяемого сайта)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Введите название сайта, которое поможет Вам легче ориентироваться в списке сайтов.
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
                                         <b>Адрес URL</b>
                                         {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
-                                        <p class="mt--3 small">(URL адрес сайта без указания htttp/https префиксов)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Введите URL сайта без указания http/https префиксов - эти настройки будут дальше.
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
                                         <b>Полный путь к файлу мониторинга (опционально)</b>
                                         {{ Form::text('file_url', '',['class' => 'form-control', 'placeholder' => 'yourdomain.com/monitoring.php']) }}
-                                        <p class="mt--3 small">(Использовать файл мониторинга (необходимо вводить полный путь))</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Вы можете получать более подробную информацию о состоянии Вашего оборудования.
+                                            Для этого необходимо установить файл мониторинга на контролируемый сервер (необходимо вводить полный путь к файлу)
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
@@ -58,41 +74,71 @@
                                             <b>HTTP ответ сервера</b>
                                             {{Form::text('http_code', '0', ['class' => 'form-control', 'hidden'])}}
                                             {{ Form::checkbox('http_code', 1, true) }}</div>
-                                            <p class="mt--3 small">(Проверка возвращаемого сайтом ответа на HTTP запрос)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Проверка возвращаемого сайтом ответа на HTTP запрос.
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
                                         <b>HTTPS</b>
                                         {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('https', 1, false) }}
-                                        <p class="mt--3 small">(Сервер с поддержкой HTTPS)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Если сервер поддерживает защищенное соединение (HTTPS), отметьте этот чекбокс для получения корректных данных об ответе сервера на HTTP запрос.
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
                                         <b>Мониторинг HTTPS</b>
                                         {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_https', 1, false) }}
-                                        <p class="mt--3 small">(Проверять HTTPS)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Отметьте чекбокс для проверки ответа сервера на запрос HTTPS.
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
                                         <b>Проверка SSL</b>
                                         {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_ssl', 1, false) }}
-                                        <p class="mt--3 small">(Проверять состояние SSL сертификата)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Отметьте чекбокс для проверки SSL сертификата сервера.
+                                        </details>
                                     </div>
 
                                    <div class="form-group">
                                         <b>Проверка версии PHP</b>
                                        {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_php', 1, true) }}
-                                       <p class="mt--3 small">(Проверять актуальность версии PHP)</p>
+                                       <details class="mt--3 small">
+                                           <summary>
+                                               Дополнительная информация
+                                           </summary>
+                                           Отметьте чекбокс для контроля версии PHP.
+                                       </details>
                                     </div>
 
                                     <div class="form-group">
                                         <b>Описание</b>
-                                        {{ Form::text('comment', null , ['class' => 'form-control', 'placeholder' => 'My website, that I love to watch on-line, but sometimes ....']) }}
-                                        <p class="mt--3 small">(Дополнительное описание)</p>
+                                        {{ Form::text('comment', null , ['class' => 'form-control', 'placeholder' => 'Это мой любимый сайт и я всегда радуюсь, видя его онлайн, но иногда...']) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Здесь Вы можете ввести дополнительную информацию для болеее полного описания сайта.
+                                        </details>
                                     </div>
 
                                     <button type="submit" class="btn btn-xs bg-gradient-cyan">Добавить</button>

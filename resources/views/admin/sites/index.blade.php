@@ -158,7 +158,7 @@
                                                     </span>
                                                 @else
                                                     {{$site->getWebServer->web_server}}
-                                                @endif
+                                                @endempty
                                                 <div class="small">
                                                     {{optional($site->getPhpVersion)->updated_at}}
                                                 </div>
@@ -166,7 +166,7 @@
                                             <td>
                                                 @empty(!$site->getPhpVersion)
                                                     <div>
-                                                        @empty($bridgePhpVersion)
+                                                        @if(empty($bridgePhpVersion))
                                                             @if($site->getPhpVersion->version != 0)
                                                                 <span class="text-gray">
                                                                 {{ $site->getPhpVersion->version }}
@@ -207,7 +207,7 @@
                                                                     <span class="text-danger"
                                                                           title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
                                                                     <i class="fa fa-exclamation-triangle"></i>
-                                                                </span>
+                                                                    </span>
                                                                 @endif
                                                             @else
                                                                 <span class="text-warning"
@@ -216,16 +216,11 @@
                                                                     </span>
                                                             @endif
                                                         @endif
-                                                        @else
-                                                            <span class="text-gray"
-                                                                  title="Версия PHP не определена. Запрос к серверу не производился.">
-                                                            <i class="fa fa-exclamation-triangle"></i>
-                                                            </span>
-                                                        @endif
                                                     </div>
                                                     <div class="small">
                                                         {{optional($site->getPhpVersion)->updated_at}}
                                                     </div>
+                                                @endempty
                                             </td>
                                             <td>
                                                 @empty(!$site->file_url)
@@ -236,7 +231,7 @@
                                                     <span class="text-gray" title="Путь до moring файла не указан">
                                                         <i class="fa fa-link"></i>
                                                     </span>
-                                                @endif
+                                                @endempty
                                             </td>
                                             <td>
                                                 <div class="small">
