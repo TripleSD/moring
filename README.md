@@ -6,7 +6,7 @@
 
 
 
-## Documentation~~~~
+## Documentation
 
 ## System Requirements
 
