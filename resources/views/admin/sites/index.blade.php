@@ -106,33 +106,39 @@
                                             <td>
                                                 <div>
                                                     <i class="fas fa-globe-americas"></i> {{$site->url}}
-                                                    @isset($site->getSslCertification->expiration_days)
-                                                        @if ($site->getSslCertification->expiration_days >= 10)
-                                                            <i class="fa fa-lock fa-1 text-success"
-                                                               title="Действующий SSL сертификат"></i>
-                                                        @elseif($site->getSslCertification->expiration_days >= 5)
-                                                            <i class="fa fa-lock fa-1 text-warning"
-                                                               title="Действующий SSL сертификат"></i>
-                                                        @elseif($site->getSslCertification->expiration_days >= 1)
-                                                            <i class="fa fa-lock fa-1 text-danger"
-                                                               title="Действующий SSL сертификат"></i>
+                                                    @if($site->https === 1)
+                                                        @isset($site->getSslCertification->expiration_days)
+                                                            @if ($site->getSslCertification->expiration_days >= 10)
+                                                                <i class="fa fa-lock fa-1 text-success"
+                                                                   title="Действующий SSL сертификат"></i>
+                                                            @elseif($site->getSslCertification->expiration_days >= 5)
+                                                                <i class="fa fa-lock fa-1 text-warning"
+                                                                   title="Действующий SSL сертификат"></i>
+                                                            @elseif($site->getSslCertification->expiration_days >= 1)
+                                                                <i class="fa fa-lock fa-1 text-danger"
+                                                                   title="Действующий SSL сертификат"></i>
+                                                            @else
+                                                                <i class="fa fa-lock fa-1 text-gray"
+                                                                   title="SSL сертификат истек"></i>
+                                                            @endif
+                                                            <span class="small">
+                                                            ({{ $site->getSslCertification->expiration_days }} дней)</span>
                                                         @else
                                                             <i class="fa fa-lock fa-1 text-gray"
-                                                               title="SSL сертификат истек"></i>
+                                                               title="Проверка SSL сертификата еще не производилась"></i>
                                                         @endif
-                                                        <span class="small">
-                                                            ({{ $site->getSslCertification->expiration_days }} дней)</span>
                                                     @endif
                                                 </div>
                                                 @isset($site->getSslCertification->expiration_days)
-                                                    <div>
-                                                        <span class="small">Поставщик: {{ $site->getSslCertification->issuer }}</span>
+                                                    <div class="small text-gray">
+                                                        <i class="fas fa-history"></i>
+                                                        {{ $site->getSslCertification->updated_at }}
                                                     </div>
-                                                    <div>
-                                                        <span class="small">
-                                                            <i class="fas fa-history"></i>
-                                                            Последнее обновление: {{ $site->getSslCertification->updated_at }}
-                                                        </span>
+                                                    <div class="small text-gray">
+                                                        <details>
+                                                            <summary>Издатель SSL сертификата</summary>
+                                                            {{ $site->getSslCertification->issuer }}
+                                                        </details>
                                                     </div>
                                                 @endif
                                                 <div>
@@ -161,7 +167,7 @@
                                                 @else
                                                     {{$site->getWebServer->web_server}}
                                                 @endempty
-                                                <div class="small">
+                                                <div class="small text-gray">
                                                     <i class="fas fa-history"></i>
                                                     {{optional($site->getPhpVersion)->updated_at}}
                                                 </div>
@@ -220,7 +226,7 @@
                                                             @endif
                                                         @endif
                                                     </div>
-                                                    <div class="small">
+                                                    <div class="small text-gray">
                                                         <i class="fas fa-history"></i>
                                                         {{optional($site->getPhpVersion)->updated_at}}
                                                     </div>
@@ -305,19 +311,21 @@
                                                             {{ $site->getHttpCode->http_code }}
                                                             </span>
                                                         @else
-                                                            <span class="text-gray" title="Код ответа не был получен">
-                                                        <i class="fa fa-exclamation-triangle"></i>
-                                                    </span>
+                                                            <span class="text-warning" title="Неопознанный код ответа">
+                                                                <i class="fa fa-exclamation-triangle"></i>
+                                                            </span>
                                                         @endif
                                                     @else
-                                                        <span class="text-gray" title="Код ответа не был получен">
-                                                        <i class="fa fa-exclamation-triangle"></i>
-                                                </span>
+                                                        <span class="text-warning" title="Код ответа не был получен">
+                                                            <i class="fa fa-exclamation-triangle"></i>
+                                                        </span>
                                                     @endif
                                                 </div>
-                                                <div class="small">
-                                                    <i class="fas fa-history"></i>
-                                                    {{ optional($site->getHttpCode)->updated_at }}
+                                                <div class="small text-gray">
+                                                    @empty(!$site->getHttpCode)
+                                                        <i class="fas fa-history"></i>
+                                                        {{ optional($site->getHttpCode)->updated_at }}
+                                                    @endif
                                                 </div>
                                             </td>
                                             <td>
@@ -328,11 +336,9 @@
                                                         <i class="fa fa-eye"></i>
                                                     </a>
                                                     <a href="{{route('admin.sites.edit', $site->id)}}"
-                                                       class="btn btn-xs bg-gradient-warning" title="Редактирование сайта">
+                                                       class="btn btn-xs bg-gradient-warning"
+                                                       title="Редактирование сайта">
                                                         <i class="fa fa-edit"></i></a>
-                                                    <a href="#"
-                                                       class="btn btn-xs bg-gradient-danger" title="Удаление сайта">
-                                                        <i class="fa fa-trash"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
