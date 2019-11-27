@@ -1,4 +1,4 @@
-php:
+php: true
   preset: laravel
   enabled:
     - alpha_ordered_imports
