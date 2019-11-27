@@ -26,7 +26,7 @@ class SitesController extends Controller
         //TODO вынести в репозиторий два запроса
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
         $bridgePhpVersion = BridgePhpVersions::get();
-        return view('admin.sites.index', compact('sites','bridgePhpVersion','bridgeBranchVersion'));
+        return view('admin.sites.index', compact('sites', 'bridgePhpVersion', 'bridgeBranchVersion'));
     }
 
     /**
@@ -42,29 +42,34 @@ class SitesController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function store(StoreSiteRequest $request)
     {
         $fillable = $request->validated();
-        $result = (new AdminSitesRepository())->store($fillable);
-        if($result) {
-            $check = new SitesChecker();
-            $check->handle();
-            flash('Запись добавлена')->success();
-            return redirect()
-                ->route('admin.sites.index');
+
+        // Checking DNS resolve by domains
+        if (checkdnsrr($fillable['url'], 'A')) {
+            $result = (new AdminSitesRepository())->store($fillable);
+            if ($result) {
+                $check = new SitesChecker();
+                $check->handle();
+                flash('Запись добавлена')->success();
+                return redirect()->route('admin.sites.index');
+            } else {
+                return back()->withInput();
+            }
         } else {
-            return back()
-                ->withInput();
+            flash('Запись не добавлена. Проверьте существование домена.')->warning();
+            return back()->withInput();
         }
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function show(ShowSitesRequest $request, AdminSitesRepository $adminSiteRepository)
@@ -81,7 +86,7 @@ class SitesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function edit(ShowSitesRequest $request, AdminSitesRepository $adminSitesRepository)
@@ -93,8 +98,8 @@ class SitesController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param \Illuminate\Http\Request $request
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
@@ -115,13 +120,13 @@ class SitesController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param int $id
      * @return \Illuminate\Http\Response
      */
     public function destroy($id, AdminSitesRepository $adminSitesRepository)
     {
         $result = $adminSitesRepository->destroy($id);
-        if(!$result){
+        if (!$result) {
             return back()
                 ->withInput();
         } else {
