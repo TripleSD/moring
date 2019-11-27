@@ -38,13 +38,23 @@
                                     <div class="form-group">
                                         <label>Название сайта</label>
                                         {{ Form::text('title', $site->title , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
-                                        <p class="mt--3 small">(Название проверяемого сайта)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Введите название сайта, которое поможет Вам легче ориентироваться в списке сайтов.
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Адрес URL</label>
                                         {{ Form::text('url', $site->url , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
-                                        <p class="mt--3 small">(URL адрес сайта без указания htttp/https префиксов)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Введите URL сайта без указания http/https префиксов - эти настройки будут дальше.
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
@@ -53,13 +63,24 @@
                                             {{Form::text('enabled', '0', ['class' => 'form-control', 'hidden'])}}
                                             {{ Form::checkbox('enabled', true, $site->enabled) }}
                                         </div>
-                                        <p class="mt--3 small">(Активировать мониторинг сайта)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Для активации мониторинга отметьте данный чекбокс.
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
                                         <label>Путь к файлу мониторинга</label>
                                         {{ Form::text('file_url', $site->file_url , ['class' => 'form-control', 'placeholder' => 'monitoring.php']) }}
-                                        <p class="mt--3 small">(Для использования файла мониторинга необходимо вводить полный путь до него)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Вы можете получать более подробную информацию о состоянии Вашего оборудования.
+                                            Для этого необходимо установить файл мониторинга на контролируемый сервер (необходимо вводить полный путь к файлу)
+                                        </details>
                                     </div>
 
                                     <div class="form-group">
@@ -68,14 +89,24 @@
                                             {{Form::text('use_file', '0', ['class' => 'form-control', 'hidden'])}}
                                             {{ Form::checkbox('use_file', true, $site->checksList->use_file) }}
                                         </div>
-                                        <p class="mt--3 small">(Использовать файл мониторинга)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Если Вы не желаете использовать файл мониторинг на текущем этапе, просто снимите отметку с данного чекбокса.
+                                        </details>
                                     </div>
                                     <div class="form-group">
                                         <div>
                                             <b>HTTP ответ сервера</b>
                                             {{Form::text('http_code', '0', ['class' => 'form-control', 'hidden'])}}
                                             {{ Form::checkbox('http_code', 1, true) }}</div>
-                                        <p class="mt--3 small">(Проверка возвращаемого сайтом ответа на HTTP запрос)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Проверка возвращаемого сайтом ответа на HTTP запрос.
+                                        </details>
                                     </div>
 
                                     <div class="form-row">
@@ -85,23 +116,38 @@
                                             {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
                                                 {{ Form::checkbox('https', true, $site->https) }}
                                             </div>
-                                            <div class="mt--3 small">(Сервер с поддержкой HTTPS)</div>
+                                            <details class="mt--3 small">
+                                                <summary>
+                                                    Дополнительная информация
+                                                </summary>
+                                                Если сервер поддерживает защищенное соединение (HTTPS), отметьте этот чекбокс для получения корректных данных об ответе сервера на HTTP запрос.
+                                            </details>
                                         </div>
                                         <div class="form-group col-md-3">
-                                            <label>Мониторить HTTPS</label><br>
+                                            <label>Мониторинг HTTPS</label><br>
                                             <div class="form-check-inline">
                                             {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
                                                 {{ Form::checkbox('check_https', true, $site->checksList->check_https) }}
                                             </div>
-                                            <p class="mt--3 small">(Проверять HTTPS)</p>
+                                            <details class="mt--3 small">
+                                                <summary>
+                                                    Дополнительная информация
+                                                </summary>
+                                                Отметьте чекбокс для проверки ответа сервера на запрос HTTPS.
+                                            </details>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <label>Мониторить SSL</label><br>
+                                            <label>Мониторинг SSL</label><br>
                                             <div class="form-check-inline">
                                             {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
                                                 {{ Form::checkbox('check_ssl', true, $site->checksList->check_ssl) }}
                                             </div>
-                                            <p class="mt--3 small">(Проверять состояние SSL сертификата)</p>
+                                            <details class="mt--3 small">
+                                                <summary>
+                                                    Дополнительная информация
+                                                </summary>
+                                                Отметьте чекбокс для проверки SSL сертификата сервера.
+                                            </details>
                                         </div>
                                     </div>
 
@@ -111,13 +157,23 @@
                                             {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}
                                             {{ Form::checkbox('check_php', true, $site->checksList->check_php) }}
                                         </div>
-                                        <p class="mt--3 small">(Проверять актуальность версии PHP)</p>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Отметьте чекбокс для контроля версии PHP.
+                                        </details>
+
                                     </div>
 
                                     <div class="form-group">
                                         <label>Описание</label>
-                                        {{ Form::text('comment', $site->comment, ['class' => 'form-control', 'placeholder' => 'My website, that I love to watch on-line, but sometimes ....']) }}
-                                        <p class="mt--3 small">(Дополнительное описание)</p>
+                                        {{ Form::text('comment', $site->comment, ['class' => 'form-control', 'placeholder' => 'Это мой любимый сайт и я всегда радуюсь, видя его онлайн, но иногда...']) }}
+                                        <summary>
+                                            Дополнительная информация
+                                        </summary>
+                                        Здесь Вы можете ввести дополнительную информацию для болеее полного описания сайта.
+                                        </details>
                                     </div>
                                     <div class="form-row ">
                                         <div class="form-group col-md-4">

@@ -69,8 +69,13 @@ class SitesController extends Controller
      */
     public function show(ShowSitesRequest $request, AdminSitesRepository $adminSiteRepository)
     {
+
+        //TODO вынести в репозиторий два запроса
+        $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
+        $bridgePhpVersion = BridgePhpVersions::get();
+
         $site = $adminSiteRepository->show($request);
-        return view('admin.sites.show', compact('site'));
+        return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion'));
     }
 
     /**
