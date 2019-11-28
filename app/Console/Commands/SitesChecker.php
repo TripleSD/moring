@@ -6,10 +6,10 @@ use App\Models\Sites;
 use App\Models\SitesHttpCodes;
 use App\Models\SitesPhpVersions;
 use App\Models\SitesWebServers;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Str;
-use App\Console\Commands\SitesSSLChecker;
 
 class SitesChecker extends Command
 {
@@ -108,7 +108,7 @@ class SitesChecker extends Command
                 $fillable = ['site_id' => $site->id, 'http_code' => $statusCode];
                 $http = new SitesHttpCodes($fillable);
             }
-            $http->updated_at = \Carbon\Carbon::now();
+            $http->updated_at = Carbon::now();
             $http->save();
 
 
@@ -120,7 +120,7 @@ class SitesChecker extends Command
                 $fillable = ['site_id' => $site->id, 'web_server' => $webServerType];
                 $webServer = new SitesWebServers($fillable);
             }
-            $webServer->updated_at = \Carbon\Carbon::now();
+            $webServer->updated_at = Carbon::now();
             $webServer->save();
 
             //    PHP version saving process
@@ -132,7 +132,7 @@ class SitesChecker extends Command
                 $fillable = ['site_id' => $site->id, 'version' => $phpVersion, 'branch' => $phpBranch];
                 $php = new SitesPhpVersions($fillable);
             }
-            $php->updated_at = \Carbon\Carbon::now();
+            $php->updated_at = Carbon::now();
             $php->save();
 
         }

@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\SitesChecksList;
 use App\Models\SitesSslCertificates;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 use Spatie\SslCertificate\SslCertificate;
@@ -69,7 +70,7 @@ class SitesSSLChecker extends Command
             if (is_null($site_id)) {
                 $ssl = SitesSslCertificates::where('site_id', $check->site_id)->first();
             } else {
-                $ssl = SitesSslCertificates::where('site_id', $check->site->id)->first();
+                $ssl = SitesSslCertificates::where('site_id', $site_id)->first();
             }
 
             if (!empty($ssl)) {
@@ -85,7 +86,7 @@ class SitesSSLChecker extends Command
                     'algorithm' => $algorithm, 'from_date' => $fromDate];
                 $ssl = new SitesSslCertificates($fillable);
             }
-            $ssl->updated_at = \Carbon\Carbon::now();
+            $ssl->updated_at = Carbon::now();
             $ssl->save();
         }
     }
