@@ -23,36 +23,37 @@ class ServersController extends Controller
 
     public function index(ServersRequest $request)
     {
-        $servers = $this->serversRepository->getServersList($request);
-        return view('admin.servers.index', compact('servers'));
+//        $servers = $this->serversRepository->getServersList($request);
+//        return view('admin.servers.index', compact('servers'));
+        return view('empty');
     }
 
-    public function show($serverId, AgentController $agentController)
-    {
-        $server = $this->serversRepository->getServer($serverId);
-        $settingsFile = $agentController->getSettings();
-        return view('admin.servers.show', compact('server','settingsFile'));
-    }
-
-    public function edit($serverId)
-    {
-        $server = $this->serversRepository->getServer($serverId);
-        return view('admin.servers.edit', compact('server'));
-    }
-
-    public function create()
-    {
-        $token = $this->serversRepository->createToken();
-        return view('admin.servers.create', compact('token'));
-    }
-
-    public function store(ServersStoreRequest $serversRequest)
-    {
-        return $this->serversRepository->storeServer($serversRequest);
-    }
-
-    public function update(ServersUpdateRequest $serversRequest, $serverId)
-    {
-        return $this->serversRepository->updateServer($serversRequest, $serverId);
-    }
+//    public function show($serverId, AgentController $agentController)
+//    {
+//        $server = $this->serversRepository->getServer($serverId);
+//        $settingsFile = $agentController->getSettings();
+//        return view('admin.servers.show', compact('server','settingsFile'));
+//    }
+//
+//    public function edit($serverId)
+//    {
+//        $server = $this->serversRepository->getServer($serverId);
+//        return view('admin.servers.edit', compact('server'));
+//    }
+//
+//    public function create()
+//    {
+//        $token = $this->serversRepository->createToken();
+//        return view('admin.servers.create', compact('token'));
+//    }
+//
+//    public function store(ServersStoreRequest $serversRequest)
+//    {
+//        return $this->serversRepository->storeServer($serversRequest);
+//    }
+//
+//    public function update(ServersUpdateRequest $serversRequest, $serverId)
+//    {
+//        return $this->serversRepository->updateServer($serversRequest, $serverId);
+//    }
 }
