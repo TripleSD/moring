@@ -85,7 +85,6 @@
                                 <thead>
                                 <tr>
                                     <th>URL</th>
-                                    <th>Статус</th>
                                     <th>Веб сервер</th>
                                     <th>Версия PHP</th>
                                     <th>Проверки</th>
@@ -104,59 +103,63 @@
                                         <tr class="table-row" bgcolor="#d3d3d3">
                                             @endif
                                             <td>
-                                                <div>
-                                                    <i class="fas fa-globe-americas"></i> {{$site->url}}
-                                                    @if($site->https === 1)
-                                                        @isset($site->getSslCertification->expiration_days)
-                                                            @if ($site->getSslCertification->expiration_days >= 10)
-                                                                <i class="fa fa-lock fa-1 text-success"
-                                                                   title="Действующий SSL сертификат"></i>
-                                                            @elseif($site->getSslCertification->expiration_days >= 5)
-                                                                <i class="fa fa-lock fa-1 text-warning"
-                                                                   title="Действующий SSL сертификат"></i>
-                                                            @elseif($site->getSslCertification->expiration_days >= 1)
-                                                                <i class="fa fa-lock fa-1 text-danger"
-                                                                   title="Действующий SSL сертификат"></i>
-                                                            @else
-                                                                <i class="fa fa-lock fa-1 text-gray"
-                                                                   title="SSL сертификат истек"></i>
-                                                            @endif
-                                                            <span class="small">
-                                                            ({{ $site->getSslCertification->expiration_days }} дней)</span>
-                                                        @else
-                                                            <i class="fa fa-lock fa-1 text-gray"
-                                                               title="Проверка SSL сертификата еще не производилась"></i>
-                                                        @endif
+                                                <div class="row">
+                                                    @if($site->enabled === 1)
+                                                        <div class="vl pt-1 text-success"></div>
+                                                    @else
+                                                        <div class="vl pt-1 text-gray"></div>
                                                     @endif
-                                                </div>
-                                                @isset($site->getSslCertification->expiration_days)
-                                                    <div class="small text-gray">
-                                                        <i class="fas fa-history"></i>
-                                                        {{ $site->getSslCertification->updated_at }}
-                                                    </div>
-                                                    <div class="small text-gray">
-                                                        <details>
-                                                            <summary>Издатель SSL сертификата</summary>
-                                                            {{ $site->getSslCertification->issuer }}
-                                                        </details>
-                                                    </div>
-                                                @endif
-                                                <div>
+                                                    <div class="col">
+                                                        <i class="fas fa-globe-americas"></i> {{$site->url}}
+                                                        @if($site->https === 1)
+                                                            @isset($site->getSslCertification->expiration_days)
+                                                                @if ($site->getSslCertification->expiration_days >= 10)
+                                                                    <span class="small">
+                                                                        <i class="fa fa-lock fa-1 text-success"
+                                                                           title="Действующий SSL сертификат"></i>
+                                                                    </span>
+                                                                @elseif($site->getSslCertification->expiration_days >= 5)
+                                                                    <span class="small">
+                                                                        <i class="fa fa-lock fa-1 text-warning"
+                                                                           title="Действующий SSL сертификат"></i>
+                                                                    </span>
+                                                                @elseif($site->getSslCertification->expiration_days >= 1)
+                                                                    <span class="small">
+                                                                        <i class="fa fa-lock fa-1 text-danger"
+                                                                           title="Действующий SSL сертификат"></i>
+                                                                    </span>
+                                                                @else
+                                                                    <span class="small">
+                                                                        <i class="fa fa-lock fa-1 text-gray"
+                                                                           title="SSL сертификат истек"></i>
+                                                                    </span>
+                                                                @endif
+                                                                <span class="small">
+                                                                    ({{ $site->getSslCertification->expiration_days }}
+                                                                    дней)
+                                                                </span>
+                                                            @else
+                                                                <span class="small">
+                                                                <i class="fa fa-lock fa-1 text-gray"
+                                                                   title="Проверьте наличие установленного SSL сертификата."></i>
+                                                                </span>
+                                                            @endif
+                                                        @endif
 
+                                                        @isset($site->getSslCertification->expiration_days)
+                                                            <div class="small text-gray">
+                                                                <i class="fas fa-history"></i>
+                                                                {{ $site->getSslCertification->updated_at }}
+                                                            </div>
+                                                            <div class="small text-gray">
+                                                                <details>
+                                                                    <summary>Издатель SSL сертификата</summary>
+                                                                    {{ $site->getSslCertification->issuer }}
+                                                                </details>
+                                                            </div>
+                                                        @endif
+                                                    </div>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                @if($site->enabled === 1)
-                                                    <a href="#" class="btn btn-sm"><i class="fa fa-pause"></i></a>
-                                                    <span class="badge badge-success" title="Мониторинг включен">
-                                                    Вкл
-                                                </span>
-                                                @else
-                                                    <a href="" class="btn btn-sm"><i class="fa fa-play"></i></a>
-                                                    <span class="badge badge-warning" title="Мониторинг отключен">
-                                                    Выкл
-                                                </span>
-                                                @endif
                                             </td>
                                             <td>
                                                 @empty($site->getWebServer->web_server)
@@ -339,6 +342,15 @@
                                                        class="btn btn-xs bg-gradient-warning"
                                                        title="Редактирование сайта">
                                                         <i class="fa fa-edit"></i></a>
+                                                </div>
+                                                <div class="btn-group">
+                                                    @if($site->enabled === 1)
+                                                        <a href="#" class="btn btn-xs btn-warning"><i
+                                                                    class="fa fa-pause"></i></a>
+                                                    @else
+                                                        <a href="" class="btn btn-xs btn-success"><i
+                                                                    class="fa fa-play"></i></a>
+                                                    @endif
                                                 </div>
                                             </td>
                                         </tr>
