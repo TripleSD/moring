@@ -88,18 +88,6 @@
                                                            data-placement="right" title="HTTPS contorl is Off"></i>
                                         </span>
                                     @endif
-                                    <dt>Контроль HTTPS:</dt>
-                                    @if($site->checksList->check_https === 1)
-                                        <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip"
-                                                           data-placement="right" title="HTTPS control is On"></i>
-                                                    </span>
-                                    @else
-                                        <span class="badge badge-danger">
-                                                        <i class="fa fa-toggle-off" data-toggle="tooltip"
-                                                           data-placement="right" title="HTTPS contorl is Off"></i>
-                                        </span>
-                                    @endif
                                     <dt>Контроль SSL:</dt>
                                     <div>
                                         <i class="fas fa-globe-americas"></i> {{$site->url}}

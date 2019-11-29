@@ -123,19 +123,6 @@
                                                 Если сервер поддерживает защищенное соединение (HTTPS), отметьте этот чекбокс для получения корректных данных об ответе сервера на HTTP запрос.
                                             </details>
                                         </div>
-                                        <div class="form-group col-md-3">
-                                            <label>Мониторинг HTTPS</label><br>
-                                            <div class="form-check-inline">
-                                            {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
-                                                {{ Form::checkbox('check_https', true, $site->checksList->check_https) }}
-                                            </div>
-                                            <details class="mt--3 small">
-                                                <summary>
-                                                    Дополнительная информация
-                                                </summary>
-                                                Отметьте чекбокс для проверки ответа сервера на запрос HTTPS.
-                                            </details>
-                                        </div>
                                         <div class="form-group col-md-4">
                                             <label>Мониторинг SSL</label><br>
                                             <div class="form-check-inline">

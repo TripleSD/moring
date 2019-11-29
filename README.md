@@ -1,27 +1,47 @@
-[![](https://api.travis-ci.org/AntonMZ/moring.svg?branch=master)](https://api.travis-ci.org/AntonMZ/moring.svg?branch=master)
-[![](https://requires.io/github/AntonMZ/moring/requirements.svg?branch=dev)](https://requires.io/github/AntonMZ/moring/requirements/?branch=dev)
+# MoRiNg (monitoring system)
 
-# MoRiNg
+Description here...
 
+### Branches & builds
 
+* Master
 
+    [![](https://github.styleci.io/repos/220468288/shield?branch=master)](https://github.styleci.io/repos/220468288/shield?branch=master)
 
-## Documentation
+* Dev
 
-## System Requirements
+    [![](https://github.styleci.io/repos/220468288/shield?branch=dev)](https://github.styleci.io/repos/220468288/shield?branch=dev)
 
-- PHP >= 7.1
-- Fileinfo PHP Extension
+---
 
-## Installation
+### Documentation
 
-php artisan moring:install
-php artisan key:generate
+---
 
-## Support
+### System Requirements
 
-## Contributing to MoRiNg
+* PHP 7.3
+* composer
+* Fileinfo PHP Extension
 
-# License
+---
 
-# Consolidated
+### Installation
+* clone the repository with git clone
+* changing values in ```.env```
+* run ```composer``` install 
+* run ```php artisan key:generate```
+* run ```php artisan migrate --seed```
+* Login with credentials login: ```admin@localhost``` password: ```password```
+
+---
+
+### Support
+
+---
+
+### Contributing
+
+---
+
+### License

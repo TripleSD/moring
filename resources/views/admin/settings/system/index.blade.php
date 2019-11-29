@@ -64,9 +64,8 @@
                                                     <dd>{{ phpversion()  }}</dd>
                                                     <dd>{{ date_default_timezone_get()  }}</dd>
 
-                                                    config/app.php<br/>
-                                                    'timezone' => 'UTC',<br/>
-                                                    'timezone' => 'Europe/Moscow',<br/>
+                                                    .env<br/>
+                                                    TIMEZONE="Europe/Moscow"
 
                                                 </dl>
                                             </div>

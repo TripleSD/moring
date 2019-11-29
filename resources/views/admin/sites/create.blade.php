@@ -9,7 +9,7 @@
                     </div>
                     <div class="col-sm-8">
                         <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('home')}}">Главная</a></li>
                             <li class="breadcrumb-item active">Добавление сайта</li>
                         </ol>
                     </div>
@@ -91,18 +91,6 @@
                                                 Дополнительная информация
                                             </summary>
                                             Если сервер поддерживает защищенное соединение (HTTPS), отметьте этот чекбокс для получения корректных данных об ответе сервера на HTTP запрос.
-                                        </details>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <b>Мониторинг HTTPS</b>
-                                        {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
-                                        {{ Form::checkbox('check_https', 1, false) }}
-                                        <details class="mt--3 small">
-                                            <summary>
-                                                Дополнительная информация
-                                            </summary>
-                                            Отметьте чекбокс для проверки ответа сервера на запрос HTTPS.
                                         </details>
                                     </div>
 

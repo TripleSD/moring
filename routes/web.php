@@ -22,7 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
 //  Sites management
     Route::group(['prefix' => 'admin', 'namespace' => 'Admin\Sites'], function () {
         Route::get('/sites/refresh', 'SitesBackendController@refreshList')
-        ->name('admin.sites.refresh');
+            ->name('admin.sites.refresh');
 
         $methods = ['index', 'create', 'store', 'show', 'edit', 'update', 'destroy'];
         Route::resource('sites', 'SitesController',
@@ -45,5 +45,25 @@ Route::group(['middleware' => 'auth'], function () {
         $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
         Route::resource('servers', 'ServersController')
             ->only($methods);
+    });
+
+    Route::group(['namespace' => 'Admin\Support'], function () {
+        Route::get('/documentation', 'DocumentationController@getIndex')
+            ->name('documenation.index');
+    });
+
+    Route::group(['prefix' => 'network', 'namespace' => 'Admin\Network'], function () {
+        Route::get('/switches', 'SwitchesController@getIndex')
+            ->name('network.switches.index');
+    });
+
+    Route::group(['prefix' => 'news','namespace' => 'Admin\News'], function () {
+        Route::get('/', 'NewsController@getIndex')
+            ->name('admin.news.index');
+    });
+
+    Route::group(['prefix' => 'contacts', 'namespace' => 'Admin\Contacts'], function () {
+        Route::get('/', 'ContactsController@getIndex')
+            ->name('contacts.index');
     });
 });

@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\AdminSitesRepository;
+
 class HomeController extends Controller
 {
     /**
@@ -19,8 +21,9 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-    public function index()
+    public function index(AdminSitesRepository $adminSiteRepository)
     {
-        return view('home');
+        $sites = $adminSiteRepository->sortedList(4, 'desc');
+        return view('home', compact('sites'));
     }
 }

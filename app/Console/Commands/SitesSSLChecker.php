@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Models\SitesChecksList;
 use App\Models\SitesSslCertificates;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 use Spatie\SslCertificate\SslCertificate;
@@ -44,7 +45,7 @@ class SitesSSLChecker extends Command
         if (is_null($site_id)) {
             $checksList = SitesChecksList::where('check_ssl', 1)->with('site')->get();
         } else {
-            $checksList[] = SitesChecksList::where([['check_ssl', 1], ['site_id', $site_id]])->with('site')->get();
+            $checksList = SitesChecksList::where([['check_ssl', 1], ['site_id', $site_id]])->with('site')->get();
         }
 
         foreach ($checksList as $check) {
@@ -66,7 +67,12 @@ class SitesSSLChecker extends Command
             }
 
             //   SSL info saving process
-            $ssl = SitesSslCertificates::where('site_id', $check->site->id)->first();
+            if (is_null($site_id)) {
+                $ssl = SitesSslCertificates::where('site_id', $check->site_id)->first();
+            } else {
+                $ssl = SitesSslCertificates::where('site_id', $site_id)->first();
+            }
+
             if (!empty($ssl)) {
                 $ssl->issuer = $issuer;
                 $ssl->valid_status = $validStatus;
@@ -75,12 +81,12 @@ class SitesSSLChecker extends Command
                 $ssl->algorithm = $algorithm;
                 $ssl->from_date = $fromDate;
             } else {
-                $fillable = ['site_id' => $check->site->id, 'issuer' => $issuer, 'valid_status' => $validStatus,
+                $fillable = ['site_id' => $check->site_id, 'issuer' => $issuer, 'valid_status' => $validStatus,
                     'expiration_date' => $expirationDate, 'expiration_days' => $expirationDays,
                     'algorithm' => $algorithm, 'from_date' => $fromDate];
                 $ssl = new SitesSslCertificates($fillable);
             }
-            $ssl->updated_at = \Carbon\Carbon::now();
+            $ssl->updated_at = Carbon::now();
             $ssl->save();
         }
     }

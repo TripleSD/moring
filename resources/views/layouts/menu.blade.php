@@ -17,33 +17,32 @@
                      class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ request()->user()->name }}</a>
             </div>
         </div>
 
         <!-- Sidebar Menu -->
 
+
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                 data-accordion="false">
-                <!-- Add icons to the links using the .nav-icon class
-                     with font-awesome or any other icon font library -->
-                <li class="nav-item has-treeview">
-                    <a href="#" class="nav-link">
+                <li class="nav-item">
+                    <a href="{{ route('home') }}" class="nav-link">
+                        <i class="nav-icon fas fa-home"></i>
+                        <p>
+                            Главная
+                        </p>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('admin.news.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-newspaper"></i>
                         <p>
                             Новости
-                            <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
-                    <ul class="nav nav-treeview">
-                        <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
-                                <i class="fa fa-angle-right nav-icon"></i>
-                                <p>...</p>
-                            </a>
-                        </li>
-                    </ul>
                 </li>
 
                 <li class="nav-item has-treeview">
@@ -56,7 +55,7 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="./index.html" class="nav-link">
+                            <a href="{{ route('network.switches.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
                                 <p>Коммутаторы</p>
                             </a>
@@ -137,12 +136,21 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="{{ route('documenation.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
                                 <p>Документация</p>
                             </a>
                         </li>
                     </ul>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('contacts.index') }}" class="nav-link">
+                        <i class="nav-icon fas fa-address-book"></i>
+                        <p>
+                            Контакты
+                        </p>
+                    </a>
                 </li>
             </ul>
         </nav>

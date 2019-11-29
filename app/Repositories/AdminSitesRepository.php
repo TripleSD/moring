@@ -33,6 +33,8 @@ class AdminSitesRepository extends Repository
         if(intval($fillable['https']) === 0){
             $fillable['check_ssl'] = 0;
             $fillable['check_https'] = 0;
+        }else {
+            $fillable['check_https'] = 1;
         }
 
         //    Now we activate Moring file usage, if path has been added
@@ -58,6 +60,8 @@ class AdminSitesRepository extends Repository
         if(intval($fillable['https']) === 0){
             $fillable['check_ssl'] = 0;
             $fillable['check_https'] = 0;
+        } else {
+            $fillable['check_https'] = 1;
         }
         $site = Sites::find($id);
         $result = $site->update($fillable);
@@ -71,5 +75,17 @@ class AdminSitesRepository extends Repository
     {
         $result = Sites::destroy($id);
         return $result;
+    }
+
+    public function sortedList(int $length = null, string $sort = null)
+    {
+        if (is_null($length)){
+            $list =  Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification')->orderBy('created_at', $sort)->get();
+        } else {
+            $list =  Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification')->orderBy('created_at', $sort)->get()->slice(0, $length);
+        }
+        return $list;
     }
 }
