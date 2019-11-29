@@ -297,7 +297,7 @@
                                             </td>
                                             <td>
                                                 <div>
-                                                    @isset($site->getHttpCode)
+                                                    @if(isset($site->getHttpCode))
                                                         @if($site->getHttpCode->http_code == 200)
                                                             <span class="badge badge-success"
                                                                   title="Сайт полностью рабочий">

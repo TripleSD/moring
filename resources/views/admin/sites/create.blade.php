@@ -95,18 +95,6 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>Мониторинг HTTPS</b>
-                                        {{Form::text('check_https', '0', ['class' => 'form-control', 'hidden'])}}
-                                        {{ Form::checkbox('check_https', 1, false) }}
-                                        <details class="mt--3 small">
-                                            <summary>
-                                                Дополнительная информация
-                                            </summary>
-                                            Отметьте чекбокс для проверки ответа сервера на запрос HTTPS.
-                                        </details>
-                                    </div>
-
-                                    <div class="form-group">
                                         <b>Проверка SSL</b>
                                         {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_ssl', 1, false) }}
