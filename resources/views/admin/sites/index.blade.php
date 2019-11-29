@@ -79,7 +79,70 @@
                                 </div>
                             </div>
                         </div>
-                        <!-- /.card-header -->
+
+                        <div class="card-header">
+                            <div class="row">
+                                <a class="btn btn-app">
+                                    <span class="badge bg-success">{{ $counts['allSitesCount'] }}</span>
+                                    <i class="fas fa-globe text-info"></i> Все
+                                </a>
+                                <a class="btn btn-app">
+                                    @if($counts['softwareVersionErrors'] > 0)
+                                        <span class="badge bg-danger">{{ $counts['softwareVersionErrors'] }}</span>
+                                    @else
+                                        <span class="badge bg-success">{{ $counts['softwareVersionErrors'] }}</span>
+                                    @endif
+                                    <i class="fas fa-bug text-danger"></i> Версии ПО
+                                </a>
+                                <a class="btn btn-app">
+                                    @if($counts['bridgeErrors'] > 0)
+                                        <span class="badge bg-danger">{{ $counts['bridgeErrors'] }}</span>
+                                    @else
+                                        <span class="badge bg-success">{{ $counts['bridgeErrors'] }}</span>
+                                    @endif
+                                    <i class="fa fa-exclamation-triangle text-danger"></i> API
+                                </a>
+                                <a class="btn btn-app">
+                                    @if($counts['softwareErrorsSitesCount'] > 0)
+                                        <span class="badge bg-danger">{{ $counts['softwareErrorsSitesCount'] }}</span>
+                                    @else
+                                        <span class="badge bg-success">{{ $counts['softwareErrorsSitesCount'] }}</span>
+                                    @endif
+                                    <i class="fa fa-exclamation-triangle text-warning"></i> Ошибки
+                                </a>
+                                <a class="btn btn-app">
+                                    <span class="badge bg-success">{{ $counts['sslSuccessSitesCount'] }}</span>
+                                    <i class="fa fa-lock fa-1 text-success"></i> SSL проверен
+                                </a>
+                                <a class="btn btn-app">
+                                    @if($counts['sslExpirationsDaysSitesCount'] > 0)
+                                        <span class="badge bg-danger">{{ $counts['sslExpirationsDaysSitesCount'] }}</span>
+                                    @else
+                                        <span class="badge bg-success">{{ $counts['sslExpirationsDaysSitesCount'] }}</span>
+                                    @endif
+                                    <i class="fa fa-lock fa-1 text-warning"></i> Ошибки SSL
+                                </a>
+                                <a class="btn btn-app">
+                                    @if($counts['sslErrorsSitesCount'] > 0)
+                                        <span class="badge bg-danger">{{ $counts['sslErrorsSitesCount'] }}</span>
+                                    @else
+                                        <span class="badge bg-success">{{ $counts['sslErrorsSitesCount'] }}</span>
+                                    @endif
+                                    <i class="fa fa-lock fa-1 text-gray"></i> Ошибки SSL
+                                </a>
+                                <a class="btn btn-app">
+                                    @if($counts['disabledSitesCount'] > 0)
+                                        <span class="badge bg-danger">{{ $counts['disabledSitesCount'] }}</span>
+                                    @else
+                                        <span class="badge bg-success">{{ $counts['disabledSitesCount'] }}</span>
+                                    @endif
+                                    <i class="far fa-hourglass text-gray"></i> Отключено
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card">
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover">
                                 <thead>
@@ -100,7 +163,7 @@
                                     @if($site->enabled == 1)
                                         <tr class="table-row">
                                     @else
-                                        <tr class="table-row" bgcolor="#d3d3d3">
+                                        <tr class="table-row" bgcolor="#a9a9a9">
                                             @endif
                                             <td>
                                                 <div class="row">
@@ -110,226 +173,275 @@
                                                         <div class="vl pt-1 text-gray"></div>
                                                     @endif
                                                     <div class="col">
-                                                        <i class="fas fa-globe-americas"></i> {{$site->url}}
                                                         @if($site->https === 1)
-                                                            @isset($site->getSslCertification->expiration_days)
-                                                                @if ($site->getSslCertification->expiration_days >= 10)
-                                                                    <span class="small">
+                                                            <a href="https://{{$site->url}}" target="_blank">
+                                                                <i class="fas fa-globe"></i></a>
+                                                        @else
+                                                            <a href="http://{{$site->url}}" target="_blank">
+                                                                <i class="fas fa-globe"></i></a>
+                                                        @endif
+
+                                                        {{$site->url}}
+                                                        @if($site->enabled === 1)
+                                                            @if($site->https === 1)
+                                                                @if($site->checksList->check_ssl == 1)
+                                                                    @isset($site->getSslCertification->expiration_days)
+                                                                        @if ($site->getSslCertification->expiration_days >= 10)
+                                                                            <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-success"
                                                                            title="Действующий SSL сертификат"></i>
-                                                                    </span>
-                                                                @elseif($site->getSslCertification->expiration_days >= 5)
-                                                                    <span class="small">
+                                                                        </span>
+                                                                        @elseif($site->getSslCertification->expiration_days >= 5)
+                                                                            <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-warning"
                                                                            title="Действующий SSL сертификат"></i>
                                                                     </span>
-                                                                @elseif($site->getSslCertification->expiration_days >= 1)
-                                                                    <span class="small">
+                                                                        @elseif($site->getSslCertification->expiration_days >= 1)
+                                                                            <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-danger"
                                                                            title="Действующий SSL сертификат"></i>
                                                                     </span>
-                                                                @else
-                                                                    <span class="small">
+                                                                        @else
+                                                                            <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-gray"
                                                                            title="SSL сертификат истек"></i>
                                                                     </span>
-                                                                @endif
-                                                                <span class="small">
+                                                                        @endif
+                                                                        <span class="small">
                                                                     ({{ $site->getSslCertification->expiration_days }}
                                                                     дней)
+                                                                    </span>
+                                                                    @else
+                                                                        <span class="small">
+                                                                    <i class="fa fa-lock fa-1 text-gray"
+                                                                       title="SSL сертификат не установлен / Не включена SSL проверка"></i>
                                                                 </span>
-                                                            @else
-                                                                <span class="small">
-                                                                <i class="fa fa-lock fa-1 text-gray"
-                                                                   title="Проверьте наличие установленного SSL сертификата."></i>
+                                                                    @endif
+                                                                @else
+                                                                    <span class="small">
+                                                                    <i class="fa fa-lock fa-1 text-gray"
+                                                                       title="SSL сертификат не установлен / Не включена SSL проверка"></i>
                                                                 </span>
+                                                                @endif
                                                             @endif
-                                                        @endif
 
-                                                        @isset($site->getSslCertification->expiration_days)
-                                                            <div class="small text-gray">
-                                                                <i class="fas fa-history"></i>
-                                                                {{ $site->getSslCertification->updated_at }}
-                                                            </div>
-                                                            <div class="small text-gray">
-                                                                <details>
-                                                                    <summary>Издатель SSL сертификата</summary>
-                                                                    {{ $site->getSslCertification->issuer }}
-                                                                </details>
-                                                            </div>
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                @empty($site->getWebServer->web_server)
-                                                    <span class="text-warning"
-                                                          title="Не был получен ответ сервера об установленной версии">
-                                                                    <i class="fa fa-exclamation-triangle"></i>
-                                                    </span>
-                                                @else
-                                                    {{$site->getWebServer->web_server}}
-                                                @endempty
-                                                <div class="small text-gray">
-                                                    <i class="fas fa-history"></i>
-                                                    {{optional($site->getPhpVersion)->updated_at}}
-                                                </div>
-                                            </td>
-                                            <td>
-                                                @empty(!$site->getPhpVersion)
-                                                    <div>
-                                                        @if(empty($bridgePhpVersion))
-                                                            @if($site->getPhpVersion->version != 0)
-                                                                <span class="text-gray">
-                                                                {{ $site->getPhpVersion->version }}
-                                                                </span>
-                                                                <span class="text-danger"
-                                                                      title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
-                                                                    <i class="fa fa-exclamation-triangle"></i>
-                                                                </span>
-                                                            @else
-                                                                <span class="text-warning"
-                                                                      title="Не был получен ответ сервера об установленной версии">
-                                                                        <i class="fa fa-exclamation-triangle"></i>
-                                                                </span>
+                                                            @isset($site->getSslCertification->expiration_days)
+                                                                <div class="small text-gray">
+                                                                    <i class="fas fa-history"></i>
+                                                                    {{ $site->getSslCertification->updated_at }}
+                                                                </div>
+                                                                <div class="small text-gray">
+                                                                    <details>
+                                                                        <summary>Издатель SSL сертификата</summary>
+                                                                        {{ $site->getSslCertification->issuer }}
+                                                                    </details>
+                                                                </div>
                                                             @endif
                                                         @else
-                                                            @if($site->getPhpVersion->version != 0)
-                                                                @if(in_array($site->getPhpVersion->branch,$bridgeBranchVersion))
-                                                                    @foreach($bridgePhpVersion as $version)
-                                                                        @if($version->branch == $site->getPhpVersion->branch)
-                                                                            @if(version_compare($site->getPhpVersion->version, $version->version) >= 0)
-                                                                                <span class="text-success"
-                                                                                      title="Установлена самая последняя версия {{$version->version}}">
-                                                                                      {{ $site->getPhpVersion->version }}
-                                                                                </span>
-                                                                            @else
-                                                                                <span class="text-danger"
-                                                                                      title="Необходимо установить актуальную версию {{$version->version}}">
-                                                                                      {{ $site->getPhpVersion->version }}
-                                                                                      <i class="fas fa-bug"></i>
-                                                                                </span>
-                                                                            @endif
-                                                                        @endif
-                                                                    @endforeach
-                                                                @else
-                                                                    <span class="text-gray">
-                                                                        {{ $site->getPhpVersion->version }}
-                                                                    </span>
-                                                                    <span class="text-danger"
-                                                                          title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
-                                                                    <i class="fa fa-exclamation-triangle"></i>
-                                                                    </span>
-                                                                @endif
-                                                            @else
-                                                                <span class="text-warning"
-                                                                      title="Не был получен ответ сервера об установленной версии">
-                                                                        <i class="fa fa-exclamation-triangle"></i>
-                                                                    </span>
-                                                            @endif
+                                                            <span class="text-gray"
+                                                                  title="Сайт отключен">
+                                                                <i class="far fa-hourglass"></i>
+                                                            </span>
                                                         @endif
                                                     </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                @if($site->enabled === 1)
+                                                    @empty($site->getWebServer->web_server)
+                                                        <span class="text-warning"
+                                                              title="Не был получен ответ сервера об установленной версии">
+                                                                    <i class="fa fa-exclamation-triangle"></i>
+                                                    </span>
+                                                    @else
+                                                        {{$site->getWebServer->web_server}}
+                                                    @endempty
                                                     <div class="small text-gray">
                                                         <i class="fas fa-history"></i>
                                                         {{optional($site->getPhpVersion)->updated_at}}
                                                     </div>
-                                                @endempty
+                                                @else
+                                                    <span class="text-gray"
+                                                          title="Сайт отключен">
+                                                                <i class="far fa-hourglass"></i>
+                                                            </span>
+                                                @endif
                                             </td>
                                             <td>
-                                                <div class="small">
-                                                    @empty(!$site->file_url)
-                                                        <span class="text-success" title="Путь до Moring файла указан">
-                                                        <i class="fa fa-link"></i>
-                                                    </span>
-                                                    @else
-                                                        <span class="text-gray" title="Путь до moring файла не указан">
-                                                        <i class="fa fa-link"></i>
-                                                    </span>
+                                                @if($site->enabled === 1)
+                                                    @empty(!$site->getPhpVersion)
+                                                        <div>
+                                                            @if(empty($bridgePhpVersion))
+                                                                @if($site->getPhpVersion->version != 0)
+                                                                    <span class="text-gray">
+                                                                {{ $site->getPhpVersion->version }}
+                                                                </span>
+                                                                    <span class="text-danger"
+                                                                          title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
+                                                                    <i class="fa fa-exclamation-triangle"></i>
+                                                                </span>
+                                                                @else
+                                                                    <span class="text-warning"
+                                                                          title="Не был получен ответ сервера об установленной версии">
+                                                                        <i class="fa fa-exclamation-triangle"></i>
+                                                                </span>
+                                                                @endif
+                                                            @else
+                                                                @if($site->getPhpVersion->version != 0)
+                                                                    @if(in_array($site->getPhpVersion->branch,$bridgeBranchVersion))
+                                                                        @foreach($bridgePhpVersion as $version)
+                                                                            @if($version->branch == $site->getPhpVersion->branch)
+                                                                                @if(version_compare($site->getPhpVersion->version, $version->version) >= 0)
+                                                                                    <span class="text-success"
+                                                                                          title="Установлена самая последняя версия {{$version->version}}">
+                                                                                      {{ $site->getPhpVersion->version }}
+                                                                                </span>
+                                                                                @else
+                                                                                    <span class="text-danger"
+                                                                                          title="Необходимо установить актуальную версию {{$version->version}}">
+                                                                                      {{ $site->getPhpVersion->version }}
+                                                                                      <i class="fas fa-bug"></i>
+                                                                                </span>
+                                                                                @endif
+                                                                            @endif
+                                                                        @endforeach
+                                                                    @else
+                                                                        <span class="text-gray">
+                                                                        {{ $site->getPhpVersion->version }}
+                                                                    </span>
+                                                                        <span class="text-danger"
+                                                                              title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
+                                                                    <i class="fa fa-exclamation-triangle"></i>
+                                                                    </span>
+                                                                    @endif
+                                                                @else
+                                                                    <span class="text-warning"
+                                                                          title="Не был получен ответ сервера об установленной версии">
+                                                                        <i class="fa fa-exclamation-triangle"></i>
+                                                                    </span>
+                                                                @endif
+                                                            @endif
+                                                        </div>
+                                                        <div class="small text-gray">
+                                                            <i class="fas fa-history"></i>
+                                                            {{optional($site->getPhpVersion)->updated_at}}
+                                                        </div>
                                                     @endempty
-                                                    @if($site->checksList->http_code == 1)
-                                                        <span class="text-success"
-                                                              title="Мониторинг HTTP кодов включен">
-                                                        <i class="fas fa-check-square"></i>
-                                                    </span>
-                                                    @else
-                                                        <span class="text-warning"
-                                                              title="Мониторинг HTTP кодов отключен">
-                                                        <i class="fas fa-square"></i>
-                                                    </span>
-                                                    @endif
-
-                                                    @if($site->checksList->use_file == 1)
-                                                        <span class="text-success"
-                                                              title="Мониторинг через Moring файл включен">
-                                                        <i class="fas fa-check-square"></i>
-                                                    </span>
-                                                    @else
-                                                        <span class="text-gray"
-                                                              title="Мониторинг через Moring файл отключен">
-                                                        <i class="fas fa-square"></i>
-                                                    </span>
-                                                    @endif
-
-                                                    @if($site->checksList->check_php == 1)
-                                                        <span class="text-success"
-                                                              title="Мониторинг PHP версии включен">
-                                                        <i class="fas fa-check-square"></i>
-                                                    </span>
-                                                    @else
-                                                        <span class="text-warning"
-                                                              title="Мониторинг PHP версии отключен">
-                                                        <i class="fas fa-square"></i>
-                                                    </span>
-                                                    @endif
-
-                                                    @if($site->checksList->check_ssl == 1)
-                                                        <span class="text-success"
-                                                              title="Мониторинг SSL сертификата включен">
-                                                        <i class="fas fa-check-square"></i>
-                                                    </span>
-                                                    @else
-                                                        <span class="text-warning"
-                                                              title="Мониторинг SSL сертификата отключен">
-                                                        <i class="fas fa-square"></i>
-                                                    </span>
-                                                    @endif
-                                                </div>
+                                                @else
+                                                    <span class="text-gray"
+                                                          title="Сайт отключен">
+                                                                <i class="far fa-hourglass"></i>
+                                                            </span>
+                                                @endif
                                             </td>
                                             <td>
-                                                <div>
-                                                    @isset($site->getHttpCode)
-                                                        @if($site->getHttpCode->http_code == 200)
-                                                            <span class="badge badge-success"
-                                                                  title="Сайт полностью рабочий">
-                                                            {{ $site->getHttpCode->http_code }}
-                                                            </span>
-                                                        @elseif($site->getHttpCode->http_code == 301)
-                                                            <span class="badge badge-warning"
-                                                                  title="На сайте установлен редирект">
-                                                            {{ $site->getHttpCode->http_code }}
-                                                            </span>
-                                                        @elseif($site->getHttpCode->http_code == 302)
-                                                            <span class="badge badge-warning"
-                                                                  title="На сайте установлен редирект">
-                                                            {{ $site->getHttpCode->http_code }}
-                                                            </span>
+                                                @if($site->enabled === 1)
+                                                    <div class="small">
+                                                        @empty(!$site->file_url)
+                                                            <span class="text-success"
+                                                                  title="Путь до Moring файла указан">
+                                                        <i class="fa fa-link"></i>
+                                                    </span>
                                                         @else
-                                                            <span class="text-warning" title="Неопознанный код ответа">
+                                                            <span class="text-gray"
+                                                                  title="Путь до moring файла не указан">
+                                                        <i class="fa fa-link"></i>
+                                                    </span>
+                                                        @endempty
+                                                        @if($site->checksList->http_code == 1)
+                                                            <span class="text-success"
+                                                                  title="Мониторинг HTTP кодов включен">
+                                                        <i class="fas fa-check-square"></i>
+                                                    </span>
+                                                        @else
+                                                            <span class="text-warning"
+                                                                  title="Мониторинг HTTP кодов отключен">
+                                                        <i class="fas fa-square"></i>
+                                                    </span>
+                                                        @endif
+
+                                                        @if($site->checksList->use_file == 1)
+                                                            <span class="text-success"
+                                                                  title="Мониторинг через Moring файл включен">
+                                                        <i class="fas fa-check-square"></i>
+                                                    </span>
+                                                        @else
+                                                            <span class="text-gray"
+                                                                  title="Мониторинг через Moring файл отключен">
+                                                        <i class="fas fa-square"></i>
+                                                    </span>
+                                                        @endif
+
+                                                        @if($site->checksList->check_php == 1)
+                                                            <span class="text-success"
+                                                                  title="Мониторинг PHP версии включен">
+                                                        <i class="fas fa-check-square"></i>
+                                                    </span>
+                                                        @else
+                                                            <span class="text-warning"
+                                                                  title="Мониторинг PHP версии отключен">
+                                                        <i class="fas fa-square"></i>
+                                                    </span>
+                                                        @endif
+
+                                                        @if($site->checksList->check_ssl == 1)
+                                                            <span class="text-success"
+                                                                  title="Мониторинг SSL сертификата включен">
+                                                        <i class="fas fa-check-square"></i>
+                                                    </span>
+                                                        @else
+                                                            <span class="text-warning"
+                                                                  title="Мониторинг SSL сертификата отключен">
+                                                        <i class="fas fa-square"></i>
+                                                    </span>
+                                                        @endif
+                                                    </div>
+                                                @else
+                                                    <span class="text-gray"
+                                                          title="Сайт отключен">
+                                                                <i class="far fa-hourglass"></i>
+                                                            </span>
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if($site->enabled === 1)
+                                                    <div>
+                                                        @isset($site->getHttpCode)
+                                                            @if($site->getHttpCode->http_code == 200)
+                                                                <span class="badge badge-success"
+                                                                      title="Сайт полностью рабочий">
+                                                            {{ $site->getHttpCode->http_code }}
+                                                            </span>
+                                                            @elseif($site->getHttpCode->http_code == 301)
+                                                                <span class="badge badge-warning"
+                                                                      title="На сайте установлен редирект">
+                                                            {{ $site->getHttpCode->http_code }}
+                                                            </span>
+                                                            @elseif($site->getHttpCode->http_code == 302)
+                                                                <span class="badge badge-warning"
+                                                                      title="На сайте установлен редирект">
+                                                            {{ $site->getHttpCode->http_code }}
+                                                            </span>
+                                                            @else
+                                                                <span class="text-warning"
+                                                                      title="Неопознанный код ответа">
                                                                 <i class="fa fa-exclamation-triangle"></i>
                                                             </span>
+                                                            @endif
                                                         @endif
-                                                    @else
-                                                        <span class="text-warning" title="Код ответа не был получен">
-                                                            <i class="fa fa-exclamation-triangle"></i>
-                                                        </span>
-                                                    @endif
-                                                </div>
-                                                <div class="small text-gray">
-                                                    @empty(!$site->getHttpCode)
-                                                        <i class="fas fa-history"></i>
-                                                        {{ optional($site->getHttpCode)->updated_at }}
-                                                    @endif
-                                                </div>
+                                                    </div>
+                                                    <div class="small text-gray">
+                                                        @empty(!$site->getHttpCode)
+                                                            <i class="fas fa-history"></i>
+                                                            {{ optional($site->getHttpCode)->updated_at }}
+                                                        @endif
+                                                    </div>
+                                                @else
+                                                    <span class="text-gray"
+                                                          title="Сайт отключен">
+                                                                <i class="far fa-hourglass"></i>
+                                                            </span>
+                                                @endif
                                             </td>
                                             <td>
                                                 <div class="btn-group">
