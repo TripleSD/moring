@@ -9,6 +9,7 @@ use App\Http\Requests\Sites\StoreSiteRequest;
 use App\Http\Requests\Sites\UpdateSiteRequest;
 use App\Models\BridgePhpVersions;
 use App\Repositories\AdminSitesRepository;
+use App\Repositories\Sites\SitesCountsRepository;
 use Illuminate\Http\Request;
 
 
@@ -19,14 +20,28 @@ class SitesController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(AdminSitesRepository $adminSiteRepository, Request $request)
+    public function index(AdminSitesRepository $adminSiteRepository, SitesCountsRepository $sitesCountsRepository,
+                          Request $request)
     {
         $sites = $adminSiteRepository->index($request);
 
         //TODO вынести в репозиторий два запроса
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
         $bridgePhpVersion = BridgePhpVersions::get();
-        return view('admin.sites.index', compact('sites', 'bridgePhpVersion', 'bridgeBranchVersion'));
+
+        // Counts
+        $counts['allSitesCount'] = $sitesCountsRepository->getAllSitesCount();
+        $counts['disabledSitesCount'] = $sitesCountsRepository->getDisabledSitesCount();
+        $counts['sslExpirationsDaysSitesCount'] = $sitesCountsRepository->getSslExpirationsDaysSitesCount();
+        $counts['sslErrorsSitesCount'] = $sitesCountsRepository->getSslErrorsSitesCount();
+        $counts['sslSuccessSitesCount'] = $sitesCountsRepository->getSslSuccessSitesCount();
+        $counts['softwareErrorsSitesCount'] = $sitesCountsRepository->getSoftwareErrorsSitesCount();
+        $counts['bridgeErrors'] = $sitesCountsRepository->getBridgeErrors();
+        $counts['softwareVersionErrors'] = $sitesCountsRepository->getSoftwareVersionErrors();
+
+
+        return view('admin.sites.index', compact('sites', 'bridgePhpVersion',
+            'bridgeBranchVersion', 'counts'));
     }
 
     /**

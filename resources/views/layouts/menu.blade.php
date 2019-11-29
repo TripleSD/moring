@@ -17,7 +17,7 @@
                      class="img-circle elevation-2" alt="User Image">
             </div>
             <div class="info">
-                <a href="#" class="d-block">Alexander Pierce</a>
+                <a href="#" class="d-block">{{ request()->user()->name }}</a>
             </div>
         </div>
 

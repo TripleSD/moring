@@ -1,4 +1,6 @@
-# MoRiNg
+# MoRiNg (monitoring system)
+
+Description here...
 
 ### Branches & builds
 
@@ -10,12 +12,13 @@
 
     [![](https://github.styleci.io/repos/220468288/shield?branch=dev)](https://github.styleci.io/repos/220468288/shield?branch=dev)
 
+---
 
 ### Documentation
 
 ---
 
-## System Requirements
+### System Requirements
 
 * PHP 7.3
 * composer
