@@ -16,7 +16,7 @@
         @if($currentBuild < $latestBuild)
             <span class="badge badge-warning text-sm">
                 <i class="fas fa-info-circle"></i>
-                Доступна новая версия {{ $latestBuild }} от {{ $latestBuildDate }}г.
+                Доступна новая версия ({{ $latestBuild }} от {{ $latestBuildDate }}г.)
             </span>
         @else
             <span class="badge badge-success text-sm">
