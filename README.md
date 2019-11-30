@@ -5,7 +5,9 @@
 ![](https://img.shields.io/github/forks/TripleSD/moring)
 ![](https://img.shields.io/github/license/TripleSD/moring)
 
+<div style="text-align:center">
 <img src="docs/img/moring_readme.png" alt="drawing" width="300"/>
+</div>
 
 MoRiNg - opensource система мониторинга. На данный момент реализованы следуюшие функции:
  - Мониторинг сайтов
