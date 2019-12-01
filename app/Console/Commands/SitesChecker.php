@@ -51,6 +51,12 @@ class SitesChecker extends Command
         }
 
         foreach ($sites as $site) {
+
+            $phpVersion = 0;
+            $phpBranch = 0;
+            $statusCode = 999;
+            $webServerType = null;
+
             try {
                 if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
@@ -68,14 +74,9 @@ class SitesChecker extends Command
                     $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
                     $webServerType = $response->getHeader('server')[0];
-                    if ($webServerType == null) {
-                        $webServerType = null;
-                    }
 
                     if (preg_match('/^[0-9]*/', $response->getStatusCode())) {
                         $statusCode = $response->getStatusCode();
-                    } else {
-                        $statusCode = 999;
                     }
 
                     if ($phpVersion != null) {
@@ -84,13 +85,7 @@ class SitesChecker extends Command
                             $phpBranchRaw = explode('.', $phpVersion);
                             $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
                             $phpBranch = Str::substr($phpBranchRaw, 0, 3);
-                        } else {
-                            $phpVersion = 0;
-                            $phpBranch = 0;
                         }
-                    } else {
-                        $phpVersion = 0;
-                        $phpBranch = 0;
                     }
 
                     $ssl = new SitesSSLChecker();
