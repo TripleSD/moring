@@ -61,13 +61,13 @@ class BridgePHPVersionsChecker extends Command
             ['query' => ['identificator' => $identificator->getIdentificator()], 'allow_redirects' => false]);
         $versionsBridgeArray = json_decode($response->getBody(), true);
 
-        foreach ($versionsBridgeArray as $version => $branch) {
+        foreach ($versionsBridgeArray as $branch => $version) {
             try {
                 $localVersionsArray = BridgePhpVersions::pluck('version')->toArray();
                 if (!in_array($version, $localVersionsArray)) {
                     $versions = new BridgePhpVersions();
-                    $versions->version = $branch;
-                    $versions->branch = $version;
+                    $versions->version = $version;
+                    $versions->branch = $branch;
                     $versions->save();
                 }
             } catch (\Exception $e) {
