@@ -14,4 +14,9 @@ class Servers extends Model
     {
         $this->attributes['addr'] = ip2long($ipAddr);
     }
+
+    public function getSeversPings()
+    {
+        $this->hasOne(ServersPingResponses::class, 'server_id');
+    }
 }

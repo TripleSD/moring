@@ -29,6 +29,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('SitesSSLChecker')->daily();
         $schedule->command('BridgeMoringVersionChecker')->daily();
         $schedule->command('BridgePHPVersionsChecker')->daily();
+        $schedule->command('SitesPings')->everyFiveMinutes();
+        $schedule->command('ServersPings')->everyFiveMinutes();
     }
 
     /**
