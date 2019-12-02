@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\SitesPingResponses;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -33,5 +34,10 @@ class Sites extends Model
     public function getSslCertification()
     {
         return $this->hasOne(SitesSslCertificates::class,'site_id');
+    }
+
+    public function getSitesPings()
+    {
+        return $this->hasOne(SitesPingResponses::class, 'site_id');
     }
 }
