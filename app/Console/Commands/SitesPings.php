@@ -7,21 +7,21 @@ use App\Models\SitesPingResponses;
 use Illuminate\Console\Command;
 use App\Models\Sites;
 
-class SitesAndServersPings extends Command
+class SitesPings extends Command
 {
     /**
      * The name and signature of the console command.
      *
      * @var string
      */
-    protected $signature = 'SitesAndServersPings';
+    protected $signature = 'SitesPings';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'This command script provides pings of the sites and servers from the lists';
+    protected $description = 'This command script provides pings of the sites from the lists';
 
     /**
      * Create a new command instance.
