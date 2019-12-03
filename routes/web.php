@@ -39,6 +39,7 @@ Route::group(['middleware' => 'auth'], function () {
         $methods = ['index'];
         Route::resource('system', 'SystemController')
             ->only($methods);
+        Route::get('integrations','IntegrationsController@index')->name('integrations.index');
     });
 
     Route::group(['namespace' => 'Admin\Servers'], function () {
