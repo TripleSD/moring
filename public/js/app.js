@@ -68814,6 +68814,8 @@ try {
   __webpack_require__(/*! ./pages/dashboard3 */ "./resources/js/pages/dashboard3.js");
 
   __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+
+  __webpack_require__(/*! ./test_chart.js */ "./resources/js/test_chart.js");
 } catch (e) {}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -83488,6 +83490,46 @@ $(function () {
 
 /***/ }),
 
+/***/ "./resources/js/test_chart.js":
+/*!************************************!*\
+  !*** ./resources/js/test_chart.js ***!
+  \************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var ctx = $("#sitePings");
+
+  if (ctx.length) {
+    var days = JSON.parse(ctx.attr('data-time'));
+    var counts = JSON.parse(ctx.attr('data-ping')); //Chart.defaults.global.elements.rectangle.backgroundColor = ['rgba(94, 114, 228, 0.2)', "rgba(86, 188, 228, 0.2)"];
+
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: 'Site response in ms',
+          data: counts,
+          borderWidth: 3,
+          borderColor: 'rgb(0, 160, 160)'
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/sass/app.scss":
 /*!*********************************!*\
   !*** ./resources/sass/app.scss ***!
@@ -83506,8 +83548,8 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/anton/Documents/Yandex.Disk.localized/Develop/moring/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /Users/anton/Documents/Yandex.Disk.localized/Develop/moring/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\GAV\PhpstormProjects\moring\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\GAV\PhpstormProjects\moring\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

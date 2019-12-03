@@ -14,6 +14,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use function foo\func;
 
 class SitesController extends Controller
 {
@@ -106,8 +107,18 @@ class SitesController extends Controller
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
         $bridgePhpVersion = BridgePhpVersions::get();
 
+        $pings = $adminSiteRepository->listOfPings($request, 50);
+
+        $averages = json_encode(array_map(function( $ins){
+            return $ins['average'];
+        }, $pings));
+
+         $time = json_encode(array_map(function( $ins){
+            return $ins['created_at'];
+        }, $pings));
+
         $site = $adminSiteRepository->show($request);
-        return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion'));
+        return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion', 'averages', 'time'));
     }
 
     /**

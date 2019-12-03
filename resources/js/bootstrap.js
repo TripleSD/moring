@@ -16,6 +16,7 @@ try {
     require('./demo');
     require('./pages/dashboard3');
     require('jquery');
+    require('./show_ping_chart.js');
 
 } catch (e) {}
 

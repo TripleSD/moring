@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Sites;
 use App\Models\SitesChecksList;
+use App\Models\SitesPingResponses;
 
 class AdminSitesRepository extends Repository
 {
@@ -87,5 +88,16 @@ class AdminSitesRepository extends Repository
                 'getSslCertification')->orderBy('created_at', $sort)->get()->slice(0, $length);
         }
         return $list;
+    }
+
+    public function listOfPings($request, int $count)
+    {
+        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get()->slice(0, $count)->toArray();
+        $averaged = array_map(function ($sub) use (&$list){
+            $sub['average'] = round(floatval($sub['first'] + $sub['second'] + $sub['third']/ 3), 3);
+            return $sub;
+        }, $list);
+
+        return $averaged;
     }
 }
