@@ -15,9 +15,22 @@ class AddDefaultSettings extends Migration
     {
         DB::table('settings')->insert(
             array(
-                'telegram_api_key' => null,
-                'telegram_group_chat_id' => null,
-                'telegram_enable_status' => 0,
+                'parameter' => 'telegram_api_key',
+                'value' => null,
+            )
+        );
+
+        DB::table('settings')->insert(
+            array(
+                'parameter' => 'telegram_group_chat_id',
+                'value' => null,
+            )
+        );
+
+        DB::table('settings')->insert(
+            array(
+                'parameter' => 'telegram_enable_status',
+                'value' => 0,
             )
         );
     }
