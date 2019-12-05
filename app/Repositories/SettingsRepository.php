@@ -7,16 +7,6 @@ use GuzzleHttp\Client;
 
 class SettingsRepository extends Repository
 {
-    /**
-     * @var BridgeRepository
-     */
-    private $bridgeRepository;
-
-    public function __construct()
-    {
-        $this->bridgeRepository = new BridgeRepository();
-    }
-
     public function getTelegramStatus()
     {
         $status = Settings::where('parameter', 'telegram_enable_status')->firstOrFail();
@@ -57,12 +47,11 @@ class SettingsRepository extends Repository
     {
         $identificator = Settings::where('parameter', 'identificator')->first();
 
-        if ($identificator == null) {
-            $this->bridgeRepository->getNewIdentificator();
-            $identificator = Settings::where('parameter', 'identificator')->first();
+        if ($identificator->value == null) {
+            return (string)null;
         }
 
-        return (string) $identificator->value;
+        return (string)$identificator->value;
     }
 
     public function updateIdentificatorParam($identificator)
