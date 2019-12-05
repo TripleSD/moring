@@ -32,18 +32,11 @@ class SitesChecker extends Command
     public $settingsController;
     public $telegramConnector;
 
-
-    /**
-     * Create a new command instance.
-     *
-     * @param SettingsController $settingsController
-     * @param TelegramConnector $telegramConnector
-     */
-    public function __construct(SettingsController $settingsController, TelegramConnector $telegramConnector)
+    public function __construct()
     {
         parent::__construct();
-        $this->settingsController = $settingsController;
-        $this->telegramConnector = $telegramConnector;
+        $this->settingsController = new SettingsController();
+        $this->telegramConnector = new TelegramConnector();
     }
 
     public function handle(int $site_id = null)
@@ -88,7 +81,11 @@ class SitesChecker extends Command
                             $phpBranchRaw = explode('.', $phpVersion);
                             $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
                             $phpBranch = Str::substr($phpBranchRaw, 0, 3);
+                        } else {
+                            $phpVersion = 0;
                         }
+                    } else {
+                        $phpVersion = 0;
                     }
 
                     $ssl = new SitesSSLChecker();
@@ -138,7 +135,9 @@ class SitesChecker extends Command
             $chatId = $this->settingsController->getGroupChatId();
             $this->telegramConnector->sendMessage(
                 $chatId,
-                trim("ℹ️<b>Информация</b> \nВыполнена проверка всех сайтов.\nДата/время окончания задания: $date\nСтатус: 🟩")
+                trim(
+                    "ℹ️<b>Информация</b> \nВыполнена проверка всех сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
+                )
             );
         }
     }
