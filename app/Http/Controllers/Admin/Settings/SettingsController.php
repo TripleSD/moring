@@ -2,17 +2,20 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
+use App\Http\Controllers\Admin\Bridge\BridgeController;
 use App\Http\Controllers\Controller;
 use App\Repositories\SettingsRepository;
 
 class SettingsController extends Controller
 {
-    public $settingsRepository;
+    private $settingsRepository;
+    private $bridgeRepository;
 
     public function __construct()
     {
         $this->middleware('auth');
         $this->settingsRepository = new SettingsRepository();
+        $this->bridgeRepository = new BridgeController();
     }
 
     public function getTelegramStatus()
@@ -47,11 +50,10 @@ class SettingsController extends Controller
 
     public function getIdentificator()
     {
-        return (string)$this->settingsRepository->getIdentificator();
-    }
+        if ($this->settingsRepository->getIdentificator() === null) {
+            $this->bridgeRepository->getNewIdentificator();
+        }
 
-    public function updateIdentificatorParam($identficator)
-    {
-        $this->settingsRepository->updateIdentificatorParam($identficator);
+        return (string)$this->settingsRepository->getIdentificator();
     }
 }
