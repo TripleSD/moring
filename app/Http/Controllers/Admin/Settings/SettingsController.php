@@ -44,4 +44,24 @@ class SettingsController extends Controller
     {
         return $this->settingsRepository->updateGroupChatId($request);
     }
+
+    public function createApiKeyParam()
+    {
+        return $this->settingsRepository->createApiKeyParam();
+    }
+
+    public function createGroupChatIdParam()
+    {
+        return $this->settingsRepository->createGroupChatIdParam();
+    }
+
+    public function createTelegramStatusParam()
+    {
+        return $this->settingsRepository->createTelegramStatusParam();
+    }
+
+    public function createIdentificatorParam()
+    {
+        $this->settingsRepository->createIdentificatorParam();
+    }
 }
