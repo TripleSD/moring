@@ -41,4 +41,48 @@ class SettingsRepository extends Repository
         return Settings::where('parameter', 'telegram_group_chat_id')
             ->update(['value' => $request->input('telegram_group_chat_id')]);
     }
+
+    public function createApiKeyParam()
+    {
+        $param = Settings::where('parameter', 'telegram_api_key')->first();
+        if ($param == null) {
+            $settings = new Settings();
+            $settings->parameter = 'telegram_api_key';
+            $settings->value = '';
+            $settings->save();
+        }
+    }
+
+    public function createGroupChatIdParam()
+    {
+        $param = Settings::where('parameter', 'telegram_group_chat_id')->first();
+        if ($param == null) {
+            $settings = new Settings();
+            $settings->parameter = 'telegram_group_chat_id';
+            $settings->value = '';
+            $settings->save();
+        }
+    }
+
+    public function createTelegramStatusParam()
+    {
+        $param = Settings::where('parameter', 'telegram_enable_status')->first();
+        if ($param == null) {
+            $settings = new Settings();
+            $settings->parameter = 'telegram_enable_status';
+            $settings->value = 0;
+            $settings->save();
+        }
+    }
+
+    public function createIdentificatorParam()
+    {
+        $param = Settings::where('parameter', 'identificator')->first();
+        if ($param == null) {
+            $settings = new Settings();
+            $settings->parameter = 'identificator';
+            $settings->value = '';
+            $settings->save();
+        }
+    }
 }
