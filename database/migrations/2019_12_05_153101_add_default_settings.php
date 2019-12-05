@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTableSettings extends Migration
+class AddDefaultSettings extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,11 @@ class CreateTableSettings extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->string('parameter')->comment('Parameter');
-            $table->string('value')->comment('Parameter value');
-            $table->timestamps();
-        });
-
         DB::table('settings')->insert(
             array(
-                'identificator' => null,
+                'telegram_api_key' => null,
+                'telegram_group_chat_id' => null,
+                'telegram_enable_status' => 0,
             )
         );
     }
@@ -33,6 +29,6 @@ class CreateTableSettings extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('settings');
+        //
     }
 }

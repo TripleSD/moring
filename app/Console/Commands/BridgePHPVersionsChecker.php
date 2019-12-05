@@ -2,16 +2,16 @@
 
 namespace App\Console\Commands;
 
-use App\Http\Controllers\Admin\Statistics\IdentificatorsController;
+use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Models\BridgePhpVersions;
-use App\Models\MoringVersions;
-use App\Models\Settings;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
 
 class BridgePHPVersionsChecker extends Command
 {
+    public $settingsController;
+
     /**
      * The name and signature of the console command.
      *
@@ -34,25 +34,12 @@ class BridgePHPVersionsChecker extends Command
     public function __construct()
     {
         parent::__construct();
+        $this->settingsController = new SettingsController();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle()
     {
-        $identificator = new IdentificatorsController();
-
-        $httpClient = new Client();
-        $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCreateIdentificatorUrl'); # Url getting from /config/moring.php
-        $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
-
-        $settings = new Settings();
-        $settings->parameter = 'identificator';
-        $settings->value = json_decode($response->getBody(), true);
-        $settings->save();
+        $identificator = $this->settingsController->getIdentificator();
 
         # Getting availible Moring versions from bridge
         $httpClient = new Client();
