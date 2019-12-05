@@ -54,14 +54,15 @@ class SitesCountsRepository extends Repository
 
     public function getSoftwareErrorsSitesCount()
     {
-
         // where enabled = 1
         $sites = Sites::with('getPhpVersion')->get();
         $count = 0;
 
         foreach ($sites as $site) {
-            if ($site->getPhpVersion->version === '0') {
-                $count++;
+            if (!empty($site->getPhpVersion)) {
+                if ($site->getPhpVersion->version === '0') {
+                    $count++;
+                }
             }
         }
 
@@ -75,10 +76,11 @@ class SitesCountsRepository extends Repository
         $sites = Sites::with('getPhpVersion')->get();
         $bridgeVersions = BridgePhpVersions::pluck('branch')->toArray();
         foreach ($sites as $site) {
-
-            if ($site->getPhpVersion->branch != 0) {
-                if (!in_array($site->getPhpVersion->branch, $bridgeVersions)) {
-                    $count++;
+            if (!empty($site->getPhpVersion)) {
+                if ($site->getPhpVersion->branch != 0) {
+                    if (!in_array($site->getPhpVersion->branch, $bridgeVersions)) {
+                        $count++;
+                    }
                 }
             }
         }
@@ -94,12 +96,14 @@ class SitesCountsRepository extends Repository
         $bridgeVersions = BridgePhpVersions::get();
 
         foreach ($sites as $site) {
-            if ($site->getPhpVersion->version != 0) {
-                if (in_array($site->getPhpVersion->branch, $bridgeBranchs)) {
-                    foreach ($bridgeVersions as $version) {
-                        if ($version->branch == $site->getPhpVersion->branch) {
-                            if (version_compare($site->getPhpVersion->version, $version->version) < 0) {
-                                $count++;
+            if (!empty($site->getPhpVersion)) {
+                if ($site->getPhpVersion->version != 0) {
+                    if (in_array($site->getPhpVersion->branch, $bridgeBranchs)) {
+                        foreach ($bridgeVersions as $version) {
+                            if ($version->branch == $site->getPhpVersion->branch) {
+                                if (version_compare($site->getPhpVersion->version, $version->version) < 0) {
+                                    $count++;
+                                }
                             }
                         }
                     }
