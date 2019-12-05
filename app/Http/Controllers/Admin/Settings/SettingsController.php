@@ -9,10 +9,10 @@ class SettingsController extends Controller
 {
     public $settingsRepository;
 
-    public function __construct(SettingsRepository $settingsRepository)
+    public function __construct()
     {
         $this->middleware('auth');
-        $this->settingsRepository = $settingsRepository;
+        $this->settingsRepository = new SettingsRepository();
     }
 
     public function getTelegramStatus()
