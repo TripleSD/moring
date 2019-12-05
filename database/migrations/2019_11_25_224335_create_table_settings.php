@@ -21,7 +21,8 @@ class CreateTableSettings extends Migration
 
         DB::table('settings')->insert(
             array(
-                'identificator' => null,
+                'parameter' => 'identificator',
+                'value' => null,
             )
         );
     }
