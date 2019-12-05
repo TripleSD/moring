@@ -2,40 +2,34 @@
 
 namespace App\Http\Controllers\Admin\Bridge;
 
-use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Controller;
-use App\Models\Settings;
-use GuzzleHttp\Client;
-use Illuminate\Support\Facades\Config;
+use App\Repositories\BridgeRepository;
+use App\Repositories\SettingsRepository;
 
 class BridgeController extends Controller
 {
-    private $settingsController;
+    private $settingsRepository;
+    private $bridgeRepository;
 
     public function __construct()
     {
-        $this->settingsController = new SettingsController();
+        $this->settingsRepository = new SettingsRepository();
+        $this->bridgeRepository = new BridgeRepository();
     }
 
     public function getInfo()
     {
-        try {
-            $identificator = $this->settingsController->getIdentificator();
-
-            $settings = new Settings();
-            $settings->parameter = 'identificator';
-            $settings->value = json_decode($response->getBody(), true);
-            $settings->save();
-
-            $httpClient = new Client();
-            $response = $httpClient->request(
-                'GET',
-                Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentVersionUrl'),
-                ['query' => ['identificator' => $identificator], 'allow_redirects' => false]
-            );
-            $bridgeBuild = json_decode($response->getBody(), true);
-            return array('version' => $bridgeBuild, 'status' => '1', 'statusCode' => $response->getStatusCode());
-        } catch (\Exception $e) {
+        if ($this->settingsRepository->getIdentificator() == null) {
+            $newIdentificator = $this->bridgeRepository->getNewIdentificator();
+            $this->settingsRepository->updateIdentificatorParam($newIdentificator);
+            $this->settingsRepository->getIdentificator();
         }
+
+        return $this->bridgeRepository->getBridgeInfo($this->settingsRepository->getIdentificator());
+    }
+
+    public function getNewIdentificator()
+    {
+        $this->bridgeRepository->getNewIdentificator();
     }
 }
