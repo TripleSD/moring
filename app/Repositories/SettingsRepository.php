@@ -3,9 +3,20 @@
 namespace App\Repositories;
 
 use App\Models\Settings;
+use GuzzleHttp\Client;
 
 class SettingsRepository extends Repository
 {
+    /**
+     * @var BridgeRepository
+     */
+    private $bridgeRepository;
+
+    public function __construct()
+    {
+        $this->bridgeRepository = new BridgeRepository();
+    }
+
     public function getTelegramStatus()
     {
         $status = Settings::where('parameter', 'telegram_enable_status')->firstOrFail();
@@ -42,47 +53,21 @@ class SettingsRepository extends Repository
             ->update(['value' => $request->input('telegram_group_chat_id')]);
     }
 
-    public function createApiKeyParam()
+    public function getIdentificator()
     {
-        $param = Settings::where('parameter', 'telegram_api_key')->first();
-        if ($param == null) {
-            $settings = new Settings();
-            $settings->parameter = 'telegram_api_key';
-            $settings->value = '';
-            $settings->save();
+        $identificator = Settings::where('parameter', 'identificator')->first();
+
+        if ($identificator == null) {
+            $this->bridgeRepository->getNewIdentificator();
+            $identificator = Settings::where('parameter', 'identificator')->first();
         }
+
+        return (string) $identificator->value;
     }
 
-    public function createGroupChatIdParam()
+    public function updateIdentificatorParam($identificator)
     {
-        $param = Settings::where('parameter', 'telegram_group_chat_id')->first();
-        if ($param == null) {
-            $settings = new Settings();
-            $settings->parameter = 'telegram_group_chat_id';
-            $settings->value = '';
-            $settings->save();
-        }
-    }
-
-    public function createTelegramStatusParam()
-    {
-        $param = Settings::where('parameter', 'telegram_enable_status')->first();
-        if ($param == null) {
-            $settings = new Settings();
-            $settings->parameter = 'telegram_enable_status';
-            $settings->value = 0;
-            $settings->save();
-        }
-    }
-
-    public function createIdentificatorParam()
-    {
-        $param = Settings::where('parameter', 'identificator')->first();
-        if ($param == null) {
-            $settings = new Settings();
-            $settings->parameter = 'identificator';
-            $settings->value = '';
-            $settings->save();
-        }
+        return Settings::where('parameter', 'identificator')
+            ->update(['value' => $identificator]);
     }
 }
