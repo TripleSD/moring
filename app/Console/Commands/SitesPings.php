@@ -49,7 +49,7 @@ class SitesPings extends Command
                 $pings = Ping::pingTarget($site->url);
                 $pings['site_id'] = $site->id;
                 $sitePings = new SitesPingResponses($pings);
+                $sitePings->save();
             }
-            $sitePings->save();
         }
     }
