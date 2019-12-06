@@ -21,8 +21,6 @@ class Ping
                 preg_match("/[\d | \d.\d]{1,9}(?=ms| ms| TTL|\D{1,3}TTL)/", $string, $matches);
                 if (!empty($matches) && count($filter) < 3) {
                     $filter[] = floatval($matches[0]);
-                } else {
-                    $filter[] = 0;
                 }
                 return $filter;
             }, $filter);
@@ -34,7 +32,11 @@ class Ping
 
         $keys = ['first', 'second', 'third'];
         array_map(function ($key, $value) use (&$final){
-            $final[$key] = $value;
+            if ($value !== null) {
+                $final[$key] = $value;
+            } else {
+                $final[$key] = 0;
+            }
         }, $keys, $pre_final);
         return $final;
     }
