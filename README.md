@@ -60,6 +60,7 @@ MoRiNg - opensource система мониторинга. На данный м�
       chmod -R 777 storage/framework/sessions/
       chmod -R 777 storage/framework/views/
       chmod -R 777 storage/logs/
+      chmod -R 777 storage/framework/cache
     ```
 * войдите в систему используя логин `admin@localhost` и пароль `admin`
 ***
