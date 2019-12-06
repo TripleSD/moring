@@ -56,11 +56,11 @@ MoRiNg - opensource система мониторинга. На данный м�
     ``` 
 * смените права на папки
     ```bash  
-      chmod -R 755 storage
-      chmod -R 777 storage/framework/sessions/
-      chmod -R 777 storage/framework/views/
-      chmod -R 777 storage/logs/
-      chmod -R 777 storage/framework/cache
+      chmod 755 storage
+      chmod 777 storage/framework/sessions/
+      chmod 777 storage/framework/views/
+      chmod 777 storage/logs/
+      chmod 777 storage/framework/cache
     ```
 * войдите в систему используя логин `admin@localhost` и пароль `admin`
 ***
