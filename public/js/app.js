@@ -66941,6 +66941,89 @@ module.exports = function(module) {
 
 /***/ }),
 
+/***/ "./resources/js/admin/pings_for_new_sites.js":
+/*!***************************************************!*\
+  !*** ./resources/js/admin/pings_for_new_sites.js ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var ctx = $("#newSitesPings");
+
+  if (ctx.length) {
+    var sites = JSON.parse(ctx.attr('data-title'));
+    var ping = JSON.parse(ctx.attr('data-ping')); //Chart.defaults.global.elements.rectangle.backgroundColor = ['rgba(94, 114, 228, 0.2)', "rgba(86, 188, 228, 0.2)"];
+
+    window.chartColors = ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'];
+    var datasets = [];
+    var index = 0;
+    var myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: sites,
+        datasets: [{
+          label: 'The last ping average time to the new sites, milliseconds',
+          data: ping,
+          backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/admin/show_ping_chart.js":
+/*!***********************************************!*\
+  !*** ./resources/js/admin/show_ping_chart.js ***!
+  \***********************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+$(document).ready(function () {
+  var ctx = $("#sitePings");
+
+  if (ctx.length) {
+    var days = JSON.parse(ctx.attr('data-time'));
+    var counts = JSON.parse(ctx.attr('data-ping')); //Chart.defaults.global.elements.rectangle.backgroundColor = ['rgba(94, 114, 228, 0.2)', "rgba(86, 188, 228, 0.2)"];
+
+    var myChart = new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: days,
+        datasets: [{
+          label: 'Site response in ms',
+          data: counts,
+          borderWidth: 3,
+          borderColor: 'rgb(0, 160, 160)'
+        }]
+      },
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              beginAtZero: true
+            }
+          }]
+        }
+      }
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./resources/js/adminlte.js":
 /*!**********************************!*\
   !*** ./resources/js/adminlte.js ***!
@@ -68815,7 +68898,9 @@ try {
 
   __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
 
-  __webpack_require__(/*! ./test_chart.js */ "./resources/js/test_chart.js");
+  __webpack_require__(/*! ./admin/show_ping_chart.js */ "./resources/js/admin/show_ping_chart.js");
+
+  __webpack_require__(/*! ./admin/pings_for_new_sites */ "./resources/js/admin/pings_for_new_sites.js");
 } catch (e) {}
 /**
  * We'll load the axios HTTP library which allows us to easily issue requests
@@ -83486,46 +83571,6 @@ $(function () {
       }
     }
   });
-});
-
-/***/ }),
-
-/***/ "./resources/js/test_chart.js":
-/*!************************************!*\
-  !*** ./resources/js/test_chart.js ***!
-  \************************************/
-/*! no static exports found */
-/***/ (function(module, exports) {
-
-$(document).ready(function () {
-  var ctx = $("#sitePings");
-
-  if (ctx.length) {
-    var days = JSON.parse(ctx.attr('data-time'));
-    var counts = JSON.parse(ctx.attr('data-ping')); //Chart.defaults.global.elements.rectangle.backgroundColor = ['rgba(94, 114, 228, 0.2)', "rgba(86, 188, 228, 0.2)"];
-
-    var myChart = new Chart(ctx, {
-      type: 'line',
-      data: {
-        labels: days,
-        datasets: [{
-          label: 'Site response in ms',
-          data: counts,
-          borderWidth: 3,
-          borderColor: 'rgb(0, 160, 160)'
-        }]
-      },
-      options: {
-        scales: {
-          yAxes: [{
-            ticks: {
-              beginAtZero: true
-            }
-          }]
-        }
-      }
-    });
-  }
 });
 
 /***/ }),
