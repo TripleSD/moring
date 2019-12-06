@@ -23,7 +23,7 @@ $(document).ready(function () {
             data: {
                 labels: sites,
                 datasets: [{
-                    label: 'The last ping average time to the new sites, milliseconds',
+                    label: 'Результат последнего пинга сайта, мс',
                     data: ping,
                     backgroundColor: [
                         'rgb(255, 99, 132)',
