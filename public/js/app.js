@@ -66963,7 +66963,7 @@ $(document).ready(function () {
       data: {
         labels: sites,
         datasets: [{
-          label: 'The last ping average time to the new sites, milliseconds',
+          label: 'Результат последнего пинга сайта, мс',
           data: ping,
           backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
           borderWidth: 1
@@ -67003,7 +67003,7 @@ $(document).ready(function () {
       data: {
         labels: days,
         datasets: [{
-          label: 'Site response in ms',
+          label: 'Пинг сайта, мс',
           data: counts,
           borderWidth: 3,
           borderColor: 'rgb(0, 160, 160)'

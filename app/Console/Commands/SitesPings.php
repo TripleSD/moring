@@ -43,7 +43,7 @@ class SitesPings extends Command
         if (is_null($id)) {
             $sites = Sites::get();
         } else {
-            $sites[] = Sites::find('id', $id)->first();
+            $sites[] = Sites::find($id);
         }
             foreach ($sites as $site) {
                 $pings = Ping::pingTarget($site->url);
