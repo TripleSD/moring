@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Sites;
 
 use App\Console\Commands\SitesChecker;
+use App\Console\Commands\SitesPings;
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Connectors\TelegramConnector;
 use App\Http\Controllers\Controller;
@@ -84,8 +85,14 @@ class SitesController extends Controller
         if (checkdnsrr($fillable['url'], 'A')) {
             $result = (new AdminSitesRepository())->store($fillable);
             if ($result) {
+                // Run first site check
                 $check = new SitesChecker();
                 $check->handle((int)($result->id));
+                
+                // Run first site ping as well
+                $ping = new SitesPings();
+                $ping->handle($result->id);
+
                 flash('Запись добавлена')->success();
                 return redirect()->route('admin.sites.index');
             } else {

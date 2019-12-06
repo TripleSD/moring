@@ -12,7 +12,7 @@ $(document).ready(function () {
             data: {
                     labels: days,
                     datasets: [{
-                        label: 'Site response in ms',
+                        label: 'Пинг сайта, мс',
                         data: counts,
                         borderWidth: 3,
                         borderColor: 'rgb(0, 160, 160)'

@@ -38,14 +38,18 @@ class SitesPings extends Command
      *
      * @return mixed
      */
-    public function handle()
+    public function handle(int $id = null)
     {
-        $sites = Sites::get();
-        foreach ($sites as $site) {
-            $pings = Ping::pingTarget($site->url);
-            $pings['site_id'] = $site->id;
-            $sitePings = new SitesPingResponses($pings);
+        if (is_null($id)) {
+            $sites = Sites::get();
+        } else {
+            $sites[] = Sites::find('id', $id)->first();
+        }
+            foreach ($sites as $site) {
+                $pings = Ping::pingTarget($site->url);
+                $pings['site_id'] = $site->id;
+                $sitePings = new SitesPingResponses($pings);
+            }
             $sitePings->save();
         }
     }
-}

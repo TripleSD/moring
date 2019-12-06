@@ -105,8 +105,8 @@ class AdminSitesRepository extends Repository
     {
         $list = Sites::orderBy('created_at', 'desc')->get(['id', 'title'])->slice(0, $count)->toArray();
         $ping = array_map(function ($item) use (&$ping) {
-            $sub = SitesPingResponses::orderBy('created_at', 'desc')->where('site_id', $item['id'])->first()->toArray();
-            $item['ping'] = round(floatval($sub['first'] + $sub['second'] + $sub['third'] / 3), 3);
+            $sub = SitesPingResponses::orderBy('created_at', 'desc')->where('site_id', $item['id'])->first();
+            $item['ping'] = round(floatval($sub->first + $sub->second + $sub->third / 3), 3);
             return $item;
         }, $list);
         return $ping;
