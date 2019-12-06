@@ -88,10 +88,10 @@ class SitesController extends Controller
                 // Run first site check
                 $check = new SitesChecker();
                 $check->handle((int)($result->id));
-                
+
                 // Run first site ping as well
                 $ping = new SitesPings();
-                $ping->handle($result->id);
+                $ping->handle(intval($result->id));
 
                 flash('Запись добавлена')->success();
                 return redirect()->route('admin.sites.index');

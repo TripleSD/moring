@@ -15,19 +15,20 @@ class Ping
         } else {
             exec("ping -n 3 $host", $output, $return_var);
         }
-
         if (count($output) > 3) {
             $filter =[];
             $pre_final = array_reduce($output, function ($filter, $string){
-                preg_match("/[\d | \d.\d]{1,9}(?=ms| ms)/", $string, $matches);
+                preg_match("/[\d | \d.\d]{1,9}(?=ms| ms| TTL|\D{1,3}TTL)/", $string, $matches);
                 if (!empty($matches) && count($filter) < 3) {
                     $filter[] = floatval($matches[0]);
+                } else {
+                    $filter[] = 0;
                 }
                 return $filter;
             }, $filter);
         } else {
             for ($i = 0; $i < 2; ++$i) {
-                $pre_final[$i] = null;
+                $pre_final[$i] = 0;
             }
         }
 
@@ -35,7 +36,6 @@ class Ping
         array_map(function ($key, $value) use (&$final){
             $final[$key] = $value;
         }, $keys, $pre_final);
-
         return $final;
     }
 }
