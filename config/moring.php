@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'build' => '004',
+    'build' => '005',
     'createYear' => '2019',
     'bridgeUrl' => 'http://api.moring.ru/v1',
     'bridgeCurrentMoringVersionUrl' => '/moring/version',
