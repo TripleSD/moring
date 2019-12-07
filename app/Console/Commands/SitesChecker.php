@@ -43,8 +43,10 @@ class SitesChecker extends Command
     {
         if (is_null($site_id)) {
             $sites = Sites::get();
+            $tgMessage = 0;
         } else {
             $sites[] = Sites::find($site_id);
+            $tgMessage = 1;
         }
 
         foreach ($sites as $site) {
@@ -131,14 +133,26 @@ class SitesChecker extends Command
         }
 
         if ($this->settingsController->getTelegramStatus() === 1) {
-            $date = Carbon::now()->format('Y-m-d H:i:s');
-            $chatId = $this->settingsController->getGroupChatId();
-            $this->telegramConnector->sendMessage(
-                $chatId,
-                trim(
-                    "ℹ️<b>Информация</b> \nВыполнена проверка всех сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
-                )
-            );
+            try {
+                $date = Carbon::now()->format('Y-m-d H:i:s');
+                $chatId = $this->settingsController->getGroupChatId();
+                if ($tgMessage == 0) {
+                    $this->telegramConnector->sendMessage(
+                        $chatId,
+                        trim(
+                            "ℹ️<b>Информация</b> \nВыполнена проверка всех сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
+                        )
+                    );
+                } else {
+                    $this->telegramConnector->sendMessage(
+                        $chatId,
+                        trim(
+                            "ℹ️<b>Информация</b> \nВыполнена проверка одного сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
+                        )
+                    );
+                }
+            } catch (\Exception $e) {
+            }
         }
     }
 }

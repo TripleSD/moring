@@ -14,10 +14,12 @@ class TelegramConnector extends Controller
         $apiKey = $settings->value;
         $client = new Client();
         try {
-            $query = [
-                'query' => ['chat_id' => $chatId, 'text' => $messageText, 'parse_mode' => 'html']
+            $param = [
+                'timeout' => 5,
+                'query' => ['chat_id' => $chatId, 'text' => $messageText, 'parse_mode' => 'html'],
             ];
-            $client->post("https://api.telegram.org/bot$apiKey/sendMessage", $query);
+
+            $client->post("https://api.telegram.org/bot$apiKey/sendMessage", $param);
         } catch (\Exception $e) {
             echo $e->getMessage();
         }
