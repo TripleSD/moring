@@ -23,7 +23,17 @@ class HomeController extends Controller
      */
     public function index(AdminSitesRepository $adminSiteRepository)
     {
-        $sites = $adminSiteRepository->sortedList(4, 'desc');
-        return view('home', compact('sites'));
+        $sites = $adminSiteRepository->sortedList(5, 'desc');
+        $pingData = $adminSiteRepository->getNewSites(5);
+
+        $pings = json_encode( array_map(function($item) use (&$pings){
+            return $item['ping'];
+        }, $pingData));
+
+        $titles = json_encode( array_map(function($item) use (&$titles){
+            return $item['title'];
+        }, $pingData));
+
+        return view('home', compact('sites', 'pings', 'titles'));
     }
 }

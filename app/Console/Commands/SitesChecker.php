@@ -2,6 +2,8 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\Admin\Settings\SettingsController;
+use App\Http\Controllers\Connectors\TelegramConnector;
 use App\Models\Sites;
 use App\Models\SitesHttpCodes;
 use App\Models\SitesPhpVersions;
@@ -9,7 +11,7 @@ use App\Models\SitesWebServers;
 use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
+use Str;
 
 class SitesChecker extends Command
 {
@@ -27,31 +29,27 @@ class SitesChecker extends Command
      */
     protected $description = 'Command description';
 
-    /**
-     * Create a new command instance.
-     *
-     * @return void
-     */
+    public $settingsController;
+    public $telegramConnector;
+
     public function __construct()
     {
         parent::__construct();
+        $this->settingsController = new SettingsController();
+        $this->telegramConnector = new TelegramConnector();
     }
 
-    /**
-     * Execute the console command.
-     *
-     * @return mixed
-     */
     public function handle(int $site_id = null)
     {
         if (is_null($site_id)) {
             $sites = Sites::get();
+            $tgMessage = 0;
         } else {
             $sites[] = Sites::find($site_id);
+            $tgMessage = 1;
         }
 
         foreach ($sites as $site) {
-
             $phpVersion = 0;
             $phpBranch = 0;
             $statusCode = 999;
@@ -85,14 +83,17 @@ class SitesChecker extends Command
                             $phpBranchRaw = explode('.', $phpVersion);
                             $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
                             $phpBranch = Str::substr($phpBranchRaw, 0, 3);
+                        } else {
+                            $phpVersion = 0;
                         }
+                    } else {
+                        $phpVersion = 0;
                     }
 
                     $ssl = new SitesSSLChecker();
                     $ssl->handle($site->id);
                 }
             } catch (\Exception $e) {
-
             }
 
             //   HTTP code saving process
@@ -129,7 +130,29 @@ class SitesChecker extends Command
             }
             $php->updated_at = Carbon::now();
             $php->save();
+        }
 
+        if ($this->settingsController->getTelegramStatus() === 1) {
+            try {
+                $date = Carbon::now()->format('Y-m-d H:i:s');
+                $chatId = $this->settingsController->getGroupChatId();
+                if ($tgMessage == 0) {
+                    $this->telegramConnector->sendMessage(
+                        $chatId,
+                        trim(
+                            "ℹ️<b>Информация</b> \nВыполнена проверка всех сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
+                        )
+                    );
+                } else {
+                    $this->telegramConnector->sendMessage(
+                        $chatId,
+                        trim(
+                            "ℹ️<b>Информация</b> \nВыполнена проверка одного сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
+                        )
+                    );
+                }
+            } catch (\Exception $e) {
+            }
         }
     }
 }

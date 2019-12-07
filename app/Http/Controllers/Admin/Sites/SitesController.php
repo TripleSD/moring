@@ -3,6 +3,9 @@
 namespace App\Http\Controllers\Admin\Sites;
 
 use App\Console\Commands\SitesChecker;
+use App\Console\Commands\SitesPings;
+use App\Http\Controllers\Admin\Settings\SettingsController;
+use App\Http\Controllers\Connectors\TelegramConnector;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sites\ShowSitesRequest;
 use App\Http\Requests\Sites\StoreSiteRequest;
@@ -14,6 +17,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use function foo\func;
 
 class SitesController extends Controller
 {
@@ -81,8 +85,14 @@ class SitesController extends Controller
         if (checkdnsrr($fillable['url'], 'A')) {
             $result = (new AdminSitesRepository())->store($fillable);
             if ($result) {
+                // Run first site check
                 $check = new SitesChecker();
-                $check->handle();
+                $check->handle((int)($result->id));
+
+                // Run first site ping as well
+                $ping = new SitesPings();
+                $ping->handle(intval($result->id));
+
                 flash('Запись добавлена')->success();
                 return redirect()->route('admin.sites.index');
             } else {
@@ -106,8 +116,18 @@ class SitesController extends Controller
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
         $bridgePhpVersion = BridgePhpVersions::get();
 
+        $pings = $adminSiteRepository->listOfPings($request, 50);
+
+        $averages = json_encode(array_map(function( $ins){
+            return $ins['average'];
+        }, $pings));
+
+         $time = json_encode(array_map(function( $ins){
+            return $ins['created_at'];
+        }, $pings));
+
         $site = $adminSiteRepository->show($request);
-        return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion'));
+        return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion', 'averages', 'time'));
     }
 
     /**

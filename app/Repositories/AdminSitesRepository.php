@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Sites;
 use App\Models\SitesChecksList;
+use App\Models\SitesPingResponses;
 
 class AdminSitesRepository extends Repository
 {
@@ -30,15 +31,15 @@ class AdminSitesRepository extends Repository
     public function store(array $fillable)
     {
         //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
-        if(intval($fillable['https']) === 0){
+        if (intval($fillable['https']) === 0) {
             $fillable['check_ssl'] = 0;
             $fillable['check_https'] = 0;
-        }else {
+        } else {
             $fillable['check_https'] = 1;
         }
 
         //    Now we activate Moring file usage, if path has been added
-        if(strlen($fillable['file_url']) >= 5){
+        if (strlen($fillable['file_url']) >= 5) {
             $fillable['use_file'] = 1;
         }
 
@@ -57,7 +58,7 @@ class AdminSitesRepository extends Repository
     public function update($fillable, int $id)
     {
         //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
-        if(intval($fillable['https']) === 0){
+        if (intval($fillable['https']) === 0) {
             $fillable['check_ssl'] = 0;
             $fillable['check_https'] = 0;
         } else {
@@ -79,13 +80,35 @@ class AdminSitesRepository extends Repository
 
     public function sortedList(int $length = null, string $sort = null)
     {
-        if (is_null($length)){
-            $list =  Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->orderBy('created_at', $sort)->get();
+        if (is_null($length)) {
+            $list = Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification', 'getSitesPings')->orderBy('created_at', $sort)->get();
         } else {
-            $list =  Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->orderBy('created_at', $sort)->get()->slice(0, $length);
+            $list = Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
+                'getSslCertification', 'getSitesPings')->orderBy('created_at', $sort)->get()->slice(0, $length);
         }
         return $list;
+    }
+
+    public function listOfPings($request, int $count)
+    {
+        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get()->slice(0, $count)->toArray();
+        $averaged = array_map(function ($sub) use (&$list) {
+            $sub['average'] = round(floatval($sub['first'] + $sub['second'] + $sub['third'] / 3), 3);
+            return $sub;
+        }, $list);
+
+        return $averaged;
+    }
+
+    public function getNewSites(int $count)
+    {
+        $list = Sites::orderBy('created_at', 'desc')->get(['id', 'title'])->slice(0, $count)->toArray();
+        $ping = array_map(function ($item) use (&$ping) {
+            $sub = SitesPingResponses::orderBy('created_at', 'desc')->where('site_id', $item['id'])->first();
+            $item['ping'] = round(floatval($sub->first + $sub->second + $sub->third / 3), 3);
+            return $item;
+        }, $list);
+        return $ping;
     }
 }

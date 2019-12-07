@@ -6,5 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Settings extends Model
 {
-
+    protected $primaryKey = null;
+    public $incrementing = false;
 }

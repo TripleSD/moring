@@ -25,10 +25,12 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('SitesChecker')->everyThirtyMinutes();
+        $schedule->command('SitesChecker')->hourly();
         $schedule->command('SitesSSLChecker')->daily();
         $schedule->command('BridgeMoringVersionChecker')->daily();
         $schedule->command('BridgePHPVersionsChecker')->daily();
+        $schedule->command('SitesPings')->everyFiveMinutes();
+        $schedule->command('ServersPings')->everyFiveMinutes();
     }
 
     /**

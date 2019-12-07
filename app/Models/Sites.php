@@ -34,4 +34,9 @@ class Sites extends Model
     {
         return $this->hasOne(SitesSslCertificates::class,'site_id');
     }
+
+    public function getSitesPings()
+    {
+        return $this->hasOne(SitesPingResponses::class, 'site_id');
+    }
 }
