@@ -111,7 +111,7 @@ MoRiNg является opensource проектом. Лицезируется н
 ### Лог изменений по версиям
 ***
 
-[Build.004](https://github.com/TripleSD/moring/releases/tag/build.003)
+[Build.004](https://github.com/TripleSD/moring/releases/tag/build.004)
 - **(New)** Добавлена `ping` проверка всех сайтов с выводом графика показаний
 - **(New)** Добавлена интеграция с `Telegram`
 - **(Fix)** Добавлены значения по умолчанию в настройках панели
