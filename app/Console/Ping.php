@@ -10,9 +10,7 @@ class Ping
 
     public static function pingTarget(string $host): array
     {
-        if (self::OS == 'WINNT') {
-            exec("ping -c 3 $host", $output, $return_var);
-        } elseif (self::OS == 'Darwin') {
+        if (self::OS != 'WINNT') {
             exec("ping -c 3 $host", $output, $return_var);
         } else {
             exec("ping -n 3 $host", $output, $return_var);
