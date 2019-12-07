@@ -33,7 +33,8 @@ class SitesController extends Controller
         AdminSitesRepository $adminSiteRepository,
         SitesCountsRepository $sitesCountsRepository,
         Request $request
-    ) {
+    )
+    {
         $sites = $adminSiteRepository->index($request);
 
         //TODO вынести в репозиторий два запроса
@@ -118,11 +119,11 @@ class SitesController extends Controller
 
         $pings = $adminSiteRepository->listOfPings($request, 50);
 
-        $averages = json_encode(array_map(function( $ins){
+        $averages = json_encode(array_map(function ($ins) {
             return $ins['average'];
         }, $pings));
 
-         $time = json_encode(array_map(function( $ins){
+        $time = json_encode(array_map(function ($ins) {
             return $ins['created_at'];
         }, $pings));
 
@@ -179,5 +180,20 @@ class SitesController extends Controller
             flash('Сайт удален из списка мониторинга')->success();
             return redirect()->route('admin.sites.index');
         }
+    }
+
+    public function refresh($id, AdminSitesRepository $adminSitesRepository)
+    {
+        $check = new SitesChecker($id);
+        $check->handle($id);
+
+        $ping = new SitesPings();
+        $ping->handle($id);
+        if ($check) {
+            flash('Данные обновлены')->success();
+        } else {
+            flash("Что-то пошло не так...");
+        }
+        return back();
     }
 }
