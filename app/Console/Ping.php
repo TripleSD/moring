@@ -18,7 +18,7 @@ class Ping
         if (count($output) > 3) {
             $filter =[];
             $pre_final = array_reduce($output, function ($filter, $string){
-                preg_match("/[\d | \d.\d]{1,9}(?=ms| ms| TTL|\D{1,3}TTL)/", $string, $matches);
+                preg_match("/(?<==)[\d|\d.\d]{1,9}(?=ms| ms| TTL|\D{1,3}TTL)/", $string, $matches);
                 if (!empty($matches) && count($filter) < 3) {
                     $filter[] = floatval($matches[0]);
                 }
