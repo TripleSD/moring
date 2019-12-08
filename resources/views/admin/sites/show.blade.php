@@ -29,6 +29,10 @@
                                 <a href="{{route('admin.sites.index')}}"
                                    class="btn btn-sm bg-gradient-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i></a>
+                            <a href="{{route('admin.site.refresh', $site->id)}}"
+                               class="btn btn-sm bg-gradient-green"
+                               title="Обновить данные сайта">
+                                                        <i class="fas fa-sync-alt"></i></a>
                                 <a href="{{route('admin.sites.edit', $site->id)}}"
                                    class="btn btn-sm bg-gradient-warning" title="Редактиование профиля">
                                     <i class="fa fa-user-edit"></i></a>
