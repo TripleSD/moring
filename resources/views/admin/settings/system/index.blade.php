@@ -66,9 +66,23 @@
                                         <div class="tab-pane fade" id="custom-tabs-three-bridge" role="tabpanel"
                                              aria-labelledby="custom-tabs-three-bridge-tab">
                                             <dt>Последнее обновление PHP версий:</dt>
+                                            @if($bridgeStatistics['bridge_php_versions'] != null)
+                                            @else
+                                                <span class="text-danger">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                    Обновление никогда не выполнялось
+                                                </span>
+                                            @endif
                                             {{ $bridgeStatistics['bridge_php_versions'] }}
                                             <dt>Последнее обновление Moring версий:</dt>
-                                            {{ $bridgeStatistics['bridge_moring_versions'] }}
+                                            @if($bridgeStatistics['bridge_moring_versions'] != null)
+                                                {{ $bridgeStatistics['bridge_moring_versions'] }}
+                                            @else
+                                                <span class="text-danger">
+                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                    Обновление никогда не выполнялось
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
