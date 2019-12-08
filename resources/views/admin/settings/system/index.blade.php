@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-{{--                    <h1 class="m-0 text-dark">{{ $server->description }} ({{long2ip($server->addr)}})</h1>--}}
+                    {{--                    <h1 class="m-0 text-dark">{{ $server->description }} ({{long2ip($server->addr)}})</h1>--}}
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -30,53 +30,45 @@
                                 <a href="{{route('servers.index')}}"
                                    class="btn btn-sm bg-gradient-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i></a>
-{{--                                <a href="{{route('servers.edit',$server->id)}}"--}}
-{{--                                   class="btn btn-sm bg-gradient-warning" title="Редактирование пользователя">--}}
-{{--                                    <i class="fa fa-edit"></i></a>--}}
                             </span>
                         </div>
 
-
                         <div class="card-body">
-                            <div class="row">
-                                <div class="col-5 col-sm-3">
-                                    <div class="nav flex-column nav-tabs h-100" id="vert-tabs-tab" role="tablist"
-                                         aria-orientation="vertical">
-                                        <a class="nav-link active" id="vert-tabs-home-tab" data-toggle="pill"
-                                           href="#vert-tabs-home" role="tab" aria-controls="vert-tabs-home"
-                                           aria-selected="true">Система</a>
-                                        <a class="nav-link" id="vert-tabs-profile-tab" data-toggle="pill"
-                                           href="#vert-tabs-profile" role="tab" aria-controls="vert-tabs-profile"
-                                           aria-selected="false">Агент</a>
-                                    </div>
+                            <div class="card card-primary card-outline card-outline-tabs">
+                                <div class="card-header p-0 border-bottom-0">
+                                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                                        <li class="nav-item">
+                                            <a class="nav-link active" id="custom-tabs-three-system-tab"
+                                               data-toggle="pill" href="#custom-tabs-three-system" role="tab"
+                                               aria-controls="custom-tabs-three-system" aria-selected="true">Система</a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a class="nav-link" id="custom-tabs-three-bridge-tab" data-toggle="pill"
+                                               href="#custom-tabs-three-bridge" role="tab"
+                                               aria-controls="custom-tabs-three-bridge"
+                                               aria-selected="false">Бридж</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="col-7 col-sm-9">
-                                    <div class="tab-content" id="vert-tabs-tabContent">
-                                        <div class="tab-pane text-left fade active show" id="vert-tabs-home"
-                                             role="tabpanel" aria-labelledby="vert-tabs-home-tab">
-                                            <div class="col-sm-6">
-                                                <dl>
-                                                    <dt> ОС:</dt>
-                                                    <dd>{{ php_uname() }}</dd>
-                                                    <dt> IP адрес сервера:</dt>
-                                                    <dd>{{ PHP_OS }}</dd>
-                                                    <dt> Краткое описание:</dt>
-                                                    <dd>{{ phpversion()  }}</dd>
-                                                    <dd>{{ date_default_timezone_get()  }}</dd>
-
-                                                    .env<br/>
-                                                    TIMEZONE="Europe/Moscow"
-
-                                                </dl>
-                                            </div>
+                                <div class="card-body">
+                                    <div class="tab-content" id="custom-tabs-three-tabContent">
+                                        <div class="tab-pane fade active show" id="custom-tabs-three-system"
+                                             role="tabpanel" aria-labelledby="custom-tabs-three-system-tab">
+                                            <dt> Операционная система:</dt>
+                                            <dd>{{ php_uname() }}</dd>
+                                            <dt> IP адрес сервера:</dt>
+                                            <dd>{{ PHP_OS }}</dd>
+                                            <dt> Версия PHP интерпретатора:</dt>
+                                            <dd>{{ phpversion()  }}</dd>
+                                            <dt>Временная зона</dt>
+                                            <dd>{{env('TIMEZONE')}}</dd>
                                         </div>
-                                        <div class="tab-pane fade" id="vert-tabs-profile" role="tabpanel"
-                                             aria-labelledby="vert-tabs-profile-tab">
-                                            <div class="callout callout-info">
-{{--                                                @foreach($settingsFile as $value)--}}
-{{--                                                    {{$value}}<br/>--}}
-{{--                                                @endforeach--}}
-                                            </div>
+                                        <div class="tab-pane fade" id="custom-tabs-three-bridge" role="tabpanel"
+                                             aria-labelledby="custom-tabs-three-bridge-tab">
+                                            <dt>Последнее обновление PHP версий:</dt>
+                                            {{ $bridgeStatistics['bridge_php_versions'] }}
+                                            <dt>Последнее обновление Moring версий:</dt>
+                                            {{ $bridgeStatistics['bridge_moring_versions'] }}
                                         </div>
                                     </div>
                                 </div>
@@ -86,7 +78,5 @@
                 </div>
             </div>
         </div>
-    </div>
-    </div>
     </div>
 @endsection
