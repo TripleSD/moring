@@ -42,6 +42,9 @@ Route::group(
             }
         );
 
+//        Simple route for refreshing data of one site
+        Route::get('/admin/sites/{id}/refresh/', 'Admin\Sites\SitesController@refresh')->where('id', '[0-9]+')->name('admin.site.refresh');
+
         Route::group(
             ['prefix' => 'settings', 'namespace' => 'Admin\Settings', 'as' => 'settings.'],
             function () {

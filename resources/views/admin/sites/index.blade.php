@@ -454,6 +454,10 @@
                                                        class="btn btn-xs bg-gradient-warning"
                                                        title="Редактирование сайта">
                                                         <i class="fa fa-edit"></i></a>
+                                                    <a href="{{route('admin.site.refresh', $site->id)}}"
+                                                       class="btn btn-xs bg-gradient-green"
+                                                       title="Обновить данные сайта">
+                                                        <i class="fas fa-sync-alt"></i></a>
                                                 </div>
                                                 <div class="btn-group">
                                                     @if($site->enabled === 1)
