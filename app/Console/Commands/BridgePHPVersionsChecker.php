@@ -4,6 +4,7 @@ namespace App\Console\Commands;
 
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Models\BridgePhpVersions;
+use App\Repositories\BridgeRepository;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Config;
@@ -11,6 +12,7 @@ use Illuminate\Support\Facades\Config;
 class BridgePHPVersionsChecker extends Command
 {
     public $settingsController;
+    private $bridgeRepository;
 
     /**
      * The name and signature of the console command.
@@ -35,6 +37,7 @@ class BridgePHPVersionsChecker extends Command
     {
         parent::__construct();
         $this->settingsController = new SettingsController();
+        $this->bridgeRepository = new BridgeRepository();
     }
 
     public function handle()
@@ -58,8 +61,8 @@ class BridgePHPVersionsChecker extends Command
                     $versions->save();
                 }
             } catch (\Exception $e) {
-                echo $e->getMessage();
             }
         }
+        $this->bridgeRepository->updateStatInfo('bridge_php_versions');
     }
 }
