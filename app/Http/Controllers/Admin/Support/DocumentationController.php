@@ -8,6 +8,6 @@ class DocumentationController extends Controller
 {
     public function getIndex()
     {
-        return view('empty');
+        return view('admin.documentation.index');
     }
 }

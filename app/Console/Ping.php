@@ -10,7 +10,7 @@ class Ping
 
     public static function pingTarget(string $host): array
     {
-        if (self::OS !== 'WINNT') {
+        if (self::OS != 'WINNT') {
             exec("ping -c 3 $host", $output, $return_var);
         } else {
             exec("ping -n 3 $host", $output, $return_var);
@@ -31,13 +31,17 @@ class Ping
         }
 
         $keys = ['first', 'second', 'third'];
-        array_map(function ($key, $value) use (&$final){
-            if ($value !== null) {
-                $final[$key] = $value;
-            } else {
-                $final[$key] = 0;
-            }
-        }, $keys, $pre_final);
+        array_map(
+            function ($key, $value) use (&$final) {
+                if ($value !== null) {
+                    $final[$key] = $value;
+                } else {
+                    $final[$key] = 0;
+                }
+            },
+            $keys,
+            $pre_final
+        );
         return $final;
     }
 }

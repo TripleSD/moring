@@ -45,11 +45,14 @@ class SitesPings extends Command
         } else {
             $sites[] = Sites::find($id);
         }
-            foreach ($sites as $site) {
-                $pings = Ping::pingTarget($site->url);
-                $pings['site_id'] = $site->id;
-                $sitePings = new SitesPingResponses($pings);
-                $sitePings->save();
-            }
+
+        foreach ($sites as $site) {
+            $pings = Ping::pingTarget($site->url);
+            $pings['site_id'] = $site->id;
+            $sitePings = new SitesPingResponses($pings);
+            $sitePings->save();
         }
+
+        return true;
     }
+}
