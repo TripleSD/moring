@@ -7,6 +7,8 @@
     All rights reserved.
     <a href="https://github.com/TripleSD/moring" target="_blank"><i class="fab fa-github-square"></i></a>
     <div class="float-right d-none d-sm-inline-block">
+        <b>Moring</b> <span class="badge badge-dark">b: {{Config::get('moring.build')}}</span>
+        |
         <b>Bridge </b>
         @if($bridgeInfo['status'] == 1)
             <span class="badge badge-dark">
@@ -20,6 +22,9 @@
                 Disconnected |  Error
             </span>
         @endif
-        <b>Moring</b> <span class="badge badge-dark">b: {{Config::get('moring.build')}}</span>
+        <a href="{{ route('settings.bridge.index') }}"
+           class="btn btn-xs text-primary"
+           title="Статус обновлений бриджа">
+            <i class="fas fa-history"></i></a>
     </div>
 </footer>
