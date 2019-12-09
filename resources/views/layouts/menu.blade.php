@@ -120,7 +120,15 @@
                         <li class="nav-item">
                             <a href="{{ route('settings.system.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Системные настройки</p>
+                                <p>Система</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('settings.bridge.index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>Бридж</p>
                             </a>
                         </li>
                     </ul>

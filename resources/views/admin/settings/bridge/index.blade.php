@@ -34,17 +34,31 @@
                         </div>
 
                         <div class="card-body">
-                            <dt> Операционная система:</dt>
-                            <dd>{{ php_uname() }}</dd>
-                            <dt> IP адрес сервера:</dt>
-                            <dd>{{ PHP_OS }}</dd>
-                            <dt> Версия PHP интерпретатора:</dt>
-                            <dd>{{ phpversion()  }}</dd>
-                            <dt>Временная зона</dt>
-                            <dd>{{env('TIMEZONE')}}</dd>
+                            <dt>Последнее обновление PHP версий:</dt>
+                            @if($bridgeStatistics['bridge_php_versions'] != null)
+                                {{ $bridgeStatistics['bridge_php_versions'] }}
+                            @else
+                                <span class="text-danger">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Обновление никогда не выполнялось
+                                </span>
+                            @endif
+
+                            <dt>Последнее обновление Moring версий:</dt>
+                            @if($bridgeStatistics['bridge_moring_versions'] != null)
+                                {{ $bridgeStatistics['bridge_moring_versions'] }}
+                            @else
+                                <span class="text-danger">
+                                    <i class="fas fa-exclamation-triangle"></i>
+                                    Обновление никогда не выполнялось
+                                </span>
+                            @endif
+
+                            <div class="mt-3">
+                                <a class="btn btn-success btn-sm" href="{{ route('settings.bridge.update') }}">Обновить данные</a>
+                            </div>
                         </div>
                     </div>
-
                 </div>
             </div>
         </div>

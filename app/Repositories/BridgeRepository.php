@@ -2,6 +2,8 @@
 
 namespace App\Repositories;
 
+use App\Models\BridgeStatistics;
+use Carbon\Carbon;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Config;
 
@@ -27,5 +29,16 @@ class BridgeRepository extends Repository
         );
         $bridgeBuild = json_decode($response->getBody(), true);
         return array('version' => $bridgeBuild, 'status' => '1', 'statusCode' => $response->getStatusCode());
+    }
+
+    public function updateStatInfo($param)
+    {
+        return BridgeStatistics::where('parameter', $param)
+            ->update(['updated_at' => Carbon::now()->format('Y-m-d H:i:s')]);
+    }
+
+    public function getBridgeStatistics()
+    {
+        return BridgeStatistics::pluck('updated_at','parameter')->toArray();
     }
 }
