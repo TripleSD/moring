@@ -58,6 +58,16 @@ Route::group(
         );
 
         Route::group(
+            ['prefix' => 'settings/bridge', 'namespace' => 'Admin\Settings'],
+            function () {
+                Route::get('/', 'BridgeController@getIndex')
+                    ->name('settings.bridge.index');
+                Route::get('/update', 'BridgeController@updateInfo')
+                    ->name('settings.bridge.update');
+            }
+        );
+
+        Route::group(
             ['prefix' => 'settings/integrations', 'namespace' => 'Admin\Settings\Integrations'],
             function () {
                 Route::get('/', 'TelegramIntegrationsController@index')
