@@ -130,6 +130,13 @@ class SitesChecker extends Command
             }
             $php->updated_at = Carbon::now();
             $php->save();
+
+            // Now we remove pending status from site
+            $pending = Sites::where('id', $site->id)->first();
+            if (intval($pending->pending) === 1){
+                $pending->pending = 0;
+                $pending->save();
+            }
         }
 
         if ($this->settingsController->getTelegramStatus() === 1) {

@@ -34,6 +34,9 @@ class HomeController extends Controller
             return $item['title'];
         }, $pingData));
 
-        return view('home', compact('sites', 'pings', 'titles'));
+        $servers = json_encode($adminSiteRepository->getWebServersForNew(5)->keys());
+        $counts = json_encode(array_values($adminSiteRepository->getWebServersForNew(5)->toArray()));
+
+        return view('home', compact('sites', 'pings', 'titles', 'servers', 'counts'));
     }
 }

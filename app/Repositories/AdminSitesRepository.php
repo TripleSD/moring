@@ -42,7 +42,10 @@ class AdminSitesRepository extends Repository
         if (strlen($fillable['file_url']) >= 5) {
             $fillable['use_file'] = 1;
         }
+        // Add pending status until first check is running
+        $fillable['pending'] = 1;
 
+        // Save information
         $first_entry = (new Sites())->create($fillable);
         $fillable['site_id'] = $first_entry->id;
         $result = (new SitesChecksList())->create($fillable);
@@ -101,14 +104,30 @@ class AdminSitesRepository extends Repository
         return $averaged;
     }
 
-    public function getNewSites(int $count)
+    public function getNewSites(int $count) : array
     {
-        $list = Sites::orderBy('created_at', 'desc')->get(['id', 'title'])->slice(0, $count)->toArray();
+        $list = Sites::where('pending', '<>', 1)->orderBy('created_at', 'desc')->get(['id', 'title'])->slice(0, $count)->toArray();
         $ping = array_map(function ($item) use (&$ping) {
             $sub = SitesPingResponses::orderBy('created_at', 'desc')->where('site_id', $item['id'])->first();
             $item['ping'] = round(floatval($sub->first + $sub->second + $sub->third / 3), 3);
             return $item;
         }, $list);
         return $ping;
+    }
+
+    public function getWebServersForNew(int $count)
+    {
+        $list = Sites::where('pending', '<>', 1)->with('getWebServer')->orderBy('created_at', 'desc')->get('id', 'title')->slice(0, $count);
+        $webCounter = collect();
+        $list->map(function ($item) use ($webCounter){
+            $name = $item->getWebServer->web_server;
+            if (!$webCounter->has($name)){
+               $webCounter->put($name, 1);
+            } else {
+                $add = $webCounter->get($name) + 1;
+                $webCounter->put($name, $add);
+            }
+        });
+        return $webCounter;
     }
 }
