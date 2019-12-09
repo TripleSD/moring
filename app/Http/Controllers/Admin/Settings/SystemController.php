@@ -21,8 +21,7 @@ class SystemController extends Controller
 
     public function index()
     {
-        $bridgeStatistics = $this->bridgeRepository->getBridgeStatistics();
         $os = php_uname();
-        return view('admin.settings.system.index', compact('os','bridgeStatistics'));
+        return view('admin.settings.system.index', compact('os'));
     }
 }
