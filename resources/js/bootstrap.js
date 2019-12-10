@@ -18,6 +18,7 @@ try {
     require('jquery');
     require('./admin/show_ping_chart.js');
     require('./admin/pings_for_new_sites');
+    require('./admin/web_servers_of_new_sites');
 
 } catch (e) {}
 

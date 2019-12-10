@@ -158,6 +158,14 @@
                             </a>
                         </li>
                     </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('documenation.changelog') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>История версий</p>
+                            </a>
+                        </li>
+                    </ul>
                 </li>
 
                 <li class="nav-item">

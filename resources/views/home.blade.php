@@ -107,6 +107,13 @@
                     </canvas>
                 </div>
             </div>
+            <div class="row">
+                <div class="card col-md-6">
+                    <canvas id="newSitesWebServers" data-server="{{$servers}}" data-count="{{$counts}}" width="75%"
+                            height="50%">
+                    </canvas>
+                </div>
+            </div>
         </div>
     </div>
 @endsection
