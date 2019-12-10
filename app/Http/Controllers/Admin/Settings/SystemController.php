@@ -21,7 +21,6 @@ class SystemController extends Controller
 
     public function index()
     {
-        $os = php_uname();
-        return view('admin.settings.system.index', compact('os'));
+        return view('admin.settings.system.index');
     }
 }
