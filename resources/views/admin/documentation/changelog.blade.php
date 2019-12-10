@@ -5,18 +5,19 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Настройки</h1>
+                    <h1 class="m-0 text-dark">Документация</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">Главная</a></li>
-                        <li class="breadcrumb-item">Мониторинг</li>
-                        <li class="breadcrumb-item active">Система</li>
+                        <li class="breadcrumb-item">Помощь</li>
+                        <li class="breadcrumb-item active">Документация</li>
                     </ol>
                 </div>
             </div>
         </div>
     </div>
+
 
     <div class="content">
         <div class="container-fluid">
@@ -24,21 +25,17 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Система</h3>
-                        </div>
-
-                        <div class="card-body">
-                            <dt> Операционная система:</dt>
-                            <dd>{{ php_uname() }}</dd>
-                            <dt> IP адрес сервера:</dt>
-                            <dd>{{ request()->server('SERVER_ADDR') }}</dd>
-                            <dt> Версия PHP интерпретатора:</dt>
-                            <dd>{{ phpversion()  }}</dd>
-                            <dt>Временная зона</dt>
-                            <dd>{{env('TIMEZONE')}}</dd>
+                            <h3 class="card-title">История версий</h3>
+                            <div class="card-tools">
+                            </div>
                         </div>
                     </div>
 
+                    <div class="card">
+                        <div class="card-body">
+                            {!! $text !!}
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

@@ -11,9 +11,16 @@
         |
         <b>Bridge </b>
         @if($bridgeInfo['status'] == 1)
-            <span class="badge badge-dark">
-                b: {{$bridgeInfo['version']}}
-            </span>
+            @if(is_numeric($bridgeInfo['version']))
+                <span class="badge badge-dark">
+                    b: {{$bridgeInfo['version']}}
+                </span>
+            @else
+                <span class="badge badge-danger">
+                    {{$bridgeInfo['version']}}
+                </span>
+            @endif
+
             <span class="badge badge-success">
                 Connected | {{$bridgeInfo['statusCode']}}
             </span>

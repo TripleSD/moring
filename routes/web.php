@@ -87,10 +87,12 @@ Route::group(
         );
 
         Route::group(
-            ['namespace' => 'Admin\Support'],
+            ['prefix' => 'documentation','namespace' => 'Admin\Support'],
             function () {
-                Route::get('/documentation', 'DocumentationController@getIndex')
+                Route::get('/', 'DocumentationController@getIndex')
                     ->name('documenation.index');
+                Route::get('/changelog', 'DocumentationController@getChangeLog')
+                    ->name('documenation.changelog');
             }
         );
 
