@@ -14,7 +14,7 @@ class DocumentationController extends Controller
 
     public function getChangeLog()
     {
-        $file = Storage::disk('private')->get('CHANGELOG.md');
+        $file = file_get_contents('../CHANGELOG.md');
         $markdownParse = new \Parsedown();
         $text = $markdownParse->text($file);
         return view('admin.documentation.changelog', compact('text'));
