@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
+use App\Console\Accumulator;
 use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
 use App\Http\Controllers\Admin\Settings\SettingsController;
@@ -36,22 +37,31 @@ class SitesController extends Controller
     )
     {
         $sites = $adminSiteRepository->index($request);
-
         //TODO вынести в репозиторий два запроса
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
         $bridgePhpVersion = BridgePhpVersions::get();
 
         // Counts
-        $counts['allSitesCount'] = $sitesCountsRepository->getAllSitesCount();
-        $counts['disabledSitesCount'] = $sitesCountsRepository->getDisabledSitesCount();
-        $counts['sslExpirationsDaysSitesCount'] = $sitesCountsRepository->getSslExpirationsDaysSitesCount();
-        $counts['sslErrorsSitesCount'] = $sitesCountsRepository->getSslErrorsSitesCount();
-        $counts['sslSuccessSitesCount'] = $sitesCountsRepository->getSslSuccessSitesCount();
-        $counts['softwareErrorsSitesCount'] = $sitesCountsRepository->getSoftwareErrorsSitesCount();
-        $counts['bridgeErrors'] = $sitesCountsRepository->getBridgeErrors();
-        $counts['softwareVersionErrors'] = $sitesCountsRepository->getSoftwareVersionErrors();
+        $counts['allSites'] = $sitesCountsRepository->getAllSitesCount() ?: []; // Ok
+        $counts['sslExpirationsDaysSites'] = $sitesCountsRepository->getSslExpirationsDaysSitesCount() ?: [];
+        $counts['sslErrorsSites'] = $sitesCountsRepository->getSslErrorsSitesCount() ?: [];  // OK
+        $counts['sslSuccessSites'] = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];  //Ok
+        $counts['softwareErrorsSites'] = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];  // Ok
+        $counts['bridgeErrors'] = $sitesCountsRepository->getBridgeErrors() ?: [];
+        $counts['softwareVersionErrors'] = $sitesCountsRepository->getSoftwareVersionErrors() ?: [];
+        $counts['disabledSites'] = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
 
-
+        $keys = $request->keys();
+        if(!empty($keys)){
+            $key = $keys[0];
+            if(key_exists($key, $counts)){
+                if (! empty( $counts[$key])) {
+                    $sites = $counts[$key];
+                } else {
+                    $sites = [];
+                }
+            }
+        }
         return view(
             'admin.sites.index',
             compact(
@@ -194,6 +204,20 @@ class SitesController extends Controller
         } else {
             flash("Что-то пошло не так...");
         }
+        return back();
+    }
+
+   public function switchOnOff(int $id, int $on,  AdminSitesRepository $adminSitesRepository)
+    {
+        $request = ['id' => $id, 'on' => $on];
+
+        $switch = $adminSitesRepository->switch($request);
+        if ($switch) {
+            flash('Данные обновлены')->success();
+        } else {
+            flash("Что-то пошло не так...");
+        }
+
         return back();
     }
 }
