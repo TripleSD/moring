@@ -129,13 +129,13 @@ class SitesController extends Controller
 
         $pings = $adminSiteRepository->listOfPings($request, 50);
 
-        $averages = json_encode(array_map(function ($ins) {
-            return $ins['average'];
-        }, $pings));
+        $averages = json_encode($pings->map(function ($ins) {
+            return $ins->average;
+        }));
 
-        $time = json_encode(array_map(function ($ins) {
-            return $ins['created_at'];
-        }, $pings));
+        $time = json_encode($pings->map(function ($ins) {
+            return $ins->created_at;
+        }));
 
         $site = $adminSiteRepository->show($request);
         return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion', 'averages', 'time'));
