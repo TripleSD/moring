@@ -12,7 +12,7 @@ class SitesCountsRepository extends Repository
 {
     public function getAllSitesCount()
     {
-        return Sites::get();
+        return Sites::where('enabled', 1)->get();
     }
 
     public function getDisabledSitesCount()
@@ -22,7 +22,9 @@ class SitesCountsRepository extends Repository
 
     public function getSslExpirationsDaysSitesCount()
     {
-        return SitesSslCertificates::where('expiration_days', "<=", 0)->get();
+        return  Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
+            ->leftJoin('sites_ssl_certificates', 'sites_checks_list.id', '=', 'sites_ssl_certificates.site_id')
+            ->where('expiration_days', "<=", 0)->get();
     }
 
     public function getSslErrorsSitesCount()

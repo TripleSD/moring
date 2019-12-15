@@ -84,7 +84,7 @@
                             <div class="row">
                                 <a class="btn btn-app" href="{{route('admin.sites.index', 'allSites')}}">
                                     <span class="badge bg-success">{{ count($counts['allSites']) }}</span>
-                                    <i class="fas fa-globe text-info"></i> Все
+                                    <i class="fas fa-globe text-info"></i> Активные
                                 </a>
                                 <a class="btn btn-app" href="{{route('admin.sites.index', 'softwareVersionErrors')}}">
                                     @if(count($counts['softwareVersionErrors']) > 0)
