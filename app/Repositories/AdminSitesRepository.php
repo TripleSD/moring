@@ -130,4 +130,14 @@ class AdminSitesRepository extends Repository
         });
         return $webCounter;
     }
+    public function switch(array $request)
+    {
+        //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
+        $site = Sites::find($request['id']);
+        $site->enabled = intval($request['on']);
+        $result = $site->update();
+
+        return $result;
+    }
+
 }
