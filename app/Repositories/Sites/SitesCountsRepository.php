@@ -79,18 +79,18 @@ class SitesCountsRepository extends Repository
     {
         $count = 0;
 
-        $sites = Sites::with('getPhpVersion')->get();
+        $presites = Sites::with('getPhpVersion')->get();
         $bridgeBranchs = BridgePhpVersions::pluck('branch')->toArray();
         $bridgeVersions = BridgePhpVersions::get();
 
-        foreach ($sites as $site) {
+        foreach ($presites as $site) {
             if (!empty($site->getPhpVersion)) {
                 if ($site->getPhpVersion->version != 0) {
                     if (in_array($site->getPhpVersion->branch, $bridgeBranchs)) {
                         foreach ($bridgeVersions as $version) {
                             if ($version->branch == $site->getPhpVersion->branch) {
                                 if (version_compare($site->getPhpVersion->version, $version->version) < 0) {
-                                    $count++;
+                                    $sites[] = $site;
                                 }
                             }
                         }
