@@ -61,38 +61,38 @@ class SitesCountsRepository extends Repository
     public function getBridgeErrors()
     {
         $sites = [];
-        $pre_sites = Sites::with('getPhpVersion')->get();
+        $presites = Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
+            ->leftJoin('sites_php_versions', 'sites_checks_list.site_id', '=', 'sites_php_versions.site_id')
+            ->where(['sites.enabled' => 1, 'sites_checks_list.check_php' => 1])
+            ->where('sites_php_versions.branch', '<>', 0)
+            ->get();
         $bridgeVersions = BridgePhpVersions::pluck('branch')->toArray();
-        foreach ($pre_sites as $site) {
-            if (!empty($site->getPhpVersion)) {
-                if ($site->getPhpVersion->branch != 0) {
-                    if (!in_array($site->getPhpVersion->branch, $bridgeVersions)) {
-                        $sites[] = $site;
-                    }
-                }
+        foreach ($presites as $site) {
+            if (!in_array($site->getPhpVersion->branch, $bridgeVersions)) {
+                $sites[] = $site;
             }
+
         }
         return $sites;
     }
 
     public function getSoftwareVersionErrors()
     {
-        $count = 0;
-
-        $presites = Sites::with('getPhpVersion')->get();
+        $sites = [];
+        $presites = Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
+            ->leftJoin('sites_php_versions', 'sites_checks_list.site_id', '=', 'sites_php_versions.site_id')
+            ->where(['sites.enabled' => 1, 'sites_checks_list.check_php' => 1])
+            ->where('sites_php_versions.version', '<>', 0)
+            ->get();
         $bridgeBranchs = BridgePhpVersions::pluck('branch')->toArray();
         $bridgeVersions = BridgePhpVersions::get();
 
         foreach ($presites as $site) {
-            if (!empty($site->getPhpVersion)) {
-                if ($site->getPhpVersion->version != 0) {
-                    if (in_array($site->getPhpVersion->branch, $bridgeBranchs)) {
-                        foreach ($bridgeVersions as $version) {
-                            if ($version->branch == $site->getPhpVersion->branch) {
-                                if (version_compare($site->getPhpVersion->version, $version->version) < 0) {
-                                    $sites[] = $site;
-                                }
-                            }
+            if (in_array($site->getPhpVersion->branch, $bridgeBranchs)) {
+                foreach ($bridgeVersions as $version) {
+                    if ($version->branch == $site->getPhpVersion->branch) {
+                        if (version_compare($site->getPhpVersion->version, $version->version) < 0) {
+                            $sites[] = $site;
                         }
                     }
                 }
