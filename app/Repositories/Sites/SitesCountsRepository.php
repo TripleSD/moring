@@ -70,7 +70,7 @@ class SitesCountsRepository extends Repository
             ->get();
         $bridgeVersions = BridgePhpVersions::pluck('branch')->toArray();
         foreach ($presites as $site) {
-            if (!in_array($site->getPhpVersion->branch, $bridgeVersions)) {
+            if (!in_array($site->branch, $bridgeVersions)) {
                 $sites[] = $site;
             }
 
@@ -90,17 +90,17 @@ class SitesCountsRepository extends Repository
         $bridgeVersions = BridgePhpVersions::get();
 
         foreach ($presites as $site) {
-            if (in_array($site->getPhpVersion->branch, $bridgeBranchs)) {
+            if (in_array($site->branch, $bridgeBranchs)) {
                 foreach ($bridgeVersions as $version) {
-                    if ($version->branch == $site->getPhpVersion->branch) {
-                        if (version_compare($site->getPhpVersion->version, $version->version) < 0) {
+                    if ($version->branch == $site->branch) {
+                        if (version_compare($site->version, $version->version) < 0) {
                             $sites[] = $site;
                         }
                     }
                 }
             }
         }
-      
+
         return $sites;
     }
 }
