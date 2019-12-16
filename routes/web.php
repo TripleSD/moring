@@ -33,7 +33,7 @@ Route::group(
                     'SitesController',
                     [
                         'names' => 'admin.sites',
-                        'parameters' => ['sites' => 'id']
+                        'parameters' => ['sites' => 'id'],
                     ]
                 )
                     ->only($methods)
