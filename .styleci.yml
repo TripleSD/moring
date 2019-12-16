@@ -1,6 +1,5 @@
 preset: laravel
 
-enabled:
-  - not_operator_with_space
 disabled:
   - concat_without_spaces
+  - not_operator_with_space

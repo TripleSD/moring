@@ -60,7 +60,7 @@ class BridgeMoringVersionChecker extends Command
         foreach ($versionsBridgeArray as $created_at => $build) {
             try {
                 $localVersionsArray = MoringVersions::pluck('build')->toArray();
-                if (! in_array($build, $localVersionsArray)) {
+                if (!in_array($build, $localVersionsArray)) {
                     $versions = new MoringVersions();
                     $versions->build = $build;
                     $versions->created_at = $created_at;
