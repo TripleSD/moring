@@ -72,7 +72,7 @@ class SitesSSLChecker extends Command
                 $ssl = SitesSslCertificates::where('site_id', $site_id)->first();
             }
 
-            if (!empty($ssl)) {
+            if (! empty($ssl)) {
                 $ssl->issuer = $issuer;
                 $ssl->valid_status = $validStatus;
                 $ssl->expiration_date = $expirationDate;
