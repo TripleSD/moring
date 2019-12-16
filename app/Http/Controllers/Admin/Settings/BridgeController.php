@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Settings;
 
 use App\Http\Controllers\Controller;
+use App\Models\BridgePhpVersions;
+use App\Models\MoringVersions;
 use App\Repositories\BridgeRepository;
 use Artisan;
 
@@ -18,7 +20,10 @@ class BridgeController extends Controller
     public function getIndex()
     {
         $bridgeStatistics = $this->bridgeRepostitory->getBridgeStatistics();
-        return view('admin.settings.bridge.index', compact('bridgeStatistics'));
+        $phpLinesCount = BridgePhpVersions::count();
+        $moringLinesCount = MoringVersions::count();
+        return view('admin.settings.bridge.index', compact('bridgeStatistics',
+        'phpLinesCount','moringLinesCount'));
     }
 
     public function updateInfo()
