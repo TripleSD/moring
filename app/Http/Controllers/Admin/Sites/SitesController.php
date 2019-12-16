@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
-use App\Console\Accumulator;
 use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
-use App\Http\Controllers\Admin\Settings\SettingsController;
-use App\Http\Controllers\Connectors\TelegramConnector;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sites\ShowSitesRequest;
 use App\Http\Requests\Sites\StoreSiteRequest;
@@ -18,7 +15,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use function foo\func;
 
 class SitesController extends Controller
 {
@@ -34,8 +30,7 @@ class SitesController extends Controller
         AdminSitesRepository $adminSiteRepository,
         SitesCountsRepository $sitesCountsRepository,
         Request $request
-    )
-    {
+    ) {
         $sites = $adminSiteRepository->index($request);
         //TODO вынести в репозиторий два запроса
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
@@ -52,10 +47,10 @@ class SitesController extends Controller
         $counts['disabledSites'] = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
 
         $keys = $request->keys();
-        if(!empty($keys)){
+        if (!empty($keys)) {
             $key = $keys[0];
-            if(key_exists($key, $counts)){
-                if (! empty( $counts[$key])) {
+            if (key_exists($key, $counts)) {
+                if (!empty($counts[$key])) {
                     $sites = $counts[$key];
                 } else {
                     $sites = [];
@@ -129,13 +124,21 @@ class SitesController extends Controller
 
         $pings = $adminSiteRepository->listOfPings($request, 50);
 
-        $averages = json_encode($pings->map(function ($ins) {
-            return $ins->average;
-        }));
+        $averages = json_encode(
+            $pings->map(
+                function ($ins) {
+                    return $ins->average;
+                }
+            )
+        );
 
-        $time = json_encode($pings->map(function ($ins) {
-            return $ins->created_at;
-        }));
+        $time = json_encode(
+            $pings->map(
+                function ($ins) {
+                    return $ins->created_at;
+                }
+            )
+        );
 
         $site = $adminSiteRepository->show($request);
         return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion', 'averages', 'time'));
@@ -202,12 +205,12 @@ class SitesController extends Controller
         if ($check) {
             flash('Данные обновлены')->success();
         } else {
-            flash("Что-то пошло не так...");
+            flash('Что-то пошло не так...');
         }
         return back();
     }
 
-   public function switchOnOff(int $id, int $on,  AdminSitesRepository $adminSitesRepository)
+    public function switchOnOff(int $id, int $on, AdminSitesRepository $adminSitesRepository)
     {
         $request = ['id' => $id, 'on' => $on];
 
@@ -215,7 +218,7 @@ class SitesController extends Controller
         if ($switch) {
             flash('Данные обновлены')->success();
         } else {
-            flash("Что-то пошло не так...");
+            flash('Что-то пошло не так...');
         }
 
         return back();

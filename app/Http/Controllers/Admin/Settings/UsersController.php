@@ -18,7 +18,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = Users::get();
-        return view('admin.settings.users.index',compact('users'));
+        return view('admin.settings.users.index', compact('users'));
     }
 
     public function create()
@@ -28,16 +28,20 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$request->input('email'),
-            'password' => 'required',
-        ],[
-            'name.required' => 'Необходимо ввести имя пользователя',
-            'email.required' => 'Необходимо ввести адрес электронной почты',
-            'email.unique' => 'Указанный адрес электронной почты уже зарегистрирован',
-            'password.required' => 'Необходимо ввести пароль',
-        ]);
+        $this->validate(
+            $request,
+            [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,' . $request->input('email'),
+                'password' => 'required',
+            ],
+            [
+                'name.required' => 'Необходимо ввести имя пользователя',
+                'email.required' => 'Необходимо ввести адрес электронной почты',
+                'email.unique' => 'Указанный адрес электронной почты уже зарегистрирован',
+                'password.required' => 'Необходимо ввести пароль',
+            ]
+        );
 
         $user = new Users();
         $user->name = $request->input('name');
@@ -57,14 +61,18 @@ class UsersController extends Controller
 
     public function update(Request $request)
     {
-        $this->validate($request, [
-            'name' => 'required',
-            'email' => 'required|email|unique:users,email,'.$request->user,
-        ],[
-            'name.required' => 'Необходимо ввести имя пользователя',
-            'email.required' => 'Необходимо ввести адрес электронной почты',
-            'email.unique' => 'Указанный адрес электронной почты уже зарегистрирован',
-        ]);
+        $this->validate(
+            $request,
+            [
+                'name' => 'required',
+                'email' => 'required|email|unique:users,email,' . $request->user,
+            ],
+            [
+                'name.required' => 'Необходимо ввести имя пользователя',
+                'email.required' => 'Необходимо ввести адрес электронной почты',
+                'email.unique' => 'Указанный адрес электронной почты уже зарегистрирован',
+            ]
+        );
 
         $user = Users::find($request->user);
         $user->name = $request->input('name');
