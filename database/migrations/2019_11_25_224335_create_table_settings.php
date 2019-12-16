@@ -13,17 +13,20 @@ class CreateTableSettings extends Migration
      */
     public function up()
     {
-        Schema::create('settings', function (Blueprint $table) {
-            $table->string('parameter')->comment('Parameter');
-            $table->string('value')->nullable()->comment('Parameter value');
-            $table->timestamps();
-        });
+        Schema::create(
+            'settings',
+            function (Blueprint $table) {
+                $table->string('parameter')->comment('Parameter');
+                $table->string('value')->nullable()->comment('Parameter value');
+                $table->timestamps();
+            }
+        );
 
         DB::table('settings')->insert(
-            array(
+            [
                 'parameter' => 'identificator',
                 'value' => null,
-            )
+            ]
         );
     }
 

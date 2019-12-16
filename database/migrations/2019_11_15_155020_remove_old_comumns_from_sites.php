@@ -13,10 +13,13 @@ class RemoveOldComumnsFromSites extends Migration
      */
     public function up()
     {
-        Schema::table('sites', function (Blueprint $table) {
-            $table->removeColumn('http_code');
-            $table->removeColumn('control_file');
-        });
+        Schema::table(
+            'sites',
+            function (Blueprint $table) {
+                $table->removeColumn('http_code');
+                $table->removeColumn('control_file');
+            }
+        );
     }
 
     /**
@@ -26,8 +29,11 @@ class RemoveOldComumnsFromSites extends Migration
      */
     public function down()
     {
-        Schema::table('sites', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'sites',
+            function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

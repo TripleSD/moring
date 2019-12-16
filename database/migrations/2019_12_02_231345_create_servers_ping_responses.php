@@ -13,16 +13,18 @@ class CreateServersPingResponses extends Migration
      */
     public function up()
     {
-        Schema::create('servers_ping_responses', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->UnsignedbigInteger('server_id')->comment('Server ID');
-            $table->foreign('server_id')->references('id')->on('servers');
-            $table->float('first')->default(null)->comment('First response');
-            $table->float('second')->default(null)->comment('Second response');
-            $table->float('third')->default(null)->comment('Third response');
-            $table->timestamps();
-
-        });
+        Schema::create(
+            'servers_ping_responses',
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->UnsignedbigInteger('server_id')->comment('Server ID');
+                $table->foreign('server_id')->references('id')->on('servers');
+                $table->float('first')->default(null)->comment('First response');
+                $table->float('second')->default(null)->comment('Second response');
+                $table->float('third')->default(null)->comment('Third response');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

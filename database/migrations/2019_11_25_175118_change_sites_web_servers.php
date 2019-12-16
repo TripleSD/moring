@@ -13,9 +13,12 @@ class ChangeSitesWebServers extends Migration
      */
     public function up()
     {
-        Schema::table('sites_web_servers', function (Blueprint $table) {
-            $table->bigIncrements('id')->change();
-        });
+        Schema::table(
+            'sites_web_servers',
+            function (Blueprint $table) {
+                $table->bigIncrements('id')->change();
+            }
+        );
     }
 
     /**

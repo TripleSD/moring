@@ -13,9 +13,14 @@ class AddColumnToSitesPingResponses extends Migration
      */
     public function up()
     {
-        Schema::table('sites_ping_responses', function (Blueprint $table) {
-            $table->addColumn('float', 'average')->default(null)->after('third')->comment('Average or three previous pings');
-        });
+        Schema::table(
+            'sites_ping_responses',
+            function (Blueprint $table) {
+                $table->addColumn('float', 'average')->default(null)->after('third')->comment(
+                    'Average or three previous pings'
+                );
+            }
+        );
     }
 
     /**
@@ -25,8 +30,11 @@ class AddColumnToSitesPingResponses extends Migration
      */
     public function down()
     {
-        Schema::table('sites_ping_responses', function (Blueprint $table) {
-            $table->dropColumn('average');
-        });
+        Schema::table(
+            'sites_ping_responses',
+            function (Blueprint $table) {
+                $table->dropColumn('average');
+            }
+        );
     }
 }

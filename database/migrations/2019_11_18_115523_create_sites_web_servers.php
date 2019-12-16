@@ -13,16 +13,19 @@ class CreateSitesWebServers extends Migration
      */
     public function up()
     {
-        Schema::create('sites_web_servers', function (Blueprint $table) {
-            $table->Increments('id');
-            $table->unsignedBigInteger('site_id')
-                ->comment('Site ID');
-            $table->string('web_server')->nullable()
-                ->comment('Returned web server type');
-            $table->timestamps();
-            $table->foreign('site_id')
-                ->references('id')->on('sites');
-        });
+        Schema::create(
+            'sites_web_servers',
+            function (Blueprint $table) {
+                $table->Increments('id');
+                $table->unsignedBigInteger('site_id')
+                    ->comment('Site ID');
+                $table->string('web_server')->nullable()
+                    ->comment('Returned web server type');
+                $table->timestamps();
+                $table->foreign('site_id')
+                    ->references('id')->on('sites');
+            }
+        );
     }
 
     /**

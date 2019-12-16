@@ -13,9 +13,12 @@ class RenameColumnTokenInServersTable extends Migration
      */
     public function up()
     {
-        Schema::table('servers', function (Blueprint $table) {
-            $table->renameColumn('token','api_token');
-        });
+        Schema::table(
+            'servers',
+            function (Blueprint $table) {
+                $table->renameColumn('token', 'api_token');
+            }
+        );
     }
 
     /**

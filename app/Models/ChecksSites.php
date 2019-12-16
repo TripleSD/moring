@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * App\Models\ChecksSites
+ * App\Models\ChecksSites.
  *
  * @property int $id
  * @property string $url Контролируемый ULR
@@ -28,5 +28,4 @@ use Illuminate\Database\Eloquent\Model;
  */
 class ChecksSites extends Model
 {
-    //
 }

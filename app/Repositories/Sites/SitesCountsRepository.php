@@ -4,8 +4,6 @@ namespace App\Repositories\Sites;
 
 use App\Models\BridgePhpVersions;
 use App\Models\Sites;
-use App\Models\SitesChecksList;
-use App\Models\SitesSslCertificates;
 use App\Repositories\Repository;
 
 class SitesCountsRepository extends Repository
@@ -24,7 +22,7 @@ class SitesCountsRepository extends Repository
     {
         return Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
             ->leftJoin('sites_ssl_certificates', 'sites_checks_list.id', '=', 'sites_ssl_certificates.site_id')
-            ->where('expiration_days', "<=", 0)->get();
+            ->where('expiration_days', '<=', 0)->get();
     }
 
     public function getSslErrorsSitesCount()
@@ -36,7 +34,7 @@ class SitesCountsRepository extends Repository
                     'sites.https' => 1,
                     'sites.enabled' => 1,
                     'sites_checks_list.check_ssl' => 1,
-                    'sites_ssl_certificates.issuer' => null
+                    'sites_ssl_certificates.issuer' => null,
                 ]
             )
             ->orWhere(['sites_ssl_certificates.valid_status' => 0])
@@ -54,7 +52,7 @@ class SitesCountsRepository extends Repository
                     'sites.https' => 1,
                     'sites.enabled' => 1,
                     'sites_checks_list.check_ssl' => 1,
-                    'sites_ssl_certificates.valid_status' => 1
+                    'sites_ssl_certificates.valid_status' => 1,
                 ]
             )
             ->get();
@@ -67,7 +65,7 @@ class SitesCountsRepository extends Repository
         $query = Sites::where('enabled', 1)->with('checkPhpEnabled')->get();
         $sites = $query->filter(
             function ($site) {
-                if (!empty($site->checkPhpEnabled->getPhpErrors)) {
+                if (! empty($site->checkPhpEnabled->getPhpErrors)) {
                     return $site;
                 }
             }
@@ -86,10 +84,11 @@ class SitesCountsRepository extends Repository
             ->get();
         $bridgeVersions = BridgePhpVersions::pluck('branch')->toArray();
         foreach ($presites as $site) {
-            if (!in_array($site->branch, $bridgeVersions)) {
+            if (! in_array($site->branch, $bridgeVersions)) {
                 $sites[] = $site;
             }
         }
+
         return $sites;
     }
 

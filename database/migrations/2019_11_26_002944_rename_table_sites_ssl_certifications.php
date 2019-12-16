@@ -13,9 +13,12 @@ class RenameTableSitesSslCertifications extends Migration
      */
     public function up()
     {
-        Schema::table('sites_ssl_certifications', function (Blueprint $table) {
-            $table->rename('sites_ssl_certificates');
-        });
+        Schema::table(
+            'sites_ssl_certifications',
+            function (Blueprint $table) {
+                $table->rename('sites_ssl_certificates');
+            }
+        );
     }
 
     /**

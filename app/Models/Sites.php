@@ -12,7 +12,7 @@ class Sites extends Model
 
     use SoftDeletes;
 
-    public function checksList() : HasOne
+    public function checksList(): HasOne
     {
         return $this->hasOne(SitesChecksList::class, 'site_id');
     }

@@ -13,9 +13,12 @@ class EditPhpVersionTable extends Migration
      */
     public function up()
     {
-        Schema::table('sites_php_versions', function (Blueprint $table) {
-            $table->bigIncrements('id')->change();
-        });
+        Schema::table(
+            'sites_php_versions',
+            function (Blueprint $table) {
+                $table->bigIncrements('id')->change();
+            }
+        );
     }
 
     /**

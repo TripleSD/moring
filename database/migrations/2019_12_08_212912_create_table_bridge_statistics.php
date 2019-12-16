@@ -13,10 +13,13 @@ class CreateTableBridgeStatistics extends Migration
      */
     public function up()
     {
-        Schema::create('bridge_statistics', function (Blueprint $table) {
-            $table->string('parameter')->comment('Bridge parameter');
-            $table->timestamps();
-        });
+        Schema::create(
+            'bridge_statistics',
+            function (Blueprint $table) {
+                $table->string('parameter')->comment('Bridge parameter');
+                $table->timestamps();
+            }
+        );
     }
 
     /**
