@@ -2,7 +2,7 @@ preset: laravel
 
 disabled:
   - concat_without_spaces
-
-not-name:
-  - "public/index.php"
-  - "server.php"
+finder:
+  not-name:
+    - "public/index.php"
+    - "server.php"
