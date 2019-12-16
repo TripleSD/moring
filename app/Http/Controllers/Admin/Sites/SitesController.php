@@ -49,7 +49,7 @@ class SitesController extends Controller
         $keys = $request->keys();
         if (! empty($keys)) {
             $key = $keys[0];
-            if (key_exists($key, $counts)) {
+            if (array_key_exists($key, $counts)) {
                 if (! empty($counts[$key])) {
                     $sites = $counts[$key];
                 } else {
