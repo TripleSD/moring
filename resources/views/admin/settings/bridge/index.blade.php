@@ -38,6 +38,10 @@
                                 </span>
                             @endif
 
+                            <span class="badge badge-info">
+                                Записей в базе: {{ $phpLinesCount }}
+                            </span>
+
                             <dt>Последнее обновление Moring версий:</dt>
                             @if($bridgeStatistics['bridge_moring_versions'] != null)
                                 {{ $bridgeStatistics['bridge_moring_versions'] }}
@@ -48,8 +52,13 @@
                                 </span>
                             @endif
 
+                            <span class="badge badge-info">
+                                Записей в базе: {{ $moringLinesCount }}
+                            </span>
+
                             <div class="mt-3">
-                                <a class="btn btn-success btn-sm" href="{{ route('settings.bridge.update') }}">Обновить данные</a>
+                                <a class="btn btn-success btn-sm" href="{{ route('settings.bridge.update') }}">Обновить
+                                    данные</a>
                             </div>
                         </div>
                     </div>
