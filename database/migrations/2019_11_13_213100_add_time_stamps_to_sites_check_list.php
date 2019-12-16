@@ -13,9 +13,12 @@ class AddTimeStampsToSitesCheckList extends Migration
      */
     public function up()
     {
-        Schema::table('sites_checks_list', function (Blueprint $table) {
-            $table->timestamps();
-        });
+        Schema::table(
+            'sites_checks_list',
+            function (Blueprint $table) {
+                $table->timestamps();
+            }
+        );
     }
 
     /**
@@ -25,8 +28,11 @@ class AddTimeStampsToSitesCheckList extends Migration
      */
     public function down()
     {
-        Schema::table('sites_checks_list', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'sites_checks_list',
+            function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

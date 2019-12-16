@@ -13,9 +13,12 @@ class RenameColumnInSitesChecksList extends Migration
      */
     public function up()
     {
-        Schema::table('sites_checks_list', function (Blueprint $table) {
-           $table->renameColumn('use_flie', 'use_file');
-        });
+        Schema::table(
+            'sites_checks_list',
+            function (Blueprint $table) {
+                $table->renameColumn('use_flie', 'use_file');
+            }
+        );
     }
 
     /**
@@ -25,8 +28,11 @@ class RenameColumnInSitesChecksList extends Migration
      */
     public function down()
     {
-        Schema::table('sites_checks_list', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'sites_checks_list',
+            function (Blueprint $table) {
+                //
+            }
+        );
     }
 }
