@@ -87,7 +87,7 @@ class SitesSSLChecker extends Command
                     'expiration_date' => $expirationDate,
                     'expiration_days' => $expirationDays,
                     'algorithm' => $algorithm,
-                    'from_date' => $fromDate
+                    'from_date' => $fromDate,
                 ];
                 $ssl = new SitesSslCertificates($fillable);
             }

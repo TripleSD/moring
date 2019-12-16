@@ -11,13 +11,17 @@ class MoringController extends Controller
     public function getInfo()
     {
         try {
-            $latestBuild = MoringVersions::orderBy('build','desc')->first();
+            $latestBuild = MoringVersions::orderBy('build', 'desc')->first();
 
-            return ['latestBuild' => $latestBuild->build,
-                'latestBuildDate' => $latestBuild->created_at];
+            return [
+                'latestBuild' => $latestBuild->build,
+                'latestBuildDate' => $latestBuild->created_at,
+            ];
         } catch (\Exception $e) {
-            return ['latestBuild' => Config::get('moring.build'),
-                'latestBuildDate' => ''];
+            return [
+                'latestBuild' => Config::get('moring.build'),
+                'latestBuildDate' => '',
+            ];
         }
     }
 }
