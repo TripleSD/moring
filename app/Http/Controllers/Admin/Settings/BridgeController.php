@@ -22,8 +22,14 @@ class BridgeController extends Controller
         $bridgeStatistics = $this->bridgeRepostitory->getBridgeStatistics();
         $phpLinesCount = BridgePhpVersions::count();
         $moringLinesCount = MoringVersions::count();
-        return view('admin.settings.bridge.index', compact('bridgeStatistics',
-        'phpLinesCount','moringLinesCount'));
+        return view(
+            'admin.settings.bridge.index',
+            compact(
+                'bridgeStatistics',
+                'phpLinesCount',
+                'moringLinesCount'
+            )
+        );
     }
 
     public function updateInfo()
