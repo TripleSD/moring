@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sites extends Model
@@ -11,32 +12,43 @@ class Sites extends Model
 
     use SoftDeletes;
 
-    public function checksList(){
+    public function checksList() : HasOne
+    {
         return $this->hasOne(SitesChecksList::class, 'site_id');
     }
 
-    public function getPhpVersion()
+    public function getPhpVersion(): HasOne
     {
-        return $this->hasOne(SitesPhpVersions::class,'site_id');
+        return $this->hasOne(SitesPhpVersions::class, 'site_id');
     }
 
-    public function getHttpCode()
+    public function checkPhpEnabled(): HasOne
     {
-        return $this->hasOne(SitesHttpCodes::class,'site_id');
+        return $this->hasOne(SitesChecksList::class, 'site_id', 'id')->where('check_php', 1)->with('getPhpErrors');
     }
 
-    public function getWebServer()
+    public function getHttpCode(): HasOne
     {
-        return $this->hasOne(SitesWebServers::class,'site_id');
+        return $this->hasOne(SitesHttpCodes::class, 'site_id');
     }
 
-    public function getSslCertification()
+    public function getWebServer(): HasOne
     {
-        return $this->hasOne(SitesSslCertificates::class,'site_id');
+        return $this->hasOne(SitesWebServers::class, 'site_id');
     }
 
-    public function getSitesPings()
+    public function getSslCertification(): HasOne
+    {
+        return $this->hasOne(SitesChecksList::class, 'site_id')->where('check_ssl', 1)->with('getSSL');
+    }
+
+    public function getSitesPings(): HasOne
     {
         return $this->hasOne(SitesPingResponses::class, 'site_id');
+    }
+
+    public function getNewSitePing()
+    {
+        return $this->hasOne(SitesPingResponses::class, 'site_id')->latest('created_at');
     }
 }

@@ -82,59 +82,59 @@
 
                         <div class="card-header">
                             <div class="row">
-                                <a class="btn btn-app">
-                                    <span class="badge bg-success">{{ $counts['allSitesCount'] }}</span>
-                                    <i class="fas fa-globe text-info"></i> Все
+                                <a class="btn btn-app" href="{{route('admin.sites.index', 'allSites')}}">
+                                    <span class="badge bg-success">{{ count($counts['allSites']) }}</span>
+                                    <i class="fas fa-globe text-info"></i> Активные
                                 </a>
-                                <a class="btn btn-app">
-                                    @if($counts['softwareVersionErrors'] > 0)
-                                        <span class="badge bg-danger">{{ $counts['softwareVersionErrors'] }}</span>
+                                <a class="btn btn-app" href="{{route('admin.sites.index', 'softwareVersionErrors')}}">
+                                    @if(count($counts['softwareVersionErrors']) > 0)
+                                        <span class="badge bg-danger">{{ count($counts['softwareVersionErrors'])  }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ $counts['softwareVersionErrors'] }}</span>
+                                        <span class="badge bg-success">{{ count($counts['softwareVersionErrors'])  }}</span>
                                     @endif
                                     <i class="fas fa-bug text-danger"></i> Версии ПО
                                 </a>
-                                <a class="btn btn-app">
-                                    @if($counts['bridgeErrors'] > 0)
-                                        <span class="badge bg-danger">{{ $counts['bridgeErrors'] }}</span>
+                                <a class="btn btn-app" href="{{route('admin.sites.index', 'bridgeErrors')}}">
+                                    @if(count($counts['bridgeErrors']) > 0)
+                                        <span class="badge bg-danger">{{ count($counts['bridgeErrors']) }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ $counts['bridgeErrors'] }}</span>
+                                        <span class="badge bg-success">{{ count($counts['bridgeErrors']) }}</span>
                                     @endif
                                     <i class="fa fa-exclamation-triangle text-danger"></i> API
                                 </a>
-                                <a class="btn btn-app">
-                                    @if($counts['softwareErrorsSitesCount'] > 0)
-                                        <span class="badge bg-danger">{{ $counts['softwareErrorsSitesCount'] }}</span>
+                                <a class="btn btn-app" href="{{route('admin.sites.index', 'softwareErrorsSites')}}">
+                                    @if(count($counts['softwareErrorsSites']) > 0)
+                                        <span class="badge bg-danger">{{ count($counts['softwareErrorsSites']) }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ $counts['softwareErrorsSitesCount'] }}</span>
+                                        <span class="badge bg-success">{{ count($counts['softwareErrorsSites']) }}</span>
                                     @endif
                                     <i class="fa fa-exclamation-triangle text-warning"></i> Ошибки
                                 </a>
                                 <a class="btn btn-app">
-                                    <span class="badge bg-success">{{ $counts['sslSuccessSitesCount'] }}</span>
+                                    <span class="badge bg-success">{{ count($counts['sslSuccessSites']) }}</span>
                                     <i class="fa fa-lock fa-1 text-success"></i> SSL проверен
                                 </a>
-                                <a class="btn btn-app">
-                                    @if($counts['sslExpirationsDaysSitesCount'] > 0)
-                                        <span class="badge bg-danger">{{ $counts['sslExpirationsDaysSitesCount'] }}</span>
+                                <a class="btn btn-app" href="{{route('admin.sites.index', 'sslExpirationsDaysSites')}}">
+                                    @if(count($counts['sslExpirationsDaysSites']) > 0)
+                                        <span class="badge bg-danger">{{ count($counts['sslExpirationsDaysSites']) }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ $counts['sslExpirationsDaysSitesCount'] }}</span>
+                                        <span class="badge bg-success">{{ count($counts['sslExpirationsDaysSites']) }}</span>
                                     @endif
-                                    <i class="fa fa-lock fa-1 text-warning"></i> Ошибки SSL
+                                    <i class="fa fa-lock fa-1 text-warning"></i> Истек серт.
                                 </a>
-                                <a class="btn btn-app">
-                                    @if($counts['sslErrorsSitesCount'] > 0)
-                                        <span class="badge bg-danger">{{ $counts['sslErrorsSitesCount'] }}</span>
+                                <a class="btn btn-app" href="{{route('admin.sites.index', 'sslErrorsSites')}}">
+                                    @if(count($counts['sslErrorsSites']) > 0)
+                                        <span class="badge bg-danger">{{ count($counts['sslErrorsSites']) }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ $counts['sslErrorsSitesCount'] }}</span>
+                                        <span class="badge bg-success">{{ count($counts['sslErrorsSites']) }}</span>
                                     @endif
                                     <i class="fa fa-lock fa-1 text-gray"></i> Ошибки SSL
                                 </a>
-                                <a class="btn btn-app">
-                                    @if($counts['disabledSitesCount'] > 0)
-                                        <span class="badge bg-danger">{{ $counts['disabledSitesCount'] }}</span>
+                                <a class="btn btn-app" href="{{route('admin.sites.index', 'disabledSites')}}">
+                                    @if(count($counts['disabledSites']) > 0)
+                                        <span class="badge bg-danger">{{ count($counts['disabledSites']) }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ $counts['disabledSitesCount'] }}</span>
+                                        <span class="badge bg-success">{{ count($counts['disabledSites']) }}</span>
                                     @endif
                                     <i class="far fa-hourglass text-gray"></i> Отключено
                                 </a>
@@ -461,11 +461,12 @@
                                                 </div>
                                                 <div class="btn-group">
                                                     @if($site->enabled === 1)
-                                                        <a href="#" class="btn btn-xs btn-warning"><i
-                                                                    class="fa fa-pause"></i></a>
+                                                        <a href="{{route('admin.site.switch', [$site->id, 0])}}" class="btn btn-xs btn-warning">
+                                                            <i class="fa fa-pause"></i></a>
                                                     @else
-                                                        <a href="" class="btn btn-xs btn-success"><i
-                                                                    class="fa fa-play"></i></a>
+                                                        <a href="{{route('admin.site.switch', [$site->id, 1])}}" class="btn btn-xs btn-success">
+                                                            <i class="fa fa-play"></i>
+                                                        </a>
                                                     @endif
                                                 </div>
                                             </td>

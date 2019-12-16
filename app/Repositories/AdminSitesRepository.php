@@ -85,35 +85,22 @@ class AdminSitesRepository extends Repository
     {
         if (is_null($length)) {
             $list = Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification', 'getSitesPings')->orderBy('created_at', $sort)->get();
+                'getSslCertification', 'getNewSitePing')->orderBy('created_at', $sort)->get();
         } else {
             $list = Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification', 'getSitesPings')->orderBy('created_at', $sort)->get()->slice(0, $length);
+                'getSslCertification', 'getNewSitePing')->orderBy('created_at', $sort)->get()->slice(0, $length);
         }
+
         return $list;
     }
 
     public function listOfPings($request, int $count)
     {
-        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get()->slice(0, $count)->toArray();
-        $averaged = array_map(function ($sub) use (&$list) {
-            $sub['average'] = round(floatval($sub['first'] + $sub['second'] + $sub['third'] / 3), 3);
-            return $sub;
-        }, $list);
+        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get('average', 'created_at')->slice(0, $count);
 
-        return $averaged;
+        return $list;
     }
 
-    public function getNewSites(int $count) : array
-    {
-        $list = Sites::where('pending', '<>', 1)->orderBy('created_at', 'desc')->get(['id', 'title'])->slice(0, $count)->toArray();
-        $ping = array_map(function ($item) use (&$ping) {
-            $sub = SitesPingResponses::orderBy('created_at', 'desc')->where('site_id', $item['id'])->first();
-            $item['ping'] = round(floatval($sub->first + $sub->second + $sub->third / 3), 3);
-            return $item;
-        }, $list);
-        return $ping;
-    }
 
     public function getWebServersForNew(int $count)
     {
@@ -130,4 +117,14 @@ class AdminSitesRepository extends Repository
         });
         return $webCounter;
     }
+    public function switch(array $request)
+    {
+        //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
+        $site = Sites::find($request['id']);
+        $site->enabled = intval($request['on']);
+        $result = $site->update();
+
+        return $result;
+    }
+
 }
