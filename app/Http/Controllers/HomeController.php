@@ -24,14 +24,18 @@ class HomeController extends Controller
     public function index(AdminSitesRepository $adminSiteRepository)
     {
         $sites = $adminSiteRepository->sortedList(5, 'desc');
-        $pingData =  $sites->map(function($item){
-            return $item->getNewSitePing->average;
-        });
+        $pingData = $sites->map(
+            function ($item) {
+                return $item->getNewSitePing->average;
+            }
+        );
         $pings = json_encode($pingData);
 
-        $titlesData = $sites->map(function($item) use (&$titles){
-            return $item->title;
-        });
+        $titlesData = $sites->map(
+            function ($item) use (&$titles) {
+                return $item->title;
+            }
+        );
         $titles = json_encode($titlesData);
 
         $servers = json_encode($adminSiteRepository->getWebServersForNew(5)->keys());

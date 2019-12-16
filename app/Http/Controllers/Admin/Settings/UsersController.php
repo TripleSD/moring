@@ -9,7 +9,6 @@ use Illuminate\Http\Request;
 
 class UsersController extends Controller
 {
-
     public function __construct()
     {
         $this->middleware('auth');
@@ -18,6 +17,7 @@ class UsersController extends Controller
     public function index()
     {
         $users = Users::get();
+
         return view('admin.settings.users.index', compact('users'));
     }
 
@@ -50,12 +50,14 @@ class UsersController extends Controller
         $user->save();
 
         flash('Запись добавлена')->success();
+
         return redirect(route('settings.users.index'));
     }
 
     public function edit($user_id)
     {
         $user = Users::find($user_id);
+
         return view('admin.settings.users.edit', compact('user'));
     }
 
@@ -81,12 +83,14 @@ class UsersController extends Controller
         $user->save();
 
         flash('Запись обновлена')->success();
+
         return redirect(route('settings.users.show', $user->id));
     }
 
     public function show(Request $request)
     {
         $user = Users::find($request->user);
+
         return view('admin.settings.users.show', compact('user'));
     }
 }

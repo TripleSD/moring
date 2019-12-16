@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\CheckSitesRepository;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 class ChecksSitesController extends Controller
 {
@@ -17,13 +19,13 @@ class ChecksSitesController extends Controller
     }
 
     /**
-     * @param CheckSitesRepository $repository
-     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View*
+     * @param CheckSitesRepository $checkSitesRepository
+     * @return Factory|View
      */
     public function getIndex(CheckSitesRepository $checkSitesRepository)
     {
         $sites = $checkSitesRepository->getList();
-        return view('sites',compact('sites'));
+
+        return view('sites', compact('sites'));
     }
 }
-    

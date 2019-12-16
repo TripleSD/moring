@@ -22,6 +22,7 @@ class Ping
                     if (! empty($matches) && count($filter) < 3) {
                         $filter[] = floatval($matches[0]);
                     }
+
                     return $filter;
                 },
                 $filter
@@ -45,6 +46,7 @@ class Ping
             $pre_final
         );
         $final['average'] = round(array_sum($final) / count($final), 3);
+
         return $final;
     }
 }

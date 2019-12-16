@@ -47,16 +47,17 @@ class SitesController extends Controller
         $counts['disabledSites'] = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
 
         $keys = $request->keys();
-        if (!empty($keys)) {
+        if (! empty($keys)) {
             $key = $keys[0];
             if (key_exists($key, $counts)) {
-                if (!empty($counts[$key])) {
+                if (! empty($counts[$key])) {
                     $sites = $counts[$key];
                 } else {
                     $sites = [];
                 }
             }
         }
+
         return view(
             'admin.sites.index',
             compact(
@@ -100,12 +101,14 @@ class SitesController extends Controller
                 $ping->handle(intval($result->id));
 
                 flash('Запись добавлена')->success();
+
                 return redirect()->route('admin.sites.index');
             } else {
                 return back()->withInput();
             }
         } else {
             flash('Запись не добавлена. Проверьте существование домена.')->warning();
+
             return back()->withInput();
         }
     }
@@ -167,12 +170,13 @@ class SitesController extends Controller
         $id = $request->id;
         $fillable = $request->validated();
         $result = $adminSitesRepository->update($fillable, $id);
-        if (!$result) {
+        if (! $result) {
             return back()->withInput($fillable);
         } else {
             $check = new SitesChecker();
             $check->handle($id);
             flash('Запись обновлена')->success();
+
             return redirect()->route('admin.sites.index');
         }
     }
@@ -186,7 +190,7 @@ class SitesController extends Controller
     public function destroy($id, AdminSitesRepository $adminSitesRepository)
     {
         $result = $adminSitesRepository->destroy($id);
-        if (!$result) {
+        if (! $result) {
             return back()
                 ->withInput();
         } else {
