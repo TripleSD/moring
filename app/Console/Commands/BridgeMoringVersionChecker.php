@@ -45,11 +45,12 @@ class BridgeMoringVersionChecker extends Command
     {
         $identificator = $this->settingsController->getIdentificator();
 
-        # Getting availible Moring versions from bridge
+        // Getting availible Moring versions from bridge
         $httpClient = new Client();
+        // Url getting from /config/moring.php
         $url = Config::get('moring.bridgeUrl') . Config::get(
                 'moring.bridgeCurrentMoringVersionUrl'
-            ); # Url getting from /config/moring.php
+            );
         $response = $httpClient->request(
             'GET',
             $url,

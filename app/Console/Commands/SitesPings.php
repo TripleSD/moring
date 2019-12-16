@@ -3,9 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Console\Ping;
+use App\Models\Sites;
 use App\Models\SitesPingResponses;
 use Illuminate\Console\Command;
-use App\Models\Sites;
 
 class SitesPings extends Command
 {

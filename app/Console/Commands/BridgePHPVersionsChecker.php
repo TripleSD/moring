@@ -44,9 +44,10 @@ class BridgePHPVersionsChecker extends Command
     {
         $identificator = $this->settingsController->getIdentificator();
 
-        # Getting availible Moring versions from bridge
+        // Getting availible Moring versions from bridge
         $httpClient = new Client();
-        $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentPHPVersionsUrl'); # Url getting from /config/moring.php
+        // Url getting from /config/moring.php
+        $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentPHPVersionsUrl');
         $response = $httpClient->request('GET', $url,
             ['query' => ['identificator' => $identificator], 'allow_redirects' => false]);
         $versionsBridgeArray = json_decode($response->getBody(), true);
