@@ -107,7 +107,6 @@ class SitesChecker extends Command
             $http->updated_at = Carbon::now();
             $http->save();
 
-
             //   WebServer type saving process
             $webServer = SitesWebServers::where('site_id', $site->id)->first();
             if (isset($webServer)) {
@@ -133,7 +132,7 @@ class SitesChecker extends Command
 
             // Now we remove pending status from site
             $pending = Sites::where('id', $site->id)->first();
-            if (intval($pending->pending) === 1){
+            if (intval($pending->pending) === 1) {
                 $pending->pending = 0;
                 $pending->save();
             }

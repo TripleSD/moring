@@ -5,7 +5,6 @@ namespace App\Console\Commands;
 use App\Console\Ping;
 use App\Models\Servers;
 use App\Models\ServersPingResponses;
-use App\Models\SitesPingResponses;
 use Illuminate\Console\Command;
 
 class ServersPings extends Command
