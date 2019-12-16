@@ -3,6 +3,6 @@ preset: laravel
 disabled:
   - concat_without_spaces
 
-exclude:
-  - public/index.php
-  - server.php
+not-name:
+  - "public/index.php"
+  - "server.php"
