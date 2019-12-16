@@ -1,4 +1,4 @@
-[Build.010](https://github.com/TripleSD/moring/releases/tag/build.009)
+[Build.010](https://github.com/TripleSD/moring/releases/tag/build.010)
 - **(Upd)** Обновлен порядок сбора данных для быстрых фильтров в разделе сайтов
 - **(New)** Включены быстрые кнопки фильтров в разделе сайтов
 - **(Fix)** Исправлен редирект со страницы авторизации
