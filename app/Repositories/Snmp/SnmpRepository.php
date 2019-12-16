@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Repositories\Snmp;
 
 use App\Repositories\Repository;

@@ -11,7 +11,7 @@ class SitesBackendRepository extends Repository
     {
         Artisan::call('SitesChecker');
         Artisan::call('SitesSSLChecker');
+
         return redirect()->route('admin.sites.index');
     }
-
 }
