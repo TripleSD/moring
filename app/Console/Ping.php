@@ -42,6 +42,7 @@ class Ping
             $keys,
             $pre_final
         );
+        $final['average'] = round(array_sum($final) / count($final), 3);
         return $final;
     }
 }

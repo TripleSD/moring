@@ -46,4 +46,9 @@ class Sites extends Model
     {
         return $this->hasOne(SitesPingResponses::class, 'site_id');
     }
+
+    public function getNewSitePing()
+    {
+        return $this->hasOne(SitesPingResponses::class, 'site_id')->latest('created_at');
+    }
 }
