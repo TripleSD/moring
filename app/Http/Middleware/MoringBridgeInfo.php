@@ -11,7 +11,8 @@ class MoringBridgeInfo
     public function handle($request, Closure $next)
     {
         $bridge = new BridgeController();
-        View::share('bridgeInfo',$bridge->getInfo());
+        View::share('bridgeInfo', $bridge->getInfo());
+
         return $next($request);
     }
 }

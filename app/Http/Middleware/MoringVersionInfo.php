@@ -21,10 +21,11 @@ class MoringVersionInfo
     {
         $builds = new MoringController();
         $builds = $builds->getInfo();
-        View::share('latestBuild',$builds['latestBuild']);
-        View::share('latestBuildDate',Carbon::parse($builds['latestBuildDate'])->format('d-m-Y'));
+        View::share('latestBuild', $builds['latestBuild']);
+        View::share('latestBuildDate', Carbon::parse($builds['latestBuildDate'])->format('d-m-Y'));
         $currentBuild = Config::get('moring.build');
-        View::share('currentBuild',$currentBuild);
+        View::share('currentBuild', $currentBuild);
+
         return $next($request);
     }
 }

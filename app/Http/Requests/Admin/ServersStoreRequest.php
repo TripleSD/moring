@@ -35,7 +35,7 @@ class ServersStoreRequest extends FormRequest
     {
         return [
             'addr.required' => 'Заполните поле IP адреса',
-            'addr.ip' => 'Введите корректо данные в поле IP адреса'
+            'addr.ip' => 'Введите корректно данные в поле IP адреса',
         ];
     }
 }
