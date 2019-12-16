@@ -37,7 +37,7 @@ class Sites extends Model
         return $this->hasOne(SitesWebServers::class, 'site_id');
     }
 
-    public function getSslCertification(): HasOne
+    public function getSslCertification() : HasOne
     {
         return $this->hasOne(SitesChecksList::class, 'site_id')->where('check_ssl', 1)->with('getSSL');
     }
