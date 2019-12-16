@@ -4,5 +4,5 @@ disabled:
   - concat_without_spaces
 finder:
   not-name:
-    - "public/index.php"
+    - "/public/index.php"
     - "server.php"
