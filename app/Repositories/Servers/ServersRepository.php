@@ -43,6 +43,7 @@ class ServersRepository extends Repository
         $server->create($fillData);
 
         flash('Сервер сохранен')->success();
+
         return redirect(route('servers.index'));
     }
 

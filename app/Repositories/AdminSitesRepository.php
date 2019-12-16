@@ -11,26 +11,51 @@ class AdminSitesRepository extends Repository
     public function index($request)
     {
         if ($request->view == 'all') {
-            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->get();
+            return Sites::with(
+                'getHttpCode',
+                'checksList',
+                'getPhpVersion',
+                'getWebServer',
+                'getSslCertification'
+            )->get();
         } elseif ($request->view == '10') {
-            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->paginate(10);
+            return Sites::with(
+                'getHttpCode',
+                'checksList',
+                'getPhpVersion',
+                'getWebServer',
+                'getSslCertification'
+            )->paginate(10);
         } elseif ($request->view == '25') {
-            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->paginate(25);
+            return Sites::with(
+                'getHttpCode',
+                'checksList',
+                'getPhpVersion',
+                'getWebServer',
+                'getSslCertification'
+            )->paginate(25);
         } elseif ($request->view == '50') {
-            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->paginate(50);
+            return Sites::with(
+                'getHttpCode',
+                'checksList',
+                'getPhpVersion',
+                'getWebServer',
+                'getSslCertification'
+            )->paginate(50);
         } else {
-            return Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification')->paginate(10);
+            return Sites::with(
+                'getHttpCode',
+                'checksList',
+                'getPhpVersion',
+                'getWebServer',
+                'getSslCertification'
+            )->paginate(10);
         }
     }
 
     public function store(array $fillable)
     {
-        //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
+        // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
         if (intval($fillable['https']) === 0) {
             $fillable['check_ssl'] = 0;
             $fillable['check_https'] = 0;
@@ -60,7 +85,7 @@ class AdminSitesRepository extends Repository
 
     public function update($fillable, int $id)
     {
-        //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
+        // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
         if (intval($fillable['https']) === 0) {
             $fillable['check_ssl'] = 0;
             $fillable['check_https'] = 0;
@@ -72,23 +97,37 @@ class AdminSitesRepository extends Repository
 
         $check = SitesChecksList::where('site_id', $id)->first();
         $check->update($fillable);
+
         return $result;
     }
 
     public function destroy(int $id)
     {
         $result = Sites::destroy($id);
+
         return $result;
     }
 
     public function sortedList(int $length = null, string $sort = null)
     {
         if (is_null($length)) {
-            $list = Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification', 'getNewSitePing')->orderBy('created_at', $sort)->get();
+            $list = Sites::with(
+                'getHttpCode',
+                'checksList',
+                'getPhpVersion',
+                'getWebServer',
+                'getSslCertification',
+                'getNewSitePing'
+            )->orderBy('created_at', $sort)->get();
         } else {
-            $list = Sites::with('getHttpCode', 'checksList', 'getPhpVersion', 'getWebServer',
-                'getSslCertification', 'getNewSitePing')->orderBy('created_at', $sort)->get()->slice(0, $length);
+            $list = Sites::with(
+                'getHttpCode',
+                'checksList',
+                'getPhpVersion',
+                'getWebServer',
+                'getSslCertification',
+                'getNewSitePing'
+            )->orderBy('created_at', $sort)->get()->slice(0, $length);
         }
 
         return $list;
@@ -96,35 +135,43 @@ class AdminSitesRepository extends Repository
 
     public function listOfPings($request, int $count)
     {
-        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get('average', 'created_at')->slice(0, $count);
+        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get(
+            'average',
+            'created_at'
+        )->slice(0, $count);
 
         return $list;
     }
 
-
     public function getWebServersForNew(int $count)
     {
-        $list = Sites::where('pending', '<>', 1)->with('getWebServer')->orderBy('created_at', 'desc')->get('id', 'title')->slice(0, $count);
+        $list = Sites::where('pending', '<>', 1)->with('getWebServer')->orderBy('created_at', 'desc')->get(
+            'id',
+            'title'
+        )->slice(0, $count);
         $webCounter = collect();
-        $list->map(function ($item) use ($webCounter){
-            $name = $item->getWebServer->web_server;
-            if (!$webCounter->has($name)){
-               $webCounter->put($name, 1);
-            } else {
-                $add = $webCounter->get($name) + 1;
-                $webCounter->put($name, $add);
+        $list->map(
+            function ($item) use ($webCounter) {
+                $name = $item->getWebServer->web_server;
+                if (! $webCounter->has($name)) {
+                    $webCounter->put($name, 1);
+                } else {
+                    $add = $webCounter->get($name) + 1;
+                    $webCounter->put($name, $add);
+                }
             }
-        });
+        );
+
         return $webCounter;
     }
+
     public function switch(array $request)
     {
-        //   Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
+        // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
         $site = Sites::find($request['id']);
         $site->enabled = intval($request['on']);
         $result = $site->update();
 
         return $result;
     }
-
 }

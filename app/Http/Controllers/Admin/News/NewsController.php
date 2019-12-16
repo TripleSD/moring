@@ -10,4 +10,5 @@ class NewsController extends Controller
     {
         return view('empty');
     }
+    
 }

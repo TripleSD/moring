@@ -13,6 +13,6 @@ class SitesSslCertificates extends Model
         'expiration_date',
         'expiration_days',
         'algorithm',
-        'from_date'
+        'from_date',
     ];
 }

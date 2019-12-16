@@ -58,7 +58,7 @@ class SitesChecker extends Command
             try {
                 if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
-                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->file_url : "http://" . $site->file_url;
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->file_url : 'http://' . $site->file_url;
                     $request = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $response = $request->getBody();
                     $responseArray = json_decode($response, true);
@@ -68,7 +68,7 @@ class SitesChecker extends Command
                     $phpBranch = $responseArray['php-branch'];
                 } else {
                     $httpClient = new Client();
-                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
                     $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
                     $webServerType = $response->getHeader('server')[0];

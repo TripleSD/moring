@@ -17,6 +17,7 @@ class BridgeRepository extends Repository
                 'moring.bridgeCreateIdentificatorUrl'
             );
         $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+
         return json_decode($response->getBody(), true);
     }
 
