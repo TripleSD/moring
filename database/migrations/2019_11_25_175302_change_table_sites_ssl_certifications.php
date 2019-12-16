@@ -13,10 +13,13 @@ class ChangeTableSitesSslCertifications extends Migration
      */
     public function up()
     {
-        Schema::table('sites_ssl_certifications', function (Blueprint $table) {
-            $table->bigIncrements('id')->change();
-        });
-        }
+        Schema::table(
+            'sites_ssl_certifications',
+            function (Blueprint $table) {
+                $table->bigIncrements('id')->change();
+            }
+        );
+    }
 
     /**
      * Reverse the migrations.

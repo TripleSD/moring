@@ -14,10 +14,10 @@ class AddDefaultSettings extends Migration
     public function up()
     {
         DB::table('settings')->insert(
-            array(
+            [
                 'parameter' => 'telegram_api_key',
                 'value' => null,
-            )
+            ]
         );
 
         DB::table('settings')->insert(
