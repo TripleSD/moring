@@ -22,7 +22,7 @@ class SitesCountsRepository extends Repository
 
     public function getSslExpirationsDaysSitesCount()
     {
-        return  Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
+        return Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
             ->leftJoin('sites_ssl_certificates', 'sites_checks_list.id', '=', 'sites_ssl_certificates.site_id')
             ->where('expiration_days', "<=", 0)->get();
     }
@@ -30,10 +30,17 @@ class SitesCountsRepository extends Repository
     public function getSslErrorsSitesCount()
     {
         $sites = Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
-                        ->join('sites_ssl_certificates', 'sites.id', '=', 'sites_ssl_certificates.site_id')
-                        ->where(['sites.https' => 1, 'sites.enabled' => 1, 'sites_checks_list.check_ssl' => 1, 'sites_ssl_certificates.issuer' => NULL])
-                        ->orWhere(['sites_ssl_certificates.valid_status' => 0])
-                        ->get();
+            ->join('sites_ssl_certificates', 'sites.id', '=', 'sites_ssl_certificates.site_id')
+            ->where(
+                [
+                    'sites.https' => 1,
+                    'sites.enabled' => 1,
+                    'sites_checks_list.check_ssl' => 1,
+                    'sites_ssl_certificates.issuer' => null
+                ]
+            )
+            ->orWhere(['sites_ssl_certificates.valid_status' => 0])
+            ->get();
 
         return $sites;
     }
@@ -42,7 +49,14 @@ class SitesCountsRepository extends Repository
     {
         $sites = Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
             ->join('sites_ssl_certificates', 'sites.id', '=', 'sites_ssl_certificates.site_id')
-            ->where(['sites.https' => 1, 'sites.enabled' => 1, 'sites_checks_list.check_ssl' => 1, 'sites_ssl_certificates.valid_status' => 1])
+            ->where(
+                [
+                    'sites.https' => 1,
+                    'sites.enabled' => 1,
+                    'sites_checks_list.check_ssl' => 1,
+                    'sites_ssl_certificates.valid_status' => 1
+                ]
+            )
             ->get();
 
         return $sites;
@@ -50,14 +64,16 @@ class SitesCountsRepository extends Repository
 
     public function getSoftwareErrorsSitesCount()
     {
-            $query = Sites::where('enabled', 1)->with('checkPhpEnabled')->get();
-            $sites = $query->filter(function ($site){
-                if (!empty($site->checkPhpEnabled->getPhpErrors)){
+        $query = Sites::where('enabled', 1)->with('checkPhpEnabled')->get();
+        $sites = $query->filter(
+            function ($site) {
+                if (!empty($site->checkPhpEnabled->getPhpErrors)) {
                     return $site;
                 }
-            });
+            }
+        );
 
-            return $sites;
+        return $sites;
     }
 
     public function getBridgeErrors()
@@ -70,10 +86,9 @@ class SitesCountsRepository extends Repository
             ->get();
         $bridgeVersions = BridgePhpVersions::pluck('branch')->toArray();
         foreach ($presites as $site) {
-            if (!in_array($site->getPhpVersion->branch, $bridgeVersions)) {
+            if (!in_array($site->branch, $bridgeVersions)) {
                 $sites[] = $site;
             }
-
         }
         return $sites;
     }
@@ -90,17 +105,17 @@ class SitesCountsRepository extends Repository
         $bridgeVersions = BridgePhpVersions::get();
 
         foreach ($presites as $site) {
-            if (in_array($site->getPhpVersion->branch, $bridgeBranchs)) {
+            if (in_array($site->branch, $bridgeBranchs)) {
                 foreach ($bridgeVersions as $version) {
-                    if ($version->branch == $site->getPhpVersion->branch) {
-                        if (version_compare($site->getPhpVersion->version, $version->version) < 0) {
+                    if ($version->branch == $site->branch) {
+                        if (version_compare($site->version, $version->version) < 0) {
                             $sites[] = $site;
                         }
                     }
                 }
             }
         }
-      
+
         return $sites;
     }
 }
