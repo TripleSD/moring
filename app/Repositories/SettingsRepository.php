@@ -9,18 +9,21 @@ class SettingsRepository extends Repository
     public function getTelegramStatus()
     {
         $status = Settings::where('parameter', 'telegram_enable_status')->firstOrFail();
+
         return (int) $status->value;
     }
 
     public function getApiKey()
     {
         $apiKey = Settings::where('parameter', 'telegram_api_key')->first();
+
         return (string) $apiKey->value;
     }
 
     public function getGroupChatId()
     {
         $chatId = Settings::where('parameter', 'telegram_group_chat_id')->first();
+
         return (string) $chatId->value;
     }
 

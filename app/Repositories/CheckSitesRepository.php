@@ -10,5 +10,4 @@ class CheckSitesRepository extends Repository
     {
         return ChecksSites::all();
     }
-
 }

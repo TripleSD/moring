@@ -144,6 +144,7 @@ class SitesController extends Controller
         );
 
         $site = $adminSiteRepository->show($request);
+
         return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion', 'averages', 'time'));
     }
 
@@ -156,6 +157,7 @@ class SitesController extends Controller
     public function edit(ShowSitesRequest $request, AdminSitesRepository $adminSitesRepository)
     {
         $site = $adminSitesRepository->show($request);
+
         return view('admin.sites.edit', compact('site'));
     }
 
@@ -195,6 +197,7 @@ class SitesController extends Controller
                 ->withInput();
         } else {
             flash('Сайт удален из списка мониторинга')->success();
+
             return redirect()->route('admin.sites.index');
         }
     }
@@ -211,6 +214,7 @@ class SitesController extends Controller
         } else {
             flash('Что-то пошло не так...');
         }
+
         return back();
     }
 

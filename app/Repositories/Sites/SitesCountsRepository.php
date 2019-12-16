@@ -88,6 +88,7 @@ class SitesCountsRepository extends Repository
                 $sites[] = $site;
             }
         }
+
         return $sites;
     }
 

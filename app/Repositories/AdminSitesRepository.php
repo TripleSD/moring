@@ -74,12 +74,14 @@ class AdminSitesRepository extends Repository
         $first_entry = (new Sites())->create($fillable);
         $fillable['site_id'] = $first_entry->id;
         $result = (new SitesChecksList())->create($fillable);
+
         return $result;
     }
 
     public function show($request)
     {
         $site = Sites::with('checksList')->with('getHttpCode')->find($request->id);
+
         return $site;
     }
 
