@@ -9,5 +9,4 @@ class SnmpRepository extends Repository
     {
         return shell_exec("/usr/bin/snmpwalk -$version -c$community $ip $oid");
     }
-
 }

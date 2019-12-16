@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Console;
-
 
 class Ping
 {
@@ -29,7 +27,7 @@ class Ping
                 $filter
             );
         } else {
-            for ($i = 0; $i < 2; ++$i) {
+            for ($i = 0; $i < 2; $i++) {
                 $pre_final[$i] = 0;
             }
         }
