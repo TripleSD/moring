@@ -93,7 +93,7 @@ class SitesController extends Controller
             if ($result) {
                 // Run first site check
                 $check = new SitesChecker();
-                $check->handle((int)($result->id));
+                $check->handle((int) ($result->id));
 
                 // Run first site ping as well
                 $ping = new SitesPings();

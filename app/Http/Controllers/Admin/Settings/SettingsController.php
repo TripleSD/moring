@@ -20,17 +20,17 @@ class SettingsController extends Controller
 
     public function getTelegramStatus()
     {
-        return (int)$this->settingsRepository->getTelegramStatus();
+        return (int) $this->settingsRepository->getTelegramStatus();
     }
 
     public function getApiKey()
     {
-        return (string)$this->settingsRepository->getApiKey();
+        return (string) $this->settingsRepository->getApiKey();
     }
 
     public function getGroupChatId()
     {
-        return (string)$this->settingsRepository->getGroupChatId();
+        return (string) $this->settingsRepository->getGroupChatId();
     }
 
     public function updateTelegramStatus($request)
@@ -54,6 +54,6 @@ class SettingsController extends Controller
             $this->bridgeRepository->getNewIdentificator();
         }
 
-        return (string)$this->settingsRepository->getIdentificator();
+        return (string) $this->settingsRepository->getIdentificator();
     }
 }
