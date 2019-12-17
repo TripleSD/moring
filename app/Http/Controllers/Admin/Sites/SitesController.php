@@ -138,7 +138,7 @@ class SitesController extends Controller
         $time = json_encode(
             $pings->map(
                 function ($ins) {
-                    return $ins->created_at;
+                    return date("Y-m-d H:i:s", strtotime($ins->created_at));
                 }
             )
         );

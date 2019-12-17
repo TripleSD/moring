@@ -23,7 +23,7 @@ $(document).ready(function () {
             data: {
                 labels: sites,
                 datasets: [{
-                    label: 'Результат последнего пинга сайта, мс',
+                    label: 'Результаты пинга последних 5 добавленных сайтов, мс',
                     data: ping,
                     backgroundColor: [
                         'rgb(255, 99, 132)',
