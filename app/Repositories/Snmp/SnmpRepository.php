@@ -6,8 +6,8 @@ use App\Repositories\Repository;
 
 class SnmpRepository extends Repository
 {
-    public function getInfo($community, $version, $ip, $oid)
+    public function getInfo($host, $community, $oid)
     {
-        return shell_exec("/usr/bin/snmpwalk -$version -c$community $ip $oid");
+        return snmp2_get($host, $community, $oid);
     }
 }
