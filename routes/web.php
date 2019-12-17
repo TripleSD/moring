@@ -103,10 +103,11 @@ Route::group(
         );
 
         Route::group(
-            ['prefix' => 'network', 'namespace' => 'Admin\Network'],
+            ['prefix' => 'network', 'namespace' => 'Admin\Network', 'as' => 'network.'],
             function () {
-                Route::get('/switches', 'SwitchesController@getIndex')
-                    ->name('network.switches.index');
+                $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
+                Route::resource('devices', 'DevicesController')
+                    ->only($methods);
             }
         );
 
