@@ -88,9 +88,11 @@
                                 </a>
                                 <a class="btn btn-app" href="{{route('admin.sites.index', 'softwareVersionErrors')}}">
                                     @if(count($counts['softwareVersionErrors']) > 0)
-                                        <span class="badge bg-danger">{{ count($counts['softwareVersionErrors'])  }}</span>
+                                        <span
+                                            class="badge bg-danger">{{ count($counts['softwareVersionErrors'])  }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ count($counts['softwareVersionErrors'])  }}</span>
+                                        <span
+                                            class="badge bg-success">{{ count($counts['softwareVersionErrors'])  }}</span>
                                     @endif
                                     <i class="fas fa-bug text-danger"></i> Версии ПО
                                 </a>
@@ -106,7 +108,8 @@
                                     @if(count($counts['softwareErrorsSites']) > 0)
                                         <span class="badge bg-danger">{{ count($counts['softwareErrorsSites']) }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ count($counts['softwareErrorsSites']) }}</span>
+                                        <span
+                                            class="badge bg-success">{{ count($counts['softwareErrorsSites']) }}</span>
                                     @endif
                                     <i class="fa fa-exclamation-triangle text-warning"></i> Ошибки
                                 </a>
@@ -116,9 +119,11 @@
                                 </a>
                                 <a class="btn btn-app" href="{{route('admin.sites.index', 'sslExpirationsDaysSites')}}">
                                     @if(count($counts['sslExpirationsDaysSites']) > 0)
-                                        <span class="badge bg-danger">{{ count($counts['sslExpirationsDaysSites']) }}</span>
+                                        <span
+                                            class="badge bg-danger">{{ count($counts['sslExpirationsDaysSites']) }}</span>
                                     @else
-                                        <span class="badge bg-success">{{ count($counts['sslExpirationsDaysSites']) }}</span>
+                                        <span
+                                            class="badge bg-success">{{ count($counts['sslExpirationsDaysSites']) }}</span>
                                     @endif
                                     <i class="fa fa-lock fa-1 text-warning"></i> Истек серт.
                                 </a>
@@ -185,18 +190,18 @@
                                                         @if($site->enabled === 1)
                                                             @if($site->https === 1)
                                                                 @if($site->checksList->check_ssl == 1)
-                                                                    @isset($site->getSslCertification->expiration_days)
-                                                                        @if ($site->getSslCertification->expiration_days >= 10)
+                                                                    @isset($site->getSslCertification->getSSL->expiration_days)
+                                                                        @if ($site->getSslCertification->getSSL->expiration_days >= 10)
                                                                             <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-success"
                                                                            title="Действующий SSL сертификат"></i>
                                                                         </span>
-                                                                        @elseif($site->getSslCertification->expiration_days >= 5)
+                                                                        @elseif($site->getSslCertification->getSSL->expiration_days >= 5)
                                                                             <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-warning"
                                                                            title="Действующий SSL сертификат"></i>
                                                                     </span>
-                                                                        @elseif($site->getSslCertification->expiration_days >= 1)
+                                                                        @elseif($site->getSslCertification->getSSL->expiration_days >= 1)
                                                                             <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-danger"
                                                                            title="Действующий SSL сертификат"></i>
@@ -208,7 +213,7 @@
                                                                     </span>
                                                                         @endif
                                                                         <span class="small">
-                                                                    ({{ $site->getSslCertification->expiration_days }}
+                                                                    ({{ $site->getSslCertification->getSSL->expiration_days }}
                                                                     дней)
                                                                     </span>
                                                                     @else
@@ -225,15 +230,15 @@
                                                                 @endif
                                                             @endif
 
-                                                            @isset($site->getSslCertification->expiration_days)
+                                                            @isset($site->getSslCertification->getSSL->expiration_days)
                                                                 <div class="small text-gray">
                                                                     <i class="fas fa-history"></i>
-                                                                    {{ $site->getSslCertification->updated_at }}
+                                                                    {{ $site->getSslCertification->getSSL->updated_at }}
                                                                 </div>
                                                                 <div class="small text-gray">
                                                                     <details>
                                                                         <summary>Издатель SSL сертификата</summary>
-                                                                        {{ $site->getSslCertification->issuer }}
+                                                                        {{ $site->getSslCertification->getSSL->issuer }}
                                                                     </details>
                                                                 </div>
                                                             @endif
@@ -295,13 +300,27 @@
                                                                                     <span class="text-success"
                                                                                           title="Установлена самая последняя версия {{$version->version}}">
                                                                                       {{ $site->getPhpVersion->version }}
-                                                                                </span>
+                                                                                    </span>
+
+                                                                                    @if($version->deprecated_status == 1)
+                                                                                        <span class="text-danger"
+                                                                                              title="Deprecated версия">
+                                                                                        <i class="fas fa-archive"></i>
+                                                                                    </span>
+                                                                                    @endif
                                                                                 @else
                                                                                     <span class="text-danger"
                                                                                           title="Необходимо установить актуальную версию {{$version->version}}">
                                                                                       {{ $site->getPhpVersion->version }}
                                                                                       <i class="fas fa-bug"></i>
-                                                                                </span>
+                                                                                    </span>
+
+                                                                                    @if($version->deprecated_status == 1)
+                                                                                        <span class="text-danger"
+                                                                                              title="Deprecated версия">
+                                                                                        <i class="fas fa-archive"></i>
+                                                                                    </span>
+                                                                                    @endif
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
@@ -461,10 +480,12 @@
                                                 </div>
                                                 <div class="btn-group">
                                                     @if($site->enabled === 1)
-                                                        <a href="{{route('admin.site.switch', [$site->id, 0])}}" class="btn btn-xs btn-warning">
+                                                        <a href="{{route('admin.site.switch', [$site->id, 0])}}"
+                                                           class="btn btn-xs btn-warning">
                                                             <i class="fa fa-pause"></i></a>
                                                     @else
-                                                        <a href="{{route('admin.site.switch', [$site->id, 1])}}" class="btn btn-xs btn-success">
+                                                        <a href="{{route('admin.site.switch', [$site->id, 1])}}"
+                                                           class="btn btn-xs btn-success">
                                                             <i class="fa fa-play"></i>
                                                         </a>
                                                     @endif

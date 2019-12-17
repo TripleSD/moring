@@ -13,9 +13,14 @@ class AddColumnToSites extends Migration
      */
     public function up()
     {
-        Schema::table('sites', function (Blueprint $table) {
-            $table->addColumn('tinyInteger','pending')->default(0)->comment('If one then hide site while data pending process is running');
-        });
+        Schema::table(
+            'sites',
+            function (Blueprint $table) {
+                $table->addColumn('tinyInteger', 'pending')->default(0)->comment(
+                    'If one then hide site while data pending process is running'
+                );
+            }
+        );
     }
 
     /**
@@ -25,8 +30,11 @@ class AddColumnToSites extends Migration
      */
     public function down()
     {
-        Schema::table('sites', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'sites',
+            function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

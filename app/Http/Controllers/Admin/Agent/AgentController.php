@@ -8,7 +8,7 @@ class AgentController extends Controller
 {
     public function getSettings()
     {
-        return array(
+        return [
             '<?php',
             '$array = [];'.PHP_EOL,
             '$array[\'os_family\'] = PHP_OS;'.PHP_EOL,
@@ -19,6 +19,6 @@ class AgentController extends Controller
             '$array[\'web_server\'] = $_SERVER[\'SERVER_SOFTWARE\'];'.PHP_EOL,
             '$array[\'os-release\'] = file_get_contents(\'/etc/os-release\')',
             'echo json_encode($array);',
-        );
+        ];
     }
 }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Console;
-
 
 class Ping
 {
@@ -16,16 +14,21 @@ class Ping
             exec("ping -n 3 $host", $output, $return_var);
         }
         if (count($output) > 3) {
-            $filter =[];
-            $pre_final = array_reduce($output, function ($filter, $string){
-                preg_match("/(?<==)[\d|\d.\d]{1,9}(?=ms| ms| TTL|\D{1,3}TTL)/", $string, $matches);
-                if (!empty($matches) && count($filter) < 3) {
-                    $filter[] = floatval($matches[0]);
-                }
-                return $filter;
-            }, $filter);
+            $filter = [];
+            $pre_final = array_reduce(
+                $output,
+                function ($filter, $string) {
+                    preg_match("/(?<==)[\d|\d.\d]{1,9}(?=ms| ms| TTL|\D{1,3}TTL)/", $string, $matches);
+                    if (! empty($matches) && count($filter) < 3) {
+                        $filter[] = floatval($matches[0]);
+                    }
+
+                    return $filter;
+                },
+                $filter
+            );
         } else {
-            for ($i = 0; $i < 2; ++$i) {
+            for ($i = 0; $i < 2; $i++) {
                 $pre_final[$i] = 0;
             }
         }
@@ -43,6 +46,7 @@ class Ping
             $pre_final
         );
         $final['average'] = round(array_sum($final) / count($final), 3);
+
         return $final;
     }
 }

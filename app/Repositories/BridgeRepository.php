@@ -12,10 +12,12 @@ class BridgeRepository extends Repository
     public function getNewIdentificator()
     {
         $httpClient = new Client();
+        // Url getting from /config/moring.php
         $url = Config::get('moring.bridgeUrl') . Config::get(
                 'moring.bridgeCreateIdentificatorUrl'
-            ); # Url getting from /config/moring.php
+            );
         $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+
         return json_decode($response->getBody(), true);
     }
 
@@ -28,7 +30,8 @@ class BridgeRepository extends Repository
             ['query' => ['identificator' => $identificator], 'allow_redirects' => false]
         );
         $bridgeBuild = json_decode($response->getBody(), true);
-        return array('version' => $bridgeBuild, 'status' => '1', 'statusCode' => $response->getStatusCode());
+
+        return ['version' => $bridgeBuild, 'status' => '1', 'statusCode' => $response->getStatusCode()];
     }
 
     public function updateStatInfo($param)
@@ -39,6 +42,6 @@ class BridgeRepository extends Repository
 
     public function getBridgeStatistics()
     {
-        return BridgeStatistics::pluck('updated_at','parameter')->toArray();
+        return BridgeStatistics::pluck('updated_at', 'parameter')->toArray();
     }
 }

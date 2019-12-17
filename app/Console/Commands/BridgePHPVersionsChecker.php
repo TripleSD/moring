@@ -44,21 +44,29 @@ class BridgePHPVersionsChecker extends Command
     {
         $identificator = $this->settingsController->getIdentificator();
 
-        # Getting availible Moring versions from bridge
+        // Getting availible Moring versions from bridge
         $httpClient = new Client();
-        $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentPHPVersionsUrl'); # Url getting from /config/moring.php
-        $response = $httpClient->request('GET', $url,
-            ['query' => ['identificator' => $identificator], 'allow_redirects' => false]);
+        // Url getting from /config/moring.php
+        $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentPHPVersionsUrl');
+        $response = $httpClient->request(
+            'GET',
+            $url,
+            ['query' => ['identificator' => $identificator], 'allow_redirects' => false]
+        );
         $versionsBridgeArray = json_decode($response->getBody(), true);
 
-        foreach ($versionsBridgeArray as $branch => $version) {
+        foreach ($versionsBridgeArray as $versionArray) {
             try {
                 $localVersionsArray = BridgePhpVersions::pluck('version')->toArray();
-                if (!in_array($version, $localVersionsArray)) {
+                if (! in_array($versionArray['version'], $localVersionsArray)) {
                     $versions = new BridgePhpVersions();
-                    $versions->version = $version;
-                    $versions->branch = $branch;
+                    $versions->version = $versionArray['version'];
+                    $versions->branch = $versionArray['branch'];
                     $versions->save();
+                } else {
+                    $version = BridgePhpVersions::where('version', $versionArray['version'])->firstOrFail();
+                    $version->deprecated_status = $versionArray['deprecated_status'];
+                    $version->save();
                 }
             } catch (\Exception $e) {
             }

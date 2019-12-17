@@ -6,7 +6,6 @@ use App\Models\SitesChecksList;
 use App\Models\SitesSslCertificates;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-
 use Spatie\SslCertificate\SslCertificate;
 
 class SitesSSLChecker extends Command
@@ -73,7 +72,7 @@ class SitesSSLChecker extends Command
                 $ssl = SitesSslCertificates::where('site_id', $site_id)->first();
             }
 
-            if (!empty($ssl)) {
+            if (! empty($ssl)) {
                 $ssl->issuer = $issuer;
                 $ssl->valid_status = $validStatus;
                 $ssl->expiration_date = $expirationDate;
@@ -81,9 +80,15 @@ class SitesSSLChecker extends Command
                 $ssl->algorithm = $algorithm;
                 $ssl->from_date = $fromDate;
             } else {
-                $fillable = ['site_id' => $check->site_id, 'issuer' => $issuer, 'valid_status' => $validStatus,
-                    'expiration_date' => $expirationDate, 'expiration_days' => $expirationDays,
-                    'algorithm' => $algorithm, 'from_date' => $fromDate];
+                $fillable = [
+                    'site_id' => $check->site_id,
+                    'issuer' => $issuer,
+                    'valid_status' => $validStatus,
+                    'expiration_date' => $expirationDate,
+                    'expiration_days' => $expirationDays,
+                    'algorithm' => $algorithm,
+                    'from_date' => $fromDate,
+                ];
                 $ssl = new SitesSslCertificates($fillable);
             }
             $ssl->updated_at = Carbon::now();

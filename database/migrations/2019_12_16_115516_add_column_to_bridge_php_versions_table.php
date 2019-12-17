@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class ChangeSitesWebServers extends Migration
+class AddColumnToBridgePhpVersionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,10 @@ class ChangeSitesWebServers extends Migration
     public function up()
     {
         Schema::table(
-            'sites_web_servers',
+            'bridge_php_versions',
             function (Blueprint $table) {
-                $table->bigIncrements('id')->change();
+                $table->integer('deprecated_status')->after('branch')
+                    ->comment('Deprecated version or not');
             }
         );
     }
@@ -28,6 +29,11 @@ class ChangeSitesWebServers extends Migration
      */
     public function down()
     {
-        //
+        Schema::table(
+            'bridge_php_versions',
+            function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

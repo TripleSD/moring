@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
-use App\Console\Accumulator;
 use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
-use App\Http\Controllers\Admin\Settings\SettingsController;
-use App\Http\Controllers\Connectors\TelegramConnector;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sites\ShowSitesRequest;
 use App\Http\Requests\Sites\StoreSiteRequest;
@@ -18,7 +15,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use function foo\func;
 
 class SitesController extends Controller
 {
@@ -34,8 +30,7 @@ class SitesController extends Controller
         AdminSitesRepository $adminSiteRepository,
         SitesCountsRepository $sitesCountsRepository,
         Request $request
-    )
-    {
+    ) {
         $sites = $adminSiteRepository->index($request);
         //TODO вынести в репозиторий два запроса
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
@@ -52,16 +47,17 @@ class SitesController extends Controller
         $counts['disabledSites'] = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
 
         $keys = $request->keys();
-        if(!empty($keys)){
+        if (! empty($keys)) {
             $key = $keys[0];
-            if(key_exists($key, $counts)){
-                if (! empty( $counts[$key])) {
+            if (array_key_exists($key, $counts)) {
+                if (! empty($counts[$key])) {
                     $sites = $counts[$key];
                 } else {
                     $sites = [];
                 }
             }
         }
+
         return view(
             'admin.sites.index',
             compact(
@@ -98,19 +94,21 @@ class SitesController extends Controller
             if ($result) {
                 // Run first site check
                 $check = new SitesChecker();
-                $check->handle((int)($result->id));
+                $check->handle((int) ($result->id));
 
                 // Run first site ping as well
                 $ping = new SitesPings();
                 $ping->handle(intval($result->id));
 
                 flash('Запись добавлена')->success();
+
                 return redirect()->route('admin.sites.index');
             } else {
                 return back()->withInput();
             }
         } else {
             flash('Запись не добавлена. Проверьте существование домена.')->warning();
+
             return back()->withInput();
         }
     }
@@ -129,15 +127,24 @@ class SitesController extends Controller
 
         $pings = $adminSiteRepository->listOfPings($request, 50);
 
-        $averages = json_encode($pings->map(function ($ins) {
-            return $ins->average;
-        }));
+        $averages = json_encode(
+            $pings->map(
+                function ($ins) {
+                    return $ins->average;
+                }
+            )
+        );
 
-        $time = json_encode($pings->map(function ($ins) {
-            return $ins->created_at;
-        }));
+        $time = json_encode(
+            $pings->map(
+                function ($ins) {
+                    return $ins->created_at;
+                }
+            )
+        );
 
         $site = $adminSiteRepository->show($request);
+
         return view('admin.sites.show', compact('site', 'bridgeBranchVersion', 'bridgePhpVersion', 'averages', 'time'));
     }
 
@@ -150,6 +157,7 @@ class SitesController extends Controller
     public function edit(ShowSitesRequest $request, AdminSitesRepository $adminSitesRepository)
     {
         $site = $adminSitesRepository->show($request);
+
         return view('admin.sites.edit', compact('site'));
     }
 
@@ -164,12 +172,13 @@ class SitesController extends Controller
         $id = $request->id;
         $fillable = $request->validated();
         $result = $adminSitesRepository->update($fillable, $id);
-        if (!$result) {
+        if (! $result) {
             return back()->withInput($fillable);
         } else {
             $check = new SitesChecker();
             $check->handle($id);
             flash('Запись обновлена')->success();
+
             return redirect()->route('admin.sites.index');
         }
     }
@@ -183,11 +192,12 @@ class SitesController extends Controller
     public function destroy($id, AdminSitesRepository $adminSitesRepository)
     {
         $result = $adminSitesRepository->destroy($id);
-        if (!$result) {
+        if (! $result) {
             return back()
                 ->withInput();
         } else {
             flash('Сайт удален из списка мониторинга')->success();
+
             return redirect()->route('admin.sites.index');
         }
     }
@@ -202,12 +212,13 @@ class SitesController extends Controller
         if ($check) {
             flash('Данные обновлены')->success();
         } else {
-            flash("Что-то пошло не так...");
+            flash('Что-то пошло не так...');
         }
+
         return back();
     }
 
-   public function switchOnOff(int $id, int $on,  AdminSitesRepository $adminSitesRepository)
+    public function switchOnOff(int $id, int $on, AdminSitesRepository $adminSitesRepository)
     {
         $request = ['id' => $id, 'on' => $on];
 
@@ -215,7 +226,7 @@ class SitesController extends Controller
         if ($switch) {
             flash('Данные обновлены')->success();
         } else {
-            flash("Что-то пошло не так...");
+            flash('Что-то пошло не так...');
         }
 
         return back();

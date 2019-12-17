@@ -58,7 +58,7 @@ class SitesChecker extends Command
             try {
                 if ($site->checksList->use_file === 1) {
                     $httpClient = new Client();
-                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->file_url : "http://" . $site->file_url;
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->file_url : 'http://' . $site->file_url;
                     $request = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $response = $request->getBody();
                     $responseArray = json_decode($response, true);
@@ -68,7 +68,7 @@ class SitesChecker extends Command
                     $phpBranch = $responseArray['php-branch'];
                 } else {
                     $httpClient = new Client();
-                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? "https://" . $site->url : "http://" . $site->url;
+                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
                     $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
                     $phpVersion = $response->getHeader('X-Powered-By');
                     $webServerType = $response->getHeader('server')[0];
@@ -107,7 +107,6 @@ class SitesChecker extends Command
             $http->updated_at = Carbon::now();
             $http->save();
 
-
             //   WebServer type saving process
             $webServer = SitesWebServers::where('site_id', $site->id)->first();
             if (isset($webServer)) {
@@ -133,7 +132,7 @@ class SitesChecker extends Command
 
             // Now we remove pending status from site
             $pending = Sites::where('id', $site->id)->first();
-            if (intval($pending->pending) === 1){
+            if (intval($pending->pending) === 1) {
                 $pending->pending = 0;
                 $pending->save();
             }

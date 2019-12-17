@@ -21,6 +21,7 @@ class TelegramIntegrationsController extends Controller
         $status = $this->settingsController->getTelegramStatus();
         $apiToken = $this->settingsController->getApiKey();
         $chatId = $this->settingsController->getGroupChatId();
+
         return view('admin.settings.integrations.index', compact('apiToken', 'chatId', 'status'));
     }
 
@@ -31,6 +32,7 @@ class TelegramIntegrationsController extends Controller
         $this->settingsController->updateApiKey($request);
         $this->settingsController->updateGroupChatId($request);
         flash('Данные обновлены')->success();
+
         return redirect()->route('settings.integrations.telegram.index');
     }
 }

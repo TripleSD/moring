@@ -13,21 +13,24 @@ class CreateSitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('sites', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->text('title')
-                ->comment('Sites title for sites list');
-            $table->text('url')
-                ->comment('Sites url');
-            $table->integer('https')
-                ->default(0);
-            $table->integer('enabled')
-                ->default(1);
-            $table->text('comment')
-                ->nullable()
-                ->comment('Sites description');
-            $table->timestamps();
-        });
+        Schema::create(
+            'sites',
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->text('title')
+                    ->comment('Sites title for sites list');
+                $table->text('url')
+                    ->comment('Sites url');
+                $table->integer('https')
+                    ->default(0);
+                $table->integer('enabled')
+                    ->default(1);
+                $table->text('comment')
+                    ->nullable()
+                    ->comment('Sites description');
+                $table->timestamps();
+            }
+        );
     }
 
     /**

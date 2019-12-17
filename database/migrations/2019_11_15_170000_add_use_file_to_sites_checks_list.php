@@ -13,11 +13,14 @@ class AddUseFileToSitesChecksList extends Migration
      */
     public function up()
     {
-        Schema::table('sites_checks_list', function (Blueprint $table) {
-            $table->addColumn('SmallInteger','use_flie')
-                ->after('http_code')
-                ->default(0);
-        });
+        Schema::table(
+            'sites_checks_list',
+            function (Blueprint $table) {
+                $table->addColumn('SmallInteger', 'use_flie')
+                    ->after('http_code')
+                    ->default(0);
+            }
+        );
     }
 
     /**
@@ -27,8 +30,11 @@ class AddUseFileToSitesChecksList extends Migration
      */
     public function down()
     {
-        Schema::table('sites_checks_list', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'sites_checks_list',
+            function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

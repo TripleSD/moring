@@ -13,13 +13,16 @@ class AddFieldFileUrlToSites extends Migration
      */
     public function up()
     {
-        Schema::table('sites', function (Blueprint $table) {
-            $table->text('file_url')
-                ->nullable()
-                ->comment('Monitoring file path')
-                ->after('enabled')
-                ->default(null);
-        });
+        Schema::table(
+            'sites',
+            function (Blueprint $table) {
+                $table->text('file_url')
+                    ->nullable()
+                    ->comment('Monitoring file path')
+                    ->after('enabled')
+                    ->default(null);
+            }
+        );
     }
 
     /**
@@ -29,8 +32,11 @@ class AddFieldFileUrlToSites extends Migration
      */
     public function down()
     {
-        Schema::table('sites', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'sites',
+            function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

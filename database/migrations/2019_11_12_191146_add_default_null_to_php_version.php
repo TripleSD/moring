@@ -13,11 +13,14 @@ class AddDefaultNullToPhpVersion extends Migration
      */
     public function up()
     {
-        Schema::table('sites_php_versions', function (Blueprint $table) {
-            $table->string('php_version')
-                ->default(NULL)
-                ->nullable();
-        });
+        Schema::table(
+            'sites_php_versions',
+            function (Blueprint $table) {
+                $table->string('php_version')
+                    ->default(null)
+                    ->nullable();
+            }
+        );
     }
 
     /**
@@ -27,8 +30,11 @@ class AddDefaultNullToPhpVersion extends Migration
      */
     public function down()
     {
-        Schema::table('sites_php_versions', function (Blueprint $table) {
-            //
-        });
+        Schema::table(
+            'sites_php_versions',
+            function (Blueprint $table) {
+                //
+            }
+        );
     }
 }

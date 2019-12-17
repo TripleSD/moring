@@ -13,9 +13,12 @@ class EditTableSitesHttpCodes extends Migration
      */
     public function up()
     {
-        Schema::table('sites_http_codes', function (Blueprint $table) {
-            $table->bigIncrements('id')->change();
-        });
+        Schema::table(
+            'sites_http_codes',
+            function (Blueprint $table) {
+                $table->bigIncrements('id')->change();
+            }
+        );
     }
 
     /**

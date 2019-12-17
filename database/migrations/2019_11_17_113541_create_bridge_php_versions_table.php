@@ -13,14 +13,17 @@ class CreateBridgePhpVersionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('bridge_php_versions', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->text('version')
-                ->comment('Current PHP version');
-            $table->integer('branch')
-                ->comment('Branch');
-            $table->timestamps();
-        });
+        Schema::create(
+            'bridge_php_versions',
+            function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->text('version')
+                    ->comment('Current PHP version');
+                $table->integer('branch')
+                    ->comment('Branch');
+                $table->timestamps();
+            }
+        );
     }
 
     /**
