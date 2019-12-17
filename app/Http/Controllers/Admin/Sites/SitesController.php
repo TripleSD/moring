@@ -57,7 +57,6 @@ class SitesController extends Controller
                 }
             }
         }
-
         return view(
             'admin.sites.index',
             compact(
