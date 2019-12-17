@@ -190,18 +190,18 @@
                                                         @if($site->enabled === 1)
                                                             @if($site->https === 1)
                                                                 @if($site->checksList->check_ssl == 1)
-                                                                    @isset($site->getSslCertification->expiration_days)
-                                                                        @if ($site->getSslCertification->expiration_days >= 10)
+                                                                    @isset($site->getSslCertification->getSSL->expiration_days)
+                                                                        @if ($site->getSslCertification->getSSL->expiration_days >= 10)
                                                                             <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-success"
                                                                            title="Действующий SSL сертификат"></i>
                                                                         </span>
-                                                                        @elseif($site->getSslCertification->expiration_days >= 5)
+                                                                        @elseif($site->getSslCertification->getSSL->expiration_days >= 5)
                                                                             <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-warning"
                                                                            title="Действующий SSL сертификат"></i>
                                                                     </span>
-                                                                        @elseif($site->getSslCertification->expiration_days >= 1)
+                                                                        @elseif($site->getSslCertification->getSSL->expiration_days >= 1)
                                                                             <span class="small">
                                                                         <i class="fa fa-lock fa-1 text-danger"
                                                                            title="Действующий SSL сертификат"></i>
@@ -213,7 +213,7 @@
                                                                     </span>
                                                                         @endif
                                                                         <span class="small">
-                                                                    ({{ $site->getSslCertification->expiration_days }}
+                                                                    ({{ $site->getSslCertification->getSSL->expiration_days }}
                                                                     дней)
                                                                     </span>
                                                                     @else
@@ -230,15 +230,15 @@
                                                                 @endif
                                                             @endif
 
-                                                            @isset($site->getSslCertification->expiration_days)
+                                                            @isset($site->getSslCertification->getSSL->expiration_days)
                                                                 <div class="small text-gray">
                                                                     <i class="fas fa-history"></i>
-                                                                    {{ $site->getSslCertification->updated_at }}
+                                                                    {{ $site->getSslCertification->getSSL->updated_at }}
                                                                 </div>
                                                                 <div class="small text-gray">
                                                                     <details>
                                                                         <summary>Издатель SSL сертификата</summary>
-                                                                        {{ $site->getSslCertification->issuer }}
+                                                                        {{ $site->getSslCertification->getSSL->issuer }}
                                                                     </details>
                                                                 </div>
                                                             @endif
