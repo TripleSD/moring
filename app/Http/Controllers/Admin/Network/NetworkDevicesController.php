@@ -4,10 +4,10 @@ namespace App\Http\Controllers\Admin\Network;
 
 use App\Http\Controllers\Controller;
 
-class SwitchesController extends Controller
+class NetworkDevicesController extends Controller
 {
     public function getIndex()
     {
-        return view('empty');
+        return view('admin.network.devices.index');
     }
 }

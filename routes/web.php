@@ -105,8 +105,8 @@ Route::group(
         Route::group(
             ['prefix' => 'network', 'namespace' => 'Admin\Network'],
             function () {
-                Route::get('/switches', 'SwitchesController@getIndex')
-                    ->name('network.switches.index');
+                Route::get('/devices', 'NetworkDevicesController@getIndex')
+                    ->name('network.devices.index');
             }
         );
 
