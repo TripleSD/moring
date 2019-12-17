@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin\Network;
 
 use App\Http\Controllers\Controller;
 
-class SwitchesController extends Controller
+class DevicesController extends Controller
 {
-    public function getIndex()
+    public function index()
     {
         return view('empty');
     }
