@@ -55,9 +55,9 @@
                     </a>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('network.switches.index') }}" class="nav-link">
+                            <a href="{{ route('network.devices.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Коммутаторы</p>
+                                <p>Устройства</p>
                             </a>
                         </li>
                     </ul>
