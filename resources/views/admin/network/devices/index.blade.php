@@ -5,7 +5,7 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0 text-dark">Мониторинг сетевых устройств</h1>
+                    <h1 class=" text-dark"><i class="nav-icon fas fa-network-wired"></i> Сеть</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
@@ -24,126 +24,84 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Список сетевых устройств</h3>
+                            <h3 class="card-title">Список устройств</h3>
                             <div class="card-tools">
                                 <div class="btn-group">
-{{--                                    <a href="{{route('servers.create')}}"--}}
-{{--                                       class="btn btn-sm btn-success" title="Создание нового сервера">--}}
-{{--                                        <i class="fa fa-plus-square"></i></a>--}}
-{{--                                    <a href="#"--}}
-{{--                                       class="btn btn-sm btn-primary" title="Обновить список">--}}
-{{--                                        <i class="fas fa-sync-alt"></i></a>--}}
-                                </div>
-                                <div class="btn-group">
-{{--                                    @if($servers instanceof \Illuminate\Pagination\LengthAwarePaginator)--}}
-{{--                                        <a href="{{route('servers.index', ['view' => 'all'])}}"--}}
-{{--                                           class="btn btn-sm btn-outline-primary" title="Показать весь список">--}}
-{{--                                            <i class="fa fa-list" aria-hidden="true"></i></a>--}}
-{{--                                    @else--}}
-{{--                                        <a href="{{route('servers.index')}}"--}}
-{{--                                           class="btn btn-sm btn-primary" title="Показать весь список">--}}
-{{--                                            <i class="fa fa-list" aria-hidden="true"></i></a>--}}
-{{--                                    @endif--}}
-
-
-{{--                                    @if(request()->view == 10)--}}
-{{--                                        <a href="{{ route('servers.index', ['view' => '10']) }}"--}}
-{{--                                           class="btn btn-sm btn-primary">--}}
-{{--                                            10</a>--}}
-{{--                                    @elseif(request()->view == null)--}}
-{{--                                        <a href="{{ route('servers.index', ['view' => '10']) }}"--}}
-{{--                                           class="btn btn-sm btn-primary">--}}
-{{--                                            10</a>--}}
-{{--                                    @else--}}
-{{--                                        <a href="{{ route('servers.index', ['view' => '10']) }}"--}}
-{{--                                           class="btn btn-sm btn-outline-primary">--}}
-{{--                                            10</a>--}}
-{{--                                    @endif--}}
-{{--                                    @if(request()->view == 25)--}}
-{{--                                        <a href="{{ route('servers.index', ['view' => '25']) }}"--}}
-{{--                                           class="btn btn-sm btn-primary">--}}
-{{--                                            25</a>--}}
-{{--                                    @else--}}
-{{--                                        <a href="{{ route('servers.index', ['view' => '25']) }}"--}}
-{{--                                           class="btn btn-sm btn-outline-primary">--}}
-{{--                                            25</a>--}}
-{{--                                    @endif--}}
-{{--                                    @if(request()->view == 50)--}}
-{{--                                        <a href="{{ route('servers.index', ['view' => '50']) }}"--}}
-{{--                                           class="btn btn-sm btn-primary">--}}
-{{--                                            50</a>--}}
-{{--                                    @else--}}
-{{--                                        <a href="{{ route('servers.index', ['view' => '50']) }}"--}}
-{{--                                           class="btn btn-sm btn-outline-primary">--}}
-{{--                                            50</a>--}}
-{{--                                    @endif--}}
+                                    <a href="{{route('network.devices.create')}}"
+                                       class="btn btn-sm btn-success" title="Добавление нового устройства">
+                                        <i class="fa fa-plus-square"></i></a>
                                 </div>
                             </div>
                         </div>
+                    </div>
 
+                    <div class="card">
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Id</th>
-                                    <th>Адрес</th>
-                                    <th>Описание</th>
-                                    <th>Статус</th>
+                                    <th>Hostname</th>
+                                    <th>Hardware / OS</th>
+                                    <th>Info</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-
-{{--                                @foreach($servers as $server)--}}
-{{--                                    @php--}}
-{{--                                        /** @var \App\Http\Controllers\Admin\Servers\ServersController $server */--}}
-{{--                                    @endphp--}}
-
-{{--                                    <tr>--}}
-{{--                                        @if($servers instanceof \Illuminate\Pagination\LengthAwarePaginator)--}}
-{{--                                            <td>{{ ($servers->currentPage() - 1) * $servers->perPage() + $loop->iteration }}</td>--}}
-{{--                                        @else--}}
-{{--                                            <td>{{ $loop->iteration }}</td>--}}
-{{--                                        @endif--}}
-{{--                                        <td>{{ long2ip($server->addr) }}</td>--}}
-{{--                                        <td>{{ $server->description }}</td>--}}
-{{--                                        <td>--}}
-{{--                                            @if($server->enabled == 1)--}}
-{{--                                                <i class="fa fa-check-circle text-success"></i>--}}
-{{--                                            @else--}}
-{{--                                                <i class="fa fa-exclamation-circle text-danger"></i>--}}
-{{--                                            @endif--}}
-{{--                                        </td>--}}
-{{--                                        <td>--}}
-{{--                                            <div class="btn-group">--}}
-{{--                                                <a href="{{route('servers.show',$server->id)}}"--}}
-{{--                                                   class="btn btn-xs bg-gradient-info"--}}
-{{--                                                   title="Просмотр сервера">--}}
-{{--                                                    <i class="fa fa-eye"></i>--}}
-{{--                                                </a>--}}
-{{--                                                <a href="{{route('servers.edit', $server->id)}}"--}}
-{{--                                                   class="btn btn-xs bg-gradient-warning" title="Редактирование сервера">--}}
-{{--                                                    <i class="fa fa-edit"></i></a>--}}
-{{--                                                <a href="#"--}}
-{{--                                                   class="btn btn-xs bg-gradient-danger" title="Удаление сервера">--}}
-{{--                                                    <i class="fa fa-trash"></i></a>--}}
-{{--                                            </div>--}}
-{{--                                        </td>--}}
-{{--                                    </tr>--}}
-{{--                                @endforeach--}}
+                                @foreach($devices as $device)
+                                    @if($device->enabled == 1)
+                                        <tr class="table-row">
+                                    @else
+                                        <tr class="table-row" bgcolor="#a9a9a9">
+                                            @endif
+                                            <td>
+                                                <div class="row">
+                                                    @if($device->enabled === 1)
+                                                        <div class="vl pt-1 text-success"></div>
+                                                    @else
+                                                        <div class="vl pt-1 text-gray"></div>
+                                                    @endif
+                                                    <div class="col">
+                                                        {{ $device->hostname }}
+                                                        <div class="small">
+                                                            Uptime:
+                                                            {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffAsCarbonInterval()->d }}
+                                                            д.
+                                                            {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffAsCarbonInterval()->h }}
+                                                            ч.
+                                                            {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffAsCarbonInterval()->i }}
+                                                            м.
+                                                            {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffAsCarbonInterval()->s }}
+                                                            с.
+                                                        </div>
+                                                    </div>
+                                            </td>
+                                            <td>
+                                                <div class="small">
+                                                    OS/Version: {{ $device->firmware->title }}
+                                                    {{ $device->firmware->version }}
+                                                    ({{ $device->packets_version }})
+                                                </div>
+                                                <div class="small">
+                                                    Model: {{ $device->model->title }}
+                                                    @empty(!$device->human_model)
+                                                        ({{$device->human_model}})
+                                                    @endif
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="small">
+                                                    Contact: {{ $device->contact }}
+                                                </div>
+                                                <div class="small">
+                                                    Location: {{ $device->location }}
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
                     </div>
-
-{{--                    @if($servers instanceof \Illuminate\Pagination\LengthAwarePaginator)--}}
-{{--                        <ul class="pagination pagination-xs">--}}
-{{--                            @if ($servers->lastPage() >= $servers->currentPage() && $servers->lastPage() > 1)--}}
-{{--                                {{ $servers->links('vendor.pagination.bootstrap-4') }}--}}
-{{--                            @endif--}}
-{{--                        </ul>--}}
-{{--                    @endif--}}
-
                 </div>
             </div>
         </div>

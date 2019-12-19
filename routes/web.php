@@ -106,7 +106,7 @@ Route::group(
             ['prefix' => 'network', 'namespace' => 'Admin\Network', 'as' => 'network.'],
             function () {
                 $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
-                Route::resource('devices', 'DevicesController')
+                Route::resource('devices', 'NetworkDevicesController')
                     ->only($methods);
             }
         );
