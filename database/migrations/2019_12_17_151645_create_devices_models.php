@@ -15,10 +15,7 @@ class CreateDevicesModels extends Migration
     {
         Schema::create('devices_models', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->unsignedBigInteger('device_id');
             $table->string('title')->comment('Description for view');
-            $table->foreign('device_id')
-                ->references('id')->on('network_devices');
             $table->timestamps();
         });
     }
