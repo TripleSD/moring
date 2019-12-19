@@ -66963,7 +66963,7 @@ $(document).ready(function () {
       data: {
         labels: sites,
         datasets: [{
-          label: 'Результат последнего пинга сайта, мс',
+          label: 'Результаты пинга последних 5 добавленных сайтов, мс',
           data: ping,
           backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
           borderWidth: 1
@@ -67044,7 +67044,7 @@ $(document).ready(function () {
       data: {
         labels: servers,
         datasets: [{
-          label: 'Статистика используемых версий web серверов, шт',
+          label: 'Статистика используемых версий для последних добавленных 5 web серверов, шт',
           data: counts,
           backgroundColor: ['rgb(255, 99, 132)', 'rgb(255, 159, 64)', 'rgb(255, 205, 86)', 'rgb(75, 192, 192)', 'rgb(54, 162, 235)'],
           borderWidth: 1

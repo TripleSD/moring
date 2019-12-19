@@ -137,20 +137,15 @@ class AdminSitesRepository extends Repository
 
     public function listOfPings($request, int $count)
     {
-        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get(
-            'average',
-            'created_at'
-        )->slice(0, $count);
+        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get(['average', 'created_at'])->slice(0, $count);
 
         return $list;
     }
 
     public function getWebServersForNew(int $count)
     {
-        $list = Sites::where('pending', '<>', 1)->with('getWebServer')->orderBy('created_at', 'desc')->get(
-            'id',
-            'title'
-        )->slice(0, $count);
+        $list = Sites::where('pending', '<>', 1)->with('getWebServer')->orderBy('created_at', 'desc')
+            ->get(['id', 'title'])->slice(0, $count);
         $webCounter = collect();
         $list->map(
             function ($item) use ($webCounter) {

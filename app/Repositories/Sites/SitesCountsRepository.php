@@ -114,7 +114,6 @@ class SitesCountsRepository extends Repository
                 }
             }
         }
-
         return $sites;
     }
 }
