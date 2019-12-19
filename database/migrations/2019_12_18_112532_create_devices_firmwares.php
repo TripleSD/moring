@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateNetworkDevicesTable extends Migration
+class CreateDevicesFirmwares extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,10 @@ class CreateNetworkDevicesTable extends Migration
      */
     public function up()
     {
-        Schema::create('network_devices', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->bigInteger('brand_id')->comment('Brand ID');
-            $table->bigInteger('model_id')->comment('Model ID');
+        Schema::create('devices_firmwares', function (Blueprint $table) {
+            $table->bigIncrements('id')->comment('Firmware id');
+            $table->string('title')->comment('Description for view');
+            $table->string('version')->comment('Version for view');
             $table->timestamps();
         });
     }
@@ -28,6 +28,6 @@ class CreateNetworkDevicesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('network_devices');
+        Schema::dropIfExists('devices_firmwares');
     }
 }
