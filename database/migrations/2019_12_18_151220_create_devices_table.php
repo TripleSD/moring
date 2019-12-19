@@ -32,6 +32,7 @@ class CreateDevicesTable extends Migration
                 $table->integer('license_level')->nullable()->comment('License level. Only to Mikrotik');
                 $table->string('serial_number')->nullable()->comment('Serial number');
                 $table->string('packets_version')->nullable()->comment('Packets version. Only to Mikrotik');
+                $table->integer('platform')->nullable()->comment('Platform type. Hw or Cloud');
                 $table->integer('enabled')->default(1)->comment('Enabled/Disable monitoring status');
                 $table->timestamps();
             }
