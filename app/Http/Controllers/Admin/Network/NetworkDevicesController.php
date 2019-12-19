@@ -25,6 +25,7 @@ class NetworkDevicesController extends Controller
     public function index()
     {
         $devices = Devices::with('firmware', 'model')->get();
+
         return view('admin.network.devices.index', compact('devices'));
     }
 
@@ -93,6 +94,7 @@ class NetworkDevicesController extends Controller
             $vendor = new DevicesVendors();
             $vendor->title = $vendorTitle;
             $vendor->save();
+
             return $vendor->id;
         } else {
             return $vendor->id;
@@ -107,6 +109,7 @@ class NetworkDevicesController extends Controller
             $model = new DevicesModels();
             $model->title = $modelTitle;
             $model->save();
+
             return $model->id;
         } else {
             return $model->id;
@@ -124,6 +127,7 @@ class NetworkDevicesController extends Controller
             $firmware->title = $firmwareTitle;
             $firmware->version = $firmwareVersion;
             $firmware->save();
+
             return $firmware->id;
         } else {
             return $firmware->id;

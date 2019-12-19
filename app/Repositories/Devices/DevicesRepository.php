@@ -33,6 +33,7 @@ class DevicesRepository extends Repository
         $device->serial_number = $serialNumber;
         $device->packets_version = $packetsVersion;
         $device->save();
+
         return true;
     }
 }

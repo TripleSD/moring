@@ -38,7 +38,7 @@ class MikroTik extends Repository
 
             return trim($string);
         } catch (\Exception $e) {
-            return null;
+            return (string)'';
         }
     }
 
@@ -84,7 +84,7 @@ class MikroTik extends Repository
 
             return trim($string);
         } catch (\Exception $e) {
-            return null;
+            return (string)'';
         }
     }
 
@@ -97,7 +97,7 @@ class MikroTik extends Repository
 
             return trim($string);
         } catch (\Exception $e) {
-            return null;
+            return (string)'';
         }
     }
 
