@@ -14,8 +14,18 @@ class SnmpRepository extends Repository
 
     public function getVendor($snmpFlow)
     {
-        $string = $snmpFlow->get('SNMPv2-MIB::sysName.0');
+        $vendor = (string) null;
 
-        return str_replace('STRING: ', '', $string);
+        $string = $snmpFlow->get('1.3.6.1.2.1.1.1.0');
+
+        if (preg_match('/RouterOS/', $string)) {
+            $vendor = 'MikroTik';
+        }
+
+        if (preg_match('/Cisco/', $string)) {
+            $vendor = 'Cisco';
+        }
+
+        return (string) $vendor;
     }
 }
