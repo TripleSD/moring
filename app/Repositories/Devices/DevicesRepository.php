@@ -8,6 +8,7 @@ use App\Repositories\Repository;
 class DevicesRepository extends Repository
 {
     public function saveDevice(
+        $title,
         $hostname,
         $vendorId,
         $modelId,
@@ -18,9 +19,11 @@ class DevicesRepository extends Repository
         $humanModel,
         $licenseLevel,
         $serialNumber,
-        $packetsVersion
+        $packetsVersion,
+        $platformType
     ) {
         $device = new Devices();
+        $device->title = $title;
         $device->hostname = $hostname;
         $device->vendor_id = $vendorId;
         $device->model_id = $modelId;
@@ -32,6 +35,7 @@ class DevicesRepository extends Repository
         $device->license_level = $licenseLevel;
         $device->serial_number = $serialNumber;
         $device->packets_version = $packetsVersion;
+        $device->platform_type = $platformType;
         $device->save();
 
         return true;
