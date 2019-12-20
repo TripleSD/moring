@@ -2,6 +2,7 @@ preset: laravel
 
 disabled:
   - concat_without_spaces
+  - simplified_null_return
 finder:
   not-name:
     - "index.php"
