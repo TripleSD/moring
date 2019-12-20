@@ -16,7 +16,7 @@ class MikroTik extends Repository
 
     public function getModel($snmpFlow)
     {
-        $string = $snmpFlow->get('SNMPv2-MIB::sysDescr.0');
+        $string = $snmpFlow->get('1.3.6.1.2.1.1.1.0');
 
         return str_replace('STRING: RouterOS ', '', $string);
     }
@@ -107,5 +107,14 @@ class MikroTik extends Repository
         $string = str_replace('INTEGER: ', '', $string);
 
         return trim($string);
+    }
+
+    public function getPlarformType($model)
+    {
+        if ($model === 'CHR') {
+            return (integer) 1;
+        } else {
+            return (integer) 0;
+        }
     }
 }
