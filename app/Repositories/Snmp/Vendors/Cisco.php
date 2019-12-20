@@ -19,6 +19,7 @@ class Cisco extends Repository
         $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.13.1001');
         $string = str_replace('STRING: ', '', $string);
         $string = str_replace('"', '', $string);
+
         return trim($string);
     }
 
@@ -26,6 +27,7 @@ class Cisco extends Repository
     {
         $string = $snmpFlow->get('SNMPv2-MIB::sysDescr.0');
         preg_match('/Cisco IOS Software/', $string, $match);
+
         return $match[0];
     }
 
