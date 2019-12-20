@@ -38,7 +38,7 @@ class MikroTik extends Repository
 
             return trim($string);
         } catch (\Exception $e) {
-            return (string) null;
+            return null;
         }
     }
 
@@ -84,7 +84,7 @@ class MikroTik extends Repository
 
             return trim($string);
         } catch (\Exception $e) {
-            return (string) null;
+            return null;
         }
     }
 
@@ -97,7 +97,7 @@ class MikroTik extends Repository
 
             return trim($string);
         } catch (\Exception $e) {
-            return (string) null;
+            return null;
         }
     }
 
@@ -112,9 +112,9 @@ class MikroTik extends Repository
     public function getPlarformType($model)
     {
         if ($model === 'CHR') {
-            return (integer) 1;
+            return (int) 1;
         } else {
-            return (integer) 0;
+            return (int) 0;
         }
     }
 }

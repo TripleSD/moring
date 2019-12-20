@@ -25,7 +25,7 @@ class Cisco extends Repository
     public function getFirmware($snmpFlow)
     {
         $string = $snmpFlow->get('SNMPv2-MIB::sysDescr.0');
-        preg_match('/Cisco IOS Software/', $string,$match);
+        preg_match('/Cisco IOS Software/', $string, $match);
         return $match[0];
     }
 
@@ -38,13 +38,13 @@ class Cisco extends Repository
 
             return trim($string);
         } catch (\Exception $e) {
-            return (string) null;
+            return null;
         }
     }
 
     public function getPacketsVersion($snmpFlow)
     {
-        return (string) null;
+        return null;
     }
 
     public function getUptime($snmpFlow)
@@ -80,13 +80,13 @@ class Cisco extends Repository
 
             return trim($string);
         } catch (\Exception $e) {
-            return (string) null;
+            return null;
         }
     }
 
     public function getHumanModel($snmpFlow)
     {
-        return (string) null;
+        return null;
     }
 
     public function getLicenseLevel($snmpFlow)
@@ -96,6 +96,6 @@ class Cisco extends Repository
 
     public function getPlarformType($model)
     {
-        return (integer) 0;
+        return (int) 0;
     }
 }
