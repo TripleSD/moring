@@ -4,7 +4,6 @@ namespace App\Repositories\Snmp\Vendors;
 
 use App\Repositories\Repository;
 use App\Repositories\Snmp\SnmpRepository;
-use phpDocumentor\Reflection\Types\Null_;
 
 class Cisco extends Repository
 {
