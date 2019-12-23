@@ -16,4 +16,9 @@ class Devices extends Model
     {
         return $this->belongsTo(DevicesModels::class, 'model_id', 'id');
     }
+
+    public function vendor(): belongsTo
+    {
+        return $this->belongsTo(DevicesVendors::class, 'vendor_id', 'id');
+    }
 }
