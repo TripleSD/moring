@@ -5,3 +5,7 @@
  
  #### Cisco
  - WS-C3560-8PC-S
+ 
+ #### D-Link
+ - DGS-3000-10TC
+ 
