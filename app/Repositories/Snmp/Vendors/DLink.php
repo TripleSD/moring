@@ -5,7 +5,7 @@ namespace App\Repositories\Snmp\Vendors;
 use App\Repositories\Repository;
 use App\Repositories\Snmp\SnmpRepository;
 
-class Dlink extends Repository
+class DLink extends Repository
 {
     private $snmpRepository;
 
