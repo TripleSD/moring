@@ -20,7 +20,10 @@ class DevicesRepository extends Repository
         $licenseLevel,
         $serialNumber,
         $packetsVersion,
-        $platformType
+        $platformType,
+        $snmpPort,
+        $snmpCommunity,
+    $snmpVersion
     ) {
         $device = new Devices();
         $device->title = $title;
@@ -36,6 +39,9 @@ class DevicesRepository extends Repository
         $device->serial_number = $serialNumber;
         $device->packets_version = $packetsVersion;
         $device->platform_type = $platformType;
+        $device->snmp_port = $snmpPort;
+        $device->snmp_community = $snmpCommunity;
+        $device->snmp_version = $snmpVersion;
         $device->save();
 
         return true;
