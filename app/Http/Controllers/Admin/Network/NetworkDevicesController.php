@@ -50,6 +50,7 @@ class NetworkDevicesController extends Controller
 
             if ($vendor == null) {
                 flash('Устройства данного вендора не поддерживаются')->warning();
+
                 return redirect()->back()->withInput();
             }
 
