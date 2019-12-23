@@ -39,12 +39,12 @@ class NetworkDevicesController extends Controller
         try {
             // Getting vars from template
             $hostname = $request->input('hostname');
-            $community = $request->input('community');
             $title = $request->input('title');
-            $port = $request->input('snmp_port');
+            $snmpCommunity = $request->input('community');
+            $snmpPort = $request->input('snmp_port');
             $snmpVersion = $request->input('snmp_version');
 
-            $snmpFlow = $this->snmpRepository->getSnmpFlow($hostname, $community);
+            $snmpFlow = $this->snmpRepository->getSnmpFlow($hostname, $snmpCommunity);
             $vendor = $this->snmpRepository->getVendor($snmpFlow);
             $vendorClass = str_replace('-','',$vendor);
 
@@ -85,7 +85,10 @@ class NetworkDevicesController extends Controller
                 $licenseLevel,
                 $serialNumber,
                 $packetsVersion,
-                $platformType
+                $platformType,
+                $snmpPort,
+                $snmpCommunity,
+                $snmpVersion
             );
             flash('Хост добавлен')->success();
 
