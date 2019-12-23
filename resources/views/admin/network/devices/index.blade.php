@@ -40,9 +40,9 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th>Hostname</th>
-                                    <th>Hardware / OS</th>
-                                    <th>Info</th>
+                                    <th>Устройство</th>
+                                    <th>Платформа / Прошивка</th>
+                                    <th>Доп.информация</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -61,10 +61,27 @@
                                                         <div class="vl pt-1 text-gray"></div>
                                                     @endif
                                                     <div class="col">
-                                                        {{ $device->hostname }}
+                                                        <div>
+                                                            @if($device->vendor->title == 'Cisco')
+                                                                <img src="/img/vendors/cisco.png">
+                                                            @elseif($device->vendor->title == 'MikroTik')
+                                                                <img src="/img/vendors/mikrotik.png">
+                                                            @elseif($device->vendor->title == 'D-Link')
+                                                                <img src="/img/vendors/d-link.png">
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col">
                                                         <div class="small">
-                                                            Uptime:
-                                                            {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffAsCarbonInterval()->d }}
+                                                            <b>Имя/IP адрес устройства:</b> {{ $device->hostname }}
+                                                        </div>
+                                                        <div class="small">
+                                                            <b>Время работы:</b>
+                                                            {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffInDays() }}
                                                             д.
                                                             {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffAsCarbonInterval()->h }}
                                                             ч.
@@ -74,15 +91,26 @@
                                                             с.
                                                         </div>
                                                     </div>
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="small">
-                                                    OS/Version: {{ $device->firmware->title }}
-                                                    {{ $device->firmware->version }}
-                                                    ({{ $device->packets_version }})
+                                                    <b>ОС:</b> {{ $device->firmware->title }}
+                                                    {{ $device->packets_version }}
                                                 </div>
+                                                @if(!empty($device->firmware->version))
+                                                    <div class="small">
+                                                        <b>Прошивка:</b> {{ $device->firmware->version }}
+                                                    </div>
+                                                @endif
                                                 <div class="small">
-                                                    Model: {{ $device->model->title }}
+                                                    <b>Модель:</b> {{ $device->model->title }}
+                                                    @if($device->platform_type == 0)
+                                                        <i class="fas fa-network-wired text-success"></i>
+                                                    @else
+                                                        <i class="fas fa-cloud text-indigo"></i>
+                                                    @endif
+
                                                     @empty(!$device->human_model)
                                                         ({{$device->human_model}})
                                                     @endif
@@ -90,10 +118,13 @@
                                             </td>
                                             <td>
                                                 <div class="small">
-                                                    Contact: {{ $device->contact }}
+                                                    <b>Контакты:</b> {{ $device->contact }}
                                                 </div>
                                                 <div class="small">
-                                                    Location: {{ $device->location }}
+                                                    <b>Расположение:</b> {{ $device->location }}
+                                                </div>
+                                                <div class="small">
+                                                    <b>Описание:</b> {{ $device->title }}
                                                 </div>
                                             </td>
                                         </tr>
