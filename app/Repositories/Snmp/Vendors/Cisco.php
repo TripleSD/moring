@@ -46,7 +46,7 @@ class Cisco extends Repository
 
     public function getPacketsVersion($snmpFlow): void
     {
-        return null;
+        return;
     }
 
     public function getUptime($snmpFlow): string
@@ -88,12 +88,12 @@ class Cisco extends Repository
 
     public function getHumanModel($snmpFlow): void
     {
-        return null;
+        return;
     }
 
     public function getLicenseLevel($snmpFlow): void
     {
-        return null;
+        return;
     }
 
     public function getPlarformType($model): int
