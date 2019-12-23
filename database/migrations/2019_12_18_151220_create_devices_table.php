@@ -36,6 +36,7 @@ class CreateDevicesTable extends Migration
                 $table->integer('enabled')->default(1)->comment('Enabled/Disable monitoring status');
                 $table->integer('snmp_port')->comment('SNMP port');
                 $table->string('snmp_community')->comment('SNMP community');
+                $table->integer('snmp_version')->comment('SNMP version');
                 $table->timestamps();
             }
         );
