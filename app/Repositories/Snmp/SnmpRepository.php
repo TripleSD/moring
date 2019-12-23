@@ -26,6 +26,12 @@ class SnmpRepository extends Repository
             $vendor = 'Cisco';
         }
 
+        if (preg_match('/DGS-/', $string)) {
+            $vendor = 'D-Link';
+        } elseif (preg_match('/DES-/', $string)) {
+            $vendor = 'D-Link';
+        }
+
         return (string) $vendor;
     }
 }
