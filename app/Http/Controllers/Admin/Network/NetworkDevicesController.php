@@ -46,7 +46,7 @@ class NetworkDevicesController extends Controller
 
             $snmpFlow = $this->snmpRepository->getSnmpFlow($hostname, $snmpCommunity);
             $vendor = $this->snmpRepository->getVendor($snmpFlow);
-            $vendorClass = str_replace('-','',$vendor);
+            $vendorClass = str_replace('-', '', $vendor);
 
             if ($vendor == null) {
                 flash('Устройства данного вендора не поддерживаются')->warning();
