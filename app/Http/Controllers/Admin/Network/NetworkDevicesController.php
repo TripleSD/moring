@@ -24,7 +24,7 @@ class NetworkDevicesController extends Controller
 
     public function index()
     {
-        $devices = Devices::with('firmware', 'model')->get();
+        $devices = Devices::with('firmware', 'model', 'vendor')->get();
 
         return view('admin.network.devices.index', compact('devices'));
     }
@@ -40,18 +40,27 @@ class NetworkDevicesController extends Controller
             // Getting vars from template
             $hostname = $request->input('hostname');
             $community = $request->input('community');
+            $title = $request->input('title');
             $port = $request->input('snmp_port');
             $snmpVersion = $request->input('snmp_version');
 
             $snmpFlow = $this->snmpRepository->getSnmpFlow($hostname, $community);
             $vendor = $this->snmpRepository->getVendor($snmpFlow);
-            $c = '\App\Repositories\Snmp\Vendors\\' . $vendor;
+            $vendorClass = str_replace('-','',$vendor);
+
+            if ($vendor == null) {
+                flash('Устройства данного вендора не поддерживаются')->warning();
+                return redirect()->back()->withInput();
+            }
+
+            $c = '\App\Repositories\Snmp\Vendors\\' . $vendorClass;
             $firmwareClass = new $c();
 
             // Gettings vars from device
             $location = $firmwareClass->getLocation($snmpFlow);
             $contact = $firmwareClass->getContact($snmpFlow);
             $model = $firmwareClass->getModel($snmpFlow);
+            $platformType = $firmwareClass->getPlarformType($model);
             $firmwareTitle = $firmwareClass->getFirmware($snmpFlow);
             $firmwareVersion = $firmwareClass->getFirmwareVersion($snmpFlow);
             $uptimeDevice = $firmwareClass->getUptime($snmpFlow);
@@ -64,6 +73,7 @@ class NetworkDevicesController extends Controller
             $vendorId = $this->checkVendor($vendor);
             $modelId = $this->checkModel($model);
             $this->deviceRepository->saveDevice(
+                $title,
                 $hostname,
                 $vendorId,
                 $modelId,
@@ -74,14 +84,16 @@ class NetworkDevicesController extends Controller
                 $humanModel,
                 $licenseLevel,
                 $serialNumber,
-                $packetsVersion
+                $packetsVersion,
+                $platformType
             );
             flash('Хост добавлен')->success();
 
             return redirect()->route('network.devices.index');
         } catch (\Exception $e) {
-            dd($e->getMessage());
-            flash('Не удалось получить SNMP данные')->warning();
+            flash($e->getFile());
+            flash($e->getLine());
+            flash('Возникла ошибка при добавлении нового устройства! (' . $e->getMessage() . ')')->warning();
 
             return redirect()->back()->withInput();
         }
