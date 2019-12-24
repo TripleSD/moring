@@ -3,7 +3,7 @@ preset: laravel
 disabled:
   - concat_without_spaces
   - simplified_null_return
-  - no_extra_consecutive_blank_lines
+  - cast_spaces
 finder:
   not-name:
     - "index.php"
