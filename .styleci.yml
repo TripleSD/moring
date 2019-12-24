@@ -1,10 +1,9 @@
 preset: laravel
 
-enabled:
-  - align_equals
 disabled:
   - concat_without_spaces
   - simplified_null_return
+  - align_equals_minimal
 finder:
   not-name:
     - "index.php"
