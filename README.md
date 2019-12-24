@@ -6,7 +6,7 @@
 ![](https://img.shields.io/github/license/TripleSD/moring)
 
 <p align="center">
-<img src="docs/img/moring_readme.png" alt="drawing" width="300"/>
+<img src="docs/img/moring_readme_1.png" alt="drawing" width="300"/>
 <img src="docs/img/moring_readme_2.png" alt="drawing" width="300"/>
 </p>
 
