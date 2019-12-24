@@ -1,10 +1,9 @@
 preset: laravel
 
-enabled:
-  - long_list_syntax
 disabled:
   - concat_without_spaces
   - simplified_null_return
+  - no_extra_consecutive_blank_lines
 finder:
   not-name:
     - "index.php"
