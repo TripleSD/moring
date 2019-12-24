@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Admin\Network;
 
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\Devices;
 use App\Models\DevicesFirmwares;
 use App\Models\DevicesModels;
 use App\Models\DevicesVendors;
-use Illuminate\Http\RedirectResponse;
-use Illuminate\Contracts\View\Factory;
 use App\Repositories\Devices\DevicesRepository;
 use App\Repositories\Snmp\SnmpRepository;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class NetworkDevicesController extends Controller
 {
