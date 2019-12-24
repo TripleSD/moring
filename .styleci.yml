@@ -3,7 +3,7 @@ preset: laravel
 disabled:
   - concat_without_spaces
   - simplified_null_return
-  - cast_spaces
+  - align_double_arrow
 finder:
   not-name:
     - "index.php"
