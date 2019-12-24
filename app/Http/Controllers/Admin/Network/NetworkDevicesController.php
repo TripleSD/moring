@@ -2,18 +2,24 @@
 
 namespace App\Http\Controllers\Admin\Network;
 
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
 use App\Models\Devices;
 use App\Models\DevicesFirmwares;
 use App\Models\DevicesModels;
 use App\Models\DevicesVendors;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Contracts\View\Factory;
 use App\Repositories\Devices\DevicesRepository;
 use App\Repositories\Snmp\SnmpRepository;
 use Illuminate\Http\Request;
 
 class NetworkDevicesController extends Controller
 {
+    /** @var SnmpRepository */
     private $snmpRepository;
+
+    /** @var DevicesRepository */
     private $deviceRepository;
 
     public function __construct()
@@ -22,6 +28,9 @@ class NetworkDevicesController extends Controller
         $this->deviceRepository = new DevicesRepository();
     }
 
+    /**
+     * @return Factory|View
+     */
     public function index()
     {
         $devices = Devices::with('firmware', 'model', 'vendor')->get();
@@ -29,25 +38,39 @@ class NetworkDevicesController extends Controller
         return view('admin.network.devices.index', compact('devices'));
     }
 
+    /**
+     * @return Factory|View
+     */
     public function create()
     {
         return view('admin.network.devices.create');
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function store(Request $request)
     {
         try {
             // Getting vars from template
-            $hostname      = $request->input('hostname');
-            $title         = $request->input('title');
-            $snmpCommunity = $request->input('community');
-            $snmpPort      = $request->input('snmp_port');
-            $snmpVersion   = $request->input('snmp_version');
+            $hostname      = $request->input('hostname');          // Hostname device
+            $title         = $request->input('title');             // Short description
+            $snmpCommunity = $request->input('community');         // Device community
+            $snmpPort      = $request->input('snmp_port');         // Device snmp port
+            $snmpVersion   = $request->input('snmp_version');      // Device snmp version 1/2/3
 
-            $snmpFlow    = $this->snmpRepository->getSnmpFlow($hostname, $snmpCommunity);
+            // Getting snmp flow from device
+            $snmpFlow = $this->snmpRepository->getSnmpFlow(
+                $hostname,
+                $snmpCommunity
+            );
+
+            // Identification vendor
             $vendor      = $this->snmpRepository->getVendor($snmpFlow);
-            $vendorClass = str_replace('-', '', $vendor);
+            $vendorClass = str_replace('-', '', $vendor); // Replace unused symbols
 
+            // Checking vendor isset on system
             if ($vendor == null) {
                 flash('Устройства данного вендора не поддерживаются')->warning();
 
@@ -57,16 +80,16 @@ class NetworkDevicesController extends Controller
             $firmwareClassFile = '\App\Repositories\Snmp\Vendors\\' . $vendorClass;
             $firmwareClass     = new $firmwareClassFile();
 
-            // Gettings vars from device
+            // Getting vars from device
             $location        = $firmwareClass->getLocation($snmpFlow);
             $contact         = $firmwareClass->getContact($snmpFlow);
             $model           = $firmwareClass->getModel($snmpFlow);
-            $platformType    = $firmwareClass->getPlarformType($model);
+            $platformType    = $firmwareClass->getPlatformType($model);
             $firmwareTitle   = $firmwareClass->getFirmware($snmpFlow);
             $firmwareVersion = $firmwareClass->getFirmwareVersion($snmpFlow);
             $uptimeDevice    = $firmwareClass->getUptime($snmpFlow);
             $packetsVersion  = $firmwareClass->getPacketsVersion($snmpFlow);
-            $serialNumber    = $firmwareClass->getSerialnNumber($snmpFlow);
+            $serialNumber    = $firmwareClass->getSerialNumber($snmpFlow);
             $humanModel      = $firmwareClass->getHumanModel($snmpFlow);
             $licenseLevel    = $firmwareClass->getLicenseLevel($snmpFlow);
 
@@ -103,7 +126,11 @@ class NetworkDevicesController extends Controller
         }
     }
 
-    public function checkVendor($vendorTitle)
+    /**
+     * @param string $vendorTitle
+     * @return int
+     */
+    public function checkVendor(string $vendorTitle): int
     {
         $vendor = DevicesVendors::where('title', $vendorTitle)->first();
         if (empty($vendor)) {
@@ -117,7 +144,11 @@ class NetworkDevicesController extends Controller
         }
     }
 
-    public function checkModel($modelTitle)
+    /**
+     * @param string $modelTitle
+     * @return int
+     */
+    public function checkModel(string $modelTitle): int
     {
         $model = DevicesModels::where('title', $modelTitle)->first();
 
@@ -132,7 +163,12 @@ class NetworkDevicesController extends Controller
         }
     }
 
-    public function checkFirmware($firmwareTitle, $firmwareVersion)
+    /**
+     * @param string $firmwareTitle
+     * @param string $firmwareVersion
+     * @return int
+     */
+    public function checkFirmware(string $firmwareTitle, string $firmwareVersion): int
     {
         $firmware = DevicesFirmwares::where('title', $firmwareTitle)
             ->where('version', $firmwareVersion)
