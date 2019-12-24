@@ -7,6 +7,7 @@ use App\Repositories\Snmp\SnmpRepository;
 
 class MikroTik extends Repository
 {
+    /** @var SnmpRepository */
     private $snmpRepository;
 
     public function __construct()
@@ -14,6 +15,10 @@ class MikroTik extends Repository
         $this->snmpRepository = new SnmpRepository();
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getModel($snmpFlow): string
     {
         $string = $snmpFlow->get('1.3.6.1.2.1.1.1.0');
@@ -21,6 +26,10 @@ class MikroTik extends Repository
         return (string) str_replace('STRING: RouterOS ', '', $string);
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getFirmware($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-MIB::sysDescr.0');
@@ -29,6 +38,10 @@ class MikroTik extends Repository
         return (string) trim($string[1]);
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string|null
+     */
     public function getFirmwareVersion($snmpFlow): ?string
     {
         try {
@@ -42,6 +55,10 @@ class MikroTik extends Repository
         }
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getPacketsVersion($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-SMI::enterprises.14988.1.1.4.4.0');
@@ -51,6 +68,10 @@ class MikroTik extends Repository
         return (string) trim($string);
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getUptime($snmpFlow): string
     {
         $string = $snmpFlow->get('.1.3.6.1.2.1.1.3.0');
@@ -60,6 +81,10 @@ class MikroTik extends Repository
         return (string) trim($string[0]);
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getContact($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-MIB::sysContact.0');
@@ -68,6 +93,10 @@ class MikroTik extends Repository
         return (string) trim($string);
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getLocation($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-MIB::sysLocation.0');
@@ -76,7 +105,11 @@ class MikroTik extends Repository
         return (string) trim($string);
     }
 
-    public function getSerialnNumber($snmpFlow): ?string
+    /**
+     * @param $snmpFlow
+     * @return string|null
+     */
+    public function getSerialNumber($snmpFlow): ?string
     {
         try {
             $string = $snmpFlow->get('1.3.6.1.4.1.14988.1.1.7.3.0');
@@ -88,6 +121,10 @@ class MikroTik extends Repository
         }
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string|null
+     */
     public function getHumanModel($snmpFlow): ?string
     {
         try {
@@ -101,6 +138,10 @@ class MikroTik extends Repository
         }
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getLicenseLevel($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-SMI::enterprises.14988.1.1.4.3.0');
@@ -109,7 +150,11 @@ class MikroTik extends Repository
         return (string) trim($string);
     }
 
-    public function getPlarformType($model): int
+    /**
+     * @param $model
+     * @return int
+     */
+    public function getPlatformType($model): int
     {
         if ($model === 'CHR') {
             return (int) 1;

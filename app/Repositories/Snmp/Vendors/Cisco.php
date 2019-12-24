@@ -7,6 +7,7 @@ use App\Repositories\Snmp\SnmpRepository;
 
 class Cisco extends Repository
 {
+    /** @var SnmpRepository */
     private $snmpRepository;
 
     public function __construct()
@@ -14,6 +15,10 @@ class Cisco extends Repository
         $this->snmpRepository = new SnmpRepository();
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getModel($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.13.1001');
@@ -23,6 +28,10 @@ class Cisco extends Repository
         return (string) trim($string);
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getFirmware($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-MIB::sysDescr.0');
@@ -31,6 +40,10 @@ class Cisco extends Repository
         return (string) $match[0];
     }
 
+    /**
+     * @param $snmpFlow
+     * @return string|null
+     */
     public function getFirmwareVersion($snmpFlow): ?string
     {
         try {
@@ -119,10 +132,10 @@ class Cisco extends Repository
     }
 
     /**
-     * @param $model
+     * @param $snmpFlow
      * @return int
      */
-    public function getPlatformType($model): int
+    public function getPlatformType($snmpFlow): int
     {
         return (int) 0;
     }

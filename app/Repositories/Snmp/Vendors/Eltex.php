@@ -7,6 +7,7 @@ use App\Repositories\Snmp\SnmpRepository;
 
 class Eltex extends Repository
 {
+    /** @var SnmpRepository */
     private $snmpRepository;
 
     public function __construct()
@@ -14,7 +15,10 @@ class Eltex extends Repository
         $this->snmpRepository = new SnmpRepository();
     }
 
-    // +
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getModel($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.13.67108992');
@@ -24,13 +28,19 @@ class Eltex extends Repository
         return (string) trim($string);
     }
 
-    // +
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getFirmware($snmpFlow): string
     {
-        return 'Eltex Linux';
+        return (string) 'Eltex Linux';
     }
 
-    // +
+    /**
+     * @param $snmpFlow
+     * @return string|null
+     */
     public function getFirmwareVersion($snmpFlow): ?string
     {
         try {
@@ -44,12 +54,17 @@ class Eltex extends Repository
         }
     }
 
-    //+
+    /**
+     * @param $snmpFlow
+     */
     public function getPacketsVersion($snmpFlow): void
     {
     }
 
-    //+
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getUptime($snmpFlow): string
     {
         $string = $snmpFlow->get('.1.3.6.1.2.1.1.3.0');
@@ -59,7 +74,10 @@ class Eltex extends Repository
         return (string) trim($string[0]);
     }
 
-    //+
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getContact($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-MIB::sysContact.0');
@@ -68,7 +86,10 @@ class Eltex extends Repository
         return (string) trim($string);
     }
 
-    // +
+    /**
+     * @param $snmpFlow
+     * @return string
+     */
     public function getLocation($snmpFlow): string
     {
         $string = $snmpFlow->get('SNMPv2-MIB::sysLocation.0');
@@ -77,8 +98,11 @@ class Eltex extends Repository
         return (string) trim($string);
     }
 
-    // +
-    public function getSerialnNumber($snmpFlow): ?string
+    /**
+     * @param $snmpFlow
+     * @return string|null
+     */
+    public function getSerialNumber($snmpFlow): ?string
     {
         try {
             $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.11.67108992');
@@ -90,18 +114,25 @@ class Eltex extends Repository
         }
     }
 
-    //+
+    /**
+     * @param $snmpFlow
+     */
     public function getHumanModel($snmpFlow): void
     {
     }
 
-    // +
+    /**
+     * @param $snmpFlow
+     */
     public function getLicenseLevel($snmpFlow): void
     {
     }
 
-    //+
-    public function getPlarformType($model): int
+    /**
+     * @param $snmpFlow
+     * @return int
+     */
+    public function getPlatformType($snmpFlow): int
     {
         return (int) 0;
     }
