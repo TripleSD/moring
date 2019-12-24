@@ -68,6 +68,8 @@
                                                                 <img src="/img/vendors/mikrotik.png">
                                                             @elseif($device->vendor->title == 'D-Link')
                                                                 <img src="/img/vendors/d-link.png">
+                                                            @elseif($device->vendor->title == 'Eltex')
+                                                                <img src="/img/vendors/eltex.png">
                                                             @endif
                                                         </div>
                                                     </div>
