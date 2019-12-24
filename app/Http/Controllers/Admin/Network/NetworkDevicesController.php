@@ -18,7 +18,7 @@ class NetworkDevicesController extends Controller
 
     public function __construct()
     {
-        $this->snmpRepository = new SnmpRepository();
+        $this->snmpRepository   = new SnmpRepository();
         $this->deviceRepository = new DevicesRepository();
     }
 
@@ -38,14 +38,14 @@ class NetworkDevicesController extends Controller
     {
         try {
             // Getting vars from template
-            $hostname = $request->input('hostname');
-            $title = $request->input('title');
+            $hostname      = $request->input('hostname');
+            $title         = $request->input('title');
             $snmpCommunity = $request->input('community');
-            $snmpPort = $request->input('snmp_port');
-            $snmpVersion = $request->input('snmp_version');
+            $snmpPort      = $request->input('snmp_port');
+            $snmpVersion   = $request->input('snmp_version');
 
-            $snmpFlow = $this->snmpRepository->getSnmpFlow($hostname, $snmpCommunity);
-            $vendor = $this->snmpRepository->getVendor($snmpFlow);
+            $snmpFlow    = $this->snmpRepository->getSnmpFlow($hostname, $snmpCommunity);
+            $vendor      = $this->snmpRepository->getVendor($snmpFlow);
             $vendorClass = str_replace('-', '', $vendor);
 
             if ($vendor == null) {
@@ -54,25 +54,25 @@ class NetworkDevicesController extends Controller
                 return redirect()->back()->withInput();
             }
 
-            $c = '\App\Repositories\Snmp\Vendors\\' . $vendorClass;
-            $firmwareClass = new $c();
+            $firmwareClassFile = '\App\Repositories\Snmp\Vendors\\' . $vendorClass;
+            $firmwareClass     = new $firmwareClassFile();
 
             // Gettings vars from device
-            $location = $firmwareClass->getLocation($snmpFlow);
-            $contact = $firmwareClass->getContact($snmpFlow);
-            $model = $firmwareClass->getModel($snmpFlow);
-            $platformType = $firmwareClass->getPlarformType($model);
-            $firmwareTitle = $firmwareClass->getFirmware($snmpFlow);
+            $location        = $firmwareClass->getLocation($snmpFlow);
+            $contact         = $firmwareClass->getContact($snmpFlow);
+            $model           = $firmwareClass->getModel($snmpFlow);
+            $platformType    = $firmwareClass->getPlarformType($model);
+            $firmwareTitle   = $firmwareClass->getFirmware($snmpFlow);
             $firmwareVersion = $firmwareClass->getFirmwareVersion($snmpFlow);
-            $uptimeDevice = $firmwareClass->getUptime($snmpFlow);
-            $packetsVersion = $firmwareClass->getPacketsVersion($snmpFlow);
-            $serialNumber = $firmwareClass->getSerialnNumber($snmpFlow);
-            $humanModel = $firmwareClass->getHumanModel($snmpFlow);
-            $licenseLevel = $firmwareClass->getLicenseLevel($snmpFlow);
+            $uptimeDevice    = $firmwareClass->getUptime($snmpFlow);
+            $packetsVersion  = $firmwareClass->getPacketsVersion($snmpFlow);
+            $serialNumber    = $firmwareClass->getSerialnNumber($snmpFlow);
+            $humanModel      = $firmwareClass->getHumanModel($snmpFlow);
+            $licenseLevel    = $firmwareClass->getLicenseLevel($snmpFlow);
 
             $firmware = $this->checkFirmware($firmwareTitle, $firmwareVersion);
             $vendorId = $this->checkVendor($vendor);
-            $modelId = $this->checkModel($model);
+            $modelId  = $this->checkModel($model);
             $this->deviceRepository->saveDevice(
                 $title,
                 $hostname,
@@ -107,7 +107,7 @@ class NetworkDevicesController extends Controller
     {
         $vendor = DevicesVendors::where('title', $vendorTitle)->first();
         if (empty($vendor)) {
-            $vendor = new DevicesVendors();
+            $vendor        = new DevicesVendors();
             $vendor->title = $vendorTitle;
             $vendor->save();
 
@@ -122,7 +122,7 @@ class NetworkDevicesController extends Controller
         $model = DevicesModels::where('title', $modelTitle)->first();
 
         if (empty($model)) {
-            $model = new DevicesModels();
+            $model        = new DevicesModels();
             $model->title = $modelTitle;
             $model->save();
 
@@ -139,8 +139,8 @@ class NetworkDevicesController extends Controller
             ->first();
 
         if (empty($firmware)) {
-            $firmware = new DevicesFirmwares();
-            $firmware->title = $firmwareTitle;
+            $firmware          = new DevicesFirmwares();
+            $firmware->title   = $firmwareTitle;
             $firmware->version = $firmwareVersion;
             $firmware->save();
 
