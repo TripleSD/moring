@@ -57,7 +57,6 @@ class DLink extends Repository
     {
     }
 
-
     /**
      * @param $snmpFlow
      * @return string
@@ -125,7 +124,6 @@ class DLink extends Repository
     public function getLicenseLevel($snmpFlow): void
     {
     }
-
 
     /**
      * @param $snmpFlow
