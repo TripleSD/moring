@@ -7,6 +7,7 @@
 
 <p align="center">
 <img src="docs/img/moring_readme.png" alt="drawing" width="300"/>
+<img src="docs/img/moring_readme_2.png" alt="drawing" width="300"/>
 </p>
 
 MoRiNg - opensource система мониторинга. На данный момент реализованы следуюшие функции:
