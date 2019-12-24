@@ -1,9 +1,9 @@
 preset: laravel
-
+enabled:
+  - unalign_equals
 disabled:
   - concat_without_spaces
   - simplified_null_return
-  - align_double_arrow
 finder:
   not-name:
     - "index.php"
