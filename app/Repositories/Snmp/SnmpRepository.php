@@ -32,6 +32,10 @@ class SnmpRepository extends Repository
             $vendor = 'D-Link';
         }
 
+        if (preg_match('/MES/', $string)) {
+            $vendor = 'Eltex';
+        }
+
         return (string) $vendor;
     }
 }
