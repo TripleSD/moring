@@ -96,6 +96,16 @@
                                     @endif
                                     <i class="fas fa-bug text-danger"></i> Версии ПО
                                 </a>
+                                <a class="btn btn-app" href="{{route('admin.sites.index', 'deprecatedPHPVersion')}}">
+                                    @if(count($counts['deprecatedPHPVersion']) > 0)
+                                        <span
+                                            class="badge bg-danger">{{ count($counts['deprecatedPHPVersion'])  }}</span>
+                                    @else
+                                        <span
+                                            class="badge bg-success">{{ count($counts['deprecatedPHPVersion'])  }}</span>
+                                    @endif
+                                    <i class="fas fa-archive text-danger"></i> Deprecated
+                                </a>
                                 <a class="btn btn-app" href="{{route('admin.sites.index', 'bridgeErrors')}}">
                                     @if(count($counts['bridgeErrors']) > 0)
                                         <span class="badge bg-danger">{{ count($counts['bridgeErrors']) }}</span>

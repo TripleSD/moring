@@ -37,7 +37,7 @@ class Sites extends Model
         return $this->hasOne(SitesWebServers::class, 'site_id');
     }
 
-    public function getSslCertification() : HasOne
+    public function getSslCertification(): HasOne
     {
         return $this->hasOne(SitesChecksList::class, 'site_id')->where('check_ssl', 1)->with('getSSL');
     }
@@ -47,7 +47,7 @@ class Sites extends Model
         return $this->hasOne(SitesPingResponses::class, 'site_id');
     }
 
-    public function getNewSitePing()
+    public function getNewSitePing(): HasOne
     {
         return $this->hasOne(SitesPingResponses::class, 'site_id')->latest('created_at');
     }

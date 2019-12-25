@@ -4,6 +4,7 @@ namespace App\Repositories\Sites;
 
 use App\Models\BridgePhpVersions;
 use App\Models\Sites;
+use App\Models\SitesPhpVersions;
 use App\Repositories\Repository;
 
 class SitesCountsRepository extends Repository
@@ -115,6 +116,20 @@ class SitesCountsRepository extends Repository
             }
         }
 
+        return $sites;
+    }
+
+    public function getDeprecatedVersions()
+    {
+        $deprcatedList = BridgePhpVersions::all('branch', 'deprecated_status');
+        $preSites = $this->getSoftwareVersionErrors();
+        $sites = array_reduce($preSites, function ($acc, $site) use ($deprcatedList){
+                $check = $deprcatedList->where('branch', $site['branch'])->first();
+                if( $check['deprecated_status'] == 1) {
+                    $acc[] = $site;
+                }
+                return $acc;
+        }, $acc=[]);
         return $sites;
     }
 }
