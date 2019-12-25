@@ -35,6 +35,16 @@
                                 <div class="col-sm-6">
                                     {{ Form::open([ 'route' => 'network.devices.store', 'method' => 'post', 'enctype' => "multipart/form-data"]) }}
                                     <div class="form-group">
+                                        <b>Описание для списка</b>
+                                        {{ Form::text('title', null , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            ...
+                                        </details>
+                                    </div>
+                                    <div class="form-group">
                                         <b>Сетевое имя устройства или IP адрес</b>
                                         {{ Form::text('hostname', null , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
                                         <details class="mt--3 small">

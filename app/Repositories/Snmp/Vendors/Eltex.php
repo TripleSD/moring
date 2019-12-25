@@ -5,7 +5,7 @@ namespace App\Repositories\Snmp\Vendors;
 use App\Repositories\Repository;
 use App\Repositories\Snmp\SnmpRepository;
 
-class MikroTik extends Repository
+class Eltex extends Repository
 {
     /** @var SnmpRepository */
     private $snmpRepository;
@@ -21,9 +21,11 @@ class MikroTik extends Repository
      */
     public function getModel($snmpFlow): string
     {
-        $string = $snmpFlow->get('1.3.6.1.2.1.1.1.0');
+        $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.13.67108992');
+        $string = str_replace('STRING: ', '', $string);
+        $string = str_replace('"', '', $string);
 
-        return (string) str_replace('STRING: RouterOS ', '', $string);
+        return (string) trim($string);
     }
 
     /**
@@ -32,10 +34,7 @@ class MikroTik extends Repository
      */
     public function getFirmware($snmpFlow): string
     {
-        $string = $snmpFlow->get('SNMPv2-MIB::sysDescr.0');
-        $string = explode(' ', $string);
-
-        return (string) trim($string[1]);
+        return (string) 'Eltex Linux';
     }
 
     /**
@@ -45,7 +44,7 @@ class MikroTik extends Repository
     public function getFirmwareVersion($snmpFlow): ?string
     {
         try {
-            $string = $snmpFlow->get('SNMPv2-SMI::enterprises.14988.1.1.7.4.0');
+            $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.10.67108992');
             $string = str_replace('STRING: ', '', $string);
             $string = str_replace('"', '', $string);
 
@@ -57,15 +56,9 @@ class MikroTik extends Repository
 
     /**
      * @param $snmpFlow
-     * @return string
      */
-    public function getPacketsVersion($snmpFlow): string
+    public function getPacketsVersion($snmpFlow): void
     {
-        $string = $snmpFlow->get('SNMPv2-SMI::enterprises.14988.1.1.4.4.0');
-        $string = str_replace('STRING: ', '', $string);
-        $string = str_replace('"', '', $string);
-
-        return (string) trim($string);
     }
 
     /**
@@ -112,25 +105,8 @@ class MikroTik extends Repository
     public function getSerialNumber($snmpFlow): ?string
     {
         try {
-            $string = $snmpFlow->get('1.3.6.1.4.1.14988.1.1.7.3.0');
+            $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.11.67108992');
             $string = str_replace('STRING: ', '', $string);
-
-            return trim($string);
-        } catch (\Exception $e) {
-            return null;
-        }
-    }
-
-    /**
-     * @param $snmpFlow
-     * @return string|null
-     */
-    public function getHumanModel($snmpFlow): ?string
-    {
-        try {
-            $string = $snmpFlow->get('SNMPv2-SMI::enterprises.14988.1.1.7.8.0');
-            $string = str_replace('STRING: ', '', $string);
-            $string = str_replace('"', '', $string);
 
             return (string) trim($string);
         } catch (\Exception $e) {
@@ -140,26 +116,24 @@ class MikroTik extends Repository
 
     /**
      * @param $snmpFlow
-     * @return string
      */
-    public function getLicenseLevel($snmpFlow): string
+    public function getHumanModel($snmpFlow): void
     {
-        $string = $snmpFlow->get('SNMPv2-SMI::enterprises.14988.1.1.4.3.0');
-        $string = str_replace('INTEGER: ', '', $string);
-
-        return (string) trim($string);
     }
 
     /**
-     * @param $model
+     * @param $snmpFlow
+     */
+    public function getLicenseLevel($snmpFlow): void
+    {
+    }
+
+    /**
+     * @param $snmpFlow
      * @return int
      */
-    public function getPlatformType($model): int
+    public function getPlatformType($snmpFlow): int
     {
-        if ($model === 'CHR') {
-            return (int) 1;
-        } else {
-            return (int) 0;
-        }
+        return (int) 0;
     }
 }
