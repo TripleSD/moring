@@ -83636,8 +83636,8 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\GAV\PhpstormProjects\moring\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\GAV\PhpstormProjects\moring\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /Users/anton/Documents/Yandex.Disk.localized/Develop/moring/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /Users/anton/Documents/Yandex.Disk.localized/Develop/moring/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

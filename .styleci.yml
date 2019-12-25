@@ -2,6 +2,8 @@ preset: laravel
 
 disabled:
   - concat_without_spaces
+  - simplified_null_return
+  - unalign_equals
 finder:
   not-name:
     - "index.php"
