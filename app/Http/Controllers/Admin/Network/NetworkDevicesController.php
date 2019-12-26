@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Network;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
 use App\Models\Devices;
 use App\Models\DevicesFirmwares;
 use App\Models\DevicesModels;
@@ -13,7 +14,6 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
 
 class NetworkDevicesController extends Controller
 {

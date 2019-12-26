@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Snmp;
 
-use Exception;
 use App\Repositories\Repository;
+use Exception;
 use SNMP;
 
 class SnmpRepository extends Repository
