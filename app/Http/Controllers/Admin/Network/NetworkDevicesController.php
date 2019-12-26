@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Network;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
 use App\Models\Devices;
 use App\Models\DevicesFirmwares;
 use App\Models\DevicesModels;
@@ -46,6 +47,44 @@ class NetworkDevicesController extends Controller
         return view('admin.network.devices.create');
     }
 
+    public function edit(Request $request)
+    {
+        $device = Devices::with('model', 'vendor', 'firmware')->find($request->device);
+
+        return view('admin.network.devices.edit', compact('device'));
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request)
+    {
+        $device = Devices::find($request->device);
+        $device->delete();
+
+        flash('Устройство удалено')->success();
+
+        return redirect()->route('network.devices.index');
+    }
+
+    public function show(Request $request)
+    {
+        $device = Devices::with('model', 'vendor', 'firmware')->find($request->device);
+
+        return view('admin.network.devices.show', compact('device'));
+    }
+
+    public function update(UpdateAndStoreDeviceRequest $request)
+    {
+        $fill   = $request->validated();
+        $device = Devices::find($request->device);
+        $device->update($fill);
+        flash('Данные успешно обнолены')->success();
+
+        return redirect()->route('network.devices.show', $request->device);
+    }
+
     /**
      * @param Request $request
      * @return RedirectResponse
@@ -54,11 +93,11 @@ class NetworkDevicesController extends Controller
     {
         try {
             // Getting vars from template
-            $hostname      = $request->input('hostname');          // Hostname device
-            $title         = $request->input('title');             // Short description
-            $snmpCommunity = $request->input('community');         // Device community
-            $snmpPort      = $request->input('snmp_port');         // Device snmp port
-            $snmpVersion   = $request->input('snmp_version');      // Device snmp version 1/2/3
+            $hostname      = $request->input('hostname');               // Hostname device
+            $title         = $request->input('title');                  // Short description
+            $snmpCommunity = $request->input('snmp_community');         // Device community
+            $snmpPort      = $request->input('snmp_port');              // Device snmp port
+            $snmpVersion   = $request->input('snmp_version');           // Device snmp version 1/2/3
 
             // Getting snmp flow from device
             $snmpFlow = $this->snmpRepository->getSnmpFlow(
@@ -72,7 +111,8 @@ class NetworkDevicesController extends Controller
 
             // Checking vendor isset on system
             if ($vendor == null) {
-                flash('Устройства данного вендора не поддерживаются')->warning();
+                flash('Производитель не определен, либо устройства данного производителя не поддерживается')
+                    ->warning();
 
                 return redirect()->back()->withInput();
             }
@@ -118,8 +158,6 @@ class NetworkDevicesController extends Controller
 
             return redirect()->route('network.devices.index');
         } catch (\Exception $e) {
-            flash($e->getFile());
-            flash($e->getLine());
             flash('Возникла ошибка при добавлении нового устройства! (' . $e->getMessage() . ')')->warning();
 
             return redirect()->back()->withInput();

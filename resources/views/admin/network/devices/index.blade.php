@@ -40,6 +40,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
+                                    <th>Вендор</th>
                                     <th>Устройство</th>
                                     <th>Платформа / Прошивка</th>
                                     <th>Доп.информация</th>
@@ -127,6 +128,19 @@
                                                 </div>
                                                 <div class="small">
                                                     <b>Описание:</b> {{ $device->title }}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{route('network.devices.show',$device->id)}}"
+                                                       class="btn btn-xs bg-gradient-info"
+                                                       title="Просмотр устройства">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{route('network.devices.edit', $device->id)}}"
+                                                       class="btn btn-xs bg-gradient-warning"
+                                                       title="Редактирование устройства">
+                                                        <i class="fa fa-edit"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
