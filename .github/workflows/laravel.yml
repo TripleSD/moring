@@ -7,6 +7,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup PHP with extensions
+
       with:
         php-version: '7.3'
         extensions: intl
