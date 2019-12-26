@@ -168,7 +168,7 @@ class NetworkDevicesController extends Controller
      * @param string $firmwareVersion
      * @return int
      */
-    public function checkFirmware(string $firmwareTitle, string $firmwareVersion): int
+    public function checkFirmware(string $firmwareTitle, string $firmwareVersion = null): int
     {
         $firmware = DevicesFirmwares::where('title', $firmwareTitle)
             ->where('version', $firmwareVersion)
