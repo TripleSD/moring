@@ -7,9 +7,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Setup PHP with extensions
-    with:
-      php-version: '7.3'
-      extension-csv: intl
+      with:
+        php-version: '7.3'
+        extensions: intl
     - uses: actions/checkout@v1
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
