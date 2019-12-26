@@ -45,6 +45,7 @@ class SitesController extends Controller
         $counts['bridgeErrors'] = $sitesCountsRepository->getBridgeErrors() ?: [];
         $counts['softwareVersionErrors'] = $sitesCountsRepository->getSoftwareVersionErrors() ?: [];
         $counts['disabledSites'] = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
+        $counts['deprecatedPHPVersion'] = ($sitesCountsRepository->getDeprecatedVersions()) ?: [];  // Ok
 
         $keys = $request->keys();
         if (! empty($keys)) {
