@@ -6,6 +6,7 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
+    - name: Setup PHP with extensions
     with:
       php-version: '7.3'
       extension-csv: intl
