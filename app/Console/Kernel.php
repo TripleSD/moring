@@ -9,7 +9,6 @@ use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
 use App\Console\Commands\SitesSSLChecker;
 use Illuminate\Console\Scheduling\Schedule;
-
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
