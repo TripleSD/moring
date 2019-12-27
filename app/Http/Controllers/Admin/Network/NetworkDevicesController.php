@@ -66,6 +66,7 @@ class NetworkDevicesController extends Controller
     public function destroy(Request $request)
     {
         $this->deviceRepository->destroyDevice($request->device);
+        flash("Устройство успешно удалено.")->warning();
 
         return redirect()->route('network.devices.index');
     }
@@ -89,7 +90,7 @@ class NetworkDevicesController extends Controller
     public function update(UpdateAndStoreDeviceRequest $request)
     {
         $this->deviceRepository->updateDevice($request);
-        flash('Данные успешно обнолены')->success();
+        flash('Данные устройства успешно обновлены.')->success();
 
         return redirect()->route('network.devices.show', $request->device);
     }
@@ -104,7 +105,7 @@ class NetworkDevicesController extends Controller
         try {
             $deviceData = $this->deviceRepository->getDeviceData($request);
             $this->deviceRepository->storeDevice($deviceData);
-            flash('Новое устройство добавлено.')->success();
+            flash('Новое устройство успешно добавлено.')->success();
 
             return redirect()->route('network.devices.index');
         } catch (Exception $exception) {
