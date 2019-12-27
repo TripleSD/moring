@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Network;
 
-use Exception;
 use App\Http\Controllers\Controller;
-use App\Repositories\Devices\DevicesVendorsRepository;
 use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
 use App\Repositories\Devices\DevicesRepository;
+use App\Repositories\Devices\DevicesVendorsRepository;
+use Exception;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -66,7 +66,7 @@ class NetworkDevicesController extends Controller
     public function destroy(Request $request)
     {
         $this->deviceRepository->destroyDevice($request->device);
-        flash("Устройство успешно удалено.")->warning();
+        flash('Устройство успешно удалено.')->warning();
 
         return redirect()->route('network.devices.index');
     }
@@ -81,7 +81,6 @@ class NetworkDevicesController extends Controller
 
         return view('admin.network.devices.show', compact('device'));
     }
-
 
     /**
      * @param UpdateAndStoreDeviceRequest $request
