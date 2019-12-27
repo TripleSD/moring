@@ -57,7 +57,6 @@ class NetworkDevicesController extends Controller
         return view('admin.network.devices.edit', compact('device'));
     }
 
-
     /**
      * @param Request $request
      * @return RedirectResponse
@@ -93,7 +92,6 @@ class NetworkDevicesController extends Controller
 
         return redirect()->route('network.devices.show', $request->device);
     }
-
 
     /**
      * @param Request $request
