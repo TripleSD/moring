@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Network;
 
+use Exception;
 use App\Http\Controllers\Controller;
 use App\Repositories\Devices\DevicesVendorsRepository;
 use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
@@ -56,9 +57,11 @@ class NetworkDevicesController extends Controller
         return view('admin.network.devices.edit', compact('device'));
     }
 
+
     /**
      * @param Request $request
      * @return RedirectResponse
+     * @throws Exception
      */
     public function destroy(Request $request)
     {
@@ -99,10 +102,12 @@ class NetworkDevicesController extends Controller
     public function store(Request $request): RedirectResponse
     {
         try {
-            $this->deviceRepository->getDeviceData($request);
+            $deviceData = $this->deviceRepository->getDeviceData($request);
+            $this->deviceRepository->storeDevice($deviceData);
+            flash('Новое устройство добавлено.')->success();
 
             return redirect()->route('network.devices.index');
-        } catch (\Exception $exception) {
+        } catch (Exception $exception) {
             flash($exception->getMessage())->warning();
 
             return redirect()->back()->withInput();
