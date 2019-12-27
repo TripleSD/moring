@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Devices;
 
-use App\Repositories\Repository;
 use App\Models\DevicesFirmwares;
+use App\Repositories\Repository;
 
 class DevicesFirmwaresRepository extends Repository
 {
