@@ -2,14 +2,14 @@
 
 namespace App\Repositories\Devices;
 
-use Exception;
 use App\Models\Devices;
 use App\Repositories\Repository;
-use Illuminate\Database\Eloquent\Model;
 use App\Repositories\Snmp\SnmpRepository;
+use Exception;
+use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Contracts\Pagination\LengthAwarePaginator;
+use Illuminate\Database\Eloquent\Model;
 
 class DevicesRepository extends Repository
 {
@@ -26,7 +26,6 @@ class DevicesRepository extends Repository
         $this->devicesVendorsRepository  = new DevicesVendorsRepository();
         $this->devicesModelsRepository   = new DevicesModelsRepository();
     }
-
 
     /**
      * @param $request
@@ -56,7 +55,6 @@ class DevicesRepository extends Repository
         return Devices::with('model', 'vendor', 'firmware')->find($deviceId);
     }
 
-
     /**
      * @param $deviceId
      * @throws Exception
@@ -65,9 +63,7 @@ class DevicesRepository extends Repository
     {
         $device = Devices::with('vendor', 'model')->find($deviceId);
         $device->delete();
-        return;
     }
-
 
     /**
      * @param $deviceId
@@ -77,7 +73,6 @@ class DevicesRepository extends Repository
     {
         return Devices::with('model', 'vendor', 'firmware')->find($deviceId);
     }
-
 
     /**
      * @param $request
@@ -130,7 +125,9 @@ class DevicesRepository extends Repository
         }
     }
 
-
+    /**
+     * @param array $deviceData
+     */
     public function storeDevice(array $deviceData): void
     {
         $device                  = new Devices();
@@ -151,10 +148,7 @@ class DevicesRepository extends Repository
         $device->snmp_community  = $deviceData['snmpCommunity'];
         $device->snmp_version    = $deviceData['snmpVersion'];
         $device->save();
-
-        return;
     }
-
 
     /**
      * @param $request
@@ -164,8 +158,6 @@ class DevicesRepository extends Repository
         $fill   = $request->validated();
         $device = Devices::find($request->device);
         $device->update($fill);
-
-        return;
     }
 
     /**
