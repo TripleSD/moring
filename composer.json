@@ -9,8 +9,6 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
-        "ext-intl": "^7.3",
-        "ext-snmp": "*",
         "doctrine/dbal": "^2.10",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "^6.4",
@@ -19,7 +17,8 @@
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
         "laravelcollective/html": "^6.0",
-        "spatie/ssl-certificate": "^1.16"
+        "spatie/ssl-certificate": "^1.16",
+        "ext-snmp": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",

@@ -8,6 +8,7 @@ use App\Console\Commands\ServersPings;
 use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
 use App\Console\Commands\SitesSSLChecker;
+use App\Console\Commands\SnmpDevicesChecker;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -25,6 +26,7 @@ class Kernel extends ConsoleKernel
         BridgePHPVersionsChecker::class,
         SitesPings::class,
         ServersPings::class,
+        SnmpDevicesChecker::class,
     ];
 
     /**
@@ -41,6 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('BridgePHPVersionsChecker')->daily();
         $schedule->command('SitesPings')->everyFiveMinutes();
         $schedule->command('ServersPings')->everyFiveMinutes();
+        $schedule->command('SnmpDevicesChecker')->everyFiveMinutes();
     }
 
     /**
