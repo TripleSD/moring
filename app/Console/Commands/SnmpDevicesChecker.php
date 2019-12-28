@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
+use App\Http\Controllers\Admin\Network\NetworkDevicesController;
+use App\Http\Controllers\Admin\Settings\SettingsController;
+use App\Http\Controllers\Connectors\TelegramConnector;
 use App\Models\Devices;
 use App\Repositories\Devices\DevicesRepository;
-use App\Http\Controllers\Connectors\TelegramConnector;
 use Illuminate\Console\Command;
-use App\Http\Controllers\Admin\Settings\SettingsController;
-use App\Http\Controllers\Admin\Network\NetworkDevicesController;
 
 class SnmpDevicesChecker extends Command
 {
@@ -70,7 +70,7 @@ class SnmpDevicesChecker extends Command
                             $chatId,
                             trim(
                                 "❌<b>Ошибка SNMP</b> \n" . $exception->getMessage() . "\n" .
-                                "ID $device->id\n" . $device->vendor->title . " " . $device->model->title
+                                "ID $device->id\n" . $device->vendor->title . ' ' . $device->model->title
                             )
                         );
                     } catch (\Exception $e) {

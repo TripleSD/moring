@@ -16,7 +16,7 @@ class SnmpRepository extends Repository
      */
     public function getSnmpFlow($host, $community)
     {
-        return new SNMP(SNMP::VERSION_2c, $host, $community,10000);
+        return new SNMP(SNMP::VERSION_2c, $host, $community, 10000);
     }
 
     /**

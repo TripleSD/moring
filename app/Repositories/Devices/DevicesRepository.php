@@ -74,7 +74,11 @@ class DevicesRepository extends Repository
         return Devices::with('model', 'vendor', 'firmware')->find($deviceId);
     }
 
-    public function setDataConnection($request)
+    /**
+     * @param $request
+     * @return array
+     */
+    public function setDataConnection($request): array
     {
         $deviceData = [];
 
@@ -87,7 +91,6 @@ class DevicesRepository extends Repository
 
         return (array) $deviceData;
     }
-
 
     /**
      * @param array $deviceDataConnection
@@ -117,7 +120,6 @@ class DevicesRepository extends Repository
             $deviceData['snmpPort']      = $deviceDataConnection['snmpPort'];
             $deviceData['snmpVersion']   = $deviceDataConnection['snmpVersion'];
 
-
             // Get & set vars from device
             $deviceData['location']        = $firmwareClass->getLocation($snmpFlow);
             $deviceData['contact']         = $firmwareClass->getContact($snmpFlow);
@@ -141,7 +143,6 @@ class DevicesRepository extends Repository
             return $deviceData;
         }
     }
-
 
     /**
      * @param array $deviceData
