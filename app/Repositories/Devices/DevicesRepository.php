@@ -74,12 +74,7 @@ class DevicesRepository extends Repository
         return Devices::with('model', 'vendor', 'firmware')->find($deviceId);
     }
 
-    /**
-     * @param $request
-     * @return array
-     * @throws Exception
-     */
-    public function getDeviceData($request): array
+    public function setDataConnection($request)
     {
         $deviceData = [];
 
@@ -90,8 +85,22 @@ class DevicesRepository extends Repository
         $deviceData['snmpPort']      = $request->input('snmp_port');              // Device snmp port
         $deviceData['snmpVersion']   = $request->input('snmp_version');           // Device snmp version 1/2/3
 
-        // Getting snmp flow from device
-        $snmpFlow = $this->snmpRepository->getSnmpFlow($deviceData['hostname'], $deviceData['snmpCommunity']);
+        return (array) $deviceData;
+    }
+
+
+    /**
+     * @param array $deviceDataConnection
+     * @return array
+     * @throws Exception
+     */
+    public function getDeviceData(array $deviceDataConnection): array
+    {
+        // Get snmp flow
+        $snmpFlow = $this->snmpRepository->getSnmpFlow(
+            $deviceDataConnection['hostname'],
+            $deviceDataConnection['snmpCommunity']
+        );
 
         $vendor = self::getVendor($snmpFlow);
 
@@ -101,7 +110,15 @@ class DevicesRepository extends Repository
             $firmwareClassFile = '\App\Repositories\Snmp\Vendors\\' . $vendor;
             $firmwareClass     = new $firmwareClassFile();
 
-            // Getting vars from device
+            //Set vars
+            $deviceData['hostname']      = $deviceDataConnection['hostname'];
+            $deviceData['title']         = $deviceDataConnection['title'];
+            $deviceData['snmpCommunity'] = $deviceDataConnection['snmpCommunity'];
+            $deviceData['snmpPort']      = $deviceDataConnection['snmpPort'];
+            $deviceData['snmpVersion']   = $deviceDataConnection['snmpVersion'];
+
+
+            // Get & set vars from device
             $deviceData['location']        = $firmwareClass->getLocation($snmpFlow);
             $deviceData['contact']         = $firmwareClass->getContact($snmpFlow);
             $deviceData['model']           = $firmwareClass->getModel($snmpFlow);
@@ -125,12 +142,19 @@ class DevicesRepository extends Repository
         }
     }
 
+
     /**
      * @param array $deviceData
+     * @param null $deviceId
      */
-    public function storeDevice(array $deviceData): void
+    public function storeDevice(array $deviceData, $deviceId = null): void
     {
-        $device                  = new Devices();
+        if ($deviceId === null) {
+            $device = new Devices();
+        } else {
+            $device = Devices::find($deviceId);
+        }
+
         $device->title           = $deviceData['title'];
         $device->hostname        = $deviceData['hostname'];
         $device->vendor_id       = $deviceData['vendorId'];
@@ -151,13 +175,12 @@ class DevicesRepository extends Repository
     }
 
     /**
-     * @param $request
+     * @param $deviceData
+     * @param $deviceId
      */
-    public function updateDevice($request): void
+    public function updateDevice($deviceData, $deviceId): void
     {
-        $fill   = $request->validated();
-        $device = Devices::find($request->device);
-        $device->update($fill);
+        self::storeDevice($deviceData, $deviceId);
     }
 
     /**
