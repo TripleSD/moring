@@ -87,20 +87,25 @@ class NetworkDevicesController extends Controller
      */
     public function update(UpdateAndStoreDeviceRequest $request)
     {
-        $this->deviceRepository->updateDevice($request);
-        flash('Данные устройства успешно обновлены.')->success();
+        try {
+            $deviceConnection = $this->deviceRepository->setDataConnection($request);
+            $deviceData       = $this->deviceRepository->getDeviceData($deviceConnection);
+            $this->deviceRepository->updateDevice($deviceData, $request->device);
+            flash('Данные устройства успешно обновлены.')->success();
 
-        return redirect()->route('network.devices.show', $request->device);
+            return redirect()->route('network.devices.show', $request->device);
+        } catch (Exception $exception) {
+            flash($exception->getMessage())->warning();
+
+            return redirect()->back()->withInput();
+        }
     }
 
-    /**
-     * @param Request $request
-     * @return RedirectResponse
-     */
-    public function store(Request $request): RedirectResponse
+    public function store(UpdateAndStoreDeviceRequest $request): RedirectResponse
     {
         try {
-            $deviceData = $this->deviceRepository->getDeviceData($request);
+            $deviceConnection = $this->deviceRepository->setDataConnection($request);
+            $deviceData       = $this->deviceRepository->getDeviceData($deviceConnection);
             $this->deviceRepository->storeDevice($deviceData);
             flash('Новое устройство успешно добавлено.')->success();
 
