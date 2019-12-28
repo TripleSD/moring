@@ -19,10 +19,8 @@ class DevicesModelsRepository extends Repository
             $model        = new DevicesModels();
             $model->title = $modelTitle;
             $model->save();
-
-            return $model->id;
-        } else {
-            return $model->id;
         }
+
+        return $model->id;
     }
 }

@@ -150,10 +150,10 @@ class DevicesRepository extends Repository
      */
     public function storeDevice(array $deviceData, $deviceId = null): void
     {
+        $device = Devices::find($deviceId);
+
         if ($deviceId === null) {
             $device = new Devices();
-        } else {
-            $device = Devices::find($deviceId);
         }
 
         $device->title           = $deviceData['title'];

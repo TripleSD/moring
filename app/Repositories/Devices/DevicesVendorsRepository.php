@@ -18,10 +18,8 @@ class DevicesVendorsRepository extends Repository
             $vendor        = new DevicesVendors();
             $vendor->title = $vendorTitle;
             $vendor->save();
-
-            return $vendor->id;
-        } else {
-            return $vendor->id;
         }
+
+        return $vendor->id;
     }
 }
