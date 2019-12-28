@@ -23,10 +23,8 @@ class DevicesFirmwaresRepository extends Repository
             $firmware->title   = $firmwareTitle;
             $firmware->version = $firmwareVersion;
             $firmware->save();
-
-            return $firmware->id;
-        } else {
-            return $firmware->id;
         }
+
+        return $firmware->id;
     }
 }

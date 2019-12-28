@@ -47,10 +47,10 @@ class SnmpDevicesChecker extends Command
      */
     public function handle(int $device_id = null)
     {
-        if (is_null($device_id)) {
+        $devices[] = Devices::find($device_id);
+
+        if ($device_id === null) {
             $devices = Devices::get();
-        } else {
-            $devices[] = Devices::find($device_id);
         }
 
         foreach ($devices as $device) {
