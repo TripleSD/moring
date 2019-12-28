@@ -203,7 +203,7 @@ class SitesController extends Controller
         }
     }
 
-    public function refresh($id, AdminSitesRepository $adminSitesRepository)
+    public function refresh($id)
     {
         $check = new SitesChecker($id);
         $check->handle($id);
