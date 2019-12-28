@@ -41,7 +41,7 @@ class SitesSSLChecker extends Command
      */
     public function handle(int $site_id = null)
     {
-        if (is_null($site_id)) {
+        if ($site_id === null) {
             $checksList = SitesChecksList::where('check_ssl', 1)->with('site')->get();
         } else {
             $checksList = SitesChecksList::where([['check_ssl', 1], ['site_id', $site_id]])->with('site')->get();
