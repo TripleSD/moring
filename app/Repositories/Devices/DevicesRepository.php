@@ -41,9 +41,9 @@ class DevicesRepository extends Repository
             return Devices::with('firmware', 'model', 'vendor')->paginate(25);
         } elseif ($request->view == '50') {
             return Devices::with('firmware', 'model', 'vendor')->paginate(50);
-        } else {
-            return Devices::with('firmware', 'model', 'vendor')->paginate(10);
         }
+
+        return Devices::with('firmware', 'model', 'vendor')->paginate(10);
     }
 
     /**
