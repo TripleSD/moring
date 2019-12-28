@@ -109,39 +109,38 @@ class DevicesRepository extends Repository
 
         if ($vendor == null) {
             throw new Exception('Не удалось определить производителя.');
-        } else {
-            $firmwareClassFile = '\App\Repositories\Snmp\Vendors\\' . $vendor;
-            $firmwareClass     = new $firmwareClassFile();
-
-            //Set vars
-            $deviceData['hostname']      = $deviceDataConnection['hostname'];
-            $deviceData['title']         = $deviceDataConnection['title'];
-            $deviceData['snmpCommunity'] = $deviceDataConnection['snmpCommunity'];
-            $deviceData['snmpPort']      = $deviceDataConnection['snmpPort'];
-            $deviceData['snmpVersion']   = $deviceDataConnection['snmpVersion'];
-
-            // Get & set vars from device
-            $deviceData['location']        = $firmwareClass->getLocation($snmpFlow);
-            $deviceData['contact']         = $firmwareClass->getContact($snmpFlow);
-            $deviceData['model']           = $firmwareClass->getModel($snmpFlow);
-            $deviceData['platformType']    = $firmwareClass->getPlatformType($deviceData['model']);
-            $deviceData['firmwareTitle']   = $firmwareClass->getFirmware($snmpFlow);
-            $deviceData['firmwareVersion'] = $firmwareClass->getFirmwareVersion($snmpFlow);
-            $deviceData['uptimeDevice']    = $firmwareClass->getUptime($snmpFlow);
-            $deviceData['packetsVersion']  = $firmwareClass->getPacketsVersion($snmpFlow);
-            $deviceData['serialNumber']    = $firmwareClass->getSerialNumber($snmpFlow);
-            $deviceData['humanModel']      = $firmwareClass->getHumanModel($snmpFlow);
-            $deviceData['licenseLevel']    = $firmwareClass->getLicenseLevel($snmpFlow);
-
-            $deviceData['firmwareId'] = $this->devicesFirmwareRepository->checkFirmware(
-                $deviceData['firmwareTitle'],
-                $deviceData['firmwareVersion']
-            );
-            $deviceData['vendorId']   = $this->devicesVendorsRepository->checkVendor($vendor);
-            $deviceData['modelId']    = $this->devicesModelsRepository->checkModel($deviceData['model']);
-
-            return $deviceData;
         }
+        $firmwareClassFile = '\App\Repositories\Snmp\Vendors\\' . $vendor;
+        $firmwareClass     = new $firmwareClassFile();
+
+        //Set vars
+        $deviceData['hostname']      = $deviceDataConnection['hostname'];
+        $deviceData['title']         = $deviceDataConnection['title'];
+        $deviceData['snmpCommunity'] = $deviceDataConnection['snmpCommunity'];
+        $deviceData['snmpPort']      = $deviceDataConnection['snmpPort'];
+        $deviceData['snmpVersion']   = $deviceDataConnection['snmpVersion'];
+
+        // Get & set vars from device
+        $deviceData['location']        = $firmwareClass->getLocation($snmpFlow);
+        $deviceData['contact']         = $firmwareClass->getContact($snmpFlow);
+        $deviceData['model']           = $firmwareClass->getModel($snmpFlow);
+        $deviceData['platformType']    = $firmwareClass->getPlatformType($deviceData['model']);
+        $deviceData['firmwareTitle']   = $firmwareClass->getFirmware($snmpFlow);
+        $deviceData['firmwareVersion'] = $firmwareClass->getFirmwareVersion($snmpFlow);
+        $deviceData['uptimeDevice']    = $firmwareClass->getUptime($snmpFlow);
+        $deviceData['packetsVersion']  = $firmwareClass->getPacketsVersion($snmpFlow);
+        $deviceData['serialNumber']    = $firmwareClass->getSerialNumber($snmpFlow);
+        $deviceData['humanModel']      = $firmwareClass->getHumanModel($snmpFlow);
+        $deviceData['licenseLevel']    = $firmwareClass->getLicenseLevel($snmpFlow);
+
+        $deviceData['firmwareId'] = $this->devicesFirmwareRepository->checkFirmware(
+            $deviceData['firmwareTitle'],
+            $deviceData['firmwareVersion']
+        );
+        $deviceData['vendorId']   = $this->devicesVendorsRepository->checkVendor($vendor);
+        $deviceData['modelId']    = $this->devicesModelsRepository->checkModel($deviceData['model']);
+
+        return $deviceData;
     }
 
     /**
