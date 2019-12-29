@@ -28,4 +28,9 @@ class SitesChecksList extends Model
     {
         return $this->hasOne(SitesSslCertificates::class, 'site_id', 'site_id');
     }
+
+    public function getPHPVersions(): HasOne
+    {
+        return $this->hasOne(SitesPhpVersions::class, 'site_id')->where('version', '<>', 0);
+    }
 }

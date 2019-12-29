@@ -34,17 +34,18 @@ class SitesController extends Controller
         $sites = $adminSiteRepository->index($request);
         //TODO вынести в репозиторий два запроса
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
-        $bridgePhpVersion = BridgePhpVersions::get();
+        $bridgePhpVersion    = BridgePhpVersions::get();
 
         // Counts
-        $counts['allSites'] = $sitesCountsRepository->getAllSitesCount() ?: []; // Ok
+        $counts['allSites']                = $sitesCountsRepository->getAllSitesCount() ?: []; // Ok
         $counts['sslExpirationsDaysSites'] = $sitesCountsRepository->getSslExpirationsDaysSitesCount() ?: [];
-        $counts['sslErrorsSites'] = $sitesCountsRepository->getSslErrorsSitesCount() ?: [];  // OK
-        $counts['sslSuccessSites'] = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];  //Ok
-        $counts['softwareErrorsSites'] = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];  // Ok
-        $counts['bridgeErrors'] = $sitesCountsRepository->getBridgeErrors() ?: [];
-        $counts['softwareVersionErrors'] = $sitesCountsRepository->getSoftwareVersionErrors() ?: [];
-        $counts['disabledSites'] = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
+        $counts['sslErrorsSites']          = $sitesCountsRepository->getSslErrorsSitesCount() ?: [];       // OK
+        $counts['sslSuccessSites']         = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];      //Ok
+        $counts['softwareErrorsSites']     = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];  // Ok
+        $counts['bridgeErrors']            = $sitesCountsRepository->getBridgeErrors() ?: [];
+        $counts['softwareVersionErrors']   = $sitesCountsRepository->getSoftwareVersionErrors() ?: [];
+        $counts['disabledSites']           = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
+        $counts['deprecatedPHPVersion']    = ($sitesCountsRepository->getDeprecatedVersions()) ?: [];  // Ok
 
         $keys = $request->keys();
         if (! empty($keys)) {
@@ -98,7 +99,7 @@ class SitesController extends Controller
 
                 // Run first site ping as well
                 $ping = new SitesPings();
-                $ping->handle(intval($result->id));
+                $ping->handle((int) ($result->id));
 
                 flash('Запись добавлена')->success();
 
@@ -123,7 +124,7 @@ class SitesController extends Controller
     {
         //TODO вынести в репозиторий два запроса
         $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
-        $bridgePhpVersion = BridgePhpVersions::get();
+        $bridgePhpVersion    = BridgePhpVersions::get();
 
         $pings = $adminSiteRepository->listOfPings($request, 50);
 
@@ -138,7 +139,7 @@ class SitesController extends Controller
         $time = json_encode(
             $pings->map(
                 function ($ins) {
-                    return $ins->created_at;
+                    return date('Y-m-d H:i:s', strtotime($ins->created_at));
                 }
             )
         );
@@ -169,9 +170,9 @@ class SitesController extends Controller
      */
     public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        $id = $request->id;
+        $id       = $request->id;
         $fillable = $request->validated();
-        $result = $adminSitesRepository->update($fillable, $id);
+        $result   = $adminSitesRepository->update($fillable, $id);
         if (! $result) {
             return back()->withInput($fillable);
         } else {
@@ -202,7 +203,7 @@ class SitesController extends Controller
         }
     }
 
-    public function refresh($id, AdminSitesRepository $adminSitesRepository)
+    public function refresh($id)
     {
         $check = new SitesChecker($id);
         $check->handle($id);

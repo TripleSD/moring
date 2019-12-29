@@ -76,8 +76,8 @@ class SitesCountsRepository extends Repository
 
     public function getBridgeErrors()
     {
-        $sites = [];
-        $presites = Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
+        $sites          = [];
+        $presites       = Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
             ->leftJoin('sites_php_versions', 'sites_checks_list.site_id', '=', 'sites_php_versions.site_id')
             ->where(['sites.enabled' => 1, 'sites_checks_list.check_php' => 1])
             ->where('sites_php_versions.branch', '<>', 0)
@@ -94,13 +94,13 @@ class SitesCountsRepository extends Repository
 
     public function getSoftwareVersionErrors()
     {
-        $sites = [];
-        $presites = Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
+        $sites          = [];
+        $presites       = Sites::join('sites_checks_list', 'sites.id', '=', 'sites_checks_list.site_id')
             ->leftJoin('sites_php_versions', 'sites_checks_list.site_id', '=', 'sites_php_versions.site_id')
             ->where(['sites.enabled' => 1, 'sites_checks_list.check_php' => 1])
             ->where('sites_php_versions.version', '<>', 0)
             ->get();
-        $bridgeBranchs = BridgePhpVersions::pluck('branch')->toArray();
+        $bridgeBranchs  = BridgePhpVersions::pluck('branch')->toArray();
         $bridgeVersions = BridgePhpVersions::get();
 
         foreach ($presites as $site) {
@@ -114,6 +114,26 @@ class SitesCountsRepository extends Repository
                 }
             }
         }
+
+        return $sites;
+    }
+
+    public function getDeprecatedVersions()
+    {
+        $deprcatedList = BridgePhpVersions::all('branch', 'deprecated_status');
+        $preSites      = $this->getSoftwareVersionErrors();
+        $sites         = array_reduce(
+            $preSites,
+            function ($acc, $site) use ($deprcatedList) {
+                $check = $deprcatedList->where('branch', $site['branch'])->first();
+                if ($check['deprecated_status'] == 1) {
+                    $acc[] = $site;
+                }
+
+                return $acc;
+            },
+            $acc = []
+        );
 
         return $sites;
     }

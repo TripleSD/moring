@@ -21,7 +21,6 @@ class TelegramConnector extends Controller
 
             $client->post("https://api.telegram.org/bot$apiKey/sendMessage", $param);
         } catch (\Exception $e) {
-            echo $e->getMessage();
         }
     }
 }

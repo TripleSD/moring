@@ -19,7 +19,7 @@ $(document).ready(function () {
             data: {
                 labels: servers,
                 datasets: [{
-                    label: 'Статистика используемых версий web серверов, шт',
+                    label: 'Статистика используемых версий для последних добавленных 5 web серверов, шт',
                     data: counts,
                     backgroundColor: [
                         'rgb(255, 99, 132)',

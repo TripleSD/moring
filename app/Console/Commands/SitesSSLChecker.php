@@ -41,7 +41,7 @@ class SitesSSLChecker extends Command
      */
     public function handle(int $site_id = null)
     {
-        if (is_null($site_id)) {
+        if ($site_id === null) {
             $checksList = SitesChecksList::where('check_ssl', 1)->with('site')->get();
         } else {
             $checksList = SitesChecksList::where([['check_ssl', 1], ['site_id', $site_id]])->with('site')->get();
@@ -49,36 +49,36 @@ class SitesSSLChecker extends Command
 
         foreach ($checksList as $check) {
             try {
-                $certificate = SslCertificate::createForHostName('https://' . $check->site->url);
-                $issuer = $certificate->getIssuer(); // Let's Encrypt Authority X3
-                $validStatus = $certificate->isValid(); // true/false
-                $expirationDate = $certificate->expirationDate(); // 2020-01-26 07:19:03
+                $certificate    = SslCertificate::createForHostName('https://' . $check->site->url);
+                $issuer         = $certificate->getIssuer();                    // Let's Encrypt Authority X3
+                $validStatus    = $certificate->isValid();                      // true/false
+                $expirationDate = $certificate->expirationDate();               // 2020-01-26 07:19:03
                 $expirationDays = $certificate->expirationDate()->diffInDays(); // 66
-                $algorithm = $certificate->getSignatureAlgorithm(); // RSA-SHA256
-                $fromDate = $certificate->validFromDate(); // 2019-10-28 07:19:03%
+                $algorithm      = $certificate->getSignatureAlgorithm();        // RSA-SHA256
+                $fromDate       = $certificate->validFromDate();                // 2019-10-28 07:19:03%
             } catch (\Exception $e) {
-                $issuer = null; // Let's Encrypt Authority X3
-                $validStatus = null; // true/false
+                $issuer         = null; // Let's Encrypt Authority X3
+                $validStatus    = null; // true/false
                 $expirationDate = null; // 2020-01-26 07:19:03
                 $expirationDays = null; // 66
-                $algorithm = null; // RSA-SHA256
-                $fromDate = null; // 2019-10-28 07:19:03%
+                $algorithm      = null; // RSA-SHA256
+                $fromDate       = null; // 2019-10-28 07:19:03%
             }
 
             //   SSL info saving process
-            if (is_null($site_id)) {
+            if ($site_id === null) {
                 $ssl = SitesSslCertificates::where('site_id', $check->site_id)->first();
             } else {
                 $ssl = SitesSslCertificates::where('site_id', $site_id)->first();
             }
 
             if (! empty($ssl)) {
-                $ssl->issuer = $issuer;
-                $ssl->valid_status = $validStatus;
+                $ssl->issuer          = $issuer;
+                $ssl->valid_status    = $validStatus;
                 $ssl->expiration_date = $expirationDate;
                 $ssl->expiration_days = $expirationDays;
-                $ssl->algorithm = $algorithm;
-                $ssl->from_date = $fromDate;
+                $ssl->algorithm       = $algorithm;
+                $ssl->from_date       = $fromDate;
             } else {
                 $fillable = [
                     'site_id' => $check->site_id,
@@ -89,7 +89,7 @@ class SitesSSLChecker extends Command
                     'algorithm' => $algorithm,
                     'from_date' => $fromDate,
                 ];
-                $ssl = new SitesSslCertificates($fillable);
+                $ssl      = new SitesSslCertificates($fillable);
             }
             $ssl->updated_at = Carbon::now();
             $ssl->save();

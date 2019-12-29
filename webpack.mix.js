@@ -15,3 +15,4 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
 
 mix.copyDirectory('resources/img/theme', 'public/img/theme');
+mix.copyDirectory('resources/img/vendors', 'public/img/vendors');
