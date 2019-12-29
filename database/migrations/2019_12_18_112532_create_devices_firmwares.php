@@ -16,7 +16,7 @@ class CreateDevicesFirmwares extends Migration
         Schema::create('devices_firmwares', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('Firmware id');
             $table->string('title')->comment('Description for view');
-            $table->string('version')->comment('Version for view');
+            $table->string('version')->nullable()->comment('Version for view');
             $table->timestamps();
         });
     }
