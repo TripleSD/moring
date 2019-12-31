@@ -34,12 +34,6 @@ return [
     'main_menu.contacts' => 'Contacts',
 
     /**
-     *  Breadcrumbs menu
-     */
-    'breadcrumbs.main' => 'Main',
-    'breadcrumbs.network' => 'Network',
-
-    /**
      * Device card
      */
     'device.notifications_and_errors' => 'Notifications & errors',
@@ -51,4 +45,16 @@ return [
     'device.platform_type' => 'Platform type',
     'device.port' => 'port',
     'device.ports' => 'Ports',
+    'device.other' => 'Other',
+    'device.operation_system' => 'Operation system',
+    'device.short_description' => 'Short description',
+    'device.summary_information' => 'Summary information',
+    'device.edit' => 'Edit',
+    'device.back' => 'Back',
+    'device.title' => 'Network',
+    'device.error_description' => 'Error description',
+
+    'device.breadcrumbs.main' => 'Main',
+    'device.breadcrumbs.network' => 'Network',
+    'device.breadcrumbs.devices' => 'Devices',
 ];

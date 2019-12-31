@@ -34,13 +34,6 @@ return [
     'main_menu.contacts' => 'Контакты',
 
     /**
-     * Меню "хлебные крошки"
-     */
-    'breadcrumbs.main' => 'Главная',
-    'breadcrumbs.network' => 'Сеть',
-
-
-    /**
      * Карточка устройсва
      */
     'device.notifications_and_errors' => 'Уведомления и ошибки',
@@ -52,4 +45,17 @@ return [
     'device.platform_type' => 'Тип платформы',
     'device.port' => 'порт',
     'device.ports' => 'Порты',
+    'device.other' => 'Другое',
+    'device.operation_system' => 'Операционная система',
+    'device.short_description' => 'Краткое описание',
+    'device.summary_information' => 'Общая информация',
+    'device.edit' => 'Редактировать',
+    'device.back' => 'Назад',
+    'device.title' => 'Сеть',
+    'device.error_description' => 'Описание ошибки',
+
+    'device.breadcrumbs.main' => 'Главная',
+    'device.breadcrumbs.network' => 'Сеть',
+    'device.breadcrumbs.devices' => 'Устройства',
+
 ];
