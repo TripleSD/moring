@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Admin\Network;
 
 use App\Http\Controllers\Controller;
-use App\Repositories\Devices\DevicesLogsRepository;
 use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
+use App\Repositories\Devices\DevicesLogsRepository;
 use App\Repositories\Devices\DevicesRepository;
 use App\Repositories\Devices\DevicesVendorsRepository;
 use Exception;
