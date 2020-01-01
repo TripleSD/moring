@@ -2,6 +2,7 @@
 
 return [
     /**
+     *
      *  Верхнее меню
      */
     'top_menu.exit' => 'Выход',
@@ -10,6 +11,7 @@ return [
     'top_menu.from' => 'от',
 
     /**
+     *
      *  Главное меню
      */
     'main_menu.home' => 'Главная',
@@ -34,6 +36,7 @@ return [
     'main_menu.contacts' => 'Контакты',
 
     /**
+     *
      * Карточка устройсва
      */
     'device.notifications_and_errors' => 'Уведомления и ошибки',
@@ -57,5 +60,4 @@ return [
     'device.breadcrumbs.main' => 'Главная',
     'device.breadcrumbs.network' => 'Сеть',
     'device.breadcrumbs.devices' => 'Устройства',
-
 ];
