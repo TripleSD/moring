@@ -2,7 +2,7 @@
 
 return [
     /**
-     *  Верхнее меню
+     *  Верхнее меню.
      */
     'top_menu.exit' => 'Выход',
     'top_menu.current_version' => 'Установлена последняя версия',
@@ -10,7 +10,7 @@ return [
     'top_menu.from' => 'от',
 
     /**
-     *  Главное меню
+     *  Главное меню.
      */
     'main_menu.home' => 'Главная',
     'main_menu.news' => 'Новости',
@@ -34,7 +34,7 @@ return [
     'main_menu.contacts' => 'Контакты',
 
     /**
-     * Карточка устройсва
+     * Карточка устройсва.
      */
     'device.notifications_and_errors' => 'Уведомления и ошибки',
     'device.errors' => 'Ошибки',

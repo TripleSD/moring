@@ -2,7 +2,7 @@
 
 return [
     /**
-     * Top menu
+     * Top menu.
      */
     'top_menu.exit' => 'Exit',
     'top_menu.current_version' => 'You have current version',
@@ -10,7 +10,7 @@ return [
     'top_menu.from' => 'from',
 
     /**
-     *  Главное меню
+     *  Main menu.
      */
     'main_menu.home' => 'Home',
     'main_menu.news' => 'News',
@@ -34,7 +34,7 @@ return [
     'main_menu.contacts' => 'Contacts',
 
     /**
-     * Device card
+     * Device card.
      */
     'device.notifications_and_errors' => 'Notifications & errors',
     'device.errors' => 'Errors',
