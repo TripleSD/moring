@@ -2,7 +2,6 @@
 
 return [
     /**
-     *
      * Top menu
      */
     'top_menu.exit' => 'Exit',
@@ -11,7 +10,6 @@ return [
     'top_menu.from' => 'from',
 
     /**
-     *
      *  Главное меню
      */
     'main_menu.home' => 'Home',
@@ -36,7 +34,6 @@ return [
     'main_menu.contacts' => 'Contacts',
 
     /**
-     *
      * Device card
      */
     'device.notifications_and_errors' => 'Notifications & errors',
