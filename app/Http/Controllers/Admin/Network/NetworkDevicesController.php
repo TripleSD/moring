@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Network;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Devices\DevicesLogsRepository;
 use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
 use App\Repositories\Devices\DevicesRepository;
 use App\Repositories\Devices\DevicesVendorsRepository;
@@ -14,9 +15,9 @@ use Illuminate\View\View;
 
 class NetworkDevicesController extends Controller
 {
-    /** @var DevicesRepository */
     private $deviceRepository;
     private $deviceVendorsRepository;
+    private $deviceLogsRepository;
 
     /**
      * NetworkDevicesController constructor.
@@ -25,6 +26,7 @@ class NetworkDevicesController extends Controller
     {
         $this->deviceRepository        = new DevicesRepository();
         $this->deviceVendorsRepository = new DevicesVendorsRepository();
+        $this->deviceLogsRepository    = new DevicesLogsRepository();
     }
 
     /**
@@ -76,9 +78,10 @@ class NetworkDevicesController extends Controller
      */
     public function show(Request $request)
     {
+        $logs   = $this->deviceLogsRepository->getLogsByDeviceId($request->device);
         $device = $this->deviceRepository->show($request->device);
 
-        return view('admin.network.devices.show', compact('device'));
+        return view('admin.network.devices.show', compact('device', 'logs'));
     }
 
     /**
