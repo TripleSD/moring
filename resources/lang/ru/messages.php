@@ -34,27 +34,36 @@ return [
     'main_menu.contacts' => 'Контакты',
 
     /**
-     * Карточка устройсва.
+     * Главная страница.
      */
-    'device.notifications_and_errors' => 'Уведомления и ошибки',
-    'device.errors' => 'Ошибки',
-    'device.snmp_fail' => 'SNMP. Ошибка подключения к устройству',
-    'device.model' => 'Модель',
-    'device.firmware_version' => 'Версия прошивки',
-    'device.date_time' => 'Дата / время',
-    'device.platform_type' => 'Тип платформы',
-    'device.port' => 'порт',
-    'device.ports' => 'Порты',
-    'device.other' => 'Другое',
-    'device.operation_system' => 'Операционная система',
-    'device.short_description' => 'Краткое описание',
-    'device.summary_information' => 'Общая информация',
-    'device.edit' => 'Редактировать',
-    'device.back' => 'Назад',
-    'device.title' => 'Сеть',
-    'device.error_description' => 'Описание ошибки',
+    'main_page.breadcrumbs.main' => 'Главная',
+    'main_page.breadcrumbs.summary_info' => 'Сводная информация',
+    'main_page.title' => 'Сводная информация',
 
-    'device.breadcrumbs.main' => 'Главная',
-    'device.breadcrumbs.network' => 'Сеть',
-    'device.breadcrumbs.devices' => 'Устройства',
+    /**
+     * Страница карточки устройсва.
+     */
+    'network.device.notifications_and_errors' => 'Уведомления и ошибки',
+    'network.device.errors' => 'Ошибки',
+    'network.device.snmp_fail' => 'SNMP. Ошибка подключения к устройству',
+    'network.device.model' => 'Модель',
+    'network.device.firmware_version' => 'Версия прошивки',
+    'network.device.date_time' => 'Дата / время',
+    'network.device.platform_type' => 'Тип платформы',
+    'network.device.platform_type.cloud' => 'облачная',
+    'network.device.platform_type.hardware' => 'аппаратная',
+    'network.device.port' => 'порт',
+    'network.device.ports' => 'Порты',
+    'network.device.other' => 'Другое',
+    'network.device.operation_system' => 'Операционная система',
+    'network.device.short_description' => 'Краткое описание',
+    'network.device.summary_information' => 'Общая информация',
+    'network.device.edit' => 'Редактировать',
+    'network.device.back' => 'Назад',
+    'network.device.title' => 'Сеть',
+    'network.device.error_description' => 'Описание ошибки',
+
+    'network.device.breadcrumbs.main' => 'Главная',
+    'network.device.breadcrumbs.network' => 'Сеть',
+    'network.device.breadcrumbs.devices' => 'Устройства',
 ];

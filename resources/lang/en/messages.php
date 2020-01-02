@@ -34,27 +34,36 @@ return [
     'main_menu.contacts' => 'Contacts',
 
     /**
-     * Device card.
+     * Main page.
      */
-    'device.notifications_and_errors' => 'Notifications & errors',
-    'device.errors' => 'Errors',
-    'device.snmp_fail' => 'SNMP. Error connection to device',
-    'device.model' => 'Model',
-    'device.firmware_version' => 'Firmware version',
-    'device.date_time' => 'Date / time',
-    'device.platform_type' => 'Platform type',
-    'device.port' => 'port',
-    'device.ports' => 'Ports',
-    'device.other' => 'Other',
-    'device.operation_system' => 'Operation system',
-    'device.short_description' => 'Short description',
-    'device.summary_information' => 'Summary information',
-    'device.edit' => 'Edit',
-    'device.back' => 'Back',
-    'device.title' => 'Network',
-    'device.error_description' => 'Error description',
+    'main_page.breadcrumbs.main' => 'Main',
+    'main_page.breadcrumbs.summary_info' => 'Summary information',
+    'main_page.title' => 'Summary information',
 
-    'device.breadcrumbs.main' => 'Main',
-    'device.breadcrumbs.network' => 'Network',
-    'device.breadcrumbs.devices' => 'Devices',
+    /**
+     * Device card page.
+     */
+    'network.device.notifications_and_errors' => 'Notifications & errors',
+    'network.device.errors' => 'Errors',
+    'network.device.snmp_fail' => 'SNMP. Error connection to device',
+    'network.device.model' => 'Model',
+    'network.device.firmware_version' => 'Firmware version',
+    'network.device.date_time' => 'Date / time',
+    'network.device.platform_type' => 'Platform type',
+    'network.device.platform_type.cloud' => 'cloud',
+    'network.device.platform_type.hardware' => 'hardware',
+    'network.device.port' => 'port',
+    'network.device.ports' => 'Ports',
+    'network.device.other' => 'Other',
+    'network.device.operation_system' => 'Operation system',
+    'network.device.short_description' => 'Short description',
+    'network.device.summary_information' => 'Summary information',
+    'network.device.edit' => 'Edit',
+    'network.device.back' => 'Back',
+    'network.device.title' => 'Network',
+    'network.device.error_description' => 'Error description',
+
+    'network.device.breadcrumbs.main' => 'Main',
+    'network.device.breadcrumbs.network' => 'Network',
+    'network.device.breadcrumbs.devices' => 'Devices',
 ];
