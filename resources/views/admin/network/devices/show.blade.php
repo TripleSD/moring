@@ -35,7 +35,7 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Карточка устройства
+                                @lang('messages.network.device.card_title')
                                 {{ $device->vendor->title }} {{ $device->model->title }}
                             </h3>
                             <div class="btn-group float-right">
@@ -79,7 +79,7 @@
                                         </span>
                                 </li>
                                 <li class="small">
-                                    ID в базе:
+                                    @lang('messages.network.device.in_base'):
                                     <span class="float-right">{{ $device->id }}
                                         </span>
                                 </li>
@@ -94,8 +94,8 @@
                                         </span>
                                 </li>
                                 <li class="small">
-                                    Версия пакетов (только для Mikrotik <a href="#"><i
-                                            class="fas fa-info-circle"></i></a>):
+                                    @lang('messages.network.device.packets_version'):
+                                    <a href="#"><i class="fas fa-question-circle"></i></a>
                                     <span class="float-right">{{ $device->packets_version }}
                                         </span>
                                 </li>
@@ -104,7 +104,7 @@
                                     <span class="float-right">
                                             @if($device->platform_type == 0)
                                             <i class="fas fa-network-wired text-success"></i>
-                                                @lang('messages.network.device.platform_type.hardware')
+                                            @lang('messages.network.device.platform_type.hardware')
                                         @else
                                             <i class="fas fa-cloud text-indigo"></i>
                                             @lang('messages.network.device.platform_type.cloud')
@@ -112,24 +112,26 @@
                                         </span>
                                 </li>
                                 <li class="small">
-                                    IP адрес / Имя устройства:
+                                    @lang('messages.network.device.hostname'):
                                     <span class="float-right">{{ $device->hostname }}
                                         </span>
                                 </li>
                                 <li class="small">
-                                    SNMP @lang('messages.network.device.port'):
+                                    @lang('messages.network.device.snmp_port'):
                                     <span class="float-right">{{ $device->snmp_port }}
                                         </span>
                                 </li>
                                 <li class="small">
-                                    Версия SNMP протокола:
+                                    @lang('messages.network.device.snmp_protocol'):
                                     <span class="float-right">{{ $device->snmp_version }}
                                         </span>
                                 </li>
                                 <li class="small">
                                     SNMP community:
                                     <span class="float-right">***** (<a href="{{ route('network.devices.edit',
-                                            $device->id) }}"> настройки</a>)
+                                            $device->id) }}">
+                                            @lang('messages.network.device.settings')
+                                        </a>)
                                         </span>
                                 </li>
                                 <li class="small">
