@@ -5,20 +5,20 @@
             <div class="row mb-2">
                 <div class="col-sm-6">
                     <h1 class="m-0 text-dark">
-                        <i class="nav-icon fas fa-network-wired"></i> @lang('messages.device.title')
+                        <i class="nav-icon fas fa-network-wired"></i> @lang('messages.network.device.title')
                     </h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">
-                                @lang('messages.device.breadcrumbs.main')</a>
+                                @lang('messages.network.device.breadcrumbs.main')</a>
                         </li>
                         <li class="breadcrumb-item">
-                            @lang('messages.device.breadcrumbs.network')
+                            @lang('messages.network.device.breadcrumbs.network')
                         </li>
                         <li class="breadcrumb-item">
                             <a href="{{ route('network.devices.index') }}">
-                                @lang('messages.device.breadcrumbs.devices')
+                                @lang('messages.network.device.breadcrumbs.devices')
                             </a>
                         </li>
                         <li class="breadcrumb-item active">{{ $device->vendor->title }} {{ $device->model->title }}</li>
@@ -40,11 +40,11 @@
                             </h3>
                             <div class="btn-group float-right">
                                 <a href="{{route('network.devices.index')}}"
-                                   class="btn btn-sm bg-gradient-info" title="@lang('messages.device.back')">
+                                   class="btn btn-sm bg-gradient-info" title="@lang('messages.network.device.back')">
                                     <i class="fa fa-arrow-left"></i></a>
                                 <a href="{{route('network.devices.edit', $device->id)}}"
                                    class="btn btn-sm bg-gradient-warning"
-                                   title="@lang('messages.device.edit')">
+                                   title="@lang('messages.network.device.edit')">
                                     <i class="fa fa-edit"></i></a>
                             </div>
                         </div>
@@ -56,7 +56,7 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <dt>@lang('messages.device.summary_information')</dt>
+                            <dt>@lang('messages.network.device.summary_information')</dt>
                         </div>
                         <div class="card-body">
                             <blockquote class="quote-secondary">
@@ -72,7 +72,7 @@
                             </blockquote>
                             <ul class="nav nav-pills flex-column">
                                 <li class="small">
-                                    @lang('messages.device.model'):
+                                    @lang('messages.network.device.model'):
                                     <span class="float-right">
                                             {{$device->vendor->title}}
                                         {{$device->model->title}}
@@ -84,12 +84,12 @@
                                         </span>
                                 </li>
                                 <li class="small">
-                                    @lang('messages.device.operation_system'):
+                                    @lang('messages.network.device.operation_system'):
                                     <span class="float-right">{{ $device->firmware->title }}
                                         </span>
                                 </li>
                                 <li class="small">
-                                    @lang('messages.device.firmware_version'):
+                                    @lang('messages.network.device.firmware_version'):
                                     <span class="float-right">{{ $device->firmware->version }}
                                         </span>
                                 </li>
@@ -100,12 +100,14 @@
                                         </span>
                                 </li>
                                 <li class="small">
-                                    @lang('messages.device.platform_type'):
+                                    @lang('messages.network.device.platform_type'):
                                     <span class="float-right">
                                             @if($device->platform_type == 0)
-                                            <i class="fas fa-network-wired text-success"></i> аппаратная
+                                            <i class="fas fa-network-wired text-success"></i>
+                                                @lang('messages.network.device.platform_type.hardware')
                                         @else
-                                            <i class="fas fa-cloud text-indigo"></i> облачная
+                                            <i class="fas fa-cloud text-indigo"></i>
+                                            @lang('messages.network.device.platform_type.cloud')
                                         @endif
                                         </span>
                                 </li>
@@ -115,7 +117,7 @@
                                         </span>
                                 </li>
                                 <li class="small">
-                                    SNMP @lang('messages.device.port'):
+                                    SNMP @lang('messages.network.device.port'):
                                     <span class="float-right">{{ $device->snmp_port }}
                                         </span>
                                 </li>
@@ -131,7 +133,7 @@
                                         </span>
                                 </li>
                                 <li class="small">
-                                    @lang('messages.device.short_description'):
+                                    @lang('messages.network.device.short_description'):
                                     <span class="float-right">{{ $device->title }}
                                         </span>
                                 </li>
@@ -143,21 +145,21 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <dt>@lang('messages.device.notifications_and_errors')</dt>
+                            <dt>@lang('messages.network.device.notifications_and_errors')</dt>
                         </div>
                         <div class="card-body table-responsive p-0">
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th class="small"><b>@lang('messages.device.error_description')</b></th>
-                                    <th class="small"><b>@lang('messages.device.date_time')</b></th>
+                                    <th class="small"><b>@lang('messages.network.device.error_description')</b></th>
+                                    <th class="small"><b>@lang('messages.network.device.date_time')</b></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($logs as $log)
                                     <tr>
                                         <td class="small">
-                                            @lang('messages.device.snmp_fail')
+                                            @lang('messages.network.device.snmp_fail')
                                         </td>
                                         <td class="small">
                                             {{$log->created_at}}
@@ -175,7 +177,7 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <dt>@lang('messages.device.ports')</dt>
+                            <dt>@lang('messages.network.device.ports')</dt>
                         </div>
                     </div>
                 </div>
@@ -183,7 +185,7 @@
                 <div class="col-6">
                     <div class="card">
                         <div class="card-header">
-                            <dt>@lang('messages.device.other')</dt>
+                            <dt>@lang('messages.network.device.other')</dt>
                         </div>
                     </div>
                 </div>
