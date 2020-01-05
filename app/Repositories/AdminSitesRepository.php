@@ -56,8 +56,8 @@ class AdminSitesRepository extends Repository
     public function store(array $fillable)
     {
         // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
-        if (intval($fillable['https']) === 0) {
-            $fillable['check_ssl'] = 0;
+        if ((int) ($fillable['https']) === 0) {
+            $fillable['check_ssl']   = 0;
             $fillable['check_https'] = 0;
         } else {
             $fillable['check_https'] = 1;
@@ -71,9 +71,9 @@ class AdminSitesRepository extends Repository
         $fillable['pending'] = 1;
 
         // Save information
-        $first_entry = (new Sites())->create($fillable);
+        $first_entry         = (new Sites())->create($fillable);
         $fillable['site_id'] = $first_entry->id;
-        $result = (new SitesChecksList())->create($fillable);
+        $result              = (new SitesChecksList())->create($fillable);
 
         return $result;
     }
@@ -88,13 +88,13 @@ class AdminSitesRepository extends Repository
     public function update($fillable, int $id)
     {
         // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
-        if (intval($fillable['https']) === 0) {
-            $fillable['check_ssl'] = 0;
+        if ((int) ($fillable['https']) === 0) {
+            $fillable['check_ssl']   = 0;
             $fillable['check_https'] = 0;
         } else {
             $fillable['check_https'] = 1;
         }
-        $site = Sites::find($id);
+        $site   = Sites::find($id);
         $result = $site->update($fillable);
 
         $check = SitesChecksList::where('site_id', $id)->first();
@@ -112,7 +112,7 @@ class AdminSitesRepository extends Repository
 
     public function sortedList(int $length = null, string $sort = null)
     {
-        if (is_null($length)) {
+        if ($length === null) {
             $list = Sites::with(
                 'getHttpCode',
                 'checksList',
@@ -137,14 +137,16 @@ class AdminSitesRepository extends Repository
 
     public function listOfPings($request, int $count)
     {
-        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get(['average', 'created_at'])->slice(0, $count);
+        $list = SitesPingResponses::where('site_id', $request->id)->orderBy('created_at', 'asc')->get(
+            ['average', 'created_at']
+        )->slice(0, $count);
 
         return $list;
     }
 
     public function getWebServersForNew(int $count)
     {
-        $list = Sites::where('pending', '<>', 1)->with('getWebServer')->orderBy('created_at', 'desc')
+        $list       = Sites::where('pending', '<>', 1)->with('getWebServer')->orderBy('created_at', 'desc')
             ->get(['id', 'title'])->slice(0, $count);
         $webCounter = collect();
         $list->map(
@@ -165,9 +167,9 @@ class AdminSitesRepository extends Repository
     public function switch(array $request)
     {
         // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
-        $site = Sites::find($request['id']);
-        $site->enabled = intval($request['on']);
-        $result = $site->update();
+        $site          = Sites::find($request['id']);
+        $site->enabled = (int) ($request['on']);
+        $result        = $site->update();
 
         return $result;
     }

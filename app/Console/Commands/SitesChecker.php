@@ -36,41 +36,41 @@ class SitesChecker extends Command
     {
         parent::__construct();
         $this->settingsController = new SettingsController();
-        $this->telegramConnector = new TelegramConnector();
+        $this->telegramConnector  = new TelegramConnector();
     }
 
     public function handle(int $site_id = null)
     {
-        if (is_null($site_id)) {
-            $sites = Sites::get();
+        if ($site_id === null) {
+            $sites     = Sites::get();
             $tgMessage = 0;
         } else {
-            $sites[] = Sites::find($site_id);
+            $sites[]   = Sites::find($site_id);
             $tgMessage = 1;
         }
 
         foreach ($sites as $site) {
-            $phpVersion = 0;
-            $phpBranch = 0;
-            $statusCode = 999;
+            $phpVersion    = 0;
+            $phpBranch     = 0;
+            $statusCode    = 999;
             $webServerType = null;
 
             try {
                 if ($site->checksList->use_file === 1) {
-                    $httpClient = new Client();
-                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->file_url : 'http://' . $site->file_url;
-                    $request = $httpClient->request('GET', $url, ['allow_redirects' => false]);
-                    $response = $request->getBody();
+                    $httpClient    = new Client();
+                    $url           = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->file_url : 'http://' . $site->file_url;
+                    $request       = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+                    $response      = $request->getBody();
                     $responseArray = json_decode($response, true);
-                    $phpVersion = $responseArray['php-version'];
-                    $statusCode = $request->getStatusCode();
+                    $phpVersion    = $responseArray['php-version'];
+                    $statusCode    = $request->getStatusCode();
                     $webServerType = $responseArray['web-server'];
-                    $phpBranch = $responseArray['php-branch'];
+                    $phpBranch     = $responseArray['php-branch'];
                 } else {
-                    $httpClient = new Client();
-                    $url = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
-                    $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
-                    $phpVersion = $response->getHeader('X-Powered-By');
+                    $httpClient    = new Client();
+                    $url           = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
+                    $response      = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+                    $phpVersion    = $response->getHeader('X-Powered-By');
                     $webServerType = $response->getHeader('server')[0];
 
                     if (preg_match('/^[0-9]*/', $response->getStatusCode())) {
@@ -79,10 +79,10 @@ class SitesChecker extends Command
 
                     if ($phpVersion != null) {
                         if (preg_match('/^PHP/', $phpVersion[0])) {
-                            $phpVersion = preg_replace('/[^\d.]/', '', $phpVersion[0]);
+                            $phpVersion   = preg_replace('/[^\d.]/', '', $phpVersion[0]);
                             $phpBranchRaw = explode('.', $phpVersion);
                             $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
-                            $phpBranch = Str::substr($phpBranchRaw, 0, 3);
+                            $phpBranch    = Str::substr($phpBranchRaw, 0, 3);
                         } else {
                             $phpVersion = 0;
                         }
@@ -102,7 +102,7 @@ class SitesChecker extends Command
                 $http->http_code = $statusCode;
             } else {
                 $fillable = ['site_id' => $site->id, 'http_code' => $statusCode];
-                $http = new SitesHttpCodes($fillable);
+                $http     = new SitesHttpCodes($fillable);
             }
             $http->updated_at = Carbon::now();
             $http->save();
@@ -112,7 +112,7 @@ class SitesChecker extends Command
             if (isset($webServer)) {
                 $webServer->web_server = $webServerType;
             } else {
-                $fillable = ['site_id' => $site->id, 'web_server' => $webServerType];
+                $fillable  = ['site_id' => $site->id, 'web_server' => $webServerType];
                 $webServer = new SitesWebServers($fillable);
             }
             $webServer->updated_at = Carbon::now();
@@ -122,17 +122,17 @@ class SitesChecker extends Command
             $php = SitesPhpVersions::where('site_id', $site->id)->first();
             if (isset($php)) {
                 $php->version = $phpVersion;
-                $php->branch = $phpBranch;
+                $php->branch  = $phpBranch;
             } else {
                 $fillable = ['site_id' => $site->id, 'version' => $phpVersion, 'branch' => $phpBranch];
-                $php = new SitesPhpVersions($fillable);
+                $php      = new SitesPhpVersions($fillable);
             }
             $php->updated_at = Carbon::now();
             $php->save();
 
             // Now we remove pending status from site
             $pending = Sites::where('id', $site->id)->first();
-            if (intval($pending->pending) === 1) {
+            if ((int) ($pending->pending) === 1) {
                 $pending->pending = 0;
                 $pending->save();
             }
@@ -140,7 +140,7 @@ class SitesChecker extends Command
 
         if ($this->settingsController->getTelegramStatus() === 1) {
             try {
-                $date = Carbon::now()->format('Y-m-d H:i:s');
+                $date   = Carbon::now()->format('Y-m-d H:i:s');
                 $chatId = $this->settingsController->getGroupChatId();
                 if ($tgMessage == 0) {
                     $this->telegramConnector->sendMessage(

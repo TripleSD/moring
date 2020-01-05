@@ -31,7 +31,7 @@
                     <a href="{{ route('home') }}" class="nav-link">
                         <i class="nav-icon fas fa-home"></i>
                         <p>
-                            Главная
+                            @lang('messages.main_menu.home')
                         </p>
                     </a>
                 </li>
@@ -40,7 +40,7 @@
                     <a href="{{ route('admin.news.index') }}" class="nav-link">
                         <i class="nav-icon fa fa-newspaper"></i>
                         <p>
-                            Новости
+                            @lang('messages.main_menu.news')
                         </p>
                     </a>
                 </li>
@@ -49,7 +49,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-network-wired"></i>
                         <p>
-                            Сеть
+                            @lang('messages.main_menu.network')
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -57,7 +57,7 @@
                         <li class="nav-item">
                             <a href="{{ route('network.devices.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Устройства</p>
+                                <p>@lang('messages.main_menu.network.devices')</p>
                             </a>
                         </li>
                     </ul>
@@ -67,7 +67,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-server"></i>
                         <p>
-                            Инфраструктура
+                            @lang('messages.main_menu.infrastructure')
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -75,7 +75,7 @@
                         <li class="nav-item">
                             <a href="{{ route('servers.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Серверы</p>
+                                <p>@lang('messages.main_menu.infrastructure.servers')</p>
                             </a>
                         </li>
                     </ul>
@@ -85,7 +85,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-globe"></i>
                         <p>
-                            Хостинг
+                            @lang('messages.main_menu.hosting')
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -93,7 +93,7 @@
                         <li class="nav-item">
                             <a href="{{ route('admin.sites.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Сайты</p>
+                                <p>@lang('messages.main_menu.hosting.sites')</p>
                             </a>
                         </li>
                     </ul>
@@ -104,7 +104,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-cogs"></i>
                         <p>
-                            Настройки
+                            @lang('messages.main_menu.settings')
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -112,7 +112,7 @@
                         <li class="nav-item">
                             <a href="{{ route('settings.users.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Пользователи</p>
+                                <p>@lang('messages.main_menu.settings.users')</p>
                             </a>
                         </li>
                     </ul>
@@ -120,7 +120,7 @@
                         <li class="nav-item">
                             <a href="{{ route('settings.system.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Система</p>
+                                <p>@lang('messages.main_menu.settings.system')</p>
                             </a>
                         </li>
                     </ul>
@@ -128,7 +128,7 @@
                         <li class="nav-item">
                             <a href="{{ route('settings.bridge.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Бридж</p>
+                                <p>@lang('messages.main_menu.settings.bridge')</p>
                             </a>
                         </li>
                     </ul>
@@ -136,7 +136,7 @@
                         <li class="nav-item">
                             <a href="{{ route('settings.integrations.telegram.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Интеграции</p>
+                                <p>@lang('messages.main_menu.settings.integrations')</p>
                             </a>
                         </li>
                     </ul>
@@ -146,7 +146,7 @@
                     <a href="#" class="nav-link">
                         <i class="nav-icon far fa-question-circle"></i>
                         <p>
-                            Помощь
+                            @lang('messages.main_menu.help')
                             <i class="right fas fa-angle-left"></i>
                         </p>
                     </a>
@@ -154,7 +154,7 @@
                         <li class="nav-item">
                             <a href="{{ route('documenation.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Документация</p>
+                                <p>@lang('messages.main_menu.help.documentation')</p>
                             </a>
                         </li>
                     </ul>
@@ -162,7 +162,7 @@
                         <li class="nav-item">
                             <a href="{{ route('documenation.changelog') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>История версий</p>
+                                <p>@lang('messages.main_menu.help.changelog')</p>
                             </a>
                         </li>
                     </ul>
@@ -172,7 +172,7 @@
                     <a href="{{ route('contacts.index') }}" class="nav-link">
                         <i class="nav-icon fas fa-address-book"></i>
                         <p>
-                            Контакты
+                            @lang('messages.main_menu.contacts')
                         </p>
                     </a>
                 </li>

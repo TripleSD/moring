@@ -6,11 +6,13 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
+    - name: Install requires
+      run: sudo apt-get install php7.3-intl
     - uses: actions/checkout@v1
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
-      run: composer install -q --no-ansi --no-interaction --no-scripts --no-suggest --no-progress --prefer-dist
+      run: composer install
     - name: Generate key
       run: php artisan key:generate
     - name: Create Database

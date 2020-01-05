@@ -37,6 +37,7 @@ class Kernel extends HttpKernel
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
             \App\Http\Middleware\MoringBridgeInfo::class,
             \App\Http\Middleware\MoringVersionInfo::class,
+            \App\Http\Middleware\Localization::class,
         ],
 
         'api' => [

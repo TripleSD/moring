@@ -67,7 +67,6 @@ class BridgeMoringVersionChecker extends Command
                     $versions->save();
                 }
             } catch (\Exception $e) {
-                echo $e->getMessage();
             }
         }
         $this->bridgeRepository->updateStatInfo('bridge_moring_versions');

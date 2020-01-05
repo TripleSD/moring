@@ -40,7 +40,7 @@ class SitesPings extends Command
      */
     public function handle(int $id = null)
     {
-        if (is_null($id)) {
+        if ($id === null) {
             $sites = Sites::get();
         } else {
             $sites[] = Sites::find($id);
