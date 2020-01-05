@@ -38,10 +38,9 @@ MoRiNg - opensource система мониторинга. На данный м�
 - - - 
 
 ### Ветки
-||||
+|Ветки|Описание|Статусы|
 |---|---|---|
-|Master|Используется для получения актуальной версии системы, либо для обновления уже используемых копий.|s|
-|[![](https://github.styleci.io/repos/220468288/shield?branch=master)](https://github.styleci.io/repos/220468288/shield?branch=master)
+|Master|Используется для получения актуальной версии системы, либо для обновления уже используемых копий.|[![](https://github.styleci.io/repos/220468288/shield?branch=master)](https://github.styleci.io/repos/220468288/shield?branch=master)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d5a6c3a61da54e81b2db96964e6ce721)](https://www.codacy.com/manual/AntonMZ/moring?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TripleSD/moring&amp;utm_campaign=Badge_Grade)|
 |Dev|Временная ветка используемая разработчиками для сохранения изменений до официального релиза новой версии.|
 [![](https://github.styleci.io/repos/220468288/shield?branch=dev)](https://github.styleci.io/repos/220468288/shield?branch=dev)|
