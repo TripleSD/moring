@@ -1,5 +1,7 @@
 # MoRiNg (система мониторинга)
 ![](https://img.shields.io/badge/OpenSource-%E2%AD%90-red)
+[![Laravel](https://img.shields.io/badge/Laravel-6.x-red?logo=laravel)]((https://img.shields.io/badge/Laravel-6.x-red?logo=laravel))
+[![PHP](https://img.shields.io/badge/PHP-7.x-blue?logo=php)]((https://img.shields.io/badge/PHP-7.x-blue?logo=php))
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/TripleSD/moring)
 ![](https://img.shields.io/github/stars/TripleSD/moring)
 ![](https://img.shields.io/github/forks/TripleSD/moring)
