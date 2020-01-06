@@ -162,6 +162,11 @@
                                     <tr>
                                         <td class="small">
                                             @lang('messages.network.device.snmp_fail')
+                                            @if($log->type === 1)
+                                                <span class="badge badge-danger">
+                                                    @lang('messages.network.device.type_status.error')
+                                                </span>
+                                                @endif
                                         </td>
                                         <td class="small">
                                             {{$log->created_at}}
