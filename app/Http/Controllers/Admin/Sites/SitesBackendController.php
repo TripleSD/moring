@@ -9,6 +9,8 @@ class SitesBackendController extends Controller
 {
     public function refreshList(SitesBackendRepository $sitesBackendRepository)
     {
-        return $sitesBackendRepository->refreshList();
+        $sitesBackendRepository->refreshList();
+
+        return redirect()->route('admin.sites.index');
     }
 }
