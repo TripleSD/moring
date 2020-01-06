@@ -1,3 +1,9 @@
+[Build.013](https://github.com/TripleSD/moring/releases/tag/build.013)
+- **(New)** - Добавлен сбор SNMP ошибок сетевых устройств
+- **(Upd)** - Обновлен шаблон списка устройств
+- **(Upd)** - Опрос устройств установлен на более короткий интервал
+- **(Upd)** - Поправлен env файл для отключения debug информации
+
 [Build.012](https://github.com/TripleSD/moring/releases/tag/build.012)
 - **(New)** - Добавлен загрузка данных о deprecated версиях PHP интерпретаторов
 - **(New)** - Добавлен фильтр сайтов с deprecated версиями PHP интерпретаторов
