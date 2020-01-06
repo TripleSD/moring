@@ -18,6 +18,7 @@ class CreateDevicesLogs extends Migration
             $table->unsignedBigInteger('device_id')->comment('Device ID');
             $table->foreign('device_id')->references('id')->on('devices');
             $table->string('message')->comment('Message');
+            $table->integer('type')->comment('Message type');
             $table->timestamps();
         });
     }
