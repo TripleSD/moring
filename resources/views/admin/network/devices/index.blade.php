@@ -93,6 +93,10 @@
                                                             {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffAsCarbonInterval()->s }}
                                                             с.
                                                         </div>
+                                                        <div class="small text-gray">
+                                                            <i class="fas fa-history"></i>
+                                                            {{ $device->updated_at }}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
