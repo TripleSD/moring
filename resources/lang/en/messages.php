@@ -68,6 +68,7 @@ return [
     'network.device.hostname' => 'IP addr / Hostname',
     'network.device.snmp_protocol' => 'Version SNMP protocol',
     'network.device.card_title' => 'Device card',
+    'network.device.type_status.error' => 'Error',
 
     'network.device.breadcrumbs.main' => 'Main',
     'network.device.breadcrumbs.network' => 'Network',

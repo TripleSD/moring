@@ -68,6 +68,7 @@ return [
     'network.device.hostname' => 'IP адрес / хостнейм',
     'network.device.snmp_protocol' => 'Версия SNMP протокола',
     'network.device.card_title' => 'Карточка устройства',
+    'network.device.type_status.error' => 'Ошибка',
 
     'network.device.breadcrumbs.main' => 'Главная',
     'network.device.breadcrumbs.network' => 'Сеть',
