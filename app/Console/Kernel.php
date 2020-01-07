@@ -43,7 +43,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('BridgePHPVersionsChecker')->daily();
         $schedule->command('SitesPings')->everyFiveMinutes();
         $schedule->command('ServersPings')->everyFiveMinutes();
-        $schedule->command('SnmpDevicesChecker')->everyFiveMinutes();
+        $schedule->command('SnmpDevicesChecker')->everyMinute();
     }
 
     /**
