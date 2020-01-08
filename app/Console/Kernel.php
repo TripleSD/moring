@@ -2,7 +2,6 @@
 
 namespace App\Console;
 
-use App\Console\Commands\SystemChecker;
 use App\Console\Commands\BridgeMoringVersionChecker;
 use App\Console\Commands\BridgePHPVersionsChecker;
 use App\Console\Commands\ServersPings;
@@ -10,6 +9,7 @@ use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
 use App\Console\Commands\SitesSSLChecker;
 use App\Console\Commands\SnmpDevicesChecker;
+use App\Console\Commands\SystemChecker;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
