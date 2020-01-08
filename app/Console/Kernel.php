@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use App\Console\Commands\SystemChecker;
 use App\Console\Commands\BridgeMoringVersionChecker;
 use App\Console\Commands\BridgePHPVersionsChecker;
 use App\Console\Commands\ServersPings;
@@ -27,6 +28,8 @@ class Kernel extends ConsoleKernel
         SitesPings::class,
         ServersPings::class,
         SnmpDevicesChecker::class,
+        SystemChecker::class,
+
     ];
 
     /**
@@ -44,6 +47,7 @@ class Kernel extends ConsoleKernel
         $schedule->command('SitesPings')->everyFiveMinutes();
         $schedule->command('ServersPings')->everyFiveMinutes();
         $schedule->command('SnmpDevicesChecker')->everyMinute();
+        $schedule->command('SystemChecker')->daily();
     }
 
     /**
