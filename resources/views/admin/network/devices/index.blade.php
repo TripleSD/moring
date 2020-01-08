@@ -80,7 +80,8 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="small">
-                                                            <b>Имя/IP адрес устройства:</b> {{ $device->hostname }}
+                                                            <b>Имя/IP адрес устройства:</b>
+                                                             {{ $device->hostname }}:{{ $device->snmp_port }}
                                                         </div>
                                                         <div class="small">
                                                             <b>Время работы:</b>
