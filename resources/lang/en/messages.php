@@ -76,7 +76,6 @@ return [
     'network.device.telnet_enabled' => 'Telnet port specified',
     'network.device.telnet_disabled' => 'Telnet port not specified',
 
-
     'network.device.breadcrumbs.main' => 'Main',
     'network.device.breadcrumbs.network' => 'Network',
     'network.device.breadcrumbs.devices' => 'Devices',
