@@ -44,11 +44,11 @@ return [
      * Device card page.
      */
     'network.device.notifications_and_errors' => 'Notifications & errors',
+    'network.device.poll_information' => 'Device poll information',
     'network.device.errors' => 'Errors',
     'network.device.snmp_fail' => 'SNMP. Error connection to device',
     'network.device.model' => 'Model',
     'network.device.firmware_version' => 'Firmware version',
-    'network.device.date_time' => 'Date / time',
     'network.device.platform_type' => 'Platform type',
     'network.device.platform_type.cloud' => 'cloud',
     'network.device.platform_type.hardware' => 'hardware',
@@ -61,7 +61,6 @@ return [
     'network.device.edit' => 'Edit',
     'network.device.back' => 'Back',
     'network.device.title' => 'Network',
-    'network.device.error_description' => 'Error description',
     'network.device.settings' => 'settings',
     'network.device.in_base' => 'ID in base',
     'network.device.packets_version' => 'Packets version (only Mikrotik)',
