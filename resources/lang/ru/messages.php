@@ -69,6 +69,12 @@ return [
     'network.device.snmp_protocol' => 'Версия SNMP протокола',
     'network.device.card_title' => 'Карточка устройства',
     'network.device.type_status.error' => 'Ошибка',
+    'network.device.enabled' => 'Включено',
+    'network.device.disabled' => 'Выключено',
+    'network.device.ssh_enabled' => 'Указан SSH порт',
+    'network.device.ssh_disabled' => 'SSH порт не указан',
+    'network.device.telnet_enabled' => 'Указан Telnet порт',
+    'network.device.telnet_disabled' => 'Telnet порт не указан',
 
     'network.device.breadcrumbs.main' => 'Главная',
     'network.device.breadcrumbs.network' => 'Сеть',
