@@ -24,7 +24,7 @@ class UpdateAndStoreDeviceRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required | string | min:3 | max:128',
+            'title' => 'required | string | min:1 | max:50',
             'hostname' => 'required | string',
             'snmp_version' => 'required | integer | between:1,3',
             'snmp_port' => 'required | integer | between:1,65535',
