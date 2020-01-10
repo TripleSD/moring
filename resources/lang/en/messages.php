@@ -69,6 +69,12 @@ return [
     'network.device.snmp_protocol' => 'Version SNMP protocol',
     'network.device.card_title' => 'Device card',
     'network.device.type_status.error' => 'Error',
+    'network.device.enabled' => 'Enabled',
+    'network.device.disabled' => 'Disabled',
+    'network.device.ssh_enabled' => 'SSH port specified',
+    'network.device.ssh_disabled' => 'SSH port not specified',
+    'network.device.telnet_enabled' => 'Telnet port specified',
+    'network.device.telnet_disabled' => 'Telnet port not specified',
 
     'network.device.breadcrumbs.main' => 'Main',
     'network.device.breadcrumbs.network' => 'Network',

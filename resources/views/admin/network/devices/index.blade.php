@@ -67,10 +67,25 @@
                                                                 <img src="/img/vendors/cisco.png">
                                                             @elseif($device->vendor->title == 'MikroTik')
                                                                 <img src="/img/vendors/mikrotik.png">
-                                                            @elseif($device->vendor->title == 'D-Link')
+                                                            @elseif($device->vendor->title == 'DLink')
                                                                 <img src="/img/vendors/d-link.png">
                                                             @elseif($device->vendor->title == 'Eltex')
                                                                 <img src="/img/vendors/eltex.png">
+                                                            @endif
+                                                        </div>
+                                                        <div>
+                                                            @if($device->enabled === 1)
+                                                                <div class="small">
+                                                                    <div class="badge badge-success">
+                                                                        @lang('messages.network.device.enabled')
+                                                                    </div>
+                                                                </div>
+                                                            @else
+                                                                <div class="small">
+                                                                    <div class="small badge badge-secondary">
+                                                                        @lang('messages.network.device.disabled')
+                                                                    </div>
+                                                                </div>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -81,7 +96,7 @@
                                                     <div class="col">
                                                         <div class="small">
                                                             <b>Имя/IP адрес устройства:</b>
-                                                             {{ $device->hostname }}:{{ $device->snmp_port }}
+                                                            {{ $device->hostname }}:{{ $device->snmp_port }}
                                                         </div>
                                                         <div class="small">
                                                             <b>Время работы:</b>
@@ -95,12 +110,40 @@
                                                             с.
                                                         </div>
                                                         <div class="small text-gray">
-                                                            <i class="fas fa-history"></i>
-                                                            {{ $device->updated_at }}
+                                                            <i class="fas fa-history"></i> {{ $device->updated_at }}
+
+                                                            @if($device->ssh_port !== null)
+                                                                <div class="badge badge-primary"
+                                                                     title="@lang('messages.network.device.ssh_enabled')">
+                                                                    <i class="fas fa-terminal"></i>
+                                                                    ssh
+                                                                </div>
+                                                            @else
+                                                                <div class="badge badge-secondary"
+                                                                     title="@lang('messages.network.device.ssh_disabled')">
+                                                                    <i class="fas fa-terminal"></i>
+                                                                    ssh
+                                                                </div>
+                                                            @endif
+
+                                                            @if($device->telnet_port !== null)
+                                                                <div class="badge badge-primary"
+                                                                     title="@lang('messages.network.device.telnet_enabled')">
+                                                                    <i class="fas fa-terminal"></i>
+                                                                    telnet
+                                                                </div>
+                                                            @else
+                                                                <div class="badge badge-secondary"
+                                                                     title="@lang('messages.network.device.telnet_disabled')">
+                                                                    <i class="fas fa-terminal"></i>
+                                                                    telnet
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
                                             </td>
+
                                             <td>
                                                 <div class="small">
                                                     <b>ОС:</b> {{ $device->firmware->title }}
