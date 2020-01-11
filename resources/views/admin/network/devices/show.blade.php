@@ -114,6 +114,12 @@
                                     <span class="float-right">{{ $device->title }}
                                         </span>
                                 </li>
+                                <li class="small">
+                                    Location:
+                                    <span class="float-right">
+                                        {{ $device->location }}
+                                    </span>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -157,7 +163,8 @@
                                     SSH:
                                     <span class="float-right">
                                     @if($device->ssh_port !== null)
-                                            <a class="badge badge-dark" href="ssh://{{$device->hostname}}"
+                                            ssh://{{$device->hostname}}
+                                            <a class="badge badge-primary" href="ssh://{{$device->hostname}}"
                                                title="@lang('messages.network.device.ssh_enabled')">
                                             <i class="fas fa-terminal"></i>
                                             </a>
@@ -172,15 +179,33 @@
                                     Telnet:
                                     <span class="float-right">
                                     @if($device->telnet_port !== null)
-                                            <a class="badge badge-dark" href="telnet://{{$device->hostname}}"
+                                            telnet://{{$device->hostname}}
+                                            <a class="badge badge-primary" href="telnet://{{$device->hostname}}"
                                                title="@lang('messages.network.device.telnet_enabled')">
-                                            <i class="fas fa-terminal"></i>
+                                                <i class="fas fa-terminal"></i>
                                             </a>
                                         @else
                                             <div class="badge badge-secondary"
                                                  title="@lang('messages.network.device.telnet_disabled')">
                                             <i class="fas fa-terminal"></i>
                                         </div>
+                                        @endif
+                                    </span>
+                                </li>
+                                <li class="small">
+                                    Web:
+                                    <span class="float-right">
+                                    @if($device->web !== null)
+                                            http://{{ $device->web }}
+                                            <a class="text-primary" href="http://{{ $device->web }}"
+                                               title="@lang('messages.network.device.web_enabled')" target="_blank">
+                                                <i class="fas fa-globe"></i>
+                                            </a>
+                                        @else
+                                            <div class="text-secondary"
+                                                 title="@lang('messages.network.device.web_disabled')">
+                                                 <i class="fas fa-globe"></i>
+                                            </div>
                                         @endif
                                     </span>
                                 </li>
@@ -192,36 +217,56 @@
 
             <div class="row">
                 <div class="col-6">
-                    <div class="card card-warning">
-                        <div class="card-header">
-                            <dt>@lang('messages.network.device.notifications_and_errors')</dt>
-                        </div>
-                        @if($device->logs !== null)
-                            <div class="card-body table-responsive p-0">
-                                <table class="table table-hover">
-                                    <tbody>
-                                    @foreach($logs as $log)
-                                        <tr>
-                                            <td class="small">
-                                                @if($log->type === 1)
-                                                    <span class="badge badge-danger">
-                                                        @lang('messages.network.device.type_status.error')
-                                                    </span>
-                                                @endif
-                                            </td>
-                                            <td class="small">
-                                                @lang('messages.network.device.snmp_fail')
-                                            </td>
-                                            <td class="small">
-                                                {{\Carbon\Carbon::parse($log->created_at)->format('d-m-Y H:i:s')}}
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                    </tbody>
-                                </table>
+                    @if($device->logs !== null)
+                        <div class="card card-warning">
+                            <div class="card-header">
+                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>
                             </div>
-                        @endif
-                    </div>
+                            @if($device->logs !== null)
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                        @foreach($logs as $log)
+                                            <tr>
+                                                <td class="small">
+                                                    @if($log->resolved === 1)
+                                                        <i class="far fa-check-circle text-success"></i>
+                                                        <span class="badge badge-secondary">
+                                                            @lang('messages.network.device.type_status.error')
+                                                        </span>
+                                                    @else
+                                                        <i class="fas fa-exclamation-circle text-danger"></i>
+                                                        @if($log->type === 1)
+                                                            <span class="badge badge-danger">
+                                                                @lang('messages.network.device.type_status.error')
+                                                            </span>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                                <td class="small">
+                                                    @lang('messages.network.device.snmp_fail')
+                                                </td>
+                                                <td class="small">
+                                                    {{\Carbon\Carbon::parse($log->created_at)->format('d-m-Y H:i:s')}}
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-" href=""
+                                                    <i class="fas fa-eye"></i>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+                        </div>
+                    @else
+                        <div class="card card-gray">
+                            <div class="card-header">
+                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>
+                            </div>
+                        </div>
+                    @endif
                 </div>
 
                 <div class="col-6">
