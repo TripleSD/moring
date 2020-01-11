@@ -28,139 +28,15 @@
         <div class="container-fluid">
             <div class="row">
                 <section class="col-lg-12 connectedSortable">
-                    <div class="card">
-                        <div class="card-header border-0">
-                            <h3 class="card-title">Недавно добавленные веб сайты</h3>
-                            <div class="card-tools float-right">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <table class="table table-striped table-valign-middle">
-                                <thead>
-                                <tr>
-                                    <th>URL</th>
-                                    <th>Статус</th>
-                                    <th>Дата проверки</th>
-                                    <th>Подробнее</th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($sites as $site)
-                                    <tr>
-                                        <td>
-                                            @if($site->enabled === 1)
-                                                <small class="text-success mr-1">
-                                                    <i class="fas fa-globe" title="Мониторинг запущен"></i>
-                                                </small>
-                                            @else
-                                                <small class="text-warning mr-1">
-                                                    <i class="fas fa-globe" title="Мониторинг приостановлен"></i>
-                                                </small>
-                                            @endif
-                                            {{$site->url}}
-                                        </td>
-                                        <td>
-                                            @if(isset($site->getHttpCode))
-                                                @if($site->getHttpCode->http_code == 200)
-                                                    <span class="badge badge-success"
-                                                          title="Сайт полностью рабочий">
-                                                            {{ $site->getHttpCode->http_code }}
-                                                            </span>
-                                                @elseif($site->getHttpCode->http_code == 301)
-                                                    <span class="badge badge-warning"
-                                                          title="На сайте установлен редирект">
-                                                            {{ $site->getHttpCode->http_code }}
-                                                            </span>
-                                                @elseif($site->getHttpCode->http_code == 302)
-                                                    <span class="badge badge-warning"
-                                                          title="На сайте установлен редирект">
-                                                            {{ $site->getHttpCode->http_code }}
-                                                            </span>
-                                                @else
-                                                    <span class="text-warning" title="Неопознанный код ответа">
-                                                                <i class="fa fa-exclamation-triangle"></i>
-                                                            </span>
-                                                @endif
-                                            @else
-                                                <span class="text-warning" title="Код ответа не был получен">
-                                                            <i class="fa fa-exclamation-triangle"></i>
-                                                        </span>
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <span
-                                                @if($site->enabled === 1)
-                                                class="pt-1 text-success">
-                                            @else
-                                                    class="pt-1 text-gray">
-                                                @endif
-                                                {{$site->getHttpCode->updated_at}}
-                                            </span>
-                                        </td>
-                                        <td>
-                                            <a href="{{route('admin.sites.show',$site->id)}}"
-                                               class="btn btn-xs bg-gradient-info"
-                                               title="Подробнее">
-                                                <i class="fas fa-search"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header border-0">
-                            <h3 class="card-title">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                Результаты пинга последних 5 добавленных сайтов, мс
-                            </h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="newSitesPings" data-title="{{$titles}}" data-ping="{{$pings}}" width="75%"
-                                    height="50%">
-                            </canvas>
-                        </div>
-                    </div>
-
-                    <div class="card">
-                        <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
-                            <h3 class="card-title">
-                                <i class="fas fa-map-marker-alt mr-1"></i>
-                                Статистика используемых версий для последних добавленных 5 web серверов, шт
-                            </h3>
-                            <div class="card-tools">
-                                <button type="button" class="btn btn-tool" data-card-widget="collapse">
-                                    <i class="fas fa-minus"></i>
-                                </button>
-                                <button type="button" class="btn btn-tool" data-card-widget="remove">
-                                    <i class="fas fa-times"></i>
-                                </button>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <canvas id="newSitesWebServers" data-server="{{$servers}}" data-count="{{$counts}}"
-                                    width="75%"
-                                    height="50%">
-                            </canvas>
-                        </div>
-                    </div>
+                    @forelse($sort as $item)
+                        @php
+                            $item_name = $item->item_name;
+                            $widget = "widgets." . $item_name;
+                        @endphp
+                        @include($widget)
+                        @yield($item_name)
+                    @empty
+                    @endforelse
                 </section>
             </div>
         </div>
