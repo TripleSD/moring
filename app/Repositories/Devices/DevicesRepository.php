@@ -34,16 +34,56 @@ class DevicesRepository extends Repository
     public function getDevicesList($request)
     {
         if ($request->view == 'all') {
-            return Devices::with('firmware', 'model', 'vendor')->get();
+            return Devices::with('firmware', 'model', 'vendor')
+                ->with(
+                    [
+                        'logs' => function ($q) {
+                            return $q->where('resolved', 0);
+                        },
+                    ]
+                )
+                ->get();
         } elseif ($request->view == '10') {
-            return Devices::with('firmware', 'model', 'vendor')->paginate(10);
+            return Devices::with('firmware', 'model', 'vendor')
+                ->with(
+                    [
+                        'logs' => function ($q) {
+                            return $q->where('resolved', 0);
+                        },
+                    ]
+                )
+                ->paginate(10);
         } elseif ($request->view == '25') {
-            return Devices::with('firmware', 'model', 'vendor')->paginate(25);
+            return Devices::with('firmware', 'model', 'vendor')
+                ->with(
+                    [
+                        'logs' => function ($q) {
+                            return $q->where('resolved', 0);
+                        },
+                    ]
+                )
+                ->paginate(25);
         } elseif ($request->view == '50') {
-            return Devices::with('firmware', 'model', 'vendor')->paginate(50);
+            return Devices::with('firmware', 'model', 'vendor')
+                ->with(
+                    [
+                        'logs' => function ($q) {
+                            return $q->where('resolved', 0);
+                        },
+                    ]
+                )
+                ->paginate(50);
         }
 
-        return Devices::with('firmware', 'model', 'vendor')->paginate(10);
+        return Devices::with('firmware', 'model', 'vendor')
+            ->with(
+                [
+                    'logs' => function ($q) {
+                        return $q->where('resolved', 0);
+                    },
+                ]
+            )
+            ->paginate(10);
     }
 
     /**

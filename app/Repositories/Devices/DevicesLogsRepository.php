@@ -9,6 +9,9 @@ class DevicesLogsRepository extends Repository
 {
     public function getLogsByDeviceId($deviceId)
     {
-        return DevicesLogs::where('device_id', $deviceId)->get();
+        return DevicesLogs::where('device_id', $deviceId)
+            ->orderBy('id', 'desc')
+            ->limit('6')
+            ->get();
     }
 }

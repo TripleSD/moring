@@ -35,7 +35,15 @@
                     <div class="card">
                         <div class="card-header">
                             <h3 class="card-title">
-                                @lang('messages.network.device.card_title')
+                                @if($device->vendor->title == 'Cisco')
+                                    <img src="/img/vendors/cisco.png">
+                                @elseif($device->vendor->title == 'MikroTik')
+                                    <img src="/img/vendors/mikrotik.png">
+                                @elseif($device->vendor->title == 'DLink')
+                                    <img src="/img/vendors/d-link.png">
+                                @elseif($device->vendor->title == 'Eltex')
+                                    <img src="/img/vendors/eltex.png">
+                                @endif
                                 {{ $device->vendor->title }} {{ $device->model->title }}
                             </h3>
                             <div class="btn-group float-right">
@@ -54,22 +62,11 @@
 
             <div class="row">
                 <div class="col-6">
-                    <div class="card">
+                    <div class="card card-info">
                         <div class="card-header">
                             <dt>@lang('messages.network.device.summary_information')</dt>
                         </div>
                         <div class="card-body">
-                            <blockquote class="quote-secondary">
-                                @if($device->vendor->title == 'Cisco')
-                                    <img src="/img/vendors/cisco.png">
-                                @elseif($device->vendor->title == 'MikroTik')
-                                    <img src="/img/vendors/mikrotik.png">
-                                @elseif($device->vendor->title == 'D-Link')
-                                    <img src="/img/vendors/d-link.png">
-                                @elseif($device->vendor->title == 'Eltex')
-                                    <img src="/img/vendors/eltex.png">
-                                @endif
-                            </blockquote>
                             <ul class="nav nav-pills flex-column">
                                 <li class="small">
                                     @lang('messages.network.device.model'):
@@ -79,9 +76,10 @@
                                         </span>
                                 </li>
                                 <li class="small">
-                                    @lang('messages.network.device.in_base'):
-                                    <span class="float-right">{{ $device->id }}
-                                        </span>
+                                    ID:
+                                    <span class="float-right">
+                                        {{ $device->id }}
+                                    </span>
                                 </li>
                                 <li class="small">
                                     @lang('messages.network.device.operation_system'):
@@ -112,6 +110,23 @@
                                         </span>
                                 </li>
                                 <li class="small">
+                                    @lang('messages.network.device.short_description'):
+                                    <span class="float-right">{{ $device->title }}
+                                        </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card card-success">
+                        <div class="card-header">
+                            <dt>@lang('messages.network.device.poll_information')</dt>
+                        </div>
+                        <div class="card-body">
+                            <ul class="nav nav-pills flex-column">
+                                <li class="small">
                                     @lang('messages.network.device.hostname'):
                                     <span class="float-right">{{ $device->hostname }}
                                         </span>
@@ -128,53 +143,48 @@
                                 </li>
                                 <li class="small">
                                     SNMP community:
-                                    <span class="float-right">***** (<a href="{{ route('network.devices.edit',
-                                            $device->id) }}">
-                                            @lang('messages.network.device.settings')
-                                        </a>)
-                                        </span>
+                                    <span class="float-right">
+                                        {{ $device->snmp_community }}
+                                    </span>
                                 </li>
                                 <li class="small">
-                                    @lang('messages.network.device.short_description'):
-                                    <span class="float-right">{{ $device->title }}
-                                        </span>
+                                    Последнее время опроса:
+                                    <span class="float-right">
+                                        {{ \Carbon\Carbon::parse($device->updated_at)->format('d-m-Y H:i:s') }}
+                                    </span>
+                                </li>
+                                <li class="small">
+                                    SSH:
+                                    <span class="float-right">
+                                    @if($device->ssh_port !== null)
+                                            <a class="badge badge-dark" href="ssh://{{$device->hostname}}"
+                                               title="@lang('messages.network.device.ssh_enabled')">
+                                            <i class="fas fa-terminal"></i>
+                                            </a>
+                                        @else
+                                            <div class="badge badge-secondary"
+                                                 title="@lang('messages.network.device.ssh_disabled')">
+                                            <i class="fas fa-terminal"></i>
+                                        </div>
+                                        @endif
+                                    </span>
+                                <li class="small">
+                                    Telnet:
+                                    <span class="float-right">
+                                    @if($device->telnet_port !== null)
+                                            <a class="badge badge-dark" href="telnet://{{$device->hostname}}"
+                                               title="@lang('messages.network.device.telnet_enabled')">
+                                            <i class="fas fa-terminal"></i>
+                                            </a>
+                                        @else
+                                            <div class="badge badge-secondary"
+                                                 title="@lang('messages.network.device.telnet_disabled')">
+                                            <i class="fas fa-terminal"></i>
+                                        </div>
+                                        @endif
+                                    </span>
                                 </li>
                             </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-6">
-                    <div class="card">
-                        <div class="card-header">
-                            <dt>@lang('messages.network.device.notifications_and_errors')</dt>
-                        </div>
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th class="small"><b>@lang('messages.network.device.error_description')</b></th>
-                                    <th class="small"><b>@lang('messages.network.device.date_time')</b></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($logs as $log)
-                                    <tr>
-                                        <td class="small">
-                                            @lang('messages.network.device.snmp_fail')
-                                            @if($log->type === 1)
-                                                <span class="badge badge-danger">
-                                                    @lang('messages.network.device.type_status.error')
-                                                </span>
-                                                @endif
-                                        </td>
-                                        <td class="small">
-                                            {{$log->created_at}}
-                                        </td>
-                                    </tr>
-                                @endforeach
-                                </tbody>
-                            </table>
                         </div>
                     </div>
                 </div>
@@ -182,15 +192,50 @@
 
             <div class="row">
                 <div class="col-6">
-                    <div class="card">
+                    <div class="card card-warning">
+                        <div class="card-header">
+                            <dt>@lang('messages.network.device.notifications_and_errors')</dt>
+                        </div>
+                        @if($device->logs !== null)
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover">
+                                    <tbody>
+                                    @foreach($logs as $log)
+                                        <tr>
+                                            <td class="small">
+                                                @if($log->type === 1)
+                                                    <span class="badge badge-danger">
+                                                        @lang('messages.network.device.type_status.error')
+                                                    </span>
+                                                @endif
+                                            </td>
+                                            <td class="small">
+                                                @lang('messages.network.device.snmp_fail')
+                                            </td>
+                                            <td class="small">
+                                                {{\Carbon\Carbon::parse($log->created_at)->format('d-m-Y H:i:s')}}
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        @endif
+                    </div>
+                </div>
+
+                <div class="col-6">
+                    <div class="card card-gray">
                         <div class="card-header">
                             <dt>@lang('messages.network.device.ports')</dt>
                         </div>
                     </div>
                 </div>
+            </div>
 
+            <div class="row">
                 <div class="col-6">
-                    <div class="card">
+                    <div class="card card-gray">
                         <div class="card-header">
                             <dt>@lang('messages.network.device.other')</dt>
                         </div>
