@@ -74,22 +74,26 @@
                                                             @endif
                                                         </div>
                                                         <div>
-                                                            @if($device->enabled === 1)
-                                                                <div class="small">
+                                                            <div class="small">
+                                                                @if($device->enabled === 1)
                                                                     <div class="badge badge-success">
                                                                         @lang('messages.network.device.enabled')
                                                                     </div>
-                                                                </div>
-                                                            @else
-                                                                <div class="small">
+                                                                @else
                                                                     <div class="small badge badge-secondary">
                                                                         @lang('messages.network.device.disabled')
                                                                     </div>
-                                                                </div>
-                                                            @endif
+                                                                @endif
+
+                                                                @if($device->logs->count() !== 0)
+                                                                    <div class="badge badge-danger">
+                                                                        <i class="fas fa-exclamation-triangle"></i>
+                                                                        {{ $device->logs->count() }}
+                                                                    </div>
+                                                                @endif
+                                                            </div>
                                                         </div>
                                                     </div>
-                                                </div>
                                             </td>
                                             <td>
                                                 <div class="row">
@@ -175,7 +179,10 @@
                                                     <b>Расположение:</b> {{ $device->location }}
                                                 </div>
                                                 <div class="small">
-                                                    <b>Описание:</b> {{ $device->title }}
+                                                    <b>Описание:</b>
+                                                    <span style="word-break: break-all;">
+                                                        {{ $device->title }}
+                                                    </span>
                                                 </div>
                                             </td>
                                             <td>
