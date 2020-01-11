@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\AdminSitesRepository;
+use App\Repositories\ItemsSortRepository;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -40,7 +42,8 @@ class HomeController extends Controller
 
         $servers = json_encode($adminSiteRepository->getWebServersForNew(5)->keys());
         $counts = json_encode(array_values($adminSiteRepository->getWebServersForNew(5)->toArray()));
-
-        return view('home', compact('sites', 'pings', 'titles', 'servers', 'counts'));
+        $user = Auth::user();
+        $sort = (new ItemsSortRepository())->sortedList($user);
+        return view('home', compact('sites', 'pings', 'titles', 'servers', 'counts', 'sort'));
     }
 }

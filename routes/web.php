@@ -51,6 +51,7 @@ Route::group(
             ['id' => '[0-9]+', 'on' => '[0-9]+']
         )->name('admin.site.switch');
 
+
         Route::group(
             ['prefix' => 'settings', 'namespace' => 'Admin\Settings', 'as' => 'settings.'],
             function () {
@@ -124,6 +125,14 @@ Route::group(
             function () {
                 Route::get('/', 'ContactsController@getIndex')
                     ->name('contacts.index');
+            }
+        );
+
+        // Item positions storage
+        Route::group(
+            ['prefix' => '/admin/panel/items/', 'namespace' => 'Admin\Sites'],
+            function () {
+                Route::post('sort', 'ItemsSortController')->name('sort');
             }
         );
     }
