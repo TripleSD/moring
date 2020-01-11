@@ -2,7 +2,14 @@
 
 namespace App\Console;
 
+use App\Console\Commands\BridgeMoringVersionChecker;
+use App\Console\Commands\BridgePHPVersionsChecker;
+use App\Console\Commands\ServersPings;
 use App\Console\Commands\SitesChecker;
+use App\Console\Commands\SitesPings;
+use App\Console\Commands\SitesSSLChecker;
+use App\Console\Commands\SnmpDevicesChecker;
+use App\Console\Commands\SystemChecker;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -15,12 +22,20 @@ class Kernel extends ConsoleKernel
      */
     protected $commands = [
         SitesChecker::class,
+        SitesSSLChecker::class,
+        BridgeMoringVersionChecker::class,
+        BridgePHPVersionsChecker::class,
+        SitesPings::class,
+        ServersPings::class,
+        SnmpDevicesChecker::class,
+        SystemChecker::class,
+
     ];
 
     /**
      * Define the application's command schedule.
      *
-     * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
+     * @param \Illuminate\Console\Scheduling\Schedule $schedule
      * @return void
      */
     protected function schedule(Schedule $schedule)
@@ -31,6 +46,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('BridgePHPVersionsChecker')->daily();
         $schedule->command('SitesPings')->everyFiveMinutes();
         $schedule->command('ServersPings')->everyFiveMinutes();
+        $schedule->command('SnmpDevicesChecker')->everyMinute();
+        $schedule->command('SystemChecker')->daily();
     }
 
     /**
@@ -40,7 +57,7 @@ class Kernel extends ConsoleKernel
      */
     protected function commands()
     {
-        $this->load(__DIR__.'/Commands');
+        $this->load(__DIR__ . '/Commands');
 
         require base_path('routes/console.php');
     }

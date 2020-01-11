@@ -1,10 +1,14 @@
 # MoRiNg (система мониторинга)
 ![](https://img.shields.io/badge/OpenSource-%E2%AD%90-red)
+[![Laravel](https://img.shields.io/badge/Laravel-6.x-red?logo=laravel)]((https://img.shields.io/badge/Laravel-6.x-red?logo=laravel))
+[![PHP](https://img.shields.io/badge/PHP-7.x-blue?logo=php)]((https://img.shields.io/badge/PHP-7.x-blue?logo=php))
 ![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/TripleSD/moring)
 ![](https://img.shields.io/github/stars/TripleSD/moring)
 ![](https://img.shields.io/github/forks/TripleSD/moring)
 ![](https://img.shields.io/github/license/TripleSD/moring)
-
+[![Total alerts](https://img.shields.io/lgtm/alerts/g/TripleSD/moring.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/TripleSD/moring/alerts/)
+[![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/TripleSD/moring.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/TripleSD/moring/context:javascript)
+[![Open Source Helpers](https://www.codetriage.com/triplesd/moring/badges/users.svg)](https://www.codetriage.com/triplesd/moring)
 <p align="center">
 <img src="docs/img/moring_readme_1.png" alt="drawing" width="300"/>
 <img src="docs/img/moring_readme_2.png" alt="drawing" width="300"/>
@@ -16,23 +20,31 @@ MoRiNg - opensource система мониторинга. На данный м�
     - проверка наличия SSL сертификата
     - проверка срока окончания действия SSL сертификата
     - проверка версии PHP интерпретатора
----
-### Ветки
- #### Master
-     
-   [![](https://github.styleci.io/repos/220468288/shield?branch=master)](https://github.styleci.io/repos/220468288/shield?branch=master)
-   [![Codacy Badge](https://api.codacy.com/project/badge/Grade/d5a6c3a61da54e81b2db96964e6ce721)](https://www.codacy.com/manual/AntonMZ/moring?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TripleSD/moring&amp;utm_campaign=Badge_Grade)
+    - проверка устройств по SNMP
     
-    
-   Используется для получения актуальной версии системы, либо для обновления уже используемых копий.
-    
- ---
-    
- #### Dev
- 
- [![](https://github.styleci.io/repos/220468288/shield?branch=dev)](https://github.styleci.io/repos/220468288/shield?branch=dev)
+ - - - 
+ - [Ветки](#Ветки)
+    - [Master](#Master)
+    - [Dev](#Dev)
+ - [Системные требования](#Системные-требования)
+ - [Установка](#Установка)
+ - [Обновление](#Обновление)
+ - [Документация](#Документация)
+ - [Техническая поддержка](#Техническая-поддержка)
+ - [Помощь проекту](#Помощь-проекту)
+ - [Авторы](#Авторы)
+ - [Используемые пакеты и фреймворки](#Используемые-пакеты-и-фреймворки)
+ - [Лицензия](#Лицензия)
+ - [Лог изменений по версиям](#Лог-изменений-по-версиям)
+- - - 
 
- Временная ветка используемая разработчиками для сохранения изменений до официального релиза новой версии.
+![](https://github.com/TripleSD/moring/workflows/Laravel/badge.svg?branch=dev)
+
+### Ветки
+|Ветка|Описание|Статусы|
+|---|---|---|
+|Master|Используется для получения актуальной версии системы, либо для обновления уже используемых копий.|[![](https://github.styleci.io/repos/220468288/shield?branch=master)](https://github.styleci.io/repos/220468288/shield?branch=master)[![Codacy Badge](https://api.codacy.com/project/badge/Grade/d5a6c3a61da54e81b2db96964e6ce721)](https://www.codacy.com/manual/AntonMZ/moring?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TripleSD/moring&amp;utm_campaign=Badge_Grade)|
+|Dev|:heavy_exclamation_mark: Временная ветка используемая разработчиками для сохранения изменений до официального релиза новой версии.|[![](https://github.styleci.io/repos/220468288/shield?branch=dev)](https://github.styleci.io/repos/220468288/shield?branch=dev)|
     
  :heavy_exclamation_mark: Не рекомендуется к использованию в production системах.
 ***
@@ -89,19 +101,18 @@ MoRiNg - opensource система мониторинга. На данный м�
 * войдите в систему используя логин `admin@localhost` и пароль `admin`
 ***
 ### Обновление
-
 * скачайте обновления
     ```bash
     git pull origin master
     ```
-* запустите установку зависимостей
+* запустите обновление зависимостей
     ```bash
-    composer install
+    composer update
     ``` 
 * запустите установку обновления таблиц базы данныз
     ```bash
     php artisan migrate
-    ``` 
+    ```  
 ***
 ### Документация
 Минимальная документация по использованию системой будет подготовлена и опубликована в ближайшее время.
@@ -134,4 +145,4 @@ MoRiNg - opensource система мониторинга. На данный м�
 MoRiNg является opensource проектом. Лицезируется на основе MIT License.
 ***
 ### Лог изменений по версиям
-Список изменений доступен в файле CHANGELOG.md
+Список изменений доступен в файле [CHANGELOG.md](CHANGELOG.md)

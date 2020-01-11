@@ -37,7 +37,7 @@ class BridgePHPVersionsChecker extends Command
     {
         parent::__construct();
         $this->settingsController = new SettingsController();
-        $this->bridgeRepository = new BridgeRepository();
+        $this->bridgeRepository   = new BridgeRepository();
     }
 
     public function handle()
@@ -47,8 +47,8 @@ class BridgePHPVersionsChecker extends Command
         // Getting availible Moring versions from bridge
         $httpClient = new Client();
         // Url getting from /config/moring.php
-        $url = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentPHPVersionsUrl');
-        $response = $httpClient->request(
+        $url                 = Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentPHPVersionsUrl');
+        $response            = $httpClient->request(
             'GET',
             $url,
             ['query' => ['identificator' => $identificator], 'allow_redirects' => false]
@@ -59,12 +59,16 @@ class BridgePHPVersionsChecker extends Command
             try {
                 $localVersionsArray = BridgePhpVersions::pluck('version')->toArray();
                 if (! in_array($versionArray['version'], $localVersionsArray)) {
-                    $versions = new BridgePhpVersions();
-                    $versions->version = $versionArray['version'];
-                    $versions->branch = $versionArray['branch'];
+                    $versions                    = new BridgePhpVersions();
+                    $versions->version           = $versionArray['version'];
+                    $versions->branch            = $versionArray['branch'];
+                    $versions->deprecated_status = $versionArray['deprecated_status'];
                     $versions->save();
                 } else {
-                    $version = BridgePhpVersions::where('version', $versionArray['version'])->firstOrFail();
+                    $version                    = BridgePhpVersions::where(
+                        'version',
+                        $versionArray['version']
+                    )->firstOrFail();
                     $version->deprecated_status = $versionArray['deprecated_status'];
                     $version->save();
                 }

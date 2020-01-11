@@ -40,6 +40,7 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
+                                    <th>Вендор</th>
                                     <th>Устройство</th>
                                     <th>Платформа / Прошивка</th>
                                     <th>Доп.информация</th>
@@ -66,20 +67,40 @@
                                                                 <img src="/img/vendors/cisco.png">
                                                             @elseif($device->vendor->title == 'MikroTik')
                                                                 <img src="/img/vendors/mikrotik.png">
-                                                            @elseif($device->vendor->title == 'D-Link')
+                                                            @elseif($device->vendor->title == 'DLink')
                                                                 <img src="/img/vendors/d-link.png">
                                                             @elseif($device->vendor->title == 'Eltex')
                                                                 <img src="/img/vendors/eltex.png">
                                                             @endif
                                                         </div>
+                                                        <div>
+                                                            <div class="small">
+                                                                @if($device->enabled === 1)
+                                                                    <div class="badge badge-success">
+                                                                        @lang('messages.network.device.enabled')
+                                                                    </div>
+                                                                @else
+                                                                    <div class="small badge badge-secondary">
+                                                                        @lang('messages.network.device.disabled')
+                                                                    </div>
+                                                                @endif
+
+                                                                @if($device->logs->count() !== 0)
+                                                                    <div class="badge badge-danger">
+                                                                        <i class="fas fa-exclamation-triangle"></i>
+                                                                        {{ $device->logs->count() }}
+                                                                    </div>
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
                                             </td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="small">
-                                                            <b>Имя/IP адрес устройства:</b> {{ $device->hostname }}
+                                                            <b>Имя/IP адрес устройства:</b>
+                                                            {{ $device->hostname }}:{{ $device->snmp_port }}
                                                         </div>
                                                         <div class="small">
                                                             <b>Время работы:</b>
@@ -92,9 +113,41 @@
                                                             {{ \Carbon\Carbon::now()->addSeconds($device->uptime / 100)->diffAsCarbonInterval()->s }}
                                                             с.
                                                         </div>
+                                                        <div class="small text-gray">
+                                                            <i class="fas fa-history"></i> {{ $device->updated_at }}
+
+                                                            @if($device->ssh_port !== null)
+                                                                <div class="badge badge-primary"
+                                                                     title="@lang('messages.network.device.ssh_enabled')">
+                                                                    <i class="fas fa-terminal"></i>
+                                                                    ssh
+                                                                </div>
+                                                            @else
+                                                                <div class="badge badge-secondary"
+                                                                     title="@lang('messages.network.device.ssh_disabled')">
+                                                                    <i class="fas fa-terminal"></i>
+                                                                    ssh
+                                                                </div>
+                                                            @endif
+
+                                                            @if($device->telnet_port !== null)
+                                                                <div class="badge badge-primary"
+                                                                     title="@lang('messages.network.device.telnet_enabled')">
+                                                                    <i class="fas fa-terminal"></i>
+                                                                    telnet
+                                                                </div>
+                                                            @else
+                                                                <div class="badge badge-secondary"
+                                                                     title="@lang('messages.network.device.telnet_disabled')">
+                                                                    <i class="fas fa-terminal"></i>
+                                                                    telnet
+                                                                </div>
+                                                            @endif
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>
+
                                             <td>
                                                 <div class="small">
                                                     <b>ОС:</b> {{ $device->firmware->title }}
@@ -126,7 +179,23 @@
                                                     <b>Расположение:</b> {{ $device->location }}
                                                 </div>
                                                 <div class="small">
-                                                    <b>Описание:</b> {{ $device->title }}
+                                                    <b>Описание:</b>
+                                                    <span style="word-break: break-all;">
+                                                        {{ $device->title }}
+                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="btn-group">
+                                                    <a href="{{route('network.devices.show',$device->id)}}"
+                                                       class="btn btn-xs bg-gradient-info"
+                                                       title="Просмотр устройства">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{route('network.devices.edit', $device->id)}}"
+                                                       class="btn btn-xs bg-gradient-warning"
+                                                       title="Редактирование устройства">
+                                                        <i class="fa fa-edit"></i></a>
                                                 </div>
                                             </td>
                                         </tr>
