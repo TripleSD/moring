@@ -39,7 +39,7 @@ class DevicesRepository extends Repository
                     [
                         'logs' => function ($q) {
                             return $q->where('resolved', 0);
-                        }
+                        },
                     ]
                 )
                 ->get();
@@ -49,7 +49,7 @@ class DevicesRepository extends Repository
                     [
                         'logs' => function ($q) {
                             return $q->where('resolved', 0);
-                        }
+                        },
                     ]
                 )
                 ->paginate(10);
@@ -59,7 +59,7 @@ class DevicesRepository extends Repository
                     [
                         'logs' => function ($q) {
                             return $q->where('resolved', 0);
-                        }
+                        },
                     ]
                 )
                 ->paginate(25);
@@ -69,7 +69,7 @@ class DevicesRepository extends Repository
                     [
                         'logs' => function ($q) {
                             return $q->where('resolved', 0);
-                        }
+                        },
                     ]
                 )
                 ->paginate(50);
@@ -80,7 +80,7 @@ class DevicesRepository extends Repository
                 [
                     'logs' => function ($q) {
                         return $q->where('resolved', 0);
-                    }
+                    },
                 ]
             )
             ->paginate(10);
