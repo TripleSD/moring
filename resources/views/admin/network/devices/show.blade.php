@@ -217,7 +217,7 @@
 
             <div class="row">
                 <div class="col-6">
-                    @if($device->logs !== null)
+                    @if($device->logs->count() !== 0)
                         <div class="card card-warning">
                             <div class="card-header">
                                 <dt>@lang('messages.network.device.notifications_and_errors')</dt>
