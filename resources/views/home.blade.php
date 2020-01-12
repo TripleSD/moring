@@ -18,19 +18,25 @@
     </div>
     <section class="content">
         <div class="container-fluid">
-            <div class="row">
-                <section class="col-lg-12 connectedSortable">
-                    @forelse($sort as $item)
+            <section class="col-lg-12 connectedSortable">
+                @if( count($sort) > 0 )
+                    @foreach($sort as $item)
                         @php
                             $item_name = $item->item_name;
                             $widget = "widgets." . $item_name;
                         @endphp
                         @include($widget)
                         @yield($item_name)
-                    @empty
-                    @endforelse
-                </section>
-            </div>
+                    @endforeach
+                @else
+                    @include('widgets.newsites')
+                    @yield('newsites')
+                    @include('widgets.newpings')
+                    @yield('newpings')
+                    @include('widgets.newwebservers')
+                    @yield('newwebservers')
+                @endif
+            </section>
         </div>
     </section>
 @endsection
