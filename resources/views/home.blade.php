@@ -25,26 +25,24 @@
         </div>
     </div>
     <section class="content">
-        <div class="container-fluid">
-            <section class="col-lg-12 connectedSortable">
-                @if( count($sort) > 0 )
-                    @foreach($sort as $item)
-                        @php
-                            $item_name = $item->item_name;
-                            $widget = "widgets." . $item_name;
-                        @endphp
-                        @include($widget)
-                        @yield($item_name)
-                    @endforeach
-                @else
-                    @include('widgets.newsites')
-                    @yield('newsites')
-                    @include('widgets.newpings')
-                    @yield('newpings')
-                    @include('widgets.newwebservers')
-                    @yield('newwebservers')
-                @endif
-            </section>
-        </div>
+        <section class="row connectedSortable">
+            @if( count($sort) > 0 )
+                @foreach($sort as $item)
+                    @php
+                        $item_name = $item->item_name;
+                        $widget = "widgets." . $item_name;
+                    @endphp
+                    @include($widget)
+                    @yield($item_name)
+                @endforeach
+            @else
+                @include('widgets.newsites')
+                @yield('newsites')
+                @include('widgets.newpings')
+                @yield('newpings')
+                @include('widgets.newwebservers')
+                @yield('newwebservers')
+            @endif
+        </section>
     </section>
 @endsection

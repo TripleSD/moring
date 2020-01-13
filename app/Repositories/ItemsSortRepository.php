@@ -1,8 +1,6 @@
 <?php
 
-
 namespace App\Repositories;
-
 
 use App\Models\ItemsSort;
 use App\User;
@@ -19,14 +17,14 @@ class ItemsSortRepository
 
     public function store(Request $request, int $id)
     {
-        if (!is_null($this->model->find(['user_id' => "$id"]))){
+        if (! is_null($this->model->find(['user_id' => "$id"]))) {
             $this->model->where('user_id', "$id")->delete();
         }
         $count = 1;
-        foreach ($request->request as $item){
+        foreach ($request->request as $item) {
             $this->model->create(['user_id' => $id, 'item_name' => $item[0], 'position' => $count]);
-            ++$count;
-        };
+            $count++;
+        }
     }
 
     public function sortedList(User $user)
