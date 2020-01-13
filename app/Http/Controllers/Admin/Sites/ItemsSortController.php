@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin\Sites;
 
 use App\Http\Controllers\Controller;
-use App\Models\ItemsSort;
 use App\Repositories\ItemsSortRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;

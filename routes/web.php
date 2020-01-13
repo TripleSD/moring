@@ -56,7 +56,6 @@ Route::group(
             ['id' => '[0-9]+', 'on' => '[0-9]+']
         )->name('admin.site.switch');
 
-
         Route::group(
             ['prefix' => 'settings', 'namespace' => 'Admin\Settings', 'as' => 'settings.'],
             function () {

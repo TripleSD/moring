@@ -44,6 +44,7 @@ class HomeController extends Controller
         $counts = json_encode(array_values($adminSiteRepository->getWebServersForNew(5)->toArray()));
         $user = Auth::user();
         $sort = (new ItemsSortRepository())->sortedList($user);
+
         return view('home', compact('sites', 'pings', 'titles', 'servers', 'counts', 'sort'));
     }
 }
