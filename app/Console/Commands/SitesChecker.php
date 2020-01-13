@@ -85,9 +85,11 @@ class SitesChecker extends Command
                             $phpBranch    = Str::substr($phpBranchRaw, 0, 3);
                         } else {
                             $phpVersion = 0;
+                            $phpBranch = 0;
                         }
                     } else {
                         $phpVersion = 0;
+                        $phpBranch = 0;
                     }
 
                     $ssl = new SitesSSLChecker();
