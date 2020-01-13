@@ -23,7 +23,7 @@ class ItemsSortRepository
         $count = 1;
         foreach ($request->request as $item) {
             $this->model->create(['user_id' => $id, 'item_name' => $item[0], 'position' => $count]);
-            ++$count;
+            $count++;
         }
     }
 
