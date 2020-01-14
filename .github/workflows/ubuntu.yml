@@ -5,9 +5,8 @@ on: [push]
 jobs:
   laravel-tests:
     runs-on: ubuntu-latest
+    php-version: 7.3
     steps:
-    - name: Select PHP version
-      php: 7.3
     - name: Show packet intl
       run: sudo apt-cache search php | grep intl
     - name: Install requires
