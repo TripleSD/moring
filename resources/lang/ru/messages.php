@@ -71,6 +71,8 @@ return [
     'network.device.ssh_disabled' => 'SSH порт не указан',
     'network.device.telnet_enabled' => 'Указан Telnet порт',
     'network.device.telnet_disabled' => 'Telnet порт не указан',
+    'network.device.web_enabled' => 'Указан URL веб интерфейса',
+    'network.device.web_disabled' => 'URL веб интерфейса не указан',
 
     'network.device.breadcrumbs.main' => 'Главная',
     'network.device.breadcrumbs.network' => 'Сеть',

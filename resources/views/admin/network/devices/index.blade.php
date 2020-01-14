@@ -143,6 +143,20 @@
                                                                     telnet
                                                                 </div>
                                                             @endif
+
+                                                            @if($device->web !== null)
+                                                                <div class="badge badge-primary"
+                                                                     title="@lang('messages.network.device.web_enabled')">
+                                                                    <i class="fas fa-globe"></i>
+                                                                    web
+                                                                </div>
+                                                            @else
+                                                                <div class="badge badge-secondary"
+                                                                     title="@lang('messages.network.device.web_disabled')">
+                                                                    <i class="fas fa-globe"></i>
+                                                                    web
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
                                                 </div>
