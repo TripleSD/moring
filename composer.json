@@ -9,6 +9,7 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "ext-intl": "*",
         "ext-json": "*",
         "ext-snmp": "*",
         "doctrine/dbal": "^2.10",
@@ -23,7 +24,6 @@
         "spatie/ssl-certificate": "^1.16"
     },
     "require-dev": {
-        "ext-intl": "*",
         "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
