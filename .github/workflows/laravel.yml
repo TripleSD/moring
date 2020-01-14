@@ -3,12 +3,23 @@ name: Laravel
 on: [push]
 
 jobs:
-  laravel-tests:
-    runs-on: ubuntu-latest
+  laravel:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      max-parallel: 3
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: ['7.3']
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
+    - uses: actions/checkout@v1
+    - uses: shivammathur/setup-php@master
+      with:
+        php-version: ${{ matrix.php-versions }}
+    - name: Check PHP version
+      run: php -v
     - name: Install requires
       run: sudo apt-get install php7.3-intl
-    - uses: actions/checkout@v1
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
