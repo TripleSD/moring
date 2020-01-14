@@ -139,9 +139,7 @@ class SitesChecker extends Command
                     $pending->pending = 0;
                     $pending->save();
                 }
-            } catch
-            (\Exception $e) {
-                echo $e->getMessage();
+            } catch (\Exception $e) {
             }
         }
 
@@ -164,8 +162,7 @@ class SitesChecker extends Command
                         )
                     );
                 }
-            } catch
-            (\Exception $e) {
+            } catch (\Exception $e) {
             }
         }
     }
