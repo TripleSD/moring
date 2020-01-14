@@ -5,18 +5,17 @@ on: [push]
 jobs:
   laravel:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        php-versions: ['7.3']
     steps:
+    - uses: actions/checkout@v1
+    - uses: actions/setup-node@v1
+      with:
+        php-version: '7.3'
     - name: Show PHP version
       run: php -v
     - name: Show packet intl
       run: sudo apt-cache search php | grep intl
     - name: Install requires
       run: sudo apt-get install php7.3-intl
-    - uses: actions/checkout@v1
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
     - name: Install Dependencies
