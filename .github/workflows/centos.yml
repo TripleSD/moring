@@ -1,0 +1,30 @@
+name: Laravel
+
+on: [push]
+
+jobs:
+  laravel-tests:
+    runs-on: centos-latest
+    steps:
+    - name: Show packet intl
+      run: sudo yum search php | grep intl
+    - name: Install requires
+      run: sudo yum install php73-php-intl.x86_64
+    - name: Show php-extensions
+      run: php -m
+    - uses: actions/checkout@v1
+    - name: Copy .env
+      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+    - name: Install Dependencies
+      run: composer install
+    - name: Generate key
+      run: php artisan key:generate
+    - name: Create Database
+      run: |
+        mkdir -p database
+        touch database/database.sqlite
+    - name: Execute tests (Unit and Feature tests) via PHPUnit
+      env:
+        DB_CONNECTION: sqlite
+        DB_DATABASE: database/database.sqlite
+      run: vendor/bin/phpunit
