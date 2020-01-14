@@ -6,6 +6,8 @@ jobs:
   laravel-tests:
     runs-on: ubuntu-latest
     steps:
+    - name: Show packet intl
+      run: sudo apt-cache search php | grep intl
     - name: Install requires
       run: sudo apt-get install php7.3-intl
     - name: Show php-extensions
