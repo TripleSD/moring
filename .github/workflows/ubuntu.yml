@@ -10,6 +10,8 @@ jobs:
       matrix:
         php-versions: ['7.3']
     steps:
+    - name: Show PHP version
+      run: php -v
     - name: Show packet intl
       run: sudo apt-cache search php | grep intl
     - name: Install requires
