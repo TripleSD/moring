@@ -178,7 +178,7 @@
                                     @if($site->enabled == 1)
                                         <tr class="table-row">
                                     @else
-                                        <tr class="table-row" bgcolor="#a9a9a9">
+                                        <tr class="table-row" style="background-color: #a9a9a9;">
                                             @endif
                                             <td>
                                                 <div class="row">
@@ -263,14 +263,16 @@
                                             </td>
                                             <td>
                                                 @if($site->enabled === 1)
-                                                    @empty($site->getWebServer->web_server)
-                                                        <span class="text-warning"
-                                                              title="Не был получен ответ сервера об установленной версии">
+                                                    <div>
+                                                        @empty($site->getWebServer->web_server)
+                                                            <span class="text-warning"
+                                                                  title="Не был получен ответ сервера об установленной версии">
                                                                     <i class="fa fa-exclamation-triangle"></i>
-                                                    </span>
-                                                    @else
-                                                        {{$site->getWebServer->web_server}}
-                                                    @endempty
+                                                            </span>
+                                                        @else
+                                                            {{$site->getWebServer->web_server}}
+                                                        @endempty
+                                                    </div>
                                                     <div class="small text-gray">
                                                         <i class="fas fa-history"></i>
                                                         {{optional($site->getPhpVersion)->updated_at}}
@@ -289,51 +291,71 @@
                                                             @if(empty($bridgePhpVersion))
                                                                 @if($site->getPhpVersion->version != 0)
                                                                     <span class="text-gray">
-                                                                {{ $site->getPhpVersion->version }}
-                                                                </span>
+                                                                        {{ $site->getPhpVersion->version }}
+                                                                    </span>
                                                                     <span class="text-danger"
                                                                           title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
-                                                                    <i class="fa fa-exclamation-triangle"></i>
-                                                                </span>
+                                                                            <i class="fa fa-exclamation-triangle"></i>
+                                                                    </span>
                                                                 @else
                                                                     <span class="text-warning"
                                                                           title="Не был получен ответ сервера об установленной версии">
                                                                         <i class="fa fa-exclamation-triangle"></i>
-                                                                </span>
+                                                                    </span>
                                                                 @endif
                                                             @else
+
+                                                                @php
+                                                                    $stableVersion = false;
+                                                                    $deprecatedVersion = false;
+                                                                @endphp
+
                                                                 @if($site->getPhpVersion->version != 0)
                                                                     @if(in_array($site->getPhpVersion->branch,$bridgeBranchVersion))
                                                                         @foreach($bridgePhpVersion as $version)
                                                                             @if($version->branch == $site->getPhpVersion->branch)
                                                                                 @if(version_compare($site->getPhpVersion->version, $version->version) >= 0)
-                                                                                    <span class="text-success"
-                                                                                          title="Установлена самая последняя версия {{$version->version}}">
-                                                                                      {{ $site->getPhpVersion->version }}
-                                                                                    </span>
+                                                                                    @php
+                                                                                        $stableVersion = true;
+                                                                                        $stableVersionView = $site->getPhpVersion->version;
+                                                                                    @endphp
 
                                                                                     @if($version->deprecated_status == 1)
-                                                                                        <span class="text-danger"
-                                                                                              title="Deprecated версия">
-                                                                                        <i class="fas fa-archive"></i>
-                                                                                    </span>
+                                                                                        @php
+                                                                                            $deprecatedVersion = true;
+                                                                                            $stableVersionView = $site->getPhpVersion->version;
+                                                                                        @endphp
                                                                                     @endif
                                                                                 @else
-                                                                                    <span class="text-danger"
-                                                                                          title="Необходимо установить актуальную версию {{$version->version}}">
-                                                                                      {{ $site->getPhpVersion->version }}
-                                                                                      <i class="fas fa-bug"></i>
-                                                                                    </span>
-
-                                                                                    @if($version->deprecated_status == 1)
-                                                                                        <span class="text-danger"
-                                                                                              title="Deprecated версия">
-                                                                                        <i class="fas fa-archive"></i>
-                                                                                    </span>
-                                                                                    @endif
+                                                                                    @php
+                                                                                        $stableVersion = false;
+                                                                                        $stableVersionView = $site->getPhpVersion->version;
+                                                                                    @endphp
                                                                                 @endif
                                                                             @endif
                                                                         @endforeach
+
+                                                                        @if($stableVersion == true)
+                                                                            <span class="text-success"
+                                                                                  title="Установлена самая последняя версия {{$stableVersionView}}">
+                                                                                      {{ $stableVersionView }}
+                                                                            </span>
+                                                                        @endif
+
+                                                                        @if($deprecatedVersion == true)
+                                                                            <span class="text-danger"
+                                                                                  title="Deprecated версия">
+                                                                                        <i class="fas fa-archive"></i>
+                                                                            </span>
+                                                                        @endif
+
+                                                                        @if($stableVersion == false)
+                                                                            <span class="text-danger"
+                                                                                  title="Необходимо установить актуальную версию {{ $version->version }}">
+                                                                                      {{ $stableVersionView }}
+                                                                                      <i class="fas fa-bug"></i>
+                                                                            </span>
+                                                                        @endif
                                                                     @else
                                                                         <span class="text-gray">
                                                                         {{ $site->getPhpVersion->version }}
