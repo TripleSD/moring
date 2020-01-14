@@ -8,6 +8,8 @@ jobs:
     steps:
     - name: Install requires
       run: sudo apt-get install php7.3-intl
+    - name: Show php-extensions
+      run: php -m
     - uses: actions/checkout@v1
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.example', '.env');"
