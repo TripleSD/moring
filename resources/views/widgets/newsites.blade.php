@@ -1,10 +1,10 @@
 @section('newsites')
-    <div class="col-6" id="1_newsites">
+    <div class="col-sm-6" id="1_newsites">
         <div class="card">
             <div class="card-header border-0">
                 <h3 class="card-title">Недавно добавленные веб сайты</h3>
                 <div class="card-tools float-right">
-                    <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <button type="button" class="btn btn-tool collapse_btn" data-card-widget="collapse">
                         <i class="fas fa-minus"></i>
                     </button>
                     <button type="button" class="btn btn-tool" data-card-widget="remove">
