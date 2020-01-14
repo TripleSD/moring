@@ -3,9 +3,11 @@ name: Ubuntu
 on: [push]
 
 jobs:
-  laravel-tests:
+  laravel:
     runs-on: ubuntu-latest
-    php-version: 7.3
+    strategy:
+      matrix:
+        php-versions: ['7.3']
     steps:
     - name: Show packet intl
       run: sudo apt-cache search php | grep intl
