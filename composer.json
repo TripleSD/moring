@@ -23,6 +23,7 @@
         "spatie/ssl-certificate": "^1.16"
     },
     "require-dev": {
+        "ext-intl": "*",
         "barryvdh/laravel-debugbar": "^3.2",
         "barryvdh/laravel-ide-helper": "^2.6",
         "facade/ignition": "^1.4",
