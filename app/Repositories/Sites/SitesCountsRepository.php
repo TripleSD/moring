@@ -107,7 +107,7 @@ class SitesCountsRepository extends Repository
             if (in_array($site->branch, $bridgeBranchs)) {
                 foreach ($bridgeVersions as $version) {
                     if ($version->branch == $site->branch) {
-                        if (version_compare($site->version, $version->version) < 0  && !in_array($site, $sites)) {
+                        if (version_compare($site->version, $version->version) < 0 && ! in_array($site, $sites)) {
                             $sites[] = $site;
                         }
                     }
