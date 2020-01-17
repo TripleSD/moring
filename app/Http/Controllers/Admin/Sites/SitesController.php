@@ -32,9 +32,10 @@ class SitesController extends Controller
         Request $request
     ) {
         $sites = $adminSiteRepository->index($request);
-        //TODO вынести в репозиторий два запроса
-        $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
-        $bridgePhpVersion    = BridgePhpVersions::get();
+        //TODO вынести в репозиторий запрос
+        $bridgePhpVersion = BridgePhpVersions::select('version', 'branch', 'deprecated_status')
+            ->orderBy('version')
+            ->get();
 
         // Counts
         $counts['allSites']                = $sitesCountsRepository->getAllSitesCount() ?: []; // Ok
@@ -43,7 +44,6 @@ class SitesController extends Controller
         $counts['sslSuccessSites']         = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];      //Ok
         $counts['softwareErrorsSites']     = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];  // Ok
         $counts['bridgeErrors']            = $sitesCountsRepository->getBridgeErrors() ?: [];
-        $counts['softwareVersionErrors']   = $sitesCountsRepository->getSoftwareVersionErrors() ?: [];
         $counts['disabledSites']           = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
         $counts['deprecatedPHPVersion']    = ($sitesCountsRepository->getDeprecatedVersions()) ?: [];  // Ok
 
@@ -64,7 +64,6 @@ class SitesController extends Controller
             compact(
                 'sites',
                 'bridgePhpVersion',
-                'bridgeBranchVersion',
                 'counts'
             )
         );
