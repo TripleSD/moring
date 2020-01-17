@@ -120,8 +120,9 @@ class SitesCountsRepository extends Repository
 
     public function getDeprecatedVersions()
     {
-        // Get all enabled sites with php versions
+        // Get all enabled and not deleted sites with php versions
         $allSites = Sites::with('getPhpVersion')
+            ->whereNull('deleted_at')
             ->where('enabled', 1)
             ->get();
 
