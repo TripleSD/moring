@@ -107,7 +107,7 @@ class SitesCountsRepository extends Repository
             if (in_array($site->branch, $bridgeBranchs)) {
                 foreach ($bridgeVersions as $version) {
                     if ($version->branch == $site->branch) {
-                        if (version_compare($site->version, $version->version) < 0  && !in_array($site, $sites)) {
+                        if (version_compare($site->version, $version->version) < 0 && ! in_array($site, $sites)) {
                             $sites[] = $site;
                         }
                     }
@@ -120,20 +120,23 @@ class SitesCountsRepository extends Repository
 
     public function getDeprecatedVersions()
     {
-        $deprcatedList = BridgePhpVersions::all('branch', 'deprecated_status')->where('deprecated_status', '=', 1);
-        $preSites      = $this->getSoftwareVersionErrors();
-        $sites         = array_reduce(
-            $preSites,
-            function ($acc, $site) use ($deprcatedList) {
-                $check = $deprcatedList->where('branch', $site['branch'])->first();
-                if ($check['deprecated_status'] == 1) {
-                    $acc[] = $site;
-                }
+        // Get all enabled sites with php versions
+        $allSites = Sites::with('getPhpVersion')
+            ->where('enabled', 1)
+            ->get();
 
-                return $acc;
-            },
-            $acc = []
-        );
+        // Get all deprecated PHP versions (version + branch)
+        $deprecatedVersions = BridgePhpVersions::where('deprecated_status', 1)->pluck('branch')->toArray();
+
+        //Create empty array for result
+        $sites = [];
+
+        // Get needing sites by condition
+        foreach ($allSites as $site) {
+            if (in_array($site->getPhpVersion->branch, $deprecatedVersions)) {
+                $sites[] = $site;
+            }
+        }
 
         return $sites;
     }
