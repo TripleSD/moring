@@ -13,20 +13,20 @@
                 </div>
             </div>
             <div class="card-body">
-                <table class="table table-striped table-valign-middle">
-                    <table class="table-responsive">
+                <div class="table-responsive">
+                    <table class="table table-sm">
                         <thead>
                         <tr>
-                            <th>URL</th>
-                            <th>Статус</th>
-                            <th>Дата проверки</th>
-                            <th>Подробнее</th>
+                            <th scope="col">URL</th>
+                            <th scope="col" class="d-none d-sm-table-cell">Статус</th>
+                            <th scope="col" class="d-none d-sm-table-cell">Дата проверки</th>
+                            <th scope="col">Подробнее</th>
                         </tr>
                         </thead>
                         <tbody>
                         @foreach($sites as $site)
                             <tr>
-                                <td>
+                                <td class="col-sm-4">
                                     @if($site->enabled === 1)
                                         <small class="text-success mr-1">
                                             <i class="fas fa-globe" title="Мониторинг запущен"></i>
@@ -38,7 +38,7 @@
                                     @endif
                                     {{$site->url}}
                                 </td>
-                                <td>
+                                <td class="d-none d-sm-table-cell">
                                     @if(isset($site->getHttpCode))
                                         @if($site->getHttpCode->http_code == 200)
                                             <span class="badge badge-success"
@@ -66,7 +66,7 @@
                                                         </span>
                                     @endif
                                 </td>
-                                <td>
+                                <td class="d-none d-sm-table-cell">
                                             <span
                                                 @if($site->enabled === 1)
                                                 class="pt-1 text-success">
@@ -87,7 +87,7 @@
                         @endforeach
                         </tbody>
                     </table>
-                </table>
+                </div>
             </div>
         </div>
     </div>
