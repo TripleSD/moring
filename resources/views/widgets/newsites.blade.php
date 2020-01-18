@@ -26,7 +26,7 @@
                         <tbody>
                         @foreach($sites as $site)
                             <tr>
-                                <td class="col-sm-4">
+                                <td>
                                     @if($site->enabled === 1)
                                         <small class="text-success mr-1">
                                             <i class="fas fa-globe" title="Мониторинг запущен"></i>
