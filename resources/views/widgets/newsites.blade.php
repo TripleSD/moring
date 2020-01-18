@@ -1,6 +1,6 @@
 @section('newsites')
     <div class="col-sm-6" id="1_newsites">
-        <div class="card">
+        <div class="card" style="max-height: 300px;">
             <div class="card-header border-0">
                 <h3 class="card-title">Недавно добавленные веб сайты</h3>
                 <div class="card-tools float-right">
