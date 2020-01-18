@@ -1,6 +1,6 @@
 @section('newpings')
     <div class="col-sm-6" id="2_newpings">
-        <div class="card">
+        <div class="card" style="max-height: 300px; min-height: 300px;">
             <div class="card-header border-0">
                 <h3 class="card-title">
                     <i class="fas fa-map-marker-alt mr-1"></i>
