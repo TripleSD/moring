@@ -21,7 +21,8 @@
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
         "laravelcollective/html": "^6.0",
-        "spatie/ssl-certificate": "^1.16"
+        "spatie/ssl-certificate": "^1.16",
+        "ext-pcntl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
