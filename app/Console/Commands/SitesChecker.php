@@ -50,11 +50,11 @@ class SitesChecker extends Command
         }
 
         foreach ($sites as $site) {
+
             $fork = pcntl_fork();
 
-            if ($fork == -1) {
-                echo 'error';
-            } elseif($fork) {
+            if ($fork) {
+                echo $site->title.PHP_EOL;
                 try {
                     if ($site->checksList->use_file === 1) {
                         $httpClient    = new Client();
@@ -147,6 +147,8 @@ class SitesChecker extends Command
                     }
                 } catch (\Exception $e) {
                 }
+
+                die(0);
             }
         }
 
