@@ -21,6 +21,8 @@
         "laravel/tinker": "^1.0",
         "laravel/ui": "^1.1",
         "laravelcollective/html": "^6.0",
+        "php-pm/httpkernel-adapter": "^2.0",
+        "php-pm/php-pm": "^2.0",
         "spatie/ssl-certificate": "^1.16"
     },
     "require-dev": {
