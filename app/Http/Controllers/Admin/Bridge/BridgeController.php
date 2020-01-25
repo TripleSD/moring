@@ -30,6 +30,6 @@ class BridgeController extends Controller
 
     public function getNewIdentificator()
     {
-        $this->bridgeRepository->getNewIdentificator();
+        return $this->bridgeRepository->getNewIdentificator();
     }
 }
