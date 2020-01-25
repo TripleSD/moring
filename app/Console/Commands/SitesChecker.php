@@ -187,7 +187,5 @@ class SitesChecker extends Command
             }
         } catch (\Exception $e) {
         }
-
-        exit();
     }
 }
