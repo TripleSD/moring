@@ -14,7 +14,7 @@ class BridgeController extends Controller
     public function __construct()
     {
         $this->settingsRepository = new SettingsRepository();
-        $this->bridgeRepository = new BridgeRepository();
+        $this->bridgeRepository   = new BridgeRepository();
     }
 
     public function getInfo()
@@ -28,7 +28,7 @@ class BridgeController extends Controller
         return $this->bridgeRepository->getBridgeInfo($this->settingsRepository->getIdentificator());
     }
 
-    public function getNewIdentificator()
+    public function getNewIdentificator(): void
     {
         $this->bridgeRepository->getNewIdentificator();
     }
