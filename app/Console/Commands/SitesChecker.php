@@ -69,7 +69,6 @@ class SitesChecker extends Command
             }
         }
 
-
         if ($this->settingsController->getTelegramStatus() === 1) {
             try {
                 $date   = Carbon::now()->format('Y-m-d H:i:s');
@@ -188,5 +187,7 @@ class SitesChecker extends Command
             }
         } catch (\Exception $e) {
         }
+
+        exit();
     }
 }
