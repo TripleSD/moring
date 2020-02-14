@@ -129,7 +129,7 @@ class AdminSitesRepository extends Repository
                 'getWebServer',
                 'getSslCertification',
                 'getNewSitePing'
-            )->orderBy('created_at', $sort)->get()->slice(0, $length);
+            )->orderBy('created_at', $sort)->limit($length)->get();
         }
 
         return $list;
