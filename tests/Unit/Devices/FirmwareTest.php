@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Devices;
 
-use Tests\TestCase;
 use App\Repositories\Devices\DevicesFirmwaresRepository;
+use Tests\TestCase;
 
 class FirmwareTest extends TestCase
 {
