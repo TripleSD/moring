@@ -36,6 +36,7 @@ class DevicesFirmwaresRepository extends Repository
         $firmware->title   = $firmwareTitle;
         $firmware->version = $firmwareVersion;
         $firmware->save();
+
         return $firmware->id;
     }
 }
