@@ -16,7 +16,7 @@ class AddColumnToBridgePhpVersionsTable extends Migration
         Schema::table(
             'bridge_php_versions',
             function (Blueprint $table) {
-                $table->integer('deprecated_status')->after('branch')
+                $table->integer('deprecated_status')->default(0)->after('branch')
                     ->comment('Deprecated version or not');
             }
         );
