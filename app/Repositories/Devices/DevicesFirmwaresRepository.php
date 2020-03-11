@@ -9,7 +9,7 @@ class DevicesFirmwaresRepository extends Repository
 {
     /**
      * @param string $firmwareTitle
-     * @param string $firmwareVersion
+     * @param string|null $firmwareVersion
      * @return int
      */
     public function checkFirmware(string $firmwareTitle, string $firmwareVersion = null): int
@@ -17,12 +17,17 @@ class DevicesFirmwaresRepository extends Repository
         $firmware = $this->getFirmware($firmwareTitle, $firmwareVersion);
 
         if (empty($firmware)) {
-            $firmware = $this->setFirmware($firmwareTitle, $firmwareVersion);
+            return $this->setFirmware($firmwareTitle, $firmwareVersion);
         }
 
         return $firmware->id;
     }
 
+    /**
+     * @param string $firmwareTitle
+     * @param string|null $firmwareVersion
+     * @return mixed
+     */
     public function getFirmware(string $firmwareTitle, string $firmwareVersion = null)
     {
         return DevicesFirmwares::where('title', $firmwareTitle)
@@ -30,6 +35,11 @@ class DevicesFirmwaresRepository extends Repository
             ->first();
     }
 
+    /**
+     * @param string $firmwareTitle
+     * @param string|null $firmwareVersion
+     * @return mixed
+     */
     public function setFirmware(string $firmwareTitle, string $firmwareVersion = null)
     {
         $firmware          = new DevicesFirmwares();
