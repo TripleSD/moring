@@ -16,7 +16,7 @@ class AddColumnToSitesPingResponses extends Migration
         Schema::table(
             'sites_ping_responses',
             function (Blueprint $table) {
-                $table->addColumn('float', 'average')->default(null)->after('third')->comment(
+                $table->addColumn('float', 'average')->nullable()->default(null)->after('third')->comment(
                     'Average or three previous pings'
                 );
             }
