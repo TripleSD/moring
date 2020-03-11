@@ -10,10 +10,8 @@ class FirmwareTest extends TestCase
     public function testSetFirmware(): void
     {
         $device = new DevicesFirmwaresRepository();
-        $device->setFirmware('TestVendor');
-        $this->assertEquals(1, 1);
-        $device->setFirmware('TestVendor2');
-        $this->assertEquals(2, 2);
+        $this->assertEquals(1, $device->setFirmware('TestVendor1'));
+        $this->assertEquals(2, $device->setFirmware('TestVendor2'));
     }
 
     public function testGetNotEmptyFirmware(): void
@@ -26,6 +24,12 @@ class FirmwareTest extends TestCase
     public function testGetEmptyFirmware(): void
     {
         $device = new DevicesFirmwaresRepository();
-        $this->assertEmpty($device->getFirmware('TestVendor1'));
+        $this->assertEmpty($device->getFirmware('TestVendor'));
+    }
+
+    public function testCheckFirmware()
+    {
+        $device = new DevicesFirmwaresRepository();
+        $this->assertEquals(1,$device->checkFirmware('TestVendor'));
     }
 }
