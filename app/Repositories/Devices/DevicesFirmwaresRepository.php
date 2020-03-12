@@ -12,15 +12,15 @@ class DevicesFirmwaresRepository extends Repository
      * @param string|null $firmwareVersion
      * @return int
      */
-    public function checkFirmware(string $firmwareTitle, string $firmwareVersion = null): int
+    public function checkFirmwareId(string $firmwareTitle, string $firmwareVersion = null): int
     {
-        $firmware = $this->getFirmware($firmwareTitle, $firmwareVersion);
+        $firmwareId = $this->getFirmwareId($firmwareTitle, $firmwareVersion);
 
-        if (empty($firmware)) {
-            return $this->setFirmware($firmwareTitle, $firmwareVersion);
+        if ($firmwareId === null) {
+            $firmwareId = $this->storeFirmware($firmwareTitle, $firmwareVersion);
         }
 
-        return $firmware->id;
+        return $firmwareId;
     }
 
     /**
@@ -28,11 +28,17 @@ class DevicesFirmwaresRepository extends Repository
      * @param string|null $firmwareVersion
      * @return mixed
      */
-    public function getFirmware(string $firmwareTitle, string $firmwareVersion = null)
+    public function getFirmwareId(string $firmwareTitle, string $firmwareVersion = null)
     {
-        return DevicesFirmwares::where('title', $firmwareTitle)
+        $device = DevicesFirmwares::where('title', $firmwareTitle)
             ->where('version', $firmwareVersion)
             ->first();
+
+        if (empty($device)) {
+            return null;
+        }
+
+        return $device->id;
     }
 
     /**
@@ -40,7 +46,7 @@ class DevicesFirmwaresRepository extends Repository
      * @param string|null $firmwareVersion
      * @return mixed
      */
-    public function setFirmware(string $firmwareTitle, string $firmwareVersion = null)
+    public function storeFirmware(string $firmwareTitle, string $firmwareVersion = null)
     {
         $firmware          = new DevicesFirmwares();
         $firmware->title   = $firmwareTitle;
