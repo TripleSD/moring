@@ -12,7 +12,7 @@ class FirmwareTest extends TestCase
         $device = new DevicesFirmwaresRepository();
         $this->assertEquals(1, $device->storeFirmware('TestVendor1'));
         $this->assertDatabaseHas('devices_firmwares', ['title' => 'TestVendor1']);
-//        $this->assertEquals(2, $device->storeFirmware('TestVendor2'));
+        $this->assertEquals(2, $device->storeFirmware('TestVendor2'));
 //        $this->assertDatabaseHas('devices_firmwares', ['title' => 'TestVendor1']);
     }
 
