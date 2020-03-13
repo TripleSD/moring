@@ -1,4 +1,4 @@
-name: Laravel
+name: Github CI
 
 on: [push]
 
@@ -9,32 +9,37 @@ jobs:
       max-parallel: 3
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: ['7.3']
+        php-versions: [7.2, 7.3, 7.4]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
     - uses: actions/checkout@v1
     - uses: shivammathur/setup-php@master
       with:
         php-version: ${{ matrix.php-versions }}
+
     - name: SQLite Install
       run: sudo apt-get update && sudo apt-get install -y sqlite3
+
     - name: Check PHP version
       run: php -v
+
     - name: Install requires
       run: sudo apt-get install php7.3-intl
+
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+
     - name: Install Dependencies
       run: composer install
+
     - name: Generate key
       run: php artisan key:generate
+
     - name: Create Database
       run: |
         mkdir -p database
         touch database/database.sqlite
         php artisan migrate
+
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit
