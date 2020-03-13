@@ -7,25 +7,34 @@ use Tests\TestCase;
 
 class FirmwareTest extends TestCase
 {
-    public function testSetFirmware(): void
+    public function testStoreFirmware(): void
     {
         $device = new DevicesFirmwaresRepository();
-        $device->setFirmware('TestVendor');
-        $this->assertEquals(1, 1);
-        $device->setFirmware('TestVendor2');
-        $this->assertEquals(2, 2);
+        $this->assertEquals(1, $device->storeFirmware('TestVendor1'));
+        $this->assertDatabaseHas('devices_firmwares', ['title' => 'TestVendor1']);
+        $this->assertEquals(2, $device->storeFirmware('TestVendor2'));
+        $this->assertDatabaseHas('devices_firmwares', ['title' => 'TestVendor1']);
     }
 
     public function testGetNotEmptyFirmware(): void
     {
         $device = new DevicesFirmwaresRepository();
-        $device->setFirmware('TestVendor');
-        $this->assertNotEmpty($device->getFirmware('TestVendor'));
+        $device->storeFirmware('TestVendor');
+        $this->assertNotEmpty($device->getFirmwareId('TestVendor'));
+        $this->assertEquals(1, $device->getFirmwareId('TestVendor'));
     }
 
     public function testGetEmptyFirmware(): void
     {
         $device = new DevicesFirmwaresRepository();
-        $this->assertEmpty($device->getFirmware('TestVendor1'));
+        $this->assertEquals(null, $device->getFirmwareId('TestVendor'));
+        $this->assertDatabaseMissing('devices_firmwares', ['title' => 'TestVendor']);
+    }
+
+    public function testCheckFirmware()
+    {
+        $device = new DevicesFirmwaresRepository();
+        $this->assertEquals(1, $device->checkFirmwareId('TestVendor'));
+        $this->assertDatabaseHas('devices_firmwares', ['title' => 'TestVendor']);
     }
 }
