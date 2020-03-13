@@ -16,14 +16,14 @@ class FirmwareTest extends TestCase
         $this->assertDatabaseHas('devices_firmwares', ['title' => 'TestVendor2']);
     }
 
-//    public function testGetNotEmptyFirmware(): void
-//    {
-//        $device = new DevicesFirmwaresRepository();
-//        $device->storeFirmware('TestVendor');
-//        $this->assertNotEmpty($device->getFirmwareId('TestVendor'));
-//        $this->assertEquals(1, $device->getFirmwareId('TestVendor'));
-//    }
-//
+    public function testGetNotEmptyFirmware(): void
+    {
+        $device = new DevicesFirmwaresRepository();
+        $device->storeFirmware('TestVendor');
+        $this->assertNotEmpty($device->getFirmwareId('TestVendor'));
+        $this->assertEquals(1, $device->getFirmwareId('TestVendor'));
+    }
+
 //    public function testGetEmptyFirmware(): void
 //    {
 //        $device = new DevicesFirmwaresRepository();
