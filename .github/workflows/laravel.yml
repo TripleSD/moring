@@ -23,7 +23,7 @@ jobs:
     - name: Install requires
       run: sudo apt-get install php7.3-intl
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
     - name: Install Dependencies
       run: composer install
     - name: Generate key
