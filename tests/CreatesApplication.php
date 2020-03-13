@@ -3,8 +3,8 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 
 trait CreatesApplication
 {
