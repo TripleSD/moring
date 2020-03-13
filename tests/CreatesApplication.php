@@ -3,9 +3,14 @@
 namespace Tests;
 
 use Illuminate\Contracts\Console\Kernel;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 trait CreatesApplication
 {
+    use DatabaseMigrations;
+    use RefreshDatabase;
+
     /**
      * Creates the application.
      *
