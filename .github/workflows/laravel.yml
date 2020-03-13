@@ -16,6 +16,8 @@ jobs:
     - uses: shivammathur/setup-php@master
       with:
         php-version: ${{ matrix.php-versions }}
+    - name: SQLite Install
+      run: sudo apt-get install -y sqlite3
     - name: Check PHP version
       run: php -v
     - name: Install requires
