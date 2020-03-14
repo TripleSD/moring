@@ -35,14 +35,14 @@ jobs:
     - name: Generate key
       run: php artisan key:generate
 
+    - name: ReCache Laravel config
+      run: php artisan config:clear
+
     - name: Create Database
       run: |
         mkdir -p database
         touch database/database.sqlite
         php artisan migrate
-
-    - name: ReCache Laravel config
-      run: php artisan config:clear
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
