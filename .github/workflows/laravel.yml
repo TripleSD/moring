@@ -38,11 +38,14 @@ jobs:
     - name: ReCache Laravel config
       run: php artisan config:clear
 
+    - name: Create Database folder
+      run: mkdir -p database
+
     - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
-        php artisan migrate
+      run: touch database/database.sqlite
+
+    - name: Apply migrations
+      run: php artisan migrate
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
