@@ -93,7 +93,7 @@ return [
 
         'sqlite_memory' => [
             'driver' => 'sqlite',
-            'database' => ':memory:',
+            'database' => env('DB_DATABASE', ':memory:'),
             'prefix' => '',
         ],
     ],
