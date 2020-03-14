@@ -27,7 +27,7 @@ jobs:
       run: sudo apt-get install php7.3-intl
 
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
 
     - name: Install Dependencies
       run: composer install
@@ -36,7 +36,7 @@ jobs:
       run: php artisan key:generate
 
     - name: ReCache Laravel config
-      run: php artisan config:clear
+      run: php artisan config:cache  --env=testing
 
     - name: Create Database folder
       run: mkdir -p database

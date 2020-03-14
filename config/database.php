@@ -90,12 +90,6 @@ return [
             'prefix' => '',
             'prefix_indexes' => true,
         ],
-
-        'sqlite_memory' => [
-            'driver' => 'sqlite',
-            'database' => env('DB_DATABASE', ':memory:'),
-            'prefix' => '',
-        ],
     ],
 
     /*

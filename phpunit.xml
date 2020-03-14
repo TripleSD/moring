@@ -27,9 +27,4 @@
             <directory suffix=".php">./app</directory>
         </whitelist>
     </filter>
-    <php>
-        <server name="APP_ENV" value="testing" force="true"/>
-        <server name="DB_CONNECTION" value="sqlite_memory" force="true"/>
-        <server name="DB_DATABASE" value=":memory:" force="true"/>
-    </php>
 </phpunit>
