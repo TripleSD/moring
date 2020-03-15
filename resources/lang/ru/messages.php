@@ -77,4 +77,6 @@ return [
     'network.device.breadcrumbs.main' => 'Главная',
     'network.device.breadcrumbs.network' => 'Сеть',
     'network.device.breadcrumbs.devices' => 'Устройства',
+
+    'flash.success' => 'Данные обновлены',
 ];

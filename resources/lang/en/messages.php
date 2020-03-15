@@ -77,4 +77,6 @@ return [
     'network.device.breadcrumbs.main' => 'Main',
     'network.device.breadcrumbs.network' => 'Network',
     'network.device.breadcrumbs.devices' => 'Devices',
+
+    'flash.success' => 'Data updated',
 ];
