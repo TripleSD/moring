@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
+use Carbon\Carbon;
 use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
 use App\Http\Controllers\Controller;
@@ -204,18 +205,38 @@ class SitesController extends Controller
 
     public function refresh($id)
     {
-        $check = new SitesChecker($id);
-        $check->handle($id);
+        // TODO - проверить нужно определять локаль
+        try {
+            // Getting current locale.
+            if (session()->has('locale')) {
+                $locale = session()->get('locale');
+            } else {
+                $locale = 'en';
+            }
 
-        $ping = new SitesPings();
-        $ping->handle($id);
-        if ($check) {
-            flash('Данные обновлены')->success();
-        } else {
-            flash('Что-то пошло не так...');
+            // Getting current time.
+            $startTime = Carbon::now();
+
+            // Starting checks
+            $check = new SitesChecker($id);
+            $check->handle($id);
+            $ping = new SitesPings();
+            $ping->handle($id);
+
+            // Getting current time for compare.
+            $endTime = Carbon::now()->locale($locale);
+
+            // Comparing start & end time (humans view).
+            $diffTime = $endTime->diffForHumans($startTime);
+
+            flash(trans('messages.flash.success') . " ($diffTime) ")->success();
+
+            return back();
+        } catch (\Exception $e) {
+            flash($e->getMessage())->error();
+
+            return redirect()->route('admin.sites.index');
         }
-
-        return back();
     }
 
     public function switchOnOff(int $id, int $on, AdminSitesRepository $adminSitesRepository)
