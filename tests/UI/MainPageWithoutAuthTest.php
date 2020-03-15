@@ -2,7 +2,6 @@
 
 namespace Tests\UI;
 
-use App;
 use Tests\TestCase;
 
 class MainPageWithoutAuthTest extends TestCase
