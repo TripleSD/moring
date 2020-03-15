@@ -39,8 +39,8 @@ MoRiNg - opensource система мониторинга. На данный м�
  - [Лог изменений по версиям](#Лог-изменений-по-версиям)
 - - - 
 
-![](https://github.com/TripleSD/moring/workflows/Github CI/badge.svg?branch=master)
-![](https://github.com/TripleSD/moring/workflows/Github CI/badge.svg?branch=dev)
+![](https://github.com/TripleSD/moring/workflows/GithubCI/badge.svg?branch=master)
+![](https://github.com/TripleSD/moring/workflows/GithubCI/badge.svg?branch=dev)
 
 ### Ветки
 |Ветка|Описание|Статусы|
