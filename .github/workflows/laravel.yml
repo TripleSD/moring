@@ -1,4 +1,4 @@
-name: Github CI
+name: GithubCI
 
 on: [push]
 
@@ -27,7 +27,7 @@ jobs:
       run: sudo apt-get install php7.3-intl
 
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.testing', '.env');"
+      run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
 
     - name: Install Dependencies
       run: composer install
@@ -46,6 +46,9 @@ jobs:
 
     - name: Apply migrations
       run: php artisan migrate
+
+    - name: Generate App Key
+      run: php artisan key:generate
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
