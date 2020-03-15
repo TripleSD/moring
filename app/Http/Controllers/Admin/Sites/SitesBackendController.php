@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
-use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Repositories\Sites\SitesBackendRepository;
+use Carbon\Carbon;
 
 class SitesBackendController extends Controller
 {

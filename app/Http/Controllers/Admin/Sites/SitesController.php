@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
-use Carbon\Carbon;
 use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
 use App\Http\Controllers\Controller;
@@ -12,6 +11,7 @@ use App\Http\Requests\Sites\UpdateSiteRequest;
 use App\Models\BridgePhpVersions;
 use App\Repositories\AdminSitesRepository;
 use App\Repositories\Sites\SitesCountsRepository;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
