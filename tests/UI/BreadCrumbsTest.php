@@ -11,7 +11,6 @@ class BreadCrumbsTest extends TestCase
         //Main page
         $this->withoutMiddleware();
         $a = $this->call('GET', '/');
-        $a->assertSee('<li class="breadcrumb-item"><a href="http://moring.test">Главная</a></li>');
-        $a->assertSee('<li class="breadcrumb-item active">Сводные данные</li>');
+        $a->assertSee('Main');
     }
 }
