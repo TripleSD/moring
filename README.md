@@ -9,6 +9,7 @@
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/TripleSD/moring.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/TripleSD/moring/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/TripleSD/moring.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/TripleSD/moring/context:javascript)
 [![Open Source Helpers](https://www.codetriage.com/triplesd/moring/badges/users.svg)](https://www.codetriage.com/triplesd/moring)
+[![HitCount](http://hits.dwyl.com/TripleSD/moring.svg)](http://hits.dwyl.com/TripleSD/moring)
 <p align="center">
 <img src="docs/img/moring_readme_1.png" alt="drawing" width="300"/>
 <img src="docs/img/moring_readme_2.png" alt="drawing" width="300"/>
@@ -38,7 +39,8 @@ MoRiNg - opensource система мониторинга. На данный м�
  - [Лог изменений по версиям](#Лог-изменений-по-версиям)
 - - - 
 
-![](https://github.com/TripleSD/moring/workflows/Laravel/badge.svg?branch=dev)
+![](https://github.com/TripleSD/moring/workflows/Github CI/badge.svg?branch=master)
+![](https://github.com/TripleSD/moring/workflows/Github CI/badge.svg?branch=dev)
 
 ### Ветки
 |Ветка|Описание|Статусы|
