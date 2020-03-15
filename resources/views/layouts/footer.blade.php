@@ -7,7 +7,8 @@
     All rights reserved.
     <a href="https://github.com/TripleSD/moring" target="_blank"><i class="fab fa-github-square"></i></a>
     <div class="float-right d-none d-sm-inline-block">
-        <b>Moring</b> <span class="badge badge-dark">b: {{Config::get('moring.build')}}</span>
+        <b>Moring</b> <span class="badge badge-dark">v: {{Config::get('moring.version')}}</span>
+        <span class="badge badge-dark">b: {{Config::get('moring.build')}}</span>
         |
         <b>Bridge </b>
         @if($bridgeInfo['status'] == 1)
