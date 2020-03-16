@@ -49,52 +49,101 @@ class SitesChecker extends Command
             $tgMessage = 1;
         }
 
+        /*
+         * http_response_code()
+         * true - web
+         * false - cli
+         */
+
         foreach ($sites as $site) {
-            $phpVersion    = 0;
-            $phpBranch     = 0;
-            $statusCode    = 999;
-            $webServerType = null;
+            if (http_response_code() == false) {
+                $fork = pcntl_fork();
 
+                if ($fork) {
+                    echo $site->title . PHP_EOL;
+                    self::ckeckSite($site);
+                    die(0);
+                }
+            } else {
+                self::ckeckSite($site);
+            }
+        }
+
+        if ($this->settingsController->getTelegramStatus() === 1) {
             try {
-                if ($site->checksList->use_file === 1) {
-                    $httpClient    = new Client();
-                    $url           = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->file_url : 'http://' . $site->file_url;
-                    $request       = $httpClient->request('GET', $url, ['allow_redirects' => false]);
-                    $response      = $request->getBody();
-                    $responseArray = json_decode($response, true);
-                    $phpVersion    = $responseArray['php-version'];
-                    $statusCode    = $request->getStatusCode();
-                    $webServerType = $responseArray['web-server'];
-                    $phpBranch     = $responseArray['php-branch'];
+                $date   = Carbon::now()->format('Y-m-d H:i:s');
+                $chatId = $this->settingsController->getGroupChatId();
+                if ($tgMessage == 0) {
+                    $this->telegramConnector->sendMessage(
+                        $chatId,
+                        trim(
+                            "ℹ️<b>Информация</b> \nВыполнена проверка всех сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
+                        )
+                    );
                 } else {
-                    $httpClient    = new Client();
-                    $url           = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
-                    $response      = $httpClient->request('GET', $url, ['allow_redirects' => false]);
-                    $phpVersion    = $response->getHeader('X-Powered-By');
-                    $webServerType = $response->getHeader('server')[0];
-
-                    if (preg_match('/^[0-9]*/', $response->getStatusCode())) {
-                        $statusCode = $response->getStatusCode();
-                    }
-
-                    if ($phpVersion != null) {
-                        if (preg_match('/^PHP/', $phpVersion[0])) {
-                            $phpVersion   = preg_replace('/[^\d.]/', '', $phpVersion[0]);
-                            $phpBranchRaw = explode('.', $phpVersion);
-                            $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
-                            $phpBranch    = Str::substr($phpBranchRaw, 0, 3);
-                        } else {
-                            $phpVersion = 0;
-                        }
-                    } else {
-                        $phpVersion = 0;
-                    }
-
-                    $ssl = new SitesSSLChecker();
-                    $ssl->handle($site->id);
+                    $this->telegramConnector->sendMessage(
+                        $chatId,
+                        trim(
+                            "ℹ️<b>Информация</b> \nВыполнена проверка одного сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
+                        )
+                    );
                 }
             } catch (\Exception $e) {
             }
+        }
+    }
+
+    private function ckeckSite($site): void
+    {
+        try {
+            if ($site->checksList->use_file === 1) {
+                $httpClient    = new Client();
+                $url           = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->file_url : 'http://' . $site->file_url;
+                $request       = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+                $response      = $request->getBody();
+                $responseArray = json_decode($response, true);
+                $phpVersion    = $responseArray['php-version'];
+                $statusCode    = $request->getStatusCode();
+                $webServerType = $responseArray['web-server'];
+                $phpBranch     = $responseArray['php-branch'];
+            } else {
+                $httpClient    = new Client();
+                $url           = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
+                $response      = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+                $phpVersion    = $response->getHeader('X-Powered-By');
+                $webServerType = $response->getHeader('server');
+
+                if ($webServerType != null) {
+                    $webServerType = $webServerType[0];
+                } else {
+                    $webServerType = 0;
+                }
+
+                if (preg_match('/^[0-9]*/', $response->getStatusCode())) {
+                    $statusCode = $response->getStatusCode();
+                } else {
+                    $statusCode = 999;
+                }
+
+                if ($phpVersion != null) {
+                    if (preg_match('/^PHP/', $phpVersion[0])) {
+                        preg_match('/[0-9].[0-9].[0-9]/', $phpVersion[0], $rawPhpVersion);
+                        $phpVersion   = $rawPhpVersion[0];
+                        $phpBranchRaw = explode('.', $phpVersion);
+                        $phpBranchRaw = $phpBranchRaw[0] * 10000 + $phpBranchRaw[1] * 100 + $phpBranchRaw[2];
+                        $phpBranch    = Str::substr($phpBranchRaw, 0, 3);
+                    } else {
+                        $phpVersion = 0;
+                        $phpBranch  = 0;
+                    }
+                } else {
+                    $phpVersion = 0;
+                    $phpBranch  = 0;
+                }
+            }
+
+            $ssl = new SitesSSLChecker();
+            $ssl->handle($site->id);
 
             //   HTTP code saving process
             $http = SitesHttpCodes::where('site_id', $site->id)->first();
@@ -136,29 +185,7 @@ class SitesChecker extends Command
                 $pending->pending = 0;
                 $pending->save();
             }
-        }
-
-        if ($this->settingsController->getTelegramStatus() === 1) {
-            try {
-                $date   = Carbon::now()->format('Y-m-d H:i:s');
-                $chatId = $this->settingsController->getGroupChatId();
-                if ($tgMessage == 0) {
-                    $this->telegramConnector->sendMessage(
-                        $chatId,
-                        trim(
-                            "ℹ️<b>Информация</b> \nВыполнена проверка всех сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
-                        )
-                    );
-                } else {
-                    $this->telegramConnector->sendMessage(
-                        $chatId,
-                        trim(
-                            "ℹ️<b>Информация</b> \nВыполнена проверка одного сайтов.\nДата/время окончания задания: $date\nСтатус: ✅"
-                        )
-                    );
-                }
-            } catch (\Exception $e) {
-            }
+        } catch (\Exception $e) {
         }
     }
 }

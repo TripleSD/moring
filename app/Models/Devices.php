@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Devices extends Model
 {
@@ -22,5 +23,10 @@ class Devices extends Model
     public function vendor(): belongsTo
     {
         return $this->belongsTo(DevicesVendors::class, 'vendor_id', 'id');
+    }
+
+    public function logs(): hasMany
+    {
+        return $this->hasMany(DevicesLogs::class, 'device_id', 'id');
     }
 }

@@ -16,6 +16,8 @@ try {
     require('./demo');
     require('./pages/dashboard3');
     require('jquery');
+    require('./admin/jquery-ui.js');
+    require('./admin/dashboard');
     require('./admin/show_ping_chart.js');
     require('./admin/pings_for_new_sites');
     require('./admin/web_servers_of_new_sites');

@@ -1,26 +1,51 @@
-name: Laravel
+name: GithubCI
 
 on: [push]
 
 jobs:
-  laravel-tests:
-    runs-on: ubuntu-latest
+  laravel:
+    runs-on: ${{ matrix.operating-system }}
+    strategy:
+      max-parallel: 3
+      matrix:
+        operating-system: [ubuntu-latest]
+        php-versions: [7.2, 7.3, 7.4]
+    name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
+    - uses: actions/checkout@v1
+    - uses: shivammathur/setup-php@master
+      with:
+        php-version: ${{ matrix.php-versions }}
+
+    - name: SQLite Install
+      run: sudo apt-get update && sudo apt-get install -y sqlite3
+
+    - name: Check PHP version
+      run: php -v
+
     - name: Install requires
       run: sudo apt-get install php7.3-intl
-    - uses: actions/checkout@v1
+
     - name: Copy .env
-      run: php -r "file_exists('.env') || copy('.env.example', '.env');"
+      run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
+
     - name: Install Dependencies
       run: composer install
+
     - name: Generate key
       run: php artisan key:generate
+
+    - name: ReCache Laravel config
+      run: php artisan config:cache  --env=testing
+
+    - name: Create Database folder
+      run: mkdir -p database
+
     - name: Create Database
-      run: |
-        mkdir -p database
-        touch database/database.sqlite
+      run: touch database/database.sqlite
+
+    - name: Apply migrations
+      run: php artisan migrate
+
     - name: Execute tests (Unit and Feature tests) via PHPUnit
-      env:
-        DB_CONNECTION: sqlite
-        DB_DATABASE: database/database.sqlite
       run: vendor/bin/phpunit

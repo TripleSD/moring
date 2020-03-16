@@ -11,6 +11,8 @@
 |
 */
 
+Route::get('lang/{locale}', 'LocalizationController@index')->name('setLocale');
+
 Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
@@ -42,7 +44,10 @@ Route::group(
         );
 
         //Simple route for refreshing data of one site
-        Route::get('/admin/sites/{id}/refresh/', 'Admin\Sites\SitesController@refresh')->where('id', '[0-9]+')->name(
+        Route::get('/admin/sites/{id}/refresh/', 'Admin\Sites\SitesController@refresh')->where(
+            'id',
+            '[0-9]+'
+        )->name(
             'admin.site.refresh'
         );
 
@@ -124,6 +129,14 @@ Route::group(
             function () {
                 Route::get('/', 'ContactsController@getIndex')
                     ->name('contacts.index');
+            }
+        );
+
+        // Item positions storage
+        Route::group(
+            ['prefix' => '/admin/panel/items/', 'namespace' => 'Admin\Sites'],
+            function () {
+                Route::post('sort', 'ItemsSortController')->name('sort');
             }
         );
     }

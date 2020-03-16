@@ -11,6 +11,7 @@ use App\Http\Requests\Sites\UpdateSiteRequest;
 use App\Models\BridgePhpVersions;
 use App\Repositories\AdminSitesRepository;
 use App\Repositories\Sites\SitesCountsRepository;
+use Carbon\Carbon;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
@@ -32,9 +33,10 @@ class SitesController extends Controller
         Request $request
     ) {
         $sites = $adminSiteRepository->index($request);
-        //TODO вынести в репозиторий два запроса
-        $bridgeBranchVersion = BridgePhpVersions::pluck('branch')->toArray();
-        $bridgePhpVersion    = BridgePhpVersions::get();
+        //TODO вынести в репозиторий запрос
+        $bridgePhpVersion = BridgePhpVersions::select('version', 'branch', 'deprecated_status')
+            ->orderBy('version')
+            ->get();
 
         // Counts
         $counts['allSites']                = $sitesCountsRepository->getAllSitesCount() ?: []; // Ok
@@ -43,7 +45,6 @@ class SitesController extends Controller
         $counts['sslSuccessSites']         = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];      //Ok
         $counts['softwareErrorsSites']     = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];  // Ok
         $counts['bridgeErrors']            = $sitesCountsRepository->getBridgeErrors() ?: [];
-        $counts['softwareVersionErrors']   = $sitesCountsRepository->getSoftwareVersionErrors() ?: [];
         $counts['disabledSites']           = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
         $counts['deprecatedPHPVersion']    = ($sitesCountsRepository->getDeprecatedVersions()) ?: [];  // Ok
 
@@ -64,7 +65,6 @@ class SitesController extends Controller
             compact(
                 'sites',
                 'bridgePhpVersion',
-                'bridgeBranchVersion',
                 'counts'
             )
         );
@@ -205,18 +205,38 @@ class SitesController extends Controller
 
     public function refresh($id)
     {
-        $check = new SitesChecker($id);
-        $check->handle($id);
+        // TODO - проверить нужно определять локаль
+        try {
+            // Getting current locale.
+            if (session()->has('locale')) {
+                $locale = session()->get('locale');
+            } else {
+                $locale = 'en';
+            }
 
-        $ping = new SitesPings();
-        $ping->handle($id);
-        if ($check) {
-            flash('Данные обновлены')->success();
-        } else {
-            flash('Что-то пошло не так...');
+            // Getting current time.
+            $startTime = Carbon::now();
+
+            // Starting checks
+            $check = new SitesChecker($id);
+            $check->handle($id);
+            $ping = new SitesPings();
+            $ping->handle($id);
+
+            // Getting current time for compare.
+            $endTime = Carbon::now()->locale($locale);
+
+            // Comparing start & end time (humans view).
+            $diffTime = $endTime->diffForHumans($startTime);
+
+            flash(trans('messages.flash.success') . " ($diffTime) ")->success();
+
+            return back();
+        } catch (\Exception $e) {
+            flash($e->getMessage())->error();
+
+            return redirect()->route('admin.sites.index');
         }
-
-        return back();
     }
 
     public function switchOnOff(int $id, int $on, AdminSitesRepository $adminSitesRepository)
