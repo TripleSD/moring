@@ -29,6 +29,9 @@ jobs:
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
 
+    - name: Enabling parallel installing packages
+      run: composer global require hirak/prestissimo
+
     - name: Install Dependencies
       run: composer install
 
