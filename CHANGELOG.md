@@ -1,3 +1,8 @@
+[v.0.1.1 (Build.014)](https://github.com/TripleSD/moring/releases/tag/build.013)
+ - **(New)** - Добавлены автотесты
+ - **(New)** - Добавлен пакет [hirak/prestissimo](https://github.com/hirak/prestissimo) для параллельной установки composer пакетов в Unit тестах.
+ - **(Fix)** - Исправлены уязвимости JS пакетов
+
 [v.0.1.0 (Build.013)](https://github.com/TripleSD/moring/releases/tag/build.013)
 - **(New)** - Добавлены Telegram уведомления о проверке работоспособности системы
 - **(New)** - Добавлено именование версий в human style (v.0.1.0)
