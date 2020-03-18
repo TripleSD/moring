@@ -35,11 +35,11 @@ jobs:
     - name: Install Dependencies
       run: composer install
 
+    - name: Clear artisan config cache
+      run: php artisan config:clear
+
     - name: Generate key
       run: php artisan key:generate
-
-    - name: ReCache Laravel config
-      run: php artisan config:cache  --env=testing
 
     - name: Create Database folder
       run: mkdir -p database
