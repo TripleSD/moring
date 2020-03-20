@@ -177,7 +177,7 @@ class DevicesRepository extends Repository
             $deviceData['firmwareTitle'],
             $deviceData['firmwareVersion']
         );
-        $deviceData['vendorId']   = $this->devicesVendorsRepository->checkVendor($vendor);
+        $deviceData['vendorId']   = $this->devicesVendorsRepository->checkVendorId($vendor);
         $deviceData['modelId']    = $this->devicesModelsRepository->getModelId($deviceData['model']);
 
         return $deviceData;
