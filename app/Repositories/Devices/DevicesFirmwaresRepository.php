@@ -40,7 +40,7 @@ class DevicesFirmwaresRepository extends Repository
      * @param string|null $firmwareVersion
      * @return object|null
      */
-    public function storeFirmware(string $firmwareTitle, string $firmwareVersion = null) : ?object
+    public function storeFirmware(string $firmwareTitle, string $firmwareVersion = null): ?object
     {
         $firmware          = new DevicesFirmwares();
         $firmware->title   = $firmwareTitle;

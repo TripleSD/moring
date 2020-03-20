@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\Devices;
 
-use Tests\TestCase;
 use App\Repositories\Devices\DevicesVendorsRepository;
+use Tests\TestCase;
 
 class DeviceVendorTest extends TestCase
 {

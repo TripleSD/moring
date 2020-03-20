@@ -31,7 +31,6 @@ class DevicesVendorsRepository extends Repository
         return DevicesVendors::where('title', $vendorTitle)->first();
     }
 
-
     /**
      * @param string $vendorTitle
      * @return object|null
