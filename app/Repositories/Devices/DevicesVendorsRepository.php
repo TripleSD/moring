@@ -11,15 +11,37 @@ class DevicesVendorsRepository extends Repository
      * @param string $vendorTitle
      * @return int
      */
-    public function checkVendor(string $vendorTitle): int
+    public function getVendorId(string $vendorTitle): int
     {
-        $vendor = DevicesVendors::where('title', $vendorTitle)->first();
+        $vendor = $this->getVendor($vendorTitle);
+
         if (empty($vendor)) {
-            $vendor        = new DevicesVendors();
-            $vendor->title = $vendorTitle;
-            $vendor->save();
+            $vendor = $this->storeVendor($vendorTitle);
         }
 
         return $vendor->id;
+    }
+
+    /**
+     * @param string $vendorTitle
+     * @return object|null
+     */
+    public function getVendor(string $vendorTitle): ?object
+    {
+        return DevicesVendors::where('title', $vendorTitle)->first();
+    }
+
+
+    /**
+     * @param string $vendorTitle
+     * @return object|null
+     */
+    public function storeVendor(string $vendorTitle): ?object
+    {
+        $vendor        = new DevicesVendors();
+        $vendor->title = $vendorTitle;
+        $vendor->save();
+
+        return $vendor;
     }
 }
