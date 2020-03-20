@@ -28,7 +28,7 @@ class DevicesFirmwaresRepository extends Repository
      * @param string|null $firmwareVersion
      * @return object|null
      */
-    public function getFirmware(string $firmwareTitle, string $firmwareVersion = null): ?object
+    private function getFirmware(string $firmwareTitle, string $firmwareVersion = null): ?object
     {
         return DevicesFirmwares::where('title', $firmwareTitle)
             ->where('version', $firmwareVersion)
@@ -40,7 +40,7 @@ class DevicesFirmwaresRepository extends Repository
      * @param string|null $firmwareVersion
      * @return object|null
      */
-    public function storeFirmware(string $firmwareTitle, string $firmwareVersion = null): ?object
+    private function storeFirmware(string $firmwareTitle, string $firmwareVersion = null): ?object
     {
         $firmware          = new DevicesFirmwares();
         $firmware->title   = $firmwareTitle;

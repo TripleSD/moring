@@ -26,7 +26,7 @@ class DevicesVendorsRepository extends Repository
      * @param string $vendorTitle
      * @return object|null
      */
-    public function getVendor(string $vendorTitle): ?object
+    private function getVendor(string $vendorTitle): ?object
     {
         return DevicesVendors::where('title', $vendorTitle)->first();
     }
@@ -35,7 +35,7 @@ class DevicesVendorsRepository extends Repository
      * @param string $vendorTitle
      * @return object|null
      */
-    public function storeVendor(string $vendorTitle): ?object
+    private function storeVendor(string $vendorTitle): ?object
     {
         $vendor        = new DevicesVendors();
         $vendor->title = $vendorTitle;

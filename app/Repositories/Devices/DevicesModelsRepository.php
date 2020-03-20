@@ -26,7 +26,7 @@ class DevicesModelsRepository extends Repository
      * @param string $modelTitle
      * @return object|null
      */
-    public function getModel(string $modelTitle): ?object
+    private function getModel(string $modelTitle): ?object
     {
         return DevicesModels::where('title', $modelTitle)->first();
     }
@@ -35,7 +35,7 @@ class DevicesModelsRepository extends Repository
      * @param string $modelTitle
      * @return object|null
      */
-    public function storeModel(string $modelTitle): ?object
+    private function storeModel(string $modelTitle): ?object
     {
         $model        = new DevicesModels();
         $model->title = $modelTitle;
