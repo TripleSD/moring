@@ -5,7 +5,7 @@ namespace Tests\Unit\Devices;
 use App\Repositories\Devices\DevicesVendorsRepository;
 use Tests\TestCase;
 
-class DeviceVendorTest extends TestCase
+class VendorTest extends TestCase
 {
     public function testGetVendorId(): void
     {

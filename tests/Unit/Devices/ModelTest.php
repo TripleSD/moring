@@ -5,7 +5,7 @@ namespace Tests\Unit\Devices;
 use App\Repositories\Devices\DevicesModelsRepository;
 use Tests\TestCase;
 
-class DevicesModelsTest extends TestCase
+class ModelTest extends TestCase
 {
     public function testGetModelId(): void
     {
