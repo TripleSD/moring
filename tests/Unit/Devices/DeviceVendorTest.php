@@ -14,6 +14,8 @@ class DeviceVendorTest extends TestCase
         $device->storeVendor('TestVendor1');
         $this->assertEquals(1, $device->getVendorId('TestVendor1'));
         $this->assertDatabaseHas('devices_vendors', ['title' => 'TestVendor1']);
+        $this->assertEquals(2, $device->getVendorId('TestVendor2'));
+        $this->assertDatabaseHas('devices_vendors', ['title' => 'TestVendor2']);
     }
 
     public function testGetVendor(): void
@@ -23,14 +25,18 @@ class DeviceVendorTest extends TestCase
         $this->assertDatabaseMissing('devices_vendors', ['title' => 'TestVendor1']);
         $this->assertEquals(1, $device->getVendorId('TestVendor1'));
         $this->assertDatabaseHas('devices_vendors', ['title' => 'TestVendor1']);
+        $this->assertEquals(null, $device->getVendor('TestVendor2'));
         $this->assertDatabaseMissing('devices_vendors', ['title' => 'TestVendor2']);
     }
 
     public function testGetVendorId(): void
     {
         $device = new DevicesVendorsRepository();
+        $this->assertDatabaseMissing('devices_vendors', ['title' => 'TestVendor1']);
         $this->assertEquals(1, $device->getVendorId('TestVendor1'));
-        $this->assertEquals(1, $device->getVendorId('TestVendor1'));
+        $this->assertDatabaseHas('devices_vendors', ['title' => 'TestVendor1']);
+        $this->assertDatabaseMissing('devices_vendors', ['title' => 'TestVendor2']);
         $this->assertEquals(2, $device->getVendorId('TestVendor2'));
+        $this->assertDatabaseHas('devices_vendors', ['title' => 'TestVendor2']);
     }
 }

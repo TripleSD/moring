@@ -173,7 +173,7 @@ class DevicesRepository extends Repository
         $deviceData['humanModel']      = $firmwareClass->getHumanModel($snmpFlow);
         $deviceData['licenseLevel']    = $firmwareClass->getLicenseLevel($snmpFlow);
 
-        $deviceData['firmwareId'] = $this->devicesFirmwareRepository->checkFirmwareId(
+        $deviceData['firmwareId'] = $this->devicesFirmwareRepository->getFirmwareId(
             $deviceData['firmwareTitle'],
             $deviceData['firmwareVersion']
         );

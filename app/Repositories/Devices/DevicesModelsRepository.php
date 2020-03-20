@@ -15,24 +15,32 @@ class DevicesModelsRepository extends Repository
     {
         $model = $this->getModel($modelTitle);
 
-        if (empty($model)) {
-            return $this->storeModel($modelTitle);
+        if ($model === null) {
+            $model = $this->storeModel($modelTitle);
         }
 
         return $model->id;
     }
 
-    public function getModel(string $modelTitle)
+    /**
+     * @param string $modelTitle
+     * @return object|null
+     */
+    public function getModel(string $modelTitle): ?object
     {
         return DevicesModels::where('title', $modelTitle)->first();
     }
 
-    public function storeModel(string $modelTitle)
+    /**
+     * @param string $modelTitle
+     * @return object|null
+     */
+    public function storeModel(string $modelTitle): ?object
     {
         $model        = new DevicesModels();
         $model->title = $modelTitle;
         $model->save();
 
-        return $model->id;
+        return $model;
     }
 }
