@@ -3,18 +3,9 @@
 namespace App\Repositories\Snmp\Vendors;
 
 use App\Repositories\Repository;
-use App\Repositories\Snmp\SnmpRepository;
 
 class DLink extends Repository
 {
-    /** @var SnmpRepository */
-    private $snmpRepository;
-
-    public function __construct()
-    {
-        $this->snmpRepository = new SnmpRepository();
-    }
-
     /**
      * @param $snmpFlow
      * @return string
