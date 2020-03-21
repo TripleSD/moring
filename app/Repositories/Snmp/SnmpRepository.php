@@ -12,6 +12,6 @@ class SnmpRepository extends Repository
         // TODO восстановить try/catch
         $snmpFlow = new SNMP(SNMP::VERSION_2c, $host, $community);
 
-        return $snmpFlow->walk(".");
+        return $snmpFlow->walk('.');
     }
 }

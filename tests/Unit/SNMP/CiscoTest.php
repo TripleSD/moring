@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\SNMP;
 
-use Tests\TestCase;
 use App\Repositories\Snmp\ParseVendor;
+use Tests\TestCase;
 
 class CiscoTest extends TestCase
 {
@@ -17,7 +17,7 @@ class CiscoTest extends TestCase
     private function getMockSnmpWalk(): array
     {
         $array    = [];
-        $mockFile = fopen(__DIR__ . "/Mocks/Cisco/WS-C3560-8PC.src", "r");
+        $mockFile = fopen(__DIR__ . '/Mocks/Cisco/WS-C3560-8PC.src', 'r');
         while (! feof($mockFile)) {
             $line = fgets($mockFile);
             $line = explode('=', $line);

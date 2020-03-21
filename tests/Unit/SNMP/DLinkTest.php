@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\SNMP;
 
-use Tests\TestCase;
 use App\Repositories\Snmp\ParseVendor;
+use Tests\TestCase;
 
 class DLinkTest extends TestCase
 {
@@ -17,7 +17,7 @@ class DLinkTest extends TestCase
     private function getMockSnmpWalk(): array
     {
         $array    = [];
-        $mockFile = fopen(__DIR__ . "/Mocks/DLink/DGS-3000-10TC.src", "r");
+        $mockFile = fopen(__DIR__ . '/Mocks/DLink/DGS-3000-10TC.src', 'r');
         while (! feof($mockFile)) {
             $line = fgets($mockFile);
             $line = explode('=', $line);

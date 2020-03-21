@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\SNMP;
 
-use Tests\TestCase;
 use App\Repositories\Snmp\ParseVendor;
+use Tests\TestCase;
 
 class EltexTest extends TestCase
 {
@@ -17,7 +17,7 @@ class EltexTest extends TestCase
     private function getMockSnmpWalk(): array
     {
         $array    = [];
-        $mockFile = fopen(__DIR__ . "/Mocks/Eltex/MES2324B.src", "r");
+        $mockFile = fopen(__DIR__ . '/Mocks/Eltex/MES2324B.src', 'r');
         while (! feof($mockFile)) {
             $line = fgets($mockFile);
             $line = explode('=', $line);
