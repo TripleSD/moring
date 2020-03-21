@@ -7,12 +7,12 @@ use App\Repositories\Repository;
 class DLink extends Repository
 {
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      * @return string
      */
-    public function getModel($snmpFlow): string
+    public function getModel($snmpArray): string
     {
-        $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.7.1');
+        $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.7.1'];
         $string = str_replace('STRING: ', '', $string);
         $string = str_replace('"', '', $string);
 
@@ -20,21 +20,21 @@ class DLink extends Repository
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      * @return string
      */
-    public function getFirmware($snmpFlow): string
+    public function getFirmware($snmpArray): string
     {
         return (string) 'D-Link Linux';
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      * @return string
      */
-    public function getFirmwareVersion($snmpFlow): string
+    public function getFirmwareVersion($snmpArray): string
     {
-        $string = $snmpFlow->get('SNMPv2-SMI::mib-2.16.19.2.0');
+        $string = $snmpArray['SNMPv2-SMI::mib-2.16.19.2.0'];
         $string = str_replace('STRING: ', '', $string);
         $string = str_replace('"', '', $string);
 
@@ -42,19 +42,19 @@ class DLink extends Repository
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      */
-    public function getPacketsVersion($snmpFlow): void
+    public function getPacketsVersion($snmpArray): void
     {
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      * @return string
      */
-    public function getUptime($snmpFlow): string
+    public function getUptime($snmpArray): string
     {
-        $string = $snmpFlow->get('.1.3.6.1.2.1.1.3.0');
+        $string = $snmpArray['.1.3.6.1.2.1.1.3.0'];
         preg_match('/\((\d+)\)/', $string, $string);
         preg_match('/\d+/', $string[1], $string);
 
@@ -62,37 +62,37 @@ class DLink extends Repository
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      * @return string
      */
-    public function getContact($snmpFlow): string
+    public function getContact($snmpArray): string
     {
-        $string = $snmpFlow->get('SNMPv2-MIB::sysContact.0');
+        $string = $snmpArray['SNMPv2-MIB::sysContact.0'];
         $string = str_replace('STRING: ', '', $string);
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      * @return string
      */
-    public function getLocation($snmpFlow): string
+    public function getLocation($snmpArray): string
     {
-        $string = $snmpFlow->get('SNMPv2-MIB::sysLocation.0');
+        $string = $snmpArray['SNMPv2-MIB::sysLocation.0'];
         $string = str_replace('STRING: ', '', $string);
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      * @return string|null
      */
-    public function getSerialNumber($snmpFlow): ?string
+    public function getSerialNumber($snmpArray): ?string
     {
         try {
-            $string = $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.11.1');
+            $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.11.1'];
             $string = str_replace('STRING: ', '', $string);
             $string = str_replace('"', '', $string);
 
@@ -103,24 +103,24 @@ class DLink extends Repository
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      */
-    public function getHumanModel($snmpFlow): void
+    public function getHumanModel($snmpArray): void
     {
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      */
-    public function getLicenseLevel($snmpFlow): void
+    public function getLicenseLevel($snmpArray): void
     {
     }
 
     /**
-     * @param $snmpFlow
+     * @param $snmpArray
      * @return int
      */
-    public function getPlatformType($snmpFlow): int
+    public function getPlatformType($snmpArray): int
     {
         return (int) 0;
     }
