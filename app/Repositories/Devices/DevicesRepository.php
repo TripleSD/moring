@@ -154,7 +154,6 @@ class DevicesRepository extends Repository
 
         $device = $this->getVendorClass($vendorName);
 
-
         //Set vars
         $deviceData['hostname']      = $deviceDataConnection['hostname'];
         $deviceData['title']         = $deviceDataConnection['title'];
@@ -233,12 +232,14 @@ class DevicesRepository extends Repository
     private function getVendorName($snmpFlow)
     {
         $vendor = new ParseVendor();
+
         return $vendor->getName($snmpFlow);
     }
 
     private function getVendorClass($vendorName)
     {
         $class = 'App\Repositories\SNMP\Vendors\\' . $vendorName;
+
         return new $class();
     }
 }
