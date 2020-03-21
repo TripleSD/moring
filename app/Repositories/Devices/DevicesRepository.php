@@ -90,7 +90,7 @@ class DevicesRepository extends Repository
      * @param $deviceId
      * @return Builder|Builder[]|Collection|Model|null
      */
-    public function editDevice($deviceId)
+    public function edit($deviceId)
     {
         return Devices::with('model', 'vendor', 'firmware')->find($deviceId);
     }
@@ -99,7 +99,7 @@ class DevicesRepository extends Repository
      * @param $deviceId
      * @throws Exception
      */
-    public function destroyDevice($deviceId): void
+    public function destroy($deviceId): void
     {
         $device = Devices::with('vendor', 'model')->find($deviceId);
         $device->delete();
@@ -187,7 +187,7 @@ class DevicesRepository extends Repository
      * @param array $deviceData
      * @param null $deviceId
      */
-    public function storeDevice(array $deviceData, $deviceId = null): void
+    public function store(array $deviceData, $deviceId = null): void
     {
         $device = Devices::find($deviceId);
 
@@ -218,9 +218,9 @@ class DevicesRepository extends Repository
      * @param $deviceData
      * @param $deviceId
      */
-    public function updateDevice($deviceData, $deviceId): void
+    public function update($deviceData, $deviceId): void
     {
-        self::storeDevice($deviceData, $deviceId);
+        self::store($deviceData, $deviceId);
     }
 
     /**
@@ -228,7 +228,7 @@ class DevicesRepository extends Repository
      * @return string|string[]
      * @throws Exception
      */
-    public function getVendor($snmpFlow)
+    private function getVendor($snmpFlow)
     {
         $vendor = $this->snmpRepository->getVendor($snmpFlow);
 
