@@ -17,7 +17,7 @@ class MikrotikTest extends TestCase
     private function getMockSnmpWalk(): array
     {
         $array    = [];
-        $mockFile = fopen(__DIR__ . "/Mocks/Mikrotik/CHR.src", "r");
+        $mockFile = fopen(__DIR__ . '/Mocks/Mikrotik/CHR.src', "r");
         while (! feof($mockFile)) {
             $line = fgets($mockFile);
             $line = explode('=', $line);
