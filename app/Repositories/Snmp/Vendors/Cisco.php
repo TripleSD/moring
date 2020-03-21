@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Snmp\Vendors;
 
-use App\Repositories\Repository;
+use App\Repositories\Snmp\VendorInterface;
 
-class Cisco extends Repository
+class Cisco implements VendorInterface
 {
     /**
      * @param $snmpArray

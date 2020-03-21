@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Snmp\Vendors;
 
-use App\Repositories\Repository;
+use App\Repositories\Snmp\VendorInterface;
 
-class DLink extends Repository
+class DLink implements VendorInterface
 {
     /**
      * @param $snmpArray

@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Snmp\Vendors;
 
-use App\Repositories\Repository;
+use App\Repositories\Snmp\VendorInterface;
 
-class Mikrotik extends Repository
+class Mikrotik implements VendorInterface
 {
     /**
      * @param $snmpArray
@@ -70,6 +70,7 @@ class Mikrotik extends Repository
         if (isset($snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'])) {
             preg_match('/\((\d+)\)/', $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'], $string);
             preg_match('/\d+/', $string[1], $string);
+
             return (string) trim($string[0]);
         } else {
             return (string) null;
