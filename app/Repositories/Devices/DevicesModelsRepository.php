@@ -11,16 +11,36 @@ class DevicesModelsRepository extends Repository
      * @param string $modelTitle
      * @return int
      */
-    public function checkModel(string $modelTitle): int
+    public function getModelId(string $modelTitle): int
     {
-        $model = DevicesModels::where('title', $modelTitle)->first();
+        $model = $this->getModel($modelTitle);
 
-        if (empty($model)) {
-            $model        = new DevicesModels();
-            $model->title = $modelTitle;
-            $model->save();
+        if ($model === null) {
+            $model = $this->storeModel($modelTitle);
         }
 
         return $model->id;
+    }
+
+    /**
+     * @param string $modelTitle
+     * @return object|null
+     */
+    private function getModel(string $modelTitle): ?object
+    {
+        return DevicesModels::where('title', $modelTitle)->first();
+    }
+
+    /**
+     * @param string $modelTitle
+     * @return object|null
+     */
+    private function storeModel(string $modelTitle): ?object
+    {
+        $model        = new DevicesModels();
+        $model->title = $modelTitle;
+        $model->save();
+
+        return $model;
     }
 }
