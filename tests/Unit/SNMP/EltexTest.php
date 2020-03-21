@@ -17,7 +17,7 @@ class EltexTest extends TestCase
     private function getMockSnmpWalk(): array
     {
         $array    = [];
-        $mockFile = fopen(__DIR__ . '/Mocks/Eltex/MES2324B.src', "r");
+        $mockFile = fopen(__DIR__ . '/Mocks/Eltex/MES2324B.src', 'r');
         while (! feof($mockFile)) {
             $line = fgets($mockFile);
             $line = explode('=', $line);
