@@ -2,8 +2,8 @@
 
 namespace Tests\Unit\SNMP;
 
-use Tests\TestCase;
 use App\Repositories\Snmp\ParseVendor;
+use Tests\TestCase;
 
 class EmptyStringTest extends TestCase
 {
