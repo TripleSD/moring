@@ -61,7 +61,7 @@ class SnmpDevicesChecker extends Command
                 $deviceConnection['snmpPort']      = $device->snmp_port;
                 $deviceConnection['snmpVersion']   = $device->snmp_version;
                 $deviceData                        = $this->devicesRepository->getDeviceData($deviceConnection);
-                $this->devicesRepository->updateDevice($deviceData, $device->id);
+                $this->devicesRepository->update($deviceData, $device->id);
             } catch (\Exception $exception) {
                 if ($this->settingsController->getTelegramStatus() === 1) {
                     try {
