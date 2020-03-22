@@ -9,7 +9,7 @@ jobs:
       max-parallel: 4
       matrix:
         operating-system: [ubuntu-latest]
-        php-versions: [7.1, 7.2, 7.3, 7.4]
+        php-versions: [7.2, 7.3, 7.4]
     name: PHP ${{ matrix.php-versions }} Test on ${{ matrix.operating-system }}
     steps:
     - uses: actions/checkout@v1
@@ -24,7 +24,7 @@ jobs:
       run: php -v
 
     - name: Install requires
-      run: sudo apt-get install php7.3-intl
+      run: sudo apt-get install php${{ matrix.php-versions }}-intl
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"

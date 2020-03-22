@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Snmp\Vendors;
 
-use App\Repositories\Repository;
+use App\Repositories\Snmp\VendorInterface;
 
-class Mikrotik extends Repository
+class Mikrotik implements VendorInterface
 {
     /**
      * @param $snmpArray
@@ -12,11 +12,10 @@ class Mikrotik extends Repository
      */
     public function getModel($snmpArray): string
     {
-        if (isset($snmpArray['SNMPv2-MIB::sysDescr.0'])) {
-            return (string) str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
-        } else {
-            return (string) null;
-        }
+        $string = str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
+        $string = preg_replace('/\n/', '', $string);
+
+        return preg_replace('/ /', '', $string);
     }
 
     /**
@@ -25,7 +24,7 @@ class Mikrotik extends Repository
      */
     public function getFirmware($snmpArray): string
     {
-        $string = $snmpArray['SNMPv2-MIB::sysDescr.0'];
+        $string = str_replace('STRING: ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
         $string = explode(' ', $string);
 
         return (string) trim($string[1]);
@@ -67,13 +66,10 @@ class Mikrotik extends Repository
      */
     public function getUptime($snmpArray): string
     {
-        if (isset($snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'])) {
-            preg_match('/\((\d+)\)/', $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'], $string);
-            preg_match('/\d+/', $string[1], $string);
-            return (string) trim($string[0]);
-        } else {
-            return (string) null;
-        }
+        preg_match('/\((\d+)\)/', $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'], $string);
+        preg_match('/\d+/', $string[1], $string);
+
+        return (string) trim($string[0]);
     }
 
     /**
@@ -109,6 +105,7 @@ class Mikrotik extends Repository
         try {
             $string = $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.3.0'];
             $string = str_replace('STRING: ', '', $string);
+            $string = str_replace('"', '', $string);
 
             return trim($string);
         } catch (\Exception $e) {
@@ -122,15 +119,11 @@ class Mikrotik extends Repository
      */
     public function getHumanModel($snmpArray): ?string
     {
-        try {
-            $string = $snmpArray['SNMPv2-MIB::sysDescr.0'];
-            $string = str_replace('STRING: RouterOS ', '', $string);
-            $string = str_replace('"', '', $string);
+        $string = $snmpArray['SNMPv2-MIB::sysDescr.0'];
+        $string = str_replace('STRING: RouterOS ', '', $string);
+        $string = str_replace('"', '', $string);
 
-            return (string) trim($string);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return (string) trim($string);
     }
 
     /**

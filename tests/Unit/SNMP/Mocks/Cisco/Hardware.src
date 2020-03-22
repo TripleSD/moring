@@ -1,0 +1,9 @@
+SNMPv2-MIB::sysDescr.0 = STRING: Cisco IOS Software, C3560 Software (C3560-IPBASE-M), Version 12.2(35)SE5, RELEASE SOFTWARE (fc1)
+Copyright (c) 1986-2007 by Cisco Systems, Inc.
+Compiled Thu 19-Jul-07 18:15 by nachen
+DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (294309196) 34 days, 1:31:31.96
+SNMPv2-MIB::sysContact.0 = STRING: admin@mail.test
+SNMPv2-MIB::sysLocation.0 = STRING: DC Super
+SNMPv2-SMI::mib-2.47.1.1.1.1.11.1 = STRING: "FOC1217V38H"
+SNMPv2-SMI::mib-2.47.1.1.1.1.9.1001 = STRING: "12.2(35)SE5"
+SNMPv2-SMI::mib-2.47.1.1.1.1.13.1001 = STRING: "WS-C3560-8PC-S"
