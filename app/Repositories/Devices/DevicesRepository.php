@@ -238,7 +238,7 @@ class DevicesRepository extends Repository
 
     private function getVendorClass($vendorName)
     {
-        $class = 'App\Repositories\Devices\SNMP\Vendors\\' . $vendorName;
+        $class = 'App\Repositories\Snmp\Vendors\\' . $vendorName;
 
         return new $class();
     }
