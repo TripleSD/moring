@@ -15,6 +15,7 @@ class Mikrotik implements VendorInterface
         if (isset($snmpArray['SNMPv2-MIB::sysDescr.0'])) {
             $string = str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
             $string = preg_replace('/\n/', '', $string);
+
             return preg_replace('/ /', '', $string);
         } else {
             return (string) null;
