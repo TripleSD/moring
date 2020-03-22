@@ -3,8 +3,8 @@
 namespace Tests\Unit\SNMP;
 
 use App\Repositories\Snmp\ParseVendor;
-use Tests\TestCase;
 use App\Repositories\Snmp\Vendors\Eltex;
+use Tests\TestCase;
 
 class EltexTest extends TestCase
 {
