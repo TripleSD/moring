@@ -58,7 +58,7 @@ class Eltex implements VendorInterface
      */
     public function getUptime($snmpArray): string
     {
-        $string = $snmpArray['.1.3.6.1.2.1.1.3.0'];
+        $string = $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'];
         preg_match('/\((\d+)\)/', $string, $string);
         preg_match('/\d+/', $string[1], $string);
 
@@ -98,6 +98,7 @@ class Eltex implements VendorInterface
         try {
             $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.11.67108992'];
             $string = str_replace('STRING: ', '', $string);
+            $string = str_replace('"', '', $string);
 
             return (string) trim($string);
         } catch (\Exception $e) {
