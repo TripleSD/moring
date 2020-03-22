@@ -12,14 +12,10 @@ class Mikrotik implements VendorInterface
      */
     public function getModel($snmpArray): string
     {
-        if (isset($snmpArray['SNMPv2-MIB::sysDescr.0'])) {
-            $string = str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
-            $string = preg_replace('/\n/', '', $string);
+        $string = str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
+        $string = preg_replace('/\n/', '', $string);
 
-            return preg_replace('/ /', '', $string);
-        } else {
-            return (string) null;
-        }
+        return preg_replace('/ /', '', $string);
     }
 
     /**
@@ -70,14 +66,10 @@ class Mikrotik implements VendorInterface
      */
     public function getUptime($snmpArray): string
     {
-        if (isset($snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'])) {
-            preg_match('/\((\d+)\)/', $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'], $string);
-            preg_match('/\d+/', $string[1], $string);
+        preg_match('/\((\d+)\)/', $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'], $string);
+        preg_match('/\d+/', $string[1], $string);
 
-            return (string) trim($string[0]);
-        } else {
-            return (string) null;
-        }
+        return (string) trim($string[0]);
     }
 
     /**
@@ -127,15 +119,11 @@ class Mikrotik implements VendorInterface
      */
     public function getHumanModel($snmpArray): ?string
     {
-        try {
-            $string = $snmpArray['SNMPv2-MIB::sysDescr.0'];
-            $string = str_replace('STRING: RouterOS ', '', $string);
-            $string = str_replace('"', '', $string);
+        $string = $snmpArray['SNMPv2-MIB::sysDescr.0'];
+        $string = str_replace('STRING: RouterOS ', '', $string);
+        $string = str_replace('"', '', $string);
 
-            return (string) trim($string);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return (string) trim($string);
     }
 
     /**

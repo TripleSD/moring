@@ -34,15 +34,11 @@ class Eltex implements VendorInterface
      */
     public function getFirmwareVersion($snmpArray): ?string
     {
-        try {
-            $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.10.67108992'];
-            $string = str_replace('STRING: ', '', $string);
-            $string = str_replace('"', '', $string);
+        $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.10.67108992'];
+        $string = str_replace('STRING: ', '', $string);
+        $string = str_replace('"', '', $string);
 
-            return (string) trim($string);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return (string) trim($string);
     }
 
     /**
@@ -95,15 +91,11 @@ class Eltex implements VendorInterface
      */
     public function getSerialNumber($snmpArray): ?string
     {
-        try {
-            $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.11.67108992'];
-            $string = str_replace('STRING: ', '', $string);
-            $string = str_replace('"', '', $string);
+        $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.11.67108992'];
+        $string = str_replace('STRING: ', '', $string);
+        $string = str_replace('"', '', $string);
 
-            return (string) trim($string);
-        } catch (\Exception $e) {
-            return null;
-        }
+        return (string) trim($string);
     }
 
     /**
