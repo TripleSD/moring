@@ -28,7 +28,7 @@ class Mikrotik implements VendorInterface
      */
     public function getFirmware($snmpArray): string
     {
-        $string = str_replace('STRING: ', '',$snmpArray['SNMPv2-MIB::sysDescr.0']);
+        $string = str_replace('STRING: ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
         $string = explode(' ', $string);
 
         return (string) trim($string[1]);
