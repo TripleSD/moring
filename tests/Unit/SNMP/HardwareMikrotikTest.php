@@ -3,8 +3,8 @@
 namespace Tests\Unit\SNMP;
 
 use App\Repositories\Snmp\ParseVendor;
-use Tests\TestCase;
 use App\Repositories\Snmp\Vendors\Mikrotik;
+use Tests\TestCase;
 
 class HardwareMikrotikTest extends TestCase
 {
