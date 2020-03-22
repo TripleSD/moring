@@ -54,7 +54,7 @@ class DLink implements VendorInterface
      */
     public function getUptime($snmpArray): string
     {
-        $string = $snmpArray['.1.3.6.1.2.1.1.3.0'];
+        $string = $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'];
         preg_match('/\((\d+)\)/', $string, $string);
         preg_match('/\d+/', $string[1], $string);
 
