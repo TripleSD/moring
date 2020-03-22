@@ -13,7 +13,9 @@ class Mikrotik implements VendorInterface
     public function getModel($snmpArray): string
     {
         if (isset($snmpArray['SNMPv2-MIB::sysDescr.0'])) {
-            return (string) str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
+            $string = str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
+            $string = preg_replace('/\n/', '', $string);
+            return preg_replace('/ /', '', $string);
         } else {
             return (string) null;
         }
@@ -25,7 +27,7 @@ class Mikrotik implements VendorInterface
      */
     public function getFirmware($snmpArray): string
     {
-        $string = $snmpArray['SNMPv2-MIB::sysDescr.0'];
+        $string = str_replace('STRING: ', '',$snmpArray['SNMPv2-MIB::sysDescr.0']);
         $string = explode(' ', $string);
 
         return (string) trim($string[1]);
@@ -110,6 +112,7 @@ class Mikrotik implements VendorInterface
         try {
             $string = $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.3.0'];
             $string = str_replace('STRING: ', '', $string);
+            $string = str_replace('"', '', $string);
 
             return trim($string);
         } catch (\Exception $e) {
