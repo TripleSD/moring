@@ -24,7 +24,7 @@ jobs:
       run: php -v
 
     - name: Install requires
-      run: sudo apt-get install php7.3-intl
+      run: sudo apt-get install php${{ matrix.php-versions }}-intl
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
