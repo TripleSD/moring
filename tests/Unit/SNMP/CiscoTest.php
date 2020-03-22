@@ -3,8 +3,8 @@
 namespace Tests\Unit\SNMP;
 
 use App\Repositories\Snmp\ParseVendor;
-use Tests\TestCase;
 use App\Repositories\Snmp\Vendors\Cisco;
+use Tests\TestCase;
 
 class CiscoTest extends TestCase
 {
