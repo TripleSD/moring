@@ -95,7 +95,7 @@ class Cisco implements VendorInterface
     public function getSerialNumber($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
-        $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.47.1.1.1.1.11.1'));
+        $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.47.1.1.1.1.11.1001'));
         $string = str_replace('"', '', $string);
 
         return (string) trim($string);
