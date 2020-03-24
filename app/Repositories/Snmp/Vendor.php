@@ -16,7 +16,7 @@ class Vendor
             }
 
             if (preg_match('/[D][EG][S]/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
-                return 'D-Link';
+                return 'DLink';
             }
 
             if (preg_match('/MES/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
