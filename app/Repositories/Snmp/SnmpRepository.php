@@ -7,11 +7,13 @@ use SNMP;
 
 class SnmpRepository extends Repository
 {
-    public function getSnmpFlow($host, $community)
+    public function startSession($varsConnection)
     {
-        // TODO восстановить try/catch
-        $snmpFlow = new SNMP(SNMP::VERSION_2c, $host, $community);
+        return new SNMP(SNMP::VERSION_2c, $varsConnection['hostname'], $varsConnection['snmpCommunity']);
+    }
 
-        return $snmpFlow->walk('.');
+    public function name($nameArray)
+    {
+        return $nameArray['1.3.6.1.2.1.1.1.0'];
     }
 }
