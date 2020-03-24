@@ -2,32 +2,34 @@
 
 namespace App\Repositories\Snmp\Vendors;
 
+use SNMP;
 use App\Repositories\Snmp\VendorInterface;
 
 class Mikrotik implements VendorInterface
 {
-    /**
-     * @param $snmpArray
-     * @return string
-     */
-    public function getModel($snmpArray): string
+    public function getModel($snmpFlow): string
     {
-        $string = str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
-        $string = preg_replace('/\n/', '', $string);
+        /* @var SNMP $snmpFlow */
+        $snmpArray = $snmpFlow->walk('SNMPv2-MIB::sysDescr.0');
+        $string    = $snmpArray['SNMPv2-MIB::sysDescr.0'];
+        $string    = str_replace('STRING: RouterOS ', '', $string);
 
-        return preg_replace('/ /', '', $string);
+        return $string;
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getFirmware($snmpArray): string
+    public function getFirmware($snmpFlow): string
     {
-        $string = str_replace('STRING: ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
-        $string = explode(' ', $string);
+        /* @var SNMP $snmpFlow */
+        $snmpArray = $snmpFlow->walk('1.3.6.1.2.1.1.1.0');
+        $string    = $snmpArray['SNMPv2-MIB::sysDescr.0'];
+        $string    = str_replace('STRING: ', '', $string);
+        $string    = explode(' ', $string);
 
-        return (string) trim($string[1]);
+        return (string) trim($string[0]);
     }
 
     /**
@@ -37,6 +39,8 @@ class Mikrotik implements VendorInterface
     public function getFirmwareVersion($snmpArray): ?string
     {
         try {
+            /* @var SNMP $snmpFlow */
+            $snmpArray = $snmpFlow->walk('1.3.6.1.4.1.14988.1.1.7.4.0');
             $string = $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.4.0'];
             $string = str_replace('STRING: ', '', $string);
             $string = str_replace('"', '', $string);
@@ -48,50 +52,54 @@ class Mikrotik implements VendorInterface
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getPacketsVersion($snmpArray): string
+    public function getPacketsVersion($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.4.4.0'];
-        $string = str_replace('STRING: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $snmpArray = $snmpFlow->walk('1.3.6.1.4.1.14988.1.1.4.4.0');
+        $string = str_replace('STRING: ', '', $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.4.4.0']);
         $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getUptime($snmpArray): string
+    public function getUptime($snmpFlow): string
     {
-        preg_match('/\((\d+)\)/', $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'], $string);
-        preg_match('/\d+/', $string[1], $string);
+        /* @var SNMP $snmpFlow */
+        $snmpArray = $snmpFlow->walk('1.3.6.1.2.1.1.3.0');
+        preg_match('/\d+/', $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'], $string);
 
         return (string) trim($string[0]);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getContact($snmpArray): string
+    public function getContact($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-MIB::sysContact.0'];
-        $string = str_replace('STRING: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $snmpArray = $snmpFlow->walk('1.3.6.1.2.1.1.4.0');
+        $string    = str_replace('STRING: ', '', $snmpArray['SNMPv2-MIB::sysContact.0']);
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getLocation($snmpArray): string
+    public function getLocation($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-MIB::sysLocation.0'];
-        $string = str_replace('STRING: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $snmpArray = $snmpFlow->walk('1.3.6.1.2.1.1.6.0');
+        $string    = str_replace('STRING: ', '', $snmpArray['SNMPv2-MIB::sysLocation.0']);
 
         return (string) trim($string);
     }
@@ -103,9 +111,10 @@ class Mikrotik implements VendorInterface
     public function getSerialNumber($snmpArray): ?string
     {
         try {
-            $string = $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.3.0'];
-            $string = str_replace('STRING: ', '', $string);
-            $string = str_replace('"', '', $string);
+            /* @var SNMP $snmpFlow */
+            $snmpArray = $snmpFlow->walk('1.3.6.1.4.1.14988.1.1.7.3.0');
+            $string    = str_replace('STRING: ', '', $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.3.0']);
+            $string    = str_replace('"', '', $string);
 
             return trim($string);
         } catch (\Exception $e) {
@@ -114,26 +123,28 @@ class Mikrotik implements VendorInterface
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string|null
      */
-    public function getHumanModel($snmpArray): ?string
+    public function getHumanModel($snmpFlow): ?string
     {
-        $string = $snmpArray['SNMPv2-MIB::sysDescr.0'];
-        $string = str_replace('STRING: RouterOS ', '', $string);
-        $string = str_replace('"', '', $string);
+        /* @var SNMP $snmpFlow */
+        $snmpArray = $snmpFlow->walk('1.3.6.1.2.1.1.1.0');
+        $string    = str_replace('STRING: RouterOS ', '', $snmpArray['SNMPv2-MIB::sysDescr.0']);
+        $string    = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getLicenseLevel($snmpArray): string
+    public function getLicenseLevel($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.4.3.0'];
-        $string = str_replace('INTEGER: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $snmpArray = $snmpFlow->walk('1.3.6.1.4.1.14988.1.1.4.3.0');
+        $string    = str_replace('INTEGER: ', '', $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.4.3.0']);
 
         return (string) trim($string);
     }
