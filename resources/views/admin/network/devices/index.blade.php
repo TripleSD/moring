@@ -179,10 +179,6 @@
                                                     @else
                                                         <i class="fas fa-cloud text-indigo"></i>
                                                     @endif
-
-                                                    @empty(!$device->human_model)
-                                                        ({{$device->human_model}})
-                                                    @endif
                                                 </div>
                                             </td>
                                             <td>
