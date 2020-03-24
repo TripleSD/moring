@@ -33,17 +33,17 @@ class Mikrotik implements VendorInterface
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string|null
      */
-    public function getFirmwareVersion($snmpArray): ?string
+    public function getFirmwareVersion($snmpFlow): ?string
     {
         try {
             /* @var SNMP $snmpFlow */
             $snmpArray = $snmpFlow->walk('1.3.6.1.4.1.14988.1.1.7.4.0');
-            $string = $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.4.0'];
-            $string = str_replace('STRING: ', '', $string);
-            $string = str_replace('"', '', $string);
+            $string    = $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.4.0'];
+            $string    = str_replace('STRING: ', '', $string);
+            $string    = str_replace('"', '', $string);
 
             return (string) trim($string);
         } catch (\Exception $e) {
@@ -59,8 +59,8 @@ class Mikrotik implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $snmpArray = $snmpFlow->walk('1.3.6.1.4.1.14988.1.1.4.4.0');
-        $string = str_replace('STRING: ', '', $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.4.4.0']);
-        $string = str_replace('"', '', $string);
+        $string    = str_replace('STRING: ', '', $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.4.4.0']);
+        $string    = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
@@ -105,16 +105,16 @@ class Mikrotik implements VendorInterface
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string|null
      */
-    public function getSerialNumber($snmpArray): ?string
+    public function getSerialNumber($snmpFlow): ?string
     {
         try {
             /* @var SNMP $snmpFlow */
             $snmpArray = $snmpFlow->walk('1.3.6.1.4.1.14988.1.1.7.3.0');
-            $string    = str_replace('STRING: ', '', $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.3.0']);
-            $string    = str_replace('"', '', $string);
+            $string = str_replace('STRING: ', '', $snmpArray['SNMPv2-SMI::enterprises.14988.1.1.7.3.0']);
+            $string = str_replace('"', '', $string);
 
             return trim($string);
         } catch (\Exception $e) {
