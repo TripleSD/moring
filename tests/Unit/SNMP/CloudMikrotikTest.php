@@ -37,14 +37,14 @@ class CloudMikrotikTest extends TestCase
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
         $vendor = new Mikrotik();
-        $this->assertEquals('6.46.4', $vendor->getPacketsVersion($snmpConnection));
+        $this->assertEquals(null, $vendor->getPacketsVersion($snmpConnection));
     }
 
     public function testGetUptime(): void
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor         = new Mikrotik();
+        $vendor = new Mikrotik();
         $this->assertEquals('199892900', $vendor->getUptime($snmpConnection));
     }
 
