@@ -2,113 +2,105 @@
 
 namespace Tests\Unit\SNMP;
 
-use App\Repositories\Snmp\ParseVendor;
 use App\Repositories\Snmp\Vendors\Cisco;
 use Tests\TestCase;
+use App\Repositories\Snmp\SnmpRepository;
 
 class CiscoTest extends TestCase
 {
-    public function testGetVendor(): void
-    {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new ParseVendor();
-        $this->assertEquals('Cisco', $vendor->getName($snmpWalk));
-    }
-
     public function testGetModel(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals('WS-C3560-8PC-S', $vendor->getModel($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals('WS-C3560-8PC-S', $vendor->getModel($snmpConnection));
     }
 
     public function testGetFirmware(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals('Cisco IOS Software', $vendor->getFirmware($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals('Cisco IOS Software', $vendor->getFirmware($snmpConnection));
     }
 
     public function testGetFirmwareVersion(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals('12.2(35)SE5', $vendor->getFirmwareVersion($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals('12.2(35)SE5', $vendor->getFirmwareVersion($snmpConnection));
     }
 
     public function testGetPacketsVersion(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals(null, $vendor->getPacketsVersion($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals(null, $vendor->getPacketsVersion($snmpConnection));
     }
 
     public function testGetUptime(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals('294309196', $vendor->getUptime($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals('294309196', $vendor->getUptime($snmpConnection));
     }
 
     public function testGetContact(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals('admin@mail.test', $vendor->getContact($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals('admin@mail.test', $vendor->getContact($snmpConnection));
     }
 
     public function testGetLocation(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals('DC Super', $vendor->getLocation($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals('DC Super', $vendor->getLocation($snmpConnection));
     }
 
     public function testGetSerialNumber(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals('FOC1217V38H', $vendor->getSerialNumber($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals('FOC1217V38H', $vendor->getSerialNumber($snmpConnection));
     }
 
     public function testGetHumanModel(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals(null, $vendor->getHumanModel($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals(null, $vendor->getHumanModel($snmpConnection));
     }
 
     public function testGetLicenseLevel(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $this->assertEquals(null, $vendor->getLicenseLevel($snmpWalk));
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $this->assertEquals(null, $vendor->getLicenseLevel($snmpConnection));
     }
 
     public function testGetPlatformType(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new Cisco();
-        $model    = $vendor->getModel($snmpWalk);
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
+        $vendor = new Cisco();
+        $model  = $vendor->getModel($snmpConnection);
         $this->assertEquals(0, $vendor->getPlatformType($model));
     }
 
-    private function getMockSnmpWalk(): array
+    private function setVarsConnection()
     {
-        $array    = [];
-        $mockFile = fopen(__DIR__ . '/Mocks/Cisco/Hardware.src', 'r');
-        while (! feof($mockFile)) {
-            $line = fgets($mockFile);
-            $line = explode('=', $line);
-
-            if (empty($line[1])) {
-                $array[$line[0]] = '';
-            } else {
-                $array[preg_replace('/ /', '', $line[0])] = $line[1];
-            }
-        }
-        fclose($mockFile);
-
+        $array['hostname']      = '127.0.0.1:9002';
+        $array['snmpCommunity'] = 'public';
         return $array;
     }
 }
