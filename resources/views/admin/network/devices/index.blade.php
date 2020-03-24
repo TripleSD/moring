@@ -65,7 +65,7 @@
                                                         <div>
                                                             @if($device->vendor->title == 'Cisco')
                                                                 <img src="/img/vendors/cisco.png">
-                                                            @elseif($device->vendor->title == 'MikroTik')
+                                                            @elseif($device->vendor->title == 'Mikrotik')
                                                                 <img src="/img/vendors/mikrotik.png">
                                                             @elseif($device->vendor->title == 'DLink')
                                                                 <img src="/img/vendors/d-link.png">
