@@ -63,10 +63,10 @@ class Cisco implements VendorInterface
     public function getUptime($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
-        preg_match('/\d+/', $snmpFlow->get('1.3.6.1.2.1.1.3.0'), $string);
-        $string = str_replace('"', '', $string);
+        preg_match('/\d+/', $snmpFlow->get('1.3.6.1.2.1.1.3.0'), $match);
+        $string = str_replace('"', '', $match[0]);
 
-        return (string) trim($string[0]);
+        return (string) trim($string);
     }
 
     /**

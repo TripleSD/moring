@@ -11,6 +11,7 @@ class Mikrotik implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $string = str_replace('STRING: RouterOS ', '', $snmpFlow->get('1.3.6.1.2.1.1.1.0'));
+        $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
@@ -66,9 +67,10 @@ class Mikrotik implements VendorInterface
     public function getUptime($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
-        preg_match('/\d+/', $snmpFlow->get('1.3.6.1.2.1.1.3.0'), $string);
+        preg_match('/\d+/', $snmpFlow->get('1.3.6.1.2.1.1.3.0'), $match);
+        $string = str_replace('"', '', $match[0]);
 
-        return (string) trim($string[0]);
+        return (string) trim($string);
     }
 
     /**
@@ -79,6 +81,7 @@ class Mikrotik implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.4.0'));
+        $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
@@ -91,6 +94,7 @@ class Mikrotik implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.6.0'));
+        $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
@@ -134,6 +138,7 @@ class Mikrotik implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $string = str_replace('INTEGER: ', '', $snmpFlow->get('1.3.6.1.4.1.14988.1.1.4.3.0'));
+        $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
