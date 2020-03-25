@@ -29,8 +29,11 @@ jobs:
     - name: Check PHP version
       run: php -v
 
-    - name: Install requires
+    - name: Install php-intl
       run: sudo apt-get install php${{ matrix.php-versions }}-intl
+
+    - name: Install php-snmp
+      run: sudo apt-get install php${{ matrix.php-versions }}-snmp
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
