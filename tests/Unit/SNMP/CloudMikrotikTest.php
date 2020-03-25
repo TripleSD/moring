@@ -72,14 +72,6 @@ class CloudMikrotikTest extends TestCase
         $this->assertEquals(null, $vendor->getSerialNumber($snmpConnection));
     }
 
-    public function testGetHumanModel(): void
-    {
-        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
-
-        $vendor = new Mikrotik();
-        $this->assertEquals('CHR', $vendor->getHumanModel($snmpConnection));
-    }
-
     public function testGetLicenseLevel(): void
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
