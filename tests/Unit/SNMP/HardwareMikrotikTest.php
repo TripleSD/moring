@@ -101,6 +101,7 @@ class HardwareMikrotikTest extends TestCase
     {
         $array['hostname']      = '127.0.0.1:9005';
         $array['snmpCommunity'] = 'public';
+
         return $array;
     }
 }

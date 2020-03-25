@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\SNMP;
 
+use App\Repositories\Snmp\SnmpRepository;
 use App\Repositories\Snmp\Vendors\DLink;
 use Tests\TestCase;
-use App\Repositories\Snmp\SnmpRepository;
 
 class DLinkTest extends TestCase
 {
@@ -101,6 +101,7 @@ class DLinkTest extends TestCase
     {
         $array['hostname']      = '127.0.0.1:9003';
         $array['snmpCommunity'] = 'public';
+
         return $array;
     }
 }

@@ -4,10 +4,10 @@ namespace App\Repositories\Devices;
 
 use App\Models\Devices;
 use App\Repositories\Repository;
-use App\Repositories\Snmp\Vendor;
 use App\Repositories\Snmp\SnmpRepository;
-use Exception;
+use App\Repositories\Snmp\Vendor;
 use App\Repositories\Snmp\VendorInterface;
+use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;

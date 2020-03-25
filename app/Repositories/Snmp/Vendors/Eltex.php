@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Snmp\Vendors;
 
-use SNMP;
 use App\Repositories\Snmp\VendorInterface;
+use SNMP;
 
 class Eltex implements VendorInterface
 {
