@@ -27,9 +27,9 @@ python utils/snmp-server/snmp-server.py -p 9005 -c utils/snmp-server/configs/Har
 PID5=$!
 
 echo 'Starting PHPunit'
-#./vendor/bin/phpunit  --coverage-html report_coverage
+#./vendor/bin/phpunit --coverage-html report_coverage
 ./vendor/bin/phpunit
-#./vendor/bin/phpunit --filter getSerialNumber tests/Unit/SNMP/EltexTest.php
+#./vendor/bin/phpunit --filter testGetSerialNumber tests/Unit/SNMP/CloudMikrotikEmptyOIDTest.php
 
 echo 'Killing SNMP servers'
 kill $PID1 $PID2 $PID3 $PID4 $PID5
