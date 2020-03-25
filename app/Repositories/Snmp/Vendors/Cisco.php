@@ -110,9 +110,12 @@ class Cisco implements VendorInterface
 
     /**
      * @param $snmpFlow
+     * @return string
      */
-    public function getLicenseLevel($snmpFlow): void
+    public function getLicenseLevel($snmpFlow): string
     {
+        /* @var SNMP $snmpFlow */
+        return (string) null;
     }
 
     /**

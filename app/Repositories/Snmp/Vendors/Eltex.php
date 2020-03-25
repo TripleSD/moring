@@ -27,7 +27,6 @@ class Eltex implements VendorInterface
     public function getFirmware($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
-
         return (string) 'Eltex Linux';
     }
 
@@ -46,10 +45,12 @@ class Eltex implements VendorInterface
 
     /**
      * @param $snmpFlow
+     * @return string
      */
-    public function getPacketsVersion($snmpFlow): void
+    public function getPacketsVersion($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
+        return (string) null;
     }
 
     /**
@@ -105,10 +106,12 @@ class Eltex implements VendorInterface
 
     /**
      * @param $snmpFlow
+     * @return string
      */
-    public function getLicenseLevel($snmpFlow): void
+    public function getLicenseLevel($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
+        return (string) null;
     }
 
     /**
