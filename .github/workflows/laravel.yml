@@ -51,19 +51,19 @@ jobs:
       run: php artisan migrate
 
     - name: Run SNMP server (Mikrotik cloud)
-      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9001 -c utils/snmp-server/configs/CloudMikrotik.py &
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9001 -c /home/runner/work/moring/moring/utils/snmp-server/configs/CloudMikrotik.py &
 
     - name: Run Cisco SNMP server (Cisco)
-      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9002 -c utils/snmp-server/configs/Cisco.py &
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9002 -c /home/runner/work/moring/moring/utils/snmp-server/configs/Cisco.py &
 
     - name: Run SNMP server (DLink)
-      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9003 -c utils/snmp-server/configs/Dlink.py &
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9003 -c /home/runner/work/moring/moring/utils/snmp-server/configs/Dlink.py &
 
     - name: Run SNMP server (Eltex)
-      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9004 -c utils/snmp-server/configs/Eltex.py &
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9004 -c /home/runner/work/moring/moring/utils/snmp-server/configs/Eltex.py &
 
     - name: Run SNMP server (Mikrotik hardware)
-      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9005 -c utils/snmp-server/configs/HardwareMikrotik.py &
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9005 -c /home/runner/work/moring/moring/utils/snmp-server/configs/HardwareMikrotik.py &
 
     - name: Execute tests (Unit and Feature tests) via PHPUnit
       run: vendor/bin/phpunit
