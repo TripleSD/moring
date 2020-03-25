@@ -54,10 +54,10 @@ jobs:
       run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9005 -c /home/runner/work/moring/moring/utils/snmp-server/configs/HardwareMikrotik.py &
 
     - name: Check SNMP server 1
-      run: snmpwalk -v2c -c public 127.0.0.1:9001 SNMPv2-MIB::sysDescr.0
+      run: snmpwalk -v2c -c public 127.0.0.1:9001
 
     - name: Check SNMP server 5
-      run: snmpwalk -v2c -c public 127.0.0.1:9005 SNMPv2-MIB::sysDescr.0
+      run: snmpwalk -v2c -c public 127.0.0.1:9005
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"
