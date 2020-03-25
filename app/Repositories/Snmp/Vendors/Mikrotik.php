@@ -120,19 +120,6 @@ class Mikrotik implements VendorInterface
 
     /**
      * @param $snmpFlow
-     * @return string|null
-     */
-    public function getHumanModel($snmpFlow): string
-    {
-        /* @var SNMP $snmpFlow */
-        $string = str_replace('STRING: RouterOS ', '', $snmpFlow->get('1.3.6.1.2.1.1.1.0'));
-        $string = str_replace('"', '', $string);
-
-        return (string) trim($string);
-    }
-
-    /**
-     * @param $snmpFlow
      * @return string
      */
     public function getLicenseLevel($snmpFlow): string

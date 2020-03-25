@@ -106,14 +106,6 @@ class Eltex implements VendorInterface
     /**
      * @param $snmpFlow
      */
-    public function getHumanModel($snmpFlow): void
-    {
-        /* @var SNMP $snmpFlow */
-    }
-
-    /**
-     * @param $snmpFlow
-     */
     public function getLicenseLevel($snmpFlow): void
     {
         /* @var SNMP $snmpFlow */

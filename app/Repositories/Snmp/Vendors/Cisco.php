@@ -111,13 +111,6 @@ class Cisco implements VendorInterface
     /**
      * @param $snmpFlow
      */
-    public function getHumanModel($snmpFlow): void
-    {
-    }
-
-    /**
-     * @param $snmpFlow
-     */
     public function getLicenseLevel($snmpFlow): void
     {
     }
