@@ -41,8 +41,9 @@ class Mikrotik implements VendorInterface
 
             return (string) trim($string);
         } catch (\Exception $e) {
-            return null;
         }
+
+        return null;
     }
 
     /**
@@ -107,8 +108,9 @@ class Mikrotik implements VendorInterface
 
             return trim($string);
         } catch (\Exception $e) {
-            return null;
         }
+
+        return null;
     }
 
     /**
