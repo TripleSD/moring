@@ -17,6 +17,12 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
 
+    - name: PWD
+      run: pwd
+
+    - name: LS
+      run: ls -lah
+
     - name: SQLite Install
       run: sudo apt-get update && sudo apt-get install -y sqlite3
 
@@ -49,12 +55,6 @@ jobs:
 
     - name: Apply migrations
       run: php artisan migrate
-
-    - name: PWD
-      run: pwd
-
-    - name: LS
-      run: ls -lah
 
     - name: Run SNMP server (Mikrotik cloud)
       run: python utils/snmp-server/snmp-server.py -p 9001 -c utils/snmp-server/configs/CloudMikrotik.py &
