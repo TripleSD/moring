@@ -174,7 +174,6 @@ class DevicesRepository extends Repository
         $deviceData['uptimeDevice']    = $device->getUptime($snmpFlow);
         $deviceData['packetsVersion']  = $device->getPacketsVersion($snmpFlow);
         $deviceData['serialNumber']    = $device->getSerialNumber($snmpFlow);
-        $deviceData['humanModel']      = $device->getHumanModel($snmpFlow);
         $deviceData['licenseLevel']    = $device->getLicenseLevel($snmpFlow);
 
         $deviceData['firmwareId'] = $this->devicesFirmwareRepository->getFirmwareId(
@@ -207,7 +206,6 @@ class DevicesRepository extends Repository
         $device->uptime          = $deviceData['uptimeDevice'];
         $device->contact         = $deviceData['contact'];
         $device->location        = $deviceData['location'];
-        $device->human_model     = $deviceData['humanModel'];
         $device->license_level   = $deviceData['licenseLevel'];
         $device->serial_number   = $deviceData['serialNumber'];
         $device->packets_version = $deviceData['packetsVersion'];
