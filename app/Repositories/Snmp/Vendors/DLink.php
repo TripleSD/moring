@@ -45,9 +45,12 @@ class DLink implements VendorInterface
 
     /**
      * @param $snmpFlow
+     * @return string
      */
-    public function getPacketsVersion($snmpFlow): void
+    public function getPacketsVersion($snmpFlow): string
     {
+        /* @var SNMP $snmpFlow */
+        return (string) null;
     }
 
     /**
@@ -70,6 +73,7 @@ class DLink implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.4.0'));
+        $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
@@ -82,6 +86,7 @@ class DLink implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.6.0'));
+        $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
@@ -101,16 +106,12 @@ class DLink implements VendorInterface
 
     /**
      * @param $snmpFlow
+     * @return string
      */
-    public function getHumanModel($snmpFlow): void
+    public function getLicenseLevel($snmpFlow): string
     {
-    }
-
-    /**
-     * @param $snmpFlow
-     */
-    public function getLicenseLevel($snmpFlow): void
-    {
+        /* @var SNMP $snmpFlow */
+        return (string) null;
     }
 
     /**

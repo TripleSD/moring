@@ -72,14 +72,6 @@ class HardwareMikrotikTest extends TestCase
         $this->assertEquals('45E4028BDAC3', $vendor->getSerialNumber($snmpConnection));
     }
 
-    public function testGetHumanModel(): void
-    {
-        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
-
-        $vendor = new Mikrotik();
-        $this->assertEquals('RB751U-2HnD', $vendor->getHumanModel($snmpConnection));
-    }
-
     public function testGetLicenseLevel(): void
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());

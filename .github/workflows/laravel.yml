@@ -56,6 +56,15 @@ jobs:
     - name: Check SNMP server 1
       run: snmpwalk -v2c -c public 127.0.0.1:9001
 
+    - name: Check SNMP server 2
+      run: snmpwalk -v2c -c public 127.0.0.1:9002
+
+    - name: Check SNMP server 3
+      run: snmpwalk -v2c -c public 127.0.0.1:9003
+
+    - name: Check SNMP server 4
+      run: snmpwalk -v2c -c public 127.0.0.1:9004
+
     - name: Check SNMP server 5
       run: snmpwalk -v2c -c public 127.0.0.1:9005
 
