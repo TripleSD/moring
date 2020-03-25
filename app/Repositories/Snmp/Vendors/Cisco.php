@@ -39,7 +39,7 @@ class Cisco implements VendorInterface
     public function getFirmwareVersion($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
-        $string = str_replace('STRING: ', '', $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.9.1001'));
+        $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.47.1.1.1.1.9.1001'));
         $string = str_replace('"', '', $string);
 
         return (string) trim($string);
@@ -48,8 +48,10 @@ class Cisco implements VendorInterface
     /**
      * @param $snmpFlow
      */
-    public function getPacketsVersion($snmpFlow): void
+    public function getPacketsVersion($snmpFlow): string
     {
+        /* @var SNMP $snmpFlow */
+        return null;
     }
 
     /**

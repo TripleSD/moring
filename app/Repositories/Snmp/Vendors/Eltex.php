@@ -14,7 +14,7 @@ class Eltex implements VendorInterface
     public function getModel($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
-        $string = str_replace('STRING: ', '', $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.13.67108992'));
+        $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.47.1.1.1.1.13.67108992'));
         $string = str_replace('"', '', $string);
 
         return (string) trim($string);
