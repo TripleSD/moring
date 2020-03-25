@@ -26,6 +26,9 @@ jobs:
     - name: SQLite Install
       run: sudo apt-get update && sudo apt-get install -y sqlite3
 
+    - name: Install snmp* packets
+      run: sudo apt-get install snmp
+
     - name: Check PHP version
       run: php -v
 
