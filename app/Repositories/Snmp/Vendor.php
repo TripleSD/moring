@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Snmp;
 
-class ParseVendor
+class Vendor
 {
-    public function getName(array $snmpFlow): string
+    public function parseName(array $snmpFlow): string
     {
         if (isset($snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
             if (preg_match('/RouterOS/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
@@ -16,7 +16,7 @@ class ParseVendor
             }
 
             if (preg_match('/[D][EG][S]/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
-                return 'D-Link';
+                return 'DLink';
             }
 
             if (preg_match('/MES/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
@@ -25,5 +25,12 @@ class ParseVendor
         }
 
         return (string) null;
+    }
+
+    public function getVendorClass($vendorName)
+    {
+        $classPath = '\App\Repositories\Snmp\Vendors\\' . $vendorName;
+
+        return new $classPath();
     }
 }

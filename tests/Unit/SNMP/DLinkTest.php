@@ -2,112 +2,97 @@
 
 namespace Tests\Unit\SNMP;
 
-use App\Repositories\Snmp\ParseVendor;
+use App\Repositories\Snmp\SnmpRepository;
 use App\Repositories\Snmp\Vendors\DLink;
 use Tests\TestCase;
 
 class DLinkTest extends TestCase
 {
-    public function testGetVendor(): void
-    {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new ParseVendor();
-        $this->assertEquals('D-Link', $vendor->getName($snmpWalk));
-    }
-
     public function testGetModel(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $this->assertEquals('DGS-3000-10TC', $vendor->getModel($snmpWalk));
+        $this->assertEquals('DGS-3000-10TC', $vendor->getModel($snmpConnection));
     }
 
     public function testGetFirmware(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $this->assertEquals('D-Link Linux', $vendor->getFirmware($snmpWalk));
+        $this->assertEquals('D-Link Linux', $vendor->getFirmware($snmpConnection));
     }
 
     public function testGetFirmwareVersion(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $this->assertEquals('1.16.B002', $vendor->getFirmwareVersion($snmpWalk));
+        $this->assertEquals('1.16.B002', $vendor->getFirmwareVersion($snmpConnection));
     }
 
     public function testGetPacketsVersion(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $this->assertEquals(null, $vendor->getPacketsVersion($snmpWalk));
+        $this->assertEquals(null, $vendor->getPacketsVersion($snmpConnection));
     }
 
     public function testGetUptime(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $this->assertEquals('2520849600', $vendor->getUptime($snmpWalk));
+        $this->assertEquals('2520849600', $vendor->getUptime($snmpConnection));
     }
 
     public function testGetContact(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $this->assertEquals('admin@mail.test', $vendor->getContact($snmpWalk));
+        $this->assertEquals('admin@mail.test', $vendor->getContact($snmpConnection));
     }
 
     public function testGetLocation(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $this->assertEquals('DC Super', $vendor->getLocation($snmpWalk));
+        $this->assertEquals('DC Super', $vendor->getLocation($snmpConnection));
     }
 
     public function testGetSerialNumber(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
-        $vendor   = new DLink();
-        $this->assertEquals('RZ1O1DA000532', $vendor->getSerialNumber($snmpWalk));
-    }
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-    public function testGetHumanModel(): void
-    {
-        $snmpWalk = $this->getMockSnmpWalk();
         $vendor   = new DLink();
-        $this->assertEquals(null, $vendor->getHumanModel($snmpWalk));
+        $this->assertEquals('RZ1O1DA000532', $vendor->getSerialNumber($snmpConnection));
     }
 
     public function testGetLicenseLevel(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $this->assertEquals(null, $vendor->getLicenseLevel($snmpWalk));
+        $this->assertEquals(null, $vendor->getLicenseLevel($snmpConnection));
     }
 
     public function testGetPlatformType(): void
     {
-        $snmpWalk = $this->getMockSnmpWalk();
+        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
+
         $vendor   = new DLink();
-        $model    = $vendor->getModel($snmpWalk);
+        $model    = $vendor->getModel($snmpConnection);
         $this->assertEquals(0, $vendor->getPlatformType($model));
     }
 
-    private function getMockSnmpWalk(): array
+    private function setVarsConnection()
     {
-        $array    = [];
-        $mockFile = fopen(__DIR__ . '/Mocks/DLink/Hardware.src', 'r');
-        while (! feof($mockFile)) {
-            $line = fgets($mockFile);
-            $line = explode('=', $line);
-
-            if (empty($line[1])) {
-                $array[$line[0]] = '';
-            } else {
-                $array[preg_replace('/ /', '', $line[0])] = $line[1];
-            }
-        }
-        fclose($mockFile);
+        $array['hostname']      = '127.0.0.1:9003';
+        $array['snmpCommunity'] = 'public';
 
         return $array;
     }

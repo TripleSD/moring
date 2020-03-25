@@ -17,14 +17,56 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
 
+    - name: Show IP
+      run: ip a
+
+    - name: Show Python version
+      run: python -V
+
     - name: SQLite Install
       run: sudo apt-get update && sudo apt-get install -y sqlite3
+
+    - name: Install snmp* packets
+      run: sudo apt-get install snmp
 
     - name: Check PHP version
       run: php -v
 
-    - name: Install requires
+    - name: Install php-intl
       run: sudo apt-get install php${{ matrix.php-versions }}-intl
+
+    - name: Install php-snmp
+      run: sudo apt-get install php${{ matrix.php-versions }}-snmp
+
+    - name: Run SNMP server (Mikrotik cloud)
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9001 -c /home/runner/work/moring/moring/utils/snmp-server/configs/CloudMikrotik.py &
+
+    - name: Run Cisco SNMP server (Cisco)
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9002 -c /home/runner/work/moring/moring/utils/snmp-server/configs/Cisco.py &
+
+    - name: Run SNMP server (DLink)
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9003 -c /home/runner/work/moring/moring/utils/snmp-server/configs/DLink.py &
+
+    - name: Run SNMP server (Eltex)
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9004 -c /home/runner/work/moring/moring/utils/snmp-server/configs/Eltex.py &
+
+    - name: Run SNMP server (Mikrotik hardware)
+      run: python /home/runner/work/moring/moring/utils/snmp-server/snmp-server.py -p 9005 -c /home/runner/work/moring/moring/utils/snmp-server/configs/HardwareMikrotik.py &
+
+    - name: Check SNMP server 1
+      run: snmpwalk -v2c -c public 127.0.0.1:9001
+
+    - name: Check SNMP server 2
+      run: snmpwalk -v2c -c public 127.0.0.1:9002
+
+    - name: Check SNMP server 3
+      run: snmpwalk -v2c -c public 127.0.0.1:9003
+
+    - name: Check SNMP server 4
+      run: snmpwalk -v2c -c public 127.0.0.1:9004
+
+    - name: Check SNMP server 5
+      run: snmpwalk -v2c -c public 127.0.0.1:9005
 
     - name: Copy .env
       run: php -r "file_exists('.env') || copy('.env.testing.example', '.env');"

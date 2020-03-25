@@ -1,7 +1,0 @@
-SNMPv2-MIB::sysDescr.0 = STRING: DGS-3000-10TC Gigabit Ethernet Switch
-DISMAN-EVENT-MIB::sysUpTimeInstance = Timeticks: (2520849600) 291 days, 18:21:36.00
-SNMPv2-MIB::sysContact.0 = STRING: admin@mail.test
-SNMPv2-MIB::sysLocation.0 = STRING: DC Super
-SNMPv2-SMI::mib-2.47.1.1.1.1.11.1 = STRING: "RZ1O1DA000532"
-SNMPv2-SMI::mib-2.16.19.2.0 = STRING: "1.16.B002"
-SNMPv2-SMI::mib-2.47.1.1.1.1.7.1 = STRING: "DGS-3000-10TC"

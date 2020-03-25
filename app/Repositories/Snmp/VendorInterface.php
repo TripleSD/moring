@@ -4,25 +4,23 @@ namespace App\Repositories\Snmp;
 
 interface VendorInterface
 {
-    public function getModel($snmpArray);
+    public function getModel($snmpFlow);
 
-    public function getFirmware($snmpArray);
+    public function getFirmware($snmpFlow);
 
-    public function getFirmwareVersion($snmpArray);
+    public function getFirmwareVersion($snmpFlow);
 
-    public function getPacketsVersion($snmpArray);
+    public function getPacketsVersion($snmpFlow);
 
-    public function getUptime($snmpArray);
+    public function getUptime($snmpFlow);
 
-    public function getContact($snmpArray);
+    public function getContact($snmpFlow);
 
-    public function getLocation($snmpArray);
+    public function getLocation($snmpFlow);
 
-    public function getSerialNumber($snmpArray);
+    public function getSerialNumber($snmpFlow);
 
-    public function getHumanModel($snmpArray);
+    public function getLicenseLevel($snmpFlow);
 
-    public function getLicenseLevel($snmpArray);
-
-    public function getPlatformType($snmpArray);
+    public function getPlatformType($snmpFlow);
 }

@@ -4,8 +4,9 @@ namespace App\Repositories\Devices;
 
 use App\Models\Devices;
 use App\Repositories\Repository;
-use App\Repositories\Snmp\ParseVendor;
 use App\Repositories\Snmp\SnmpRepository;
+use App\Repositories\Snmp\Vendor;
+use App\Repositories\Snmp\VendorInterface;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -15,14 +16,12 @@ use Illuminate\Database\Eloquent\Model;
 class DevicesRepository extends Repository
 {
     /** @var SnmpRepository */
-    private $snmpRepository;
     private $devicesFirmwareRepository;
     private $devicesVendorsRepository;
     private $devicesModelsRepository;
 
     public function __construct()
     {
-        $this->snmpRepository            = new SnmpRepository();
         $this->devicesFirmwareRepository = new DevicesFirmwaresRepository();
         $this->devicesVendorsRepository  = new DevicesVendorsRepository();
         $this->devicesModelsRepository   = new DevicesModelsRepository();
@@ -134,32 +133,36 @@ class DevicesRepository extends Repository
     }
 
     /**
-     * @param array $deviceDataConnection
+     * @param array $varsConnection
      * @return array
      * @throws Exception
      */
-    public function getDeviceData(array $deviceDataConnection): array
+    public function getDeviceData(array $varsConnection): array
     {
-        // Get snmp flow
-        $snmpFlow = $this->snmpRepository->getSnmpFlow(
-            $deviceDataConnection['hostname'],
-            $deviceDataConnection['snmpCommunity']
-        );
+        try {
+            $connection = new SnmpRepository();
+            $snmpFlow   = $connection->startSession($varsConnection)->walk('SNMPv2-MIB::sysDescr.0');
+        } catch (Exception $e) {
+            throw new Exception('Устройство не отвечает');
+        }
 
-        $vendorName = $this->getVendorName($snmpFlow);
+        $vendor     = new Vendor();
+        $vendorName = $vendor->parseName($snmpFlow);
 
         if ($vendorName == null) {
             throw new Exception('Не удалось определить производителя.');
         }
 
-        $device = $this->getVendorClass($vendorName);
+        /** @var VendorInterface $device */
+        $snmpFlow = $connection->startSession($varsConnection);
+        $device   = $vendor->getVendorClass($vendorName);
 
         //Set vars
-        $deviceData['hostname']      = $deviceDataConnection['hostname'];
-        $deviceData['title']         = $deviceDataConnection['title'];
-        $deviceData['snmpCommunity'] = $deviceDataConnection['snmpCommunity'];
-        $deviceData['snmpPort']      = $deviceDataConnection['snmpPort'];
-        $deviceData['snmpVersion']   = $deviceDataConnection['snmpVersion'];
+        $deviceData['hostname']      = $varsConnection['hostname'];
+        $deviceData['title']         = $varsConnection['title'];
+        $deviceData['snmpCommunity'] = $varsConnection['snmpCommunity'];
+        $deviceData['snmpPort']      = $varsConnection['snmpPort'];
+        $deviceData['snmpVersion']   = $varsConnection['snmpVersion'];
 
         // Get & set vars from device
         $deviceData['location']        = $device->getLocation($snmpFlow);
@@ -171,7 +174,6 @@ class DevicesRepository extends Repository
         $deviceData['uptimeDevice']    = $device->getUptime($snmpFlow);
         $deviceData['packetsVersion']  = $device->getPacketsVersion($snmpFlow);
         $deviceData['serialNumber']    = $device->getSerialNumber($snmpFlow);
-        $deviceData['humanModel']      = $device->getHumanModel($snmpFlow);
         $deviceData['licenseLevel']    = $device->getLicenseLevel($snmpFlow);
 
         $deviceData['firmwareId'] = $this->devicesFirmwareRepository->getFirmwareId(
@@ -204,7 +206,6 @@ class DevicesRepository extends Repository
         $device->uptime          = $deviceData['uptimeDevice'];
         $device->contact         = $deviceData['contact'];
         $device->location        = $deviceData['location'];
-        $device->human_model     = $deviceData['humanModel'];
         $device->license_level   = $deviceData['licenseLevel'];
         $device->serial_number   = $deviceData['serialNumber'];
         $device->packets_version = $deviceData['packetsVersion'];
@@ -222,24 +223,5 @@ class DevicesRepository extends Repository
     public function update($deviceData, $deviceId): void
     {
         self::store($deviceData, $deviceId);
-    }
-
-    /**
-     * @param $snmpFlow
-     * @return string|string[]
-     * @throws Exception
-     */
-    private function getVendorName($snmpFlow)
-    {
-        $vendor = new ParseVendor();
-
-        return $vendor->getName($snmpFlow);
-    }
-
-    private function getVendorClass($vendorName)
-    {
-        $class = 'App\Repositories\Snmp\Vendors\\' . $vendorName;
-
-        return new $class();
     }
 }
