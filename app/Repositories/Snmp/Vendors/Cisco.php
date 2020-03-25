@@ -47,11 +47,12 @@ class Cisco implements VendorInterface
 
     /**
      * @param $snmpFlow
+     * @return string
      */
     public function getPacketsVersion($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
-        return null;
+        return (string) null;
     }
 
     /**
