@@ -3,123 +3,123 @@
 namespace App\Repositories\Snmp\Vendors;
 
 use App\Repositories\Snmp\VendorInterface;
+use SNMP;
 
 class Cisco implements VendorInterface
 {
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getModel($snmpArray): string
+    public function getModel($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.13.1001'];
-        $string = str_replace('STRING: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.47.1.1.1.1.13.1001'));
         $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getFirmware($snmpArray): string
+    public function getFirmware($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-MIB::sysDescr.0'];
-        preg_match('/Cisco IOS Software/', $string, $match);
+        /* @var SNMP $snmpFlow */
+        preg_match('/Cisco IOS Software/', $snmpFlow->get('1.3.6.1.2.1.1.1.0'), $match);
 
         return (string) $match[0];
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string|null
      */
-    public function getFirmwareVersion($snmpArray): ?string
+    public function getFirmwareVersion($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.9.1001'];
-        $string = str_replace('STRING: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $string = str_replace('STRING: ', '', $snmpFlow->get('SNMPv2-SMI::mib-2.47.1.1.1.1.9.1001'));
         $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      */
-    public function getPacketsVersion($snmpArray): void
+    public function getPacketsVersion($snmpFlow): void
     {
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getUptime($snmpArray): string
+    public function getUptime($snmpFlow): string
     {
-        $string = $snmpArray['DISMAN-EVENT-MIB::sysUpTimeInstance'];
-        preg_match('/\((\d+)\)/', $string, $string);
-        preg_match('/\d+/', $string[1], $string);
+        /* @var SNMP $snmpFlow */
+        preg_match('/\d+/', $snmpFlow->get('1.3.6.1.2.1.1.3.0'), $string);
 
         return (string) trim($string[0]);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getContact($snmpArray): string
+    public function getContact($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-MIB::sysContact.0'];
-        $string = str_replace('STRING: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.4.0'));
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string
      */
-    public function getLocation($snmpArray): string
+    public function getLocation($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-MIB::sysLocation.0'];
-        $string = str_replace('STRING: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.6.0'));
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return string|null
      */
-    public function getSerialNumber($snmpArray): ?string
+    public function getSerialNumber($snmpFlow): string
     {
-        $string = $snmpArray['SNMPv2-SMI::mib-2.47.1.1.1.1.11.1'];
-        $string = str_replace('STRING: ', '', $string);
+        /* @var SNMP $snmpFlow */
+        $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.47.1.1.1.1.11.1001'));
         $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      */
-    public function getHumanModel($snmpArray): void
+    public function getHumanModel($snmpFlow): void
     {
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      */
-    public function getLicenseLevel($snmpArray): void
+    public function getLicenseLevel($snmpFlow): void
     {
     }
 
     /**
-     * @param $snmpArray
+     * @param $snmpFlow
      * @return int
      */
-    public function getPlatformType($snmpArray): int
+    public function getPlatformType($snmpFlow): int
     {
         return (int) 0;
     }
