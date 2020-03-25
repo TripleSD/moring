@@ -72,6 +72,7 @@ class Eltex implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.4.0'));
+        $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }
@@ -84,6 +85,7 @@ class Eltex implements VendorInterface
     {
         /* @var SNMP $snmpFlow */
         $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.6.0'));
+        $string = str_replace('"', '', $string);
 
         return (string) trim($string);
     }

@@ -25,8 +25,9 @@ class Mikrotik implements VendorInterface
         /* @var SNMP $snmpFlow */
         $string = str_replace('STRING: ', '', $snmpFlow->get('1.3.6.1.2.1.1.1.0'));
         $string = explode(' ', $string);
+        $string = str_replace('"', '', $string[0]);
 
-        return (string) trim($string[0]);
+        return (string) trim($string);
     }
 
     /**
