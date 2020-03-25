@@ -72,14 +72,6 @@ class EltexTest extends TestCase
         $this->assertEquals('ES32001131', $vendor->getSerialNumber($snmpConnection));
     }
 
-    public function testGetHumanModel(): void
-    {
-        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
-
-        $vendor   = new Eltex();
-        $this->assertEquals(null, $vendor->getHumanModel($snmpConnection));
-    }
-
     public function testGetLicenseLevel(): void
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());

@@ -72,14 +72,6 @@ class CiscoTest extends TestCase
         $this->assertEquals('FOC1217V38H', $vendor->getSerialNumber($snmpConnection));
     }
 
-    public function testGetHumanModel(): void
-    {
-        $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
-
-        $vendor = new Cisco();
-        $this->assertEquals(null, $vendor->getHumanModel($snmpConnection));
-    }
-
     public function testGetLicenseLevel(): void
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
