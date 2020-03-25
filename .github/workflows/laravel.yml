@@ -20,6 +20,9 @@ jobs:
     - name: Show IP
       run: ip a
 
+    - name: Show Python version
+      run: python -V
+
     - name: SQLite Install
       run: sudo apt-get update && sudo apt-get install -y sqlite3
 
