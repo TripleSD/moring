@@ -17,7 +17,7 @@ PID1=$!
 python utils/snmp-server/snmp-server.py -p 9002 -c utils/snmp-server/configs/Cisco.py &
 PID2=$!
 
-python utils/snmp-server/snmp-server.py -p 9003 -c utils/snmp-server/configs/Dlink.py &
+python utils/snmp-server/snmp-server.py -p 9003 -c utils/snmp-server/configs/DLink.py &
 PID3=$!
 
 python utils/snmp-server/snmp-server.py -p 9004 -c utils/snmp-server/configs/Eltex.py &
