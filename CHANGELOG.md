@@ -1,3 +1,9 @@
+[v.0.1.3 (Build.020)](https://github.com/TripleSD/moring/releases/tag/0.1.3)
+ - **(Add)** - Добавлен пакет [delimitry/snmp-server](https://github.com/delimitry/snmp-server) для эмуляции snmp устройств
+ - **(Upd)** - Осуществлен рефакторинг SNMP классов для ускоения запроса и получения SNMP информации
+ - **(Upd)** - Осуществлен рефакторинг SNMP тестов под измененные SNMP классы
+ - **(Del)** - Удален старый код
+
 [v.0.1.2 (Build.016)](https://github.com/TripleSD/moring/releases/tag/0.1.2)
  - **(New)** - Добавлены новые автотесты для SNMP классов
  - **(New)** - Добалена поддержка PHP 7.2 / 7.4 версий
