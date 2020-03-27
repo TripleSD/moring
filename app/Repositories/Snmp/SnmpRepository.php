@@ -9,7 +9,10 @@ class SnmpRepository extends Repository
 {
     public function startSession($varsConnection)
     {
-        return new SNMP(SNMP::VERSION_2c, $varsConnection['hostname'], $varsConnection['snmpCommunity']);
+        return new SNMP(
+            SNMP::VERSION_2c,
+            $varsConnection['hostname'] . ':' . $varsConnection['port'], $varsConnection['community']
+        );
     }
 
     public function getVendorNameRawString($snmpFlow)
