@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Network;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
+use App\Models\Devices;
 use App\Repositories\Devices\DevicesLogsRepository;
 use App\Repositories\Devices\DevicesRepository;
 use App\Repositories\Devices\DevicesVendorsRepository;
@@ -107,6 +108,16 @@ class NetworkDevicesController extends Controller
     public function store(UpdateAndStoreDeviceRequest $request): RedirectResponse
     {
         try {
+            $device = Devices::where('hostname', $request->hostname)
+                ->where('snmp_version', $request->snmp_version)
+                ->where('snmp_port', $request->snmp_port)
+                ->where('snmp_community', $request->snmp_community)
+                ->get();
+
+            if ($device->isNotEmpty()) {
+                throw new Exception('Данное устройство уже есть в списке');
+            }
+
             $deviceConnection = $this->deviceRepository->setDataConnection($request);
             $deviceData       = $this->deviceRepository->getDeviceData($deviceConnection);
             $this->deviceRepository->store($deviceData);

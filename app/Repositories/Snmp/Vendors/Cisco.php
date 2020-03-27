@@ -53,6 +53,8 @@ class Cisco implements VendorInterface
     public function getPacketsVersion($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
+        $snmpFlow->close();
+
         return (string) null;
     }
 
@@ -115,6 +117,8 @@ class Cisco implements VendorInterface
     public function getLicenseLevel($snmpFlow): string
     {
         /* @var SNMP $snmpFlow */
+        $snmpFlow->close();
+
         return (string) null;
     }
 
