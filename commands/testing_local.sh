@@ -26,13 +26,16 @@ PID4=$!
 python utils/snmp-server/snmp-server.py -p 9005 -c utils/snmp-server/configs/HardwareMikrotik.py &
 PID5=$!
 
+python utils/snmp-server/snmp-server.py -p 9006 -c utils/snmp-server/configs/EmptyVendor.py &
+PID6=$!
+
 echo 'Starting PHPunit'
 #./vendor/bin/phpunit --coverage-html report_coverage
 ./vendor/bin/phpunit
 #./vendor/bin/phpunit --filter testGetSerialNumber tests/Unit/SNMP/CloudMikrotikEmptyOIDTest.php
 
 echo 'Killing SNMP servers'
-kill $PID1 $PID2 $PID3 $PID4 $PID5
+kill $PID1 $PID2 $PID3 $PID4 $PID5 $PID6
 
 echo 'Removing .env file'
 rm -f .env
