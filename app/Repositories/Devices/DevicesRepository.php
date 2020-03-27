@@ -140,22 +140,22 @@ class DevicesRepository extends Repository
     public function getDeviceData(array $varsConnection): array
     {
         try {
-            $connection = new SnmpRepository();
-            $snmpFlow   = $connection->startSession($varsConnection)->walk('SNMPv2-MIB::sysDescr.0');
+            $snmpObject          = new SnmpRepository();
+            $snmpFlow            = $snmpObject->startSession($varsConnection);
+            $vendorNameRawString = $snmpObject->getVendorNameRawString($snmpFlow);
         } catch (Exception $e) {
             throw new Exception('Устройство не отвечает');
         }
 
         $vendor     = new Vendor();
-        $vendorName = $vendor->parseName($snmpFlow);
+        $vendorName = $vendor->parseName($vendorNameRawString);
 
         if ($vendorName == null) {
             throw new Exception('Не удалось определить производителя.');
         }
 
         /** @var VendorInterface $device */
-        $snmpFlow = $connection->startSession($varsConnection);
-        $device   = $vendor->getVendorClass($vendorName);
+        $device = $vendor->getVendorClass($vendorName);
 
         //Set vars
         $deviceData['hostname']      = $varsConnection['hostname'];
