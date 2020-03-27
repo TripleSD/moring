@@ -2,9 +2,9 @@
 
 namespace Tests\Unit\SNMP_Vendors;
 
+use App\Repositories\Snmp\SnmpRepository;
 use App\Repositories\Snmp\Vendor;
 use App\Repositories\Snmp\Vendors\Cisco;
-use App\Repositories\Snmp\SnmpRepository;
 use Tests\TestCase;
 
 class CiscoTest extends TestCase
