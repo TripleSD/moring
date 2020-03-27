@@ -9,11 +9,12 @@ class SnmpRepository extends Repository
 {
     public function startSession($varsConnection)
     {
-        return new SNMP(SNMP::VERSION_2c, $varsConnection['hostname'], $varsConnection['snmpCommunity']);
+         return new SNMP(SNMP::VERSION_2c, $varsConnection['hostname'], $varsConnection['snmpCommunity']);
     }
 
-    public function name($nameArray)
+    public function getVendorNameRawString($snmpFlow)
     {
-        return $nameArray['1.3.6.1.2.1.1.1.0'];
+        /** @var SNMP $snmpFlow */
+         return $snmpFlow->get('1.3.6.1.2.1.1.1.0');
     }
 }
