@@ -27,8 +27,8 @@ class EltexTest extends TestCase
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '127.0.0.1:9004';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '127.0.0.1:9004';
+        $array['community'] = 'public';
 
         return $array;
     }

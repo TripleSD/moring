@@ -20,8 +20,8 @@ class EmptyVendorTest extends TestCase
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '127.0.0.1:9006';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '127.0.0.1:9006';
+        $array['community'] = 'public';
 
         return $array;
     }

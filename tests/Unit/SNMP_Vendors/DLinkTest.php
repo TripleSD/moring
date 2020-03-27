@@ -27,8 +27,8 @@ class DLinkTest extends TestCase
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '127.0.0.1:9003';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '127.0.0.1:9003';
+        $array['community'] = 'public';
 
         return $array;
     }

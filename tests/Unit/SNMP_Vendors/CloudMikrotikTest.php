@@ -11,8 +11,8 @@ class CloudMikrotikTest extends TestCase
 {
     public function testParseName(): void
     {
-        $snmpObject = new SnmpRepository();
-        $snmpFlow = $snmpObject->startSession($this->setVarsConnection());
+        $snmpObject          = new SnmpRepository();
+        $snmpFlow            = $snmpObject->startSession($this->setVarsConnection());
         $vendorNameRawString = $snmpObject->getVendorNameRawString($snmpFlow);
 
         $vendor = new Vendor();
@@ -27,8 +27,8 @@ class CloudMikrotikTest extends TestCase
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '127.0.0.1:9001';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '127.0.0.1:9001';
+        $array['community'] = 'public';
 
         return $array;
     }
