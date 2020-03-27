@@ -91,8 +91,9 @@ class CloudMikrotikTest extends TestCase
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '127.0.0.1:9001';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '127.0.0.1:9001';
+        $array['community'] = 'public';
+        $array['port']      = 161;
 
         return $array;
     }

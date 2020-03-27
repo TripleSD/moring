@@ -24,8 +24,9 @@ class CloudMikrotikExceptionTest extends TestCase
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '0.0.0.0';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '0.0.0.0';
+        $array['community'] = 'public';
+        $array['port']      = 161;
 
         return $array;
     }

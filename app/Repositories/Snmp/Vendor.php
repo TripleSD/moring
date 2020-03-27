@@ -4,23 +4,23 @@ namespace App\Repositories\Snmp;
 
 class Vendor
 {
-    public function parseName(array $snmpFlow): string
+    public function parseName(string $rawString): string
     {
-        if (isset($snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
-            if (preg_match('/RouterOS/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
-                return 'Mikrotik';
+        if (isset($rawString)) {
+            if (preg_match('/RouterOS/', $rawString)) {
+                return (string) 'Mikrotik';
             }
 
-            if (preg_match('/Cisco/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
-                return 'Cisco';
+            if (preg_match('/Cisco/', $rawString)) {
+                return (string) 'Cisco';
             }
 
-            if (preg_match('/[D][EG][S]/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
-                return 'DLink';
+            if (preg_match('/[D][EG][S]/', $rawString)) {
+                return (string) 'DLink';
             }
 
-            if (preg_match('/MES/', $snmpFlow['SNMPv2-MIB::sysDescr.0'])) {
-                return 'Eltex';
+            if (preg_match('/MES/', $rawString)) {
+                return (string) 'Eltex';
             }
         }
 

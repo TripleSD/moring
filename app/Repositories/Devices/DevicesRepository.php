@@ -123,11 +123,11 @@ class DevicesRepository extends Repository
         $deviceData = [];
 
         // Getting vars from template
-        $deviceData['hostname']      = $request->input('hostname');               // Hostname device
-        $deviceData['title']         = $request->input('title');                  // Short description
-        $deviceData['snmpCommunity'] = $request->input('snmp_community');         // Device community
-        $deviceData['snmpPort']      = $request->input('snmp_port');              // Device snmp port
-        $deviceData['snmpVersion']   = $request->input('snmp_version');           // Device snmp version 1/2/3
+        $deviceData['hostname']    = $request->input('hostname');               // Hostname device
+        $deviceData['title']       = $request->input('title');                  // Short description
+        $deviceData['community']   = $request->input('snmp_community');         // Device community
+        $deviceData['port']        = $request->input('snmp_port');              // Device snmp port
+        $deviceData['snmpVersion'] = $request->input('snmp_version');           // Device snmp version 1/2/3
 
         return (array) $deviceData;
     }
@@ -140,29 +140,29 @@ class DevicesRepository extends Repository
     public function getDeviceData(array $varsConnection): array
     {
         try {
-            $connection = new SnmpRepository();
-            $snmpFlow   = $connection->startSession($varsConnection)->walk('SNMPv2-MIB::sysDescr.0');
+            $snmpObject          = new SnmpRepository();
+            $snmpFlow            = $snmpObject->startSession($varsConnection);
+            $vendorNameRawString = $snmpObject->getVendorNameRawString($snmpFlow);
         } catch (Exception $e) {
             throw new Exception('Устройство не отвечает');
         }
 
         $vendor     = new Vendor();
-        $vendorName = $vendor->parseName($snmpFlow);
+        $vendorName = $vendor->parseName($vendorNameRawString);
 
         if ($vendorName == null) {
             throw new Exception('Не удалось определить производителя.');
         }
 
         /** @var VendorInterface $device */
-        $snmpFlow = $connection->startSession($varsConnection);
-        $device   = $vendor->getVendorClass($vendorName);
+        $device = $vendor->getVendorClass($vendorName);
 
         //Set vars
-        $deviceData['hostname']      = $varsConnection['hostname'];
-        $deviceData['title']         = $varsConnection['title'];
-        $deviceData['snmpCommunity'] = $varsConnection['snmpCommunity'];
-        $deviceData['snmpPort']      = $varsConnection['snmpPort'];
-        $deviceData['snmpVersion']   = $varsConnection['snmpVersion'];
+        $deviceData['hostname']    = $varsConnection['hostname'];
+        $deviceData['title']       = $varsConnection['title'];
+        $deviceData['community']   = $varsConnection['community'];
+        $deviceData['port']        = $varsConnection['port'];
+        $deviceData['snmpVersion'] = $varsConnection['snmpVersion'];
 
         // Get & set vars from device
         $deviceData['location']        = $device->getLocation($snmpFlow);
@@ -210,8 +210,8 @@ class DevicesRepository extends Repository
         $device->serial_number   = $deviceData['serialNumber'];
         $device->packets_version = $deviceData['packetsVersion'];
         $device->platform_type   = $deviceData['platformType'];
-        $device->snmp_port       = $deviceData['snmpPort'];
-        $device->snmp_community  = $deviceData['snmpCommunity'];
+        $device->snmp_port       = $deviceData['port'];
+        $device->snmp_community  = $deviceData['community'];
         $device->snmp_version    = $deviceData['snmpVersion'];
         $device->save();
     }
