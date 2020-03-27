@@ -26,6 +26,7 @@ class CloudMikrotikExceptionTest extends TestCase
     {
         $array['hostname']  = '0.0.0.0';
         $array['community'] = 'public';
+        $array['port']      = 161;
 
         return $array;
     }

@@ -93,6 +93,7 @@ class EltexTest extends TestCase
     {
         $array['hostname']  = '127.0.0.1:9004';
         $array['community'] = 'public';
+        $array['port']      = 161;
 
         return $array;
     }

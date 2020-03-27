@@ -93,6 +93,7 @@ class HardwareMikrotikTest extends TestCase
     {
         $array['hostname']  = '127.0.0.1:9005';
         $array['community'] = 'public';
+        $array['port']      = 161;
 
         return $array;
     }

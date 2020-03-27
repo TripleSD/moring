@@ -29,6 +29,7 @@ class CloudMikrotikTest extends TestCase
     {
         $array['hostname']  = '127.0.0.1:9001';
         $array['community'] = 'public';
+        $array['port']      = 161;
 
         return $array;
     }
