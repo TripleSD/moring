@@ -12,7 +12,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals('DGS-3000-10TC', $vendor->getModel($snmpConnection));
     }
 
@@ -20,7 +20,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals('D-Link Linux', $vendor->getFirmware($snmpConnection));
     }
 
@@ -28,7 +28,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals('1.16.B002', $vendor->getFirmwareVersion($snmpConnection));
     }
 
@@ -36,7 +36,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals(null, $vendor->getPacketsVersion($snmpConnection));
     }
 
@@ -44,7 +44,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals('2520849600', $vendor->getUptime($snmpConnection));
     }
 
@@ -52,7 +52,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals('admin@mail.test', $vendor->getContact($snmpConnection));
     }
 
@@ -60,7 +60,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals('DC Super', $vendor->getLocation($snmpConnection));
     }
 
@@ -68,7 +68,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals('RZ1O1DA000532', $vendor->getSerialNumber($snmpConnection));
     }
 
@@ -76,7 +76,7 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
+        $vendor = new DLink();
         $this->assertEquals(null, $vendor->getLicenseLevel($snmpConnection));
     }
 
@@ -84,15 +84,15 @@ class DLinkTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new DLink();
-        $model    = $vendor->getModel($snmpConnection);
+        $vendor = new DLink();
+        $model  = $vendor->getModel($snmpConnection);
         $this->assertEquals(0, $vendor->getPlatformType($model));
     }
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '127.0.0.1:9003';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '127.0.0.1:9003';
+        $array['community'] = 'public';
 
         return $array;
     }

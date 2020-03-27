@@ -12,7 +12,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals('MES2324B', $vendor->getModel($snmpConnection));
     }
 
@@ -20,7 +20,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals('Eltex Linux', $vendor->getFirmware($snmpConnection));
     }
 
@@ -28,7 +28,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals('4.0.7', $vendor->getFirmwareVersion($snmpConnection));
     }
 
@@ -36,7 +36,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals(null, $vendor->getPacketsVersion($snmpConnection));
     }
 
@@ -44,7 +44,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals('2409917400', $vendor->getUptime($snmpConnection));
     }
 
@@ -52,7 +52,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals('admin@mail.test', $vendor->getContact($snmpConnection));
     }
 
@@ -60,7 +60,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals('DC Super', $vendor->getLocation($snmpConnection));
     }
 
@@ -68,7 +68,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals('ES32001131', $vendor->getSerialNumber($snmpConnection));
     }
 
@@ -76,7 +76,7 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
+        $vendor = new Eltex();
         $this->assertEquals(null, $vendor->getLicenseLevel($snmpConnection));
     }
 
@@ -84,15 +84,15 @@ class EltexTest extends TestCase
     {
         $snmpConnection = (new SnmpRepository())->startSession($this->setVarsConnection());
 
-        $vendor   = new Eltex();
-        $model    = $vendor->getModel($snmpConnection);
+        $vendor = new Eltex();
+        $model  = $vendor->getModel($snmpConnection);
         $this->assertEquals(0, $vendor->getPlatformType($model));
     }
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '127.0.0.1:9004';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '127.0.0.1:9004';
+        $array['community'] = 'public';
 
         return $array;
     }

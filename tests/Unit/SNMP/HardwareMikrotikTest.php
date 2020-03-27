@@ -91,8 +91,8 @@ class HardwareMikrotikTest extends TestCase
 
     private function setVarsConnection()
     {
-        $array['hostname']      = '127.0.0.1:9005';
-        $array['snmpCommunity'] = 'public';
+        $array['hostname']  = '127.0.0.1:9005';
+        $array['community'] = 'public';
 
         return $array;
     }
