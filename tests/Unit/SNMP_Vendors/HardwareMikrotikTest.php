@@ -2,10 +2,10 @@
 
 namespace Tests\Unit\SNMP_Vendors;
 
-use App\Repositories\Snmp\Vendor;
 use App\Repositories\Snmp\SnmpRepository;
-use Tests\TestCase;
+use App\Repositories\Snmp\Vendor;
 use App\Repositories\Snmp\Vendors\Mikrotik;
+use Tests\TestCase;
 
 class HardwareMikrotikTest extends TestCase
 {
