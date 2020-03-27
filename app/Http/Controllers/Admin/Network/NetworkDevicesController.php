@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Network;
 
-use App\Models\Devices;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Sites\UpdateAndStoreDeviceRequest;
+use App\Models\Devices;
 use App\Repositories\Devices\DevicesLogsRepository;
 use App\Repositories\Devices\DevicesRepository;
 use App\Repositories\Devices\DevicesVendorsRepository;
