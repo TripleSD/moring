@@ -71,9 +71,11 @@
                                 <li class="small">
                                     @lang('messages.network.device.model'):
                                     <span class="float-right">
-                                            {{$device->vendor->title}}
-                                        {{$device->model->title}}
-                                        </span>
+                                        {{$device->vendor->title}} {{$device->model->title}}
+                                        @if($device->serial_number)
+                                            (SN: {{$device->serial_number}})
+                                        @endif
+                                    </span>
                                 </li>
                                 <li class="small">
                                     ID:
