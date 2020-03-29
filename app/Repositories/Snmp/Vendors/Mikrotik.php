@@ -137,10 +137,11 @@ class Mikrotik implements VendorInterface
      */
     public function getPlatformType($modelName): int
     {
+        /* @var VendorInterface $modelName */
         if ($modelName === 'CHR') {
             return (int) 1;
-        } else {
-            return (int) 0;
         }
+
+        return (int) 0;
     }
 }
