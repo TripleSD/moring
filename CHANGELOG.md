@@ -1,3 +1,6 @@
+[v.0.1.5 (Build.024)](https://github.com/TripleSD/moring/releases/tag/0.1.4)
+ - **(New)** - Добавлен вывод серийного номера SNMP устройства в карточке устройства
+
 [v.0.1.4 (Build.023)](https://github.com/TripleSD/moring/releases/tag/0.1.4)
  - **(New)** - Добавлены новые автотесты для SNMP классов
  - **(New)** - Добавлена проверка на повторное добавление SNMP устройства
