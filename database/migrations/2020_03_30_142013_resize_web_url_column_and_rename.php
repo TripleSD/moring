@@ -17,7 +17,13 @@ class ResizeWebUrlColumnAndRename extends Migration
             'devices',
             function (Blueprint $table) {
                 $table->dropColumn('web');
-                $table->string('url_web')->nullable()->after('snmp_version');
+            }
+        );
+
+        Schema::table(
+            'devices',
+            function (Blueprint $table) {
+                $table->string('web_url')->nullable()->after('snmp_version');
             }
         );
     }
