@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePortSshColumnAndPortTelnetColumn extends Migration
+class DeleteSshPortColumnAndTelnetPortColumn extends Migration
 {
     /**
      * Run the migrations.
@@ -13,6 +13,20 @@ class CreatePortSshColumnAndPortTelnetColumn extends Migration
      */
     public function up()
     {
+        Schema::table(
+            'devices',
+            function (Blueprint $table) {
+                $table->dropColumn('ssh_port');
+            }
+        );
+
+        Schema::table(
+            'devices',
+            function (Blueprint $table) {
+                $table->dropColumn('telnet_port');
+            }
+        );
+
         Schema::table(
             'devices',
             function (Blueprint $table) {
