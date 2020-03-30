@@ -207,6 +207,7 @@ class DevicesRepository extends Repository
         $device->model_id        = $deviceData['model_id'];
         $device->firmware_id     = $deviceData['firmware_id'];
         $device->uptime          = $deviceData['uptime'];
+        $device->enabled         = $deviceData['enabled'];
         $device->contact         = $deviceData['contact'];
         $device->location        = $deviceData['location'];
         $device->license_level   = $deviceData['license_level'];
