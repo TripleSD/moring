@@ -18,6 +18,12 @@ class RenameSshPortColumnAndTelnetPortColumn extends Migration
             function (Blueprint $table) {
                 $table->dropColumn('ssh_port');
                 $table->dropColumn('telnet_port');
+            }
+        );
+
+        Schema::table(
+            'devices',
+            function (Blueprint $table) {
                 $table->integer('port_ssh')->nullable()->after('snmp_version');
                 $table->integer('port_telnet')->nullable()->after('port_ssh');
             }
