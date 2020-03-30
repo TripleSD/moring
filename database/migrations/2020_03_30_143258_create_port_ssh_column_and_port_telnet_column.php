@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameSshPortColumnAndTelnetPortColumn extends Migration
+class CreatePortSshColumnAndPortTelnetColumn extends Migration
 {
     /**
      * Run the migrations.
