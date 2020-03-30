@@ -128,6 +128,9 @@ class DevicesRepository extends Repository
         $deviceData['community']    = $request->input('snmp_community');         // Device community
         $deviceData['port']         = $request->input('snmp_port');              // Device snmp port
         $deviceData['snmp_version'] = $request->input('snmp_version');           // Device snmp version 1/2/3
+        $deviceData['port_ssh']     = $request('port_ssh');
+        $deviceData['port_telnet']  = $request('port_telnet');
+        $deviceData['web_url']      = $request('web_url');
 
         return (array) $deviceData;
     }
@@ -213,6 +216,9 @@ class DevicesRepository extends Repository
         $device->snmp_port       = $deviceData['snmp_port'];
         $device->snmp_community  = $deviceData['snmp_community'];
         $device->snmp_version    = $deviceData['snmp_version'];
+        $device->port_ssh        = $deviceData['port_ssh'];
+        $device->port_telnet     = $deviceData['port_telnet'];
+        $device->web_url         = $deviceData['web_url'];
         $device->save();
     }
 
