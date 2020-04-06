@@ -5,7 +5,7 @@ namespace App\Repositories\Devices;
 use App\Models\Devices;
 use App\Repositories\Repository;
 use App\Repositories\Snmp\SnmpRepository;
-use App\Repositories\Snmp\Vendor;
+use App\Repositories\Snmp\Vendors\Vendor;
 use App\Repositories\Snmp\VendorInterface;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
