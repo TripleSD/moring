@@ -92,8 +92,7 @@ class NetworkDevicesController extends Controller
     public function update(UpdateAndStoreDeviceRequest $request)
     {
         try {
-            $deviceConnection = $this->deviceRepository->setDataConnection($request);
-            $deviceData       = $this->deviceRepository->getDeviceData($deviceConnection);
+            $deviceData = $this->deviceRepository->getDeviceData($request);
             $this->deviceRepository->update($deviceData, $request->device);
             flash('Данные устройства успешно обновлены.')->success();
 
@@ -109,17 +108,22 @@ class NetworkDevicesController extends Controller
     {
         try {
             $device = Devices::where('hostname', $request->hostname)
-                ->where('snmp_version', $request->snmp_version)
-                ->where('snmp_port', $request->snmp_port)
-                ->where('snmp_community', $request->snmp_community)
+                ->where('version', $request->version)
+                ->where('port', $request->port)
+                ->where('community', $request->community)
                 ->get();
 
             if ($device->isNotEmpty()) {
                 throw new Exception('Данное устройство уже есть в списке');
             }
 
-            $deviceConnection = $this->deviceRepository->setDataConnection($request);
-            $deviceData       = $this->deviceRepository->getDeviceData($deviceConnection);
+            $deviceData                = $this->deviceRepository->getDeviceData($request);
+            $deviceData['title']       = $request->input('title');
+            $deviceData['enabled']     = 1;
+            $deviceData['port_ssh']    = $request->input('port_ssh');
+            $deviceData['port_telnet'] = $request->input('port_telnet');
+            $deviceData['web_url']     = $request->input('web_url');
+
             $this->deviceRepository->store($deviceData);
             flash('Новое устройство успешно добавлено.')->success();
 
