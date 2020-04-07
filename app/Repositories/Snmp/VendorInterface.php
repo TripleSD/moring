@@ -22,5 +22,5 @@ interface VendorInterface
 
     public function getLicenseLevel($snmpFlow);
 
-    public function getPlatformType($snmpFlow);
+    public function getPlatformType($modelName);
 }

@@ -5,8 +5,8 @@ namespace App\Repositories\Devices;
 use App\Models\Devices;
 use App\Repositories\Repository;
 use App\Repositories\Snmp\SnmpRepository;
-use App\Repositories\Snmp\Vendor;
 use App\Repositories\Snmp\VendorInterface;
+use App\Repositories\Snmp\Vendors\Vendor;
 use Exception;
 use Illuminate\Contracts\Pagination\LengthAwarePaginator;
 use Illuminate\Database\Eloquent\Builder;
@@ -117,31 +117,18 @@ class DevicesRepository extends Repository
     /**
      * @param $request
      * @return array
-     */
-    public function setDataConnection($request): array
-    {
-        $deviceData = [];
-
-        // Getting vars from template
-        $deviceData['hostname']    = $request->input('hostname');               // Hostname device
-        $deviceData['title']       = $request->input('title');                  // Short description
-        $deviceData['community']   = $request->input('snmp_community');         // Device community
-        $deviceData['port']        = $request->input('snmp_port');              // Device snmp port
-        $deviceData['snmpVersion'] = $request->input('snmp_version');           // Device snmp version 1/2/3
-
-        return (array) $deviceData;
-    }
-
-    /**
-     * @param array $varsConnection
-     * @return array
      * @throws Exception
      */
-    public function getDeviceData(array $varsConnection): array
+    public function getDeviceData($request): array
     {
+        $deviceData['hostname']  = $request->input('hostname');               // Hostname device
+        $deviceData['community'] = $request->input('community');              // Device community
+        $deviceData['port']      = $request->input('port');                   // Device snmp port
+        $deviceData['version']   = $request->input('version');                // Device snmp version 1/2/3
+
         try {
             $snmpObject          = new SnmpRepository();
-            $snmpFlow            = $snmpObject->startSession($varsConnection);
+            $snmpFlow            = $snmpObject->startSession($deviceData);
             $vendorNameRawString = $snmpObject->getVendorNameRawString($snmpFlow);
         } catch (Exception $e) {
             throw new Exception('Устройство не отвечает');
@@ -157,31 +144,24 @@ class DevicesRepository extends Repository
         /** @var VendorInterface $device */
         $device = $vendor->getVendorClass($vendorName);
 
-        //Set vars
-        $deviceData['hostname']    = $varsConnection['hostname'];
-        $deviceData['title']       = $varsConnection['title'];
-        $deviceData['community']   = $varsConnection['community'];
-        $deviceData['port']        = $varsConnection['port'];
-        $deviceData['snmpVersion'] = $varsConnection['snmpVersion'];
-
         // Get & set vars from device
-        $deviceData['location']        = $device->getLocation($snmpFlow);
-        $deviceData['contact']         = $device->getContact($snmpFlow);
-        $deviceData['model']           = $device->getModel($snmpFlow);
-        $deviceData['platformType']    = $device->getPlatformType($deviceData['model']);
-        $deviceData['firmwareTitle']   = $device->getFirmware($snmpFlow);
-        $deviceData['firmwareVersion'] = $device->getFirmwareVersion($snmpFlow);
-        $deviceData['uptimeDevice']    = $device->getUptime($snmpFlow);
-        $deviceData['packetsVersion']  = $device->getPacketsVersion($snmpFlow);
-        $deviceData['serialNumber']    = $device->getSerialNumber($snmpFlow);
-        $deviceData['licenseLevel']    = $device->getLicenseLevel($snmpFlow);
+        $deviceData['location']         = $device->getLocation($snmpFlow);
+        $deviceData['contact']          = $device->getContact($snmpFlow);
+        $deviceData['model']            = $device->getModel($snmpFlow);
+        $deviceData['platform_type']    = $device->getPlatformType($deviceData['model']);
+        $deviceData['firmware_title']   = $device->getFirmware($snmpFlow);
+        $deviceData['firmware_version'] = $device->getFirmwareVersion($snmpFlow);
+        $deviceData['uptime']           = $device->getUptime($snmpFlow);
+        $deviceData['packets_version']  = $device->getPacketsVersion($snmpFlow);
+        $deviceData['serial_number']    = $device->getSerialNumber($snmpFlow);
+        $deviceData['license_level']    = $device->getLicenseLevel($snmpFlow);
 
-        $deviceData['firmwareId'] = $this->devicesFirmwareRepository->getFirmwareId(
-            $deviceData['firmwareTitle'],
-            $deviceData['firmwareVersion']
+        $deviceData['firmware_id'] = $this->devicesFirmwareRepository->getFirmwareId(
+            $deviceData['firmware_title'],
+            $deviceData['firmware_version']
         );
-        $deviceData['vendorId']   = $this->devicesVendorsRepository->getVendorId($vendorName);
-        $deviceData['modelId']    = $this->devicesModelsRepository->getModelId($deviceData['model']);
+        $deviceData['vendor_id']   = $this->devicesVendorsRepository->getVendorId($vendorName);
+        $deviceData['model_id']    = $this->devicesModelsRepository->getModelId($deviceData['model']);
 
         return $deviceData;
     }
@@ -200,19 +180,23 @@ class DevicesRepository extends Repository
 
         $device->title           = $deviceData['title'];
         $device->hostname        = $deviceData['hostname'];
-        $device->vendor_id       = $deviceData['vendorId'];
-        $device->model_id        = $deviceData['modelId'];
-        $device->firmware_id     = $deviceData['firmwareId'];
-        $device->uptime          = $deviceData['uptimeDevice'];
+        $device->vendor_id       = $deviceData['vendor_id'];
+        $device->model_id        = $deviceData['model_id'];
+        $device->firmware_id     = $deviceData['firmware_id'];
+        $device->uptime          = $deviceData['uptime'];
+        $device->enabled         = $deviceData['enabled'];
         $device->contact         = $deviceData['contact'];
         $device->location        = $deviceData['location'];
-        $device->license_level   = $deviceData['licenseLevel'];
-        $device->serial_number   = $deviceData['serialNumber'];
-        $device->packets_version = $deviceData['packetsVersion'];
-        $device->platform_type   = $deviceData['platformType'];
-        $device->snmp_port       = $deviceData['port'];
-        $device->snmp_community  = $deviceData['community'];
-        $device->snmp_version    = $deviceData['snmpVersion'];
+        $device->license_level   = $deviceData['license_level'];
+        $device->serial_number   = $deviceData['serial_number'];
+        $device->packets_version = $deviceData['packets_version'];
+        $device->platform_type   = $deviceData['platform_type'];
+        $device->port            = $deviceData['port'];
+        $device->community       = $deviceData['community'];
+        $device->version         = $deviceData['version'];
+        $device->port_ssh        = $deviceData['port_ssh'];
+        $device->port_telnet     = $deviceData['port_telnet'];
+        $device->web_url         = $deviceData['web_url'];
         $device->save();
     }
 

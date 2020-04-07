@@ -116,7 +116,7 @@
                                                         <div class="small text-gray">
                                                             <i class="fas fa-history"></i> {{ $device->updated_at }}
 
-                                                            @if($device->ssh_port !== null)
+                                                            @if($device->port_ssh !== null)
                                                                 <div class="badge badge-primary"
                                                                      title="@lang('messages.network.device.ssh_enabled')">
                                                                     <i class="fas fa-terminal"></i>
@@ -130,7 +130,7 @@
                                                                 </div>
                                                             @endif
 
-                                                            @if($device->telnet_port !== null)
+                                                            @if($device->port_telnet !== null)
                                                                 <div class="badge badge-primary"
                                                                      title="@lang('messages.network.device.telnet_enabled')">
                                                                     <i class="fas fa-terminal"></i>
@@ -144,7 +144,8 @@
                                                                 </div>
                                                             @endif
 
-                                                            @if($device->web !== null)
+                                                            @if($device->web_url !== null)
+
                                                                 <div class="badge badge-primary"
                                                                      title="@lang('messages.network.device.web_enabled')">
                                                                     <i class="fas fa-globe"></i>

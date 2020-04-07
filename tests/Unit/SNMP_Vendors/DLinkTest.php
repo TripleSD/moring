@@ -3,8 +3,8 @@
 namespace Tests\Unit\SNMP_Vendors;
 
 use App\Repositories\Snmp\SnmpRepository;
-use App\Repositories\Snmp\Vendor;
 use App\Repositories\Snmp\Vendors\DLink;
+use App\Repositories\Snmp\Vendors\Vendor;
 use Tests\TestCase;
 
 class DLinkTest extends TestCase

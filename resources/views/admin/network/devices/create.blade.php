@@ -57,7 +57,7 @@
 
                                     <div class="form-group">
                                         <b>Версия SNMP протокола</b>
-                                        {{ Form::text('snmp_version', '2' , ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 2']) }}
+                                        {{ Form::text('version', '2' , ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 2']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -68,7 +68,7 @@
 
                                     <div class="form-group">
                                         <b>Порт SNMP</b>
-                                        {{ Form::text('snmp_port', '161', ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 161']) }}
+                                        {{ Form::text('port', '161', ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 161']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -79,7 +79,38 @@
 
                                     <div class="form-group">
                                         <b>SNMP community</b>
-                                        {{Form::text('snmp_community', 'public', ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        {{Form::text('community', 'public', ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            ...
+                                        </details>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <b>SSH порт</b>
+                                        {{Form::text('port_ssh', null, ['class' => 'form-control', 'placeholder' => 'Пример: 22'])}}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            ...
+                                        </details>
+                                    </div>
+                                    <div class="form-group">
+                                        <b>Telnet порт</b>
+                                        {{Form::text('port_telnet', null, ['class' => 'form-control', 'placeholder' => 'Пример: 23'])}}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            ...
+                                        </details>
+                                    </div>
+                                    <div class="form-group">
+                                        <b>Web консоль управления</b>
+                                        {{Form::text('web_url', null, ['class' => 'form-control', 'placeholder' => 'Пример: http://127.0.0.1'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация

@@ -123,11 +123,14 @@ class Cisco implements VendorInterface
     }
 
     /**
-     * @param $snmpFlow
+     * @param $modelName
      * @return int
      */
-    public function getPlatformType($snmpFlow): int
+    public function getPlatformType($modelName): int
     {
+        /* @var VendorInterface $modelName */
+        unset($modelName);
+
         return (int) 0;
     }
 }
