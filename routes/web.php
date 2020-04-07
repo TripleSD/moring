@@ -17,6 +17,13 @@ Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::group(
+    ['prefix' => 'api', 'namespace' => 'Api'],
+    function () {
+        Route::get('/pings', 'ApiController@getPingJson');
+    }
+);
+
+Route::group(
     ['middleware' => 'auth'],
     function () {
         Route::get('/', 'HomeController@index')->name('home');
