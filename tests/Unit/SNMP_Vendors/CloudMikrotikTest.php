@@ -3,8 +3,8 @@
 namespace Tests\Unit\SNMP_Vendors;
 
 use App\Repositories\Snmp\SnmpRepository;
-use App\Repositories\Snmp\Vendors\Vendor;
 use App\Repositories\Snmp\Vendors\Mikrotik;
+use App\Repositories\Snmp\Vendors\Vendor;
 use Tests\TestCase;
 
 class CloudMikrotikTest extends TestCase

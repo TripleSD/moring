@@ -31,7 +31,7 @@ class UpdateAndStoreDeviceRequest extends FormRequest
             'community' => 'required | string | between:1,255',
             'web_url' => 'string | between:1,255 | nullable',
             'port_ssh' => 'integer | nullable',
-            'port_telnet' => 'integer | nullable'
+            'port_telnet' => 'integer | nullable',
         ];
     }
 
