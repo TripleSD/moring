@@ -92,8 +92,17 @@ class NetworkDevicesController extends Controller
     public function update(UpdateAndStoreDeviceRequest $request)
     {
         try {
+            //TODO убрать дублирование кода
             $deviceData = $this->deviceRepository->getDeviceData($request);
+
+            $deviceData['title']       = $request->input('title');
+            $deviceData['enabled']     = $request->input('enabled')->default(0);
+            $deviceData['port_ssh']    = $request->input('port_ssh');
+            $deviceData['port_telnet'] = $request->input('port_telnet');
+            $deviceData['web_url']     = $request->input('web_url');
+
             $this->deviceRepository->update($deviceData, $request->device);
+
             flash('Данные устройства успешно обновлены.')->success();
 
             return redirect()->route('network.devices.show', $request->device);
