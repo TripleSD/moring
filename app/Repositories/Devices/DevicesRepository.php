@@ -123,11 +123,11 @@ class DevicesRepository extends Repository
         $deviceData = [];
 
         // Getting vars from template
-        $deviceData['hostname']    = $request->input('hostname');               // Hostname device
-        $deviceData['title']       = $request->input('title');                  // Short description
-        $deviceData['community']   = $request->input('community');              // Device community
-        $deviceData['port']        = $request->input('port');                   // Device snmp port
-        $deviceData['version']     = $request->input('version');                // Device snmp version 1/2/3
+        $deviceData['hostname']  = $request->input('hostname');               // Hostname device
+        $deviceData['title']     = $request->input('title');                  // Short description
+        $deviceData['community'] = $request->input('community');              // Device community
+        $deviceData['port']      = $request->input('port');                   // Device snmp port
+        $deviceData['version']   = $request->input('version');                // Device snmp version 1/2/3
 
         return (array) $deviceData;
     }
