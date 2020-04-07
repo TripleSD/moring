@@ -1,4 +1,4 @@
-[v.0.1.5 (Build.025)](https://github.com/TripleSD/moring/releases/tag/0.1.4)
+[v.0.1.5 (Build.025)](https://github.com/TripleSD/moring/releases/tag/0.1.5)
  - **(New)** - Добавлен вывод серийного номера SNMP устройства в карточке устройства
  - **(New)** - Добавлены быстрые web/ssh/telnet ссылки в карточке SNMP устройства
  - **(New)** - Добавлены тесты для Device классов
