@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Devices extends Model
 {
-    protected $fillable = ['title', 'hostname', 'version', 'port', 'community'];
+    protected $fillable = ['title', 'hostname', 'version', 'port', 'community', 'web_url', 'port_ssh', 'port_telnet'];
 
     public function firmware(): belongsTo
     {
