@@ -29,6 +29,9 @@ class UpdateAndStoreDeviceRequest extends FormRequest
             'version' => 'required | integer | between:1,3',
             'port' => 'required | integer | between:1,65535',
             'community' => 'required | string | between:1,255',
+            'web_url' => 'string | between:1,255 | nullable',
+            'port_ssh' => 'integer | nullable',
+            'port_telnet' => 'integer | nullable'
         ];
     }
 
@@ -53,6 +56,13 @@ class UpdateAndStoreDeviceRequest extends FormRequest
             'community.required' => 'Поле "SNMP community" должно быть заполнено',
             'community.string' => 'Поле "SNMP community" содержит некорректные символы',
             'community.between' => 'Длина записи в поле "SNMP community" от 1 до 255 символов',
+
+            'web_url.string' => 'Поле "Web консоль управления" содержит некорректные символы',
+            'web_url.between' => 'Длина записи в поле "Web консоль управления" от 1 до 255 символов',
+
+            'port_ssh.integer' => 'Поле "SSH порт" содержит некорректные символы',
+
+            'port_telnet.integer' => 'Поле "Telnet порт" содержит некорректные символы',
         ];
     }
 }
