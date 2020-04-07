@@ -164,9 +164,10 @@
                                 <li class="small">
                                     SSH:
                                     <span class="float-right">
-                                    @if($device->ssh_port !== null)
-                                            ssh://{{$device->hostname}}
-                                            <a class="badge badge-primary" href="ssh://{{$device->hostname}}"
+                                    @if($device->port_ssh !== null)
+                                            ssh://{{$device->hostname}}:{{$device->port_ssh}}
+                                            <a class="badge badge-primary"
+                                               href="ssh://{{$device->hostname}}:{{$device->port_ssh}}"
                                                title="@lang('messages.network.device.ssh_enabled')">
                                             <i class="fas fa-terminal"></i>
                                             </a>
@@ -180,9 +181,10 @@
                                 <li class="small">
                                     Telnet:
                                     <span class="float-right">
-                                    @if($device->telnet_port !== null)
-                                            telnet://{{$device->hostname}}
-                                            <a class="badge badge-primary" href="telnet://{{$device->hostname}}"
+                                    @if($device->port_telnet !== null)
+                                            telnet://{{$device->hostname}}:{{$device->port_telnet}}
+                                            <a class="badge badge-primary"
+                                               href="telnet://{{$device->hostname}} {{$device->port_telnet}}"
                                                title="@lang('messages.network.device.telnet_enabled')">
                                                 <i class="fas fa-terminal"></i>
                                             </a>
@@ -197,9 +199,9 @@
                                 <li class="small">
                                     Web:
                                     <span class="float-right">
-                                    @if($device->web !== null)
-                                            http://{{ $device->web }}
-                                            <a class="text-primary" href="http://{{ $device->web }}"
+                                    @if($device->web_url !== null)
+                                            {{ $device->web_url }}
+                                            <a class="text-primary" href="{{ $device->web_url}}"
                                                title="@lang('messages.network.device.web_enabled')" target="_blank">
                                                 <i class="fas fa-globe"></i>
                                             </a>

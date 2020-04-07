@@ -55,12 +55,11 @@ class SnmpDevicesChecker extends Command
 
         foreach ($devices as $device) {
             try {
-                $deviceConnection['hostname']    = $device->hostname;
-                $deviceConnection['title']       = $device->title;
-                $deviceConnection['community']   = $device->snmp_community;
-                $deviceConnection['port']        = $device->snmp_port;
-                $deviceConnection['snmpVersion'] = $device->snmp_version;
-                $deviceData                      = $this->devicesRepository->getDeviceData($deviceConnection);
+                $deviceConnection['hostname']  = $device->hostname;
+                $deviceConnection['community'] = $device->community;
+                $deviceConnection['port']      = $device->port;
+                $deviceConnection['version']   = $device->version;
+                $deviceData                    = $this->devicesRepository->getDeviceData($deviceConnection);
                 $this->devicesRepository->update($deviceData, $device->id);
             } catch (\Exception $exception) {
                 if ($this->settingsController->getTelegramStatus() === 1) {

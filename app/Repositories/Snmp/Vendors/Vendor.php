@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repositories\Snmp;
+namespace App\Repositories\Snmp\Vendors;
 
 class Vendor
 {
@@ -27,10 +27,10 @@ class Vendor
         return (string) null;
     }
 
-    public function getVendorClass($vendorName)
+    public function getVendorClass($vendorName): object
     {
-        $classPath = '\App\Repositories\Snmp\Vendors\\' . $vendorName;
+        $class = __NAMESPACE__ . '\\' . $vendorName;
 
-        return new $classPath();
+        return new $class();
     }
 }
