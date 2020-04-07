@@ -117,31 +117,18 @@ class DevicesRepository extends Repository
     /**
      * @param $request
      * @return array
+     * @throws Exception
      */
-    public function setDataConnection($request): array
+    public function getDeviceData($request): array
     {
-        $deviceData = [];
-
-        // Getting vars from template
         $deviceData['hostname']  = $request->input('hostname');               // Hostname device
-        $deviceData['title']     = $request->input('title');                  // Short description
         $deviceData['community'] = $request->input('community');              // Device community
         $deviceData['port']      = $request->input('port');                   // Device snmp port
         $deviceData['version']   = $request->input('version');                // Device snmp version 1/2/3
 
-        return (array) $deviceData;
-    }
-
-    /**
-     * @param array $varsConnection
-     * @return array
-     * @throws Exception
-     */
-    public function getDeviceData(array $varsConnection): array
-    {
         try {
             $snmpObject          = new SnmpRepository();
-            $snmpFlow            = $snmpObject->startSession($varsConnection);
+            $snmpFlow            = $snmpObject->startSession($deviceData);
             $vendorNameRawString = $snmpObject->getVendorNameRawString($snmpFlow);
         } catch (Exception $e) {
             throw new Exception('Устройство не отвечает');
@@ -156,13 +143,6 @@ class DevicesRepository extends Repository
 
         /** @var VendorInterface $device */
         $device = $vendor->getVendorClass($vendorName);
-
-        //Set vars
-        $deviceData['hostname']  = $varsConnection['hostname'];
-        $deviceData['title']     = $varsConnection['title'];
-        $deviceData['community'] = $varsConnection['community'];
-        $deviceData['port']      = $varsConnection['port'];
-        $deviceData['version']   = $varsConnection['version'];
 
         // Get & set vars from device
         $deviceData['location']         = $device->getLocation($snmpFlow);
