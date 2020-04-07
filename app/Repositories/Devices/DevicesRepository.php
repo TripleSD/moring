@@ -123,14 +123,11 @@ class DevicesRepository extends Repository
         $deviceData = [];
 
         // Getting vars from template
-        $deviceData['hostname']     = $request->input('hostname');               // Hostname device
-        $deviceData['title']        = $request->input('title');                  // Short description
-        $deviceData['community']    = $request->input('snmp_community');         // Device community
-        $deviceData['port']         = $request->input('snmp_port');              // Device snmp port
-        $deviceData['snmp_version'] = $request->input('snmp_version');           // Device snmp version 1/2/3
-        $deviceData['port_ssh']     = $request('port_ssh');
-        $deviceData['port_telnet']  = $request('port_telnet');
-        $deviceData['web_url']      = $request('web_url');
+        $deviceData['hostname']    = $request->input('hostname');               // Hostname device
+        $deviceData['title']       = $request->input('title');                  // Short description
+        $deviceData['community']   = $request->input('community');              // Device community
+        $deviceData['port']        = $request->input('port');                   // Device snmp port
+        $deviceData['version']     = $request->input('version');                // Device snmp version 1/2/3
 
         return (array) $deviceData;
     }
@@ -161,11 +158,11 @@ class DevicesRepository extends Repository
         $device = $vendor->getVendorClass($vendorName);
 
         //Set vars
-        $deviceData['hostname']       = $varsConnection['hostname'];
-        $deviceData['title']          = $varsConnection['title'];
-        $deviceData['snmp_community'] = $varsConnection['snmp_community'];
-        $deviceData['snmp_port']      = $varsConnection['snmp_port'];
-        $deviceData['snmp_version']   = $varsConnection['snmp_version'];
+        $deviceData['hostname']  = $varsConnection['hostname'];
+        $deviceData['title']     = $varsConnection['title'];
+        $deviceData['community'] = $varsConnection['community'];
+        $deviceData['port']      = $varsConnection['port'];
+        $deviceData['version']   = $varsConnection['version'];
 
         // Get & set vars from device
         $deviceData['location']         = $device->getLocation($snmpFlow);
@@ -214,9 +211,9 @@ class DevicesRepository extends Repository
         $device->serial_number   = $deviceData['serial_number'];
         $device->packets_version = $deviceData['packets_version'];
         $device->platform_type   = $deviceData['platform_type'];
-        $device->snmp_port       = $deviceData['snmp_port'];
-        $device->snmp_community  = $deviceData['snmp_community'];
-        $device->snmp_version    = $deviceData['snmp_version'];
+        $device->port            = $deviceData['port'];
+        $device->community       = $deviceData['community'];
+        $device->version         = $deviceData['version'];
         $device->port_ssh        = $deviceData['port_ssh'];
         $device->port_telnet     = $deviceData['port_telnet'];
         $device->web_url         = $deviceData['web_url'];
