@@ -19,7 +19,11 @@ Route::post('/login', 'Auth\LoginController@login');
 Route::group(
     ['prefix' => 'api', 'namespace' => 'Api'],
     function () {
-        Route::get('/pings', 'ApiController@getPingJson');
+        Route::get('/', 'ApiController@index');
+        Route::get('/search', 'ApiController@search');
+        Route::post('/search', 'ApiController@search');
+        Route::get('/query', 'ApiController@query');
+        Route::post('/query', 'ApiController@query');
     }
 );
 
