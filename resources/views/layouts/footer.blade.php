@@ -12,7 +12,7 @@
 
         @if(App::environment() == 'production')
             <span class="badge badge-secondary">env: {{App::environment()}}</span>
-        @elseif ( App::environment() == 'staging' ?? 'local')
+        @elseif ( App::environment() == 'development' ?? 'staging' ?? 'local')
             <span class="badge badge-danger">env: {{App::environment()}}</span>
         @else
             <span class="badge badge-warning">env: {{App::environment()}}</span>
