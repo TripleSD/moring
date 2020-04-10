@@ -9,6 +9,14 @@
     <div class="float-right d-none d-sm-inline-block">
         <b>Moring</b> <span class="badge badge-dark">v: {{Config::get('moring.version')}}</span>
         <span class="badge badge-dark">b: {{Config::get('moring.build')}}</span>
+
+        @if(App::environment() == 'production')
+            <span class="badge badge-secondary">env: {{App::environment()}}</span>
+        @elseif ( App::environment() == 'staging' ?? 'local')
+            <span class="badge badge-danger">env: {{App::environment()}}</span>
+        @else
+            <span class="badge badge-warning">env: {{App::environment()}}</span>
+        @endif
         |
         <b>Bridge </b>
         @if($bridgeInfo['status'] == 1)
