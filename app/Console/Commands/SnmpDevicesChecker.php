@@ -50,7 +50,7 @@ class SnmpDevicesChecker extends Command
         $devices[] = Devices::find($device_id);
 
         if ($device_id === null) {
-            $devices = Devices::get();
+            $devices = Devices::where('enabled', 1)->get();
         }
 
         foreach ($devices as $device) {
