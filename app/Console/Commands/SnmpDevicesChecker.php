@@ -72,7 +72,7 @@ class SnmpDevicesChecker extends Command
 
                 $status = DevicesLogs::where('device_id', $device->id)->orderBy('id', 'desc')->first();
 
-                if ($status->type === 1) {
+                if (isset($status) && $status->type === 1) {
                     $log = new DevicesLogsRepository();
                     $log->store($device->id, 'Устройство восстановилось', 2);
 
