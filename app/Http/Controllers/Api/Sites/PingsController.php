@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Sites;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sites;
@@ -8,14 +8,14 @@ use App\Models\SitesPingResponses;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ApiController extends Controller
+class PingsController extends Controller
 {
     public function index()
     {
         return 'OK';
     }
 
-    public function search(Request $request)
+    public function search()
     {
         return \Response::json(Sites::pluck('title'));
     }
