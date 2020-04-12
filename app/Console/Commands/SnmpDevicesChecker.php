@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Repositories\Devices\DevicesLogsRepository;
 use App\Http\Controllers\Admin\Network\NetworkDevicesController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Connectors\TelegramConnector;
@@ -68,6 +69,10 @@ class SnmpDevicesChecker extends Command
                 $deviceData = $this->devicesRepository->getDeviceData($deviceConnection);
                 $this->devicesRepository->update($deviceData, $device->id);
             } catch (\Exception $exception) {
+
+                $log = new DevicesLogsRepository();
+                $log->store($device->id, 'Устройство не отвечает', 1);
+
                 if ($this->settingsController->getTelegramStatus() === 1) {
                     try {
                         $chatId = $this->settingsController->getGroupChatId();
