@@ -2,7 +2,7 @@
 
 return [
     'build' => '026',
-    'version' => '0.1.5',
+    'version' => '0.1.6',
     'createYear' => '2019',
     'bridgeUrl' => 'http://api.moring.ru/v1',
     'bridgeCurrentMoringVersionUrl' => '/moring/version',
