@@ -115,17 +115,12 @@ class DevicesRepository extends Repository
     }
 
     /**
-     * @param $request
+     * @param array $deviceData
      * @return array
      * @throws Exception
      */
-    public function getDeviceData($request): array
+    public function getDeviceData(array $deviceData): array
     {
-        $deviceData['hostname']  = $request->input('hostname');               // Hostname device
-        $deviceData['community'] = $request->input('community');              // Device community
-        $deviceData['port']      = $request->input('port');                   // Device snmp port
-        $deviceData['version']   = $request->input('version');                // Device snmp version 1/2/3
-
         try {
             $snmpObject          = new SnmpRepository();
             $snmpFlow            = $snmpObject->startSession($deviceData);

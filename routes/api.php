@@ -20,3 +20,12 @@ use Illuminate\Http\Request;
 //            return $request->user();
 //        });
 //    });
+
+Route::group(
+    ['middleware' => ['throttle:500,1'], 'prefix' => 'pings', 'namespace' => 'Api'],
+    function () {
+        Route::get('/', 'ApiController@index');
+        Route::post('/search', 'ApiController@search');
+        Route::post('/query', 'ApiController@query');
+    }
+);

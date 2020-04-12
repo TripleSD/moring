@@ -1,3 +1,11 @@
+[v.0.1.6 (Build.026)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
+
+- **(New)** - Added enable/disable SNMP device status.
+- **(New)** - Added showing ENV (local/staging/dev/production).
+- **(New)** - Added Grafana integration (sites list with ping for export).
+- **(Fix)** - Fixed SNMP console command. 
+- **(Fix)** - Fixed default value enable/disable status SNMP devices.
+
 [v.0.1.5 (Build.025)](https://github.com/TripleSD/moring/releases/tag/0.1.5)
  - **(New)** - Добавлен вывод серийного номера SNMP устройства в карточке устройства
  - **(New)** - Добавлены быстрые web/ssh/telnet ссылки в карточке SNMP устройства

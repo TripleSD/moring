@@ -44,6 +44,7 @@
                                             ...
                                         </details>
                                     </div>
+
                                     <div class="form-group">
                                         <b>Сетевое имя устройства или IP адрес</b>
                                         {{ Form::text('hostname', null , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
@@ -98,6 +99,7 @@
                                             ...
                                         </details>
                                     </div>
+
                                     <div class="form-group">
                                         <b>Telnet порт</b>
                                         {{Form::text('port_telnet', null, ['class' => 'form-control', 'placeholder' => 'Пример: 23'])}}
@@ -108,6 +110,7 @@
                                             ...
                                         </details>
                                     </div>
+
                                     <div class="form-group">
                                         <b>Web консоль управления</b>
                                         {{Form::text('web_url', null, ['class' => 'form-control', 'placeholder' => 'Пример: http://127.0.0.1'])}}
@@ -118,6 +121,18 @@
                                             ...
                                         </details>
                                     </div>
+
+                                    <div class="form-group">
+                                        <b>Вкл/Выкл</b>
+                                        {{ Form::checkbox('enabled', true, true) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            ...
+                                        </details>
+                                    </div>
+
                                     <button type="submit" class="btn btn-xs bg-gradient-cyan">Добавить</button>
                                     {{ Form::close() }}
                                 </div>
