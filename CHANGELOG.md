@@ -1,5 +1,4 @@
 [v.0.1.6 (Build.026)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
-
 - **(New)** - Added enable/disable SNMP device status.
 - **(New)** - Added showing ENV (local/staging/dev/production).
 - **(New)** - Added Grafana integration (sites list with ping for export).
