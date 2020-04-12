@@ -21,7 +21,6 @@ use Illuminate\Http\Request;
 //        });
 //    });
 
-
 Route::group(
     ['middleware' => ['throttle:500,1'], 'prefix' => 'pings', 'namespace' => 'Api'],
     function () {
