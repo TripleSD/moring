@@ -38,6 +38,7 @@ Route::group(
             function () {
                 Route::get('/', 'SslController@index');
                 Route::post('/search', 'SslController@search');
+                Route::get('/query', 'SslController@query');
                 Route::post('/query', 'SslController@query');
             }
         );

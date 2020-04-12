@@ -97,7 +97,7 @@ class SnmpDevicesChecker extends Command
             } catch (\Exception $exception) {
                 $status = DevicesLogs::where('device_id', $device->id)->orderBy('id', 'desc')->first();
 
-                if ($status->type === 1) {
+                if (isset($status) && $status->type === 1) {
                     return;
                 }
 
