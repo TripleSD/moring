@@ -20,3 +20,15 @@ use Illuminate\Http\Request;
 //            return $request->user();
 //        });
 //    });
+
+
+Route::group(
+    ['prefix' => 'pings', 'namespace' => 'Api'],
+    function () {
+        Route::get('/', 'ApiController@index');
+//        Route::get('/search', 'ApiController@search');
+        Route::post('/search', 'ApiController@search');
+//        Route::get('/query', 'ApiController@query');
+        Route::post('/query', 'ApiController@query');
+    }
+);

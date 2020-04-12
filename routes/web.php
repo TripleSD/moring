@@ -17,17 +17,6 @@ Route::get('/login', 'Auth\LoginController@showLoginForm')->name('login');
 Route::post('/login', 'Auth\LoginController@login');
 
 Route::group(
-    ['prefix' => 'api', 'namespace' => 'Api'],
-    function () {
-        Route::get('/', 'ApiController@index');
-        Route::get('/search', 'ApiController@search');
-        Route::post('/search', 'ApiController@search');
-        Route::get('/query', 'ApiController@query');
-        Route::post('/query', 'ApiController@query');
-    }
-);
-
-Route::group(
     ['middleware' => 'auth'],
     function () {
         Route::get('/', 'HomeController@index')->name('home');
