@@ -7,9 +7,23 @@
     All rights reserved.
     <a href="https://github.com/TripleSD/moring" target="_blank"><i class="fab fa-github-square"></i></a>
     <div class="float-right d-none d-sm-inline-block">
+        |||
         <b>Moring</b> <span class="badge badge-dark">v: {{Config::get('moring.version')}}</span>
         <span class="badge badge-dark">b: {{Config::get('moring.build')}}</span>
-        |
+
+        @if(App::environment() == 'production')
+            <span class="badge badge-dark">env: {{App::environment()}}</span>
+        @elseif ( App::environment() == 'staging')
+            <span class="badge badge-primary">env: {{App::environment()}}</span>
+        @elseif ( App::environment() == 'development')
+            <span class="badge badge-warning">env: {{App::environment()}}</span>
+        @elseif ( App::environment() == 'local')
+            <span class="badge badge-light">env: {{App::environment()}}</span>
+        @else
+            <span class="badge badge-danger">env: {{App::environment()}}</span>
+        @endif
+
+        |||
         <b>Bridge </b>
         @if($bridgeInfo['status'] == 1)
             @if(is_numeric($bridgeInfo['version']))
@@ -34,5 +48,6 @@
            class="btn btn-xs text-primary"
            title="Статус обновлений бриджа">
             <i class="fas fa-history"></i></a>
+        |||
     </div>
 </footer>

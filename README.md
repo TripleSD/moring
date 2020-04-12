@@ -6,6 +6,8 @@
 ![](https://img.shields.io/github/stars/TripleSD/moring)
 ![](https://img.shields.io/github/forks/TripleSD/moring)
 ![](https://img.shields.io/github/license/TripleSD/moring)
+![](https://api.travis-ci.org/AntonMZ/moring.svg?branch=master)
+![](https://requires.io/github/AntonMZ/moring/requirements.svg?branch=dev)
 [![Total alerts](https://img.shields.io/lgtm/alerts/g/TripleSD/moring.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/TripleSD/moring/alerts/)
 [![Language grade: JavaScript](https://img.shields.io/lgtm/grade/javascript/g/TripleSD/moring.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/TripleSD/moring/context:javascript)
 [![Open Source Helpers](https://www.codetriage.com/triplesd/moring/badges/users.svg)](https://www.codetriage.com/triplesd/moring)
@@ -52,7 +54,7 @@ MoRiNg - opensource система мониторинга. На данный м�
 ***
 ### Системные требования
 
-* PHP 7.3
+* PHP 7.2 / 7.3 / 7.4
 * composer
 * Расширение fileinfo
 * Расширение snmp
@@ -115,6 +117,8 @@ MoRiNg - opensource система мониторинга. На данный м�
     ```bash
     php artisan migrate
     ```  
+* запустите оптимизацию приложения для обновления данных
+    php artisan optimize
 ***
 ### Документация
 Минимальная документация по использованию системой будет подготовлена и опубликована в ближайшее время.
@@ -142,9 +146,23 @@ MoRiNg - opensource система мониторинга. На данный м�
 ### Используемые пакеты и фреймворки
 * Фреймворк Laravel 6.5.0
 * Тема AdminLTE
+* [delimitry/snmp-server packet](https://github.com/delimitry/snmp-server)
 ***
 ### Лицензия
 MoRiNg является opensource проектом. Лицезируется на основе MIT License.
 ***
 ### Лог изменений по версиям
 Список изменений доступен в файле [CHANGELOG.md](CHANGELOG.md)
+
+---
+## Documentation
+
+## System Requirements
+
+## Installation
+
+## Support
+
+## Contributing to MoRiNg
+
+# License

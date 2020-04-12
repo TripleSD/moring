@@ -50,16 +50,22 @@ class SnmpDevicesChecker extends Command
         $devices[] = Devices::find($device_id);
 
         if ($device_id === null) {
-            $devices = Devices::get();
+            $devices = Devices::where('enabled', 1)->get();
         }
 
         foreach ($devices as $device) {
             try {
-                $deviceConnection['hostname']  = $device->hostname;
-                $deviceConnection['community'] = $device->community;
-                $deviceConnection['port']      = $device->port;
-                $deviceConnection['version']   = $device->version;
-                $deviceData                    = $this->devicesRepository->getDeviceData($deviceConnection);
+                $deviceConnection['hostname']    = $device->hostname;
+                $deviceConnection['community']   = $device->community;
+                $deviceConnection['port']        = $device->port;
+                $deviceConnection['version']     = $device->version;
+                $deviceConnection['title']       = $device->title;
+                $deviceConnection['enabled']     = $device->enabled;
+                $deviceConnection['port_ssh']    = $device->port_ssh;
+                $deviceConnection['port_telnet'] = $device->port_telnet;
+                $deviceConnection['web_url']     = $device->web_url;
+
+                $deviceData = $this->devicesRepository->getDeviceData($deviceConnection);
                 $this->devicesRepository->update($deviceData, $device->id);
             } catch (\Exception $exception) {
                 if ($this->settingsController->getTelegramStatus() === 1) {

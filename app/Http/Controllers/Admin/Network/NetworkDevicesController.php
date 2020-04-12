@@ -92,14 +92,8 @@ class NetworkDevicesController extends Controller
     public function update(UpdateAndStoreDeviceRequest $request)
     {
         try {
-            //TODO убрать дублирование кода
-            $deviceData = $this->deviceRepository->getDeviceData($request);
-
-            $deviceData['title']       = $request->input('title');
-            $deviceData['enabled']     = $request->input('enabled')->default(0);
-            $deviceData['port_ssh']    = $request->input('port_ssh');
-            $deviceData['port_telnet'] = $request->input('port_telnet');
-            $deviceData['web_url']     = $request->input('web_url');
+            $connection = $this->setVars($request);
+            $deviceData = $this->deviceRepository->getDeviceData($connection);
 
             $this->deviceRepository->update($deviceData, $request->device);
 
@@ -126,12 +120,8 @@ class NetworkDevicesController extends Controller
                 throw new Exception('Данное устройство уже есть в списке');
             }
 
-            $deviceData                = $this->deviceRepository->getDeviceData($request);
-            $deviceData['title']       = $request->input('title');
-            $deviceData['enabled']     = 1;
-            $deviceData['port_ssh']    = $request->input('port_ssh');
-            $deviceData['port_telnet'] = $request->input('port_telnet');
-            $deviceData['web_url']     = $request->input('web_url');
+            $connection = $this->setVars($request);
+            $deviceData = $this->deviceRepository->getDeviceData($connection);
 
             $this->deviceRepository->store($deviceData);
             flash('Новое устройство успешно добавлено.')->success();
@@ -142,5 +132,20 @@ class NetworkDevicesController extends Controller
 
             return redirect()->back()->withInput();
         }
+    }
+
+    private function setVars(UpdateAndStoreDeviceRequest $request)
+    {
+        $deviceData['hostname']    = $request->input('hostname');               // Hostname device
+        $deviceData['community']   = $request->input('community');              // Device community
+        $deviceData['port']        = $request->input('port');                   // Device snmp port
+        $deviceData['version']     = $request->input('version');                // Device snmp version 1/2/3
+        $deviceData['title']       = $request->input('title');
+        $deviceData['enabled']     = $request->input('enabled', 0);
+        $deviceData['port_ssh']    = $request->input('port_ssh');
+        $deviceData['port_telnet'] = $request->input('port_telnet');
+        $deviceData['web_url']     = $request->input('web_url');
+
+        return $deviceData;
     }
 }
