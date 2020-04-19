@@ -22,21 +22,22 @@ class SslController extends Controller
 
     public function query(Request $request)
     {
-        $arr_r     = [];
-        $targets   = $request->input('targets');
+        $arr_r   = [];
+        $targets = $request->input('targets');
 
         foreach ($targets as $key => $target) {
-            $url               = $target['target'];
-            $site              = Sites::where('url', $target)->first();
-            $values            = SitesSslCertificates::where('site_id', $site->id)->get();
+            $url    = $target['target'];
+            $site   = Sites::where('url', $target)->first();
+            $values = SitesSslCertificates::where('site_id', $site->id)->get();
+
             $arr['target']     = $url;
             $arr['datapoints'] = [];
 
+            $arr_count = 0;
+
             foreach ($values as $key => $value) {
-                array_push(
-                    $arr['datapoints'],
-                    [$value->expiration_days, Carbon::now()->getPreciseTimestamp(3)]
-                );
+                $arr['datapoints'][$arr_count] = [$value->expiration_days, Carbon::now()->getPreciseTimestamp(3)];
+                $arr_count++;
             }
 
             $arr_r[] = $arr;

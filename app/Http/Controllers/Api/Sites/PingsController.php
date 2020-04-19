@@ -34,14 +34,18 @@ class PingsController extends Controller
             $values            = SitesPingResponses::where('site_id', $site->id)
                 ->whereBetween('created_at', [$startTime, $endTime])
                 ->get();
+
             $arr['target']     = $url;
             $arr['datapoints'] = [];
 
+            $arr_count         = 0;
+
             foreach ($values as $key => $value) {
-                array_push(
-                    $arr['datapoints'],
-                    [$value->average, Carbon::parse($value->created_at)->getPreciseTimestamp(3)]
-                );
+                $arr['datapoints'][$arr_count] = [
+                    $value->average,
+                    Carbon::parse($value->created_at)->getPreciseTimestamp(3)
+                ];
+                $arr_count++;
             }
 
             $arr_r[] = $arr;
