@@ -1,5 +1,9 @@
-[v.0.1.7 (Build.02x)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
-- **(Fix)** - Fixed show snmp port in devices list.
+[v.0.1.7 (Build.027)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
+- **(New)** - Added showing errors list for SNMP device.
+- **(New)** - Added showing errors counts for SNMP devices list.
+- **(New)** - Added Telegram notifications for SNMP device (up/down)
+- **(New)** - Added new Grafana integration (export sites list with SSL certificate expiration date)
+- **(Fix)** - Fixed showing snmp port in devices list.
 
 [v.0.1.6 (Build.026)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
 - **(New)** - Added enable/disable SNMP device status.
