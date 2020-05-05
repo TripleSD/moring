@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\Sites;
 
 use App\Http\Controllers\Controller;
 use App\Models\Sites;
@@ -8,14 +8,14 @@ use App\Models\SitesPingResponses;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
-class ApiController extends Controller
+class PingsController extends Controller
 {
     public function index()
     {
         return 'OK';
     }
 
-    public function search(Request $request)
+    public function search()
     {
         return \Response::json(Sites::pluck('title'));
     }
@@ -29,19 +29,23 @@ class ApiController extends Controller
         $endTime   = Carbon::parse($range['to'])->addHours(3);
 
         foreach ($targets as $key => $target) {
-            $url               = $target['target'];
-            $site              = Sites::where('url', $target)->first();
-            $values            = SitesPingResponses::where('site_id', $site->id)
+            $url    = $target['target'];
+            $site   = Sites::where('url', $target)->first();
+            $values = SitesPingResponses::where('site_id', $site->id)
                 ->whereBetween('created_at', [$startTime, $endTime])
                 ->get();
+
             $arr['target']     = $url;
             $arr['datapoints'] = [];
 
+            $arr_count = 0;
+
             foreach ($values as $key => $value) {
-                array_push(
-                    $arr['datapoints'],
-                    [$value->average, Carbon::parse($value->created_at)->getPreciseTimestamp(3)]
-                );
+                $arr['datapoints'][$arr_count] = [
+                    $value->average,
+                    Carbon::parse($value->created_at)->getPreciseTimestamp(3),
+                ];
+                $arr_count++;
             }
 
             $arr_r[] = $arr;

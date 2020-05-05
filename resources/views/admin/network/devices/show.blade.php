@@ -158,7 +158,7 @@
                                 <li class="small">
                                     Последнее время опроса:
                                     <span class="float-right">
-                                        {{ \Carbon\Carbon::parse($device->updated_at)->format('d-m-Y H:i:s') }}
+                                        {{ \Carbon\Carbon::parse($device->updated_at)->format('d.m.Y H:i:s') }}
                                     </span>
                                 </li>
                                 <li class="small">
@@ -234,24 +234,36 @@
                                             <tr>
                                                 <td class="small">
                                                     @if($log->resolved === 1)
-                                                        <i class="far fa-check-circle text-success"></i>
                                                         <span class="badge badge-secondary">
-                                                            @lang('messages.network.device.type_status.error')
+                                                            <i class="fas fa-eye"></i>
+                                                        </span>
+                                                        <span class="badge badge-secondary">
+                                                            @lang('messages.network.device.type_status.alert')
                                                         </span>
                                                     @else
-                                                        <i class="fas fa-exclamation-circle text-danger"></i>
+                                                        <span class="badge badge-danger">
+                                                            <i class="fas fa-eye"></i>
+                                                        </span>
                                                         @if($log->type === 1)
                                                             <span class="badge badge-danger">
-                                                                @lang('messages.network.device.type_status.error')
+                                                                @lang('messages.network.device.type_status.alert')
+                                                            </span>
+                                                        @else
+                                                            <span class="badge badge-success">
+                                                                @lang('messages.network.device.type_status.info')
                                                             </span>
                                                         @endif
                                                     @endif
                                                 </td>
                                                 <td class="small">
-                                                    @lang('messages.network.device.snmp_fail')
+                                                    @if($log->type === 1)
+                                                        @lang('messages.network.device.snmp.device.log.down')
+                                                    @else
+                                                        @lang('messages.network.device.snmp.device.log.up')
+                                                    @endif
                                                 </td>
                                                 <td class="small">
-                                                    {{\Carbon\Carbon::parse($log->created_at)->format('d-m-Y H:i:s')}}
+                                                    {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
                                                 </td>
                                                 <td>
                                                     <a class="btn btn-" href=""
