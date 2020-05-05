@@ -76,7 +76,6 @@ class SnmpDevicesChecker extends Command
                     $log = new DevicesLogsRepository();
                     $log->store($device->id, 'Устройство восстановилось', 2);
 
-
                     if ($this->settingsController->getTelegramStatus() === 1) {
                         $url = route('network.devices.show', $device->id);
                         try {
@@ -84,7 +83,7 @@ class SnmpDevicesChecker extends Command
                             $this->telegramConnector->sendMessage(
                                 $chatId,
                                 trim(
-                                    "✅<b>Уведомление SNMP</b> \n" . 'Связь восстановлена'. "\n" .
+                                    "✅<b>Уведомление SNMP</b> \n" . 'Связь восстановлена' . "\n" .
                                     "ID $device->id\n" . $device->vendor->title . ' ' . $device->model->title
                                 ),
                                 $url
@@ -93,7 +92,6 @@ class SnmpDevicesChecker extends Command
                         }
                     }
                 }
-
             } catch (\Exception $exception) {
                 $status = DevicesLogs::where('device_id', $device->id)->orderBy('id', 'desc')->first();
 

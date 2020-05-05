@@ -20,8 +20,8 @@ class TelegramConnector extends Controller
                     'inline_keyboard' => [
                         [
                             ['text' => 'URL', 'url' => $url],
-                        ]
-                    ]
+                        ],
+                    ],
                 ];
                 $encodedKeyboard = json_encode($keyboard);
 
