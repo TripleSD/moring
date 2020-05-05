@@ -22,10 +22,24 @@ use Illuminate\Http\Request;
 //    });
 
 Route::group(
-    ['middleware' => ['throttle:500,1'], 'prefix' => 'pings', 'namespace' => 'Api'],
+    ['middleware' => ['throttle:500,1'], 'prefix' => 'sites'],
     function () {
-        Route::get('/', 'ApiController@index');
-        Route::post('/search', 'ApiController@search');
-        Route::post('/query', 'ApiController@query');
+        Route::group(
+            ['prefix' => 'pings', 'namespace' => 'Api\Sites'],
+            function () {
+                Route::get('/', 'PingsController@index');
+                Route::post('/search', 'PingsController@search');
+                Route::post('/query', 'PingsController@query');
+            }
+        );
+
+        Route::group(
+            ['prefix' => 'ssl', 'namespace' => 'Api\Sites'],
+            function () {
+                Route::get('/', 'SslController@index');
+                Route::post('/search', 'SslController@search');
+                Route::post('/query', 'SslController@query');
+            }
+        );
     }
 );
