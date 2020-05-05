@@ -1,3 +1,7 @@
+[v.0.1.8 (Build.028)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
+- **(Add)** - Added treshold pings values of sites.
+- **(Fix)** - Fixed order columns in sites table.
+
 [v.0.1.7 (Build.027)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
 - **(New)** - Added showing errors list for SNMP device.
 - **(New)** - Added showing errors counts for SNMP devices list.
