@@ -29,21 +29,21 @@ class PingsController extends Controller
         $endTime   = Carbon::parse($range['to'])->addHours(3);
 
         foreach ($targets as $key => $target) {
-            $url               = $target['target'];
-            $site              = Sites::where('url', $target)->first();
-            $values            = SitesPingResponses::where('site_id', $site->id)
+            $url    = $target['target'];
+            $site   = Sites::where('url', $target)->first();
+            $values = SitesPingResponses::where('site_id', $site->id)
                 ->whereBetween('created_at', [$startTime, $endTime])
                 ->get();
 
             $arr['target']     = $url;
             $arr['datapoints'] = [];
 
-            $arr_count         = 0;
+            $arr_count = 0;
 
             foreach ($values as $key => $value) {
                 $arr['datapoints'][$arr_count] = [
                     $value->average,
-                    Carbon::parse($value->created_at)->getPreciseTimestamp(3)
+                    Carbon::parse($value->created_at)->getPreciseTimestamp(3),
                 ];
                 $arr_count++;
             }

@@ -19,7 +19,7 @@ class TelegramConnector extends Controller
                 $keyboard        = [
                     'inline_keyboard' => [
                         [
-                            ['text' => 'URL', 'url' => $url]
+                            ['text' => 'URL', 'url' => $url],
                         ]
                     ]
                 ];
@@ -31,7 +31,7 @@ class TelegramConnector extends Controller
                         'chat_id' => $chatId,
                         'text' => $messageText,
                         'parse_mode' => 'html',
-                        'reply_markup' => $encodedKeyboard
+                        'reply_markup' => $encodedKeyboard,
                     ],
                 ];
             } else {
@@ -40,7 +40,6 @@ class TelegramConnector extends Controller
                     'query' => ['chat_id' => $chatId, 'text' => $messageText, 'parse_mode' => 'html'],
                 ];
             }
-
 
             $client->post("https://api.telegram.org/bot$apiKey/sendMessage", $param);
         } catch (\Exception $e) {

@@ -2,12 +2,12 @@
 
 namespace App\Console\Commands;
 
-use App\Models\DevicesLogs;
-use App\Repositories\Devices\DevicesLogsRepository;
 use App\Http\Controllers\Admin\Network\NetworkDevicesController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Connectors\TelegramConnector;
 use App\Models\Devices;
+use App\Models\DevicesLogs;
+use App\Repositories\Devices\DevicesLogsRepository;
 use App\Repositories\Devices\DevicesRepository;
 use Illuminate\Console\Command;
 

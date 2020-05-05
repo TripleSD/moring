@@ -20,7 +20,7 @@ class DevicesLogsRepository extends Repository
      * @param string $message
      * @param int $type
      */
-    public function store(int $deviceId, string $message, int $type) : void
+    public function store(int $deviceId, string $message, int $type): void
     {
         $log            = new DevicesLogs();
         $log->device_id = $deviceId;

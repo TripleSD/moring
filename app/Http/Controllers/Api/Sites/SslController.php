@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Api\Sites;
 
-use Carbon\Carbon;
 use App\Http\Controllers\Controller;
 use App\Models\Sites;
 use App\Models\SitesSslCertificates;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class SslController extends Controller
