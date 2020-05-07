@@ -193,40 +193,50 @@
                                                                     @isset($site->getSslCertification->getSSL->expiration_days)
                                                                         @if ($site->getSslCertification->getSSL->expiration_days >= 10)
                                                                             <span class="small">
-                                                                        <i class="fa fa-lock fa-1 text-success"
-                                                                           title="Действующий SSL сертификат"></i>
-                                                                        </span>
+                                                                                <span class="badge badge-success">
+                                                                                    <i class="fa fa-lock fa-1x" title="Действующий SSL сертификат"></i>
+                                                                                    <span class="text-dark">
+                                                                                        {{ $site->getSslCertification->getSSL->expiration_days }}
+                                                                                    </span>
+                                                                                </span>
+                                                                            </span>
                                                                         @elseif($site->getSslCertification->getSSL->expiration_days >= 5)
                                                                             <span class="small">
-                                                                        <i class="fa fa-lock fa-1 text-warning"
-                                                                           title="Действующий SSL сертификат"></i>
-                                                                    </span>
+                                                                                <span class="badge badge-warning">
+                                                                                    <i class="fa fa-lock fa-1x" title="Действующий SSL сертификат"></i>
+                                                                                    <span class="text-dark">
+                                                                                            {{ $site->getSslCertification->getSSL->expiration_days }}
+                                                                                    </span>
+                                                                                </span>
+                                                                            </span>
                                                                         @elseif($site->getSslCertification->getSSL->expiration_days >= 1)
                                                                             <span class="small">
-                                                                        <i class="fa fa-lock fa-1 text-danger"
-                                                                           title="Действующий SSL сертификат"></i>
-                                                                    </span>
+                                                                                <span class="badge badge-danger">
+                                                                                    <i class="fa fa-lock fa-1x" title="Действующий SSL сертификат"></i>
+                                                                                    <span class="text-dark">
+                                                                                            {{ $site->getSslCertification->getSSL->expiration_days }}
+                                                                                    </span>
+                                                                                </span>
+                                                                            </span>
                                                                         @else
                                                                             <span class="small">
-                                                                        <i class="fa fa-lock fa-1 text-gray"
-                                                                           title="SSL сертификат истек"></i>
-                                                                    </span>
+                                                                                <span class="badge badge-secondary">
+                                                                                    <i class="fa fa-lock fa-1x" title="SSL сертификат истек"></i>
+                                                                                    <span class="text-dark">
+                                                                                            {{ $site->getSslCertification->getSSL->expiration_days }}
+                                                                                    </span>
+                                                                                </span>
+                                                                            </span>
                                                                         @endif
-                                                                        <span class="small">
-                                                                    ({{ $site->getSslCertification->getSSL->expiration_days }}
-                                                                    дней)
-                                                                    </span>
                                                                     @else
                                                                         <span class="small">
-                                                                    <i class="fa fa-lock fa-1 text-gray"
-                                                                       title="SSL сертификат не установлен / Не включена SSL проверка"></i>
-                                                                </span>
+                                                                            <i class="fa fa-lock fa-1 text-gray" title="SSL сертификат не установлен / Не включена SSL проверка"></i>
+                                                                        </span>
                                                                     @endif
                                                                 @else
                                                                     <span class="small">
-                                                                    <i class="fa fa-lock fa-1 text-gray"
-                                                                       title="SSL сертификат не установлен / Не включена SSL проверка"></i>
-                                                                </span>
+                                                                        <i class="fa fa-lock fa-1 text-gray" title="SSL сертификат не установлен / Не включена SSL проверка"></i>
+                                                                    </span>
                                                                 @endif
                                                             @endif
 
