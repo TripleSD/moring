@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Sites;
 
+use App\Models\Sites;
 use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesPings;
 use App\Http\Controllers\Controller;
@@ -216,6 +217,9 @@ class SitesController extends Controller
 
             // Getting current time.
             $startTime = Carbon::now();
+
+            $site = Sites::find($id);
+            $site->update(['ip_address' => gethostbyname($site->url)]);
 
             // Starting checks
             $check = new SitesChecker($id);
