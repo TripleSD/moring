@@ -153,10 +153,10 @@
                                 <thead>
                                 <tr>
                                     <th>URL</th>
-                                    <th>Веб сервер</th>
-                                    <th>Версия PHP</th>
+                                    <th>Веб окружение</th>
+                                    <th>Интерпретатор</th>
                                     <th>Проверки</th>
-                                    <th>HTTP Code</th>
+                                    <th>Статус</th>
                                     <th></th>
                                 </tr>
                                 </thead>
@@ -178,14 +178,6 @@
                                                         <div class="vl pt-1 text-gray"></div>
                                                     @endif
                                                     <div class="col">
-                                                        @if($site->https === 1)
-                                                            <a href="https://{{$site->url}}" target="_blank">
-                                                                <i class="fas fa-globe"></i></a>
-                                                        @else
-                                                            <a href="http://{{$site->url}}" target="_blank">
-                                                                <i class="fas fa-globe"></i></a>
-                                                        @endif
-
                                                         {{$site->url}}
                                                         @if($site->enabled === 1)
                                                             @if($site->https === 1)
@@ -240,6 +232,10 @@
                                                                 @endif
                                                             @endif
 
+                                                            <a href="https://{{$site->url}}" target="_blank" class="small">
+                                                                <i class="fas fa-globe"></i>
+                                                            </a>
+
                                                             @isset($site->getSslCertification->getSSL->expiration_days)
                                                                 <div class="small text-gray">
                                                                     <i class="fas fa-history"></i>
@@ -270,7 +266,9 @@
                                                                     <i class="fa fa-exclamation-triangle"></i>
                                                             </span>
                                                         @else
-                                                            {{$site->getWebServer->web_server}}
+                                                            <span class="small">
+                                                                {{$site->getWebServer->web_server}}
+                                                            </span>
                                                         @endempty
                                                     </div>
                                                     <div class="small text-gray">
