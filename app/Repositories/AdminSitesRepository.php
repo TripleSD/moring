@@ -63,6 +63,9 @@ class AdminSitesRepository extends Repository
             $fillable['check_https'] = 1;
         }
 
+        // Get ip address
+        $fillable['ip_address'] = gethostbyname($fillable['url']);
+
         //    Now we activate Moring file usage, if path has been added
         if (strlen($fillable['file_url']) >= 5) {
             $fillable['use_file'] = 1;
