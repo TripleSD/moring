@@ -293,10 +293,9 @@
                                                                             <i class="fa fa-exclamation-triangle"></i>
                                                                     </span>
                                                                 @else
-                                                                    <span class="text-warning"
-                                                                          title="Не был получен ответ сервера об установленной версии">
-                                                                        <i class="fa fa-exclamation-triangle"></i>
-                                                                    </span>
+                                                                    <i class="far fa-frown"
+                                                                       title="Не был получен ответ сервера об установленной версии"></i>
+                                                                    Unknown
                                                                 @endif
                                                             @else
                                                                 @if($site->getPhpVersion->version != 0)
@@ -353,10 +352,9 @@
                                                                         </span>
                                                                     @endif
                                                                 @else
-                                                                    <span class="text-warning"
-                                                                          title="Не был получен ответ сервера об установленной версии">
-                                                                        <i class="fa fa-exclamation-triangle"></i>
-                                                                    </span>
+                                                                    <i class="far fa-frown"
+                                                                       title="Не был получен ответ сервера об установленной версии"></i>
+                                                                    Unknown
                                                                 @endif
                                                             @endif
                                                             <div class="text-gray">
@@ -471,6 +469,16 @@
                                                                 </span>
                                                                 @endif
                                                             @endif
+
+                                                            @empty($site->ip_address)
+                                                                <i class="fas fa-map-marker-alt"></i>
+                                                                <i class="far fa-frown"
+                                                                   title="Не удалось определить IP адрес"></i>
+                                                                Unknown
+                                                            @else
+                                                                <i class="fas fa-map-marker-alt"></i>
+                                                                {{ $site->ip_address }}
+                                                            @endempty
                                                         </div>
                                                         <div class="text-gray">
                                                             @empty(!$site->getHttpCode)
