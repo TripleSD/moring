@@ -3,15 +3,17 @@
     height: 60px;
 }
 .main-sidebar {
-    background-image: linear-gradient(rgba(255,255,255,0.2), rgba(255,255,255,0.2)),url("../img/theme/background.jpg");
-    background-position: top;
+    background-image: linear-gradient(to top,rgba(255,255,255,0.4), rgba(255,255,255,0.1)),url("../img/theme/background.jpg");
 }
 .card-header {
     background-image: linear-gradient(rgba(255,255,255,0.8), rgba(255,255,255,0.8)),url("../img/theme/background.jpg");
-    background-position: bottom;
 }
 
 .main-header {
-    background-image: linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),url("../img/theme/background.jpg");
-    background-position: top;
+    background-image: linear-gradient(to left,rgba(255,255,255,0.4), rgba(255,255,255,0.1)),url("../img/theme/background.jpg");
+}
+
+.login-page,
+.register-page {
+    background-image: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,1)),url("../img/theme/background.jpg");
 }
