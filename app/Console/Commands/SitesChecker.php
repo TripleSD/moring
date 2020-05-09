@@ -183,7 +183,7 @@ class SitesChecker extends Command
 
             // Now we remove pending status from site
             $pending = Sites::where('id', $site->id)->first();
-            if ((int)($pending->pending) === 1) {
+            if ((int) ($pending->pending) === 1) {
                 $pending->pending = 0;
                 $pending->save();
             }
