@@ -19,7 +19,7 @@ class CreateItemsSortsTable extends Migration
             $table->string('item_name')->comment('Item name being sorted');
             $table->integer('position')->comment('Position of the item in the screen');
             $table->foreign('user_id')->references('id')->on('users');
-            $table->smallInteger('display')->default(1)->comment('Show or hide item in the screen');
+            $table->boolean('display')->default(1)->comment('Show or hide item in the screen');
             $table->timestamps();
         });
     }
