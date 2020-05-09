@@ -16,7 +16,7 @@ class AddFieldCheckPhpToSitesCheckList extends Migration
         Schema::table(
             'sites_checks_list',
             function (Blueprint $table) {
-                $table->smallInteger('check_php')
+                $table->boolean('check_php')
                     ->default(1)
                     ->after('http_code');
             }
