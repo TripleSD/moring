@@ -16,16 +16,8 @@ class AddPingsSitesTrasholds extends Migration
         Schema::table(
             'sites',
             function (Blueprint $table) {
-                $table->integer('ping_treshold')->default('0')
+                $table->integer('ping_treshold')->default(0)
                     ->after('pending')->comment('Ping treshold (int) value');
-            }
-        );
-
-        Schema::table(
-            'sites',
-            function (Blueprint $table) {
-                $table->boolean('ping_treshold_status')->default('0')
-                    ->after('ping_treshold')->comment('Ping treshold status');
             }
         );
     }
