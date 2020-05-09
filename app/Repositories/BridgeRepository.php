@@ -29,7 +29,7 @@ class BridgeRepository extends Repository
         $response = $httpClient->request(
             'GET',
             Config::get('moring.bridgeUrl') . Config::get('moring.bridgeCurrentVersionUrl'),
-            ['query' => ['identificator' => $identificator,'env' => env('APP_ENV')], 'allow_redirects' => false]
+            ['query' => ['identificator' => $identificator], 'allow_redirects' => false]
         );
         $bridgeBuild = json_decode($response->getBody(), true);
 
