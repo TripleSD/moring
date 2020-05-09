@@ -8,17 +8,17 @@ class SettingsRepository extends Repository
 {
     public function getTelegramStatus()
     {
-        return (int)Settings::where('parameter', 'telegram_enable_status')->value('value');
+        return (int) Settings::where('parameter', 'telegram_enable_status')->value('value');
     }
 
     public function getApiKey()
     {
-        return (string)Settings::where('parameter', 'telegram_api_key')->value('value');
+        return (string) Settings::where('parameter', 'telegram_api_key')->value('value');
     }
 
     public function getGroupChatId()
     {
-        return (string)Settings::where('parameter', 'telegram_group_chat_id')->value('value');
+        return (string) Settings::where('parameter', 'telegram_group_chat_id')->value('value');
     }
 
     public function updateTelegramStatus($request)
@@ -41,7 +41,7 @@ class SettingsRepository extends Repository
 
     public function getIdentificator()
     {
-        return (string)Settings::where('parameter', 'identificator')->value('value');
+        return (string) Settings::where('parameter', 'identificator')->value('value');
     }
 
     public function updateIdentificatorParam($identificator)
