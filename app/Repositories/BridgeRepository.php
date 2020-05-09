@@ -16,7 +16,9 @@ class BridgeRepository extends Repository
         $url = Config::get('moring.bridgeUrl') . Config::get(
                 'moring.bridgeCreateIdentificatorUrl'
             );
-        $response = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+        $response = $httpClient->request('GET', $url,
+                                         ['query' => ['env' => env('APP_ENV')],
+                                         'allow_redirects' => false]);
 
         return json_decode($response->getBody(), true);
     }
