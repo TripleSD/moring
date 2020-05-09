@@ -95,7 +95,7 @@ class SitesChecker extends Command
 
     private function ckeckSite($site): void
     {
-        Sites::where('id',$site->id)->update(['ip_address' => gethostbyname($site->url)]);
+        Sites::where('id', $site->id)->update(['ip_address' => gethostbyname($site->url)]);
 
         try {
             if ($site->checksList->use_file === 1) {
@@ -183,7 +183,7 @@ class SitesChecker extends Command
 
             // Now we remove pending status from site
             $pending = Sites::where('id', $site->id)->first();
-            if ((int) ($pending->pending) === 1) {
+            if ((int)($pending->pending) === 1) {
                 $pending->pending = 0;
                 $pending->save();
             }
