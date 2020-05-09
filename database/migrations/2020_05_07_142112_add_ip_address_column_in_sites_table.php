@@ -13,9 +13,15 @@ class AddIpAddressColumnInSitesTable extends Migration
      */
     public function up()
     {
-        Schema::table('sites', function (Blueprint $table) {
-            $table->string('ip_address')->after('url')->comment('IP address');
-        });
+        Schema::table(
+            'sites',
+            function (Blueprint $table) {
+                $table->string('ip_address')
+                    ->after('url')
+                    ->nullable()
+                    ->comment('IP address');
+            }
+        );
     }
 
     /**
