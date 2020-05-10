@@ -8,18 +8,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Sites extends Model
 {
-    protected $fillable = [
-        'title',
-        'url',
-        'active',
-        'comment',
-        'file_url',
-        'https',
-        'enabled',
-        'pending',
-        'ip_address',
-        'trashold'
-    ];
+    protected $fillable = ['title', 'url', 'active', 'comment', 'file_url', 'https', 'enabled', 'pending',
+                           'ip_address', 'ping_trashold'];
 
     use SoftDeletes;
 
