@@ -36,6 +36,7 @@ class UpdateSiteRequest extends FormRequest
             'check_ssl' => 'integer | max:1',
             'enabled' => 'integer | max:1',
             'comment' => 'nullable | max:255',
+            'trashold' => 'integer | nullable',
         ];
     }
 
