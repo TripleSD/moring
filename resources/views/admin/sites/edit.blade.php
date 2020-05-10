@@ -1,20 +1,20 @@
 @extends('layouts.app')
 
 @section('content')
-        <div class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                    <div class="col-sm-4">
-                        <h1 class="m-0 text-dark">Редактирование сайта</h1>
-                    </div>
-                    <div class="col-sm-8">
-                        <ol class="breadcrumb float-sm-right">
-                            <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Редактирование сайта</li>
-                        </ol>
-                    </div>
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-4">
+                    <h1 class="m-0 text-dark">Редактирование сайта</h1>
+                </div>
+                <div class="col-sm-8">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Редактирование сайта</li>
+                    </ol>
                 </div>
             </div>
+        </div>
 
         <!-- Main content -->
         <div class="content">
@@ -42,7 +42,8 @@
                                             <summary>
                                                 Дополнительная информация
                                             </summary>
-                                            Введите название сайта, которое поможет Вам легче ориентироваться в списке сайтов.
+                                            Введите название сайта, которое поможет Вам легче ориентироваться в списке
+                                            сайтов.
                                         </details>
                                     </div>
 
@@ -53,7 +54,8 @@
                                             <summary>
                                                 Дополнительная информация
                                             </summary>
-                                            Введите URL сайта без указания http/https префиксов - эти настройки будут дальше.
+                                            Введите URL сайта без указания http/https префиксов - эти настройки будут
+                                            дальше.
                                         </details>
                                     </div>
 
@@ -78,8 +80,10 @@
                                             <summary>
                                                 Дополнительная информация
                                             </summary>
-                                            Вы можете получать более подробную информацию о состоянии Вашего оборудования.
-                                            Для этого необходимо установить файл мониторинга на контролируемый сервер (необходимо вводить полный путь к файлу)
+                                            Вы можете получать более подробную информацию о состоянии Вашего
+                                            оборудования.
+                                            Для этого необходимо установить файл мониторинга на контролируемый сервер
+                                            (необходимо вводить полный путь к файлу)
                                         </details>
                                     </div>
 
@@ -93,7 +97,8 @@
                                             <summary>
                                                 Дополнительная информация
                                             </summary>
-                                            Если Вы не желаете использовать файл мониторинг на текущем этапе, просто снимите отметку с данного чекбокса.
+                                            Если Вы не желаете использовать файл мониторинг на текущем этапе, просто
+                                            снимите отметку с данного чекбокса.
                                         </details>
                                     </div>
                                     <div class="form-group">
@@ -113,20 +118,22 @@
                                         <div class="form-group col-md-3">
                                             <label>Поддержка HTTPS</label><br>
                                             <div class="form-check-inline">
-                                            {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
+                                                {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
                                                 {{ Form::checkbox('https', true, $site->https) }}
                                             </div>
                                             <details class="mt--3 small">
                                                 <summary>
                                                     Дополнительная информация
                                                 </summary>
-                                                Если сервер поддерживает защищенное соединение (HTTPS), отметьте этот чекбокс для получения корректных данных об ответе сервера на HTTP запрос.
+                                                Если сервер поддерживает защищенное соединение (HTTPS), отметьте этот
+                                                чекбокс для получения корректных данных об ответе сервера на HTTP
+                                                запрос.
                                             </details>
                                         </div>
                                         <div class="form-group col-md-4">
                                             <label>Мониторинг SSL</label><br>
                                             <div class="form-check-inline">
-                                            {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
+                                                {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
                                                 {{ Form::checkbox('check_ssl', true, $site->checksList->check_ssl) }}
                                             </div>
                                             <details class="mt--3 small">
@@ -150,27 +157,41 @@
                                             </summary>
                                             Отметьте чекбокс для контроля версии PHP.
                                         </details>
-
                                     </div>
 
                                     <div class="form-group">
                                         <label>Описание</label>
                                         {{ Form::text('comment', $site->comment, ['class' => 'form-control', 'placeholder' => 'Это мой любимый сайт и я всегда радуюсь, видя его онлайн, но иногда...']) }}
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        Здесь Вы можете ввести дополнительную информацию для болеее полного описания сайта.
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Здесь Вы можете ввести дополнительную информацию для болеее полного описания
+                                            сайта.
                                         </details>
                                     </div>
+
+                                    <div class="form-group">
+                                        <b>Ping trashold</b>
+                                        {{ Form::text('ping_trashold', $site->ping_trashold , ['class' => 'form-control', 'placeholder' => '10']) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Максимальное значение ping при котором необходимо уведомлять
+                                                администратора
+                                            </summary>
+                                            Ping trashold
+                                        </details>
+                                    </div>
+
                                     <div class="form-row ">
                                         <div class="form-group col-md-4">
-                                    <button type="submit" class="btn btn-xs bg-gradient-cyan">Обновить</button>
-                                    {{ Form::close() }}
+                                            <button type="submit" class="btn btn-xs bg-gradient-cyan">Обновить</button>
+                                            {{ Form::close() }}
                                         </div>
                                         <div class="form-group col-md-4">
-                                    {{Form::open([ 'url' => route('admin.sites.destroy', $site->id), 'method' => 'delete', 'enctype' => "multipart/form-data"])}}
-                                    <button type="submit" class="btn btn-xs bg-gradient-red">Удалить</button>
-                                    {{ Form::close() }}
+                                            {{Form::open([ 'url' => route('admin.sites.destroy', $site->id), 'method' => 'delete', 'enctype' => "multipart/form-data"])}}
+                                            <button type="submit" class="btn btn-xs bg-gradient-red">Удалить</button>
+                                            {{ Form::close() }}
                                         </div>
                                     </div>
                                 </div>

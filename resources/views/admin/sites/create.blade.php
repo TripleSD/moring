@@ -81,69 +81,81 @@
                                         </div>
                                         <details class="mt--3 small">
                                             <summary>
-                                            Дополнительная информация
+                                                Дополнительная информация
                                             </summary>
                                             Проверка возвращаемого сайтом ответа на HTTP запрос.
                                         </details>
                                     </div>
 
-                                <div class="form-group">
-                                    <b>HTTPS</b>
-                                    {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
-                                    {{ Form::checkbox('https', 1, false) }}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        Если сервер поддерживает защищенное соединение (HTTPS), отметьте этот чекбокс
-                                        для получения корректных данных об ответе сервера на HTTP запрос.
-                                    </details>
-                                </div>
+                                    <div class="form-group">
+                                        <b>HTTPS</b>
+                                        {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('https', 1, false) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Если сервер поддерживает защищенное соединение (HTTPS), отметьте этот
+                                            чекбокс
+                                            для получения корректных данных об ответе сервера на HTTP запрос.
+                                        </details>
+                                    </div>
 
-                                <div class="form-group">
-                                    <b>Проверка SSL</b>
-                                    {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
-                                    {{ Form::checkbox('check_ssl', 1, false) }}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        Отметьте чекбокс для проверки SSL сертификата сервера.
-                                    </details>
-                                </div>
+                                    <div class="form-group">
+                                        <b>Проверка SSL</b>
+                                        {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('check_ssl', 1, false) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Отметьте чекбокс для проверки SSL сертификата сервера.
+                                        </details>
+                                    </div>
 
-                                <div class="form-group">
-                                    <b>Проверка версии PHP</b>
-                                    {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}
-                                    {{ Form::checkbox('check_php', 1, true) }}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        Отметьте чекбокс для контроля версии PHP.
-                                    </details>
-                                </div>
+                                    <div class="form-group">
+                                        <b>Проверка версии PHP</b>
+                                        {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}
+                                        {{ Form::checkbox('check_php', 1, true) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Отметьте чекбокс для контроля версии PHP.
+                                        </details>
+                                    </div>
 
-                                <div class="form-group">
-                                    <b>Описание</b>
-                                    {{ Form::text('comment', null , ['class' => 'form-control', 'placeholder' => 'Это мой любимый сайт и я всегда радуюсь, видя его онлайн, но иногда...']) }}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        Здесь Вы можете ввести дополнительную информацию для болеее полного описания
-                                        сайта.
-                                    </details>
-                                </div>
+                                    <div class="form-group">
+                                        <b>Описание</b>
+                                        {{ Form::text('comment', null , ['class' => 'form-control', 'placeholder' => 'Это мой любимый сайт и я всегда радуюсь, видя его онлайн, но иногда...']) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Здесь Вы можете ввести дополнительную информацию для болеее полного описания
+                                            сайта.
+                                        </details>
+                                    </div>
 
-                                <button type="submit" class="btn btn-xs bg-gradient-cyan">Добавить</button>
-                                {{ Form::close() }}
+                                    <div class="form-group">
+                                        <b>Ping trashold</b>
+                                        {{ Form::text('ping_trashold', null , ['class' => 'form-control', 'placeholder' => '10']) }}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Максимальное значение ping при котором необходимо уведомлять администратора
+                                            </summary>
+                                            Ping trashold
+                                        </details>
+                                    </div>
+
+                                    <button type="submit" class="btn btn-xs bg-gradient-cyan">Добавить</button>
+                                    {{ Form::close() }}
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
