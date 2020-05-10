@@ -35,6 +35,7 @@ class StoreSiteRequest extends FormRequest
             'check_php' => 'integer | max:1',
             'check_ssl' => 'integer | max:1',
             'comment' => 'nullable | max:255',
+            'trashold' => 'integer | nullable',
         ];
     }
 
