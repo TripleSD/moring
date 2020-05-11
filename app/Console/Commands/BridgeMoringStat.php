@@ -49,7 +49,7 @@ class BridgeMoringStat extends Command
             );
 
         $httpClient->request(
-            'GET',
+            'POST',
             $url,
             [
                 'query' => [
