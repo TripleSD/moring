@@ -54,9 +54,9 @@ class BridgeMoringStat extends Command
             [
                 'query' => [
                     'identificator' => $this->settingsController->getIdentificator(),
-                    'version' => Config::get('moring.version')
+                    'version' => Config::get('moring.version'),
                 ],
-                'allow_redirects' => false
+                'allow_redirects' => false,
             ]
         );
     }
