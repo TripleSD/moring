@@ -45,7 +45,7 @@ class BridgeMoringStat extends Command
         $httpClient = new Client();
 
         $url = Config::get('moring.bridgeUrl') . Config::get(
-                'moring.bridgeCurrentMoringVersionUrl'
+                'moring.bridgeUpdateUseMoringVersion'
             );
 
         $httpClient->request(
