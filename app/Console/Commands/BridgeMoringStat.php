@@ -3,7 +3,6 @@
 namespace App\Console\Commands;
 
 use App\Http\Controllers\Admin\Settings\SettingsController;
-use App\Models\MoringVersions;
 use App\Repositories\BridgeRepository;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
