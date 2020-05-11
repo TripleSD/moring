@@ -1,7 +1,7 @@
 <nav class="main-header navbar navbar-expand navbar-white navbar-light">
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
+            <a class="nav-link text-white" data-widget="pushmenu" href="#"><i class="fas fa-bars"></i></a>
         </li>
     </ul>
 
@@ -28,7 +28,7 @@
         </li>
 
         <li class="nav-item d-none d-sm-inline-block">
-            <a href="{{route('auth.logout')}}" class="nav-link">
+            <a href="{{route('auth.logout')}}" class="nav-link text-white">
                 <i class="nav-icon fas fa-door-open"></i>
                 @lang('messages.top_menu.exit')
             </a>

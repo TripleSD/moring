@@ -16,7 +16,7 @@ class AddColumnToSites extends Migration
         Schema::table(
             'sites',
             function (Blueprint $table) {
-                $table->addColumn('tinyInteger', 'pending')->default(0)->comment(
+                $table->boolean('pending')->after('comment')->default(0)->comment(
                     'If one then hide site while data pending process is running'
                 );
             }

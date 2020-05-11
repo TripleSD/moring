@@ -34,8 +34,8 @@ class UpdateSiteRequest extends FormRequest
             'use_file' => 'integer | max:1',
             'check_php' => 'integer | max:1',
             'check_ssl' => 'integer | max:1',
-            'enabled' => 'integer | max:1',
             'comment' => 'nullable | max:255',
+            'ping_trashold' => 'integer | nullable',
         ];
     }
 

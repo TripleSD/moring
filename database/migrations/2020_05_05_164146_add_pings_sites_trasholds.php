@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class RenameColumnInSitesChecksList extends Migration
+class AddPingsSitesTrasholds extends Migration
 {
     /**
      * Run the migrations.
@@ -14,9 +14,10 @@ class RenameColumnInSitesChecksList extends Migration
     public function up()
     {
         Schema::table(
-            'sites_checks_list',
+            'sites',
             function (Blueprint $table) {
-                $table->renameColumn('use_flie', 'use_file');
+                $table->integer('ping_treshold')->default(0)
+                    ->after('pending')->comment('Ping treshold (int) value');
             }
         );
     }
@@ -28,11 +29,6 @@ class RenameColumnInSitesChecksList extends Migration
      */
     public function down()
     {
-        Schema::table(
-            'sites_checks_list',
-            function (Blueprint $table) {
-                //
-            }
-        );
+        //
     }
 }
