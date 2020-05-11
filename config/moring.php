@@ -9,4 +9,5 @@ return [
     'bridgeCurrentVersionUrl' => '/bridge/version',
     'bridgeCreateIdentificatorUrl' => '/identificators/create',
     'bridgeCurrentPHPVersionsUrl' => '/php/versions',
+    'bridgeUpdateUseMoringVersion' => '/statistics/versions/update'
 ];
