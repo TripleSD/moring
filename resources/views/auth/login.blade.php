@@ -8,7 +8,7 @@
         </div>
 
         <div class="card">
-            <div class="card-body login-card-body">
+            <div class="card-body login-card-body rounded">
                 <form method="POST" action="{{ route('login') }}">
                     @csrf
                     <div class="input-group mb-3">
@@ -20,7 +20,8 @@
                         </div>
                     </div>
                     <div class="input-group mb-3">
-                        <input id="password" name="password" type="password" class="form-control" placeholder="Пароль">
+                        <input id="password" name="password" type="password" class="form-control"
+                               placeholder="Пароль">
                         <div class="input-group-append">
                             <div class="input-group-text">
                                 <span class="fas fa-lock"></span>

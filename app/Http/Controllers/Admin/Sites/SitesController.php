@@ -9,6 +9,7 @@ use App\Http\Requests\Sites\ShowSitesRequest;
 use App\Http\Requests\Sites\StoreSiteRequest;
 use App\Http\Requests\Sites\UpdateSiteRequest;
 use App\Models\BridgePhpVersions;
+use App\Models\Sites;
 use App\Repositories\AdminSitesRepository;
 use App\Repositories\Sites\SitesCountsRepository;
 use Carbon\Carbon;
@@ -216,6 +217,9 @@ class SitesController extends Controller
 
             // Getting current time.
             $startTime = Carbon::now();
+
+            $site = Sites::find($id);
+            $site->update(['ip_address' => gethostbyname($site->url)]);
 
             // Starting checks
             $check = new SitesChecker($id);

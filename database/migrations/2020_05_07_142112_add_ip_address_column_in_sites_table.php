@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddUseFileToSitesChecksList extends Migration
+class AddIpAddressColumnInSitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,11 +14,12 @@ class AddUseFileToSitesChecksList extends Migration
     public function up()
     {
         Schema::table(
-            'sites_checks_list',
+            'sites',
             function (Blueprint $table) {
-                $table->boolean('use_file')
-                    ->after('http_code')
-                    ->default(0);
+                $table->string('ip_address')
+                    ->after('url')
+                    ->nullable()
+                    ->comment('IP address');
             }
         );
     }
@@ -30,11 +31,6 @@ class AddUseFileToSitesChecksList extends Migration
      */
     public function down()
     {
-        Schema::table(
-            'sites_checks_list',
-            function (Blueprint $table) {
-                //
-            }
-        );
+        //
     }
 }

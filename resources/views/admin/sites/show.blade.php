@@ -219,7 +219,6 @@
                             </dl>
                         </div>
                         <div class="col-sm-6">
-                            <iframe src="http://192.168.0.140:3001/d-solo/7YOgNojZk/sites?orgId=1&refresh=5m&from=1586505012146&to=1586526612147&panelId=2&theme=light" width="650" height="200" frameborder="0"></iframe>
                             <canvas id="sitePings" data-time="{{$time}}" data-ping="{{$averages}}" width="100%"
                                     height="100%">
                             </canvas>
