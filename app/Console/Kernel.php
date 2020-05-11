@@ -42,6 +42,7 @@ class Kernel extends ConsoleKernel
     {
         $schedule->command('SitesChecker')->hourly();
         $schedule->command('SitesSSLChecker')->daily();
+        $schedule->command('BridgeMoringStat')->hourly();
         $schedule->command('BridgeMoringVersionChecker')->daily();
         $schedule->command('BridgePHPVersionsChecker')->daily();
         $schedule->command('SitesPings')->everyFiveMinutes();
