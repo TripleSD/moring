@@ -285,7 +285,7 @@
                                                         </div>
                                                         <div class="text-gray">
                                                             <i class="fas fa-flag-checkered"></i>
-                                                            {{optional($site->getPhpVersion)->updated_at}}
+                                                            {{optional($site->getWebServer)->updated_at}}
                                                         </div>
                                                     @else
                                                         <span class="text-gray"
