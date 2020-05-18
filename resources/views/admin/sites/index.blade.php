@@ -376,8 +376,9 @@
                                                                     </div>
                                                                 @else
                                                                     <div>
-                                                                        <i class="far fa-frown"
-                                                                           title="Не был получен ответ сервера об установленной версии"></i>
+                                                                        <i class="far fa-question-circle"
+                                                                           title=" Не был получен ответ сервера об
+                                                                           установленной версии"></i>
                                                                         Unknown
                                                                     </div>
                                                                 @endif
