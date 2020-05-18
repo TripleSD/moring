@@ -1,10 +1,10 @@
-[v.0.1.8 (Build.028)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
+[v.0.1.8 (Build.028)](https://github.com/TripleSD/moring/releases/tag/0.1.8)
 - **(New)** - Added treshold pings values of sites.
 - **(New)** - Added showing site's ip address.
 - **(Upd)** - Updated some templates.
 - **(Upd)** - Updated values of .env file.
 
-[v.0.1.7 (Build.027)](https://github.com/TripleSD/moring/releases/tag/0.1.6)
+[v.0.1.7 (Build.027)](https://github.com/TripleSD/moring/releases/tag/0.1.7)
 - **(New)** - Added showing errors list for SNMP device.
 - **(New)** - Added showing errors counts for SNMP devices list.
 - **(New)** - Added Telegram notifications for SNMP device (up/down).
