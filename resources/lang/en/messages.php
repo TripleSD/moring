@@ -5,7 +5,7 @@ return [
      * Top menu.
      */
     'top_menu.exit' => 'Exit',
-    'top_menu.current_version' => 'You have up-to-date version.',
+    'top_menu.current_version' => 'You have up to date version.',
     'top_menu.new_version' => 'Available new version',
     'top_menu.from' => 'from',
 
