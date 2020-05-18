@@ -1,3 +1,8 @@
+[v.0.1.9 (Build.029)](https://github.com/TripleSD/moring/releases/tag/0.1.9)
+- **(Upd)** - Refactoring sites repository.
+- **(Upd)** - Refactoring old migrations.
+- **(Upd)** - Refactoring templates.
+
 [v.0.1.8 (Build.028)](https://github.com/TripleSD/moring/releases/tag/0.1.8)
 - **(New)** - Added treshold pings values of sites.
 - **(New)** - Added showing site's ip address.
