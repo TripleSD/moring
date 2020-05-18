@@ -234,14 +234,14 @@
 
                                                                 @isset($site->getSslCertification->getSSL->expiration_days)
                                                                     <div class="text-gray">
-                                                                        <i class="fas fa-flag-checkered"></i>
-                                                                        {{ $site->getSslCertification->getSSL->updated_at }}
-                                                                    </div>
-                                                                    <div class="text-gray">
                                                                         <details>
                                                                             <summary>Издатель SSL сертификата</summary>
                                                                             {{ $site->getSslCertification->getSSL->issuer }}
                                                                         </details>
+                                                                    </div>
+                                                                    <div class="text-gray">
+                                                                        <i class="fas fa-flag-checkered"></i>
+                                                                        {{ $site->getSslCertification->getSSL->updated_at }}
                                                                     </div>
                                                                 @endif
                                                             @endif
@@ -282,6 +282,9 @@
                                                                     {{$site->getWebServer->web_server}}
                                                                 @endif
                                                             @endempty
+                                                        </div>
+                                                        <div>
+                                                            <br>
                                                         </div>
                                                         <div class="text-gray">
                                                             <i class="fas fa-flag-checkered"></i>
@@ -380,6 +383,9 @@
                                                                            title=" Не был получен ответ сервера об
                                                                            установленной версии"></i>
                                                                         Unknown
+                                                                    </div>
+                                                                    <div>
+                                                                        <br>
                                                                     </div>
                                                                 @endif
                                                             @endif
@@ -505,6 +511,9 @@
                                                                 <i class="fas fa-map-marker-alt"></i>
                                                                 {{ $site->ip_address }}
                                                             @endempty
+                                                        </div>
+                                                        <div>
+                                                            <br>
                                                         </div>
                                                         <div class="text-gray">
                                                             @empty(!$site->getHttpCode)
