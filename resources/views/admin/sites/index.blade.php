@@ -253,14 +253,36 @@
                                             <td>
                                                 <div class="small">
                                                     @if($site->enabled === 1)
-                                                        @empty($site->getWebServer->web_server)
-                                                            <span class="text-warning"
-                                                                  title="Не был получен ответ сервера об установленной версии">
-                                                                    <i class="fa fa-exclamation-triangle"></i>
-                                                            </span>
-                                                        @else
-                                                            {{$site->getWebServer->web_server}}
-                                                        @endempty
+                                                        <div>
+                                                            @empty($site->getWebServer->web_server)
+                                                                <span class="text-warning"
+                                                                      title="Не был получен ответ сервера об установленной версии">
+                                                                        <i class="fa fa-exclamation-triangle"></i>
+                                                                </span>
+                                                            @else
+                                                                @if(preg_match('/nginx/', $site->getWebServer->web_server))
+                                                                    <div class="badge badge-success">
+                                                                        Nginx
+                                                                    </div>
+                                                                    {{$site->getWebServer->web_server}}
+                                                                @elseif(preg_match('/Apache/', $site->getWebServer->web_server))
+                                                                    <div class="badge badge-success">
+                                                                        Apache
+                                                                    </div>
+                                                                    {{$site->getWebServer->web_server}}
+                                                                @elseif(preg_match('/IIS/', $site->getWebServer->web_server))
+                                                                    <div class="badge badge-success">
+                                                                        IIS
+                                                                    </div>
+                                                                    {{$site->getWebServer->web_server}}
+                                                                @else
+                                                                    <div class="badge badge-dark">
+                                                                        Unknown
+                                                                    </div>
+                                                                    {{$site->getWebServer->web_server}}
+                                                                @endif
+                                                            @endempty
+                                                        </div>
                                                         <div class="text-gray">
                                                             <i class="fas fa-history"></i>
                                                             {{optional($site->getPhpVersion)->updated_at}}
