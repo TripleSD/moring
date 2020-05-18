@@ -316,62 +316,70 @@
                                                                 @endif
                                                             @else
                                                                 @if($site->getPhpVersion->version != 0)
-                                                                    @if($bridgePhpVersion->contains('version',$site->getPhpVersion->version))
-                                                                        @foreach($bridgePhpVersion as $version)
-                                                                            @if($version->branch == $site->getPhpVersion->branch)
-                                                                                @if(version_compare($site->getPhpVersion->version, $version->version) < 0)
-                                                                                    @php
-                                                                                        $deprecatedVersion = true;
-                                                                                    @endphp
-                                                                                    @break
-                                                                                @elseif(version_compare($site->getPhpVersion->version, $version->version) == 0)
-                                                                                    @if($version->deprecated_status == '1')
+                                                                    <div class="badge badge-primary">
+                                                                        PHP
+                                                                    </div>
+                                                                    <div>
+                                                                        Version:
+                                                                        @if($bridgePhpVersion->contains('version',$site->getPhpVersion->version))
+                                                                            @foreach($bridgePhpVersion as $version)
+                                                                                @if($version->branch == $site->getPhpVersion->branch)
+                                                                                    @if(version_compare($site->getPhpVersion->version, $version->version) < 0)
                                                                                         @php
                                                                                             $deprecatedVersion = true;
                                                                                         @endphp
                                                                                         @break
+                                                                                    @elseif(version_compare($site->getPhpVersion->version, $version->version) == 0)
+                                                                                        @if($version->deprecated_status == '1')
+                                                                                            @php
+                                                                                                $deprecatedVersion = true;
+                                                                                            @endphp
+                                                                                            @break
+                                                                                        @else
+                                                                                            @php
+                                                                                                $deprecatedVersion = false;
+                                                                                            @endphp
+                                                                                        @endif
                                                                                     @else
                                                                                         @php
                                                                                             $deprecatedVersion = false;
                                                                                         @endphp
+                                                                                        @continue
                                                                                     @endif
-                                                                                @else
-                                                                                    @php
-                                                                                        $deprecatedVersion = false;
-                                                                                    @endphp
-                                                                                    @continue
                                                                                 @endif
-                                                                            @endif
-                                                                        @endforeach
+                                                                            @endforeach
 
-                                                                        @if($deprecatedVersion == false)
-                                                                            <span class="text-success"
-                                                                                  title="Установлена самая последняя версия в ветке">
+                                                                            @if($deprecatedVersion == false)
+                                                                                <span class="text-success"
+                                                                                      title="Установлена самая последняя версия в ветке">
                                                                                     {{ $site->getPhpVersion->version }}
                                                                             </span>
-                                                                        @endif
+                                                                            @endif
 
-                                                                        @if($deprecatedVersion == true)
-                                                                            <span class="text-danger"
-                                                                                  title="Необходимо установить более новую версию">
+                                                                            @if($deprecatedVersion == true)
+                                                                                <span class="text-danger"
+                                                                                      title="Необходимо установить более новую версию">
                                                                                     {{ $site->getPhpVersion->version }}
                                                                                   <i class="fas fa-archive"></i>
                                                                             </span>
-                                                                        @endif
-                                                                    @else
-                                                                        <span class="text-gray">
+                                                                            @endif
+                                                                        @else
+                                                                            <span class="text-gray">
                                                                             {{ $site->getPhpVersion->version }}
                                                                         </span>
 
-                                                                        <span class="text-danger"
-                                                                              title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
+                                                                            <span class="text-danger"
+                                                                                  title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
                                                                                 <i class="fa fa-exclamation-triangle"></i>
                                                                         </span>
-                                                                    @endif
+                                                                        @endif
+                                                                    </div>
                                                                 @else
-                                                                    <i class="far fa-frown"
-                                                                       title="Не был получен ответ сервера об установленной версии"></i>
-                                                                    Unknown
+                                                                    <div>
+                                                                        <i class="far fa-frown"
+                                                                           title="Не был получен ответ сервера об установленной версии"></i>
+                                                                        Unknown
+                                                                    </div>
                                                                 @endif
                                                             @endif
                                                             <div class="text-gray">
