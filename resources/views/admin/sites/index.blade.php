@@ -234,7 +234,7 @@
 
                                                                 @isset($site->getSslCertification->getSSL->expiration_days)
                                                                     <div class="text-gray">
-                                                                        <i class="fas fa-history"></i>
+                                                                        <i class="fas fa-flag-checkered"></i>
                                                                         {{ $site->getSslCertification->getSSL->updated_at }}
                                                                     </div>
                                                                     <div class="text-gray">
@@ -284,7 +284,7 @@
                                                             @endempty
                                                         </div>
                                                         <div class="text-gray">
-                                                            <i class="fas fa-history"></i>
+                                                            <i class="fas fa-flag-checkered"></i>
                                                             {{optional($site->getPhpVersion)->updated_at}}
                                                         </div>
                                                     @else
@@ -384,7 +384,7 @@
                                                                 @endif
                                                             @endif
                                                             <div class="text-gray">
-                                                                <i class="fas fa-history"></i>
+                                                                <i class="fas fa-flag-checkered"></i>
                                                                 {{optional($site->getPhpVersion)->updated_at}}
                                                             </div>
                                                         @endempty
@@ -508,7 +508,7 @@
                                                         </div>
                                                         <div class="text-gray">
                                                             @empty(!$site->getHttpCode)
-                                                                <i class="fas fa-history"></i>
+                                                                <i class="fas fa-flag-checkered"></i>
                                                                 {{ optional($site->getHttpCode)->updated_at }}
                                                             @endif
                                                         </div>
