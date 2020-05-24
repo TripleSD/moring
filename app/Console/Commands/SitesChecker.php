@@ -41,6 +41,10 @@ class SitesChecker extends Command
 
     public function handle(int $site_id = null)
     {
+        print_r('Start' . PHP_EOL);
+
+        $start = microtime(true);
+
         if ($site_id === null) {
             $sites     = Sites::get();
             $tgMessage = 0;
@@ -49,25 +53,15 @@ class SitesChecker extends Command
             $tgMessage = 1;
         }
 
-        /*
-         * http_response_code()
-         * true - web
-         * false - cli
-         */
-
         foreach ($sites as $site) {
-            if (http_response_code() == false) {
-                $fork = pcntl_fork();
-
-                if ($fork) {
-                    echo $site->title . PHP_EOL;
-                    self::ckeckSite($site);
-                    die(0);
-                }
-            } else {
-                self::ckeckSite($site);
-            }
+            self::ckeckSite($site);
+            echo '.';
         }
+
+        $finish = microtime(true);
+        $delta  = $finish - $start;
+
+        print_r(PHP_EOL . 'Finish!' . PHP_EOL . 'Time: ' .$delta . ' seconds');
 
         if ($this->settingsController->getTelegramStatus() === 1) {
             try {
@@ -111,7 +105,7 @@ class SitesChecker extends Command
             } else {
                 $httpClient    = new Client();
                 $url           = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
-                $response      = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+                $response      = $httpClient->request('GET', $url, ['allow_redirects' => false, 'debug' => false]);
                 $phpVersion    = $response->getHeader('X-Powered-By');
                 $webServerType = $response->getHeader('server');
 
@@ -142,6 +136,18 @@ class SitesChecker extends Command
                     $phpVersion = 0;
                     $phpBranch  = 0;
                 }
+            }
+
+            $ssl = new SitesSSLChecker();
+            $ssl->handle($site->id);
+
+            //   HTTP code saving process
+            $http = SitesHttpCodes::where('site_id', $site->id)->first();
+            if (isset($http)) {
+                $http->http_code = $statusCode;
+            } else {
+                $fillable = ['site_id' => $site->id, 'http_code' => $statusCode];
+                $http     = new SitesHttpCodes($fillable);
             }
 
             $ssl = new SitesSSLChecker();
