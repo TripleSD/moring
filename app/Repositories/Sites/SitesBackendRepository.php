@@ -3,13 +3,17 @@
 namespace App\Repositories\Sites;
 
 use App\Repositories\Repository;
-use Illuminate\Support\Facades\Artisan;
+use App\Console\Commands\SitesChecker;
+use App\Console\Commands\SitesSSLChecker;
 
 class SitesBackendRepository extends Repository
 {
     public function refreshList()
     {
-        Artisan::call('SitesChecker');
-        Artisan::call('SitesSSLChecker');
+        $siteChecker = new SitesChecker();
+        $siteChecker->handle(null,'web');
+
+        $siteSslChecker = new SitesSSLChecker();
+        $siteSslChecker->handle();
     }
 }
