@@ -22,7 +22,7 @@
         "laravel/ui": "^1.1",
         "laravelcollective/html": "^6.0",
         "spatie/ssl-certificate": "^1.16",
-        "ext-pcntl": "*"
+        "ext-curl": "*"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.2",
