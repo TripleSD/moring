@@ -250,14 +250,17 @@
                                                     <div class="text-muted">
                                                         Check URL:
                                                         @if($site->https === 1)
-                                                            https://
                                                             @if($site->checksList->use_file === 1)
-                                                                {{ $site->url }}/{{ $site->file_url}}
+                                                                https://{{ $site->url }}/{{ $site->file_url}}
                                                             @else
-                                                                {{ $site->url }}
+                                                                https://{{ $site->url }}
                                                             @endif
                                                         @else
-                                                            http://
+                                                            @if($site->checksList->use_file === 1)
+                                                                http://{{ $site->url }}/{{ $site->file_url}}
+                                                            @else
+                                                                http://{{ $site->url }}
+                                                            @endif
                                                         @endif
                                                     </div>
                                                 </div>
