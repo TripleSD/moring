@@ -89,7 +89,7 @@
 
                                     <div class="form-group">
                                         <div>
-                                            {{ Form::checkbox('http_code', 1, true) }}
+                                            {{ Form::checkbox('http_code', 1, $site->checksList->http_code) }}
                                             <b>Проверка HTTP кода</b>
                                         </div>
                                         <details class="mt--3 small">
