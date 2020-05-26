@@ -60,20 +60,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <div>
-                                            {{ Form::checkbox('enabled', true, $site->enabled) }}
-                                            <b>Мониторить сайт</b>
-                                        </div>
-                                        <details class="mt--3 small">
-                                            <summary>
-                                                Дополнительная информация
-                                            </summary>
-                                            Для активации мониторинга отметьте данный чекбокс.
-                                        </details>
-                                    </div>
-
-                                    <div class="form-group">
-                                        <b>Путь к файлу мониторинга</b>
+                                        <b>Полный путь к файлу мониторинга (опционально)</b>
                                         {{ Form::text('file_url', $site->file_url , ['class' => 'form-control', 'placeholder' => 'monitoring.php']) }}
                                         <details class="mt--3 small">
                                             <summary>
@@ -174,6 +161,19 @@
                                                 администратора
                                             </summary>
                                             Ping threshold
+                                        </details>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            {{ Form::checkbox('enabled', true, $site->enabled) }}
+                                            <b>Мониторить сайт</b>
+                                        </div>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Для активации мониторинга отметьте данный чекбокс.
                                         </details>
                                     </div>
 
