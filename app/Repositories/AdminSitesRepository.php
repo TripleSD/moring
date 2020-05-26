@@ -91,12 +91,19 @@ class AdminSitesRepository extends Repository
 
     public function update($fillable, int $id)
     {
-        // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
-        if ((int) ($fillable['https']) === 0) {
+
+        if (! isset($fillable['https'])) {
+            $fillable['https'] = 0;
             $fillable['check_ssl']   = 0;
             $fillable['check_https'] = 0;
-        } else {
-            $fillable['check_https'] = 1;
+        }
+
+        if (! isset($fillable['enabled'])) {
+            $fillable['enabled'] = 0;
+        }
+
+        if (! isset($fillable['use_file'])) {
+            $fillable['use_file'] = 0;
         }
 
         // Get ip address
