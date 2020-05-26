@@ -100,7 +100,7 @@ class SitesController extends Controller
 
                 // Run first site ping as well
                 $ping = new SitesPings();
-                $ping->handle((int) ($result->id));
+                $ping->handle((int) ($result->site_id));
 
                 flash('Запись добавлена')->success();
 
