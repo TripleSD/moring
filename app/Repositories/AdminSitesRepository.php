@@ -57,7 +57,7 @@ class AdminSitesRepository extends Repository
     {
         // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
         if (isset($fillable['https']) === false) {
-            $fillable['https'] = 0;
+            $fillable['https']       = 0;
             $fillable['check_ssl']   = 0;
             $fillable['check_https'] = 0;
         } else {
