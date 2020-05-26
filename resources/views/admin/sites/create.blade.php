@@ -37,7 +37,7 @@
 
                                     <div class="form-group">
                                         <b>Название сайта</b>
-                                        {{ Form::text('title', null , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
+                                        {{ Form::text('title', null , ['class' => 'form-control', 'required','placeholder' => 'My website.']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
