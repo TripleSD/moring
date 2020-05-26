@@ -48,7 +48,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>Адрес URL</b>
+                                        <b>URL сайта</b>
                                         {{ Form::text('url', $site->url , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
                                         <details class="mt--3 small">
                                             <summary>
@@ -90,7 +90,7 @@
                                     <div class="form-group">
                                         <div>
                                             {{ Form::checkbox('http_code', 1, true) }}
-                                            <b>HTTP ответ сервера</b>
+                                            <b>Проверка HTTP кода</b>
                                         </div>
                                         <details class="mt--3 small">
                                             <summary>
@@ -117,7 +117,7 @@
                                     <div class="form-group">
                                         <div>
                                             {{ Form::checkbox('check_ssl', true, $site->checksList->check_ssl) }}
-                                            <b>Мониторинг SSL</b>
+                                            <b>Проверка SSL</b>
                                         </div>
                                         <details class="mt--3 small">
                                             <summary>
