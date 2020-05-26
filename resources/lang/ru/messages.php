@@ -5,7 +5,7 @@ return [
      *  Верхнее меню.
      */
     'top_menu.exit' => 'Выход',
-    'top_menu.current_version' => 'Установлена последняя версия',
+    'top_menu.current_version' => 'Установлена последняя версия.',
     'top_menu.new_version' => 'Доступна новая версия',
     'top_menu.from' => 'от',
 

@@ -8,13 +8,16 @@ class Ping
 
     public static function pingTarget(string $host): array
     {
-        if (self::OS != 'WINNT') {
-            exec("ping -c 3 $host", $output, $return_var);
-        } else {
+        if (self::OS === 'Darwin') {
+            exec("ping -c 3 -i 0.5 $host", $output, $return_var);
+        } elseif (self::OS === 'WINNT') {
             exec("ping -n 3 $host", $output, $return_var);
+        } else {
+            exec("ping -c 3 -A $host", $output, $return_var);
         }
+
         if (count($output) > 3) {
-            $filter = [];
+            $filter    = [];
             $pre_final = array_reduce(
                 $output,
                 function ($filter, $string) {

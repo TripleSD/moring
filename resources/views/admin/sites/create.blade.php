@@ -75,9 +75,8 @@
 
                                     <div class="form-group">
                                         <div>
-                                            <b>HTTP ответ сервера</b>
-                                            {{Form::text('http_code', '0', ['class' => 'form-control', 'hidden'])}}
                                             {{ Form::checkbox('http_code', 1, true) }}
+                                            <b>HTTP ответ сервера</b>
                                         </div>
                                         <details class="mt--3 small">
                                             <summary>
@@ -88,9 +87,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>HTTPS</b>
-                                        {{Form::text('https', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('https', 1, false) }}
+                                        <b>HTTPS</b>
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -102,9 +100,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>Проверка SSL</b>
-                                        {{Form::text('check_ssl', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_ssl', 1, false) }}
+                                        <b>Проверка SSL</b>
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -114,9 +111,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>Проверка версии PHP</b>
-                                        {{Form::text('check_php', '0', ['class' => 'form-control', 'hidden'])}}
                                         {{ Form::checkbox('check_php', 1, true) }}
+                                        <b>Проверка версии PHP</b>
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -138,13 +134,13 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>Ping trashold</b>
-                                        {{ Form::text('ping_trashold', null , ['class' => 'form-control', 'placeholder' => '10']) }}
+                                        <b>Ping threshold</b>
+                                        {{ Form::text('ping_threshold', null , ['class' => 'form-control', 'placeholder' => '10']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Максимальное значение ping при котором необходимо уведомлять администратора
                                             </summary>
-                                            Ping trashold
+                                            Ping threshold
                                         </details>
                                     </div>
 

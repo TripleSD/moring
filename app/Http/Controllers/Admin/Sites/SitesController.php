@@ -96,7 +96,7 @@ class SitesController extends Controller
             if ($result) {
                 // Run first site check
                 $check = new SitesChecker();
-                $check->handle((int) ($result->id));
+                $check->handle((int) ($result->id), 'web');
 
                 // Run first site ping as well
                 $ping = new SitesPings();
@@ -222,8 +222,8 @@ class SitesController extends Controller
             $site->update(['ip_address' => gethostbyname($site->url)]);
 
             // Starting checks
-            $check = new SitesChecker($id);
-            $check->handle($id);
+            $check = new SitesChecker();
+            $check->handle($id, 'web');
             $ping = new SitesPings();
             $ping->handle($id);
 
