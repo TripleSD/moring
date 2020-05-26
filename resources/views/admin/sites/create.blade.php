@@ -134,13 +134,13 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>Ping trashold</b>
-                                        {{ Form::text('ping_trashold', null , ['class' => 'form-control', 'placeholder' => '10']) }}
+                                        <b>Ping threshold</b>
+                                        {{ Form::text('ping_threshold', null , ['class' => 'form-control', 'placeholder' => '10']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Максимальное значение ping при котором необходимо уведомлять администратора
                                             </summary>
-                                            Ping trashold
+                                            Ping threshold
                                         </details>
                                     </div>
 

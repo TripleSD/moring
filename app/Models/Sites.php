@@ -18,7 +18,7 @@ class Sites extends Model
         'enabled',
         'pending',
         'ip_address',
-        'ping_trashold',
+        'ping_threshold',
     ];
 
     use SoftDeletes;
