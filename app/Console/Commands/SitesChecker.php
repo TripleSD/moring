@@ -179,7 +179,7 @@ class SitesChecker extends Command
                 }
 
                 if ($phpVersion != null) {
-                    if (preg_match('/^PHP/', $phpVersion)) {
+                    if (preg_match('/^PHP|php/', $phpVersion)) {
                         preg_match('/[\d][.]\d{1,2}[.]\d{1,2}/', $phpVersion, $rawPhpVersion);
                         $phpVersion   = $rawPhpVersion[0];
                         $phpBranchRaw = explode('.', $phpVersion);
