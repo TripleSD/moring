@@ -75,7 +75,21 @@
 
                                     <div class="form-group">
                                         <div>
-                                            {{ Form::checkbox('http_code', 1, true) }}
+                                            {{ Form::checkbox('use_file', true, false) }}
+                                            <b>Использовать файл мониторинга</b><br>
+                                        </div>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Если Вы не желаете использовать файл мониторинг на текущем этапе, просто
+                                            снимите отметку с данного чекбокса.
+                                        </details>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            {{ Form::checkbox('http_code', 1, false) }}
                                             <b>Проверка HTTP кода</b>
                                         </div>
                                         <details class="mt--3 small">
@@ -111,7 +125,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        {{ Form::checkbox('check_php', 1, true) }}
+                                        {{ Form::checkbox('check_php', 1, false) }}
                                         <b>Проверка версии PHP</b>
                                         <details class="mt--3 small">
                                             <summary>
