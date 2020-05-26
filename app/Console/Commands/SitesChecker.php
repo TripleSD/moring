@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 use Str;
 
 class SitesChecker extends Command
@@ -132,6 +133,7 @@ class SitesChecker extends Command
                 $url = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
                 $ch  = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_USERAGENT, Config::get('moring.userAgent'));
                 curl_setopt($ch, CURLOPT_HEADER, true);
                 curl_setopt($ch, CURLOPT_NOBODY, true);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
