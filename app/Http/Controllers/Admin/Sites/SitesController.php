@@ -223,7 +223,7 @@ class SitesController extends Controller
 
             // Starting checks
             $check = new SitesChecker();
-            $check->handle($id,'web');
+            $check->handle($id, 'web');
             $ping = new SitesPings();
             $ping->handle($id);
 

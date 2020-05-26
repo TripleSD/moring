@@ -2,7 +2,6 @@
 
 namespace App\Console\Commands;
 
-use Exception;
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use App\Http\Controllers\Connectors\TelegramConnector;
 use App\Models\Sites;
@@ -10,6 +9,7 @@ use App\Models\SitesHttpCodes;
 use App\Models\SitesPhpVersions;
 use App\Models\SitesWebServers;
 use Carbon\Carbon;
+use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 use Str;
@@ -51,8 +51,8 @@ class SitesChecker extends Command
         }
 
         if ($cli) {
-            $this->info("Start script.");
-            $this->line("------------------------------------");
+            $this->info('Start script.');
+            $this->line('------------------------------------');
 
             $start = microtime(true);
         }
@@ -76,9 +76,9 @@ class SitesChecker extends Command
                 $endTaskTime = microtime(true);
                 $delta       = $endTaskTime - $startTaskTime;
 
-                $this->warn("End check!");
-                $this->warn("Time: " . $delta . 'sec.');
-                $this->line("------------------------------------");
+                $this->warn('End check!');
+                $this->warn('Time: ' . $delta . 'sec.');
+                $this->line('------------------------------------');
             }
         }
 
@@ -86,7 +86,7 @@ class SitesChecker extends Command
             $finish = microtime(true);
             $delta  = $finish - $start;
 
-            $this->info("Finish!");
+            $this->info('Finish!');
             $this->info("Total time: $delta sec");
         }
 
@@ -150,7 +150,7 @@ class SitesChecker extends Command
 
                 foreach ($data as $part) {
                     //some headers will contain ":" character (Location for example), and the part after ":" will be lost, Thanks to @Emanuele
-                    $middle = explode(":", $part, 2);
+                    $middle = explode(':', $part, 2);
 
                     //Supress warning message if $middle[1] does not exist, Thanks to @crayons
                     if (! isset($middle[1])) {

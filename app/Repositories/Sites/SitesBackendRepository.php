@@ -11,7 +11,7 @@ class SitesBackendRepository extends Repository
     public function refreshList()
     {
         $siteChecker = new SitesChecker();
-        $siteChecker->handle(null,'web');
+        $siteChecker->handle(null, 'web');
 
         $siteSslChecker = new SitesSSLChecker();
         $siteSslChecker->handle();
