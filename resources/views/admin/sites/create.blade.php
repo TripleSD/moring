@@ -48,8 +48,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>Адрес URL</b>
-                                        {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
+                                        <b>URL сайта</b>
+                                        {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -76,7 +76,7 @@
                                     <div class="form-group">
                                         <div>
                                             {{ Form::checkbox('http_code', 1, true) }}
-                                            <b>HTTP ответ сервера</b>
+                                            <b>Проверка HTTP кода</b>
                                         </div>
                                         <details class="mt--3 small">
                                             <summary>
@@ -88,7 +88,7 @@
 
                                     <div class="form-group">
                                         {{ Form::checkbox('https', 1, false) }}
-                                        <b>HTTPS</b>
+                                        <b>Поддержка HTTPS</b>
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
