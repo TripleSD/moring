@@ -171,17 +171,18 @@ class SitesController extends Controller
      */
     public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        $id       = $request->id;
-        $fillable = $request->validated();
-        $result   = $adminSitesRepository->update($fillable, $id);
-        if (! $result) {
-            return back()->withInput($fillable);
-        } else {
+        $adminSitesRepository->update($request->validated(), $request->id);
+
+        if ($adminSitesRepository->checkUrl($request)) {
             $check = new SitesChecker();
-            $check->handle($id, 'web');
+            $check->handle($request->id, 'web');
             flash('Запись обновлена')->success();
 
             return redirect()->route('admin.sites.index');
+        } else {
+            flash('Проверьте настройки')->warning();
+
+            return redirect()->back()->withInput();
         }
     }
 
