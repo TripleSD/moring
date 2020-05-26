@@ -178,7 +178,7 @@ class SitesController extends Controller
             return back()->withInput($fillable);
         } else {
             $check = new SitesChecker();
-            $check->handle($id);
+            $check->handle($id, 'web');
             flash('Запись обновлена')->success();
 
             return redirect()->route('admin.sites.index');

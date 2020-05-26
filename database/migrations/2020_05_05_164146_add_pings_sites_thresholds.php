@@ -16,8 +16,10 @@ class AddPingsSitesThresholds extends Migration
         Schema::table(
             'sites',
             function (Blueprint $table) {
-                $table->integer('ping_threshold')->default(0)
-                    ->after('pending')->comment('Ping threshold (int) value');
+                $table->integer('ping_threshold')
+                    ->nullable()
+                    ->after('pending')
+                    ->comment('Ping threshold (int) value');
             }
         );
     }
