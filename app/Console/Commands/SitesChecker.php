@@ -59,10 +59,10 @@ class SitesChecker extends Command
         }
 
         if ($site_id === null) {
-            $sites     = Sites::where('enabled', 1)->get();
+            $sites     = Sites::where('enabled', 1)->with('checksList')->get();
             $tgMessage = 0;
         } else {
-            $sites[]   = Sites::find($site_id);
+            $sites[]   = Sites::where('id', $site_id)->with('checksList')->firstOrFail();
             $tgMessage = 1;
         }
 
