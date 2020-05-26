@@ -2,9 +2,9 @@
 
 namespace App\Repositories\Sites;
 
-use App\Repositories\Repository;
 use App\Console\Commands\SitesChecker;
 use App\Console\Commands\SitesSSLChecker;
+use App\Repositories\Repository;
 
 class SitesBackendRepository extends Repository
 {
