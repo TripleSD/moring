@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPingsSitesTrasholds extends Migration
+class AddPingsSitesThresholds extends Migration
 {
     /**
      * Run the migrations.
@@ -16,8 +16,8 @@ class AddPingsSitesTrasholds extends Migration
         Schema::table(
             'sites',
             function (Blueprint $table) {
-                $table->integer('ping_treshold')->default(0)
-                    ->after('pending')->comment('Ping treshold (int) value');
+                $table->integer('ping_threshold')->default(0)
+                    ->after('pending')->comment('Ping threshold (int) value');
             }
         );
     }

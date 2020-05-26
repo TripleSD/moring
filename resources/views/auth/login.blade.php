@@ -4,9 +4,9 @@
     <body class="hold-transition login-page">
     <div class="login-box">
         <div class="login-logo">
+            <img src="{{asset('img/theme/logo.png')}}" height="50">
             <b>MoRiNg</b>
         </div>
-
         <div class="card">
             <div class="card-body login-card-body rounded">
                 <form method="POST" action="{{ route('login') }}">
