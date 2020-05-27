@@ -121,12 +121,10 @@ class SitesController extends Controller
         $site = $adminSitesRepository->store($request->validated());
 
         // Site check
-        $check = new SitesChecker();
-        $check->handle((int) $site->site_id, 'web');
+        $this->checkSite($site->site_id);
 
         // Site pings
-        $ping = new SitesPings();
-        $ping->handle((int) ($site->site_id));
+        $this->pingSite($site->site_id);
 
         flash('Запись добавлена')->success();
 
@@ -212,8 +210,8 @@ class SitesController extends Controller
         $adminSitesRepository->update($request->validated(), $request->id);
 
         // Site check
-        $check = new SitesChecker();
-        $check->handle($request->id, 'web');
+        $this->checkSite($request->id);
+
         flash('Запись обновлена')->success();
 
         return redirect()->route('admin.sites.index');
@@ -298,5 +296,21 @@ class SitesController extends Controller
     private function createDataArray($request)
     {
         return ['url' => $request->url, 'file_url' => $request->file_url, 'https' => $request->https];
+    }
+
+    private function checkSite($siteId)
+    {
+        $check = new SitesChecker();
+        $check->handle($siteId, 'web');
+
+        return true;
+    }
+
+    private function pingSite($siteId)
+    {
+        $ping = new SitesPings();
+        $ping->handle($siteId);
+
+        return true;
     }
 }
