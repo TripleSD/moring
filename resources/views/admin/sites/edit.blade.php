@@ -49,7 +49,7 @@
 
                                     <div class="form-group">
                                         <b>URL сайта</b>
-                                        {{ Form::text('url', $site->url , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
+                                        {{ Form::text('url', $site->url , ['class' => 'form-control', 'readonly']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
