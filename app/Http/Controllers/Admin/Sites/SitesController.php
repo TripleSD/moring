@@ -84,45 +84,46 @@ class SitesController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param StoreSiteRequest $request
+     * @param AdminSitesRepository $adminSitesRepository
      * @return RedirectResponse
      */
     public function store(StoreSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
         // Checking DNS resolve by domains
-        if (checkdnsrr($request->url, 'A')) {
-            $site = [
-                'url' => $request->url,
-                'file_url' => $request->file_url,
-                'https' => $request->https
-            ];
-
-            if (! isset($request->use_file)) {
-                $request->use_file = 0;
-            }
-
-            if ($request->use_file && ! $adminSitesRepository->checkUrl($site)) {
-                flash('Проверьте имя сайта/имя Moring файла/настройки HTTPS.')->warning();
-
-                return redirect()->back()->withInput();
-            }
-
-            $site = (new AdminSitesRepository())->store($request->validated());
-
-            $check = new SitesChecker();
-            $check->handle((int) $site->site_id, 'web');
-
-
-            $ping = new SitesPings();
-            $ping->handle((int) ($site->site_id));
-
-            flash('Запись добавлена')->success();
-
-            return redirect()->route('admin.sites.index');
-        } else {
+        if ($adminSitesRepository->checkDnsDomain($request) === false) {
             flash('Запись не добавлена. Проверьте существование домена.')->warning();
 
-            return back()->withInput();
+            return redirect()->back()->withInput();
         }
+
+        $site = [
+            'url' => $request->url,
+            'file_url' => $request->file_url,
+            'https' => $request->https
+        ];
+
+        if (! isset($request->use_file)) {
+            $request->use_file = 0;
+        }
+
+        if ($request->use_file && ! $adminSitesRepository->checkUrl($site)) {
+            flash('Проверьте имя сайта/имя Moring файла/настройки HTTPS.')->warning();
+
+            return redirect()->back()->withInput();
+        }
+
+        $site = (new AdminSitesRepository())->store($request->validated());
+
+        $check = new SitesChecker();
+        $check->handle((int) $site->site_id, 'web');
+
+
+        $ping = new SitesPings();
+        $ping->handle((int) ($site->site_id));
+
+        flash('Запись добавлена')->success();
+
+        return redirect()->route('admin.sites.index');
     }
 
     /**
