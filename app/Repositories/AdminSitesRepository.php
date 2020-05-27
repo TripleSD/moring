@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\Sites;
+use GuzzleHttp\Client;
 use App\Models\SitesChecksList;
 use App\Models\SitesPingResponses;
 
@@ -67,10 +68,6 @@ class AdminSitesRepository extends Repository
         // Get ip address
         $fillable['ip_address'] = gethostbyname($fillable['url']);
 
-        //    Now we activate Moring file usage, if path has been added
-        if (strlen($fillable['file_url']) >= 5) {
-            $fillable['use_file'] = 1;
-        }
         // Add pending status until first check is running
         $fillable['pending'] = 1;
 
@@ -91,9 +88,8 @@ class AdminSitesRepository extends Repository
 
     public function update($fillable, int $id)
     {
-
         if (! isset($fillable['https'])) {
-            $fillable['https'] = 0;
+            $fillable['https']       = 0;
             $fillable['check_ssl']   = 0;
             $fillable['check_https'] = 0;
         }
@@ -187,5 +183,27 @@ class AdminSitesRepository extends Repository
         $result        = $site->update();
 
         return $result;
+    }
+
+    public function checkUrl($array)
+    {
+        $url = $array['url'];
+        $file_url = $array['file_url'];
+        $https = $array['https'];
+
+        $url  = ($https) ? 'https://' . $url . '/' . $file_url : 'http://' . $url . '/' . $file_url;
+
+        try {
+            $httpClient = new Client();
+            $response   = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+
+            if ($response->getStatusCode() === 200) {
+                return true;
+            }
+
+            return false;
+        } catch (\Exception $e) {
+            return false;
+        }
     }
 }
