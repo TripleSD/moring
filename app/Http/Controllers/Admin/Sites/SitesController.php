@@ -89,35 +89,42 @@ class SitesController extends Controller
      */
     public function store(StoreSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        // Checking DNS resolve by domains
+        // Checking domain DNS Resolve
+        // Create data array for check
+        // Check default value
+        // Check full check url
+        // Storing data
+        // Site check
+        // Site pings
+
+        // Checking domain DNS resolve
         if ($adminSitesRepository->checkDnsDomain($request) === false) {
             flash('Запись не добавлена. Проверьте существование домена.')->warning();
 
             return redirect()->back()->withInput();
         }
 
-        $site = [
-            'url' => $request->url,
-            'file_url' => $request->file_url,
-            'https' => $request->https
-        ];
+        // Create data array for check
+        $site = ['url' => $request->url, 'file_url' => $request->file_url, 'https' => $request->https];
 
-        if (! isset($request->use_file)) {
-            $request->use_file = 0;
-        }
+        // Check default value
+        (isset($request->use_file)) ? $request->use_file = 1 : $request->use_file = 0;
 
+        //Check full check url
         if ($request->use_file && ! $adminSitesRepository->checkUrl($site)) {
             flash('Проверьте имя сайта/имя Moring файла/настройки HTTPS.')->warning();
 
             return redirect()->back()->withInput();
         }
 
-        $site = (new AdminSitesRepository())->store($request->validated());
+        // Storing data
+        $site = $adminSitesRepository->store($request->validate());
 
+        // Site check
         $check = new SitesChecker();
         $check->handle((int) $site->site_id, 'web');
 
-
+        // Site pings
         $ping = new SitesPings();
         $ping->handle((int) ($site->site_id));
 
