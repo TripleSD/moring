@@ -65,6 +65,8 @@ class AdminSitesRepository extends Repository
             $fillable['check_https'] = 1;
         }
 
+        $fillable['enabled'] = 1;
+
         // Get ip address
         $fillable['ip_address'] = gethostbyname($fillable['url']);
 
