@@ -209,12 +209,16 @@ class AdminSitesRepository extends Repository
         }
     }
 
-    public function checkDnsDomain($request)
+    /**
+     * @param $request
+     * @return bool
+     */
+    public function checkErrorDnsDomain($request)
     {
         if (checkdnsrr($request->url, 'A')) {
-            return true;
+            return false;
         }
 
-        return false;
+        return true;
     }
 }
