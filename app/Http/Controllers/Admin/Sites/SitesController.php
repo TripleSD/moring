@@ -118,7 +118,7 @@ class SitesController extends Controller
         }
 
         // Storing data
-        $site = $adminSitesRepository->store($request->validate());
+        $site = $adminSitesRepository->store($request->validated());
 
         // Site check
         $check = new SitesChecker();
