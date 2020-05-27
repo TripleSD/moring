@@ -98,14 +98,14 @@ class SitesController extends Controller
         // Site pings
 
         // Checking domain DNS resolve
-        if ($adminSitesRepository->checkDnsDomain($request) === false) {
+        if ($adminSitesRepository->checkErrorDnsDomain($request)) {
             flash('Запись не добавлена. Проверьте существование домена.')->warning();
 
             return redirect()->back()->withInput();
         }
 
         // Create data array for check
-        $site = ['url' => $request->url, 'file_url' => $request->file_url, 'https' => $request->https];
+        $site = $this->createDataArray($request);
 
         // Check default value
         (isset($request->use_file)) ? $request->use_file = 1 : $request->use_file = 0;
@@ -196,7 +196,7 @@ class SitesController extends Controller
         // Site check
 
         // Create data array for check
-        $site = ['url' => $request->url, 'file_url' => $request->file_url, 'https' => $request->https];
+        $site = $this->createDataArray($request);
 
         // Check default value
         (isset($request->use_file)) ? $request->use_file = 1 : $request->use_file = 0;
@@ -289,5 +289,14 @@ class SitesController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * @param $request
+     * @return array
+     */
+    private function createDataArray($request)
+    {
+        return ['url' => $request->url, 'file_url' => $request->file_url, 'https' => $request->https];
     }
 }
