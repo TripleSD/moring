@@ -110,7 +110,7 @@ class SitesController extends Controller
         // Check default value
         (isset($request->use_file)) ? $request->use_file = 1 : $request->use_file = 0;
 
-        //Check full check url
+        // Check full check url
         if ($request->use_file && ! $adminSitesRepository->checkUrl($site)) {
             flash('Проверьте имя сайта/имя Moring файла/настройки HTTPS.')->warning();
 
@@ -189,19 +189,34 @@ class SitesController extends Controller
      */
     public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        $adminSitesRepository->update($request->validated(), $request->id);
+        // Create data array for check
+        // Check default value
+        // Check full check url
+        // Storing data
+        // Site check
 
-        if ($adminSitesRepository->checkUrl($request)) {
-            $check = new SitesChecker();
-            $check->handle($request->id, 'web');
-            flash('Запись обновлена')->success();
+        // Create data array for check
+        $site = ['url' => $request->url, 'file_url' => $request->file_url, 'https' => $request->https];
 
-            return redirect()->route('admin.sites.index');
-        } else {
-            flash('Проверьте настройки')->warning();
+        // Check default value
+        (isset($request->use_file)) ? $request->use_file = 1 : $request->use_file = 0;
+
+        // Check full check url
+        if ($request->use_file && ! $adminSitesRepository->checkUrl($site)) {
+            flash('Проверьте имя сайта/имя Moring файла/настройки HTTPS.')->warning();
 
             return redirect()->back()->withInput();
         }
+
+        // Storing data
+        $adminSitesRepository->update($request->validated(), $request->id);
+
+        // Site check
+        $check = new SitesChecker();
+        $check->handle($request->id, 'web');
+        flash('Запись обновлена')->success();
+
+        return redirect()->route('admin.sites.index');
     }
 
     /**
