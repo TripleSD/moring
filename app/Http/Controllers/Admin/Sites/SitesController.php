@@ -254,10 +254,8 @@ class SitesController extends Controller
             $site->update(['ip_address' => gethostbyname($site->url)]);
 
             // Starting checks
-            $check = new SitesChecker();
-            $check->handle($id, 'web');
-            $ping = new SitesPings();
-            $ping->handle($id);
+            $this->checkSite($id);
+            $this->pingSite($id);
 
             // Getting current time for compare.
             $endTime = Carbon::now()->locale($locale);
