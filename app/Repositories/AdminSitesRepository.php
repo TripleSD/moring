@@ -189,11 +189,11 @@ class AdminSitesRepository extends Repository
 
     public function checkUrl($array)
     {
-        $url = $array['url'];
+        $url      = $array['url'];
         $file_url = $array['file_url'];
-        $https = $array['https'];
+        $https    = $array['https'];
 
-        $url  = ($https) ? 'https://' . $url . '/' . $file_url : 'http://' . $url . '/' . $file_url;
+        $url = ($https) ? 'https://' . $url . '/' . $file_url : 'http://' . $url . '/' . $file_url;
 
         try {
             $httpClient = new Client();
@@ -207,5 +207,14 @@ class AdminSitesRepository extends Repository
         } catch (\Exception $e) {
             return false;
         }
+    }
+
+    public function checkDnsDomain($request)
+    {
+        if (checkdnsrr($request->url, 'A')) {
+            return true;
+        }
+
+        return false;
     }
 }
