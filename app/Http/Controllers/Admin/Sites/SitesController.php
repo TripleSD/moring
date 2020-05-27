@@ -253,8 +253,10 @@ class SitesController extends Controller
             $site = Sites::find($id);
             $site->update(['ip_address' => gethostbyname($site->url)]);
 
-            // Starting checks
+            // Site check
             $this->checkSite($id);
+
+            // Site pings
             $this->pingSite($id);
 
             // Getting current time for compare.
@@ -296,6 +298,10 @@ class SitesController extends Controller
         return ['url' => $request->url, 'file_url' => $request->file_url, 'https' => $request->https];
     }
 
+    /**
+     * @param $siteId
+     * @return bool
+     */
     private function checkSite($siteId)
     {
         $check = new SitesChecker();
@@ -304,6 +310,10 @@ class SitesController extends Controller
         return true;
     }
 
+    /**
+     * @param $siteId
+     * @return bool
+     */
     private function pingSite($siteId)
     {
         $ping = new SitesPings();
