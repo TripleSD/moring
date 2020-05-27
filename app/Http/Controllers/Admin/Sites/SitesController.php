@@ -42,12 +42,12 @@ class SitesController extends Controller
         // Counts
         $counts['allSites']                = $sitesCountsRepository->getAllSitesCount() ?: []; // Ok
         $counts['sslExpirationsDaysSites'] = $sitesCountsRepository->getSslExpirationsDaysSitesCount() ?: [];
-        $counts['sslErrorsSites']          = $sitesCountsRepository->getSslErrorsSitesCount() ?: [];       // OK
-        $counts['sslSuccessSites']         = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];      //Ok
-        $counts['softwareErrorsSites']     = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];  // Ok
+        $counts['sslErrorsSites']          = $sitesCountsRepository->getSslErrorsSitesCount() ?: [];            // OK
+        $counts['sslSuccessSites']         = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];           //Ok
+        $counts['softwareErrorsSites']     = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];       // Ok
         $counts['bridgeErrors']            = $sitesCountsRepository->getBridgeErrors() ?: [];
-        $counts['disabledSites']           = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
-        $counts['deprecatedPHPVersion']    = ($sitesCountsRepository->getDeprecatedVersions()) ?: [];  // Ok
+        $counts['disabledSites']           = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];         // Ok
+        $counts['deprecatedPHPVersion']    = ($sitesCountsRepository->getDeprecatedVersions()) ?: [];         // Ok
 
         $keys = $request->keys();
         if (! empty($keys)) {
@@ -86,28 +86,38 @@ class SitesController extends Controller
      * @param StoreSiteRequest $request
      * @return RedirectResponse
      */
-    public function store(StoreSiteRequest $request)
+    public function store(StoreSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        $fillable = $request->validated();
-
         // Checking DNS resolve by domains
-        if (checkdnsrr($fillable['url'], 'A')) {
-            $result = (new AdminSitesRepository())->store($fillable);
-            if ($result) {
-                // Run first site check
-                $check = new SitesChecker();
-                $check->handle((int) $result->site_id, 'web');
+        if (checkdnsrr($request->url, 'A')) {
+            $site = [
+                'url' => $request->url,
+                'file_url' => $request->file_url,
+                'https' => $request->https
+            ];
 
-                // Run first site ping as well
-                $ping = new SitesPings();
-                $ping->handle((int) ($result->site_id));
-
-                flash('Запись добавлена')->success();
-
-                return redirect()->route('admin.sites.index');
-            } else {
-                return back()->withInput();
+            if (! isset($request->use_file)) {
+                $request->use_file = 0;
             }
+
+            if ($request->use_file && ! $adminSitesRepository->checkUrl($site)) {
+                flash('Проверьте имя сайта/имя Moring файла/настройки HTTPS.')->warning();
+
+                return redirect()->back()->withInput();
+            }
+
+            $site = (new AdminSitesRepository())->store($request->validated());
+
+            $check = new SitesChecker();
+            $check->handle((int) $site->site_id, 'web');
+
+
+            $ping = new SitesPings();
+            $ping->handle((int) ($site->site_id));
+
+            flash('Запись добавлена')->success();
+
+            return redirect()->route('admin.sites.index');
         } else {
             flash('Запись не добавлена. Проверьте существование домена.')->warning();
 
