@@ -35,7 +35,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open(['url' => route('network.devices.update', $device->id), 'method' => 'put']) }}
+                                    {{ Form::open(['url' => route('network.devices.update', $device->id), 'method' => 'patch']) }}
                                     <div class="form-group">
                                         <b>Описание</b>
                                         {{ Form::text('title', $device->title , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}

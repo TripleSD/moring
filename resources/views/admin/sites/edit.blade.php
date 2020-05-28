@@ -33,7 +33,7 @@
 
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open(['url' => route('admin.sites.update', $site->id), 'method' => 'put']) }}
+                                    {{ Form::open(['url' => route('admin.sites.update', $site->id), 'method' => 'patch']) }}
 
                                     <div class="form-group">
                                         <b>Название сайта</b>
