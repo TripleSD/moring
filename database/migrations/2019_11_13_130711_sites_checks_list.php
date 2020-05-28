@@ -20,7 +20,7 @@ class SitesChecksList extends Migration
                 $table->unsignedBigInteger('site_id')
                     ->comment('Site ID');
                 $table->boolean('http_code')
-                    ->default(1);
+                    ->default(0);
                 $table->boolean('check_https')
                     ->default(0);
                 $table->boolean('check_ssl')
