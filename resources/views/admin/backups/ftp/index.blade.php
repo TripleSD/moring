@@ -27,7 +27,7 @@
                             <h3 class="card-title">Список устройств</h3>
                             <div class="card-tools">
                                 <div class="btn-group">
-                                    <a href="{{route('network.devices.create')}}"
+                                    <a href="{{route('backups.ftp.create')}}"
                                        class="btn btn-sm btn-success" title="Добавление нового устройства">
                                         <i class="fa fa-plus-square"></i></a>
                                 </div>
@@ -100,7 +100,7 @@
                                                         </div>
                                                         <div class="small text-gray">
                                                             <i class="fas fa-history"></i>
-                                                            Last check: {{ $task->logs->last()->created_at }}
+                                                            Last check: {{ $task->updated_at }}
                                                         </div>
                                                     </div>
                                                 </div>
