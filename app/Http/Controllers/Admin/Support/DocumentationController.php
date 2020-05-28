@@ -15,6 +15,9 @@ class DocumentationController extends Controller
         return view('admin.documentation.index');
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function getChangeLog()
     {
         $file = file_get_contents('../CHANGELOG.md');
