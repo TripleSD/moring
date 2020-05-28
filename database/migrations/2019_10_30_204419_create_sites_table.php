@@ -24,7 +24,7 @@ class CreateSitesTable extends Migration
                 $table->integer('https')
                     ->default(0);
                 $table->integer('enabled')
-                    ->default(1);
+                    ->default(0);
                 $table->text('comment')
                     ->nullable()
                     ->comment('Sites description');
