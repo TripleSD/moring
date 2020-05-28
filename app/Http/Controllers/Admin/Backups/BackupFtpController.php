@@ -31,4 +31,12 @@ class BackupFtpController extends Controller
 
         return view('admin.backups.ftp.index', compact('tasks'));
     }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function create()
+    {
+        return view('admin.backups.ftp.create');
+    }
 }
