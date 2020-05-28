@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Support;
 
+use Parsedown;
 use App\Http\Controllers\Controller;
 
 class DocumentationController extends Controller
@@ -14,7 +15,7 @@ class DocumentationController extends Controller
     public function getChangeLog()
     {
         $file = file_get_contents('../CHANGELOG.md');
-        $markdownParse = new \Parsedown();
+        $markdownParse = new Parsedown();
         $text = $markdownParse->text($file);
 
         return view('admin.documentation.changelog', compact('text'));
