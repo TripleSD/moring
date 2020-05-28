@@ -112,6 +112,8 @@ Route::group(
                     ->name('documenation.index');
                 Route::get('/changelog', 'DocumentationController@getChangeLog')
                     ->name('documenation.changelog');
+                Route::get('/about', 'DocumentationController@about')
+                    ->name('documenation.about');
             }
         );
 
