@@ -86,6 +86,12 @@ class BackupFtpController extends Controller
         return redirect()->route('backups.ftp.index');
     }
 
+    public function show(Request $request)
+    {
+        $task = BackupFtpList::find($request->ftp);
+
+        return view('admin.backups.ftp.show', compact('task'));
+    }
 
     /**
      * @param Request $request
