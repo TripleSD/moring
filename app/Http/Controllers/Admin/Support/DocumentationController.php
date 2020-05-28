@@ -20,4 +20,13 @@ class DocumentationController extends Controller
 
         return view('admin.documentation.changelog', compact('text'));
     }
+
+    public function about()
+    {
+        $file = file_get_contents('../README.md');
+        $markdownParse = new Parsedown();
+        $text = $markdownParse->text($file);
+
+        return view('admin.documentation.about', compact('text'));
+    }
 }
