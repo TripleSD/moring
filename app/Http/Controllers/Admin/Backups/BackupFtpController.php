@@ -78,7 +78,7 @@ class BackupFtpController extends Controller
 
             ]
         );
-        $fill['enabled'] = 1;
+
         BackupFtpList::create($fill);
 
         flash('Данные сохранены')->success();
