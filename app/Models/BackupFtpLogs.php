@@ -12,5 +12,5 @@ class BackupFtpLogs extends Model
 {
     protected $table = 'backup_ftp_logs';
 
-    protected $fillable = ['task_id', 'status'];
+    protected $fillable = ['task_id', 'status', 'resolved'];
 }
