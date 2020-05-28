@@ -113,9 +113,7 @@
                                                 </div>
                                                 <div class="small">
                                                     <b>Файл:</b>
-                                                    {{ $task->pre }}
                                                     {{ $task->filename }}
-                                                    {{ $task->post }}
                                                 </div>
                                                 <div class="small">
                                                     <b>Описание:</b>
