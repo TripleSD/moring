@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Admin\Support;
 
 use Parsedown;
+use Illuminate\View\View;
 use App\Http\Controllers\Controller;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Contracts\Foundation\Application;
 
 class DocumentationController extends Controller
 {
@@ -21,6 +24,9 @@ class DocumentationController extends Controller
         return view('admin.documentation.changelog', compact('text'));
     }
 
+    /**
+     * @return Application|Factory|View
+     */
     public function about()
     {
         $file = file_get_contents('../README.md');
