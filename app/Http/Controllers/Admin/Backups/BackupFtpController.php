@@ -6,7 +6,9 @@ use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\BackupFtpList;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Foundation\Application;
 use App\Repositories\Backups\BackupFtpRepository;
 
@@ -51,5 +53,36 @@ class BackupFtpController extends Controller
         $task = BackupFtpList::find($request->ftp);
 
         return view('admin.backups.ftp.edit', compact('task'));
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
+    public function update(Request $request)
+    {
+        $fill = $this->validate(
+            $request,
+            [
+                'description' => 'required',
+                'hostname' => 'required',
+                'port' => 'integer',
+                'folder' => 'alpha_dash',
+                'pre' => 'alpha_dash',
+                'post' => 'alpha_dash',
+                'filename' => 'required',
+                'interval' => 'integer',
+            ],
+            [
+
+            ]
+        );
+
+        BackupFtpList::where('id', $request->ftp)->update($fill);
+
+        flash('Данные обновлны')->success();
+
+        return redirect()->route('backups.ftp.index');
     }
 }
