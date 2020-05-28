@@ -13,8 +13,20 @@ class BackupFtpList extends Model
 {
     protected $table = 'backup_ftp_list';
 
+    protected $fillable = [
+        'description',
+        'hostname',
+        'port',
+        'folder',
+        'pre',
+        'post',
+        'filename',
+        'interval',
+        'enabled'
+    ];
+
     public function logs(): HasMany
     {
-        return $this->hasMany(BackupFtpLogs::class,'task_id', 'id');
+        return $this->hasMany(BackupFtpLogs::class, 'task_id', 'id');
     }
 }
