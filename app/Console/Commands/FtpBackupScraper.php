@@ -27,6 +27,9 @@ class FtpBackupScraper extends Command
         $tasks = BackupFtpList::where('enabled', 1)->get();
 
         foreach ($tasks as $task) {
+            $filename = explode('.',$task->filename);
+            $filename = $task->pre . $filename[0] . $task->post . '.' . $filename[1];
+
             $stream = ftp_connect($task->hostname);
             ftp_login($stream, $task->login, $task->password);
             ftp_pasv($stream, true);
@@ -37,7 +40,7 @@ class FtpBackupScraper extends Command
             $resolved = 0;
 
             foreach ($files as $file) {
-                if ($file['name'] === $task->filename) {
+                if ($file['name'] === $filename) {
                     $status   = 1;
                     $resolved = 1;
                 }
