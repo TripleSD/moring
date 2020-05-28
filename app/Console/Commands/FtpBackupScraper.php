@@ -27,7 +27,7 @@ class FtpBackupScraper extends Command
         $tasks = BackupFtpList::where('enabled', 1)->get();
 
         foreach ($tasks as $task) {
-            $filename = explode('.',$task->filename);
+            $filename = explode('.', $task->filename);
             $filename = $task->pre . $filename[0] . $task->post . '.' . $filename[1];
 
             $stream = ftp_connect($task->hostname);
