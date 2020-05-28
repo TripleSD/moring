@@ -33,7 +33,7 @@
 
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open([ 'route' => 'admin.sites.store', 'method' => 'post', 'enctype' => "multipart/form-data"]) }}
+                                    {{ Form::open(['url' => route('admin.sites.store'), 'method' => 'post']) }}
 
                                     <div class="form-group">
                                         <b>Название сайта</b>
@@ -152,7 +152,8 @@
                                         {{ Form::text('ping_threshold', null , ['class' => 'form-control', 'placeholder' => '10']) }}
                                         <details class="mt--3 small">
                                             <summary>
-                                                Максимальное значение ping при котором необходимо уведомлять администратора
+                                                Максимальное значение ping при котором необходимо уведомлять
+                                                администратора
                                             </summary>
                                             Ping threshold
                                         </details>

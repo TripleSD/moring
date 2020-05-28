@@ -33,7 +33,7 @@
 
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open([ 'url' => route('admin.sites.update', $site->id), 'method' => 'put', 'enctype' => "multipart/form-data"]) }}
+                                    {{ Form::open(['url' => route('admin.sites.update', $site->id), 'method' => 'put']) }}
 
                                     <div class="form-group">
                                         <b>Название сайта</b>
@@ -183,7 +183,7 @@
                                             {{ Form::close() }}
                                         </div>
                                         <div class="form-group col-md-4">
-                                            {{Form::open([ 'url' => route('admin.sites.destroy', $site->id), 'method' => 'delete', 'enctype' => "multipart/form-data"])}}
+                                            {{Form::open([ 'url' => route('admin.sites.destroy', $site->id), 'method' => 'delete'])}}
                                             <button type="submit" class="btn btn-xs bg-gradient-red">Удалить</button>
                                             {{ Form::close() }}
                                         </div>

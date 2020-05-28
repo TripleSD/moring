@@ -36,7 +36,7 @@
 
                         <div class="card-body">
                             <div class="col-sm-6">
-                                {{ Form::open(['url' => route('settings.users.update', $user->id),'method' => 'post', 'enctype' => "multipart/form-data"]) }}
+                                {{ Form::open(['url' => route('settings.users.update', $user->id),'method' => 'post']) }}
                                 @method('patch')
 
                                 <div class="form-group">

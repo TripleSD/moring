@@ -34,7 +34,7 @@
 
                         <div class="card-body">
                             <div class="col-sm-6">
-                                {{ Form::open(['url' => route('servers.store'),'method' => 'post', 'enctype' => "multipart/form-data"]) }}
+                                {{ Form::open(['url' => route('servers.store'),'method' => 'post']) }}
 
                                 <div class="form-group">
                                     <label>IP адрес сервера

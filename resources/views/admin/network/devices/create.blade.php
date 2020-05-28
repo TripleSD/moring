@@ -33,7 +33,7 @@
 
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open([ 'route' => 'network.devices.store', 'method' => 'post', 'enctype' => "multipart/form-data"]) }}
+                                    {{ Form::open(['url' => route('network.devices.store'), 'method' => 'post']) }}
                                     <div class="form-group">
                                         <b>Описание</b>
                                         {{ Form::text('title', null , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}

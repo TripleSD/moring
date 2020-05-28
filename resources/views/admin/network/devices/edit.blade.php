@@ -35,7 +35,7 @@
                         <div class="card">
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open([ 'url' => route('network.devices.update', $device->id), 'method' => 'put', 'enctype' => "multipart/form-data"]) }}
+                                    {{ Form::open(['url' => route('network.devices.update', $device->id), 'method' => 'put']) }}
                                     <div class="form-group">
                                         <b>Описание</b>
                                         {{ Form::text('title', $device->title , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
@@ -140,7 +140,7 @@
                                         {{ Form::close() }}
 
                                         <div class="float-right">
-                                            {{Form::open([ 'url' => route('network.devices.destroy', $device->id), 'method' => 'delete', 'enctype' => "multipart/form-data"])}}
+                                            {{Form::open([ 'url' => route('network.devices.destroy', $device->id), 'method' => 'delete'])}}
                                             <button type="submit" class="btn btn-xs bg-gradient-red">Удалить
                                             </button>
                                             {{ Form::close() }}
