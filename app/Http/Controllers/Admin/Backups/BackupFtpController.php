@@ -60,6 +60,38 @@ class BackupFtpController extends Controller
      * @return RedirectResponse
      * @throws ValidationException
      */
+    public function store(Request $request)
+    {
+        $fill = $this->validate(
+            $request,
+            [
+                'description' => 'required',
+                'hostname' => 'required',
+                'port' => 'integer',
+                'folder' => 'alpha_dash',
+                'pre' => 'alpha_dash',
+                'post' => 'alpha_dash',
+                'filename' => 'required',
+                'interval' => 'integer',
+            ],
+            [
+
+            ]
+        );
+        $fill['enabled'] = 1;
+        BackupFtpList::create($fill);
+
+        flash('Данные сохранены')->success();
+
+        return redirect()->route('backups.ftp.index');
+    }
+
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
     public function update(Request $request)
     {
         $fill = $this->validate(
