@@ -89,6 +89,14 @@ Route::group(
         );
 
         Route::group(
+            ['prefix' => 'backups', 'namespace' => 'Admin\Backups','as' => 'backups.'],
+            function () {
+                $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
+                Route::resource('ftp', 'BackupFtpController')->only($methods);
+            }
+        );
+
+        Route::group(
             ['namespace' => 'Admin\Servers'],
             function () {
                 $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
