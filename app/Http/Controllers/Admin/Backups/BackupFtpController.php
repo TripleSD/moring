@@ -89,10 +89,9 @@ class BackupFtpController extends Controller
 
     public function show(Request $request)
     {
-        $task = BackupFtpList::find($request->ftp);
-        $logs = BackupFtpLogs::where('task_id', $request->ftp)->get();
+        $task = BackupFtpList::with('logs')->find($request->ftp);
 
-        return view('admin.backups.ftp.show', compact('task', 'logs'));
+        return view('admin.backups.ftp.show', compact('task'));
     }
 
     /**
