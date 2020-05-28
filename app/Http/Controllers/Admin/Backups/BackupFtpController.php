@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin\Backups;
 
 use Illuminate\View\View;
+use Illuminate\Http\Request;
+use App\Models\BackupFtpList;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\Foundation\Application;
@@ -38,5 +40,16 @@ class BackupFtpController extends Controller
     public function create()
     {
         return view('admin.backups.ftp.create');
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function edit(Request $request)
+    {
+        $task = BackupFtpList::find($request->ftp);
+
+        return view('admin.backups.ftp.edit', compact('task'));
     }
 }
