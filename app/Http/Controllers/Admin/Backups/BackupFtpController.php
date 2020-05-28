@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Backups;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\BackupFtpList;
+use App\Models\BackupFtpLogs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
@@ -89,8 +90,9 @@ class BackupFtpController extends Controller
     public function show(Request $request)
     {
         $task = BackupFtpList::find($request->ftp);
+        $logs = BackupFtpLogs::where('task_id', $request->ftp)->get();
 
-        return view('admin.backups.ftp.show', compact('task'));
+        return view('admin.backups.ftp.show', compact('task', 'logs'));
     }
 
     /**
