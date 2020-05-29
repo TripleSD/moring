@@ -49,6 +49,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('ServersPings')->everyFiveMinutes();
         $schedule->command('SnmpDevicesChecker')->everyMinute();
         $schedule->command('SystemChecker')->daily();
+
+        $schedule->command('scraper:ftp --interval=1')->hourly();
+        $schedule->command('scraper:ftp --interval=3')->hourlyAt([0,3,6,9,12,15,18,21]);
+        $schedule->command('scraper:ftp --interval=6')->hourlyAt([0,6,12,18]);
+        $schedule->command('scraper:ftp --interval=12')->hourlyAt([0,12]);
     }
 
     /**
