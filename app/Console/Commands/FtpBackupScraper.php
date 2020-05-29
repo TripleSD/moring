@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use Carbon\Carbon;
 use App\Models\BackupFtpList;
 use App\Models\BackupFtpLogs;
 use Illuminate\Console\Command;
@@ -39,6 +40,8 @@ class FtpBackupScraper extends Command
         $tasks = BackupFtpList::where('enabled', 1)->where('interval', $interval)->get();
 
         foreach ($tasks as $task) {
+            BackupFtpList::where('id', $task->id)->update(['updated_at' => Carbon::now()->format('Y-m-d H:i:s')]);
+
             $stream = ftp_connect($task->hostname);
             ftp_login($stream, $task->login, $task->password);
             ftp_pasv($stream, true);
