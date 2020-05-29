@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Backups;
 use Illuminate\View\View;
 use Illuminate\Http\Request;
 use App\Models\BackupFtpList;
-use App\Models\BackupFtpLogs;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Contracts\View\Factory;
@@ -121,6 +120,19 @@ class BackupFtpController extends Controller
         BackupFtpList::where('id', $request->ftp)->update($fill);
 
         flash('Данные обновлны')->success();
+
+        return redirect()->route('backups.ftp.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request)
+    {
+        BackupFtpList::where('id', $request->ftp)->delete();
+
+        flash('Запись удалена')->success();
 
         return redirect()->route('backups.ftp.index');
     }
