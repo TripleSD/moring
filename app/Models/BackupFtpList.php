@@ -8,7 +8,6 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class BackupFtpList
- * @package App\Models
  */
 class BackupFtpList extends Model
 {
@@ -23,7 +22,7 @@ class BackupFtpList extends Model
         'post',
         'filename',
         'interval',
-        'enabled'
+        'enabled',
     ];
 
     public function logs(): HasMany
@@ -31,15 +30,18 @@ class BackupFtpList extends Model
         return $this->hasMany(BackupFtpLogs::class, 'task_id', 'id');
     }
 
+    /**
+     * @return string
+     */
     public function getFullFilenameAttribute()
     {
-        $this->attributes['pre'] = preg_replace('/%Y/',Carbon::now()->format('Y'), $this->attributes['pre']);
-        $this->attributes['pre'] = preg_replace('/%m/',Carbon::now()->format('m'), $this->attributes['pre']);
-        $this->attributes['pre'] = preg_replace('/%d/',Carbon::now()->format('d'), $this->attributes['pre']);
+        $this->attributes['pre'] = preg_replace('/%Y/', Carbon::now()->format('Y'), $this->attributes['pre']);
+        $this->attributes['pre'] = preg_replace('/%m/', Carbon::now()->format('m'), $this->attributes['pre']);
+        $this->attributes['pre'] = preg_replace('/%d/', Carbon::now()->format('d'), $this->attributes['pre']);
 
-        $this->attributes['post'] = preg_replace('/%Y/',Carbon::now()->format('Y'), $this->attributes['post']);
-        $this->attributes['post'] = preg_replace('/%m/',Carbon::now()->format('m'), $this->attributes['post']);
-        $this->attributes['post'] = preg_replace('/%d/',Carbon::now()->format('d'), $this->attributes['post']);
+        $this->attributes['post'] = preg_replace('/%Y/', Carbon::now()->format('Y'), $this->attributes['post']);
+        $this->attributes['post'] = preg_replace('/%m/', Carbon::now()->format('m'), $this->attributes['post']);
+        $this->attributes['post'] = preg_replace('/%d/', Carbon::now()->format('d'), $this->attributes['post']);
 
         $filename = explode('.', $this->attributes['filename']);
 
