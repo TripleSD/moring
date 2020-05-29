@@ -30,7 +30,7 @@ class BackupFtpList extends Model
         return $this->hasMany(BackupFtpLogs::class, 'task_id', 'id');
     }
 
-    public function getFulleFilenameAttribute()
+    public function getFullFilenameAttribute()
     {
         $filename = explode('.', $this->attributes['filename']);
 
