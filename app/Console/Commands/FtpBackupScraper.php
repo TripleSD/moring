@@ -13,7 +13,7 @@ class FtpBackupScraper extends Command
      *
      * @var string
      */
-    protected $signature = 'FtpBackupScraper';
+    protected $signature = 'scraper:ftp {--interval=}';
 
     /**
      * The console command description.
@@ -24,7 +24,19 @@ class FtpBackupScraper extends Command
 
     public function handle()
     {
-        $tasks = BackupFtpList::where('enabled', 1)->get();
+        if ($this->option('interval') === '3') {
+            $interval = 3;
+        } elseif ($this->option('interval') === '6') {
+            $interval = 6;
+        } elseif ($this->option('interval') === '12') {
+            $interval = 12;
+        } elseif ($this->option('interval') === '1') {
+            $interval = 1;
+        } else {
+            $interval = 1;
+        }
+
+        $tasks = BackupFtpList::where('enabled', 1)->where('interval', $interval)->get();
 
         foreach ($tasks as $task) {
             $filename = explode('.', $task->filename);
