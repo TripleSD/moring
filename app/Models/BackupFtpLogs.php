@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BackupFtpLogs
- * @package App\Models
  */
 class BackupFtpLogs extends Model
 {
