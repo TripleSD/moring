@@ -3,9 +3,9 @@
 namespace App\Repositories;
 
 use App\Models\Sites;
-use GuzzleHttp\Client;
 use App\Models\SitesChecksList;
 use App\Models\SitesPingResponses;
+use GuzzleHttp\Client;
 
 class AdminSitesRepository extends Repository
 {
