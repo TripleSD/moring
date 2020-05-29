@@ -136,10 +136,11 @@
                                     <div class="form-group">
                                         <b>Interval</b>
                                         <div>
-                                            {{ Form::radio('interval', '1', false) }} 1h
-                                            {{ Form::radio('interval', '3', false) }} 3h
-                                            {{ Form::radio('interval', '6', false) }} 6h
-                                            {{ Form::radio('interval', '12',false) }} 12h
+                                            {{ Form::radio('interval', '1', false) }} every 1h
+                                            {{ Form::radio('interval', '3', false) }} every 3h
+                                            {{ Form::radio('interval', '6', false) }} every 6h
+                                            {{ Form::radio('interval', '12',false) }} every 12h
+                                            {{ Form::radio('interval', '24',false) }} every day
                                         </div>
                                         <details class="mt--3 small">
                                             <summary>
