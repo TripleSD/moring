@@ -68,6 +68,28 @@
                                     </div>
 
                                     <div class="form-group">
+                                        <b>Логин</b>
+                                        {{Form::text('login', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            ...
+                                        </details>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <b>Пароль</b>
+                                        {{Form::text('password', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            ...
+                                        </details>
+                                    </div>
+
+                                    <div class="form-group">
                                         <b>Папка</b>
                                         {{Form::text('folder', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
                                         <details class="mt--3 small">
