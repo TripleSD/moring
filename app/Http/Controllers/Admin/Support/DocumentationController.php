@@ -8,6 +8,9 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 use Parsedown;
 
+/**
+ * Class DocumentationController
+ */
 class DocumentationController extends Controller
 {
     public function getIndex()
