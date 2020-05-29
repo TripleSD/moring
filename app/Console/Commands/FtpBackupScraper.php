@@ -2,9 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Carbon\Carbon;
 use App\Models\BackupFtpList;
 use App\Models\BackupFtpLogs;
+use Carbon\Carbon;
 use Illuminate\Console\Command;
 
 class FtpBackupScraper extends Command
@@ -61,7 +61,7 @@ class FtpBackupScraper extends Command
             $arr = [
                 'task_id' => $task->id,
                 'status' => $status,
-                'resolved' => $resolved
+                'resolved' => $resolved,
             ];
 
             BackupFtpLogs::create($arr);
