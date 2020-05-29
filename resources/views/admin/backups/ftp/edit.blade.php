@@ -127,8 +127,17 @@
                                         </details>
                                     </div>
 
-                                    <button type="submit" class="btn btn-xs bg-gradient-cyan">Добавить</button>
-                                    {{ Form::close() }}
+                                    <div class="form-group">
+                                        <button type="submit" class="btn btn-xs bg-gradient-success">Обновить</button>
+                                        {{ Form::close() }}
+
+                                        <div class="float-right">
+                                            {{Form::open([ 'url' => route('backups.ftp.destroy', $task->id), 'method' => 'delete'])}}
+                                            <button type="submit" class="btn btn-xs bg-gradient-red">Удалить
+                                            </button>
+                                            {{ Form::close() }}
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
