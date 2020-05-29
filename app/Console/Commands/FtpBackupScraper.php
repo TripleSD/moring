@@ -52,7 +52,7 @@ class FtpBackupScraper extends Command
             $resolved = 0;
 
             foreach ($files as $file) {
-                if ($file['name'] === $task->filename) {
+                if ($file['name'] === $task->FullFilename) {
                     $status   = 1;
                     $resolved = 1;
                 }
