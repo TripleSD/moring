@@ -5,13 +5,13 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class=" text-dark"><i class="nav-icon fas fa-network-wired"></i> Сеть</h1>
+                    <h1 class=" text-dark"><i class="nav-icon fas fa-box-open"></i> Backups</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{route('home')}}">Главная</a></li>
-                        <li class="breadcrumb-item">Сеть</li>
-                        <li class="breadcrumb-item active">Устройства</li>
+                        <li class="breadcrumb-item">Backups</li>
+                        <li class="breadcrumb-item active">FTP</li>
                     </ol>
                 </div>
             </div>
@@ -24,7 +24,7 @@
                 <div class="col-12">
                     <div class="card">
                         <div class="card-header">
-                            <h3 class="card-title">Список устройств</h3>
+                            <h3 class="card-title">Список проверок</h3>
                             <div class="card-tools">
                                 <div class="btn-group">
                                     <a href="{{route('backups.ftp.create')}}"
@@ -113,7 +113,7 @@
                                                 </div>
                                                 <div class="small">
                                                     <b>Файл:</b>
-                                                    {{ $task->FulleFilename }}
+                                                    {{ $task->FullFilename }}
                                                 </div>
                                                 <div class="small">
                                                     <b>Описание:</b>
