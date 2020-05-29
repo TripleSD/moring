@@ -91,12 +91,12 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="small">
-                                                            <b>Имя/IP адрес устройства:</b>
-                                                            {{ $task->hostname }}
+                                                            <b>Адрес подключения:</b>
+                                                            {{ $task->hostname }}:{{ $task->port }}
                                                         </div>
                                                         <div class="small">
-                                                            <b>Порт:</b>
-                                                            {{ $task->port }}
+                                                            <b>Интервал проверки:</b>
+                                                            {{ $task->interval }} час.
                                                         </div>
                                                         <div class="small text-gray">
                                                             <i class="fas fa-history"></i>
