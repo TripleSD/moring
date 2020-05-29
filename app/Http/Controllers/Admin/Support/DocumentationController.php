@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Support;
 
-use Parsedown;
-use Illuminate\View\View;
 use App\Http\Controllers\Controller;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
+use Parsedown;
 
 class DocumentationController extends Controller
 {
