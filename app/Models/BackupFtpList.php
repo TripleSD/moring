@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
- * Class BackupFtpList
+ * Class BackupFtpList.
  */
 class BackupFtpList extends Model
 {

@@ -9,7 +9,7 @@ use Illuminate\View\View;
 use Parsedown;
 
 /**
- * Class DocumentationController
+ * Class DocumentationController.
  */
 class DocumentationController extends Controller
 {

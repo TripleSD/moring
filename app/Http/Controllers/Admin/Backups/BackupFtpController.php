@@ -12,9 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
-
 /**
- * Class BackupFtpController
+ * Class BackupFtpController.
  */
 class BackupFtpController extends Controller
 {

@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class BackupFtpLogs
+ * Class BackupFtpLogs.
  */
 class BackupFtpLogs extends Model
 {
