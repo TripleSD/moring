@@ -113,7 +113,7 @@
                                                 </div>
                                                 <div class="small">
                                                     <b>Файл:</b>
-                                                    {{ $task->filename }}
+                                                    {{ $task->FulleFilename }}
                                                 </div>
                                                 <div class="small">
                                                     <b>Описание:</b>
