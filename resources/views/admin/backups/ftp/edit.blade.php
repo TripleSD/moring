@@ -65,7 +65,7 @@
                                     <div class="form-group">
                                         <b>Порт</b>
                                         <span class="small text-danger">*</span>
-                                        {{ Form::text('port', $task->port, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 161']) }}
+                                        {{ Form::text('port', $task->port, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 21']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -77,7 +77,7 @@
                                     <div class="form-group">
                                         <b>Логин</b>
                                         <span class="small text-danger">*</span>
-                                        {{Form::text('login', $task->login, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        {{Form::text('login', $task->login, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: backup-user'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -99,7 +99,7 @@
 
                                     <div class="form-group">
                                         <b>Папка</b>
-                                        {{Form::text('folder', $task->folder, ['class' => 'form-control', 'placeholder' => 'Пример: public'])}}
+                                        {{Form::text('folder', $task->folder, ['class' => 'form-control', 'placeholder' => 'Пример: BackupSite'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -110,7 +110,7 @@
 
                                     <div class="form-group">
                                         <b>Pre suffix</b>
-                                        {{Form::text('pre', $task->pre, ['class' => 'form-control', 'placeholder' => 'Пример: 22'])}}
+                                        {{Form::text('pre', $task->pre, ['class' => 'form-control', 'placeholder' => 'Пример: backup_'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -121,7 +121,7 @@
 
                                     <div class="form-group">
                                         <b>Post suffix</b>
-                                        {{Form::text('post', $task->post, ['class' => 'form-control', 'placeholder' => 'Пример: 23'])}}
+                                        {{Form::text('post', $task->post, ['class' => 'form-control', 'placeholder' => 'Пример: _%Y-%m-%d'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -133,7 +133,7 @@
                                     <div class="form-group">
                                         <b>File</b>
                                         <span class="small text-danger">*</span>
-                                        {{Form::text('filename', $task->filename, ['class' => 'form-control', 'placeholder' => 'Пример: http://127.0.0.1'])}}
+                                        {{Form::text('filename', $task->filename, ['class' => 'form-control', 'placeholder' => 'Пример: test.tar'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
