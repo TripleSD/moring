@@ -23,7 +23,7 @@
                     <div class="col-12">
                         <div class="card">
                             <div class="card-header">
-                                <h3 class="card-title">Редактирование FPT проверки</h3>
+                                <h3 class="card-title">Редактирование FTP проверки</h3>
                                 <div class="card-tools">
                                     <a href="{{route('network.devices.index')}}"
                                        class="btn btn-sm bg-gradient-info" title="Вернуться">
