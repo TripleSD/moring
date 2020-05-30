@@ -79,6 +79,7 @@ class NetworkDevicesController extends Controller
      */
     public function show(Request $request)
     {
+        //TODO переписать в один запрос как в FTP
         $logs   = $this->deviceLogsRepository->getLogsByDeviceId($request->device);
         $device = $this->deviceRepository->show($request->device);
 
