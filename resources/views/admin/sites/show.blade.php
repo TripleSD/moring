@@ -175,9 +175,7 @@
                                             SSL сертификат:
                                             <span class="float-right">
                                                 @isset($site->getSslCertification->getSSL->expiration_days)
-                                                    <div class="text-gray">
-                                                        {{ $site->getSslCertification->getSSL->issuer }}
-                                                    </div>
+                                                    {{ $site->getSslCertification->getSSL->issuer }}
                                                 @endif
                                             </span>
                                         </div>
