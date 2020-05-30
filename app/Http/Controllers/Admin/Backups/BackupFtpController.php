@@ -72,6 +72,8 @@ class BackupFtpController extends Controller
                 'post' => 'nullable',
                 'filename' => 'required',
                 'interval' => 'required|integer',
+                'login' => 'required',
+                'password' => 'required',
             ],
             [
 
@@ -110,6 +112,8 @@ class BackupFtpController extends Controller
                 'post' => 'nullable',
                 'filename' => 'required',
                 'interval' => 'required|integer',
+                'login' => 'required',
+                'password' => 'required',
             ],
             [
 
