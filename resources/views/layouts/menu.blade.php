@@ -110,7 +110,7 @@
                         <li class="nav-item">
                             <a href="{{ route('backups.ftp.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
-                                <p>Ftp</p>
+                                <p>FTP</p>
                             </a>
                         </li>
                     </ul>
