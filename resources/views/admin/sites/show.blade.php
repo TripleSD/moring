@@ -191,37 +191,47 @@
                                     </span>
                                 </li>
                                 <li class="small">
-                                    Версия Web сервера:
-                                    <span class="float-right">
-                                    @empty($site->getWebServer->web_server)
-                                            <span class="text-warning"
-                                                  title="Не был получен ответ сервера об установленной версии">
-                                                    <i class="fa fa-exclamation-triangle"></i>
+                                    <div class="row">
+                                        <div class="col">
+                                            Версия web сервера:
+                                            <span class="float-right">
+                                                @empty($site->getWebServer->web_server)
+                                                    <span class="text-warning"
+                                                          title="Не был получен ответ сервера об установленной версии">
+                                                            <i class="fa fa-exclamation-triangle"></i>
+                                                        </span>
+                                                @else
+                                                    @if(preg_match('/nginx/', $site->getWebServer->web_server))
+                                                        <div class="badge badge-success">
+                                                                            Nginx
+                                                                        </div>
+                                                        {{$site->getWebServer->web_server}}
+                                                    @elseif(preg_match('/Apache/', $site->getWebServer->web_server))
+                                                        <div class="badge badge-success">
+                                                                            Apache
+                                                                        </div>
+                                                        {{$site->getWebServer->web_server}}
+                                                    @elseif(preg_match('/IIS/', $site->getWebServer->web_server))
+                                                        <div class="badge badge-success">
+                                                                            IIS
+                                                                        </div>
+                                                        {{$site->getWebServer->web_server}}
+                                                    @else
+                                                        <div class="badge badge-dark">
+                                                                            Unknown
+                                                                        </div>
+                                                        {{$site->getWebServer->web_server}}
+                                                    @endif
+                                                @endempty
                                             </span>
-                                        @else
-                                            @if(preg_match('/nginx/', $site->getWebServer->web_server))
-                                                <div class="badge badge-success">
-                                                                        Nginx
-                                                                    </div>
-                                                {{$site->getWebServer->web_server}}
-                                            @elseif(preg_match('/Apache/', $site->getWebServer->web_server))
-                                                <div class="badge badge-success">
-                                                                        Apache
-                                                                    </div>
-                                                {{$site->getWebServer->web_server}}
-                                            @elseif(preg_match('/IIS/', $site->getWebServer->web_server))
-                                                <div class="badge badge-success">
-                                                                        IIS
-                                                                    </div>
-                                                {{$site->getWebServer->web_server}}
-                                            @else
-                                                <div class="badge badge-dark">
-                                                                        Unknown
-                                                                    </div>
-                                                {{$site->getWebServer->web_server}}
-                                            @endif
-                                        @endempty
-                                    </span>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col text-gray">
+                                            <i class="fas fa-flag-checkered"></i>
+                                            {{ $site->getWebServer->updated_at }}
+                                        </div>
+                                    </div>
                                 </li>
                                 <li class="small">
                                     Контроль версии PHP:
