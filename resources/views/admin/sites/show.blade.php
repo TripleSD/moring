@@ -51,25 +51,25 @@
                         <div class="card-body">
                             <ul class="nav nav-pills flex-column">
                                 <li class="small">
-                                    Наименование
+                                    Краткое описание:
                                     <span class="float-right">
                                         {{ $site->title }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    ID:
+                                    IP:
                                     <span class="float-right">
-                                        {{ $site->id }}
+                                        {{ $site->ip_address }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    URL
+                                    URL:
                                     <span class="float-right">
                                         {{ $site->url }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    Мониторинг состояния сайта
+                                    Мониторинг состояния сайта:
                                     <span class="float-right">
                                         @if($site->enabled === 1)
                                             <span class="text-success">
@@ -85,7 +85,7 @@
                                     </span>
                                 </li>
                                 <li class="small">
-                                    Файл мониторинга
+                                    Файл мониторинга:
                                     <span class="float-right">
                                     @if(strlen($site->file_url) >= 5)
                                             {{ $site->file_url }}
@@ -101,101 +101,132 @@
                                                     </span>
                                             @endif
                                         @else
-                                            <dd>Не используется</dd>
+                                            Не используется
                                         @endif
                                     </span>
                                 </li>
                                 <li class="small">
-                                    Используется HTTPS
+                                    Поддержка HTTPS:
                                     <span class="float-right">
                                     @if($site->https === 1)
-                                            <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip"
+                                            <span class="text-success">
+                                                        <i class="fas fa-check-square" data-toggle="tooltip"
                                                            data-placement="right" title="HTTPS control is On"></i>
                                                     </span>
                                         @else
-                                            <span class="badge badge-danger">
-                                                        <i class="fa fa-toggle-off" data-toggle="tooltip"
+                                            <span class="text-gray">
+                                                        <i class="fas fa-check-square" data-toggle="tooltip"
                                                            data-placement="right" title="HTTPS contorl is Off"></i>
                                         </span>
                                         @endif
                                                                             </span>
                                 </li>
                                 <li class="small">
-                                    Контроль SSL
+                                    Контроль SSL:
                                     <span class="float-right">
-<div>
-                            <i class="fas fa-globe-americas"></i> {{$site->url}}
-    @isset($site->getSslCertification->expiration_days)
-        @if ($site->getSslCertification->expiration_days >= 10)
-            <i class="fa fa-lock fa-1 text-success"
-               title="Действующий SSL сертификат"></i>
-        @elseif($site->getSslCertification->expiration_days >= 5)
-            <i class="fa fa-lock fa-1 text-warning"
-               title="Действующий SSL сертификат"></i>
-        @elseif($site->getSslCertification->expiration_days >= 1)
-            <i class="fa fa-lock fa-1 text-danger"
-               title="Действующий SSL сертификат"></i>
-        @else
-            <i class="fa fa-lock fa-1 text-gray"
-               title="SSL сертификат истек"></i>
-        @endif
-        <span class="small">
-                                                            ({{ $site->getSslCertification->expiration_days }} дней)</span>
-    @endif
-                        </div>
-                        @if($site->checksList->check_ssl === 1)
-                                            <span class="badge badge-success">
-                                                        <i class="fa fa-toggle-on" data-toggle="tooltip"
-                                                           data-placement="right" title="HTTPS control is On"></i>
-                                                    </span>
+                                        <i class="fas fa-globe-americas"></i> {{$site->url}}
+                                        @isset($site->getSslCertification->expiration_days)
+                                            @if ($site->getSslCertification->expiration_days >= 10)
+                                                <i class="fa fa-lock fa-1 text-success"
+                                                   title="Действующий SSL сертификат"></i>
+                                            @elseif($site->getSslCertification->expiration_days >= 5)
+                                                <i class="fa fa-lock fa-1 text-warning"
+                                                   title="Действующий SSL сертификат"></i>
+                                            @elseif($site->getSslCertification->expiration_days >= 1)
+                                                <i class="fa fa-lock fa-1 text-danger"
+                                                   title="Действующий SSL сертификат"></i>
+                                            @else
+                                                <i class="fa fa-lock fa-1 text-gray"
+                                                   title="SSL сертификат истек"></i>
+                                            @endif
+                                            <span class="small">
+                                                ({{ $site->getSslCertification->expiration_days }} дней)
+                                            </span>
+                                        @endif
+                                        @if($site->checksList->check_ssl === 1)
+                                            <span class="text-success">
+                                                <i class="fas fa-check-square" data-toggle="tooltip"
+                                                   data-placement="right" title="HTTPS control is On"></i>
+                                                </span>
                                         @else
-                                            <span class="badge badge-danger">
-                                                        <i class="fa fa-toggle-off" data-toggle="tooltip"
-                                                           data-placement="right" title="HTTPS contorl is Off"></i>
-                                        </span>
+                                            <span class="text-gray">
+                                                <i class="fas fa-check-square" data-toggle="tooltip"
+                                                   data-placement="right" title="HTTPS contorl is Off"></i>
+                                            </span>
                                         @endif
                                     </span>
                                 </li>
                                 <li class="small">
-                                    HTTP ответ сервера
+                                    SSL сертификат:
                                     <span class="float-right">
-                                    @if(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == 200)
-                                            <span class="badge badge-success">
-                                                        {{ $site->getHttpCode->http_code }}
-                                                    </span>
-                                        @elseif(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == '')
-                                            <span class="badge badge-light">
-                                                        <i class="fa fa-exclamation-triangle"></i>
-                                                    </span>
-                                        @elseif (isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code > 200)
-                                            <span class="badge badge-danger">
-                                                        {{ $site->getHttpCode->http_code }}
-                                                    </span>
-                                        @else
-                                            <span class="badge badge-danger">
-                                                        -- // --
-                                                    </span>
+                                        @isset($site->getSslCertification->getSSL->expiration_days)
+                                            <div class="text-gray">
+                                                {{ $site->getSslCertification->getSSL->issuer }}
+                                                <i class="fas fa-flag-checkered"></i>
+                                            {{ $site->getSslCertification->getSSL->updated_at }}
+                                            </div>
                                         @endif
-                                                                        </span>
+                                    </span>
                                 </li>
                                 <li class="small">
-                                    Версия Web сервера
+                                    HTTP ответ сервера:
+                                    <span class="float-right">
+                                        @if(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == 200)
+                                            <span class="badge badge-success">
+                                                {{ $site->getHttpCode->http_code }}
+                                            </span>
+                                        @elseif(isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code == '')
+                                            <span class="badge badge-light">
+                                                <i class="fa fa-exclamation-triangle"></i>
+                                            </span>
+                                        @elseif (isset($site->getHttpCode->http_code) && $site->getHttpCode->http_code > 200)
+                                            <span class="badge badge-danger">
+                                                {{ $site->getHttpCode->http_code }}
+                                            </span>
+                                        @else
+                                            <span class="badge badge-danger">
+                                                -- // --
+                                            </span>
+                                        @endif
+                                    </span>
+                                </li>
+                                <li class="small">
+                                    Версия Web сервера:
                                     <span class="float-right">
                                     @empty($site->getWebServer->web_server)
                                             <span class="text-warning"
                                                   title="Не был получен ответ сервера об установленной версии">
-                                                                    <i class="fa fa-exclamation-triangle"></i>
-                                                    </span>
+                                                    <i class="fa fa-exclamation-triangle"></i>
+                                            </span>
                                         @else
-                                            {{$site->getWebServer->web_server}}
-                                        @endif
-                                                                        </span>
+                                            @if(preg_match('/nginx/', $site->getWebServer->web_server))
+                                                <div class="badge badge-success">
+                                                                        Nginx
+                                                                    </div>
+                                                {{$site->getWebServer->web_server}}
+                                            @elseif(preg_match('/Apache/', $site->getWebServer->web_server))
+                                                <div class="badge badge-success">
+                                                                        Apache
+                                                                    </div>
+                                                {{$site->getWebServer->web_server}}
+                                            @elseif(preg_match('/IIS/', $site->getWebServer->web_server))
+                                                <div class="badge badge-success">
+                                                                        IIS
+                                                                    </div>
+                                                {{$site->getWebServer->web_server}}
+                                            @else
+                                                <div class="badge badge-dark">
+                                                                        Unknown
+                                                                    </div>
+                                                {{$site->getWebServer->web_server}}
+                                            @endif
+                                        @endempty
+                                    </span>
                                 </li>
                                 <li class="small">
-                                    Контроль версии PHP
+                                    Контроль версии PHP:
                                     <span class="float-right">
-                                    @if($site->enabled === 1)
+                                        @if($site->enabled === 1)
                                             @empty(!$site->getPhpVersion)
                                                 @if(empty($bridgePhpVersion))
                                                     @if($site->getPhpVersion->version != 0)
@@ -213,100 +244,87 @@
                                                     @endif
                                                 @else
                                                     @if($site->getPhpVersion->version != 0)
-                                                        <div class="badge badge-primary">
-                                                                        PHP
-                                                                    </div>
-                                                        <div>
-                                                                        Version:
-                                                                        @if($bridgePhpVersion->contains('version',$site->getPhpVersion->version))
-                                                                @foreach($bridgePhpVersion as $version)
-                                                                    @if($version->branch == $site->getPhpVersion->branch)
-                                                                        @if(version_compare($site->getPhpVersion->version, $version->version) < 0)
+                                                        <span class="badge badge-primary">
+                                                            PHP
+                                                        </span>
+                                                        Version:
+                                                        @if($bridgePhpVersion->contains('version',$site->getPhpVersion->version))
+                                                            @foreach($bridgePhpVersion as $version)
+                                                                @if($version->branch == $site->getPhpVersion->branch)
+                                                                    @if(version_compare($site->getPhpVersion->version, $version->version) < 0)
+                                                                        @php
+                                                                            $deprecatedVersion = true;
+                                                                        @endphp
+                                                                        @break
+                                                                    @elseif(version_compare($site->getPhpVersion->version, $version->version) == 0)
+                                                                        @if($version->deprecated_status == '1')
                                                                             @php
                                                                                 $deprecatedVersion = true;
                                                                             @endphp
                                                                             @break
-                                                                        @elseif(version_compare($site->getPhpVersion->version, $version->version) == 0)
-                                                                            @if($version->deprecated_status == '1')
-                                                                                @php
-                                                                                    $deprecatedVersion = true;
-                                                                                @endphp
-                                                                                @break
-                                                                            @else
-                                                                                @php
-                                                                                    $deprecatedVersion = false;
-                                                                                @endphp
-                                                                            @endif
                                                                         @else
                                                                             @php
                                                                                 $deprecatedVersion = false;
                                                                             @endphp
-                                                                            @continue
                                                                         @endif
+                                                                    @else
+                                                                        @php
+                                                                            $deprecatedVersion = false;
+                                                                        @endphp
+                                                                        @continue
                                                                     @endif
-                                                                @endforeach
+                                                                @endif
+                                                            @endforeach
 
-                                                                @if($deprecatedVersion == false)
-                                                                    <span class="text-success"
-                                                                          title="Установлена самая последняя версия в ветке">
+                                                            @if($deprecatedVersion == false)
+                                                                <span class="text-success"
+                                                                      title="Установлена самая последняя версия в ветке">
                                                                                     {{ $site->getPhpVersion->version }}
                                                                             </span>
-                                                                @endif
+                                                            @endif
 
-                                                                @if($deprecatedVersion == true)
-                                                                    <span class="text-danger"
-                                                                          title="Необходимо установить более новую версию">
+                                                            @if($deprecatedVersion == true)
+                                                                <span class="text-danger"
+                                                                      title="Необходимо установить более новую версию">
                                                                                     {{ $site->getPhpVersion->version }}
                                                                                   <i class="fas fa-archive"></i>
                                                                             </span>
-                                                                @endif
-                                                            @else
-                                                                <span class="text-gray">
+                                                            @endif
+                                                        @else
+                                                            <span class="text-gray">
                                                                             {{ $site->getPhpVersion->version }}
                                                                         </span>
 
-                                                                <span class="text-danger"
-                                                                      title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
+                                                            <span class="text-danger"
+                                                                  title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
                                                                                 <i class="fa fa-exclamation-triangle"></i>
                                                                         </span>
-                                                            @endif
-                                                                    </div>
+                                                        @endif
                                                     @else
-                                                        <div>
-                                                                        <i class="far fa-question-circle"
-                                                                           title=" Не был получен ответ сервера об
-                                                                           установленной версии"></i>
-                                                                        Unknown
-                                                                    </div>
-                                                        <div>
-                                                                        <br>
-                                                                    </div>
+                                                        <i class="far fa-question-circle"
+                                                           title=" Не был получен ответ сервера об
+                                                                установленной версии"></i>
+                                                        Unknown
                                                     @endif
                                                 @endif
-                                                <div class="text-gray">
-                                                                <i class="fas fa-flag-checkered"></i>
-                                                                {{optional($site->getPhpVersion)->updated_at}}
-                                                            </div>
+                                                <span class="text-gray">
+                                                    <i class="fas fa-flag-checkered"></i>
+                                                    {{optional($site->getPhpVersion)->updated_at}}
+                                                </span>
                                             @endempty
                                         @else
                                             <span class="text-gray"
                                                   title="Сайт отключен">
-                                                                <i class="far fa-hourglass"></i>
-                                                            </span>
+                                                    <i class="far fa-hourglass"></i>
+                                            </span>
                                         @endif
-                                                                        </span>
-                                </li>
-                                <li class="small">
-                                    Last update:
-                                    {{--                            <span class="float-right">--}}
-                                    {{--                                        {{ $device->location }}--}}
-                                    {{--                                    </span>--}}
+                                    </span>
                                 </li>
                                 <li class="small">
                                     Комментарий:
                                     <span class="float-right">
-                                    {{ $site->comment }}
-                                                                        </span>
+                                        {{ $site->comment }}
+                                    </span>
                                 </li>
                             </ul>
                         </div>
