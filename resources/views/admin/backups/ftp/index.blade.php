@@ -9,9 +9,9 @@
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('home')}}">Главная</a></li>
+                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
                         <li class="breadcrumb-item">Backups</li>
-                        <li class="breadcrumb-item active">FTP</li>
+                        <li class="breadcrumb-item active">Ftp</li>
                     </ol>
                 </div>
             </div>
