@@ -133,7 +133,7 @@
                                     <div class="form-group">
                                         <b>File</b>
                                         <span class="small text-danger">*</span>
-                                        {{Form::text('filename', null, ['class' => 'form-control', 'placeholder' => 'Пример: test.tar'])}}
+                                        {{Form::text('filename', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: test.tar'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
