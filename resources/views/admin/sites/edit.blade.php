@@ -36,7 +36,7 @@
                                     {{ Form::open(['url' => route('admin.sites.update', $site->id), 'method' => 'patch']) }}
 
                                     <div class="form-group">
-                                        <b>Название сайта</b>
+                                        <b>Краткое описание</b>
                                         {{ Form::text('title', $site->title , ['class' => 'form-control', 'required','placeholder' => 'My website.']) }}
                                         <details class="mt--3 small">
                                             <summary>
@@ -114,6 +114,7 @@
                                             запрос.
                                         </details>
                                     </div>
+
                                     <div class="form-group">
                                         <div>
                                             {{ Form::checkbox('check_ssl', true, $site->checksList->check_ssl) }}
