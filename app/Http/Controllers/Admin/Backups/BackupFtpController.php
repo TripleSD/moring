@@ -66,12 +66,12 @@ class BackupFtpController extends Controller
             [
                 'description' => 'required',
                 'hostname' => 'required',
-                'port' => 'integer',
+                'port' => 'required|integer',
                 'folder' => 'alpha_dash',
                 'pre' => 'nullable',
                 'post' => 'nullable',
                 'filename' => 'required',
-                'interval' => 'integer',
+                'interval' => 'required|integer',
             ],
             [
 
@@ -104,12 +104,12 @@ class BackupFtpController extends Controller
             [
                 'description' => 'required',
                 'hostname' => 'required',
-                'port' => 'integer',
+                'port' => 'required|integer',
                 'folder' => 'alpha_dash',
                 'pre' => 'nullable',
                 'post' => 'nullable',
                 'filename' => 'required',
-                'interval' => 'integer',
+                'interval' => 'required|integer',
             ],
             [
 
