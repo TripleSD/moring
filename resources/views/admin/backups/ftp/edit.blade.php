@@ -91,7 +91,7 @@
 
                                     <div class="form-group">
                                         <b>Папка</b>
-                                        {{Form::text('folder', $task->folder, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        {{Form::text('folder', $task->folder, ['class' => 'form-control', 'placeholder' => 'Пример: public'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
