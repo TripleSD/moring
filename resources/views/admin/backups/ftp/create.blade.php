@@ -99,7 +99,7 @@
 
                                     <div class="form-group">
                                         <b>Папка</b>
-                                        {{Form::text('folder', null, ['class' => 'form-control', 'placeholder' => 'Пример: public'])}}
+                                        {{Form::text('folder', null, ['class' => 'form-control', 'placeholder' => 'Пример: BackupSite'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -110,7 +110,7 @@
 
                                     <div class="form-group">
                                         <b>Pre suffix</b>
-                                        {{Form::text('pre', null, ['class' => 'form-control', 'placeholder' => 'Пример: 22'])}}
+                                        {{Form::text('pre', null, ['class' => 'form-control', 'placeholder' => 'Пример: backup_'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -121,7 +121,7 @@
 
                                     <div class="form-group">
                                         <b>Post suffix</b>
-                                        {{Form::text('post', null, ['class' => 'form-control', 'placeholder' => 'Пример: 23'])}}
+                                        {{Form::text('post', null, ['class' => 'form-control', 'placeholder' => 'Пример: _%Y-%m-%d'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -133,7 +133,7 @@
                                     <div class="form-group">
                                         <b>File</b>
                                         <span class="small text-danger">*</span>
-                                        {{Form::text('filename', null, ['class' => 'form-control', 'placeholder' => 'Пример: http://127.0.0.1'])}}
+                                        {{Form::text('filename', null, ['class' => 'form-control', 'placeholder' => 'Пример: test.tar'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
