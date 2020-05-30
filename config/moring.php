@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'build' => '030',
+    'build' => '031',
     'version' => '0.1.9',
     'createYear' => '2019',
     'userAgent' => 'MoringBot',
