@@ -7,7 +7,7 @@ use App\Models\BackupFtpLogs;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 
-class FtpBackupScraper extends Command
+class BackupFtpScraper extends Command
 {
     /**
      * The name and signature of the console command.
