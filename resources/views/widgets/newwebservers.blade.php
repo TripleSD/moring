@@ -4,7 +4,7 @@
             <div class="card-header border-0 ui-sortable-handle" style="cursor: move;">
                 <h3 class="card-title">
                     <i class="fas fa-map-marker-alt mr-1"></i>
-                    Статистика используемых версий для 5 новых web серверов, шт
+                    Используемые версий для 5 новых web серверов, шт
                 </h3>
                 <div class="card-tools">
                     <button type="button" class="btn btn-tool" data-card-widget="collapse">
