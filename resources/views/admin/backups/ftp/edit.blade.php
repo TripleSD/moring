@@ -33,9 +33,14 @@
 
                             <div class="card-body">
                                 <div class="col-sm-6">
+                                    <span class="small text-danger float-right">
+                                        * - обязательно для заполнения
+                                    </span>
+
                                     {{ Form::open([ 'url' => route('backups.ftp.update', $task->id), 'method' => 'patch']) }}
                                     <div class="form-group">
                                         <b>Описание</b>
+                                        <span class="small text-danger">*</span>
                                         {{ Form::text('description', $task->description , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
                                         <details class="mt--3 small">
                                             <summary>
@@ -47,6 +52,7 @@
 
                                     <div class="form-group">
                                         <b>Сетевое имя устройства или IP адрес</b>
+                                        <span class="small text-danger">*</span>
                                         {{ Form::text('hostname', $task->hostname , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
                                         <details class="mt--3 small">
                                             <summary>
@@ -58,6 +64,7 @@
 
                                     <div class="form-group">
                                         <b>Порт</b>
+                                        <span class="small text-danger">*</span>
                                         {{ Form::text('port', $task->port, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 161']) }}
                                         <details class="mt--3 small">
                                             <summary>
@@ -69,6 +76,7 @@
 
                                     <div class="form-group">
                                         <b>Логин</b>
+                                        <span class="small text-danger">*</span>
                                         {{Form::text('login', $task->login, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
                                         <details class="mt--3 small">
                                             <summary>
@@ -80,7 +88,7 @@
 
                                     <div class="form-group">
                                         <b>Пароль</b>
-                                        {{Form::text('password', $task->password, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        {{Form::text('password', $task->password, ['class' => 'form-control', 'placeholder' => 'Пример: 7{m5MUqpBDEmEXG'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -124,6 +132,7 @@
 
                                     <div class="form-group">
                                         <b>File</b>
+                                        <span class="small text-danger">*</span>
                                         {{Form::text('filename', $task->filename, ['class' => 'form-control', 'placeholder' => 'Пример: http://127.0.0.1'])}}
                                         <details class="mt--3 small">
                                             <summary>
@@ -135,6 +144,7 @@
 
                                     <div class="form-group">
                                         <b>Interval</b>
+                                        <span class="small text-danger">*</span>
                                         <div>
                                             {{ Form::radio('interval', '1', $task->interval === 1) }} every 1h
                                             {{ Form::radio('interval', '3', $task->interval === 3) }} every 3h
