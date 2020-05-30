@@ -1,3 +1,10 @@
+[v.0.1.10 (Build.030)](https://github.com/TripleSD/moring/releases/tag/0.2.0)
+- **(New)** - Activated sites checker from moring file.
+- **(New)** - Added Backup Ftp scraper.
+- **(Upd)** - Updated templates.
+- **(Upd)** - Refactoring sites repository.
+- **(Fix)** - Fixed sites controller.
+
 [v.0.1.9 (Build.029)](https://github.com/TripleSD/moring/releases/tag/0.1.9)
 - **(Upd)** - Refactoring sites repository.
 - **(Upd)** - Refactoring old migrations.
