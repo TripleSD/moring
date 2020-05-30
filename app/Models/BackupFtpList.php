@@ -23,6 +23,8 @@ class BackupFtpList extends Model
         'filename',
         'interval',
         'enabled',
+        'login',
+        'password',
     ];
 
     public function logs(): HasMany
