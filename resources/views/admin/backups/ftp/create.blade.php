@@ -33,9 +33,14 @@
 
                             <div class="card-body">
                                 <div class="col-sm-6">
+                                    <span class="small text-danger float-right">
+                                        * - обязательно для заполнения
+                                    </span>
+
                                     {{ Form::open([ 'url' => route('backups.ftp.store'), 'method' => 'post']) }}
                                     <div class="form-group">
                                         <b>Описание</b>
+                                        <span class="small text-danger">*</span>
                                         {{ Form::text('description', null , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
                                         <details class="mt--3 small">
                                             <summary>
@@ -47,6 +52,7 @@
 
                                     <div class="form-group">
                                         <b>Сетевое имя устройства или IP адрес</b>
+                                        <span class="small text-danger">*</span>
                                         {{ Form::text('hostname', null , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
                                         <details class="mt--3 small">
                                             <summary>
@@ -58,7 +64,8 @@
 
                                     <div class="form-group">
                                         <b>Порт</b>
-                                        {{ Form::text('port', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 161']) }}
+                                        <span class="small text-danger">*</span>
+                                        {{ Form::text('port', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 21']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -69,7 +76,8 @@
 
                                     <div class="form-group">
                                         <b>Логин</b>
-                                        {{Form::text('login', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        <span class="small text-danger">*</span>
+                                        {{Form::text('login', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: backup-user'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -80,7 +88,7 @@
 
                                     <div class="form-group">
                                         <b>Пароль</b>
-                                        {{Form::text('password', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: public'])}}
+                                        {{Form::text('password', null, ['class' => 'form-control', 'placeholder' => 'Пример: 7{m5MUqpBDEmEXG'])}}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -124,6 +132,7 @@
 
                                     <div class="form-group">
                                         <b>File</b>
+                                        <span class="small text-danger">*</span>
                                         {{Form::text('filename', null, ['class' => 'form-control', 'placeholder' => 'Пример: http://127.0.0.1'])}}
                                         <details class="mt--3 small">
                                             <summary>
@@ -135,6 +144,7 @@
 
                                     <div class="form-group">
                                         <b>Interval</b>
+                                        <span class="small text-danger">*</span>
                                         <div>
                                             {{ Form::radio('interval', '1', false) }} every 1h
                                             {{ Form::radio('interval', '3', false) }} every 3h
