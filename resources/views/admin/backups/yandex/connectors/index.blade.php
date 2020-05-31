@@ -42,7 +42,7 @@
                             </div>
                             <div class="card-tools">
                                 <div class="btn-group">
-                                    <a href="{{route('backups.ftp.create')}}"
+                                    <a href="{{route('backups.yandex.connectors.create')}}"
                                        class="btn btn-xs btn-success" title="Добавление нового устройства">
                                         <i class="fas fa-plus-square"></i> Новый</a>
                                 </div>
