@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Admin\Backups;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\BackupYandexConnections;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
@@ -30,5 +32,16 @@ class YandexConnectionsController extends Controller
         $connections = $BackupYandexConnectionsRepository->connectionsList();
 
         return view('admin.backups.yandex.connections.index', compact('connections'));
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function edit(Request $request)
+    {
+        $connection = BackupYandexConnections::find($request->id);
+
+        return view('admin.backups.yandex.connections.edit', compact('connection'));
     }
 }
