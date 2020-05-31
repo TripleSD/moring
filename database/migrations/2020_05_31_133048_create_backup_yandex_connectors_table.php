@@ -18,6 +18,7 @@ class CreateBackupYandexConnectorsTable extends Migration
             $table->string('description')->comment('Description');
             $table->string('token')->comment('Token');
             $table->boolean('status')->comment('Connection status');
+            $table->timestamp('status_updated_at')->nullable()->comment('Last check datetime.');
             $table->text('comment')->nullable()->comment('Comment');
             $table->timestamps();
         });
