@@ -93,7 +93,15 @@ Route::group(
             function () {
                 $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
                 Route::resource('ftp', 'BackupFtpController')->only($methods);
-                Route::resource('yandex', 'BackupYandexController')->only($methods);
+                Route::group(
+                    ['prefix' => 'yandex', 'as' => 'yandex.'],
+                    function () {
+                        $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
+                        Route::resource('tasks', 'BackupYandexController')->only($methods);
+                        Route::resource('connections', 'YandexConnectionsController')->only($methods);
+                        Route::resource('trash', 'BackupYandexController')->only($methods);
+                    }
+                );
             }
         );
 
