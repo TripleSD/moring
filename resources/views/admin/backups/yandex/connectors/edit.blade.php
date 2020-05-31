@@ -48,7 +48,7 @@
                                 <div class="form-group">
                                     <b>Краткое описание</b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::text('description', $connector->description , ['class' => 'form-control',
+                                    {{ Form::text('description', $connector->description, ['class' => 'form-control',
                                         'required', 'placeholder' => 'Аккаунт клиента']) }}
                                     <details class="mt--3 small">
                                         <summary>
@@ -61,7 +61,7 @@
                                 <div class="form-group">
                                     <b>Токен</b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::text('description', $connector->token , ['class' => 'form-control',
+                                    {{ Form::text('description', $connector->token, ['class' => 'form-control',
                                         'required', 'placeholder' => 'Hhs7JushsksTgJdls']) }}
                                     <details class="mt--3 small">
                                         <summary>
@@ -73,7 +73,7 @@
 
                                 <div class="form-group">
                                     <b>Комментарий</b>
-                                    {{ Form::textarea('description', $connector->comment , ['class' => 'form-control',
+                                    {{ Form::textarea('description', $connector->comment, ['class' => 'form-control',
                                         'rows' => 10, 'placeholder' => 'Комментарий...']) }}
                                     <details class="mt--3 small">
                                         <summary>
