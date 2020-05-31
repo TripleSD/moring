@@ -44,4 +44,12 @@ class YandexConnectorsController extends Controller
 
         return view('admin.backups.yandex.connectors.edit', compact('connector'));
     }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function create()
+    {
+        return view('admin.backups.yandex.connectors.create');
+    }
 }
