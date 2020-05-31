@@ -11,10 +11,10 @@ use Illuminate\View\View;
 use App\Repositories\Backups\BackupYandexConnectionsRepository;
 
 /**
- * Class BackupYandexController
+ * Class YandexConnectorsController
  * @package App\Http\Controllers\Admin\Backups
  */
-class YandexConnectionsController extends Controller
+class YandexConnectorsController extends Controller
 {
     private $BackupYandexConnectionsRepository;
 
