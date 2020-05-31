@@ -13,7 +13,7 @@
                                        class="btn btn-xs btn-outline-secondary" title="Вернуться">
                                         <i class="fa fa-home"></i></a>
                                 </div>
-                                <span class="text-muted">Home | Backup | Список коннекторов</span>
+                                <span class="text-muted">Home | Backup | Список коннекторов Яндекс Диск</span>
                             </div>
                             <div class="card-tools">
                                 <div class="btn-group">
