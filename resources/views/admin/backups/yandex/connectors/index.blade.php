@@ -14,7 +14,7 @@
                                 <div class="btn-group">
                                     <a href="{{route('backups.yandex.connectors.create')}}"
                                        class="btn btn-xs btn-success" title="Добавление нового устройства">
-                                        <i class="fas fa-plus-square"></i> Новый</a>
+                                        <i class="fas fa-plus-square"></i> Добавить</a>
                                 </div>
                                 <div class="btn-group">
                                     <a class="btn btn-xs {{ (request()->route()->named('backups.yandex.connectors.index')) ? 'btn-danger' : 'btn-dark' }}"
