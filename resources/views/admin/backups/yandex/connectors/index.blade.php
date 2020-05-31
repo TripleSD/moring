@@ -16,21 +16,7 @@
                                 <span class="text-muted">Home | Backup | Яндекс Диск | Список коннекторов</span>
                             </div>
                             <div class="card-tools">
-                                <div class="btn-group">
-                                    <a class="btn btn-xs {{ (request()->route()->named('backups.yandex.connectors.index')) ? 'btn-danger' : 'btn-dark' }}"
-                                       href="{{ route('backups.yandex.connectors.index') }}"
-                                       title="Просмотр устройства">
-                                        Коннекторы
-                                    </a>
-                                    <a class="btn btn-xs {{ (request()->route()->named('backups.yandex.tasks.index')) ? 'btn-danger' : 'btn-dark' }}"
-                                       href="{{ route('backups.yandex.tasks.index') }}" title="Просмотр устройства">
-                                        Проверки
-                                    </a>
-                                    <a class="btn btn-xs {{ (request()->route()->named('backups.yandex.trash.index')) ? 'btn-danger' : 'btn-dark' }}"
-                                       href="{{ route('backups.yandex.trash.index') }}"
-                                       title="Редактирование устройства">
-                                        Корзины</a>
-                                </div>
+                                @include('admin.backups.yandex.menu')
                                 <div class="btn-group">
                                     <a href="{{route('backups.yandex.connectors.create')}}"
                                        class="btn btn-xs btn-success" title="Добавление нового устройства">
