@@ -4,11 +4,11 @@ namespace App\Http\Controllers\Admin\Backups;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\BackupYandexConnections;
+use App\Models\BackupYandexConnectors;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
-use App\Repositories\Backups\BackupYandexConnectionsRepository;
+use App\Repositories\Backups\YandexConnectorsRepository;
 
 /**
  * Class YandexConnectorsController
@@ -16,22 +16,22 @@ use App\Repositories\Backups\BackupYandexConnectionsRepository;
  */
 class YandexConnectorsController extends Controller
 {
-    private $BackupYandexConnectionsRepository;
+    private $YandexConnectorsRepository;
 
     public function __construct()
     {
-        $this->BackupYandexConnectionsRepository = new BackupYandexConnectionsRepository();
+        $this->YandexConnectorsRepository = new YandexConnectorsRepository();
     }
 
     /**
-     * @param BackupYandexConnectionsRepository $BackupYandexConnectionsRepository
+     * @param YandexConnectorsRepository $YandexConnectorsRepository
      * @return Application|Factory|View
      */
-    public function index(BackupYandexConnectionsRepository $BackupYandexConnectionsRepository)
+    public function index(YandexConnectorsRepository $YandexConnectorsRepository)
     {
-        $connections = $BackupYandexConnectionsRepository->connectionsList();
+        $connectors = $YandexConnectorsRepository->getList();
 
-        return view('admin.backups.yandex.connections.index', compact('connections'));
+        return view('admin.backups.yandex.connectors.index', compact('connectors'));
     }
 
     /**
@@ -40,8 +40,8 @@ class YandexConnectorsController extends Controller
      */
     public function edit(Request $request)
     {
-        $connection = BackupYandexConnections::find($request->id);
+        $connector = BackupYandexConnectors::find($request->id);
 
-        return view('admin.backups.yandex.connections.edit', compact('connection'));
+        return view('admin.backups.yandex.connectors.edit', compact('connector'));
     }
 }
