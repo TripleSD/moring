@@ -55,49 +55,45 @@
                             <table class="table table-hover">
                                 <thead>
                                 <tr>
-                                    <th></th>
                                     <th>Подключение</th>
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($connectors as $connector)
-                                        <tr class="table-row">
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div>
+                                    <tr class="table-row">
+                                        <td>
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="small">
+                                                    <span
+                                                        class="{{ ($connector->status) ? 'text-success' : 'text-gray' }}">
                                                             <i class="fab fa-yandex"></i>
-                                                            <i class="fas fa-bookmark"></i>
-                                                        </div>
+                                                            <i class="fas fa-link"></i>
+                                                            </span>
+                                                        {{ $connector->description }}
+                                                    </div>
+                                                    <div class="small">
+                                                    Последнее подключение {{ $connector->status_updated_at }}
                                                     </div>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="small">
-                                                            <b>Краткое описание:</b>
-                                                            {{ $connector->description }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a href="{{route('backups.yandex.connectors.show',$connector->id)}}"
-                                                       class="btn btn-xs bg-gradient-info"
-                                                       title="Просмотр устройства">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                    <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
-                                                       class="btn btn-xs bg-gradient-warning"
-                                                       title="Редактирование устройства">
-                                                        <i class="fa fa-edit"></i></a>
-                                                </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="{{route('backups.yandex.connectors.show',$connector->id)}}"
+                                                   class="btn btn-xs bg-gradient-info"
+                                                   title="Просмотр устройства">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
+                                                   class="btn btn-xs bg-gradient-warning"
+                                                   title="Редактирование устройства">
+                                                    <i class="fa fa-edit"></i></a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
                                 </tbody>
                             </table>
                         </div>
