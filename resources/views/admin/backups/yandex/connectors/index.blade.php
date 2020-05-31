@@ -8,14 +8,14 @@
                     <div class="card mt-3">
                         <div class="card-header">
                             <div class="card-title">
-                                Список коннекторов
+                                <div class="btn-group">
+                                    <a href="{{route('home')}}"
+                                       class="btn btn-xs btn-outline-secondary" title="Вернуться">
+                                        <i class="fa fa-home"></i></a>
+                                </div>
+                                <span class="text-muted">Home | Backup | Список коннекторов</span>
                             </div>
                             <div class="card-tools">
-                                <div class="btn-group">
-                                    <a href="{{route('backups.yandex.connectors.create')}}"
-                                       class="btn btn-xs btn-success" title="Добавление нового устройства">
-                                        <i class="fas fa-plus-square"></i> Добавить</a>
-                                </div>
                                 <div class="btn-group">
                                     <a class="btn btn-xs {{ (request()->route()->named('backups.yandex.connectors.index')) ? 'btn-danger' : 'btn-dark' }}"
                                        href="{{ route('backups.yandex.connectors.index') }}"
@@ -30,6 +30,11 @@
                                        href="{{ route('backups.yandex.trash.index') }}"
                                        title="Редактирование устройства">
                                         Корзины</a>
+                                </div>
+                                <div class="btn-group">
+                                    <a href="{{route('backups.yandex.connectors.create')}}"
+                                       class="btn btn-xs btn-success" title="Добавление нового устройства">
+                                        <i class="fas fa-plus-square"></i> Добавить</a>
                                 </div>
                             </div>
                         </div>
