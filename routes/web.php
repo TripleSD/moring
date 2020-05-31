@@ -93,6 +93,7 @@ Route::group(
             function () {
                 $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
                 Route::resource('ftp', 'BackupFtpController')->only($methods);
+                Route::resource('yandex', 'BackupYandexController')->only($methods);
             }
         );
 
