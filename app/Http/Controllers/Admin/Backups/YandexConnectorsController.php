@@ -52,4 +52,15 @@ class YandexConnectorsController extends Controller
     {
         return view('admin.backups.yandex.connectors.create');
     }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function show(Request $request)
+    {
+        $connector = BackupYandexConnectors::find($request->id);
+
+        return view('admin.backups.yandex.connectors.show', compact('connector'));
+    }
 }
