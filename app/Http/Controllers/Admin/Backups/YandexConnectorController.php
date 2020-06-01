@@ -14,7 +14,7 @@ use App\Repositories\Backups\YandexConnectorsRepository;
  * Class YandexConnectorsController
  * @package App\Http\Controllers\Admin\Backups
  */
-class YandexConnectorsController extends Controller
+class YandexConnectorController extends Controller
 {
     private $YandexConnectorsRepository;
 
