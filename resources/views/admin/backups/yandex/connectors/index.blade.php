@@ -13,7 +13,15 @@
                                        class="btn btn-xs btn-outline-secondary" title="Вернуться">
                                         <i class="fa fa-home"></i></a>
                                 </div>
-                                <span class="text-muted">Home | Backup | Яндекс Диск | Список коннекторов</span>
+                                <div class="btn-group">
+                                    <span class="text-muted text-sm">Dashboard</span>
+                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm">Backup</span>
+                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm">Яндекс Диск</span>
+                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-sm">Список коннекторов</span>
+                                </div>
                             </div>
                             <div class="card-tools">
                                 @include('admin.backups.yandex.menu')
