@@ -8,7 +8,7 @@ use App\Models\BackupYandexConnectors;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
-use App\Repositories\Backups\YandexConnectorsRepository;
+use App\Repositories\Backups\YandexConnectorRepository;
 
 /**
  * Class YandexConnectorsController
@@ -16,20 +16,20 @@ use App\Repositories\Backups\YandexConnectorsRepository;
  */
 class YandexConnectorController extends Controller
 {
-    private $YandexConnectorsRepository;
+    private $yandexConnectorsRepository;
 
     public function __construct()
     {
-        $this->YandexConnectorsRepository = new YandexConnectorsRepository();
+        $this->yandexConnectorsRepository = new YandexConnectorRepository();
     }
 
     /**
-     * @param YandexConnectorsRepository $YandexConnectorsRepository
+     * @param YandexConnectorRepository $yandexConnectorsRepository
      * @return Application|Factory|View
      */
-    public function index(YandexConnectorsRepository $YandexConnectorsRepository)
+    public function index(YandexConnectorRepository $yandexConnectorsRepository)
     {
-        $connectors = $YandexConnectorsRepository->getList();
+        $connectors = $yandexConnectorsRepository->getList();
 
         return view('admin.backups.yandex.connectors.index', compact('connectors'));
     }
