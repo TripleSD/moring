@@ -26,4 +26,13 @@ class BackupYandexConnectors extends Model
 
         return 0;
     }
+
+    public function getPercentBucketUsedAttribute()
+    {
+        if ($this->attributes['total_space'] > 0) {
+            return round($this->attributes['trash_size'] / $this->attributes['total_space'] * 100, 0);
+        }
+
+        return 0;
+    }
 }
