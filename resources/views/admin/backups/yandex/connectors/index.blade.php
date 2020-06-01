@@ -52,7 +52,7 @@
                                             <div class="small">
                                                 Последнее подключение {{ $connector->status_updated_at }}
                                             </div>
-                                            <div>
+                                            <div class="small">
                                                 Всего места/занято:
                                                 <div class="progress">
                                                     <div class="progress-bar bg-gradient-primary"
@@ -65,7 +65,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div>
+                                            <div class="small">
                                                 Корзина:
                                                 <div class="progress">
                                                     <div class="progress-bar bg-primary" role="progressbar"
