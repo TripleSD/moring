@@ -116,7 +116,7 @@
                     </ul>
                     <ul class="nav nav-treeview">
                         <li class="nav-item">
-                            <a href="{{ route('backups.yandex.index') }}" class="nav-link">
+                            <a href="{{ route('backups.yandex.tasks.index') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
                                 <p>Yandex Disk</p>
                             </a>
