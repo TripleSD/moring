@@ -4,10 +4,12 @@ namespace App\Http\Controllers\Admin\Backups;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use App\Models\BackupYandexConnectors;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
+use App\Repositories\Backups\YandexTrashRepository;
 use App\Repositories\Backups\YandexConnectorRepository;
 
 /**
@@ -17,10 +19,12 @@ use App\Repositories\Backups\YandexConnectorRepository;
 class YandexConnectorController extends Controller
 {
     private $yandexConnectorsRepository;
+    private $yandexTrashRepository;
 
     public function __construct()
     {
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
+        $this->yandexTrashRepository      = new YandexTrashRepository();
     }
 
     /**
@@ -62,5 +66,23 @@ class YandexConnectorController extends Controller
         $connector = BackupYandexConnectors::find($request->id);
 
         return view('admin.backups.yandex.connectors.show', compact('connector'));
+    }
+
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function clean(Request $request)
+    {
+        $result = $this->yandexTrashRepository->cleanTrash($request);
+
+        if ($result) {
+            flash('Корзина успешно очищена')->success();
+        } else {
+            flash('Что-то пошло нет так')->warning();
+        }
+
+        return redirect()->route('backups.yandex.connectors.index');
     }
 }
