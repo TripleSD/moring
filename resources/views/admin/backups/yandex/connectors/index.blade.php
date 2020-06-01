@@ -15,11 +15,11 @@
                                 </div>
                                 <div class="btn-group">
                                     <span class="text-muted text-sm">Dashboard</span>
-                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
                                     <span class="text-muted text-sm">Backup</span>
-                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
                                     <span class="text-muted text-sm">Яндекс Диск</span>
-                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
                                     <span class="text-sm">Список коннекторов</span>
                                 </div>
                             </div>
@@ -78,17 +78,22 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="btn-group">
-                                                <a href="{{route('backups.yandex.connectors.show',$connector->id)}}"
-                                                   class="btn btn-xs bg-gradient-info"
-                                                   title="Просмотр устройства">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
-                                                   class="btn btn-xs bg-gradient-warning"
-                                                   title="Редактирование устройства">
-                                                    <i class="fa fa-edit"></i></a>
-                                            </div>
+                                            <a href="{{route('backups.yandex.connectors.show',$connector->id)}}"
+                                               class="btn btn-xs bg-info"
+                                               title="Просмотр устройства">
+                                                <i class="fa fa-eye"></i>
+                                            </a>
+                                            <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
+                                               class="btn btn-xs bg-warning"
+                                               title="Редактирование устройства">
+                                                <i class="fas fa-pencil-alt"></i></a>
+
+                                            @if($connector->trash_size > 0)
+                                                <a href="{{route('backups.yandex.backups.yandex.connectors.clean', $connector->id)}}"
+                                                   class="btn btn-xs bg-danger"
+                                                   title="Очистка корзины">
+                                                    <i class="fas fa-dumpster-fire"></i></a>
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
