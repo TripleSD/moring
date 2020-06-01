@@ -42,15 +42,18 @@
                                     <tr class="table-row">
                                         <td>
                                             <div class="small">
-                                                <span
-                                                    class="{{ ($connector->status) ? 'text-success' : 'text-gray' }}">
-                                                    <i class="fab fa-yandex"></i>
-                                                    <i class="fas fa-link"></i>
-                                                </span>
+                                                Краткое описание:
                                                 {{ $connector->description }}
                                             </div>
                                             <div class="small">
-                                                Последнее подключение {{ $connector->status_updated_at }}
+                                                Статус:
+                                                <span
+                                                    class="badge {{ ($connector->status) ? 'badge-success' : 'badge-gray' }}">
+                                                    Активен
+                                                </span>
+                                            </div>
+                                            <div class="small">
+                                                Последний опрос: {{ $connector->status_updated_at }}
                                             </div>
                                             <div class="small">
                                                 Всего места/занято:
@@ -78,22 +81,29 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <a href="{{route('backups.yandex.connectors.show',$connector->id)}}"
-                                               class="btn btn-xs bg-info"
-                                               title="Просмотр устройства">
-                                                <i class="fa fa-eye"></i>
-                                            </a>
-                                            <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
-                                               class="btn btn-xs bg-warning"
-                                               title="Редактирование устройства">
-                                                <i class="fas fa-pencil-alt"></i></a>
+                                            <div class="btn-group">
+                                                <a href="{{route('backups.yandex.connectors.show',$connector->id)}}"
+                                                   class="btn btn-xs bg-info"
+                                                   title="Просмотр устройства">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
+                                                   class="btn btn-xs bg-warning"
+                                                   title="Редактирование устройства">
+                                                    <i class="fas fa-pencil-alt"></i></a>
 
-                                            @if($connector->trash_size > 0)
-                                                <a href="{{route('backups.yandex.backups.yandex.connectors.clean', $connector->id)}}"
-                                                   class="btn btn-xs bg-danger"
-                                                   title="Очистка корзины">
-                                                    <i class="fas fa-dumpster-fire"></i></a>
-                                            @endif
+                                                <a href="{{route('backups.yandex.backups.yandex.connectors.refresh', $connector->id)}}"
+                                                   class="btn btn-xs bg-success"
+                                                   title="Обновить данные">
+                                                    <i class="fas fa-sync-alt"></i></a>
+
+                                                @if($connector->trash_size > 0)
+                                                    <a href="{{route('backups.yandex.backups.yandex.connectors.clean', $connector->id)}}"
+                                                       class="btn btn-xs bg-danger"
+                                                       title="Очистка корзины">
+                                                        <i class="fas fa-dumpster-fire"></i></a>
+                                                @endif
+                                            </div>
                                         </td>
                                     </tr>
                                 @endforeach
