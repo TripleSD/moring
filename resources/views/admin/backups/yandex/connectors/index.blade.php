@@ -41,18 +41,38 @@
                                 @foreach($connectors as $connector)
                                     <tr class="table-row">
                                         <td>
-                                            <div class="row">
-                                                <div class="col">
-                                                    <div class="small">
-                                                    <span
-                                                        class="{{ ($connector->status) ? 'text-success' : 'text-gray' }}">
-                                                            <i class="fab fa-yandex"></i>
-                                                            <i class="fas fa-link"></i>
-                                                            </span>
-                                                        {{ $connector->description }}
+                                            <div class="small">
+                                                <span
+                                                    class="{{ ($connector->status) ? 'text-success' : 'text-gray' }}">
+                                                    <i class="fab fa-yandex"></i>
+                                                    <i class="fas fa-link"></i>
+                                                </span>
+                                                {{ $connector->description }}
+                                            </div>
+                                            <div class="small">
+                                                Последнее подключение {{ $connector->status_updated_at }}
+                                            </div>
+                                            <div>
+                                                Всего места/занято:
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-gradient-primary"
+                                                         role="progressbar"
+                                                         aria-valuenow="{{ $connector->percent_used }}"
+                                                         aria-valuemin="0" aria-valuemax="100"
+                                                         style="width: {{ $connector->percent_used }}%">
+                                                        <span
+                                                            class="text-dark">{{ $connector->percentused }}% Used</span>
                                                     </div>
-                                                    <div class="small">
-                                                        Последнее подключение {{ $connector->status_updated_at }}
+                                                </div>
+                                            </div>
+                                            <div>
+                                                Корзина:
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-primary" role="progressbar"
+                                                         aria-valuenow="{{ $connector->percent_bucket_used }}"
+                                                         aria-valuemin="0" aria-valuemax="100"
+                                                         style="width: {{ $connector->percent_bucket_used }}%">
+                                                        <span class="text-dark">{{ $connector->percent_bucket_used }}% Used</span>
                                                     </div>
                                                 </div>
                                             </div>
