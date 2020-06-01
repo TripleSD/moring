@@ -9,12 +9,12 @@ use App\Models\BackupYandexConnectors;
  * Class YandexConnectorsRepository
  * @package App\Repositories\Backups
  */
-class YandexConnectorsRepository extends Repository
+class YandexConnectorRepository extends Repository
 {
     /**
      * @return mixed
      */
-    public function connectionsList()
+    public function getList()
     {
         return BackupYandexConnectors::get();
     }
