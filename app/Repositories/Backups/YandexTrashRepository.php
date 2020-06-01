@@ -38,7 +38,7 @@ class YandexTrashRepository extends Repository
         curl_close($ch);
 
         if ($httpcode !== 202) {
-           return false;
+            return false;
         }
 
         return true;
