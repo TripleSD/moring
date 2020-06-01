@@ -97,9 +97,12 @@ Route::group(
                     ['prefix' => 'yandex', 'as' => 'yandex.'],
                     function () {
                         $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
-                        Route::resource('tasks', 'BackupYandexController')->only($methods);
-                        Route::resource('connections', 'YandexConnectionsController')->only($methods);
-                        Route::resource('trash', 'BackupYandexController')->only($methods);
+                        Route::resource('tasks', 'YandexTaskController',
+                                        ['parameters' => ['tasks' => 'id']])->only($methods);
+                        Route::resource('connectors', 'YandexConnectorController',
+                                        ['parameters' => ['connectors' => 'id']])->only($methods);
+                        Route::resource('trash', 'YandexTrashController',
+                                        ['parameters' => ['trash' => 'id']])->only($methods);
                     }
                 );
             }
