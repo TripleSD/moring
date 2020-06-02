@@ -15,11 +15,13 @@
                                 </div>
                                 <div class="btn-group">
                                     <span class="text-muted text-sm">Dashboard</span>
-                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
                                     <span class="text-muted text-sm">Backup</span>
-                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">Яндекс Диск</span>
-                                    <span class="text-muted text-sm"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm">
+                                        <a href="{{ route('backups.yandex.tasks.index') }}">Яндекс Диск</a>
+                                    </span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
                                     <span class="text-sm">Список корзин</span>
                                 </div>
                             </div>
