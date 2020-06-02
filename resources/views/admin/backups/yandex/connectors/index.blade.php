@@ -35,8 +35,8 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
-                            @foreach($connectors as $connector)
+                        @foreach($connectors as $connector)
+                            <div class="col-6">
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="small">
@@ -79,7 +79,8 @@
                                         </div>
                                         <hr/>
                                         <div class="small">
-                                            <i class="fas fa-hdd"></i> Total: {{ $connector->used_space / 1024 / 1024 / 1024}} Гб из
+                                            <i class="fas fa-hdd"></i>
+                                            Total: {{ $connector->used_space / 1024 / 1024 / 1024}} Гб из
                                             {{ $connector->total_space / 1024 / 1024 / 1024 }} Гб
                                             <div class="progress">
                                                 <div class="progress-bar bg-gradient-primary"
@@ -93,7 +94,8 @@
                                             </div>
                                         </div>
                                         <div class="small">
-                                            <i class="fas fa-dumpster"></i> Trash: {{ $connector->trash_size / 1024 / 1024 / 1024}} Гб из
+                                            <i class="fas fa-dumpster"></i>
+                                            Trash: {{ $connector->trash_size / 1024 / 1024 / 1024}} Гб из
                                             {{ $connector->total_space / 1024 / 1024 / 1024 }} Гб
                                             <div class="progress">
                                                 <div class="progress-bar bg-primary" role="progressbar"
@@ -107,8 +109,8 @@
                                         </div>
                                     </div>
                                 </div>
-                            @endforeach
-                        </div>
+                            </div>
+                        @endforeach
                     </div>
                 </div>
             </div>
