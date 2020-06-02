@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
@@ -47,5 +48,10 @@ class BackupYandexTask extends Model
         $filename = explode('.', $this->attributes['filename']);
 
         return $this->attributes['pre'] . $filename[0] . $this->attributes['post'] . '.' . $filename[1];
+    }
+
+    public function connector(): HasOne
+    {
+        return $this->HasOne(BackupYandexConnectors::class, 'id', 'connector_id');
     }
 }
