@@ -13,7 +13,15 @@
                                        class="btn btn-xs btn-outline-secondary" title="Вернуться">
                                         <i class="fa fa-home"></i></a>
                                 </div>
-                                <span class="text-muted">Home | Backup | Яндекс Диск | Просмотр коннектора</span>
+                                <div class="btn-group">
+                                    <span class="text-muted text-sm">Dashboard</span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm">Backup</span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm">Яндекс Диск</span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-sm">Просмотр коннектора</span>
+                                </div>
                             </div>
                             <span class="float-right">
                                 <a href="{{route('backups.yandex.connectors.index')}}"
@@ -38,76 +46,66 @@
                         <div class="card-body">
                             <ul class="nav nav-pills flex-column">
                                 <li class="small">
-                                    Наименование
+                                    Краткое описание:
                                     <span class="float-right">
-
+{{ $connector->description }}
                                                 </span>
                                 </li>
                                 <li class="small">
-                                    ID:
+                                    Token:
                                     <span class="float-right">
-
-                                                </span>
+                                        {{ $connector->token }}
+                                    </span>
                                 </li>
                                 <li class="small">
-                                    URL
+                                    Статус:
                                     <span class="float-right">
-
-                                                </span>
+                                        <span class="badge {{ ($connector->status) ? 'badge-success' : 'badge-gray' }}">
+                                            Активен
+                                        </span>
+                                        {{ $connector->http_code }}
+                                    </span>
                                 </li>
                                 <li class="small">
-                                    Мониторинг состояния сайта
+                                    Последний опрос:
                                     <span class="float-right">
-
-                                                </span>
-                                </li>
-                                <li class="small">
-                                    Файл мониторинга
-                                    <span class="float-right">
-
-                                                </span>
-                                </li>
-                                <li class="small">
-                                    Используется HTTPS
-                                    <span class="float-right">
-
-                                                </span>
-                                </li>
-                                <li class="small">
-                                    Контроль SSL
-                                    <span class="float-right">
-
-                                                </span>
-                                </li>
-                                <li class="small">
-                                    HTTP ответ сервера
-                                    <span class="float-right">
-
-                                                </span>
-                                </li>
-                                <li class="small">
-                                    Версия Web сервера
-                                    <span class="float-right">
-
-                                                </span>
-                                </li>
-                                <li class="small">
-                                    Контроль версии PHP
-                                    <span class="float-right">
-
-                                                </span>
-                                </li>
-                                <li class="small">
-                                    Last update:
-                                    <span class="float-right">
-
-                                                </span>
+                                        {{ $connector->status_updated_at }}
+                                    </span>
                                 </li>
                                 <li class="small">
                                     Комментарий:
                                     <span class="float-right">
                                         {{ $connector->description }}
                                     </span>
+                                </li>
+                                <li class="small">
+                                    <i class="fas fa-dumpster"></i>
+                                    Trash: {{ $connector->trash_size / 1024 / 1024 / 1024}} Гб из
+                                    {{ $connector->total_space / 1024 / 1024 / 1024 }} Гб
+                                    <div class="progress">
+                                        <div class="progress-bar bg-primary" role="progressbar"
+                                             aria-valuenow="{{ $connector->percent_bucket_used }}"
+                                             aria-valuemin="0" aria-valuemax="100"
+                                             style="width: {{ $connector->percent_bucket_used }}%">
+                                                    <span
+                                                        class="text-dark">{{ $connector->percent_bucket_used }}% Used</span>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="small">
+                                    <i class="fas fa-hdd"></i>
+                                    Total: {{ $connector->used_space / 1024 / 1024 / 1024}} Гб из
+                                    {{ $connector->total_space / 1024 / 1024 / 1024 }} Гб
+                                    <div class="progress">
+                                        <div class="progress-bar bg-gradient-primary"
+                                             role="progressbar"
+                                             aria-valuenow="{{ $connector->percent_used }}"
+                                             aria-valuemin="0" aria-valuemax="100"
+                                             style="width: {{ $connector->percent_used }}%">
+                                                        <span
+                                                            class="text-dark">{{ $connector->percentused }}% Used</span>
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
