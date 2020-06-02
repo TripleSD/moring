@@ -6,9 +6,9 @@ use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
 
 /**
- * Class YandexTrashRepository.
+ * Class YandexBasketRepository.
  */
-class YandexTrashRepository extends Repository
+class YandexBasketRepository extends Repository
 {
     /**
      * @return mixed
