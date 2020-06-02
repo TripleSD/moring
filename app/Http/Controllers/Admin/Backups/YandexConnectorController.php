@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Models\BackupYandexConnectors;
+use Illuminate\Validation\ValidationException;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
@@ -94,6 +95,34 @@ class YandexConnectorController extends Controller
         } else {
             flash('Что-то пошло нет так')->warning();
         }
+
+        return redirect()->route('backups.yandex.connectors.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
+    public function store(Request $request)
+    {
+        $fill = $this->validate($request, [
+            'description' => 'required',
+            'token' => 'required',
+            'comment' => 'nullable',
+        ],[
+
+                                ]
+        );
+
+        $fill['status'] = 1;
+        $fill['total_space'] = 0;
+        $fill['used_space'] = 0;
+        $fill['trash_size'] = 0;
+        $fill['http_code'] = 200;
+
+        BackupYandexConnectors::create($fill);
+        flash('Данные сохранены')->success();
 
         return redirect()->route('backups.yandex.connectors.index');
     }
