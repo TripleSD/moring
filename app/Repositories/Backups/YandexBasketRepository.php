@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Backups;
 
+use App\Models\BackupYandexBaskets;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
 
@@ -15,7 +16,7 @@ class YandexBasketRepository extends Repository
      */
     public function getList()
     {
-//        return BackupYandexConnectors::get();
+        return BackupYandexBaskets::get();
     }
 
     /**
