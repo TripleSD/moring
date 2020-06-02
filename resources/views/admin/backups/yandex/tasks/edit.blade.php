@@ -133,7 +133,7 @@
 
                                 <div class="form-group">
                                     <b>Комментарий</b>
-                                    {{Form::text('comment', $task->comment, ['class' => 'form-control', 'placeholder' => 'Пример: BackupSite'])}}
+                                    {{Form::textarea('comment', $task->comment, ['class' => 'form-control',  'rows' => 5, 'placeholder' => 'Комментарий...'])}}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
