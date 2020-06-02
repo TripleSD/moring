@@ -128,7 +128,6 @@ class YandexConnectorController extends Controller
         return redirect()->route('backups.yandex.connectors.index');
     }
 
-
     /**
      * @param Request $request
      * @return RedirectResponse
