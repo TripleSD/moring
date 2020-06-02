@@ -22,7 +22,8 @@ class BackupYandexTask extends Model
         'filename',
         'interval',
         'enabled',
-        'comment'
+        'comment',
+        'connector_id',
     ];
 
     public function logs(): HasMany
