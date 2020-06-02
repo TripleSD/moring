@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BackupYandexConnectors
- * @package App\Models
  */
 class BackupYandexConnectors extends Model
 {
@@ -20,7 +19,7 @@ class BackupYandexConnectors extends Model
         'total_space',
         'used_space',
         'trash_size',
-        'http_code'
+        'http_code',
     ];
 
     public function getPercentUsedAttribute()
