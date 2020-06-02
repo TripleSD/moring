@@ -75,10 +75,22 @@ class YandexConnectorController extends Controller
      */
     public function clean(Request $request)
     {
-        $result = $this->yandexTrashRepository->cleanTrash($request);
+        if ($this->yandexTrashRepository->cleanTrash($request)) {
+            $this->yandexConnectorsRepository->refresh($request);
+            flash('Корзина успешно очищена')->success();
+        } else {
+            flash('Что-то пошло нет так')->warning();
+        }
+
+        return redirect()->route('backups.yandex.connectors.index');
+    }
+
+    public function refresh(Request $request)
+    {
+        $result = $this->yandexConnectorsRepository->refresh($request);
 
         if ($result) {
-            flash('Корзина успешно очищена')->success();
+            flash('Данные обновлены')->success();
         } else {
             flash('Что-то пошло нет так')->warning();
         }
