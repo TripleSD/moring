@@ -74,4 +74,14 @@ class YandexTaskController extends Controller
 
         return redirect()->route('backups.yandex.tasks.index');
     }
+
+    /**
+     * @return Application|Factory|View
+     */
+    public function create()
+    {
+        $connectors = $this->yandexConnectorsRepository->getPluckList();
+
+        return view('admin.backups.yandex.tasks.create', compact('connectors'));
+    }
 }
