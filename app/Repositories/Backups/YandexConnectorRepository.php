@@ -20,6 +20,11 @@ class YandexConnectorRepository extends Repository
         return BackupYandexConnectors::get();
     }
 
+    public function getPluckList()
+    {
+        return BackupYandexConnectors::pluck('description', 'id');
+    }
+
     public function refresh($request)
     {
         $connector = BackupYandexConnectors::find($request->id);
