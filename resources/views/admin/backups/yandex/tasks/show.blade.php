@@ -1,40 +1,31 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class=" text-dark"><i class="nav-icon fas fa-box-open"></i> Backups</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item">Backups</li>
-                        <li class="breadcrumb-item active">Ftp</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card mt-3">
                         <div class="card-header">
                             <h3 class="card-title">
-                                Просмотр профиля
+                                <span class="text-muted text-sm">Dashboard</span>
+                                <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                <span class="text-muted text-sm">Backup</span>
+                                <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                <span class="text-muted text-sm">
+                                        <a href="{{ route('backups.yandex.tasks.index') }}">Яндекс Диск</a>
+                                    </span>
+                                <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                <span class="text-sm">Просмотр проверки</span>
                             </h3>
                             <span class="float-right">
-                                                            <a href="{{route('backups.ftp.index')}}"
-                                                               class="btn btn-sm bg-gradient-info" title="Вернуться">
-                                                                <i class="fa fa-arrow-left"></i></a>
-                                                            <a href="{{route('backups.ftp.edit', $task->id)}}"
-                                                               class="btn btn-sm bg-gradient-warning"
-                                                               title="Редактиование профиля">
-                                                                <i class="fa fa-user-edit"></i></a>
+                                <a href="{{route('backups.yandex.tasks.index')}}"
+                                   class="btn btn-xs bg-gradient-info" title="Вернуться">
+                                    <i class="fa fa-arrow-left"></i> Назад</a>
+                                <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
+                                   class="btn btn-xs bg-gradient-warning"
+                                   title="Редактиование профиля">
+                                    <i class="fa fa-user-edit"></i> Правка</a>
                             </span>
                         </div>
                     </div>
@@ -50,75 +41,63 @@
                         <div class="card-body">
                             <ul class="nav nav-pills flex-column">
                                 <li class="small">
-                                    Наименование
+                                    Краткое описание
                                     <span class="float-right">
-
+                                        {{ $task->description }}
                                     </span>
                                 </li>
                                 <li class="small">
                                     ID:
                                     <span class="float-right">
-
+                                        {{ $task->id }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    URL
+                                    Коннектор:
                                     <span class="float-right">
-
+                                        {{ $task->connector->description }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    Мониторинг состояния сайта
+                                    Папка
                                     <span class="float-right">
-
+                                         {{ $task->folder }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    Файл мониторинга
+                                    Pre
                                     <span class="float-right">
-
+                                         {{ $task->pre }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    Используется HTTPS
+                                    Post
                                     <span class="float-right">
-
+                                        {{ $task->post }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    Контроль SSL
+                                    File
                                     <span class="float-right">
-
+                                        {{ $task->file }}
                                     </span>
                                 </li>
                                 <li class="small">
-                                    HTTP ответ сервера
+                                  Interval
                                     <span class="float-right">
-
-                                    </span>
-                                </li>
-                                <li class="small">
-                                    Версия Web сервера
-                                    <span class="float-right">
-
-                                    </span>
-                                </li>
-                                <li class="small">
-                                    Контроль версии PHP
-                                    <span class="float-right">
-
+                                        {{ $task->interval }}
                                     </span>
                                 </li>
                                 <li class="small">
                                     Last update:
                                     <span class="float-right">
-
+                                        {{ $task->updated_at }}
                                     </span>
                                 </li>
                                 <li class="small">
                                     Комментарий:
                                     <span class="float-right">
-                                        {{ $task->description }}
+                                        {{ $task->comment }}
                                     </span>
                                 </li>
                             </ul>
