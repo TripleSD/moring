@@ -2,11 +2,9 @@
 
 namespace App\Console\Commands;
 
-use App\Models\BackupFtpList;
-use App\Models\BackupFtpLogs;
+use App\Models\BackupYandexConnectors;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use App\Models\BackupYandexConnectors;
 
 class BackupYandexConnectorsKeeper extends Command
 {
@@ -48,7 +46,7 @@ class BackupYandexConnectorsKeeper extends Command
                         'used_space' => $res['used_space'],
                         'http_code' => $httpcode,
                         'status' => 1,
-                        'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                        'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]
                 );
             } else {
@@ -56,7 +54,7 @@ class BackupYandexConnectorsKeeper extends Command
                     [
                         'http_code' => $httpcode,
                         'status' => 0,
-                        'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                        'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                     ]
                 );
             }
