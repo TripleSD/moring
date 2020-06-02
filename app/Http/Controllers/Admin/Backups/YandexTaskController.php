@@ -28,7 +28,7 @@ class YandexTaskController extends Controller
      */
     public function index(YandexTaskRepository $yandexRepository)
     {
-        $tasks = $yandexRepository->tasksList();
+        $tasks = $yandexRepository->getList();
 
         return view('admin.backups.yandex.tasks.index', compact('tasks'));
     }

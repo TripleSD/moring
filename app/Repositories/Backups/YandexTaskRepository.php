@@ -16,7 +16,7 @@ class YandexTaskRepository extends Repository
     /**
      * @return Builder[]|Collection
      */
-    public function tasksList()
+    public function getList()
     {
         return BackupYandexList::with(
                 [
