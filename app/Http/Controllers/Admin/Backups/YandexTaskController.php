@@ -14,20 +14,20 @@ use App\Repositories\Backups\YandexTaskRepository;
  */
 class YandexTaskController extends Controller
 {
-    private $BackupYandexRepository;
+    private $yandexRepository;
 
     public function __construct()
     {
-        $this->BackupYandexRepository = new YandexTaskRepository();
+        $this->yandexRepository = new YandexTaskRepository();
     }
 
     /**
-     * @param YandexTaskRepository $BackupYandexRepository
+     * @param yandexTaskRepository $yandexRepository
      * @return Application|Factory|View
      */
-    public function index(YandexTaskRepository $BackupYandexRepository)
+    public function index(YandexTaskRepository $yandexRepository)
     {
-        $tasks = $BackupYandexRepository->tasksList();
+        $tasks = $yandexRepository->tasksList();
 
         return view('admin.backups.yandex.tasks.index', compact('tasks'));
     }
