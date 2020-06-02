@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Backups;
 use Illuminate\Http\Request;
 use App\Models\BackupYandexTask;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\RedirectResponse;
 use App\Models\BackupYandexConnectors;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -121,5 +122,18 @@ class YandexTaskController extends Controller
         $task = $this->yandexRepository->getTask($request);
 
         return view('admin.backups.yandex.tasks.show', compact('task'));
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request)
+    {
+        BackupYandexTask::where('id', $request->id)->delete();
+
+        flash('Задание удалено.')->success();
+
+        return redirect()->route('backups.yandex.tasks.index');
     }
 }
