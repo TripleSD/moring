@@ -18,13 +18,15 @@
                                     <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
                                     <span class="text-muted text-sm">Backup</span>
                                     <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">Яндекс Диск</span>
+                                    <span class="text-muted text-sm">
+                                        <a href="{{ route('backups.yandex.tasks.index') }}">Яндекс Диск</a>
+                                    </span>
                                     <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
                                     <span class="text-sm">Редактирование проверки</span>
                                 </div>
                             </div>
                             <div class="card-tools">
-                                <a href="{{route('backups.ftp.index')}}"
+                                <a href="{{route('backups.yandex.tasks.index')}}"
                                    class="btn btn-xs bg-gradient-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i> Назад</a>
                             </div>
@@ -41,7 +43,7 @@
                                 <span class="small text-danger float-right">
                                     * - обязательно для заполнения
                                 </span>
-                                {{--                                {{ Form::open([ 'url' => route('backups.ftp.update', $task->id), 'method' => 'patch']) }}--}}
+                                {{ Form::open([ 'url' => route('backups.yandex.tasks.update', $task->id), 'method' => 'patch']) }}
                                 <div class="form-group">
                                     <b>Краткое описание</b>
                                     <span class="small text-danger">*</span>
@@ -57,7 +59,7 @@
                                 <div class="form-group">
                                     <b>Коннектор</b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::select('connector', $connectors, null, ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
+                                    {{ Form::select('connector_id', $connectors, $task->connector_id, ['class' => 'form-control', 'required', 'placeholder' => 'Выберите коннектор...']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
@@ -131,7 +133,7 @@
 
                                 <div class="form-group">
                                     <b>Комментарий</b>
-                                    {{Form::text('folder', $task->comment, ['class' => 'form-control', 'placeholder' => 'Пример: BackupSite'])}}
+                                    {{Form::text('comment', $task->comment, ['class' => 'form-control', 'placeholder' => 'Пример: BackupSite'])}}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
@@ -140,18 +142,18 @@
                                     </details>
                                 </div>
 
-                                {{--                                <div class="form-group">--}}
-                                {{--                                    <button type="submit" class="btn btn-xs bg-gradient-success">Обновить</button>--}}
-                                {{--                                    {{ Form::close() }}--}}
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-xs bg-gradient-success">Обновить</button>
+                                    {{ Form::close() }}
 
-                                {{--                                    <div class="float-right">--}}
-                                {{--                                        {{Form::open([ 'url' => route('backups.ftp.destroy', $task->id), 'method' => 'delete'])}}--}}
-                                {{--                                        <button type="submit" class="btn btn-xs bg-gradient-red">Удалить--}}
-                                {{--                                        </button>--}}
-                                {{--                                        {{ Form::close() }}--}}
-                                {{--                                    </div>--}}
-                                {{--                                </div>--}}
-                                {{--                            </div>--}}
+                                    <div class="float-right">
+                                        {{Form::open([ 'url' => route('backups.yandex.tasks.destroy', $task->id), 'method' => 'delete'])}}
+                                        <button type="submit" class="btn btn-xs bg-gradient-red">Удалить
+                                        </button>
+                                        {{ Form::close() }}
+                                    </div>
+                                </div>
+                            </div>
                             </div>
                         </div>
                     </div>
