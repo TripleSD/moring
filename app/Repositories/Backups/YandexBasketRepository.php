@@ -43,4 +43,13 @@ class YandexBasketRepository extends Repository
 
         return true;
     }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    public function getBasket($request)
+    {
+        return BackupYandexBaskets::find($request->id);
+    }
 }
