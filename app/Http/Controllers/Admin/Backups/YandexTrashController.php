@@ -3,14 +3,13 @@
 namespace App\Http\Controllers\Admin\Backups;
 
 use App\Http\Controllers\Controller;
+use App\Repositories\Backups\YandexTrashRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
-use App\Repositories\Backups\YandexTrashRepository;
 
 /**
  * Class YandexTrashController
- * @package App\Http\Controllers\Admin\Backups
  */
 class YandexTrashController extends Controller
 {
