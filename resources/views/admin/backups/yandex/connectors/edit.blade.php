@@ -84,6 +84,13 @@
                                 <div class="form-group">
                                     <button type="submit" class="btn btn-xs bg-gradient-success">Сохранить</button>
                                     {{ Form::close() }}
+
+                                    <div class="float-right">
+                                        {{Form::open([ 'url' => route('backups.yandex.connectors.destroy', $connector->id), 'method' => 'delete'])}}
+                                        <button type="submit" class="btn btn-xs bg-gradient-red">Удалить
+                                        </button>
+                                        {{ Form::close() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
