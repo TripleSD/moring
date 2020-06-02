@@ -2,8 +2,8 @@
 
 namespace App\Repositories\Backups;
 
-use App\Repositories\Repository;
 use App\Models\BackupYandexConnectors;
+use App\Repositories\Repository;
 
 /**
  * Class YandexTrashRepository
