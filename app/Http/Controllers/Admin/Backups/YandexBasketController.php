@@ -26,8 +26,8 @@ class YandexBasketController extends Controller
      */
     public function index(YandexBasketRepository $yandexBasketRepository)
     {
-        $trash = $yandexBasketRepository->getList();
+        $baskets = $yandexBasketRepository->getList();
 
-        return view('admin.backups.yandex.trash.index', compact('trash'));
+        return view('admin.backups.yandex.baskets.index', compact('baskets'));
     }
 }
