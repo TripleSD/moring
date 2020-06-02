@@ -39,4 +39,14 @@ class BackupYandexConnectors extends Model
 
         return 0;
     }
+
+    public function getTotalSpaceAttribute()
+    {
+        return round($this->attributes['total_space'] / 1024 / 1024 / 1024, 0);
+    }
+
+    public function getUsedSpaceAttribute()
+    {
+        return round($this->attributes['used_space'] / 1024 / 1024 / 1024, 0);
+    }
 }
