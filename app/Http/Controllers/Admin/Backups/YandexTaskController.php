@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Backups;
 
-use Illuminate\Http\Request;
-use App\Models\BackupYandexTask;
 use App\Http\Controllers\Controller;
-use Illuminate\Http\RedirectResponse;
-use App\Models\BackupYandexConnectors;
-use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Contracts\View\Factory;
-use Illuminate\View\View;
+use App\Models\BackupYandexTask;
 use App\Repositories\Backups\YandexTaskRepository;
 use App\Repositories\Backups\YandexConnectorRepository;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 /**
  * Class BackupYandexController
