@@ -35,6 +35,6 @@ class YandexTaskRepository extends Repository
      */
     public function getTask($request)
     {
-        return BackupYandexTask::where('id', $request->id)->firstOrFail();
+        return BackupYandexTask::with('connector')->where('id', $request->id)->firstOrFail();
     }
 }
