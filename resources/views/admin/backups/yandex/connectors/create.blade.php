@@ -42,7 +42,7 @@
                                         * - обязательно для заполнения
                                     </span>
 
-                                {{ Form::open([ 'url' => route('backups.yandex.connectors.store'), 'method' => 'patch']) }}
+                                {{ Form::open([ 'url' => route('backups.yandex.connectors.store'), 'method' => 'post']) }}
                                 <div class="form-group">
                                     <b>Краткое описание</b>
                                     <span class="small text-danger">*</span>
@@ -59,7 +59,7 @@
                                 <div class="form-group">
                                     <b>Токен</b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::text('description', null, ['class' => 'form-control',
+                                    {{ Form::text('token', null, ['class' => 'form-control',
                                         'required', 'placeholder' => 'Пример: Hhs7JushsksTgJdls']) }}
                                     <details class="mt--3 small">
                                         <summary>
@@ -71,7 +71,7 @@
 
                                 <div class="form-group">
                                     <b>Комментарий</b>
-                                    {{ Form::textarea('description', null, ['class' => 'form-control',
+                                    {{ Form::textarea('comment', null, ['class' => 'form-control',
                                         'rows' => 5, 'placeholder' => 'Комментарий...']) }}
                                     <details class="mt--3 small">
                                         <summary>
