@@ -13,7 +13,15 @@
                                        class="btn btn-xs btn-outline-secondary" title="Вернуться">
                                         <i class="fa fa-home"></i></a>
                                 </div>
-                                <span class="text-muted">Home | Backup | Новый коннектор Яндекс Диск</span>
+                                <div class="btn-group">
+                                    <span class="text-muted text-sm">Dashboard</span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm">Backup</span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm">Яндекс Диск</span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-sm">Новый коннектор</span>
+                                </div>
                             </div>
                             <div class="card-tools">
                                 <a href="{{route('backups.yandex.connectors.index')}}"
@@ -39,7 +47,7 @@
                                     <b>Краткое описание</b>
                                     <span class="small text-danger">*</span>
                                     {{ Form::text('description', null, ['class' => 'form-control',
-                                        'required', 'placeholder' => 'Аккаунт клиента']) }}
+                                        'required', 'placeholder' => 'Пример: Аккаунт клиента или disk@site.local']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
@@ -52,7 +60,7 @@
                                     <b>Токен</b>
                                     <span class="small text-danger">*</span>
                                     {{ Form::text('description', null, ['class' => 'form-control',
-                                        'required', 'placeholder' => 'Hhs7JushsksTgJdls']) }}
+                                        'required', 'placeholder' => 'Пример: Hhs7JushsksTgJdls']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
@@ -64,7 +72,7 @@
                                 <div class="form-group">
                                     <b>Комментарий</b>
                                     {{ Form::textarea('description', null, ['class' => 'form-control',
-                                        'rows' => 10, 'placeholder' => 'Комментарий...']) }}
+                                        'rows' => 5, 'placeholder' => 'Комментарий...']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
