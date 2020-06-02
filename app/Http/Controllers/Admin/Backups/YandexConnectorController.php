@@ -155,4 +155,17 @@ class YandexConnectorController extends Controller
 
         return redirect()->route('backups.yandex.connectors.index');
     }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request)
+    {
+        BackupYandexConnectors::where('id', $request->id)->delete();
+
+        flash('Коннектор удален.')->success();
+
+        return redirect()->route('backups.yandex.connectors.index');
+    }
 }
