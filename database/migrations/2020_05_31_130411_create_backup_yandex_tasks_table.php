@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBackupYandexTable extends Migration
+class CreateBackupYandexTasksTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class CreateBackupYandexTable extends Migration
     public function up()
     {
         Schema::create(
-            'backup_yandex_list',
+            'backup_yandex_tasks',
             function (Blueprint $table) {
                 $table->bigIncrements('id')->comment('Id');
                 $table->integer('connector_id')->comment('Connector ID');
