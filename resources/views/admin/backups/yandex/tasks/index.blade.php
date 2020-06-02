@@ -90,8 +90,8 @@
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="small">
-                                                            <b>Адрес подключения:</b>
-                                                            {{--                                                            {{ $task->hostname }}:{{ $task->port }}--}}
+                                                            <b>Коннектор:</b>
+                                                                {{ $task->connector->description }}
                                                         </div>
                                                         <div class="small">
                                                             <b>Интервал проверки:</b>
