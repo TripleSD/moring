@@ -19,12 +19,13 @@ class YandexTaskRepository extends Repository
     public function getList()
     {
         return BackupYandexTask::with(
-                [
-                    'logs' => function ($q) {
-                        return $q->where('resolved', 0);
-                    },
-                ]
-            )
+            [
+                'connector',
+                'logs' => function ($q) {
+                    return $q->where('resolved', 0);
+                },
+            ]
+        )
             ->get();
     }
 
