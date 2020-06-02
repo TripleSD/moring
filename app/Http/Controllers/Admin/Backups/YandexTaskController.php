@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
-use App\Repositories\Backups\BackupYandexRepository;
+use App\Repositories\Backups\YandexTaskRepository;
 
 /**
  * Class BackupYandexController
@@ -18,14 +18,14 @@ class YandexTaskController extends Controller
 
     public function __construct()
     {
-        $this->BackupYandexRepository = new BackupYandexRepository();
+        $this->BackupYandexRepository = new YandexTaskRepository();
     }
 
     /**
-     * @param BackupYandexRepository $BackupYandexRepository
+     * @param YandexTaskRepository $BackupYandexRepository
      * @return Application|Factory|View
      */
-    public function index(BackupYandexRepository $BackupYandexRepository)
+    public function index(YandexTaskRepository $BackupYandexRepository)
     {
         $tasks = $BackupYandexRepository->tasksList();
 
