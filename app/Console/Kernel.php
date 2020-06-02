@@ -58,6 +58,8 @@ class Kernel extends ConsoleKernel
         $schedule->command('scraper:ftp --interval=12')->hourlyAt(12);
         $schedule->command('scraper:ftp --interval=12')->dailyAt('23:55');
         $schedule->command('scraper:ftp --interval=24')->dailyAt('23:55');
+
+        $schedule->command('backup:yandex-connectors-keeper')->everyMinute();
     }
 
     /**
