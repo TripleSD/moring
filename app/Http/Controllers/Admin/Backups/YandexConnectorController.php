@@ -8,13 +8,13 @@ use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexTrashRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
-use Illuminate\Http\Request;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 
 /**
- * Class YandexConnectorsController
+ * Class YandexConnectorsController.
  */
 class YandexConnectorController extends Controller
 {
@@ -67,7 +67,6 @@ class YandexConnectorController extends Controller
 
         return view('admin.backups.yandex.connectors.show', compact('connector'));
     }
-
 
     /**
      * @param Request $request
