@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Backups;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -30,5 +31,12 @@ class YandexTaskController extends Controller
         $tasks = $yandexRepository->tasksList();
 
         return view('admin.backups.yandex.tasks.index', compact('tasks'));
+    }
+
+    public function edit(Request $request)
+    {
+        $task = YandexTaskRepository::where('id', $request->id)->get();
+
+        return view('admin.backups.yandex.tasks.edit', compact('task'));
     }
 }
