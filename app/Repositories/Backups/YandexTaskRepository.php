@@ -3,7 +3,7 @@
 namespace App\Repositories\Backups;
 
 use App\Repositories\Repository;
-use App\Models\BackupYandexList;
+use App\Models\BackupYandexTask;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -18,7 +18,7 @@ class YandexTaskRepository extends Repository
      */
     public function getList()
     {
-        return BackupYandexList::with(
+        return BackupYandexTask::with(
                 [
                     'logs' => function ($q) {
                         return $q->where('resolved', 0);
@@ -34,6 +34,6 @@ class YandexTaskRepository extends Repository
      */
     public function getTask($request)
     {
-        return BackupYandexList::where('id', $request->id)->get();
+        return BackupYandexTask::where('id', $request->id)->firstOrFail();
     }
 }
