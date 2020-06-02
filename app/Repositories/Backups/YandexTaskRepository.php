@@ -27,4 +27,13 @@ class YandexTaskRepository extends Repository
             )
             ->get();
     }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    public function getTask($request)
+    {
+        return BackupYandexList::where('id', $request->id)->get();
+    }
 }
