@@ -8,6 +8,7 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 use App\Repositories\Backups\YandexTaskRepository;
+use App\Repositories\Backups\YandexConnectorRepository;
 
 /**
  * Class BackupYandexController
@@ -16,10 +17,12 @@ use App\Repositories\Backups\YandexTaskRepository;
 class YandexTaskController extends Controller
 {
     private $yandexRepository;
+    private $yandexConnectorsRepository;
 
     public function __construct()
     {
         $this->yandexRepository = new YandexTaskRepository();
+        $this->yandexConnectorsRepository = new YandexConnectorRepository();
     }
 
     /**
@@ -39,7 +42,8 @@ class YandexTaskController extends Controller
     public function edit(Request $request)
     {
         $task = $this->yandexRepository->getTask($request);
+        $connectors = $this->yandexConnectorsRepository->getPluckList();
 
-        return view('admin.backups.yandex.tasks.edit', compact('task'));
+        return view('admin.backups.yandex.tasks.edit', compact('task', 'connectors'));
     }
 }
