@@ -123,12 +123,12 @@
                                             </td>
                                             <td>
                                                 <div class="btn-group">
-                                                    <a href="{{route('backups.ftp.show',$task->id)}}"
+                                                    <a href="{{route('backups.yandex.tasks.show',$task->id)}}"
                                                        class="btn btn-xs bg-gradient-info"
                                                        title="Просмотр устройства">
                                                         <i class="fa fa-eye"></i>
                                                     </a>
-                                                    <a href="{{route('backups.ftp.edit', $task->id)}}"
+                                                    <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
                                                        class="btn btn-xs bg-gradient-warning"
                                                        title="Редактирование устройства">
                                                         <i class="fa fa-edit"></i></a>
