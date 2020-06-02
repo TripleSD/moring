@@ -42,12 +42,12 @@ class SitesController extends Controller
         // Counts
         $counts['allSites']                = $sitesCountsRepository->getAllSitesCount() ?: []; // Ok
         $counts['sslExpirationsDaysSites'] = $sitesCountsRepository->getSslExpirationsDaysSitesCount() ?: [];
-        $counts['sslErrorsSites']          = $sitesCountsRepository->getSslErrorsSitesCount() ?: [];       // OK
-        $counts['sslSuccessSites']         = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];      //Ok
-        $counts['softwareErrorsSites']     = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];  // Ok
+        $counts['sslErrorsSites']          = $sitesCountsRepository->getSslErrorsSitesCount() ?: [];            // OK
+        $counts['sslSuccessSites']         = $sitesCountsRepository->getSslSuccessSitesCount() ?: [];           //Ok
+        $counts['softwareErrorsSites']     = $sitesCountsRepository->getSoftwareErrorsSitesCount() ?: [];       // Ok
         $counts['bridgeErrors']            = $sitesCountsRepository->getBridgeErrors() ?: [];
-        $counts['disabledSites']           = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];  // Ok
-        $counts['deprecatedPHPVersion']    = ($sitesCountsRepository->getDeprecatedVersions()) ?: [];  // Ok
+        $counts['disabledSites']           = ($sitesCountsRepository->getDisabledSitesCount()) ?: [];         // Ok
+        $counts['deprecatedPHPVersion']    = ($sitesCountsRepository->getDeprecatedVersions()) ?: [];         // Ok
 
         $keys = $request->keys();
         if (! empty($keys)) {
@@ -84,35 +84,51 @@ class SitesController extends Controller
     /**
      * Store a newly created resource in storage.
      * @param StoreSiteRequest $request
+     * @param AdminSitesRepository $adminSitesRepository
      * @return RedirectResponse
      */
-    public function store(StoreSiteRequest $request)
+    public function store(StoreSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        $fillable = $request->validated();
+        // Checking domain DNS Resolve
+        // Create data array for check
+        // Check default value
+        // Check full check url
+        // Storing data
+        // Site check
+        // Site pings
 
-        // Checking DNS resolve by domains
-        if (checkdnsrr($fillable['url'], 'A')) {
-            $result = (new AdminSitesRepository())->store($fillable);
-            if ($result) {
-                // Run first site check
-                $check = new SitesChecker();
-                $check->handle((int) ($result->id), 'web');
-
-                // Run first site ping as well
-                $ping = new SitesPings();
-                $ping->handle((int) ($result->id));
-
-                flash('Запись добавлена')->success();
-
-                return redirect()->route('admin.sites.index');
-            } else {
-                return back()->withInput();
-            }
-        } else {
+        // Checking domain DNS resolve
+        if ($adminSitesRepository->checkErrorDnsDomain($request)) {
             flash('Запись не добавлена. Проверьте существование домена.')->warning();
 
-            return back()->withInput();
+            return redirect()->back()->withInput();
         }
+
+        // Create data array for check
+        $site = $this->createDataArray($request);
+
+        // Check default value
+        (isset($request->use_file)) ? $request->use_file = 1 : $request->use_file = 0;
+
+        // Check full check url
+        if ($request->use_file && ! $adminSitesRepository->checkUrl($site)) {
+            flash('Проверьте имя сайта/имя Moring файла/настройки HTTPS.')->warning();
+
+            return redirect()->back()->withInput();
+        }
+
+        // Storing data
+        $site = $adminSitesRepository->store($request->validated());
+
+        // Site check
+        $this->checkSite($site->site_id);
+
+        // Site pings
+        $this->pingSite($site->site_id);
+
+        flash('Запись добавлена')->success();
+
+        return redirect()->route('admin.sites.index');
     }
 
     /**
@@ -171,18 +187,34 @@ class SitesController extends Controller
      */
     public function update(UpdateSiteRequest $request, AdminSitesRepository $adminSitesRepository)
     {
-        $id       = $request->id;
-        $fillable = $request->validated();
-        $result   = $adminSitesRepository->update($fillable, $id);
-        if (! $result) {
-            return back()->withInput($fillable);
-        } else {
-            $check = new SitesChecker();
-            $check->handle($id, 'web');
-            flash('Запись обновлена')->success();
+        // Create data array for check
+        // Check default value
+        // Check full check url
+        // Storing data
+        // Site check
 
-            return redirect()->route('admin.sites.index');
+        // Create data array for check
+        $site = $this->createDataArray($request);
+
+        // Check default value
+        (isset($request->use_file)) ? $request->use_file = 1 : $request->use_file = 0;
+
+        // Check full check url
+        if ($request->use_file && ! $adminSitesRepository->checkUrl($site)) {
+            flash('Проверьте имя сайта/имя Moring файла/настройки HTTPS.')->warning();
+
+            return redirect()->back()->withInput();
         }
+
+        // Storing data
+        $adminSitesRepository->update($request->validated(), $request->id);
+
+        // Site check
+        $this->checkSite($request->id);
+
+        flash('Запись обновлена')->success();
+
+        return redirect()->route('admin.sites.index');
     }
 
     /**
@@ -221,11 +253,11 @@ class SitesController extends Controller
             $site = Sites::find($id);
             $site->update(['ip_address' => gethostbyname($site->url)]);
 
-            // Starting checks
-            $check = new SitesChecker();
-            $check->handle($id, 'web');
-            $ping = new SitesPings();
-            $ping->handle($id);
+            // Site check
+            $this->checkSite($id);
+
+            // Site pings
+            $this->pingSite($id);
 
             // Getting current time for compare.
             $endTime = Carbon::now()->locale($locale);
@@ -255,5 +287,38 @@ class SitesController extends Controller
         }
 
         return back();
+    }
+
+    /**
+     * @param $request
+     * @return array
+     */
+    private function createDataArray($request)
+    {
+        return ['url' => $request->url, 'file_url' => $request->file_url, 'https' => $request->https];
+    }
+
+    /**
+     * @param $siteId
+     * @return bool
+     */
+    private function checkSite($siteId)
+    {
+        $check = new SitesChecker();
+        $check->handle($siteId, 'web');
+
+        return true;
+    }
+
+    /**
+     * @param $siteId
+     * @return bool
+     */
+    private function pingSite($siteId)
+    {
+        $ping = new SitesPings();
+        $ping->handle($siteId);
+
+        return true;
     }
 }

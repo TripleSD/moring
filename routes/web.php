@@ -89,6 +89,14 @@ Route::group(
         );
 
         Route::group(
+            ['prefix' => 'backups', 'namespace' => 'Admin\Backups', 'as' => 'backups.'],
+            function () {
+                $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
+                Route::resource('ftp', 'BackupFtpController')->only($methods);
+            }
+        );
+
+        Route::group(
             ['namespace' => 'Admin\Servers'],
             function () {
                 $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
@@ -104,6 +112,8 @@ Route::group(
                     ->name('documenation.index');
                 Route::get('/changelog', 'DocumentationController@getChangeLog')
                     ->name('documenation.changelog');
+                Route::get('/about', 'DocumentationController@about')
+                    ->name('documenation.about');
             }
         );
 

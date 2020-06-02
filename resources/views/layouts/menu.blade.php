@@ -98,6 +98,23 @@
                     </ul>
                 </li>
 
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-box-open"></i>
+                        <p>
+                            Backups
+                            <i class="right fas fa-angle-left"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('backups.ftp.index') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>FTP</p>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
 
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
@@ -162,6 +179,14 @@
                             <a href="{{ route('documenation.changelog') }}" class="nav-link">
                                 <i class="fa fa-angle-right nav-icon"></i>
                                 <p>@lang('messages.main_menu.help.changelog')</p>
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a href="{{ route('documenation.about') }}" class="nav-link">
+                                <i class="fa fa-angle-right nav-icon"></i>
+                                <p>About</p>
                             </a>
                         </li>
                     </ul>

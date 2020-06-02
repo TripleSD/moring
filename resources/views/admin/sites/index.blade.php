@@ -247,6 +247,22 @@
                                                             @endif
                                                         </div>
                                                     </div>
+                                                    <div class="text-muted">
+                                                        Check URL:
+                                                        @if($site->https === 1)
+                                                            @if($site->checksList->use_file === 1)
+                                                                https://{{ $site->url }}/{{ $site->file_url}}
+                                                            @else
+                                                                https://{{ $site->url }}
+                                                            @endif
+                                                        @else
+                                                            @if($site->checksList->use_file === 1)
+                                                                http://{{ $site->url }}/{{ $site->file_url}}
+                                                            @else
+                                                                http://{{ $site->url }}
+                                                            @endif
+                                                        @endif
+                                                    </div>
                                                 </div>
                                             </td>
 

@@ -33,11 +33,11 @@
 
                             <div class="card-body">
                                 <div class="col-sm-6">
-                                    {{ Form::open([ 'route' => 'admin.sites.store', 'method' => 'post', 'enctype' => "multipart/form-data"]) }}
+                                    {{ Form::open(['url' => route('admin.sites.store'), 'method' => 'post']) }}
 
                                     <div class="form-group">
-                                        <b>Название сайта</b>
-                                        {{ Form::text('title', null , ['class' => 'form-control', 'required','placeholder' => 'My website or so']) }}
+                                        <b>Краткое описание</b>
+                                        {{ Form::text('title', null , ['class' => 'form-control', 'required','placeholder' => 'My website.']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -48,8 +48,8 @@
                                     </div>
 
                                     <div class="form-group">
-                                        <b>Адрес URL</b>
-                                        {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com/']) }}
+                                        <b>URL сайта</b>
+                                        {{ Form::text('url', null , ['class' => 'form-control', 'required', 'placeholder' => 'yourdomain.com']) }}
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -75,8 +75,22 @@
 
                                     <div class="form-group">
                                         <div>
-                                            {{ Form::checkbox('http_code', 1, true) }}
-                                            <b>HTTP ответ сервера</b>
+                                            {{ Form::checkbox('use_file', true, false) }}
+                                            <b>Использовать файл мониторинга</b><br>
+                                        </div>
+                                        <details class="mt--3 small">
+                                            <summary>
+                                                Дополнительная информация
+                                            </summary>
+                                            Если Вы не желаете использовать файл мониторинг на текущем этапе, просто
+                                            снимите отметку с данного чекбокса.
+                                        </details>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div>
+                                            {{ Form::checkbox('http_code', 1, false) }}
+                                            <b>Проверка HTTP кода</b>
                                         </div>
                                         <details class="mt--3 small">
                                             <summary>
@@ -88,7 +102,7 @@
 
                                     <div class="form-group">
                                         {{ Form::checkbox('https', 1, false) }}
-                                        <b>HTTPS</b>
+                                        <b>Поддержка HTTPS</b>
                                         <details class="mt--3 small">
                                             <summary>
                                                 Дополнительная информация
@@ -111,7 +125,7 @@
                                     </div>
 
                                     <div class="form-group">
-                                        {{ Form::checkbox('check_php', 1, true) }}
+                                        {{ Form::checkbox('check_php', 1, false) }}
                                         <b>Проверка версии PHP</b>
                                         <details class="mt--3 small">
                                             <summary>
@@ -138,7 +152,8 @@
                                         {{ Form::text('ping_threshold', null , ['class' => 'form-control', 'placeholder' => '10']) }}
                                         <details class="mt--3 small">
                                             <summary>
-                                                Максимальное значение ping при котором необходимо уведомлять администратора
+                                                Максимальное значение ping при котором необходимо уведомлять
+                                                администратора
                                             </summary>
                                             Ping threshold
                                         </details>

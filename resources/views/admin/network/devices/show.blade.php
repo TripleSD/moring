@@ -266,7 +266,7 @@
                                                     {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
                                                 </td>
                                                 <td>
-                                                    <a class="btn btn-" href=""
+                                                    <a class="btn btn-" href=""></a>
                                                     <i class="fas fa-eye"></i>
                                                 </td>
                                             </tr>
