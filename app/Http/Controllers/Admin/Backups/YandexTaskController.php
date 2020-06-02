@@ -84,4 +84,31 @@ class YandexTaskController extends Controller
 
         return view('admin.backups.yandex.tasks.create', compact('connectors'));
     }
+
+    public function store(Request $request)
+    {
+        $fill = $this->validate(
+            $request,
+            [
+                'description' => 'required',
+                'connector_id' => 'required',
+                'folder' => 'nullable',
+                'pre' => 'nullable',
+                'post' => 'nullable',
+                'filename' => 'required',
+                'interval' => 'required',
+                'comment' => 'nullable',
+            ],
+            [
+
+            ]
+        );
+        $fill['enabled'] = 1;
+
+        BackupYandexTask::create($fill);
+
+        flash('Задание добавлено.')->success();
+
+        return redirect()->route('backups.yandex.tasks.index');
+    }
 }
