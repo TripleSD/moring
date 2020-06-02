@@ -126,4 +126,33 @@ class YandexConnectorController extends Controller
 
         return redirect()->route('backups.yandex.connectors.index');
     }
+
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
+    public function update(Request $request)
+    {
+        $fill = $this->validate($request, [
+            'description' => 'required',
+            'token' => 'required',
+            'comment' => 'nullable',
+        ],[
+
+                                ]
+        );
+
+        $fill['status'] = 1;
+        $fill['total_space'] = 0;
+        $fill['used_space'] = 0;
+        $fill['trash_size'] = 0;
+        $fill['http_code'] = 200;
+
+        BackupYandexConnectors::where('id', $request->id)->update($fill);
+        flash('Данные обновлены.')->success();
+
+        return redirect()->route('backups.yandex.connectors.index');
+    }
 }
