@@ -85,8 +85,8 @@
                                                 <div class="row small">
                                                     <div class="col-12">
                                                         <i class="fas fa-hdd"></i>
-                                                        Total: {{ $connector->used_space / 1024 / 1024 / 1024}} Гб из
-                                                        {{ $connector->total_space / 1024 / 1024 / 1024 }} Гб
+                                                        Total: {{ $connector->used_space }} Гб из
+                                                        {{ $connector->total_space }} Гб
                                                         <div class="progress">
                                                             <div class="progress-bar bg-gradient-primary"
                                                                  role="progressbar"
@@ -102,8 +102,8 @@
                                                 <div class="row small">
                                                     <div class="col-12">
                                                         <i class="fas fa-dumpster"></i>
-                                                        Trash: {{ $connector->trash_size / 1024 / 1024 / 1024}} Гб из
-                                                        {{ $connector->total_space / 1024 / 1024 / 1024 }} Гб
+                                                        Trash: {{ $connector->trash_size }} Гб из
+                                                        {{ $connector->total_space }} Гб
                                                         <div class="progress">
                                                             <div class="progress-bar bg-primary" role="progressbar"
                                                                  aria-valuenow="{{ $connector->percent_bucket_used }}"
