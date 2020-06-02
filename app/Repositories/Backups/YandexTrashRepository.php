@@ -6,8 +6,7 @@ use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
 
 /**
- * Class YandexTrashRepository
- * @package App\Repositories\Backups
+ * Class YandexTrashRepository.
  */
 class YandexTrashRepository extends Repository
 {
@@ -29,7 +28,7 @@ class YandexTrashRepository extends Repository
 
         $ch = curl_init('https://cloud-api.yandex.net/v1/disk/trash/resources/?path=');
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: OAuth ' . $connector->token]);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($ch, CURLOPT_HEADER, true);

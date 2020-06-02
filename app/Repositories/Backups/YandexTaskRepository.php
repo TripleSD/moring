@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
 /**
- * Class BackupYandexRepository
+ * Class BackupYandexRepository.
  */
 class YandexTaskRepository extends Repository
 {

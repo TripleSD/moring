@@ -9,7 +9,7 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 
 /**
- * Class YandexTrashController
+ * Class YandexTrashController.
  */
 class YandexTrashController extends Controller
 {

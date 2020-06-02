@@ -7,7 +7,7 @@ use App\Repositories\Repository;
 use Carbon\Carbon;
 
 /**
- * Class YandexConnectorsRepository
+ * Class YandexConnectorsRepository.
  */
 class YandexConnectorRepository extends Repository
 {
@@ -50,6 +50,7 @@ class YandexConnectorRepository extends Repository
                     'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]
             );
+
             return true;
         }
 
@@ -60,6 +61,7 @@ class YandexConnectorRepository extends Repository
                 'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
         );
+
         return false;
     }
 }
