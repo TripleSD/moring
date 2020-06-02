@@ -103,6 +103,8 @@ Route::group(
                                         ['parameters' => ['connectors' => 'id']])->only($methods);
                         Route::get('/connectors/{id}/clean', 'YandexConnectorController@clean')
                             ->name('backups.yandex.connectors.clean');
+                        Route::get('/connectors/{id}/refresh', 'YandexConnectorController@refresh')
+                            ->name('backups.yandex.connectors.refresh');
                         Route::resource('trash', 'YandexTrashController',
                                         ['parameters' => ['trash' => 'id']])->only($methods);
                     }
