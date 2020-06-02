@@ -23,19 +23,22 @@ class YandexTaskController extends Controller
     }
 
     /**
-     * @param yandexTaskRepository $yandexRepository
      * @return Application|Factory|View
      */
-    public function index(YandexTaskRepository $yandexRepository)
+    public function index()
     {
-        $tasks = $yandexRepository->getList();
+        $tasks = $this->yandexRepository->getList();
 
         return view('admin.backups.yandex.tasks.index', compact('tasks'));
     }
 
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
     public function edit(Request $request)
     {
-        $task = YandexTaskRepository::where('id', $request->id)->get();
+        $task = $this->yandexRepository->getTask($request);
 
         return view('admin.backups.yandex.tasks.edit', compact('task'));
     }
