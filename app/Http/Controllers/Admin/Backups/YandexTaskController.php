@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin\Backups;
 
 use Illuminate\Http\Request;
+use App\Models\BackupYandexTask;
 use App\Http\Controllers\Controller;
+use App\Models\BackupYandexConnectors;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
@@ -21,7 +23,7 @@ class YandexTaskController extends Controller
 
     public function __construct()
     {
-        $this->yandexRepository = new YandexTaskRepository();
+        $this->yandexRepository           = new YandexTaskRepository();
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
     }
 
@@ -41,9 +43,35 @@ class YandexTaskController extends Controller
      */
     public function edit(Request $request)
     {
-        $task = $this->yandexRepository->getTask($request);
+        $task       = $this->yandexRepository->getTask($request);
         $connectors = $this->yandexConnectorsRepository->getPluckList();
 
         return view('admin.backups.yandex.tasks.edit', compact('task', 'connectors'));
+    }
+
+    public function update(Request $request)
+    {
+        $fill = $this->validate(
+            $request,
+            [
+                'description' => 'required',
+                'connector_id' => 'required',
+                'folder' => 'nullable',
+                'pre' => 'nullable',
+                'post' => 'nullable',
+                'filename' => 'required',
+                'interval' => 'required',
+                'comment' => 'nullable',
+            ],
+            [
+
+            ]
+        );
+
+        BackupYandexTask::where('id', $request->id)->update($fill);
+
+        flash('Данные обновлены.')->success();
+
+        return redirect()->route('backups.yandex.tasks.index');
     }
 }
