@@ -2,13 +2,12 @@
 
 namespace App\Repositories\Backups;
 
-use Carbon\Carbon;
-use App\Repositories\Repository;
 use App\Models\BackupYandexConnectors;
+use App\Repositories\Repository;
+use Carbon\Carbon;
 
 /**
  * Class YandexConnectorsRepository
- * @package App\Repositories\Backups
  */
 class YandexConnectorRepository extends Repository
 {
@@ -48,7 +47,7 @@ class YandexConnectorRepository extends Repository
                     'used_space' => $res['used_space'],
                     'http_code' => $httpcode,
                     'status' => 1,
-                    'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                    'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]
             );
             return true;
@@ -58,7 +57,7 @@ class YandexConnectorRepository extends Repository
             [
                 'http_code' => $httpcode,
                 'status' => 0,
-                'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s')
+                'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
         );
         return false;
