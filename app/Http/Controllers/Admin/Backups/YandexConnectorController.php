@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Backups;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Backups\YandexConnectorRepository;
-use App\Repositories\Backups\YandexTrashRepository;
+use App\Repositories\Backups\YandexBasketRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -19,12 +19,12 @@ use Illuminate\View\View;
 class YandexConnectorController extends Controller
 {
     private $yandexConnectorsRepository;
-    private $yandexTrashRepository;
+    private $yandexBasketRepository;
 
     public function __construct()
     {
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
-        $this->yandexTrashRepository      = new YandexTrashRepository();
+        $this->yandexBasketRepository      = new YandexBasketRepository();
     }
 
     /**
@@ -74,7 +74,7 @@ class YandexConnectorController extends Controller
      */
     public function clean(Request $request)
     {
-        if ($this->yandexTrashRepository->cleanTrash($request)) {
+        if ($this->yandexBasketRepository->cleanTrash($request)) {
             $this->yandexConnectorsRepository->refresh($request);
             flash('Корзина успешно очищена')->success();
         } else {
