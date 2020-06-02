@@ -15,7 +15,12 @@ class BackupYandexConnectors extends Model
     protected $fillable = [
         'description',
         'token',
-        'comment'
+        'comment',
+        'status',
+        'total_space',
+        'used_space',
+        'trash_size',
+        'http_code'
     ];
 
     public function getPercentUsedAttribute()
