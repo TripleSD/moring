@@ -111,4 +111,15 @@ class YandexTaskController extends Controller
 
         return redirect()->route('backups.yandex.tasks.index');
     }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function show(Request $request)
+    {
+        $task = $this->yandexRepository->getTask($request);
+
+        return view('admin.backups.yandex.tasks.show', compact('task'));
+    }
 }
