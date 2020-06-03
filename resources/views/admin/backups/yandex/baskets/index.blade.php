@@ -76,7 +76,7 @@
                                                                         @lang('messages.network.device.disabled')
                                                                     </div>
                                                                 @endif
-
+1111
 {{--                                                                @if($task->logs->count() !== 0)--}}
 {{--                                                                    <div class="badge badge-danger">--}}
 {{--                                                                        <i class="fas fa-exclamation-triangle"></i>--}}
@@ -120,17 +120,17 @@
                                                 </div>
                                             </td>
                                             <td>
-{{--                                                <div class="btn-group">--}}
-{{--                                                    <a href="{{route('backups.ftp.show',$task->id)}}"--}}
-{{--                                                       class="btn btn-xs bg-gradient-info"--}}
-{{--                                                       title="Просмотр устройства">--}}
-{{--                                                        <i class="fa fa-eye"></i>--}}
-{{--                                                    </a>--}}
-{{--                                                    <a href="{{route('backups.ftp.edit', $task->id)}}"--}}
-{{--                                                       class="btn btn-xs bg-gradient-warning"--}}
-{{--                                                       title="Редактирование устройства">--}}
-{{--                                                        <i class="fa fa-edit"></i></a>--}}
-{{--                                                </div>--}}
+                                                <div class="btn-group">
+                                                    <a href="{{route('backups.yandex.baskets.show',$basket->id)}}"
+                                                       class="btn btn-xs bg-gradient-info"
+                                                       title="Просмотр устройства">
+                                                        <i class="fa fa-eye"></i>
+                                                    </a>
+                                                    <a href="{{route('backups.yandex.baskets.edit', $basket->id)}}"
+                                                       class="btn btn-xs bg-gradient-warning"
+                                                       title="Редактирование устройства">
+                                                        <i class="fa fa-edit"></i></a>
+                                                </div>
                                             </td>
                                         </tr>
                                         @endforeach
