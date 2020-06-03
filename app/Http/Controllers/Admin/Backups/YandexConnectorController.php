@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Backups;
 
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexConnectors;
+use App\Models\BackupYandexConnectorsLogs;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexBasketRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -12,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
+use App\Repositories\Backups\YandexConnectorsLogsRepository;
 
 /**
  * Class YandexConnectorsController.
@@ -20,22 +22,24 @@ class YandexConnectorController extends Controller
 {
     private $yandexConnectorsRepository;
     private $yandexBasketRepository;
+    private $yandexConnectorsLogsRepository;
 
     public function __construct()
     {
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
         $this->yandexBasketRepository      = new YandexBasketRepository();
+        $this->yandexConnectorsLogsRepository = new yandexConnectorsLogsRepository();
     }
 
     /**
-     * @param YandexConnectorRepository $yandexConnectorsRepository
      * @return Application|Factory|View
      */
-    public function index(YandexConnectorRepository $yandexConnectorsRepository)
+    public function index()
     {
-        $connectors = $yandexConnectorsRepository->getList();
+        $connectors = $this->yandexConnectorsRepository->getList();
+        $logs = $this->yandexConnectorsLogsRepository->getList();
 
-        return view('admin.backups.yandex.connectors.index', compact('connectors'));
+        return view('admin.backups.yandex.connectors.index', compact('connectors', 'logs'));
     }
 
     /**
