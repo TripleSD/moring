@@ -16,7 +16,7 @@ class YandexBasketRepository extends Repository
      */
     public function getList()
     {
-        return BackupYandexBaskets::get();
+        return BackupYandexBaskets::with('connector')->get();
     }
 
     /**
