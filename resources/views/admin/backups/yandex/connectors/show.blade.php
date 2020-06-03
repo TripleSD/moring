@@ -71,7 +71,11 @@
                                 <li class="small">
                                     Последний опрос:
                                     <span class="float-right">
-                                        {{ $connector->status_updated_at }}
+                                        @if($connector->logs->count() > 0)
+                                            {{ $connector->logs->lat()->created_at }}
+                                        @else
+                                            -
+                                        @endif
                                     </span>
                                 </li>
                                 <li class="small">

@@ -76,7 +76,11 @@
                                                         <b>Последний опрос:</b>
                                                     </div>
                                                     <div class="col-6">
-                                                        {{ $connector->status_updated_at }}
+                                                        @if($connector->logs->count() > 0)
+                                                            {{ $connector->logs->last()->created_at }}
+                                                        @else
+                                                            -
+                                                        @endif
                                                     </div>
                                                 </div>
 
@@ -159,45 +163,26 @@
                                         <table class="table table-hover">
                                             <tbody>
                                             @foreach($logs as $log)
-                                                <tr>
-                                                    <td class="small">
-                                                        @if($log->resolved === 1)
-                                                            <span class="badge badge-secondary">
-                                                            <i class="fas fa-eye"></i>
-                                                        </span>
-                                                            <span class="badge badge-secondary">
-                                                            @lang('messages.network.device.type_status.alert')
-                                                        </span>
-                                                        @else
-                                                            <span class="badge badge-danger">
-                                                            <i class="fas fa-eye"></i>
-                                                        </span>
-                                                            @if($log->type === 1)
-                                                                <span class="badge badge-danger">
-                                                                @lang('messages.network.device.type_status.alert')
+                                                @if($log->status === 0)
+                                                    <tr {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
+                                                        <td class="small">
+                                                            <span
+                                                                class="badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
+                                                                @lang('messages.backups.yandex.connectors.log.alert')
                                                             </span>
-                                                            @else
-                                                                <span class="badge badge-success">
-                                                                @lang('messages.network.device.type_status.info')
-                                                            </span>
-                                                            @endif
-                                                        @endif
-                                                    </td>
-                                                    <td class="small">
-                                                        @if($log->type === 1)
-                                                            @lang('messages.network.device.snmp.device.log.down')
-                                                        @else
-                                                            @lang('messages.network.device.snmp.device.log.up')
-                                                        @endif
-                                                    </td>
-                                                    <td class="small">
-                                                        {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
-                                                    </td>
-                                                    <td>
-                                                        <a class="btn btn-" href=""></a>
-                                                        <i class="fas fa-eye"></i>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                        <td class="small">
+                                                            @lang('messages.backups.yandex.connectors.log.down')
+                                                        </td>
+                                                        <td class="small">
+                                                            {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                        </td>
+                                                        <td>
+                                                            <a class="btn btn-" href=""></a>
+                                                            <i class="fas fa-eye"></i>
+                                                        </td>
+                                                    </tr>
+                                                @endif
                                             @endforeach
                                             </tbody>
                                         </table>

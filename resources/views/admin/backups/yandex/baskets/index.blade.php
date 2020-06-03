@@ -48,96 +48,92 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                {{--                                @foreach($tasks as $task)--}}
-                                {{--                                    @if($task->enabled == 1)--}}
-                                {{--                                        <tr class="table-row">--}}
-                                {{--                                    @else--}}
-                                {{--                                        <tr class="table-row" bgcolor="#a9a9a9">--}}
-                                {{--                                            @endif--}}
-                                {{--                                            <td>--}}
-                                {{--                                                <div class="row">--}}
-                                {{--                                                    @if($task->enabled === 1)--}}
-                                {{--                                                        <div class="vl pt-1 text-success"></div>--}}
-                                {{--                                                    @else--}}
-                                {{--                                                        <div class="vl pt-1 text-gray"></div>--}}
-                                {{--                                                    @endif--}}
-                                {{--                                                    <div class="col">--}}
-                                {{--                                                        <div>--}}
-                                {{--                                                            <i class="fas fa-box-open"></i>--}}
-                                {{--                                                        </div>--}}
-                                {{--                                                        <div>--}}
-                                {{--                                                            <div class="small">--}}
-                                {{--                                                                @if($task->enabled === 1)--}}
-                                {{--                                                                    <div class="badge badge-success">--}}
-                                {{--                                                                        @lang('messages.network.device.enabled')--}}
-                                {{--                                                                    </div>--}}
-                                {{--                                                                @else--}}
-                                {{--                                                                    <div class="small badge badge-secondary">--}}
-                                {{--                                                                        @lang('messages.network.device.disabled')--}}
-                                {{--                                                                    </div>--}}
-                                {{--                                                                @endif--}}
+                                @foreach($baskets as $basket)
+                                    @if($basket->enabled == 1)
+                                        <tr class="table-row">
+                                    @else
+                                        <tr class="table-row" bgcolor="#a9a9a9">
+                                            @endif
+                                            <td>
+                                                <div class="row">
+                                                    @if($basket->enabled === 1)
+                                                        <div class="vl pt-1 text-success"></div>
+                                                    @else
+                                                        <div class="vl pt-1 text-gray"></div>
+                                                    @endif
+                                                    <div class="col">
+                                                        <div>
+                                                            <i class="fas fa-box-open"></i>
+                                                        </div>
+                                                        <div>
+                                                            <div class="small">
+                                                                @if($basket->enabled === 1)
+                                                                    <div class="badge badge-success">
+                                                                        @lang('messages.network.device.enabled')
+                                                                    </div>
+                                                                @else
+                                                                    <div class="small badge badge-secondary">
+                                                                        @lang('messages.network.device.disabled')
+                                                                    </div>
+                                                                @endif
 
-                                {{--                                                                @if($task->logs->count() !== 0)--}}
-                                {{--                                                                    <div class="badge badge-danger">--}}
-                                {{--                                                                        <i class="fas fa-exclamation-triangle"></i>--}}
-                                {{--                                                                        {{ $task->logs->count() }}--}}
-                                {{--                                                                    </div>--}}
-                                {{--                                                                @endif--}}
-                                {{--                                                            </div>--}}
-                                {{--                                                        </div>--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                </div>--}}
-                                {{--                                            </td>--}}
-                                {{--                                            <td>--}}
-                                {{--                                                <div class="row">--}}
-                                {{--                                                    <div class="col">--}}
-                                {{--                                                        <div class="small">--}}
-                                {{--                                                            <b>Адрес подключения:</b>--}}
-                                {{--                                                            --}}{{--                                                            {{ $task->hostname }}:{{ $task->port }}--}}
-                                {{--                                                        </div>--}}
-                                {{--                                                        <div class="small">--}}
-                                {{--                                                            <b>Интервал проверки:</b>--}}
-                                {{--                                                            {{ $task->interval }} час.--}}
-                                {{--                                                        </div>--}}
-                                {{--                                                        <div class="small text-gray">--}}
-                                {{--                                                            <i class="fas fa-history"></i>--}}
-                                {{--                                                            Last check: {{ $task->updated_at }}--}}
-                                {{--                                                        </div>--}}
-                                {{--                                                    </div>--}}
-                                {{--                                                </div>--}}
-                                {{--                                            </td>--}}
+{{--                                                                @if($task->logs->count() !== 0)--}}
+{{--                                                                    <div class="badge badge-danger">--}}
+{{--                                                                        <i class="fas fa-exclamation-triangle"></i>--}}
+{{--                                                                        {{ $task->logs->count() }}--}}
+{{--                                                                    </div>--}}
+{{--                                                                @endif--}}
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="row">
+                                                    <div class="col">
+                                                        <div class="small">
+                                                            <b>Коннектор:</b>
+                                                            {{ $basket->connector->description }}
+                                                        </div>
+                                                        <div class="small">
+                                                            <b>Интервал проверки:</b>
+                                                            {{ $basket->interval }} час.
+                                                        </div>
+                                                        <div class="small text-gray">
+                                                            <i class="fas fa-history"></i>
+                                                            Last check: {{ $basket->updated_at }}
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
 
-                                {{--                                            <td>--}}
-                                {{--                                                <div class="small">--}}
-                                {{--                                                    <b>Папка:</b>--}}
-                                {{--                                                    {{ $task->folder }}--}}
-                                {{--                                                </div>--}}
-                                {{--                                                <div class="small">--}}
-                                {{--                                                    <b>Файл:</b>--}}
-                                {{--                                                    {{ $task->FullFilename }}--}}
-                                {{--                                                </div>--}}
-                                {{--                                                <div class="small">--}}
-                                {{--                                                    <b>Описание:</b>--}}
-                                {{--                                                    <span style="word-break: break-all;">--}}
-                                {{--                                                        {{ $task->description }}--}}
-                                {{--                                                    </span>--}}
-                                {{--                                                </div>--}}
-                                {{--                                            </td>--}}
-                                {{--                                            <td>--}}
-                                {{--                                                <div class="btn-group">--}}
-                                {{--                                                    <a href="{{route('backups.ftp.show',$task->id)}}"--}}
-                                {{--                                                       class="btn btn-xs bg-gradient-info"--}}
-                                {{--                                                       title="Просмотр устройства">--}}
-                                {{--                                                        <i class="fa fa-eye"></i>--}}
-                                {{--                                                    </a>--}}
-                                {{--                                                    <a href="{{route('backups.ftp.edit', $task->id)}}"--}}
-                                {{--                                                       class="btn btn-xs bg-gradient-warning"--}}
-                                {{--                                                       title="Редактирование устройства">--}}
-                                {{--                                                        <i class="fa fa-edit"></i></a>--}}
-                                {{--                                                </div>--}}
-                                {{--                                            </td>--}}
-                                {{--                                        </tr>--}}
-                                {{--                                        @endforeach--}}
+                                            <td>
+                                                <div class="small">
+                                                    <b>Корзина добавлена:</b>
+                                                    {{ $basket->created_at }}
+                                                </div>
+                                                <div class="small">
+                                                    <b>Описание:</b>
+                                                    <span style="word-break: break-all;">
+                                                    {{ $basket->description }}
+                                                                                    </span>
+                                                </div>
+                                            </td>
+                                            <td>
+{{--                                                <div class="btn-group">--}}
+{{--                                                    <a href="{{route('backups.ftp.show',$task->id)}}"--}}
+{{--                                                       class="btn btn-xs bg-gradient-info"--}}
+{{--                                                       title="Просмотр устройства">--}}
+{{--                                                        <i class="fa fa-eye"></i>--}}
+{{--                                                    </a>--}}
+{{--                                                    <a href="{{route('backups.ftp.edit', $task->id)}}"--}}
+{{--                                                       class="btn btn-xs bg-gradient-warning"--}}
+{{--                                                       title="Редактирование устройства">--}}
+{{--                                                        <i class="fa fa-edit"></i></a>--}}
+{{--                                                </div>--}}
+                                            </td>
+                                        </tr>
+                                        @endforeach
                                 </tbody>
                             </table>
                         </div>
