@@ -16,7 +16,7 @@ class YandexConnectorRepository extends Repository
      */
     public function getList()
     {
-        return BackupYandexConnectors::orderBy('id', 'desc')->get();
+        return BackupYandexConnectors::with('logs')->orderBy('id', 'desc')->get();
     }
 
     public function getPluckList()
