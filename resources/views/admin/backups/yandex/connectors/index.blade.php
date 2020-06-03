@@ -45,7 +45,7 @@
                                     <a href="{{route('backups.yandex.connectors.create')}}"
                                        class="btn btn-xs btn-success" title="Добавление нового устройства">
                                         <i class="fas fa-plus-square"></i>
-                                    @lang('messages.backups.yandex.buttons.add')
+                                        @lang('messages.backups.yandex.buttons.add')
                                     </a>
                                 </div>
                             </div>
@@ -61,7 +61,9 @@
                                             <div class="col-8">
                                                 <div class="row small">
                                                     <div class="col-6">
-                                                        <b>Идентификатор:</b>
+                                                        <b>
+                                                            @lang('messages.backups.yandex.fields.identificator'):
+                                                        </b>
                                                     </div>
                                                     <div class="col-6">
                                                         #{{ $connector->id }}
@@ -69,7 +71,9 @@
                                                 </div>
                                                 <div class="row small">
                                                     <div class="col-6">
-                                                        <b>Краткое описание:</b>
+                                                        <b>
+                                                            @lang('messages.backups.yandex.fields.description'):
+                                                        </b>
                                                     </div>
                                                     <div class="col-6">
                                                         {{ $connector->description }}
@@ -77,19 +81,28 @@
                                                 </div>
                                                 <div class="row small">
                                                     <div class="col-6">
-                                                        <b>Статус:</b>
+                                                        <b>
+                                                            @lang('messages.backups.yandex.fields.status'):
+                                                        </b>
                                                     </div>
                                                     <div class="col-6">
-                                                                <span
-                                                                    class="badge {{ ($connector->status) ? 'badge-success' : 'badge-gray' }}">
-                                                                    Активен
-                                                                </span>
-                                                        {{ $connector->http_code }}
+                                                        @if($connector->status === 1)
+                                                            <span class="badge badge-success">
+                                                                @lang('messages.backups.yandex.fields.active')
+                                                            </span>
+                                                        @else
+                                                            <span class="badge badge-gray">
+                                                                @lang('messages.backups.yandex.fields.not_active')
+                                                            </span>
+                                                        @endif
+                                                        HTTP_CODE: {{ $connector->http_code }}
                                                     </div>
                                                 </div>
                                                 <div class="row small">
                                                     <div class="col-6">
-                                                        <b>Последний опрос:</b>
+                                                        <b>
+                                                            @lang('messages.backups.yandex.fields.last_check'):
+                                                        </b>
                                                     </div>
                                                     <div class="col-6">
                                                         @if($connector->logs->count() > 0)
@@ -105,16 +118,22 @@
                                                 <div class="row small">
                                                     <div class="col-12">
                                                         <i class="fas fa-hdd"></i>
-                                                        Total: {{ $connector->used_space }} Гб из
-                                                        {{ $connector->total_space }} Гб
+                                                        @lang('messages.backups.yandex.fields.total'):
+                                                        {{ $connector->used_space }}
+                                                        @lang('messages.backups.yandex.fields.gb')
+                                                        @lang('messages.backups.yandex.fields.of')
+                                                        {{ $connector->total_space }}
+                                                        @lang('messages.backups.yandex.fields.gb')
                                                         <div class="progress">
                                                             <div class="progress-bar bg-gradient-primary"
                                                                  role="progressbar"
                                                                  aria-valuenow="{{ $connector->percent_used }}"
                                                                  aria-valuemin="0" aria-valuemax="100"
                                                                  style="width: {{ $connector->percent_used }}%">
-                                                        <span
-                                                            class="text-dark">{{ $connector->percentused }}% Used</span>
+                                                                <span class="text-dark">
+                                                                    @lang('messages.backups.yandex.fields.used')
+                                                                    {{ $connector->percentused }}%
+                                                                </span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -122,15 +141,21 @@
                                                 <div class="row small">
                                                     <div class="col-12">
                                                         <i class="fas fa-dumpster"></i>
-                                                        Trash: {{ $connector->trash_size }} Гб из
-                                                        {{ $connector->total_space }} Гб
+                                                        @lang('messages.backups.yandex.fields.basket'):
+                                                        {{ $connector->trash_size }}
+                                                        @lang('messages.backups.yandex.fields.gb')
+                                                        @lang('messages.backups.yandex.fields.of')
+                                                        {{ $connector->total_space }}
+                                                        @lang('messages.backups.yandex.fields.gb')
                                                         <div class="progress">
                                                             <div class="progress-bar bg-primary" role="progressbar"
                                                                  aria-valuenow="{{ $connector->percent_bucket_used }}"
                                                                  aria-valuemin="0" aria-valuemax="100"
                                                                  style="width: {{ $connector->percent_bucket_used }}%">
-                                                    <span
-                                                        class="text-dark">{{ $connector->percent_bucket_used }}% Used</span>
+                                                            <span class="text-dark">
+                                                                @lang('messages.backups.yandex.fields.used')
+                                                                {{ $connector->percent_bucket_used }}%
+                                                            </span>
                                                             </div>
                                                         </div>
                                                     </div>
