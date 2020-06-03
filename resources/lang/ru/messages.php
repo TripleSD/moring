@@ -83,8 +83,22 @@ return [
     'flash.success' => 'Данные обновлены',
 
     /**
+     * Yandex page.
+     */
+    'backups.yandex.breadcrumbs.dashboard' => 'Рабочий стол',
+    'backups.yandex.breadcrumbs.backups' => 'Бэкапы',
+    'backups.yandex.breadcrumbs.yandex' => 'Яндекс диск',
+    'backups.yandex.breadcrumbs.connectors.list' => 'Список коннекторов',
+
+    'backups.yandex.breadcrumbs.small.connectors' => 'Коннекторы',
+    'backups.yandex.breadcrumbs.small.checks' => 'Проверки',
+    'backups.yandex.breadcrumbs.small.baskets' => 'Корзины',
+
+    'backups.yandex.buttons.add' => 'Добавить',
+
+    /**
      * Yandex connectors page.
      */
     'backups.yandex.connectors.log.alert' => 'Ошибка',
-    'backups.yandex.connectors.log.down' => 'Соединение не было установлено',
+    'backups.yandex.connectors.log.down' => 'Соединение не установлено',
 ];

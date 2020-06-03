@@ -82,6 +82,21 @@ return [
 
     'flash.success' => 'Data updated',
 
+
+    /**
+     * Yandex page.
+     */
+    'backups.yandex.breadcrumbs.dashboard' => 'Dashboard',
+    'backups.yandex.breadcrumbs.backups' => 'Backups',
+    'backups.yandex.breadcrumbs.yandex' => 'Yandex disk',
+    'backups.yandex.breadcrumbs.connectors.list' => 'Connectors list',
+
+    'backups.yandex.breadcrumbs.small.connectors' => 'Connectors',
+    'backups.yandex.breadcrumbs.small.checks' => 'Checks',
+    'backups.yandex.breadcrumbs.small.baskets' => 'Baskets',
+
+    'backups.yandex.buttons.add' => 'Add',
+
     /**
      * Yandex connectors page.
      */
