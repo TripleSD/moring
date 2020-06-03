@@ -172,14 +172,21 @@
                                                             </span>
                                                         </td>
                                                         <td class="small">
-                                                            @lang('messages.backups.yandex.connectors.log.down')
+                                                            <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                                Connector #{{ $log->connector_id }} |
+                                                                @lang('messages.backups.yandex.connectors.log.down')
+                                                            </span>
                                                         </td>
                                                         <td class="small">
-                                                            {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                            <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                                {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                            </span>
                                                         </td>
                                                         <td>
-                                                            <a class="btn btn-" href=""></a>
-                                                            <i class="fas fa-eye"></i>
+                                                            <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                                <a class="btn btn-" href=""></a>
+                                                                <i class="fas fa-eye"></i>
+                                                            </span>
                                                         </td>
                                                     </tr>
                                                 @endif
