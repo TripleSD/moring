@@ -44,11 +44,11 @@
                                         * - обязательно для заполнения
                                     </span>
 
-                                {{ Form::open([ 'url' => route('backups.ftp.update', $task->id), 'method' => 'patch']) }}
+                                {{ Form::open([ 'url' => route('backups.yandex.baskets.update', $basket->id), 'method' => 'patch']) }}
                                 <div class="form-group">
-                                    <b>Описание</b>
+                                    <b>Краткое описание</b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::text('description', $task->description , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
+                                    {{ Form::text('description', $basket->description , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
@@ -58,9 +58,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Сетевое имя устройства или IP адрес</b>
+                                    <b>Коннектор</b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::text('hostname', $task->hostname , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
+                                    {{ Form::select('connector_id', $connectors, $basket->connector_id, ['class' => 'form-control', 'required', 'placeholder' => 'Выберите коннектор...']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
@@ -70,77 +70,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Порт</b>
+                                    <b>Комментарий</b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::text('port', $task->port, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 21']) }}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Логин</b>
-                                    <span class="small text-danger">*</span>
-                                    {{Form::text('login', $task->login, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: backup-user'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Пароль</b>
-                                    {{Form::text('password', $task->password, ['class' => 'form-control', 'placeholder' => 'Пример: 7{m5MUqpBDEmEXG'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Папка</b>
-                                    {{Form::text('folder', $task->folder, ['class' => 'form-control', 'placeholder' => 'Пример: BackupSite'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Pre suffix</b>
-                                    {{Form::text('pre', $task->pre, ['class' => 'form-control', 'placeholder' => 'Пример: backup_'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Post suffix</b>
-                                    {{Form::text('post', $task->post, ['class' => 'form-control', 'placeholder' => 'Пример: _%Y-%m-%d'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>File</b>
-                                    <span class="small text-danger">*</span>
-                                    {{Form::text('filename', $task->filename, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: test.tar'])}}
+                                    {{ Form::textarea('comment', $basket->comment, ['class' => 'form-control',
+                                            'rows' => 5, 'placeholder' => 'Комментарий...']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
@@ -153,11 +86,11 @@
                                     <b>Interval</b>
                                     <span class="small text-danger">*</span>
                                     <div>
-                                        {{ Form::radio('interval', '1', $task->interval === 1) }} every 1h
-                                        {{ Form::radio('interval', '3', $task->interval === 3) }} every 3h
-                                        {{ Form::radio('interval', '6', $task->interval === 6) }} every 6h
-                                        {{ Form::radio('interval', '12', $task->interval === 12) }} every 12h
-                                        {{ Form::radio('interval', '24', $task->interval === 24) }} every day
+                                        {{ Form::radio('interval', '1', $basket->interval === 1) }} every 1h
+                                        {{ Form::radio('interval', '3', $basket->interval === 3) }} every 3h
+                                        {{ Form::radio('interval', '6', $basket->interval === 6) }} every 6h
+                                        {{ Form::radio('interval', '12', $basket->interval === 12) }} every 12h
+                                        {{ Form::radio('interval', '24', $basket->interval === 24) }} every day
                                     </div>
                                     <details class="mt--3 small">
                                         <summary>
@@ -172,7 +105,7 @@
                                     {{ Form::close() }}
 
                                     <div class="float-right">
-                                        {{Form::open([ 'url' => route('backups.ftp.destroy', $task->id), 'method' => 'delete'])}}
+                                        {{Form::open([ 'url' => route('backups.yandex.baskets.destroy', $basket->id), 'method' => 'delete'])}}
                                         <button type="submit" class="btn btn-xs bg-gradient-red">Удалить
                                         </button>
                                         {{ Form::close() }}
