@@ -81,4 +81,10 @@ return [
     'network.device.breadcrumbs.devices' => 'Устройства',
 
     'flash.success' => 'Данные обновлены',
+
+    /**
+     * Yandex connectors page.
+     */
+    'backups.yandex.connectors.log.alert' => 'Ошибка',
+    'backups.yandex.connectors.log.down' => 'Соединение не было установлено',
 ];
