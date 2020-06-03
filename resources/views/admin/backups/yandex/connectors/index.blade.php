@@ -37,8 +37,8 @@
                     </div>
 
                     <div class="row">
-                        @foreach($connectors as $connector)
-                            <div class="col-6">
+                        <div class="col-6">
+                            @foreach($connectors as $connector)
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
@@ -144,8 +144,67 @@
                                         </div>
                                     </div>
                                 </div>
+                            @endforeach
+                        </div>
+
+                        <div class="col-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="text-muted text-sm">
+                                    @lang('messages.network.device.notifications_and_errors')
+                                    </span>
+                                </div>
+                                @if($logs !== null)
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                            @foreach($logs as $log)
+                                                <tr>
+                                                    <td class="small">
+                                                        @if($log->resolved === 1)
+                                                            <span class="badge badge-secondary">
+                                                            <i class="fas fa-eye"></i>
+                                                        </span>
+                                                            <span class="badge badge-secondary">
+                                                            @lang('messages.network.device.type_status.alert')
+                                                        </span>
+                                                        @else
+                                                            <span class="badge badge-danger">
+                                                            <i class="fas fa-eye"></i>
+                                                        </span>
+                                                            @if($log->type === 1)
+                                                                <span class="badge badge-danger">
+                                                                @lang('messages.network.device.type_status.alert')
+                                                            </span>
+                                                            @else
+                                                                <span class="badge badge-success">
+                                                                @lang('messages.network.device.type_status.info')
+                                                            </span>
+                                                            @endif
+                                                        @endif
+                                                    </td>
+                                                    <td class="small">
+                                                        @if($log->type === 1)
+                                                            @lang('messages.network.device.snmp.device.log.down')
+                                                        @else
+                                                            @lang('messages.network.device.snmp.device.log.up')
+                                                        @endif
+                                                    </td>
+                                                    <td class="small">
+                                                        {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                    </td>
+                                                    <td>
+                                                        <a class="btn btn-" href=""></a>
+                                                        <i class="fas fa-eye"></i>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
                             </div>
-                        @endforeach
+                        </div>
                     </div>
                 </div>
             </div>
