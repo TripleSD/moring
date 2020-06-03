@@ -96,9 +96,23 @@ return [
 
     'backups.yandex.buttons.add' => 'Добавить',
 
+    'backups.yandex.fields.identificator' => 'Идентификатор',
+    'backups.yandex.fields.description' => 'Краткое описание',
+    'backups.yandex.fields.status' => 'Статус',
+    'backups.yandex.fields.last_check' => 'Последняя проверка',
+    'backups.yandex.fields.total' => 'Всего',
+    'backups.yandex.fields.basket' => 'Корзина',
+    'backups.yandex.fields.gb' => 'ГБ',
+    'backups.yandex.fields.of' => 'из',
+    'backups.yandex.fields.used' => 'Используется',
+    'backups.yandex.fields.active' => 'Актиный',
+    'backups.yandex.fields.not_active' => 'Не активный',
+    'backups.yandex.fields.reponse' => 'Ответ',
+
     /**
      * Yandex connectors page.
      */
+    'backups.yandex.connectors.log.connector' => 'Коннектор',
     'backups.yandex.connectors.log.alert' => 'Ошибка',
-    'backups.yandex.connectors.log.down' => 'Соединение не установлено',
+    'backups.yandex.connectors.log.down' => 'Ошибка соединения',
 ];
