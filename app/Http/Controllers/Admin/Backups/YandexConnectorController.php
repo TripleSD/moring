@@ -66,7 +66,7 @@ class YandexConnectorController extends Controller
      */
     public function show(Request $request)
     {
-        $connector = BackupYandexConnectors::find($request->id);
+        $connector = BackupYandexConnectors::with('logs')->find($request->id);
 
         return view('admin.backups.yandex.connectors.show', compact('connector'));
     }
