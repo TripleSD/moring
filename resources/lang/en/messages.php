@@ -43,7 +43,7 @@ return [
     /**
      * Device card page.
      */
-    'network.device.notifications_and_errors' => 'Notifications & errors',
+    'network.device.notifications_and_errors' => 'Notifications | Errors',
     'network.device.poll_information' => 'Device poll information',
     'network.device.errors' => 'Errors',
     'network.device.snmp.device.log.down' => 'Connection down',

@@ -43,7 +43,7 @@ return [
     /**
      * Страница карточки устройсва.
      */
-    'network.device.notifications_and_errors' => 'Уведомления и ошибки',
+    'network.device.notifications_and_errors' => 'Уведомления | Ошибки',
     'network.device.poll_information' => 'Информация об опросе устройства',
     'network.device.errors' => 'Ошибки',
     'network.device.snmp_device_down' => 'Подключение потеряно',
