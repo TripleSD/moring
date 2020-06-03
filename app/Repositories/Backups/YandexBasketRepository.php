@@ -52,4 +52,14 @@ class YandexBasketRepository extends Repository
     {
         return BackupYandexBaskets::find($request->id);
     }
+
+    /**
+     * @param $dataArray
+     * @param $basketId
+     * @return mixed
+     */
+    public function updateBasket($dataArray, $basketId)
+    {
+        return BackupYandexBaskets::where('id', $basketId)->update($dataArray);
+    }
 }
