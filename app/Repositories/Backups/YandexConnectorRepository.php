@@ -47,7 +47,6 @@ class YandexConnectorRepository extends Repository
                     'used_space' => $res['used_space'],
                     'http_code' => $httpcode,
                     'status' => 1,
-                    'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
                 ]
             );
 
@@ -58,7 +57,6 @@ class YandexConnectorRepository extends Repository
             [
                 'http_code' => $httpcode,
                 'status' => 0,
-                'status_updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
             ]
         );
 
