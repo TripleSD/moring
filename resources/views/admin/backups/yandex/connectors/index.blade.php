@@ -91,11 +91,12 @@
                                                                 @lang('messages.backups.yandex.fields.active')
                                                             </span>
                                                         @else
-                                                            <span class="badge badge-gray">
+                                                            <span class="badge badge-danger">
                                                                 @lang('messages.backups.yandex.fields.not_active')
                                                             </span>
                                                         @endif
-                                                        HTTP_CODE: {{ $connector->http_code }}
+                                                        | @lang('messages.backups.yandex.fields.reponse'):
+                                                        {{ $connector->http_code }}
                                                     </div>
                                                 </div>
                                                 <div class="row small">
@@ -110,54 +111,6 @@
                                                         @else
                                                             -
                                                         @endif
-                                                    </div>
-                                                </div>
-
-                                                <hr/>
-
-                                                <div class="row small">
-                                                    <div class="col-12">
-                                                        <i class="fas fa-hdd"></i>
-                                                        @lang('messages.backups.yandex.fields.total'):
-                                                        {{ $connector->used_space }}
-                                                        @lang('messages.backups.yandex.fields.gb')
-                                                        @lang('messages.backups.yandex.fields.of')
-                                                        {{ $connector->total_space }}
-                                                        @lang('messages.backups.yandex.fields.gb')
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-gradient-primary"
-                                                                 role="progressbar"
-                                                                 aria-valuenow="{{ $connector->percent_used }}"
-                                                                 aria-valuemin="0" aria-valuemax="100"
-                                                                 style="width: {{ $connector->percent_used }}%">
-                                                                <span class="text-dark">
-                                                                    @lang('messages.backups.yandex.fields.used')
-                                                                    {{ $connector->percentused }}%
-                                                                </span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <div class="row small">
-                                                    <div class="col-12">
-                                                        <i class="fas fa-dumpster"></i>
-                                                        @lang('messages.backups.yandex.fields.basket'):
-                                                        {{ $connector->trash_size }}
-                                                        @lang('messages.backups.yandex.fields.gb')
-                                                        @lang('messages.backups.yandex.fields.of')
-                                                        {{ $connector->total_space }}
-                                                        @lang('messages.backups.yandex.fields.gb')
-                                                        <div class="progress">
-                                                            <div class="progress-bar bg-primary" role="progressbar"
-                                                                 aria-valuenow="{{ $connector->percent_bucket_used }}"
-                                                                 aria-valuemin="0" aria-valuemax="100"
-                                                                 style="width: {{ $connector->percent_bucket_used }}%">
-                                                            <span class="text-dark">
-                                                                @lang('messages.backups.yandex.fields.used')
-                                                                {{ $connector->percent_bucket_used }}%
-                                                            </span>
-                                                            </div>
-                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -187,6 +140,50 @@
                                                 </span>
                                             </div>
                                         </div>
+                                        <hr/>
+                                        <div class="row small">
+                                            <div class="col-6">
+                                                <i class="fas fa-hdd"></i>
+                                                @lang('messages.backups.yandex.fields.total'):
+                                                {{ $connector->used_space }}
+                                                @lang('messages.backups.yandex.fields.gb')
+                                                @lang('messages.backups.yandex.fields.of')
+                                                {{ $connector->total_space }}
+                                                @lang('messages.backups.yandex.fields.gb')
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-gradient-primary"
+                                                         role="progressbar"
+                                                         aria-valuenow="{{ $connector->percent_used }}"
+                                                         aria-valuemin="0" aria-valuemax="100"
+                                                         style="width: {{ $connector->percent_used }}%">
+                                                                <span class="text-dark">
+                                                                    @lang('messages.backups.yandex.fields.used')
+                                                                    {{ $connector->percentused }}%
+                                                                </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <i class="fas fa-dumpster"></i>
+                                                @lang('messages.backups.yandex.fields.basket'):
+                                                {{ $connector->trash_size }}
+                                                @lang('messages.backups.yandex.fields.gb')
+                                                @lang('messages.backups.yandex.fields.of')
+                                                {{ $connector->total_space }}
+                                                @lang('messages.backups.yandex.fields.gb')
+                                                <div class="progress">
+                                                    <div class="progress-bar bg-primary" role="progressbar"
+                                                         aria-valuenow="{{ $connector->percent_bucket_used }}"
+                                                         aria-valuemin="0" aria-valuemax="100"
+                                                         style="width: {{ $connector->percent_bucket_used }}%">
+                                                            <span class="text-dark">
+                                                                @lang('messages.backups.yandex.fields.used')
+                                                                {{ $connector->percent_bucket_used }}%
+                                                            </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             @endforeach
@@ -214,7 +211,8 @@
                                                         </td>
                                                         <td class="small">
                                                             <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
-                                                                Connector #{{ $log->connector_id }} |
+                                                                @lang('messages.backups.yandex.connectors.log.connector')
+                                                                #{{ $log->connector_id }} |
                                                                 @lang('messages.backups.yandex.connectors.log.down')
                                                             </span>
                                                         </td>
