@@ -55,7 +55,8 @@
                     <div class="row">
                         <div class="col-sm-6">
                             @foreach($connectors as $connector)
-                                <div class="callout callout-{{ ($connector->status) ? 'success' : 'danger'}}">
+                                <div class="callout callout-{{ ($connector->status) ? 'success' : 'danger' }}"
+                                    style="background: {{ ($connector->status) ? 'white' : '#FFF5EE' }}">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
