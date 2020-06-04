@@ -99,7 +99,7 @@ return [
 
     'backups.yandex.buttons.add' => 'Add',
 
-    'backups.yandex.fields.identificator' => 'Identificator',
+    'backups.yandex.fields.connector' => 'Connector ID',
     'backups.yandex.fields.status' => 'Status',
     'backups.yandex.fields.last_check' => 'Last check',
     'backups.yandex.fields.total' => 'Total',
