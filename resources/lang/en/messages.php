@@ -100,7 +100,7 @@ return [
     'backups.yandex.buttons.add' => 'Add',
 
     'backups.yandex.fields.identificator' => 'Identificator',
-    'backups.yandex.fields.description' => 'Short description',
+    'backups.yandex.fields.description' => 'Description',
     'backups.yandex.fields.status' => 'Status',
     'backups.yandex.fields.last_check' => 'Last check',
     'backups.yandex.fields.total' => 'Total',

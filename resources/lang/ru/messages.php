@@ -99,7 +99,7 @@ return [
     'backups.yandex.buttons.add' => 'Добавить',
 
     'backups.yandex.fields.identificator' => 'Идентификатор',
-    'backups.yandex.fields.description' => 'Краткое описание',
+    'backups.yandex.fields.description' => 'Описание',
     'backups.yandex.fields.status' => 'Статус',
     'backups.yandex.fields.last_check' => 'Последняя проверка',
     'backups.yandex.fields.total' => 'Всего',
