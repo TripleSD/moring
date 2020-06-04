@@ -10,4 +10,6 @@ use Illuminate\Database\Eloquent\Model;
 class BackupYandexConnectorsLogs extends Model
 {
     protected $table = 'backup_yandex_connectors_logs';
+
+    protected $fillable = ['connector_id', 'status', 'resolved'];
 }
