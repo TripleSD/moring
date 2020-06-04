@@ -100,7 +100,6 @@ return [
     'backups.yandex.buttons.add' => 'Add',
 
     'backups.yandex.fields.identificator' => 'Identificator',
-    'backups.yandex.fields.description' => 'Description',
     'backups.yandex.fields.status' => 'Status',
     'backups.yandex.fields.last_check' => 'Last check',
     'backups.yandex.fields.total' => 'Total',
@@ -108,8 +107,8 @@ return [
     'backups.yandex.fields.gb' => 'GB',
     'backups.yandex.fields.of' => 'of',
     'backups.yandex.fields.used' => 'Using',
-    'backups.yandex.fields.active' => 'Active',
-    'backups.yandex.fields.not_active' => 'Not active',
+    'backups.yandex.fields.online' => 'Online',
+    'backups.yandex.fields.offline' => 'Offline',
     'backups.yandex.fields.reponse' => 'Response',
 
 

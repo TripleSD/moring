@@ -99,7 +99,6 @@ return [
     'backups.yandex.buttons.add' => 'Добавить',
 
     'backups.yandex.fields.identificator' => 'Идентификатор',
-    'backups.yandex.fields.description' => 'Описание',
     'backups.yandex.fields.status' => 'Статус',
     'backups.yandex.fields.last_check' => 'Последняя проверка',
     'backups.yandex.fields.total' => 'Всего',
@@ -107,8 +106,8 @@ return [
     'backups.yandex.fields.gb' => 'ГБ',
     'backups.yandex.fields.of' => 'из',
     'backups.yandex.fields.used' => 'Используется',
-    'backups.yandex.fields.active' => 'Актиный',
-    'backups.yandex.fields.not_active' => 'Не активный',
+    'backups.yandex.fields.online' => 'Актиный',
+    'backups.yandex.fields.offline' => 'Не активный',
     'backups.yandex.fields.reponse' => 'Ответ',
 
     /**
