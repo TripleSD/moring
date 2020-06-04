@@ -53,69 +53,80 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
+                        <div class="col-sm-6">
                             @foreach($connectors as $connector)
                                 <div class="card">
                                     <div class="card-body">
                                         <div class="row">
-                                            <div class="col-8">
-                                                <div class="row small">
-                                                    <div class="col-6">
+                                                <span class="vl-big text-{{ ($connector->status) ? 'success' : 'danger'}}"></span>
+                                            <div class="col-11">
+                                                <div class="row">
+                                                    <div class="col-12">
                                                         <b>
-                                                            @lang('messages.backups.yandex.fields.identificator'):
+                                                        <i class="fas fa-user-circle"></i>
+                                                            {{ $connector->description }}
                                                         </b>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        #{{ $connector->id }}
                                                     </div>
                                                 </div>
-                                                <div class="row small">
-                                                    <div class="col-6">
-                                                        <b>
-                                                            @lang('messages.backups.yandex.fields.description'):
-                                                        </b>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        {{ $connector->description }}
-                                                    </div>
-                                                </div>
-                                                <div class="row small">
-                                                    <div class="col-6">
-                                                        <b>
-                                                            @lang('messages.backups.yandex.fields.status'):
-                                                        </b>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        @if($connector->status === 1)
-                                                            <span class="badge badge-success">
-                                                                @lang('messages.backups.yandex.fields.active')
+                                                <div class="row">
+                                                    <div class="col-11">
+                                                        <div class="row small">
+                                                            <div class="col-4">
+                                                                <b>
+                                                                    @lang('messages.backups.yandex.fields.identificator')
+                                                                    :
+                                                                </b>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                #{{ $connector->id }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row small">
+                                                            <div class="col-4">
+                                                                <b>
+                                                                    @lang('messages.backups.yandex.fields.status'):
+                                                                </b>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                @if($connector->status === 1)
+                                                                    <span class="badge badge-success">
+                                                                @lang('messages.backups.yandex.fields.online')
                                                             </span>
-                                                        @else
-                                                            <span class="badge badge-danger">
-                                                                @lang('messages.backups.yandex.fields.not_active')
+                                                                @else
+                                                                    <span class="badge badge-danger">
+                                                                @lang('messages.backups.yandex.fields.offline')
                                                             </span>
-                                                        @endif
-                                                        | @lang('messages.backups.yandex.fields.reponse'):
-                                                        {{ $connector->http_code }}
+                                                                @endif
+                                                            </div>
+                                                        </div>
+                                                        <div class="row small">
+                                                            <div class="col-4">
+                                                                <b>
+                                                                    @lang('messages.backups.yandex.fields.status'):
+                                                                </b>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                @lang('messages.backups.yandex.fields.reponse'):
+                                                                {{ $connector->http_code }}
+                                                            </div>
+                                                        </div>
+                                                        <div class="row small">
+                                                            <div class="col-4">
+                                                                <b>
+                                                                    @lang('messages.backups.yandex.fields.last_check'):
+                                                                </b>
+                                                            </div>
+                                                            <div class="col-8">
+                                                                @if($connector->logs->count() > 0)
+                                                                    {{ $connector->logs->last()->created_at }}
+                                                                @else
+                                                                    -
+                                                                @endif
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                                <div class="row small">
-                                                    <div class="col-6">
-                                                        <b>
-                                                            @lang('messages.backups.yandex.fields.last_check'):
-                                                        </b>
-                                                    </div>
-                                                    <div class="col-6">
-                                                        @if($connector->logs->count() > 0)
-                                                            {{ $connector->logs->last()->created_at }}
-                                                        @else
-                                                            -
-                                                        @endif
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-4">
-                                                    <span class="btn-group float-right">
+                                                    <div class="col-1">
+                                                    <span class="btn-group-vertical float-right">
                                                 <a href="{{route('backups.yandex.connectors.show',$connector->id)}}"
                                                    class="btn btn-xs bg-info"
                                                    title="Просмотр устройства">
@@ -138,48 +149,50 @@
                                                         <i class="fas fa-dumpster-fire"></i></a>
                                                         @endif
                                                 </span>
-                                            </div>
-                                        </div>
-                                        <hr/>
-                                        <div class="row small">
-                                            <div class="col-6">
-                                                <i class="fas fa-hdd"></i>
-                                                @lang('messages.backups.yandex.fields.total'):
-                                                {{ $connector->used_space }}
-                                                @lang('messages.backups.yandex.fields.gb')
-                                                @lang('messages.backups.yandex.fields.of')
-                                                {{ $connector->total_space }}
-                                                @lang('messages.backups.yandex.fields.gb')
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-gradient-primary"
-                                                         role="progressbar"
-                                                         aria-valuenow="{{ $connector->percent_used }}"
-                                                         aria-valuemin="0" aria-valuemax="100"
-                                                         style="width: {{ $connector->percent_used }}%">
+                                                    </div>
+                                                </div>
+                                                <hr/>
+                                                <div class="row small">
+                                                    <div class="col-6">
+                                                        <i class="fas fa-hdd"></i>
+                                                        @lang('messages.backups.yandex.fields.total'):
+                                                        {{ $connector->used_space }}
+                                                        @lang('messages.backups.yandex.fields.gb')
+                                                        @lang('messages.backups.yandex.fields.of')
+                                                        {{ $connector->total_space }}
+                                                        @lang('messages.backups.yandex.fields.gb')
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-gradient-primary"
+                                                                 role="progressbar"
+                                                                 aria-valuenow="{{ $connector->percent_used }}"
+                                                                 aria-valuemin="0" aria-valuemax="100"
+                                                                 style="width: {{ $connector->percent_used }}%">
                                                                 <span class="text-dark">
                                                                     @lang('messages.backups.yandex.fields.used')
                                                                     {{ $connector->percentused }}%
                                                                 </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-6">
-                                                <i class="fas fa-dumpster"></i>
-                                                @lang('messages.backups.yandex.fields.basket'):
-                                                {{ $connector->trash_size }}
-                                                @lang('messages.backups.yandex.fields.gb')
-                                                @lang('messages.backups.yandex.fields.of')
-                                                {{ $connector->total_space }}
-                                                @lang('messages.backups.yandex.fields.gb')
-                                                <div class="progress">
-                                                    <div class="progress-bar bg-primary" role="progressbar"
-                                                         aria-valuenow="{{ $connector->percent_bucket_used }}"
-                                                         aria-valuemin="0" aria-valuemax="100"
-                                                         style="width: {{ $connector->percent_bucket_used }}%">
+                                                    <div class="col-6">
+                                                        <i class="fas fa-dumpster"></i>
+                                                        @lang('messages.backups.yandex.fields.basket'):
+                                                        {{ $connector->trash_size }}
+                                                        @lang('messages.backups.yandex.fields.gb')
+                                                        @lang('messages.backups.yandex.fields.of')
+                                                        {{ $connector->total_space }}
+                                                        @lang('messages.backups.yandex.fields.gb')
+                                                        <div class="progress">
+                                                            <div class="progress-bar bg-primary" role="progressbar"
+                                                                 aria-valuenow="{{ $connector->percent_bucket_used }}"
+                                                                 aria-valuemin="0" aria-valuemax="100"
+                                                                 style="width: {{ $connector->percent_bucket_used }}%">
                                                             <span class="text-dark">
                                                                 @lang('messages.backups.yandex.fields.used')
                                                                 {{ $connector->percent_bucket_used }}%
                                                             </span>
+                                                            </div>
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>
@@ -189,7 +202,8 @@
                             @endforeach
                         </div>
 
-                        <div class="col-6">
+
+                        <div class="col-sm-6">
                             <div class="card">
                                 <div class="card-header">
                                     <span class="text-muted text-sm">
@@ -202,10 +216,10 @@
                                             <tbody>
                                             @foreach($logs as $log)
                                                 @if($log->status === 0)
-                                                    <tr {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
+                                                    <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
                                                         <td class="small">
                                                             <span
-                                                                class="badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
+                                                                class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
                                                                 @lang('messages.backups.yandex.connectors.log.alert')
                                                             </span>
                                                         </td>
