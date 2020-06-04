@@ -71,7 +71,7 @@
                                                     <div class="row small">
                                                         <div class="col-4">
                                                             <b>
-                                                                @lang('messages.backups.yandex.fields.identificator')
+                                                                @lang('messages.backups.yandex.fields.connector')
                                                                 :
                                                             </b>
                                                         </div>
@@ -89,23 +89,16 @@
                                                             @if($connector->status === 1)
                                                                 <span class="badge badge-success">
                                                                 @lang('messages.backups.yandex.fields.online')
+                                                                    |
+                                                                {{ $connector->http_code }}
                                                             </span>
                                                             @else
                                                                 <span class="badge badge-danger">
                                                                 @lang('messages.backups.yandex.fields.offline')
+                                                                    |
+                                                                {{ $connector->http_code }}
                                                             </span>
                                                             @endif
-                                                        </div>
-                                                    </div>
-                                                    <div class="row small">
-                                                        <div class="col-4">
-                                                            <b>
-                                                                @lang('messages.backups.yandex.fields.status'):
-                                                            </b>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            @lang('messages.backups.yandex.fields.reponse'):
-                                                            {{ $connector->http_code }}
                                                         </div>
                                                     </div>
                                                     <div class="row small">
@@ -149,7 +142,7 @@
                                                 </span>
                                                 </div>
                                             </div>
-                                            <hr/>
+
                                             <div class="row small">
                                                 <div class="col-6">
                                                     <i class="fas fa-hdd"></i>
