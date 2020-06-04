@@ -6,7 +6,7 @@
     </a>
     <a class="btn btn-xs {{ (request()->route()->named('backups.yandex.tasks.index')) ? 'btn-danger' : 'btn-dark' }}"
        href="{{ route('backups.yandex.tasks.index') }}" title="Просмотр устройства">
-        @lang('messages.backups.yandex.breadcrumbs.small.checks')
+        @lang('messages.backups.yandex.breadcrumbs.small.tasks')
     </a>
     <a class="btn btn-xs {{ (request()->route()->named('backups.yandex.baskets.index')) ? 'btn-danger' : 'btn-dark' }}"
        href="{{ route('backups.yandex.baskets.index') }}"
