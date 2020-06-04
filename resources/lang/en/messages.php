@@ -109,7 +109,6 @@ return [
     'backups.yandex.fields.used' => 'Using',
     'backups.yandex.fields.online' => 'Online',
     'backups.yandex.fields.offline' => 'Offline',
-    'backups.yandex.fields.reponse' => 'Response',
 
 
 

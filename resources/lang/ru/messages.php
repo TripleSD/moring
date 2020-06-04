@@ -108,7 +108,6 @@ return [
     'backups.yandex.fields.used' => 'Используется',
     'backups.yandex.fields.online' => 'Актиный',
     'backups.yandex.fields.offline' => 'Не активный',
-    'backups.yandex.fields.reponse' => 'Ответ',
 
     /**
      * Yandex connectors page.
