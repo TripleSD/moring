@@ -4,7 +4,7 @@ namespace App\Repositories\Backups;
 
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
-use Carbon\Carbon;
+use App\Models\BackupYandexConnectorsLogs;
 
 /**
  * Class YandexConnectorsRepository.
@@ -50,6 +50,8 @@ class YandexConnectorRepository extends Repository
                 ]
             );
 
+            BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1,]);
+
             return true;
         }
 
@@ -59,6 +61,8 @@ class YandexConnectorRepository extends Repository
                 'status' => 0,
             ]
         );
+
+        BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0,]);
 
         return false;
     }
