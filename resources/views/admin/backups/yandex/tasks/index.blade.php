@@ -14,13 +14,27 @@
                                         <i class="fa fa-home"></i></a>
                                 </div>
                                 <div class="btn-group">
-                                    <span class="text-muted text-sm">Dashboard</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">Backup</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">Яндекс Диск</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-sm">Список проверок</span>
+                                    <span class="text-muted text-sm">
+                                        @lang('messages.backups.yandex.breadcrumbs.dashboard')
+                                    </span>
+                                    <span class="text-muted text-sm px-1">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm">
+                                        @lang('messages.backups.yandex.breadcrumbs.backups')
+                                    </span>
+                                    <span class="text-muted text-sm px-1">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm">
+                                        @lang('messages.backups.yandex.breadcrumbs.yandex')
+                                    </span>
+                                    <span class="text-muted text-sm px-1">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-sm">
+                                        @lang('messages.backups.yandex.breadcrumbs.tasks.list')
+                                    </span>
                                 </div>
                             </div>
                             <div class="card-tools">
@@ -28,7 +42,9 @@
                                 <div class="btn-group">
                                     <a href="{{route('backups.yandex.tasks.create')}}"
                                        class="btn btn-xs btn-success" title="Добавление нового устройства">
-                                        <i class="fa fa-plus-square"></i> Добавить</a>
+                                        <i class="fa fa-plus-square"></i>
+                                        @lang('messages.backups.yandex.buttons.add')
+                                    </a>
                                 </div>
                             </div>
                         </div>
