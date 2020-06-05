@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Backups;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use App\Models\BackupYandexBucketsLogs;
 use App\Repositories\Backups\YandexBasketRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -33,8 +34,13 @@ class YandexBasketController extends Controller
     public function index(YandexBasketRepository $yandexBasketRepository)
     {
         $baskets = $yandexBasketRepository->getList();
+        $logs    = BackupYandexBucketsLogs::where('status', 0)
+            ->where('resolved', 0)
+            ->orderBy('id')
+            ->limit('50')
+            ->get();
 
-        return view('admin.backups.yandex.baskets.index', compact('baskets'));
+        return view('admin.backups.yandex.baskets.index', compact('baskets', 'logs'));
     }
 
     /**
