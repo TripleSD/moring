@@ -5,6 +5,7 @@ namespace App\Repositories\Backups;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
 use App\Models\BackupYandexConnectorsLogs;
+use App\Http\Controllers\Admin\System\LogController;
 
 /**
  * Class YandexConnectorsRepository.
@@ -27,8 +28,8 @@ class YandexConnectorRepository extends Repository
     public function refresh($connectorId)
     {
         $connector = BackupYandexConnectors::find($connectorId);
-
-        $ch = curl_init('https://cloud-api.yandex.net/v1/disk/');
+        $url       = 'https://cloud-api.yandex.net/v1/disk/';
+        $ch        = curl_init($url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: OAuth ' . $connector->token]);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
@@ -51,6 +52,13 @@ class YandexConnectorRepository extends Repository
             );
 
             BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1,]);
+            $log = new LogController();
+            $log->insert(
+                'Yandex',
+                $httpcode,
+                'GET' . ' | ' . $url,
+                '1'
+            );
 
             return true;
         }
@@ -63,6 +71,13 @@ class YandexConnectorRepository extends Repository
         );
 
         BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0,]);
+        $log = new LogController();
+        $log->insert(
+            'Yandex',
+            $httpcode,
+            'GET' . ' | ' . $res['error'] . ' | ' . $url,
+            '1'
+        );
 
         return false;
     }
