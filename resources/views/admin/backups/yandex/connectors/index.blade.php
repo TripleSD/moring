@@ -199,6 +199,14 @@
                                     <span class="text-muted text-sm">
                                     @lang('messages.network.device.notifications_and_errors')
                                     </span>
+                                    <span class="float-right">
+                                        <div class="btn-group">
+                                    <a href="#"
+                                       class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
+                                        <i class="fas fa-eye"></i> Все записи
+                                    </a>
+                                        </div>
+                                    </span>
                                 </div>
                                 @if($logs !== null)
                                     <div class="card-body table-responsive p-0">
