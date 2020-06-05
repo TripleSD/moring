@@ -20,13 +20,13 @@ use App\Repositories\Backups\YandexConnectorsLogsRepository;
 class YandexConnectorController extends Controller
 {
     private $yandexConnectorsRepository;
-    private $yandexBasketRepository;
+    private $yandexBucketsRepository;
     private $yandexConnectorsLogsRepository;
 
     public function __construct()
     {
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
-        $this->yandexBasketRepository      = new YandexBucketsRepository();
+        $this->yandexBucketsRepository      = new YandexBucketsRepository();
         $this->yandexConnectorsLogsRepository = new yandexConnectorsLogsRepository();
     }
 
@@ -77,7 +77,7 @@ class YandexConnectorController extends Controller
      */
     public function clean(Request $request)
     {
-        if ($this->yandexBasketRepository->cleanTrash($request)) {
+        if ($this->yandexBucketsRepository->cleanTrash($request)) {
             $this->yandexConnectorsRepository->refresh($request);
             flash('Корзина успешно очищена')->success();
         } else {

@@ -49,10 +49,10 @@ class YandexBucketsController extends Controller
      */
     public function edit(Request $request)
     {
-        $basket     = $this->yandexBucketsRepository->getBucket($request);
+        $bucket     = $this->yandexBucketsRepository->getBucket($request);
         $connectors = $this->yandexConnectorRepository->getPluckList();
 
-        return view('admin.backups.yandex.buckets.edit', compact('basket', 'connectors'));
+        return view('admin.backups.yandex.buckets.edit', compact('bucket', 'connectors'));
     }
 
     /**
