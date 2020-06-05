@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class BackupYandexLogs
+ * Class BackupYandexTasksLogs
  * @package App\Models
  */
-class BackupYandexLogs extends Model
+class BackupYandexTasksLogs extends Model
 {
-    protected $table = 'backup_yandex_logs';
+    protected $table = 'backup_yandex_tasks_logs';
 
     protected $fillable = ['task_id', 'status', 'resolved'];
 }
