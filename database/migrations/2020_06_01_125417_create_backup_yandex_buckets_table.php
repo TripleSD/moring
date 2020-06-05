@@ -14,14 +14,17 @@ class CreateBackupYandexBucketsTable extends Migration
     public function up()
     {
         Schema::create(
-            'backup_yandex_baskets',
+            'backup_yandex_buckets',
             function (Blueprint $table) {
                 $table->bigIncrements('id')->comment('Id');
-                $table->integer('connector_id')->comment('Connector ID');
+                $table->unsignedBigInteger('connector_id')->comment('Connector ID');
                 $table->smallInteger('interval')->comment('Check interval');
                 $table->boolean('enabled')->default(0)->comment('Enable/disable status');
                 $table->string('description')->comment('Task description');
                 $table->text('comment')->nullable()->comment('Task comment');
+                $table->foreign('connector_id')
+                    ->references('id')
+                    ->on('backup_yandex_connectors');
                 $table->timestamps();
             }
         );
