@@ -7,9 +7,9 @@ use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
 
 /**
- * Class YandexBasketRepository.
+ * Class YandexBucketsRepository.
  */
-class YandexBasketRepository extends Repository
+class YandexBucketsRepository extends Repository
 {
     /**
      * @return mixed
@@ -48,18 +48,18 @@ class YandexBasketRepository extends Repository
      * @param $request
      * @return mixed
      */
-    public function getBasket($request)
+    public function getBucket($request)
     {
         return BackupYandexBuckets::find($request->id);
     }
 
     /**
      * @param $dataArray
-     * @param $basketId
+     * @param $bucketId
      * @return mixed
      */
-    public function updateBasket($dataArray, $basketId)
+    public function updateBucket($dataArray, $bucketId)
     {
-        return BackupYandexBuckets::where('id', $basketId)->update($dataArray);
+        return BackupYandexBuckets::where('id', $bucketId)->update($dataArray);
     }
 }
