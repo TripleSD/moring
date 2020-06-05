@@ -207,28 +207,28 @@
                                             @foreach($logs as $log)
                                                 <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
                                                     <td class="small">
-                                                            <span
-                                                                class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
-                                                                @lang('messages.backups.yandex.connectors.log.alert')
-                                                            </span>
+                                                        <span
+                                                            class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
+                                                            @lang('messages.backups.yandex.connectors.log.alert')
+                                                        </span>
                                                     </td>
                                                     <td class="small">
-                                                            <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
-                                                                @lang('messages.backups.yandex.connectors.log.connector')
-                                                                #{{ $log->connector_id }} |
-                                                                @lang('messages.backups.yandex.connectors.log.down')
-                                                            </span>
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            @lang('messages.backups.yandex.connectors.log.connector')
+                                                            #{{ $log->connector_id }} |
+                                                            @lang('messages.backups.yandex.connectors.log.down')
+                                                        </span>
                                                     </td>
                                                     <td class="small">
-                                                            <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
-                                                                {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
-                                                            </span>
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                        </span>
                                                     </td>
-                                                    <td>
-                                                            <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
-                                                                <a class="btn btn-" href=""></a>
-                                                                <i class="fas fa-eye"></i>
-                                                            </span>
+                                                    <td class="small">
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            <a class="btn btn-" href=""></a>
+                                                            <i class="fas fa-eye"></i>
+                                                        </span>
                                                     </td>
                                                 </tr>
                                             @endforeach
