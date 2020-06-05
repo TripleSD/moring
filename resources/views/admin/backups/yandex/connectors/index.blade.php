@@ -217,7 +217,7 @@
                                                     <td class="small">
                                                         <span
                                                             class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
-                                                            @lang('messages.backups.yandex.connectors.log.alert')
+                                                            @lang('messages.backups.yandex.connectors.log.error')
                                                         </span>
                                                     </td>
                                                     <td class="small">
