@@ -56,7 +56,7 @@
                         <div class="col-sm-6">
                             @foreach($connectors as $connector)
                                 <div class="callout callout-{{ ($connector->status) ? 'success' : 'danger' }}"
-                                    style="background: {{ ($connector->status) ? 'white' : '#FFF5EE' }}">
+                                     style="background: {{ ($connector->status) ? 'white' : '#FFF5EE' }}">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
@@ -70,23 +70,23 @@
                                             <div class="row">
                                                 <div class="col-11">
                                                     <div class="row small">
-                                                        <div class="col-4">
+                                                        <div class="col-3">
                                                             <b>
                                                                 @lang('messages.backups.yandex.fields.connector')
                                                                 :
                                                             </b>
                                                         </div>
-                                                        <div class="col-8">
+                                                        <div class="col-9">
                                                             #{{ $connector->id }}
                                                         </div>
                                                     </div>
                                                     <div class="row small">
-                                                        <div class="col-4">
+                                                        <div class="col-3">
                                                             <b>
                                                                 @lang('messages.backups.yandex.fields.status'):
                                                             </b>
                                                         </div>
-                                                        <div class="col-8">
+                                                        <div class="col-9">
                                                             @if($connector->status === 1)
                                                                 <span class="badge badge-success">
                                                                 @lang('messages.backups.yandex.fields.online')
@@ -103,12 +103,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="row small">
-                                                        <div class="col-4">
+                                                        <div class="col-3">
                                                             <b>
                                                                 @lang('messages.backups.yandex.fields.last_check'):
                                                             </b>
                                                         </div>
-                                                        <div class="col-8">
+                                                        <div class="col-9">
                                                             @if($connector->logs->count() > 0)
                                                                 {{ $connector->logs->last()->created_at }}
                                                             @else
@@ -205,34 +205,32 @@
                                         <table class="table table-hover">
                                             <tbody>
                                             @foreach($logs as $log)
-                                                @if($log->status === 0)
-                                                    <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
-                                                        <td class="small">
+                                                <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
+                                                    <td class="small">
                                                             <span
                                                                 class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
                                                                 @lang('messages.backups.yandex.connectors.log.alert')
                                                             </span>
-                                                        </td>
-                                                        <td class="small">
+                                                    </td>
+                                                    <td class="small">
                                                             <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
                                                                 @lang('messages.backups.yandex.connectors.log.connector')
                                                                 #{{ $log->connector_id }} |
                                                                 @lang('messages.backups.yandex.connectors.log.down')
                                                             </span>
-                                                        </td>
-                                                        <td class="small">
+                                                    </td>
+                                                    <td class="small">
                                                             <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
                                                                 {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
                                                             </span>
-                                                        </td>
-                                                        <td>
+                                                    </td>
+                                                    <td>
                                                             <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
                                                                 <a class="btn btn-" href=""></a>
                                                                 <i class="fas fa-eye"></i>
                                                             </span>
-                                                        </td>
-                                                    </tr>
-                                                @endif
+                                                    </td>
+                                                </tr>
                                             @endforeach
                                             </tbody>
                                         </table>
