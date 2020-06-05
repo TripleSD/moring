@@ -33,7 +33,11 @@ class YandexTaskController extends Controller
     public function index()
     {
         $tasks = $this->yandexRepository->getList();
-        $logs  = BackupYandexTasksLogs::where('status', 0)->orderBy('id')->limit('50')->get();
+        $logs  = BackupYandexTasksLogs::where('status', 0)
+            ->where('resolved', 0)
+            ->orderBy('id')
+            ->limit('50')
+            ->get();
 
         return view('admin.backups.yandex.tasks.index', compact('tasks', 'logs'));
     }
