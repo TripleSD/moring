@@ -35,14 +35,14 @@
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                     <span class="text-sm">
-                                        @lang('messages.backups.yandex.breadcrumbs.baskets.list')
+                                        @lang('messages.backups.yandex.breadcrumbs.buckets.list')
                                     </span>
                                 </div>
                             </div>
                             <div class="card-tools">
                                 @include('admin.backups.yandex.menu')
                                 <div class="btn-group">
-                                    <a href="{{route('backups.yandex.baskets.create')}}"
+                                    <a href="{{route('backups.yandex.buckets.create')}}"
                                        class="btn btn-xs btn-success" title="Добавление нового устройства">
                                         <i class="fa fa-plus-square"></i>
                                         @lang('messages.backups.yandex.buttons.add')
@@ -54,8 +54,8 @@
 
                     <div class="row">
                         <div class="col-sm-6">
-                            @foreach($baskets as $basket)
-                                <div class="callout callout-{{ ($basket->enabled) ? 'success' : 'danger' }}">
+                            @foreach($buckets as $bucket)
+                                <div class="callout callout-{{ ($bucket->enabled) ? 'success' : 'danger' }}">
                                     <div class="row">
                                         <div class="col-11">
                                             <div class="row small">
@@ -64,7 +64,7 @@
                                                 </div>
                                                 <div class="col-8">
 
-                                                    @if($basket->enabled === 1)
+                                                    @if($bucket->enabled === 1)
                                                         <div class="badge badge-success">
                                                             @lang('messages.network.device.enabled')
                                                         </div>
@@ -73,7 +73,7 @@
                                                             @lang('messages.network.device.disabled')
                                                         </div>
                                                     @endif
-                                                    {{--                                                    @if($basket->logs->count() !== 0)--}}
+                                                    {{--                                                    @if($bucket->logs->count() !== 0)--}}
                                                     {{--                                                        <div class="badge badge-danger">--}}
                                                     {{--                                                            <i class="fas fa-exclamation-triangle"></i>--}}
                                                     {{--                                                            {{ $task->logs->count() }}--}}
@@ -88,7 +88,7 @@
                                                     <b>Коннектор:</b>
                                                 </div>
                                                 <div class="col-8">
-                                                    {{ $basket->connector->description }}
+                                                    {{ $bucket->connector->description }}
                                                 </div>
                                             </div>
                                             <div class="row small">
@@ -96,7 +96,7 @@
                                                     <b>Интервал проверки:</b>
                                                 </div>
                                                 <div class="col-8">
-                                                    {{ $basket->interval }} час.
+                                                    {{ $bucket->interval }} час.
                                                 </div>
                                             </div>
                                             <div class="row small">
@@ -104,7 +104,7 @@
                                                     Last check:
                                                 </div>
                                                 <div class="col-8">
-                                                    {{ $basket->updated_at }}
+                                                    {{ $bucket->updated_at }}
                                                 </div>
                                             </div>
 
@@ -113,7 +113,7 @@
                                                     <b>Корзина добавлена:</b>
                                                 </div>
                                                 <div class="col-8">
-                                                    {{ $basket->created_at }}
+                                                    {{ $bucket->created_at }}
                                                 </div>
                                             </div>
                                             <div class="row small">
@@ -121,18 +121,18 @@
                                                     <b>Описание:</b>
                                                 </div>
                                                 <div class="col-8">
-                                                    {{ $basket->description }}
+                                                    {{ $bucket->description }}
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-1">
                                             <div class="btn-group-vertical">
-                                                <a href="{{route('backups.yandex.baskets.show',$basket->id)}}"
+                                                <a href="{{route('backups.yandex.buckets.show',$bucket->id)}}"
                                                    class="btn btn-xs btn-outline-info"
                                                    title="Просмотр устройства">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
-                                                <a href="{{route('backups.yandex.baskets.edit', $basket->id)}}"
+                                                <a href="{{route('backups.yandex.buckets.edit', $bucket->id)}}"
                                                    class="btn btn-xs btn-outline-warning"
                                                    title="Редактирование устройства">
                                                     <i class="fa fa-edit"></i></a>
