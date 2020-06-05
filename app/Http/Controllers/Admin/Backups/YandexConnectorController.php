@@ -130,8 +130,9 @@ class YandexConnectorController extends Controller
         $fill['trash_size']  = 0;
         $fill['http_code']   = 200;
 
-        BackupYandexConnectors::create($fill);
-        flash('Данные сохранены')->success();
+        $connector = BackupYandexConnectors::create($fill);
+        $this->yandexConnectorsRepository->refresh($connector->id);
+        flash('Коннектор добавлен')->success();
 
         return redirect()->route('backups.yandex.connectors.index');
     }
