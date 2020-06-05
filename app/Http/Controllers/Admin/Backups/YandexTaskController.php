@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin\Backups;
 
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexTask;
+use App\Models\BackupYandexTasksLogs;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexTaskRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -32,8 +33,9 @@ class YandexTaskController extends Controller
     public function index()
     {
         $tasks = $this->yandexRepository->getList();
+        $logs  = BackupYandexTasksLogs::where('status', 0)->get();
 
-        return view('admin.backups.yandex.tasks.index', compact('tasks'));
+        return view('admin.backups.yandex.tasks.index', compact('tasks', 'logs'));
     }
 
     /**
@@ -86,7 +88,7 @@ class YandexTaskController extends Controller
 
     public function store(Request $request)
     {
-        $fill = $this->validate(
+        $fill            = $this->validate(
             $request,
             [
                 'description' => 'required',
