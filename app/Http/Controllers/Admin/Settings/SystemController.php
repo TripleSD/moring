@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
+use App\Models\SystemLogs;
 use App\Http\Controllers\Controller;
 use App\Repositories\BridgeRepository;
 
@@ -17,6 +18,7 @@ class SystemController extends Controller
 
     public function index()
     {
-        return view('admin.settings.system.index');
+        $logs = SystemLogs::orderBy('id', 'desc')->get();
+        return view('admin.settings.system.index', compact('logs'));
     }
 }
