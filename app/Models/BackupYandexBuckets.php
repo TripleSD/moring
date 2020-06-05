@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
- * Class BackupYandexBaskets.
+ * Class BackupYandexBuckets.
  */
-class BackupYandexBaskets extends Model
+class BackupYandexBuckets extends Model
 {
-    protected $table = 'backup_yandex_baskets';
+    protected $table = 'backup_yandex_buckets';
 
     public function connector(): HasOne
     {
