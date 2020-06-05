@@ -6,41 +6,41 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Models\BackupYandexBucketsLogs;
-use App\Repositories\Backups\YandexBasketRepository;
+use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 use App\Repositories\Backups\YandexConnectorRepository;
-use App\Http\Requests\Admin\Backups\BasketsStoreRequest;
+use App\Http\Requests\Admin\Backups\BucketsStoreRequest;
 
 /**
- * Class YandexBasketsController.
+ * Class YandexBucketsController.
  */
-class YandexBasketController extends Controller
+class YandexBucketsController extends Controller
 {
-    private $yandexBasketRepository;
+    private $yandexBucketsRepository;
     private $yandexConnectorRepository;
 
     public function __construct()
     {
-        $this->yandexBasketRepository    = new YandexBasketRepository();
+        $this->yandexBucketsRepository   = new YandexBucketsRepository();
         $this->yandexConnectorRepository = new YandexConnectorRepository();
     }
 
     /**
-     * @param YandexBasketRepository $yandexBasketRepository
+     * @param YandexBucketsRepository $yandexBucketsRepository
      * @return Application|Factory|View
      */
-    public function index(YandexBasketRepository $yandexBasketRepository)
+    public function index(YandexBucketsRepository $yandexBucketsRepository)
     {
-        $baskets = $yandexBasketRepository->getList();
+        $buckets = $yandexBucketsRepository->getList();
         $logs    = BackupYandexBucketsLogs::where('status', 0)
             ->where('resolved', 0)
             ->orderBy('id')
             ->limit('50')
             ->get();
 
-        return view('admin.backups.yandex.baskets.index', compact('baskets', 'logs'));
+        return view('admin.backups.yandex.buckets.index', compact('buckets', 'logs'));
     }
 
     /**
@@ -49,24 +49,24 @@ class YandexBasketController extends Controller
      */
     public function edit(Request $request)
     {
-        $basket     = $this->yandexBasketRepository->getBasket($request);
+        $basket     = $this->yandexBucketsRepository->getBucket($request);
         $connectors = $this->yandexConnectorRepository->getPluckList();
 
-        return view('admin.backups.yandex.baskets.edit', compact('basket', 'connectors'));
+        return view('admin.backups.yandex.buckets.edit', compact('basket', 'connectors'));
     }
 
     /**
-     * @param BasketsStoreRequest $request
+     * @param BucketsStoreRequest $request
      * @return RedirectResponse
      */
-    public function update(BasketsStoreRequest $request)
+    public function update(BucketsStoreRequest $request)
     {
         try {
-            $this->yandexBasketRepository->updateBasket($request->validated(), $request->id);
+            $this->yandexBucketsRepository->updateBucket($request->validated(), $request->id);
 
             flash('Данные обновлены')->success();
 
-            return redirect()->route('backups.yandex.baskets.index');
+            return redirect()->route('backups.yandex.buckets.index');
         } catch (\Exception $e) {
             //TODO писать ошибку в общий лог
         }
