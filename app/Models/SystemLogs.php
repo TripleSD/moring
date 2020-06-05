@@ -12,7 +12,9 @@ class SystemLogs extends Model
     protected $table = 'system_logs';
 
     protected $fillable = [
-        'description',
+        'service',
+        'status',
         'debug_info',
+        'user_id',
     ];
 }
