@@ -15,6 +15,6 @@ class YandexConnectorsLogsRepository extends Repository
      */
     public function getList()
     {
-        return BackupYandexConnectorsLogs::orderBy('id')->limit('50')->get();
+        return BackupYandexConnectorsLogs::where('status', 0)->orderBy('id')->limit('50')->get();
     }
 }
