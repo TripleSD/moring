@@ -17,7 +17,7 @@ class CreateBackupYandexTasksTable extends Migration
             'backup_yandex_tasks',
             function (Blueprint $table) {
                 $table->bigIncrements('id')->comment('Id');
-                $table->integer('connector_id')->comment('Connector ID');
+                $table->unsignedBigInteger('connector_id')->comment('Connector ID');
                 $table->string('filename')->comment('File name');
                 $table->string('pre')->nullable()->comment('String before filename');
                 $table->string('post')->nullable()->comment('String after filename');
@@ -27,6 +27,9 @@ class CreateBackupYandexTasksTable extends Migration
                 $table->string('description')->comment('Task description');
                 $table->text('comment')->nullable()->comment('Task comment');
                 $table->integer('http_code')->comment('HTTP response code');
+                $table->foreign('connector_id')
+                    ->references('id')
+                    ->on('backup_yandex_connectors');
                 $table->timestamps();
             }
         );
