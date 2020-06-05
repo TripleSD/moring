@@ -28,7 +28,7 @@ class BackupYandexTask extends Model
 
     public function logs(): HasMany
     {
-        return $this->hasMany(BackupYandexLogs::class, 'task_id', 'id');
+        return $this->hasMany(BackupYandexTasksLogs::class, 'task_id', 'id');
     }
 
     /**
