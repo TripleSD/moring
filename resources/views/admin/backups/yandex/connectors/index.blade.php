@@ -168,7 +168,7 @@
                                                 </div>
                                                 <div class="col-6">
                                                     <i class="fas fa-dumpster"></i>
-                                                    @lang('messages.backups.yandex.fields.basket'):
+                                                    @lang('messages.backups.yandex.fields.bucket'):
                                                     {{ $connector->trash_size }}
                                                     @lang('messages.backups.yandex.fields.gb')
                                                     @lang('messages.backups.yandex.fields.of')
