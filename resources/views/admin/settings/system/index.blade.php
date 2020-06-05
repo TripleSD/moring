@@ -38,7 +38,21 @@
                             <dd>{{env('TIMEZONE')}}</dd>
                         </div>
                     </div>
-
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-responsive">
+                    @foreach($logs as $log)
+                        <tr>
+                            <td class="col-2">{{ $log->created_at }}</td>
+                            <td class="col-2">{{ $log->service }}</td>
+                            <td class="col-2">@lang($log->status)</td>
+                            <td class="col-4">{{ $log->debug_info }}</td>
+                            <td class="col-2">{{ $log->user_id }}</td>
+                        </tr>
+                    @endforeach
+                    </table>
                 </div>
             </div>
         </div>
