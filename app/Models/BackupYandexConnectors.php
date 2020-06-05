@@ -50,6 +50,11 @@ class BackupYandexConnectors extends Model
         return round($this->attributes['used_space'] / 1024 / 1024 / 1024, 0);
     }
 
+    public function getTrashSizeAttribute()
+    {
+        return round($this->attributes['trash_size'] / 1024 / 1024 / 1024, 0);
+    }
+
     public function logs()
     {
         return $this->hasMany(BackupYandexConnectorsLogs::class,'connector_id', 'id');
