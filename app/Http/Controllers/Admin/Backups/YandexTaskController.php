@@ -109,6 +109,7 @@ class YandexTaskController extends Controller
             ]
         );
         $fill['enabled'] = 1;
+        $fill['http_code'] = 200;
 
         BackupYandexTask::create($fill);
 
