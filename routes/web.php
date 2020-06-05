@@ -105,8 +105,8 @@ Route::group(
                             ->name('backups.yandex.connectors.clean');
                         Route::get('/connectors/{id}/refresh', 'YandexConnectorController@refresh')
                             ->name('backups.yandex.connectors.refresh');
-                        Route::resource('baskets', 'YandexBasketController',
-                                        ['parameters' => ['baskets' => 'id']])->only($methods);
+                        Route::resource('buckets', 'YandexBucketsController',
+                                        ['parameters' => ['buckets' => 'id']])->only($methods);
                     }
                 );
             }
