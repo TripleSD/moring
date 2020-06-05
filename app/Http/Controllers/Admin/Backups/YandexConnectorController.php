@@ -83,7 +83,7 @@ class YandexConnectorController extends Controller
     public function clean(Request $request)
     {
         if ($this->yandexBucketsRepository->cleanTrash($request)) {
-            $this->yandexConnectorsRepository->refresh($request);
+            $this->yandexConnectorsRepository->refresh($request->id);
             flash('Корзина успешно очищена')->success();
         } else {
             flash('Что-то пошло нет так')->warning();
@@ -94,7 +94,7 @@ class YandexConnectorController extends Controller
 
     public function refresh(Request $request)
     {
-        $result = $this->yandexConnectorsRepository->refresh($request);
+        $result = $this->yandexConnectorsRepository->refresh($request->id);
 
         if ($result) {
             flash('Данные обновлены')->success();
