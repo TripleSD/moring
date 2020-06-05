@@ -169,14 +169,14 @@
                                                     <td class="small">
                                                         <span
                                                             class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
-                                                            @lang('messages.backups.yandex.connectors.log.alert')
+                                                            @lang('messages.backups.yandex.tasks.log.error')
                                                         </span>
                                                     </td>
                                                     <td class="small">
                                                         <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
-                                                            @lang('messages.backups.yandex.connectors.log.connector')
-                                                            #{{ $log->connector_id }} |
-                                                            @lang('messages.backups.yandex.connectors.log.down')
+                                                            @lang('messages.backups.yandex.tasks.log.task')
+                                                            #{{ $log->task_id }} |
+                                                            @lang('messages.backups.yandex.tasks.log.no_file')
                                                         </span>
                                                     </td>
                                                     <td class="small">
