@@ -6,6 +6,7 @@ use App;
 use Lang;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexConnectors;
+use App\Models\BackupYandexConnectorsLogs;
 use App\Http\Controllers\Admin\System\LogController;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexBucketsRepository;
@@ -176,7 +177,7 @@ class YandexConnectorController extends Controller
     {
         try {
             BackupYandexConnectors::where('id', $request->id)->delete();
-
+            BackupYandexConnectorsLogs::where('connector_id', $request->id)->delete();
             flash('Коннектор удален.')->success();
 
             return redirect()->route('backups.yandex.connectors.index');
