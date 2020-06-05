@@ -72,7 +72,7 @@
                                     Последний опрос:
                                     <span class="float-right">
                                         @if($connector->logs->count() > 0)
-                                            {{ $connector->logs->lat()->created_at }}
+                                            {{ $connector->logs->last()->created_at }}
                                         @else
                                             -
                                         @endif
