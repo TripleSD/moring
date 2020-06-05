@@ -50,110 +50,146 @@
                         </div>
                     </div>
 
-                    <div class="card">
-                        <div class="card-body table-responsive p-0">
-                            <table class="table table-hover">
-                                <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>Подключение</th>
-                                    <th>Доп.информация</th>
-                                    <th></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                @foreach($tasks as $task)
-                                    @if($task->enabled == 1)
-                                        <tr class="table-row">
-                                    @else
-                                        <tr class="table-row" bgcolor="#a9a9a9">
-                                            @endif
-                                            <td>
-                                                <div class="row">
-                                                    @if($task->enabled === 1)
-                                                        <div class="vl pt-1 text-success"></div>
-                                                    @else
-                                                        <div class="vl pt-1 text-gray"></div>
-                                                    @endif
-                                                    <div class="col">
-                                                        <div>
-                                                            <i class="fas fa-box-open"></i>
-                                                        </div>
-                                                        <div>
-                                                            <div class="small">
-                                                                @if($task->enabled === 1)
-                                                                    <div class="badge badge-success">
-                                                                        @lang('messages.network.device.enabled')
-                                                                    </div>
-                                                                @else
-                                                                    <div class="small badge badge-secondary">
-                                                                        @lang('messages.network.device.disabled')
-                                                                    </div>
-                                                                @endif
-
-                                                                @if($task->logs->count() !== 0)
-                                                                    <div class="badge badge-danger">
-                                                                        <i class="fas fa-exclamation-triangle"></i>
-                                                                        {{ $task->logs->count() }}
-                                                                    </div>
-                                                                @endif
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <div class="row">
-                                                    <div class="col">
-                                                        <div class="small">
-                                                            <b>Коннектор:</b>
-                                                                {{ $task->connector->description }}
-                                                        </div>
-                                                        <div class="small">
-                                                            <b>Интервал проверки:</b>
-                                                            {{ $task->interval }} час.
-                                                        </div>
-                                                        <div class="small text-gray">
-                                                            <i class="fas fa-history"></i>
-                                                            Last check: {{ $task->updated_at }}
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </td>
-
-                                            <td>
-                                                <div class="small">
-                                                    <b>Папка:</b>
-                                                    {{ $task->folder }}
-                                                </div>
-                                                <div class="small">
-                                                    <b>Файл:</b>
-                                                    {{ $task->FullFilename }}
-                                                </div>
-                                                <div class="small">
-                                                    <b>Описание:</b>
-                                                    <span style="word-break: break-all;">
+                    <div class="row">
+                        <div class="col-sm-6" bgcolor="red">
+                            @foreach($tasks as $task)
+                                <div class="callout callout-{{ ($task->enabled) ? 'success' : 'default' }}">
+                                    <div class="row">
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <b>
+                                                        <i class="fas fa-bookmark"></i>
                                                         {{ $task->description }}
-                                                    </span>
+                                                    </b>
+                                                    <span class="small text-muted">#{{ $task->id }}</span>
                                                 </div>
-                                            </td>
-                                            <td>
-                                                <div class="btn-group">
-                                                    <a href="{{route('backups.yandex.tasks.show',$task->id)}}"
-                                                       class="btn btn-xs bg-gradient-info"
-                                                       title="Просмотр устройства">
-                                                        <i class="fa fa-eye"></i>
-                                                    </a>
-                                                    <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
-                                                       class="btn btn-xs bg-gradient-warning"
-                                                       title="Редактирование устройства">
-                                                        <i class="fa fa-edit"></i></a>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-11">
+                                                    <div class="row small">
+                                                        <div class="col-3">
+                                                            <b>Status:</b>
+                                                        </div>
+                                                        <div class="col-9">
+                                                            @if($task->enabled === 1)
+                                                                <div class="badge badge-success">
+                                                                    @lang('messages.network.device.enabled')
+                                                                </div>
+                                                            @else
+                                                                <div class="small badge badge-secondary">
+                                                                    @lang('messages.network.device.disabled')
+                                                                </div>
+                                                            @endif
+
+                                                            @if($task->logs->count() !== 0)
+                                                                <div class="badge badge-danger">
+                                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                                    {{ $task->logs->count() }}
+                                                                </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row small">
+                                                        <div class="col-3">
+                                                            <b>Коннектор:</b>
+                                                        </div>
+                                                        <div class="col-9">
+                                                            {{ $task->connector->description }}
+                                                            (id: {{ $task->connector->id }})
+                                                        </div>
+                                                    </div>
+                                                    <div class="row small">
+                                                        <div class="col-3">
+                                                            <b>Интервал:</b>
+                                                        </div>
+                                                        <div class="col-9">
+                                                            {{ $task->interval }} час.
+                                                            <i class="fas fa-chevron-right"></i>
+                                                            <b>Last update:</b>
+                                                            {{ $task->updated_at }}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row small">
+                                                        <div class="col-3">
+                                                            <b>Файл:</b>
+                                                        </div>
+                                                        <div class="col-9">
+                                                            @empty($task->folder)
+                                                                {{ $task->FullFilename }}
+                                                            @else
+                                                                /{{ $task->folder }}/{{ $task->FullFilename }}
+                                                            @endempty
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                            </td>
-                                        </tr>
-                                        @endforeach
-                                </tbody>
-                            </table>
+                                                <div class="col-1">
+                                                    <div class="btn-group-vertical float-right">
+                                                        <a href="{{route('backups.yandex.tasks.show',$task->id)}}"
+                                                           class="btn btn-xs bg-gradient-info"
+                                                           title="Просмотр устройства">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
+                                                           class="btn btn-xs bg-gradient-warning"
+                                                           title="Редактирование устройства">
+                                                            <i class="fa fa-edit"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="text-muted text-sm">
+                                    @lang('messages.network.device.notifications_and_errors')
+                                    </span>
+                                </div>
+                                @if($logs !== null)
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                            @foreach($logs as $log)
+                                                <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
+                                                    <td class="small">
+                                                        <span
+                                                            class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
+                                                            @lang('messages.backups.yandex.connectors.log.alert')
+                                                        </span>
+                                                    </td>
+                                                    <td class="small">
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            @lang('messages.backups.yandex.connectors.log.connector')
+                                                            #{{ $log->connector_id }} |
+                                                            @lang('messages.backups.yandex.connectors.log.down')
+                                                        </span>
+                                                    </td>
+                                                    <td class="small">
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                        </span>
+                                                    </td>
+                                                    <td class="small">
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            <a class="btn btn-"
+                                                               href=""></a>
+                                                            <i class="fas fa-eye"></i>
+                                                        </span>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
