@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Admin\Backups;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Backups\YandexConnectorRepository;
-use App\Repositories\Backups\YandexBasketRepository;
+use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -26,7 +26,7 @@ class YandexConnectorController extends Controller
     public function __construct()
     {
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
-        $this->yandexBasketRepository      = new YandexBasketRepository();
+        $this->yandexBasketRepository      = new YandexBucketsRepository();
         $this->yandexConnectorsLogsRepository = new yandexConnectorsLogsRepository();
     }
 
