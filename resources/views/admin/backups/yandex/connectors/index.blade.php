@@ -70,23 +70,23 @@
                                             <div class="row">
                                                 <div class="col-11">
                                                     <div class="row small">
-                                                        <div class="col-3">
+                                                        <div class="col-4">
                                                             <b>
                                                                 @lang('messages.backups.yandex.fields.connector')
                                                                 :
                                                             </b>
                                                         </div>
-                                                        <div class="col-9">
+                                                        <div class="col-8">
                                                             #{{ $connector->id }}
                                                         </div>
                                                     </div>
                                                     <div class="row small">
-                                                        <div class="col-3">
+                                                        <div class="col-4">
                                                             <b>
                                                                 @lang('messages.backups.yandex.fields.status'):
                                                             </b>
                                                         </div>
-                                                        <div class="col-9">
+                                                        <div class="col-8">
                                                             @if($connector->status === 1)
                                                                 <span class="badge badge-success">
                                                                 @lang('messages.backups.yandex.fields.online')
@@ -103,12 +103,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="row small">
-                                                        <div class="col-3">
+                                                        <div class="col-4">
                                                             <b>
                                                                 @lang('messages.backups.yandex.fields.last_check'):
                                                             </b>
                                                         </div>
-                                                        <div class="col-9">
+                                                        <div class="col-8">
                                                             @if($connector->logs->count() > 0)
                                                                 {{ $connector->logs->last()->created_at }}
                                                             @else
