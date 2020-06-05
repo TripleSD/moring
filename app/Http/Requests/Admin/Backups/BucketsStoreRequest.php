@@ -4,7 +4,10 @@ namespace App\Http\Requests\Admin\Backups;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class BasketsStoreRequest extends FormRequest
+/**
+ * Class BucketsStoreRequest
+ */
+class BucketsStoreRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
