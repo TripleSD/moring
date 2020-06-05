@@ -53,108 +53,147 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-6">
-                            <div class="card">
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover">
-                                        <thead>
-                                        <tr>
-                                            <th></th>
-                                            <th>Подключение</th>
-                                            <th>Доп.информация</th>
-                                            <th></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        @foreach($baskets as $basket)
-                                            @if($basket->enabled == 1)
-                                                <tr class="table-row">
-                                            @else
-                                                <tr class="table-row" bgcolor="#a9a9a9">
-                                                    @endif
-                                                    <td>
-                                                        <div class="row">
-                                                            @if($basket->enabled === 1)
-                                                                <div class="vl pt-1 text-success"></div>
-                                                            @else
-                                                                <div class="vl pt-1 text-gray"></div>
-                                                            @endif
-                                                            <div class="col">
-                                                                <div>
-                                                                    <i class="fas fa-box-open"></i>
-                                                                </div>
-                                                                <div>
-                                                                    <div class="small">
-                                                                        @if($basket->enabled === 1)
-                                                                            <div class="badge badge-success">
-                                                                                @lang('messages.network.device.enabled')
-                                                                            </div>
-                                                                        @else
-                                                                            <div class="small badge badge-secondary">
-                                                                                @lang('messages.network.device.disabled')
-                                                                            </div>
-                                                                        @endif
-                                                                        1111
-                                                                        {{--                                                                @if($task->logs->count() !== 0)--}}
-                                                                        {{--                                                                    <div class="badge badge-danger">--}}
-                                                                        {{--                                                                        <i class="fas fa-exclamation-triangle"></i>--}}
-                                                                        {{--                                                                        {{ $task->logs->count() }}--}}
-                                                                        {{--                                                                    </div>--}}
-                                                                        {{--                                                                @endif--}}
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>
-                                                        <div class="row">
-                                                            <div class="col">
-                                                                <div class="small">
-                                                                    <b>Коннектор:</b>
-                                                                    {{ $basket->connector->description }}
-                                                                </div>
-                                                                <div class="small">
-                                                                    <b>Интервал проверки:</b>
-                                                                    {{ $basket->interval }} час.
-                                                                </div>
-                                                                <div class="small text-gray">
-                                                                    <i class="fas fa-history"></i>
-                                                                    Last check: {{ $basket->updated_at }}
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </td>
+                        <div class="col-sm-6">
+                            @foreach($baskets as $basket)
+                                <div class="callout callout-{{ ($basket->enabled) ? 'success' : 'danger' }}">
+                                    <div class="row">
+                                        <div class="col-11">
+                                            <div class="row small">
+                                                <div class="col-4">
+                                                    <b>Status:</b>
+                                                </div>
+                                                <div class="col-8">
 
-                                                    <td>
-                                                        <div class="small">
-                                                            <b>Корзина добавлена:</b>
-                                                            {{ $basket->created_at }}
+                                                    @if($basket->enabled === 1)
+                                                        <div class="badge badge-success">
+                                                            @lang('messages.network.device.enabled')
                                                         </div>
-                                                        <div class="small">
-                                                            <b>Описание:</b>
-                                                            <span style="word-break: break-all;">
+                                                    @else
+                                                        <div class="small badge badge-secondary">
+                                                            @lang('messages.network.device.disabled')
+                                                        </div>
+                                                    @endif
+                                                    {{--                                                    @if($basket->logs->count() !== 0)--}}
+                                                    {{--                                                        <div class="badge badge-danger">--}}
+                                                    {{--                                                            <i class="fas fa-exclamation-triangle"></i>--}}
+                                                    {{--                                                            {{ $task->logs->count() }}--}}
+                                                    {{--                                                        </div>--}}
+                                                    {{--                                                    @endif--}}
+                                                </div>
+                                            </div>
+
+
+                                            <div class="row small">
+                                                <div class="col-4">
+                                                    <b>Коннектор:</b>
+                                                </div>
+                                                <div class="col-8">
+                                                    {{ $basket->connector->description }}
+                                                </div>
+                                            </div>
+                                            <div class="row small">
+                                                <div class="col-4">
+                                                    <b>Интервал проверки:</b>
+                                                </div>
+                                                <div class="col-8">
+                                                    {{ $basket->interval }} час.
+                                                </div>
+                                            </div>
+                                            <div class="row small">
+                                                <div class="col-4">
+                                                    Last check:
+                                                </div>
+                                                <div class="col-8">
+                                                    {{ $basket->updated_at }}
+                                                </div>
+                                            </div>
+
+                                            <div class="row small">
+                                                <div class="col-4">
+                                                    <b>Корзина добавлена:</b>
+                                                </div>
+                                                <div class="col-8">
+                                                    {{ $basket->created_at }}
+                                                </div>
+                                            </div>
+                                            <div class="row small">
+                                                <div class="col-4">
+                                                    <b>Описание:</b>
+                                                </div>
+                                                <div class="col-8">
                                                     {{ $basket->description }}
-                                                                                    </span>
-                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-1">
+                                            <div class="btn-group-vertical">
+                                                <a href="{{route('backups.yandex.baskets.show',$basket->id)}}"
+                                                   class="btn btn-xs btn-outline-info"
+                                                   title="Просмотр устройства">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                                <a href="{{route('backups.yandex.baskets.edit', $basket->id)}}"
+                                                   class="btn btn-xs btn-outline-warning"
+                                                   title="Редактирование устройства">
+                                                    <i class="fa fa-edit"></i></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+
+                        <div class="col-sm-6">
+                            <div class="card">
+                                <div class="card-header">
+                                    <span class="text-muted text-sm">
+                                    @lang('messages.network.device.notifications_and_errors')
+                                    </span>
+                                    <span class="float-right">
+                                        <div class="btn-group">
+                                    <a href="#"
+                                       class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
+                                        <i class="fas fa-eye"></i> Все записи
+                                    </a>
+                                        </div>
+                                    </span>
+                                </div>
+                                @if($logs !== null)
+                                    <div class="card-body table-responsive p-0">
+                                        <table class="table table-hover">
+                                            <tbody>
+                                            @foreach($logs as $log)
+                                                <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
+                                                    <td class="small">
+                                                        <span
+                                                            class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
+                                                            @lang('messages.backups.yandex.connectors.log.error')
+                                                        </span>
                                                     </td>
-                                                    <td>
-                                                        <div class="btn-group">
-                                                            <a href="{{route('backups.yandex.baskets.show',$basket->id)}}"
-                                                               class="btn btn-xs bg-gradient-info"
-                                                               title="Просмотр устройства">
-                                                                <i class="fa fa-eye"></i>
-                                                            </a>
-                                                            <a href="{{route('backups.yandex.baskets.edit', $basket->id)}}"
-                                                               class="btn btn-xs bg-gradient-warning"
-                                                               title="Редактирование устройства">
-                                                                <i class="fa fa-edit"></i></a>
-                                                        </div>
+                                                    <td class="small">
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            @lang('messages.backups.yandex.connectors.log.connector')
+                                                            #{{ $log->connector_id }} |
+                                                            @lang('messages.backups.yandex.connectors.log.down')
+                                                        </span>
+                                                    </td>
+                                                    <td class="small">
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                        </span>
+                                                    </td>
+                                                    <td class="small">
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            <a class="btn btn-" href=""></a>
+                                                            <i class="fas fa-eye"></i>
+                                                        </span>
                                                     </td>
                                                 </tr>
-                                                @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
+                                            @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
                             </div>
                         </div>
                     </div>
