@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Backups;
 
+use App;
+use Lang;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexConnectors;
+use App\Http\Controllers\Admin\System\LogController;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -22,11 +25,13 @@ class YandexConnectorController extends Controller
     private $yandexConnectorsRepository;
     private $yandexBucketsRepository;
     private $yandexConnectorsLogsRepository;
+    private $logController;
 
     public function __construct()
     {
-        $this->yandexConnectorsRepository = new YandexConnectorRepository();
-        $this->yandexBucketsRepository      = new YandexBucketsRepository();
+        $this->logController                  = new LogController();
+        $this->yandexConnectorsRepository     = new YandexConnectorRepository();
+        $this->yandexBucketsRepository        = new YandexBucketsRepository();
         $this->yandexConnectorsLogsRepository = new yandexConnectorsLogsRepository();
     }
 
@@ -36,7 +41,7 @@ class YandexConnectorController extends Controller
     public function index()
     {
         $connectors = $this->yandexConnectorsRepository->getList();
-        $logs = $this->yandexConnectorsLogsRepository->getList();
+        $logs       = $this->yandexConnectorsLogsRepository->getList();
 
         return view('admin.backups.yandex.connectors.index', compact('connectors', 'logs'));
     }
@@ -168,10 +173,18 @@ class YandexConnectorController extends Controller
      */
     public function destroy(Request $request)
     {
-        BackupYandexConnectors::where('id', $request->id)->delete();
+        try {
+            BackupYandexConnectors::where('id', $request->id)->delete();
 
-        flash('Коннектор удален.')->success();
+            flash('Коннектор удален.')->success();
 
-        return redirect()->route('backups.yandex.connectors.index');
+            return redirect()->route('backups.yandex.connectors.index');
+        } catch (\Exception $e) {
+            flash(Lang::get('messages.system_logs.errors.error'))->warning();
+
+            $this->logController->insert('messages.system_logs.errors.error.foreign_key', $e->getMessage());
+
+            return redirect()->route('backups.yandex.connectors.index');
+        }
     }
 }
