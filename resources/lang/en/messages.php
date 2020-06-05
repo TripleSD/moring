@@ -116,6 +116,10 @@ return [
      * Yandex connectors page.
      */
     'backups.yandex.connectors.log.connector' => 'Connector',
-    'backups.yandex.connectors.log.alert' => 'Alert',
+    'backups.yandex.connectors.log.error' => 'Error',
     'backups.yandex.connectors.log.down' => 'Connection failed',
+
+    'backups.yandex.tasks.log.task' => 'Task',
+    'backups.yandex.tasks.log.error' => 'Error',
+    'backups.yandex.tasks.log.no_file' => 'Missing file',
 ];
