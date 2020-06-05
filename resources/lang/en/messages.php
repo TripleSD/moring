@@ -122,4 +122,13 @@ return [
     'backups.yandex.tasks.log.task' => 'Task',
     'backups.yandex.tasks.log.error' => 'Error',
     'backups.yandex.tasks.log.no_file' => 'Missing file',
+
+
+
+    /**
+     *  System Logs.
+     */
+
+    'system_logs.errors.error' => 'Error. Check system log',
+    'system_logs.errors.error.foreign_key' => 'Mysql. Foreign key',
 ];
