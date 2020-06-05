@@ -24,9 +24,9 @@ class YandexConnectorRepository extends Repository
         return BackupYandexConnectors::pluck('description', 'id');
     }
 
-    public function refresh($request)
+    public function refresh($connectorId)
     {
-        $connector = BackupYandexConnectors::find($request->id);
+        $connector = BackupYandexConnectors::find($connectorId);
 
         $ch = curl_init('https://cloud-api.yandex.net/v1/disk/');
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: OAuth ' . $connector->token]);
