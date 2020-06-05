@@ -21,6 +21,7 @@ class CreateBackupYandexConnectorsTable extends Migration
             $table->bigInteger('total_space')->comment('Total space');
             $table->bigInteger('used_space')->comment('Used space');
             $table->bigInteger('trash_size')->comment('Trash_size');
+            $table->integer('http_code')->comment('Response HTTP code');
             $table->text('comment')->nullable()->comment('Comment');
             $table->timestamps();
         });
