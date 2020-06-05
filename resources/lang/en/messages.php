@@ -90,12 +90,12 @@ return [
     'backups.yandex.breadcrumbs.backups' => 'Backups',
     'backups.yandex.breadcrumbs.yandex' => 'Yandex disk',
     'backups.yandex.breadcrumbs.connectors.list' => 'Connectors list',
-    'backups.yandex.breadcrumbs.baskets.list' => 'Baskets list',
+    'backups.yandex.breadcrumbs.buckets.list' => 'Buckets list',
     'backups.yandex.breadcrumbs.tasks.list' => 'Tasks list',
 
     'backups.yandex.breadcrumbs.small.connectors' => 'Connectors',
     'backups.yandex.breadcrumbs.small.tasks' => 'Tasks',
-    'backups.yandex.breadcrumbs.small.baskets' => 'Baskets',
+    'backups.yandex.breadcrumbs.small.buckets' => 'Buckets',
 
     'backups.yandex.buttons.add' => 'Add',
 
@@ -103,7 +103,7 @@ return [
     'backups.yandex.fields.status' => 'Status',
     'backups.yandex.fields.last_check' => 'Last check',
     'backups.yandex.fields.total' => 'Total',
-    'backups.yandex.fields.basket' => 'Basket',
+    'backups.yandex.fields.bucket' => 'Bucket',
     'backups.yandex.fields.gb' => 'GB',
     'backups.yandex.fields.of' => 'of',
     'backups.yandex.fields.used' => 'Using',

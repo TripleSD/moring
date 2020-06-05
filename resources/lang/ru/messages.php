@@ -89,12 +89,12 @@ return [
     'backups.yandex.breadcrumbs.backups' => 'Бэкапы',
     'backups.yandex.breadcrumbs.yandex' => 'Яндекс диск',
     'backups.yandex.breadcrumbs.connectors.list' => 'Список коннекторов',
-    'backups.yandex.breadcrumbs.baskets.list' => 'Список корзин',
+    'backups.yandex.breadcrumbs.buckets.list' => 'Список корзин',
     'backups.yandex.breadcrumbs.tasks.list' => 'Список задач',
 
     'backups.yandex.breadcrumbs.small.connectors' => 'Коннекторы',
     'backups.yandex.breadcrumbs.small.tasks' => 'Задачи',
-    'backups.yandex.breadcrumbs.small.baskets' => 'Корзины',
+    'backups.yandex.breadcrumbs.small.buckets' => 'Корзины',
 
     'backups.yandex.buttons.add' => 'Добавить',
 
@@ -102,7 +102,7 @@ return [
     'backups.yandex.fields.status' => 'Статус',
     'backups.yandex.fields.last_check' => 'Последняя проверка',
     'backups.yandex.fields.total' => 'Всего',
-    'backups.yandex.fields.basket' => 'Корзина',
+    'backups.yandex.fields.bycket' => 'Корзина',
     'backups.yandex.fields.gb' => 'ГБ',
     'backups.yandex.fields.of' => 'из',
     'backups.yandex.fields.used' => 'Используется',
