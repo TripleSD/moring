@@ -12,6 +12,13 @@ use App\Http\Controllers\Admin\System\LogController;
  */
 class YandexConnectorRepository extends Repository
 {
+    private $logController;
+
+    public function __construct()
+    {
+        $this->logController = new LogController();
+    }
+
     /**
      * @return mixed
      */
@@ -51,18 +58,22 @@ class YandexConnectorRepository extends Repository
                 ]
             );
 
+            // Insert event to fail log
             BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1,]);
-            $log = new LogController();
-            $log->insert(
-                'Yandex',
+
+            // Insert event to system log
+            $this->logController->insert(
+                \Config::get('moring.service_yandex_disk'),
                 $httpcode,
                 'GET' . ' | ' . $url,
-                '1'
+                \Auth::user()->id,
+                \Route::getCurrentRoute()->getActionName()
             );
 
             return true;
         }
 
+        // Insert event to fail log
         BackupYandexConnectors::where('id', $connector->id)->update(
             [
                 'http_code' => $httpcode,
@@ -71,12 +82,14 @@ class YandexConnectorRepository extends Repository
         );
 
         BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0,]);
-        $log = new LogController();
-        $log->insert(
-            'Yandex',
+
+        // Insert event to system log
+        $this->logController->insert(
+            \Config::get('moring.service_yandex_disk'),
             $httpcode,
             'GET' . ' | ' . $res['error'] . ' | ' . $url,
-            '1'
+            \Auth::user()->id,
+            \Route::getCurrentRoute()->getActionName()
         );
 
         return false;
