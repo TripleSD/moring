@@ -27,7 +27,10 @@ class SystemController extends Controller
      */
     public function index()
     {
-        $logs = SystemLogs::with('user')->orderBy('id', 'desc')->get();
+        $logs     = SystemLogs::with('user')
+            ->orderBy('id', 'desc')
+            ->paginate(50);
+
         $services = SystemLogs::distinct('service')->pluck('service');
 
         return view('admin.settings.system.index', compact('logs', 'services'));
