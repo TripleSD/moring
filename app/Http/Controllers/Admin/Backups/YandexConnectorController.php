@@ -43,8 +43,9 @@ class YandexConnectorController extends Controller
     {
         $connectors = $this->yandexConnectorsRepository->getList();
         $logs       = $this->yandexConnectorsLogsRepository->getList();
+        $logCount   = $this->yandexConnectorsLogsRepository->getCount();
 
-        return view('admin.backups.yandex.connectors.index', compact('connectors', 'logs'));
+        return view('admin.backups.yandex.connectors.index', compact('connectors', 'logs', 'logCount'));
     }
 
     /**
