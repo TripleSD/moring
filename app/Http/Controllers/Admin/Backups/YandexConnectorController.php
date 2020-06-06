@@ -208,4 +208,14 @@ class YandexConnectorController extends Controller
             return redirect()->route('backups.yandex.connectors.index');
         }
     }
+
+    /**
+     * @return RedirectResponse
+     */
+    public function resolve()
+    {
+        BackupYandexConnectorsLogs::where('resolved', 0)->update(['resolved'=> 1]);
+
+        return redirect()->route('backups.yandex.connectors.index');
+    }
 }
