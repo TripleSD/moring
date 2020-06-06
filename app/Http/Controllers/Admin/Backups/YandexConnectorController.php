@@ -84,30 +84,34 @@ class YandexConnectorController extends Controller
      */
     public function clean(Request $request)
     {
-        try {
+        $this->logController->insert(
+            \Config::get('moring.service.yandex.disk'),
+            '-',
+            '',
+            \Auth::user()->id,
+            \Route::getCurrentRoute()->getActionName()
+        );
+
             if ($this->yandexBucketsRepository->cleanTrash($request)) {
                 $this->yandexConnectorsRepository->refreshState($request->id);
                 flash('Корзина очищена')->success();
-                return redirect()->route('backups.yandex.connectors.index');
             } else {
                 flash('Очистка поставлена в очередь')->success();
-                return redirect()->route('backups.yandex.connectors.index');
             }
-        } catch (\Exception $e) {
-            flash('Что-то пошло нет так')->warning();
-            $this->logController->insert(
-                \Config::get('moring.service.yandex.disk'),
-                '-',
-                $e->getMessage(),
-                \Auth::user()->id,
-                \Route::getCurrentRoute()->getActionName()
-            );
+
             return redirect()->route('backups.yandex.connectors.index');
-        }
     }
 
     public function refresh(Request $request)
     {
+        $this->logController->insert(
+            \Config::get('moring.service_yandex_disk'),
+            '-',
+            $request->method(),
+            \Auth::user()->id,
+            \Route::getCurrentRoute()->getActionName()
+        );
+
         $result = $this->yandexConnectorsRepository->refreshState($request->id);
 
         if ($result) {
@@ -125,10 +129,10 @@ class YandexConnectorController extends Controller
      */
     public function store(ConnectorsStoreUpdateRequest $request)
     {
-        $data      = $request->validated();                                 // Validation data
-        $connector = $this->yandexConnectorsRepository->store($data);       // Storing data
+        $verifiedData = $request->validated();
+        $connector    = $this->yandexConnectorsRepository->store($verifiedData);
 
-        $this->yandexConnectorsRepository->refreshState($connector->id);    // Refreshing current status
+        $this->yandexConnectorsRepository->refreshState($connector->id);
 
         flash('Коннектор добавлен')->success();
 
@@ -141,10 +145,10 @@ class YandexConnectorController extends Controller
      */
     public function update(ConnectorsStoreUpdateRequest $request)
     {
-        $data        = $request->validated();
-        $connectorId = $request->id;
+        $verifiedData = $request->validated();
+        $connectorId  = $request->id;
 
-        $this->yandexConnectorsRepository->update($connectorId, $data);
+        $this->yandexConnectorsRepository->update($connectorId, $verifiedData);
         $this->yandexConnectorsRepository->refreshState($connectorId);
 
         flash('Данные обновлены.')->success();
