@@ -14,9 +14,9 @@ use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 use Illuminate\View\View;
 use App\Repositories\Backups\YandexConnectorsLogsRepository;
+use App\Http\Requests\Admin\Backups\Yandex\ConnectorsStoreUpdateRequest;
 
 /**
  * Class YandexConnectorsController.
@@ -120,23 +120,12 @@ class YandexConnectorController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param ConnectorsStoreUpdateRequest $request
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(ConnectorsStoreUpdateRequest $request)
     {
-        $fill = $this->validate(
-            $request,
-            [
-                'description' => 'required',
-                'token' => 'required',
-                'comment' => 'nullable',
-            ],
-            [
-
-            ]
-        );
+        $fill = $request->validated();
 
         $fill['status']      = 1;
         $fill['total_space'] = 0;
@@ -152,24 +141,12 @@ class YandexConnectorController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param ConnectorsStoreUpdateRequest $request
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function update(Request $request)
+    public function update(ConnectorsStoreUpdateRequest $request)
     {
-        $fill = $this->validate(
-            $request,
-            [
-                'description' => 'required',
-                'token' => 'required',
-                'comment' => 'nullable',
-            ],
-            [
-
-            ]
-        );
-
+        $fill = $request->validated();
         $fill['status']      = 1;
         $fill['total_space'] = 0;
         $fill['used_space']  = 0;
