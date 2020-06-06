@@ -15,7 +15,7 @@ class LogController extends Controller
         $this->middleware('auth');
     }
 
-    public function insert($service, $status, $debugInfo, $user_id)
+    public function insert($service, $status, $debugInfo, $user_id, $route)
     {
         SystemLogs::create(
             [
@@ -23,6 +23,7 @@ class LogController extends Controller
                 'status' => $status,
                 'debug_info' => $debugInfo,
                 'user_id' => $user_id,
+                'route' => $route,
             ]
         );
 
