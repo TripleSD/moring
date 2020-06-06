@@ -16,5 +16,11 @@ class SystemLogs extends Model
         'status',
         'debug_info',
         'user_id',
+        'route',
     ];
+
+    public function user()
+    {
+        return $this->hasOne(Users::class, 'id', 'user_id');
+    }
 }
