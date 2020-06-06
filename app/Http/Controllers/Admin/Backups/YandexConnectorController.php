@@ -83,14 +83,26 @@ class YandexConnectorController extends Controller
      */
     public function clean(Request $request)
     {
-        if ($this->yandexBucketsRepository->cleanTrash($request)) {
-            $this->yandexConnectorsRepository->refresh($request->id);
-            flash('Корзина успешно очищена')->success();
-        } else {
+        try {
+            if ($this->yandexBucketsRepository->cleanTrash($request)) {
+                $this->yandexConnectorsRepository->refresh($request->id);
+                flash('Корзина очищена')->success();
+                return redirect()->route('backups.yandex.connectors.index');
+            } else {
+                flash('Очистка поставлена в очередь')->success();
+                return redirect()->route('backups.yandex.connectors.index');
+            }
+        } catch (\Exception $e) {
             flash('Что-то пошло нет так')->warning();
+            $this->logController->insert(
+                \Config::get('moring.service.yandex.disk'),
+                '-',
+                $e->getMessage(),
+                '1',
+                \Route::getCurrentRoute()->getActionName()
+            );
+            return redirect()->route('backups.yandex.connectors.index');
         }
-
-        return redirect()->route('backups.yandex.connectors.index');
     }
 
     public function refresh(Request $request)
@@ -184,7 +196,13 @@ class YandexConnectorController extends Controller
         } catch (\Exception $e) {
             flash(Lang::get('messages.system_logs.errors.error'))->warning();
 
-            $this->logController->insert('messages.system_logs.errors.error.foreign_key', $e->getMessage());
+            $this->logController->insert(
+                \Config::get('moring.service.mysql'),
+                'messages.system_logs.errors.error.foreign_key',
+                $e->getMessage(),
+                '1',
+                \Route::getCurrentRoute()->getActionName()
+            );
 
             return redirect()->route('backups.yandex.connectors.index');
         }
