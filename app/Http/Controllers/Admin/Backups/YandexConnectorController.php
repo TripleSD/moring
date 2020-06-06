@@ -86,7 +86,7 @@ class YandexConnectorController extends Controller
     {
         try {
             if ($this->yandexBucketsRepository->cleanTrash($request)) {
-                $this->yandexConnectorsRepository->refresh($request->id);
+                $this->yandexConnectorsRepository->refreshState($request->id);
                 flash('Корзина очищена')->success();
                 return redirect()->route('backups.yandex.connectors.index');
             } else {
@@ -108,7 +108,7 @@ class YandexConnectorController extends Controller
 
     public function refresh(Request $request)
     {
-        $result = $this->yandexConnectorsRepository->refresh($request->id);
+        $result = $this->yandexConnectorsRepository->refreshState($request->id);
 
         if ($result) {
             flash('Данные обновлены')->success();
@@ -125,16 +125,11 @@ class YandexConnectorController extends Controller
      */
     public function store(ConnectorsStoreUpdateRequest $request)
     {
-        $fill = $request->validated();
+        $data      = $request->validated();                                 // Validation data
+        $connector = $this->yandexConnectorsRepository->store($data);       // Storing data
 
-        $fill['status']      = 1;
-        $fill['total_space'] = 0;
-        $fill['used_space']  = 0;
-        $fill['trash_size']  = 0;
-        $fill['http_code']   = 200;
+        $this->yandexConnectorsRepository->refreshState($connector->id);    // Refreshing current status
 
-        $connector = BackupYandexConnectors::create($fill);
-        $this->yandexConnectorsRepository->refresh($connector->id);
         flash('Коннектор добавлен')->success();
 
         return redirect()->route('backups.yandex.connectors.index');
@@ -146,14 +141,12 @@ class YandexConnectorController extends Controller
      */
     public function update(ConnectorsStoreUpdateRequest $request)
     {
-        $fill = $request->validated();
-        $fill['status']      = 1;
-        $fill['total_space'] = 0;
-        $fill['used_space']  = 0;
-        $fill['trash_size']  = 0;
-        $fill['http_code']   = 200;
+        $data        = $request->validated();
+        $connectorId = $request->id;
 
-        BackupYandexConnectors::where('id', $request->id)->update($fill);
+        $this->yandexConnectorsRepository->update($connectorId, $data);
+        $this->yandexConnectorsRepository->refreshState($connectorId);
+
         flash('Данные обновлены.')->success();
 
         return redirect()->route('backups.yandex.connectors.index');
@@ -191,7 +184,7 @@ class YandexConnectorController extends Controller
      */
     public function resolve()
     {
-        BackupYandexConnectorsLogs::where('resolved', 0)->update(['resolved'=> 1]);
+        BackupYandexConnectorsLogs::where('resolved', 0)->update(['resolved' => 1]);
 
         return redirect()->route('backups.yandex.connectors.index');
     }
