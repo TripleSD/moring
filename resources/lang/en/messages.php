@@ -130,5 +130,5 @@ return [
      */
 
     'system_logs.errors.error' => 'Error. Check system log',
-    'system_logs.errors.error.foreign_key' => 'Mysql. Foreign key',
+    'system_logs.errors.error.foreign_key' => 'Foreign key',
 ];

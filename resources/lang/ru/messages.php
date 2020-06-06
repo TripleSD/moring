@@ -125,5 +125,5 @@ return [
     'backups.yandex.tasks.log.no_file' => 'Отсутствует файл',
 
     'system_logs.errors.error' => 'Ошибка. Проверьте системный журнал',
-    'system_logs.errors.error.foreign_key' => 'Mysql. Внешний ключ',
+    'system_logs.errors.error.foreign_key' => 'Внешний ключ',
 ];
