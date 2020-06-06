@@ -18,7 +18,7 @@ class YandexConnectorsLogsRepository extends Repository
         return BackupYandexConnectorsLogs::where('status', 0)
             ->where('resolved', 0)
             ->orderBy('id')
-            ->limit('50')
+            ->limit('15')
             ->get();
     }
 }
