@@ -199,6 +199,9 @@
                                     <span class="text-muted text-sm">
                                     @lang('messages.network.device.notifications_and_errors')
                                     </span>
+                                    <span class="badge badge-{{ ($logs->count() > 0) ? 'danger' : 'success'}}">
+                                        {{ $logs->count() }}
+                                    </span>
                                     <span class="float-right">
                                         <div class="btn-group">
                                     <a href="#"
