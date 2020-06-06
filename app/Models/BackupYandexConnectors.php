@@ -11,6 +11,14 @@ class BackupYandexConnectors extends Model
 {
     protected $table = 'backup_yandex_connectors';
 
+    protected $attributes = [
+        'status' => 1,
+        'total_space' => 0,
+        'used_space' => 0,
+        'trash_size' => 0,
+        'http_code' => 200,
+    ];
+
     protected $fillable = [
         'description',
         'token',
@@ -57,6 +65,6 @@ class BackupYandexConnectors extends Model
 
     public function logs()
     {
-        return $this->hasMany(BackupYandexConnectorsLogs::class,'connector_id', 'id');
+        return $this->hasMany(BackupYandexConnectorsLogs::class, 'connector_id', 'id');
     }
 }
