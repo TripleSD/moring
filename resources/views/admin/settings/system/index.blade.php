@@ -43,6 +43,18 @@
 
             <div class="row">
                 <div class="col-12">
+                    {{ Form::open(['url' => route('settings.integrations.telegram.update'), 'method' => 'post']) }}
+                    {{ Form::select('service', $services , ['class' => 'form-control',
+                                                    'placeholder' => 'Пример: -101xxxxxx']) }}
+                    <button type="submit" class="btn btn-xs bg-gradient-cyan mt-3">
+                        Обновить
+                    </button>
+                    {{ Form::close() }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
                     <table class="table table-responsive">
                         <thead>
                         <th>Datetime</th>
@@ -54,28 +66,39 @@
                     @foreach($logs as $log)
                         <tr>
                             <td class="col-2">
-                                <span class="small">{{ $log->created_at }}</span>
+                                <span class="text-xs">{{ $log->created_at }}</span>
                             </td>
-                            <td class="col-2">
-                                <span class="small">{{ $log->service }}</span>
+                            <td class="col-1">
+                                <span class="text-xs">{{ $log->service }}</span>
                             </td>
-                            <td class="col-3">
-                                <span class="small">@lang($log->status)</span>
+                            <td class="col-1">
+                                <span class="text-xs">@lang($log->status)</span>
                             </td>
-                            <td class="col-3">
+                            <td class="col-6">
                                 <div>
-                                    <span class="small">{{ $log->debug_info }}</span>
+                                    <span class="text-xs">{{ $log->debug_info }}</span>
                                 </div>
                                 <div>
-                                    <span class="small">{{ $log->route }}</span>
+                                    <span class="text-xs">{{ $log->route }}</span>
                                 </div>
                             </td>
                             <td class="col-2">
-                                <span class="small">{{ $log->user->name }}</span>
+                                <span class="text-xs">{{ $log->user->name }}</span>
                             </td>
                         </tr>
                     @endforeach
                     </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @if($logs instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                        <ul class="pagination pagination-xs">
+                            @if ($logs->lastPage() >= $logs->currentPage() && $logs->lastPage() > 1)
+                                {{ $logs->links('vendor.pagination.bootstrap-4') }}
+                            @endif
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>
