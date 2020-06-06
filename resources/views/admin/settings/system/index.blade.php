@@ -40,16 +40,39 @@
                     </div>
                 </div>
             </div>
+
             <div class="row">
                 <div class="col-12">
                     <table class="table table-responsive">
+                        <thead>
+                        <th>Datetime</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                        <th>User</th>
+                        </thead>
                     @foreach($logs as $log)
                         <tr>
-                            <td class="col-2">{{ $log->created_at }}</td>
-                            <td class="col-2">{{ $log->service }}</td>
-                            <td class="col-2">@lang($log->status)</td>
-                            <td class="col-4">{{ $log->debug_info }}</td>
-                            <td class="col-2">{{ $log->user_id }}</td>
+                            <td class="col-2">
+                                <span class="small">{{ $log->created_at }}</span>
+                            </td>
+                            <td class="col-2">
+                                <span class="small">{{ $log->service }}</span>
+                            </td>
+                            <td class="col-3">
+                                <span class="small">@lang($log->status)</span>
+                            </td>
+                            <td class="col-3">
+                                <div>
+                                    <span class="small">{{ $log->debug_info }}</span>
+                                </div>
+                                <div>
+                                    <span class="small">{{ $log->route }}</span>
+                                </div>
+                            </td>
+                            <td class="col-2">
+                                <span class="small">{{ $log->user->name }}</span>
+                            </td>
                         </tr>
                     @endforeach
                     </table>
