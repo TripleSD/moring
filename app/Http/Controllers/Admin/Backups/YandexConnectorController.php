@@ -98,7 +98,7 @@ class YandexConnectorController extends Controller
                 \Config::get('moring.service.yandex.disk'),
                 '-',
                 $e->getMessage(),
-                '1',
+                \Auth::user()->id,
                 \Route::getCurrentRoute()->getActionName()
             );
             return redirect()->route('backups.yandex.connectors.index');
@@ -197,10 +197,10 @@ class YandexConnectorController extends Controller
             flash(Lang::get('messages.system_logs.errors.error'))->warning();
 
             $this->logController->insert(
-                \Config::get('moring.service.mysql'),
+                \Config::get('moring.service_mysql'),
                 'messages.system_logs.errors.error.foreign_key',
                 $e->getMessage(),
-                '1',
+                \Auth::user()->id,
                 \Route::getCurrentRoute()->getActionName()
             );
 
