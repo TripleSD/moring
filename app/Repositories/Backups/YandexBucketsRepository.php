@@ -2,15 +2,19 @@
 
 namespace App\Repositories\Backups;
 
+use GuzzleHttp\Client;
 use App\Models\BackupYandexBuckets;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
+use App\Http\Controllers\Admin\System\LogController;
 
 /**
  * Class YandexBucketsRepository.
  */
 class YandexBucketsRepository extends Repository
 {
+    protected $service = 'Yandex Disk';
+
     /**
      * @return mixed
      */
@@ -26,22 +30,43 @@ class YandexBucketsRepository extends Repository
     public function cleanTrash($request)
     {
         $connector = BackupYandexConnectors::find($request->id);
+        $url       = 'https://cloud-api.yandex.net/v1/disk/trash/resources/?path=';
 
-        $ch = curl_init('https://cloud-api.yandex.net/v1/disk/trash/resources/?path=');
-        curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: OAuth ' . $connector->token]);
-        curl_setopt($ch, CURLOPT_CUSTOMREQUEST, 'DELETE');
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($ch, CURLOPT_HEADER, true);
-        curl_exec($ch);
-        $httpcode = curl_getinfo($ch, CURLINFO_RESPONSE_CODE);
-        curl_close($ch);
+        $client = new Client();
+        $res    = $client->delete(
+            $url,
+            [
+                'headers' => [
+                    "Authorization" => "OAuth $connector->token",
+                ]
+            ]
+        );
 
-        if ($httpcode !== 202) {
+        $status = json_decode($res->getBody(), true);
+
+        if ($status === null) {
+            $logController = new LogController();
+            $logController->insert(
+                $this->service,
+                $res->getStatusCode(),
+                "GET | true | $url",
+                '1',
+                \Route::getCurrentRoute()->getActionName()
+            );
+
+            return true;
+        } else {
+            $logController = new LogController();
+            $logController->insert(
+                $this->service,
+                $res->getStatusCode(),
+                "GET | false | $url",
+                '1',
+                \Route::getCurrentRoute()->getActionName()
+            );
+
             return false;
         }
-
-        return true;
     }
 
     /**
