@@ -208,6 +208,10 @@
                                        class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
                                         <i class="fas fa-eye"></i> Все записи
                                     </a>
+                                            <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
+                                               class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
+                                        <i class="fas fa-fire-extinguisher"></i> Прочитать все
+                                    </a>
                                         </div>
                                     </span>
                                 </div>
