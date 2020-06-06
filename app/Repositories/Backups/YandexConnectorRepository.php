@@ -13,10 +13,12 @@ use App\Http\Controllers\Admin\System\LogController;
 class YandexConnectorRepository extends Repository
 {
     private $logController;
+    private $backupYandexConnectors;
 
     public function __construct()
     {
-        $this->logController = new LogController();
+        $this->logController          = new LogController();
+        $this->backupYandexConnectors = new BackupYandexConnectors();
     }
 
     /**
@@ -32,7 +34,11 @@ class YandexConnectorRepository extends Repository
         return BackupYandexConnectors::pluck('description', 'id');
     }
 
-    public function refresh($connectorId)
+    /**
+     * @param $connectorId
+     * @return bool
+     */
+    public function refreshState($connectorId)
     {
         $connector = BackupYandexConnectors::find($connectorId);
         $url       = 'https://cloud-api.yandex.net/v1/disk/';
@@ -93,5 +99,26 @@ class YandexConnectorRepository extends Repository
         );
 
         return false;
+    }
+
+    /**
+     * @param $data
+     * @return mixed
+     */
+    public function store($data)
+    {
+        return $this->backupYandexConnectors->create($data);
+    }
+
+    /**
+     * @param $connectorId
+     * @param $data
+     * @return bool
+     */
+    public function update($connectorId, $data)
+    {
+        $this->backupYandexConnectors->where('id', $connectorId)->update($data);
+
+        return $this->backupYandexConnectors->update($data);
     }
 }
