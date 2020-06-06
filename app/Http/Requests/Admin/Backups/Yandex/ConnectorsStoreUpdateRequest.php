@@ -27,6 +27,7 @@ class ConnectorsStoreUpdateRequest extends FormRequest
     public function rules()
     {
         return [
+            'id' => 'integer | nullable',
             'description' => 'required',
             'token' => 'required',
             'comment' => 'nullable',
