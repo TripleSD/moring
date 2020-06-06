@@ -18,7 +18,8 @@ class SystemController extends Controller
 
     public function index()
     {
-        $logs = SystemLogs::orderBy('id', 'desc')->get();
+        $logs = SystemLogs::with('user')->orderBy('id', 'desc')->get();
+
         return view('admin.settings.system.index', compact('logs'));
     }
 }
