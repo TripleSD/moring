@@ -99,6 +99,8 @@ Route::group(
                         $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
                         Route::resource('tasks', 'YandexTaskController',
                                         ['parameters' => ['tasks' => 'id']])->only($methods);
+                        Route::get('/connectors/resolve', 'YandexConnectorController@resolve')
+                            ->name('backups.yandex.connectors.resolve');
                         Route::resource('connectors', 'YandexConnectorController',
                                         ['parameters' => ['connectors' => 'id']])->only($methods);
                         Route::get('/connectors/{id}/clean', 'YandexConnectorController@clean')
