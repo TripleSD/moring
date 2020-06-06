@@ -21,4 +21,11 @@ class YandexConnectorsLogsRepository extends Repository
             ->limit('15')
             ->get();
     }
+
+    public function getCount()
+    {
+        return BackupYandexConnectorsLogs::where('status', 0)
+            ->where('resolved', 0)
+            ->count();
+    }
 }
