@@ -7,6 +7,7 @@ use Lang;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexConnectors;
 use App\Models\BackupYandexConnectorsLogs;
+use App\Repositories\System\SystemLogRepository;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -29,7 +30,7 @@ class YandexConnectorController extends Controller
 
     public function __construct()
     {
-        $this->systemLog                      = new App\Repositories\System\SystemLogRepository();
+        $this->systemLog                      = new SystemLogRepository();
         $this->yandexConnectorsRepository     = new YandexConnectorRepository();
         $this->yandexBucketsRepository        = new YandexBucketsRepository();
         $this->yandexConnectorsLogsRepository = new yandexConnectorsLogsRepository();
