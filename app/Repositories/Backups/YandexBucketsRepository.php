@@ -6,7 +6,6 @@ use GuzzleHttp\Client;
 use App\Models\BackupYandexBuckets;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
-use App\Http\Controllers\Admin\System\LogController;
 
 /**
  * Class YandexBucketsRepository.
