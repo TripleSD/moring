@@ -7,7 +7,6 @@ use Lang;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexConnectors;
 use App\Models\BackupYandexConnectorsLogs;
-use App\Http\Controllers\Admin\System\LogController;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -26,21 +25,24 @@ class YandexConnectorController extends Controller
     private $yandexConnectorsRepository;
     private $yandexBucketsRepository;
     private $yandexConnectorsLogsRepository;
-    private $logController;
+    private $systemLog;
 
     public function __construct()
     {
-        $this->logController                  = new LogController();
+        $this->systemLog                      = new App\Repositories\System\SystemLogRepository();
         $this->yandexConnectorsRepository     = new YandexConnectorRepository();
         $this->yandexBucketsRepository        = new YandexBucketsRepository();
         $this->yandexConnectorsLogsRepository = new yandexConnectorsLogsRepository();
     }
 
     /**
+     * @param Request $request
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
+        $this->systemLog->createUserEvent($request);
+
         $connectors = $this->yandexConnectorsRepository->getList();
         $logs       = $this->yandexConnectorsLogsRepository->getList();
         $logCount   = $this->yandexConnectorsLogsRepository->getCount();
@@ -54,16 +56,21 @@ class YandexConnectorController extends Controller
      */
     public function edit(Request $request)
     {
+        $this->systemLog->createUserEvent($request);
+
         $connector = BackupYandexConnectors::find($request->id);
 
         return view('admin.backups.yandex.connectors.edit', compact('connector'));
     }
 
     /**
+     * @param Request $request
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(Request $request)
     {
+        $this->systemLog->createUserEvent($request);
+
         return view('admin.backups.yandex.connectors.create');
     }
 
@@ -73,6 +80,8 @@ class YandexConnectorController extends Controller
      */
     public function show(Request $request)
     {
+        $this->systemLog->createUserEvent($request);
+
         $connector = BackupYandexConnectors::with('logs')->find($request->id);
 
         return view('admin.backups.yandex.connectors.show', compact('connector'));
@@ -84,35 +93,27 @@ class YandexConnectorController extends Controller
      */
     public function clean(Request $request)
     {
-        $this->logController->insert(
-            \Config::get('moring.service.yandex.disk'),
-            '-',
-            '',
-            \Auth::user()->id,
-            \Route::getCurrentRoute()->getActionName()
-        );
+        $this->systemLog->createUserEvent($request);
 
-            if ($this->yandexBucketsRepository->cleanTrash($request)) {
-                $this->yandexConnectorsRepository->refreshState($request->id);
-                flash('Корзина очищена')->success();
-            } else {
-                flash('Очистка поставлена в очередь')->success();
-            }
+        if ($this->yandexBucketsRepository->cleanTrash($request)) {
+            $this->yandexConnectorsRepository->refreshState($request);
+            flash('Корзина очищена')->success();
+        } else {
+            flash('Очистка поставлена в очередь')->success();
+        }
 
-            return redirect()->route('backups.yandex.connectors.index');
+        return redirect()->route('backups.yandex.connectors.index');
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
     public function refresh(Request $request)
     {
-        $this->logController->insert(
-            \Config::get('moring.service_yandex_disk'),
-            '-',
-            $request->method(),
-            \Auth::user()->id,
-            \Route::getCurrentRoute()->getActionName()
-        );
+        $this->systemLog->createUserEvent($request);
 
-        $result = $this->yandexConnectorsRepository->refreshState($request->id);
+        $result = $this->yandexConnectorsRepository->refreshState($request);
 
         if ($result) {
             flash('Данные обновлены')->success();
@@ -129,6 +130,8 @@ class YandexConnectorController extends Controller
      */
     public function store(ConnectorsStoreUpdateRequest $request)
     {
+        $this->systemLog->createUserEvent($request);
+
         $verifiedData = $request->validated();
         $connector    = $this->yandexConnectorsRepository->store($verifiedData);
 
@@ -145,6 +148,8 @@ class YandexConnectorController extends Controller
      */
     public function update(ConnectorsStoreUpdateRequest $request)
     {
+        $this->systemLog->createUserEvent($request);
+
         $verifiedData = $request->validated();
         $connectorId  = $request->id;
 
@@ -162,6 +167,8 @@ class YandexConnectorController extends Controller
      */
     public function destroy(Request $request)
     {
+        $this->systemLog->createUserEvent($request);
+
         try {
             BackupYandexConnectors::where('id', $request->id)->delete();
             BackupYandexConnectorsLogs::where('connector_id', $request->id)->delete();
@@ -171,12 +178,10 @@ class YandexConnectorController extends Controller
         } catch (\Exception $e) {
             flash(Lang::get('messages.system_logs.errors.error'))->warning();
 
-            $this->logController->insert(
-                \Config::get('moring.service_mysql'),
-                'messages.system_logs.errors.error.foreign_key',
-                $e->getMessage(),
-                \Auth::user()->id,
-                \Route::getCurrentRoute()->getActionName()
+            $this->systemLog->createServiceEvent(
+                'mysql',
+                'messages.system_logs.errors.mysql.foreign_key',
+                $e->getMessage()
             );
 
             return redirect()->route('backups.yandex.connectors.index');
@@ -184,10 +189,13 @@ class YandexConnectorController extends Controller
     }
 
     /**
+     * @param Request $request
      * @return RedirectResponse
      */
-    public function resolve()
+    public function resolve(Request $request)
     {
+        $this->systemLog->createUserEvent($request);
+
         BackupYandexConnectorsLogs::where('resolved', 0)->update(['resolved' => 1]);
 
         return redirect()->route('backups.yandex.connectors.index');
