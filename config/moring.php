@@ -13,4 +13,5 @@ return [
     'bridgeUpdateUseMoringVersion' => '/statistics/versions/update',
     'service_mysql' => 'Mysql Server',
     'service_yandex_disk' => 'Yandex Disk',
+    'service_system' => 'System',
 ];
