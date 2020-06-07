@@ -2,9 +2,12 @@
 
 namespace App\Repositories\Backups;
 
+use Illuminate\Http\Request;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
+use Illuminate\Database\Eloquent\Builder;
 use App\Models\BackupYandexConnectorsLogs;
+use Illuminate\Database\Eloquent\Collection;
 use App\Repositories\System\SystemLogRepository;
 
 /**
@@ -12,8 +15,8 @@ use App\Repositories\System\SystemLogRepository;
  */
 class YandexConnectorRepository extends Repository
 {
-    private $systemLog;
     private $backupYandexConnectors;
+    private $systemLog;
 
     public function __construct()
     {
@@ -22,13 +25,16 @@ class YandexConnectorRepository extends Repository
     }
 
     /**
-     * @return mixed
+     * @return Builder[]|Collection
      */
     public function getList()
     {
         return BackupYandexConnectors::with('logs')->orderBy('id', 'desc')->get();
     }
 
+    /**
+     * @return mixed
+     */
     public function getPluckList()
     {
         return BackupYandexConnectors::pluck('description', 'id');
@@ -40,6 +46,8 @@ class YandexConnectorRepository extends Repository
      */
     public function refreshState($request)
     {
+        /* @var $request Request */
+
         $connector = BackupYandexConnectors::find($request->id);
         $url       = 'https://cloud-api.yandex.net/v1/disk/';
         $ch        = curl_init($url);
@@ -71,7 +79,7 @@ class YandexConnectorRepository extends Repository
             $this->systemLog->createServiceEvent(
                 \Config::get('moring.service_yandex_disk'),
                 $httpcode,
-                'GET' . ' | ' . $url
+                $request->method() . PHP_EOL . $url
             );
 
             return true;
@@ -91,7 +99,7 @@ class YandexConnectorRepository extends Repository
         $this->systemLog->createServiceEvent(
             \Config::get('moring.service_yandex_disk'),
             $httpcode,
-            'GET' . ' | ' . $res['error'] . ' | ' . $url
+            $request->method() . PHP_EOL . $res['error'] . PHP_EOL . $url,
         );
 
         return false;
