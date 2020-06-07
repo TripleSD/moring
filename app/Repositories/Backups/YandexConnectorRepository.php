@@ -34,7 +34,6 @@ class YandexConnectorRepository extends Repository
         return BackupYandexConnectors::pluck('description', 'id');
     }
 
-
     /**
      * @param $request
      * @return bool
@@ -70,7 +69,6 @@ class YandexConnectorRepository extends Repository
 
             // Insert event to system log
             $this->systemLog->createServiceEvent(
-                $request,
                 \Config::get('moring.service_yandex_disk'),
                 $httpcode,
                 'GET' . ' | ' . $url
@@ -91,10 +89,9 @@ class YandexConnectorRepository extends Repository
 
         // Insert event to system log
         $this->systemLog->createServiceEvent(
-            $request,
             \Config::get('moring.service_yandex_disk'),
-            'GET' . ' | ' . $res['error'] . ' | ' . $url,
-            $httpcode
+            $httpcode,
+            'GET' . ' | ' . $res['error'] . ' | ' . $url
         );
 
         return false;
