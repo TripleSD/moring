@@ -63,30 +63,37 @@
                         <th>Description</th>
                         <th>User</th>
                         </thead>
-                    @foreach($logs as $log)
-                        <tr>
-                            <td class="col-2">
-                                <span class="text-xs">{{ $log->created_at }}</span>
-                            </td>
-                            <td class="col-1">
-                                <span class="text-xs">{{ $log->service }}</span>
-                            </td>
-                            <td class="col-1">
-                                <span class="text-xs">@lang($log->status)</span>
-                            </td>
-                            <td class="col-6">
-                                <div>
-                                    <span class="text-xs">{{ $log->debug_info }}</span>
-                                </div>
-                                <div>
-                                    <span class="text-xs">{{ $log->route }}</span>
-                                </div>
-                            </td>
-                            <td class="col-2">
-                                <span class="text-xs">{{ $log->user->name }}</span>
-                            </td>
-                        </tr>
-                    @endforeach
+                        @foreach($logs as $log)
+                            <tr>
+                                <td class="col-2">
+                                    <span class="text-xs">{{ $log->created_at }}</span>
+                                </td>
+                                <td class="col-1">
+                                    <span class="text-xs">{{ $log->service }}</span>
+                                </td>
+                                <td class="col-1">
+                                    <span class="text-xs">@lang($log->status)</span>
+                                </td>
+                                <td class="col-6">
+                                    <div>
+                                        <span class="text-xs">{{ $log->debug_info }}</span>
+                                    </div>
+                                    <div>
+                                    <span class="text-xs">
+                                        <span class="badge badge-success">
+                                            Route:
+                                        </span>
+                                        <span class="badge badge-dark">
+                                            {{ $log->route }}
+                                        </span>
+                                    </span>
+                                    </div>
+                                </td>
+                                <td class="col-2">
+                                    <span class="text-xs">{{ $log->user->name }}</span>
+                                </td>
+                            </tr>
+                        @endforeach
                     </table>
                 </div>
             </div>
