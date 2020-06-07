@@ -119,11 +119,13 @@ return [
     /**
      * Yandex tasks page.
      */
-
     'backups.yandex.tasks.log.task' => 'Задача',
     'backups.yandex.tasks.log.error' => 'Ошибка',
     'backups.yandex.tasks.log.no_file' => 'Отсутствует файл',
 
+    /**
+     *  System Logs.
+     */
     'system_logs.errors.error' => 'Ошибка. Проверьте системный журнал',
-    'system_logs.errors.error.foreign_key' => 'Внешний ключ',
+    'system_logs.errors.mysql.foreign_key' => 'Внешний ключ',
 ];

@@ -110,8 +110,6 @@ return [
     'backups.yandex.fields.online' => 'Online',
     'backups.yandex.fields.offline' => 'Offline',
 
-
-
     /**
      * Yandex connectors page.
      */
@@ -119,16 +117,16 @@ return [
     'backups.yandex.connectors.log.error' => 'Error',
     'backups.yandex.connectors.log.down' => 'Connection failed',
 
+    /**
+     * Yandex tasks page.
+     */
     'backups.yandex.tasks.log.task' => 'Task',
     'backups.yandex.tasks.log.error' => 'Error',
     'backups.yandex.tasks.log.no_file' => 'Missing file',
 
-
-
     /**
      *  System Logs.
      */
-
     'system_logs.errors.error' => 'Error. Check system log',
-    'system_logs.errors.error.foreign_key' => 'Foreign key',
+    'system_logs.errors.mysql.foreign_key' => 'Foreign key',
 ];
