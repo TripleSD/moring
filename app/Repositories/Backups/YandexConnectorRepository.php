@@ -5,19 +5,19 @@ namespace App\Repositories\Backups;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
 use App\Models\BackupYandexConnectorsLogs;
-use App\Http\Controllers\Admin\System\LogController;
+use App\Repositories\System\SystemLogRepository;
 
 /**
  * Class YandexConnectorsRepository.
  */
 class YandexConnectorRepository extends Repository
 {
-    private $logController;
+    private $systemLog;
     private $backupYandexConnectors;
 
     public function __construct()
     {
-        $this->logController          = new LogController();
+        $this->systemLog              = new SystemLogRepository();
         $this->backupYandexConnectors = new BackupYandexConnectors();
     }
 
@@ -34,13 +34,14 @@ class YandexConnectorRepository extends Repository
         return BackupYandexConnectors::pluck('description', 'id');
     }
 
+
     /**
-     * @param $connectorId
+     * @param $request
      * @return bool
      */
-    public function refreshState($connectorId)
+    public function refreshState($request)
     {
-        $connector = BackupYandexConnectors::find($connectorId);
+        $connector = BackupYandexConnectors::find($request->id);
         $url       = 'https://cloud-api.yandex.net/v1/disk/';
         $ch        = curl_init($url);
         curl_setopt($ch, CURLOPT_HTTPHEADER, ['Authorization: OAuth ' . $connector->token]);
@@ -68,12 +69,11 @@ class YandexConnectorRepository extends Repository
             BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1,]);
 
             // Insert event to system log
-            $this->logController->insert(
+            $this->systemLog->createServiceEvent(
+                $request,
                 \Config::get('moring.service_yandex_disk'),
                 $httpcode,
-                'GET' . ' | ' . $url,
-                \Auth::user()->id,
-                \Route::getCurrentRoute()->getActionName()
+                'GET' . ' | ' . $url
             );
 
             return true;
@@ -90,12 +90,11 @@ class YandexConnectorRepository extends Repository
         BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0,]);
 
         // Insert event to system log
-        $this->logController->insert(
+        $this->systemLog->createServiceEvent(
+            $request,
             \Config::get('moring.service_yandex_disk'),
-            $httpcode,
             'GET' . ' | ' . $res['error'] . ' | ' . $url,
-            \Auth::user()->id,
-            \Route::getCurrentRoute()->getActionName()
+            $httpcode
         );
 
         return false;
