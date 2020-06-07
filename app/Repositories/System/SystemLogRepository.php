@@ -18,7 +18,7 @@ class SystemLogRepository extends Repository
     public function createUserEvent($request)
     {
         $logArray = [
-            'service' => \Config::get('moring.service_user'),
+            'service' => \Config::get('moring.service_system'),
             'debug_info' => $request->method(),
             'status' => $request->server('REDIRECT_STATUS'),
             'user_id' => \Auth::user()->id,
