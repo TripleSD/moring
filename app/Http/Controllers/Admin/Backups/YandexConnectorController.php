@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin\Backups;
 
 use App;
 use Lang;
+use App\Models\BackupYandexTask;
+use App\Models\BackupYandexBuckets;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexConnectors;
 use App\Models\BackupYandexConnectorsLogs;
@@ -84,8 +86,10 @@ class YandexConnectorController extends Controller
         $this->systemLog->createUserEvent($request);
 
         $connector = BackupYandexConnectors::with('logs')->find($request->id);
+        $tasks     = BackupYandexTask::where('connector_id', $request->id)->get();
+        $buckets   = BackupYandexBuckets::where('connector_id', $request->id)->get();
 
-        return view('admin.backups.yandex.connectors.show', compact('connector'));
+        return view('admin.backups.yandex.connectors.show', compact('connector', 'tasks', 'buckets'));
     }
 
     /**
