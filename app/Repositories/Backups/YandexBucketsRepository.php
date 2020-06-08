@@ -6,19 +6,30 @@ use GuzzleHttp\Client;
 use App\Models\BackupYandexBuckets;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
+use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Collection;
+use App\Repositories\System\SystemLogRepository;
 
 /**
  * Class YandexBucketsRepository.
  */
 class YandexBucketsRepository extends Repository
 {
-    protected $service = 'Yandex Disk';
+    private $systemLog;
+
+    public function __construct()
+    {
+        $this->systemLog              = new SystemLogRepository();
+    }
 
     /**
-     * @return mixed
+     * @param $request
+     * @return Builder[]|Collection
      */
-    public function getList()
+    public function getList($request)
     {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexBuckets::with('connector')->get();
     }
 
@@ -28,6 +39,8 @@ class YandexBucketsRepository extends Repository
      */
     public function cleanTrash($request)
     {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
         $connector = BackupYandexConnectors::find($request->id);
         $url       = 'https://cloud-api.yandex.net/v1/disk/trash/resources/?path=';
 
@@ -44,24 +57,22 @@ class YandexBucketsRepository extends Repository
         $status = json_decode($res->getBody(), true);
 
         if ($status === null) {
-            $logController = new LogController();
-            $logController->insert(
-                $this->service,
+            // Insert event to system log
+            $this->systemLog->createServiceEvent(
+                __FUNCTION__,
+                \Config::get('moring.service_yandex_disk'),
                 $res->getStatusCode(),
-                "GET | true | $url",
-                '1',
-                \Route::getCurrentRoute()->getActionName()
+                $request->method() . PHP_EOL . $url
             );
 
             return true;
         } else {
-            $logController = new LogController();
-            $logController->insert(
-                $this->service,
+            // Insert event to system log
+            $this->systemLog->createServiceEvent(
+                __FUNCTION__,
+                \Config::get('moring.service_yandex_disk'),
                 $res->getStatusCode(),
-                "GET | false | $url",
-                '1',
-                \Route::getCurrentRoute()->getActionName()
+                $request->method() . PHP_EOL . $url
             );
 
             return false;
@@ -74,16 +85,19 @@ class YandexBucketsRepository extends Repository
      */
     public function getBucket($request)
     {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexBuckets::find($request->id);
     }
 
     /**
-     * @param $dataArray
-     * @param $bucketId
+     * @param $request
      * @return mixed
      */
-    public function updateBucket($dataArray, $bucketId)
+    public function updateBucket($request)
     {
-        return BackupYandexBuckets::where('id', $bucketId)->update($dataArray);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
+        return BackupYandexBuckets::where('id', $request->id)->update($request->validated());
     }
 }
