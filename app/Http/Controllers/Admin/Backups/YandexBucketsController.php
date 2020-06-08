@@ -28,12 +28,13 @@ class YandexBucketsController extends Controller
     }
 
     /**
+     * @param Request $request
      * @param YandexBucketsRepository $yandexBucketsRepository
      * @return Application|Factory|View
      */
-    public function index(YandexBucketsRepository $yandexBucketsRepository)
+    public function index(Request $request, YandexBucketsRepository $yandexBucketsRepository)
     {
-        $buckets = $yandexBucketsRepository->getList();
+        $buckets = $yandexBucketsRepository->getList($request);
         $logs    = BackupYandexBucketsLogs::where('status', 0)
             ->where('resolved', 0)
             ->orderBy('id')
@@ -62,7 +63,7 @@ class YandexBucketsController extends Controller
     public function update(BucketsStoreRequest $request)
     {
         try {
-            $this->yandexBucketsRepository->updateBucket($request->validated(), $request->id);
+            $this->yandexBucketsRepository->updateBucket($request);
 
             flash('Данные обновлены')->success();
 
