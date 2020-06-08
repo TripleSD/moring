@@ -117,13 +117,13 @@ class YandexConnectorRepository extends Repository
     }
 
     /**
-     * @param $connectorId
+     * @param $request
      * @param $data
      * @return bool
      */
-    public function update($connectorId, $data)
+    public function update($request, $data)
     {
-        $this->backupYandexConnectors->where('id', $connectorId)->update($data);
+        $this->backupYandexConnectors->where('id', $request->id)->update($data);
 
         return $this->backupYandexConnectors->update($data);
     }

@@ -138,9 +138,8 @@ class YandexConnectorController extends Controller
         $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $verifiedData = $request->validated();
-        $connector    = $this->yandexConnectorsRepository->store($verifiedData);
-
-        $this->yandexConnectorsRepository->refreshState($connector->id);
+        $this->yandexConnectorsRepository->store($verifiedData);
+        $this->yandexConnectorsRepository->refreshState($request);
 
         flash('Коннектор добавлен')->success();
 
@@ -156,10 +155,9 @@ class YandexConnectorController extends Controller
         $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $verifiedData = $request->validated();
-        $connectorId  = $request->id;
 
-        $this->yandexConnectorsRepository->update($connectorId, $verifiedData);
-        $this->yandexConnectorsRepository->refreshState($connectorId);
+        $this->yandexConnectorsRepository->update($request, $verifiedData);
+        $this->yandexConnectorsRepository->refreshState($request);
 
         flash('Данные обновлены.')->success();
 
