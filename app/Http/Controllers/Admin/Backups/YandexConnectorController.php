@@ -44,7 +44,7 @@ class YandexConnectorController extends Controller
      */
     public function index(Request $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $connectors = $this->yandexConnectorsRepository->getList();
         $logs       = $this->yandexConnectorsLogsRepository->getList();
@@ -59,7 +59,7 @@ class YandexConnectorController extends Controller
      */
     public function edit(Request $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $connector = BackupYandexConnectors::find($request->id);
 
@@ -72,7 +72,7 @@ class YandexConnectorController extends Controller
      */
     public function create(Request $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         return view('admin.backups.yandex.connectors.create');
     }
@@ -83,7 +83,7 @@ class YandexConnectorController extends Controller
      */
     public function show(Request $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $connector = BackupYandexConnectors::with('logs')->find($request->id);
         $tasks     = BackupYandexTask::where('connector_id', $request->id)->get();
@@ -98,7 +98,7 @@ class YandexConnectorController extends Controller
      */
     public function clean(Request $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         if ($this->yandexBucketsRepository->cleanTrash($request)) {
             $this->yandexConnectorsRepository->refreshState($request);
@@ -116,7 +116,7 @@ class YandexConnectorController extends Controller
      */
     public function refresh(Request $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $result = $this->yandexConnectorsRepository->refreshState($request);
 
@@ -135,7 +135,7 @@ class YandexConnectorController extends Controller
      */
     public function store(ConnectorsStoreUpdateRequest $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $verifiedData = $request->validated();
         $connector    = $this->yandexConnectorsRepository->store($verifiedData);
@@ -153,7 +153,7 @@ class YandexConnectorController extends Controller
      */
     public function update(ConnectorsStoreUpdateRequest $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $verifiedData = $request->validated();
         $connectorId  = $request->id;
@@ -172,7 +172,7 @@ class YandexConnectorController extends Controller
      */
     public function destroy(Request $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         try {
             BackupYandexConnectors::where('id', $request->id)->delete();
@@ -184,6 +184,7 @@ class YandexConnectorController extends Controller
             flash(Lang::get('messages.system_logs.errors.error'))->warning();
 
             $this->systemLog->createServiceEvent(
+                __FUNCTION__,
                 'mysql',
                 'messages.system_logs.errors.mysql.foreign_key',
                 $e->getMessage()
@@ -199,7 +200,7 @@ class YandexConnectorController extends Controller
      */
     public function resolve(Request $request)
     {
-        $this->systemLog->createUserEvent($request);
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         BackupYandexConnectorsLogs::where('resolved', 0)->update(['resolved' => 1]);
 
