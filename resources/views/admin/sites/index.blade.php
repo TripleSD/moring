@@ -280,21 +280,28 @@
                                                                         <i class="fa fa-exclamation-triangle"></i>
                                                                 </span>
                                                             @else
-                                                                @if(preg_match('/nginx/', $site->getWebServer->web_server))
+                                                                @if(preg_match('/Nginx|nginx/', $site->getWebServer->web_server))
                                                                     <div class="badge badge-success">
                                                                         Nginx
                                                                     </div>
-                                                                    {{$site->getWebServer->web_server}}
-                                                                @elseif(preg_match('/Apache/', $site->getWebServer->web_server))
+                                                                    <div>
+                                                                        {{$site->getWebServer->web_server}}
+                                                                    </div>
+                                                                @elseif(preg_match('/Apache|apache/', $site->getWebServer->web_server))
                                                                     <div class="badge badge-success">
                                                                         Apache
                                                                     </div>
-                                                                    {{$site->getWebServer->web_server}}
-                                                                @elseif(preg_match('/IIS/', $site->getWebServer->web_server))
+                                                                    <div>
+                                                                        {{$site->getWebServer->web_server}}
+                                                                    </div>
+
+                                                                @elseif(preg_match('/IIS|iis/', $site->getWebServer->web_server))
                                                                     <div class="badge badge-success">
                                                                         IIS
                                                                     </div>
-                                                                    {{$site->getWebServer->web_server}}
+                                                                    <div class="text-break">
+                                                                        {{$site->getWebServer->web_server}}
+                                                                    </div>
                                                                 @else
                                                                     <div class="badge badge-dark">
                                                                         Unknown
@@ -304,7 +311,7 @@
                                                             @endempty
                                                         </div>
                                                         <div>
-                                                            <br><br>
+                                                            <br>
                                                         </div>
                                                         <div class="text-gray">
                                                             <i class="fas fa-flag-checkered"></i>
