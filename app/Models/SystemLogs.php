@@ -17,6 +17,7 @@ class SystemLogs extends Model
         'debug_info',
         'user_id',
         'route',
+        'callable_function'
     ];
 
     public function user()
