@@ -102,12 +102,12 @@ return [
     'backups.yandex.fields.status' => 'Статус',
     'backups.yandex.fields.last_check' => 'Последняя проверка',
     'backups.yandex.fields.total' => 'Всего',
-    'backups.yandex.fields.bycket' => 'Корзина',
+    'backups.yandex.fields.bucket' => 'Корзина',
     'backups.yandex.fields.gb' => 'ГБ',
     'backups.yandex.fields.of' => 'из',
     'backups.yandex.fields.used' => 'Используется',
-    'backups.yandex.fields.online' => 'Актиный',
-    'backups.yandex.fields.offline' => 'Не активный',
+    'backups.yandex.fields.online' => 'Онлайн',
+    'backups.yandex.fields.offline' => 'Офлайн',
 
     /**
      * Yandex connectors page.
