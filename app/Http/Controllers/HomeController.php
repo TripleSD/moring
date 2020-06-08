@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Repositories\AdminSitesRepository;
 use App\Repositories\ItemsSortRepository;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Contracts\Support\Renderable;
 
 class HomeController extends Controller
 {
@@ -20,8 +21,8 @@ class HomeController extends Controller
 
     /**
      * Show the application dashboard.
-     *
-     * @return \Illuminate\Contracts\Support\Renderable
+     * @param AdminSitesRepository $adminSiteRepository
+     * @return Renderable
      */
     public function index(AdminSitesRepository $adminSiteRepository)
     {
