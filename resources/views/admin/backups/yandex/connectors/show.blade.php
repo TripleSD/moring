@@ -83,7 +83,7 @@
                                         <li class="small">
                                             Комментарий:
                                             <span class="float-right">
-                                        {{ $connector->description }}
+                                        {{ $connector->comment }}
                                     </span>
                                         </li>
                                         <li class="small">
