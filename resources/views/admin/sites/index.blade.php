@@ -306,7 +306,9 @@
                                                                     <div class="badge badge-dark">
                                                                         Unknown
                                                                     </div>
-                                                                    {{$site->getWebServer->web_server}}
+                                                                    <div>
+                                                                        {{$site->getWebServer->web_server}}
+                                                                    </div>
                                                                 @endif
                                                             @endempty
                                                         </div>
