@@ -20,6 +20,7 @@ class CreateSystemLogsTable extends Migration
             $table->text('debug_info')->nullable()->comment('Full error text');
             $table->integer('user_id')->comment('User ID');
             $table->string('route')->comment('Current route');
+            $table->string('callable_function')->comment('Callable function');
             $table->timestamps();
         });
     }
