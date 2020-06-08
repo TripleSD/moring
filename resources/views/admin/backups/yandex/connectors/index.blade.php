@@ -203,7 +203,7 @@
                             <div class="card">
                                 <div class="card-header">
                                     <span class="text-muted text-sm">
-                                    @lang('messages.network.device.notifications_and_errors')
+                                    @lang('messages.backups.yandex.titles.errors')
                                     </span>
                                     <span class="badge badge-{{ ($logCount > 0) ? 'danger' : 'success'}}">
                                         {{ $logCount }}
