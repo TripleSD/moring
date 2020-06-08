@@ -77,6 +77,7 @@ class YandexConnectorRepository extends Repository
 
             // Insert event to system log
             $this->systemLog->createServiceEvent(
+                __FUNCTION__,
                 \Config::get('moring.service_yandex_disk'),
                 $httpcode,
                 $request->method() . PHP_EOL . $url
@@ -97,9 +98,10 @@ class YandexConnectorRepository extends Repository
 
         // Insert event to system log
         $this->systemLog->createServiceEvent(
+            __FUNCTION__,
             \Config::get('moring.service_yandex_disk'),
             $httpcode,
-            $request->method() . PHP_EOL . $res['error'] . PHP_EOL . $url,
+            $request->method() . PHP_EOL . $res['error'] . PHP_EOL . $url
         );
 
         return false;
