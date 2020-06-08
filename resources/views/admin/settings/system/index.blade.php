@@ -68,25 +68,30 @@
                                 <td class="col-2">
                                     <span class="text-xs">{{ $log->created_at }}</span>
                                 </td>
-                                <td class="col-1">
+                                <td class="col-2">
                                     <span class="text-xs">{{ $log->service }}</span>
                                 </td>
                                 <td class="col-1">
                                     <span class="text-xs">@lang($log->status)</span>
                                 </td>
-                                <td class="col-6">
-                                    <div>
-                                        <span class="text-xs">{{ $log->debug_info }}</span>
-                                    </div>
-                                    <div>
-                                    <span class="text-xs">
+                                <td class="col-5">
+                                    <div class="text-xs">
                                         <span class="badge badge-success">
                                             Route:
                                         </span>
-                                        <span class="badge badge-dark">
-                                            {{ $log->route }}
+                                        {{ $log->route }}
+                                    </div>
+                                    <div class="text-xs">
+                                        <span class="badge badge-info">
+                                            Callable function:
                                         </span>
-                                    </span>
+                                        {{ $log->callable_function }}
+                                    </div>
+                                    <div class="text-xs">
+                                        <span class="badge badge-dark">
+                                            Info:
+                                        </span>
+                                        {{ $log->debug_info }}
                                     </div>
                                 </td>
                                 <td class="col-2">
