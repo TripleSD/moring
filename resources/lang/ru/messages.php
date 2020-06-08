@@ -96,6 +96,8 @@ return [
     'backups.yandex.breadcrumbs.small.tasks' => 'Задачи',
     'backups.yandex.breadcrumbs.small.buckets' => 'Корзины',
 
+    'backups.yandex.titles.errors' => 'Ошибки',
+
     'backups.yandex.buttons.add' => 'Добавить',
 
     'backups.yandex.fields.connector' => 'ID коннектора',

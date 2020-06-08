@@ -97,6 +97,8 @@ return [
     'backups.yandex.breadcrumbs.small.tasks' => 'Tasks',
     'backups.yandex.breadcrumbs.small.buckets' => 'Buckets',
 
+    'backups.yandex.titles.errors' => 'Errors',
+
     'backups.yandex.buttons.add' => 'Add',
 
     'backups.yandex.fields.connector' => 'Connector ID',
