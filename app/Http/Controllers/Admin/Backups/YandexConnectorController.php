@@ -28,11 +28,10 @@ class YandexConnectorController extends Controller
     private $yandexConnectorsRepository;
     private $yandexBucketsRepository;
     private $yandexConnectorsLogsRepository;
-    private $systemLog;
 
     public function __construct()
     {
-        $this->systemLog                      = new SystemLogRepository();
+        parent::__construct();
         $this->yandexConnectorsRepository     = new YandexConnectorRepository();
         $this->yandexBucketsRepository        = new YandexBucketsRepository();
         $this->yandexConnectorsLogsRepository = new yandexConnectorsLogsRepository();
