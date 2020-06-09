@@ -32,7 +32,16 @@ class YandexBucketsRepository extends Repository
     {
         $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
-        return BackupYandexBuckets::with('connector')->get();
+        return BackupYandexBuckets::with(
+            [
+                'connector',
+                'logs' => function ($q) {
+                    return $q->where('resolved', 0);
+                },
+            ]
+        )
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     /**
