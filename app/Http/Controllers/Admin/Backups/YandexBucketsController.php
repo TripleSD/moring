@@ -113,7 +113,7 @@ class YandexBucketsController extends Controller
      */
     public function destroy(Request $request)
     {
-        BackupYandexBuckets::where('id', $request->id)->delete();
+        $this->yandexBucketsRepository->destroyBucket($request);
 
         flash('Задание удалено.')->success();
 
