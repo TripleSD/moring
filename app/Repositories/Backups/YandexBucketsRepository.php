@@ -111,4 +111,13 @@ class YandexBucketsRepository extends Repository
 
         return BackupYandexBuckets::create($request->validated());
     }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    public function destroyBucket($request)
+    {
+        return BackupYandexBuckets::where('id', $request->id)->delete();
+    }
 }
