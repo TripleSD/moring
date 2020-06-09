@@ -68,7 +68,7 @@
                                             <div class="row">
                                                 <div class="col-12">
                                                     <b>
-                                                        <i class="fas fa-user-circle"></i>
+                                                        <i class="fas fa-plug"></i>
                                                         {{ $connector->description }}
                                                     </b>
                                                 </div>

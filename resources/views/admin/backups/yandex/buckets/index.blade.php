@@ -55,87 +55,100 @@
                     <div class="row">
                         <div class="col-sm-6">
                             @foreach($buckets as $bucket)
-                                <div class="callout callout-{{ ($bucket->enabled) ? 'success' : 'danger' }}">
+                                <div class="callout callout-{{ ($bucket->enabled) ? 'success' : 'warning' }}"
+                                     style="background: {{ ($bucket->status) ? 'white' : '#FFF5EE' }}">
                                     <div class="row">
-                                        <div class="col-11">
-                                            <div class="row small">
-                                                <div class="col-4">
-                                                    <b>Status:</b>
+                                        <div class="col-12">
+                                            <div class="row">
+                                                <div class="col-12">
+                                                    <b>
+                                                        <i class="fas fa-dumpster"></i>
+                                                        {{ $bucket->description }}
+                                                    </b>
                                                 </div>
-                                                <div class="col-8">
-
-                                                    @if($bucket->enabled === 1)
-                                                        <div class="badge badge-success">
-                                                            @lang('messages.network.device.enabled')
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-11">
+                                                    <div class="row small">
+                                                        <div class="col-4">
+                                                            <b>Status:</b>
                                                         </div>
-                                                    @else
-                                                        <div class="small badge badge-secondary">
-                                                            @lang('messages.network.device.disabled')
+                                                        <div class="col-8">
+
+                                                            @if($bucket->enabled === 1)
+                                                                <div class="badge badge-success">
+                                                                    @lang('messages.network.device.enabled')
+                                                                </div>
+                                                            @else
+                                                                <div class="small badge badge-secondary">
+                                                                    @lang('messages.network.device.disabled')
+                                                                </div>
+                                                            @endif
+                                                            {{--                                                    @if($bucket->logs->count() !== 0)--}}
+                                                            {{--                                                        <div class="badge badge-danger">--}}
+                                                            {{--                                                            <i class="fas fa-exclamation-triangle"></i>--}}
+                                                            {{--                                                            {{ $task->logs->count() }}--}}
+                                                            {{--                                                        </div>--}}
+                                                            {{--                                                    @endif--}}
                                                         </div>
-                                                    @endif
-                                                    {{--                                                    @if($bucket->logs->count() !== 0)--}}
-                                                    {{--                                                        <div class="badge badge-danger">--}}
-                                                    {{--                                                            <i class="fas fa-exclamation-triangle"></i>--}}
-                                                    {{--                                                            {{ $task->logs->count() }}--}}
-                                                    {{--                                                        </div>--}}
-                                                    {{--                                                    @endif--}}
-                                                </div>
-                                            </div>
+                                                    </div>
 
 
-                                            <div class="row small">
-                                                <div class="col-4">
-                                                    <b>Коннектор:</b>
-                                                </div>
-                                                <div class="col-8">
-                                                    {{ $bucket->connector->description }}
-                                                </div>
-                                            </div>
-                                            <div class="row small">
-                                                <div class="col-4">
-                                                    <b>Интервал проверки:</b>
-                                                </div>
-                                                <div class="col-8">
-                                                    {{ $bucket->interval }} час.
-                                                </div>
-                                            </div>
-                                            <div class="row small">
-                                                <div class="col-4">
-                                                    Last check:
-                                                </div>
-                                                <div class="col-8">
-                                                    {{ $bucket->updated_at }}
-                                                </div>
-                                            </div>
+                                                    <div class="row small">
+                                                        <div class="col-4">
+                                                            <b>Коннектор:</b>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            {{ $bucket->connector->description }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row small">
+                                                        <div class="col-4">
+                                                            <b>Интервал проверки:</b>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            {{ $bucket->interval }} час.
+                                                        </div>
+                                                    </div>
+                                                    <div class="row small">
+                                                        <div class="col-4">
+                                                            Last check:
+                                                        </div>
+                                                        <div class="col-8">
+                                                            {{ $bucket->updated_at }}
+                                                        </div>
+                                                    </div>
 
-                                            <div class="row small">
-                                                <div class="col-4">
-                                                    <b>Корзина добавлена:</b>
+                                                    <div class="row small">
+                                                        <div class="col-4">
+                                                            <b>Корзина добавлена:</b>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            {{ $bucket->created_at }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row small">
+                                                        <div class="col-4">
+                                                            <b>Описание:</b>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            {{ $bucket->description }}
+                                                        </div>
+                                                    </div>
                                                 </div>
-                                                <div class="col-8">
-                                                    {{ $bucket->created_at }}
+                                                <div class="col-1">
+                                                    <div class="btn-group-vertical">
+                                                        <a href="{{route('backups.yandex.buckets.show',$bucket->id)}}"
+                                                           class="btn btn-xs btn-outline-info"
+                                                           title="Просмотр устройства">
+                                                            <i class="fa fa-eye"></i>
+                                                        </a>
+                                                        <a href="{{route('backups.yandex.buckets.edit', $bucket->id)}}"
+                                                           class="btn btn-xs btn-outline-warning"
+                                                           title="Редактирование устройства">
+                                                            <i class="fa fa-edit"></i></a>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="row small">
-                                                <div class="col-4">
-                                                    <b>Описание:</b>
-                                                </div>
-                                                <div class="col-8">
-                                                    {{ $bucket->description }}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-1">
-                                            <div class="btn-group-vertical">
-                                                <a href="{{route('backups.yandex.buckets.show',$bucket->id)}}"
-                                                   class="btn btn-xs btn-outline-info"
-                                                   title="Просмотр устройства">
-                                                    <i class="fa fa-eye"></i>
-                                                </a>
-                                                <a href="{{route('backups.yandex.buckets.edit', $bucket->id)}}"
-                                                   class="btn btn-xs btn-outline-warning"
-                                                   title="Редактирование устройства">
-                                                    <i class="fa fa-edit"></i></a>
                                             </div>
                                         </div>
                                     </div>
