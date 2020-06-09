@@ -44,9 +44,9 @@
                                     * - обязательно для заполнения
                                 </span>
 
-                                {{ Form::open([ 'url' => route('backups.ftp.store'), 'method' => 'post']) }}
+                                {{ Form::open([ 'url' => route('backups.yandex.buckets.store'), 'method' => 'post']) }}
                                 <div class="form-group">
-                                    <b>Описание</b>
+                                    <b>Краткое описание</b>
                                     <span class="small text-danger">*</span>
                                     {{ Form::text('description', null , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
                                     <details class="mt--3 small">
@@ -58,9 +58,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Сетевое имя устройства или IP адрес</b>
+                                    <b>Коннектор</b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::text('hostname', null , ['class' => 'form-control', 'required', 'placeholder' => 'mydevice.local или 192.168.88.1']) }}
+                                    {{ Form::select('connector_id', $connectors, null, ['class' => 'form-control', 'required', 'placeholder' => 'Выберите коннектор...']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
@@ -70,77 +70,9 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Порт</b>
-                                    <span class="small text-danger">*</span>
-                                    {{ Form::text('port', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: 21']) }}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Логин</b>
-                                    <span class="small text-danger">*</span>
-                                    {{Form::text('login', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: backup-user'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Пароль</b>
-                                    {{Form::text('password', null, ['class' => 'form-control', 'placeholder' => 'Пример: 7{m5MUqpBDEmEXG'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Папка</b>
-                                    {{Form::text('folder', null, ['class' => 'form-control', 'placeholder' => 'Пример: BackupSite'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Pre suffix</b>
-                                    {{Form::text('pre', null, ['class' => 'form-control', 'placeholder' => 'Пример: backup_'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>Post suffix</b>
-                                    {{Form::text('post', null, ['class' => 'form-control', 'placeholder' => 'Пример: _%Y-%m-%d'])}}
-                                    <details class="mt--3 small">
-                                        <summary>
-                                            Дополнительная информация
-                                        </summary>
-                                        ...
-                                    </details>
-                                </div>
-
-                                <div class="form-group">
-                                    <b>File</b>
-                                    <span class="small text-danger">*</span>
-                                    {{Form::text('filename', null, ['class' => 'form-control', 'required', 'placeholder' => 'Пример: test.tar'])}}
+                                    <b>Комментарий</b>
+                                    {{ Form::textarea('comment', null, ['class' => 'form-control',
+                                        'rows' => 5, 'placeholder' => 'Комментарий...']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             Дополнительная информация
