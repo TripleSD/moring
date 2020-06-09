@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\Admin\Backups;
+namespace App\Http\Requests\Admin\Backups\Yandex;
 
 use Illuminate\Foundation\Http\FormRequest;
 
 /**
- * Class BucketsStoreRequest
+ * Class BucketsStoreUpdateRequest.
  */
-class BucketsStoreRequest extends FormRequest
+class BucketsStoreUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
