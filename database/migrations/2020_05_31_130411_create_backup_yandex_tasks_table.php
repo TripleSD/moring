@@ -23,9 +23,9 @@ class CreateBackupYandexTasksTable extends Migration
                 $table->string('post')->nullable()->comment('String after filename');
                 $table->string('folder')->nullable()->comment('Folder path');
                 $table->smallInteger('interval')->comment('Check interval');
-                $table->boolean('enabled')->default(0)->comment('Enable/disable status');
+                $table->boolean('enabled')->comment('Enable/disable status');
                 $table->string('description')->comment('Task description');
-                $table->text('comment')->nullable()->comment('Task comment');
+                $table->text('comment')->nullable()->comment('User comment');
                 $table->integer('http_code')->comment('HTTP response code');
                 $table->foreign('connector_id')
                     ->references('id')
