@@ -45,7 +45,11 @@ class YandexBucketsController extends Controller
             ->limit('50')
             ->get();
 
-        return view('admin.backups.yandex.buckets.index', compact('buckets', 'logs'));
+        $logCount   = BackupYandexBucketsLogs::where('status', 0)
+            ->where('resolved', 0)
+            ->count();
+
+        return view('admin.backups.yandex.buckets.index', compact('buckets', 'logs', 'logCount'));
     }
 
     /**
