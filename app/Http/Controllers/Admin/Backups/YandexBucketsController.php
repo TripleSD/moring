@@ -80,6 +80,10 @@ class YandexBucketsController extends Controller
         }
     }
 
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
     public function create(Request $request)
     {
         $this->systemLog->createUserEvent(__FUNCTION__, $request);
