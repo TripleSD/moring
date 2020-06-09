@@ -6,6 +6,7 @@ use Carbon\CarbonInterface;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\View;
+use App\Repositories\Backups\YandexBucketsLogsRepository;
 use App\Repositories\Backups\YandexConnectorsLogsRepository;
 
 /**
@@ -14,10 +15,12 @@ use App\Repositories\Backups\YandexConnectorsLogsRepository;
 class HeaderCounts
 {
     private $YandexConnectorsLogsRepository;
+    private $YandexBucketsLogsRepository;
 
     public function __construct()
     {
         $this->YandexConnectorsLogsRepository = new YandexConnectorsLogsRepository();
+        $this->YandexBucketsLogsRepository = new YandexBucketsLogsRepository();
     }
 
     /**
@@ -29,11 +32,26 @@ class HeaderCounts
      */
     public function handle($request, Closure $next)
     {
-        $yandexConnectorsLogsCount = $this->YandexConnectorsLogsRepository->getCount();
-        $yandexConnectorsLastEvent = $this->YandexConnectorsLogsRepository->getList();
-        if ($yandexConnectorsLastEvent->count() > 0) {
+        $yandexBucketsLogs = $this->YandexBucketsLogsRepository->getList();
+        $yandexBucketsLogsCount = $yandexBucketsLogs->count();
+
+        if ($yandexBucketsLogs->count() > 0) {
+            $yandexBucketsLogsLastEvent = Carbon::parse(
+                $yandexBucketsLogs->last()->created_at
+            )->diffForHumans(
+                Carbon::now(),
+                ['syntax' => CarbonInterface::DIFF_RELATIVE_TO_NOW]
+            );
+        } else {
+            $yandexBucketsLogsLastEvent = null;
+        }
+
+        $yandexConnectorsLogs = $this->YandexConnectorsLogsRepository->getList();
+        $yandexConnectorsLogsCount = $yandexConnectorsLogs->count();
+
+        if ($yandexConnectorsLogs->count() > 0) {
             $yandexConnectorsLogsLastEvent = Carbon::parse(
-                $yandexConnectorsLastEvent->last()->created_at
+                $yandexConnectorsLogs->last()->created_at
             )->diffForHumans(
                 Carbon::now(),
                 ['syntax' => CarbonInterface::DIFF_RELATIVE_TO_NOW]
@@ -42,7 +60,10 @@ class HeaderCounts
             $yandexConnectorsLogsLastEvent = null;
         }
 
-        $totalCount = $yandexConnectorsLogsCount;
+        $totalCount = $yandexConnectorsLogsCount + $yandexBucketsLogsCount;
+
+        View::share('yandexBucketsLogsCount', $yandexBucketsLogsCount);
+        View::share('yandexBucketsLogsLastEvent', $yandexBucketsLogsLastEvent);
 
         View::share('yandexConnectorsLogsCount', $yandexConnectorsLogsCount);
         View::share('yandexConnectorsLogsLastEvent', $yandexConnectorsLogsLastEvent);
