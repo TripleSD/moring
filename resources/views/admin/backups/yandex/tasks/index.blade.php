@@ -115,7 +115,11 @@
                                                             {{ $task->interval }} час.
                                                             <i class="fas fa-chevron-right"></i>
                                                             <b>Last update:</b>
-                                                            {{ $task->updated_at }}
+                                                            @empty($task->lastCheck)
+                                                                -
+                                                            @else
+                                                                {{ $task->lastCheck }}
+                                                            @endif
                                                         </div>
                                                     </div>
 
