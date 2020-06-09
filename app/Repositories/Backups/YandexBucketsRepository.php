@@ -100,4 +100,15 @@ class YandexBucketsRepository extends Repository
 
         return BackupYandexBuckets::where('id', $request->id)->update($request->validated());
     }
+
+    /**
+     * @param $request
+     * @return mixed
+     */
+    public function createBucket($request)
+    {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
+        return BackupYandexBuckets::create($request->validated());
+    }
 }
