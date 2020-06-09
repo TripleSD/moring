@@ -21,13 +21,12 @@ class YandexBucketsController extends Controller
 {
     private $yandexBucketsRepository;
     private $yandexConnectorsRepository;
-    private $systemLog;
 
     public function __construct()
     {
+        parent::__construct();
         $this->yandexBucketsRepository    = new YandexBucketsRepository();
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
-        $this->systemLog                  = new SystemLogRepository();
     }
 
     /**
@@ -37,6 +36,8 @@ class YandexBucketsController extends Controller
      */
     public function index(Request $request, YandexBucketsRepository $yandexBucketsRepository)
     {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
         $buckets = $yandexBucketsRepository->getList($request);
         $logs    = BackupYandexBucketsLogs::where('status', 0)
             ->where('resolved', 0)
@@ -53,6 +54,8 @@ class YandexBucketsController extends Controller
      */
     public function edit(Request $request)
     {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
         $bucket     = $this->yandexBucketsRepository->getBucket($request);
         $connectors = $this->yandexConnectorsRepository->getPluckList();
 
@@ -65,6 +68,8 @@ class YandexBucketsController extends Controller
      */
     public function update(BucketsStoreRequest $request)
     {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
         try {
             $this->yandexBucketsRepository->updateBucket($request);
 
