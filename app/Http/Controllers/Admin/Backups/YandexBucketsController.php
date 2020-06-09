@@ -19,12 +19,12 @@ use App\Http\Requests\Admin\Backups\BucketsStoreRequest;
 class YandexBucketsController extends Controller
 {
     private $yandexBucketsRepository;
-    private $yandexConnectorRepository;
+    private $yandexConnectorsRepository;
 
     public function __construct()
     {
         $this->yandexBucketsRepository   = new YandexBucketsRepository();
-        $this->yandexConnectorRepository = new YandexConnectorRepository();
+        $this->yandexConnectorsRepository = new YandexConnectorRepository();
     }
 
     /**
@@ -51,7 +51,7 @@ class YandexBucketsController extends Controller
     public function edit(Request $request)
     {
         $bucket     = $this->yandexBucketsRepository->getBucket($request);
-        $connectors = $this->yandexConnectorRepository->getPluckList();
+        $connectors = $this->yandexConnectorsRepository->getPluckList();
 
         return view('admin.backups.yandex.buckets.edit', compact('bucket', 'connectors'));
     }
@@ -71,5 +71,12 @@ class YandexBucketsController extends Controller
         } catch (\Exception $e) {
             //TODO писать ошибку в общий лог
         }
+    }
+
+    public function create()
+    {
+        $connectors = $this->yandexConnectorsRepository->getPluckList();
+
+        return view('admin.backups.yandex.buckets.create', compact('connectors'));
     }
 }
