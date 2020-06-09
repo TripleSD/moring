@@ -23,6 +23,7 @@ class YandexTaskController extends Controller
 
     public function __construct()
     {
+        parent::__construct();
         $this->yandexRepository           = new YandexTaskRepository();
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
     }
@@ -38,8 +39,9 @@ class YandexTaskController extends Controller
             ->orderBy('id')
             ->limit('50')
             ->get();
+        $logCount = 0;
 
-        return view('admin.backups.yandex.tasks.index', compact('tasks', 'logs'));
+        return view('admin.backups.yandex.tasks.index', compact('tasks', 'logs', 'logCount'));
     }
 
     /**
