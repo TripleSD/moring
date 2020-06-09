@@ -6,13 +6,12 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Models\BackupYandexBucketsLogs;
-use App\Repositories\System\SystemLogRepository;
 use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 use App\Repositories\Backups\YandexConnectorRepository;
-use App\Http\Requests\Admin\Backups\BucketsStoreRequest;
+use App\Http\Requests\Admin\Backups\Yandex\BucketsStoreUpdateRequest;
 
 /**
  * Class YandexBucketsController.
@@ -63,10 +62,10 @@ class YandexBucketsController extends Controller
     }
 
     /**
-     * @param BucketsStoreRequest $request
+     * @param BucketsStoreUpdateRequest $request
      * @return RedirectResponse
      */
-    public function update(BucketsStoreRequest $request)
+    public function update(BucketsStoreUpdateRequest $request)
     {
         $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
@@ -88,5 +87,18 @@ class YandexBucketsController extends Controller
         $connectors = $this->yandexConnectorsRepository->getPluckList();
 
         return view('admin.backups.yandex.buckets.create', compact('connectors'));
+    }
+
+    /**
+     * @param BucketsStoreUpdateRequest $request
+     * @return RedirectResponse
+     */
+    public function store(BucketsStoreUpdateRequest $request)
+    {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
+        $this->yandexBucketsRepository->createBucket($request);
+
+        return redirect()->route('backups.yandex.buckets.index');
     }
 }
