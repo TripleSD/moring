@@ -126,6 +126,12 @@ return [
     'backups.yandex.tasks.log.no_file' => 'Отсутствует файл',
 
     /**
+     * Yandex buckets page.
+     */
+
+    'backups.yandex.buckets.titles.errors' => 'Ошибки',
+
+    /**
      *  System Logs.
      */
     'system_logs.errors.error' => 'Ошибка. Проверьте системный журнал',
