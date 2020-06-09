@@ -50,7 +50,8 @@
                                 </div>
                                 <div class="btn-group">
                                     <a href="https://github.com/TripleSD/moring-documentation/blob/master/Backups/Yandex/Connectors/README.md"
-                                       class="btn btn-xs btn-outline-dark" title="Добавление нового устройства" target="_blank">
+                                       class="btn btn-xs btn-outline-dark" title="Добавление нового устройства"
+                                       target="_blank">
                                         Help
                                     </a>
                                 </div>
@@ -203,23 +204,26 @@
                             <div class="card">
                                 <div class="card-header">
                                     <span class="text-muted text-sm">
-                                    @lang('messages.backups.yandex.titles.errors')
+                                        @lang('messages.backups.yandex.titles.errors')
                                     </span>
                                     <span class="badge badge-{{ ($logCount > 0) ? 'danger' : 'success'}}">
                                         {{ $logCount }}
                                     </span>
-                                    <span class="float-right">
+                                    <div class="float-right">
                                         <div class="btn-group">
-                                    <a href="#"
-                                       class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                        <i class="fas fa-eye"></i> Все записи
-                                    </a>
-                                            <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
+                                            <a href="#"
                                                class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                        <i class="fas fa-fire-extinguisher"></i> Прочитать все
-                                    </a>
+                                                <i class="fas fa-eye"></i> Все записи
+                                            </a>
+                                            @if($logCount > 0)
+                                                <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
+                                                   class="btn btn-xs btn-outline-info"
+                                                   title="Добавление нового устройства">
+                                                    <i class="fas fa-fire-extinguisher"></i> Прочитать все
+                                                </a>
+                                            @endif
                                         </div>
-                                    </span>
+                                    </div>
                                 </div>
                                 @if($logs !== null)
                                     <div class="card-body table-responsive p-0">
