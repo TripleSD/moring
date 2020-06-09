@@ -29,7 +29,15 @@ class YandexConnectorRepository extends Repository
      */
     public function getList()
     {
-        return BackupYandexConnectors::with('logs')->orderBy('id', 'desc')->get();
+        return BackupYandexConnectors::with(
+            [
+                'logs' => function ($q) {
+                    return $q->where('resolved', 0);
+                },
+            ]
+        )
+            ->orderBy('id', 'desc')
+            ->get();
     }
 
     /**
