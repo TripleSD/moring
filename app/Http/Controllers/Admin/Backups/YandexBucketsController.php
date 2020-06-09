@@ -110,6 +110,8 @@ class YandexBucketsController extends Controller
      */
     public function destroy(Request $request)
     {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
         $this->yandexBucketsRepository->destroyBucket($request);
 
         flash('Задание удалено.')->success();
