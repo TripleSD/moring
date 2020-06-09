@@ -13,7 +13,7 @@ class BackupYandexBuckets extends Model
     protected $table = 'backup_yandex_buckets';
 
     protected $attributes = [
-        'enabled' => 1,
+        'enabled' => 0,
     ];
 
     protected $fillable = ['connector_id', 'interval', 'enabled', 'description', 'comment'];
