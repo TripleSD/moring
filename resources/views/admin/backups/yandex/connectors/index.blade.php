@@ -99,13 +99,19 @@
                                                                 @lang('messages.backups.yandex.fields.online')
                                                                     |
                                                                 {{ $connector->http_code }}
-                                                            </span>
+                                                                </span>
                                                             @else
                                                                 <span class="badge badge-danger">
                                                                 @lang('messages.backups.yandex.fields.offline')
                                                                     |
                                                                 {{ $connector->http_code }}
                                                             </span>
+                                                            @endif
+                                                            @if($connector->logs->count() !== 0)
+                                                                <div class="badge badge-danger">
+                                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                                    {{ $connector->logs->count() }}
+                                                                </div>
                                                             @endif
                                                         </div>
                                                     </div>
@@ -116,10 +122,10 @@
                                                             </b>
                                                         </div>
                                                         <div class="col-8">
-                                                            @if($connector->logs->count() > 0)
-                                                                {{ $connector->logs->last()->created_at }}
-                                                            @else
+                                                            @empty($connector->lastCheck)
                                                                 -
+                                                            @else
+                                                                {{ $connector->lastCheck }}
                                                             @endif
                                                         </div>
                                                     </div>
