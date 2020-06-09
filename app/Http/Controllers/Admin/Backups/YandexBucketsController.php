@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Backups;
 
 use Illuminate\Http\Request;
+use App\Models\BackupYandexBuckets;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Models\BackupYandexBucketsLogs;
@@ -102,6 +103,19 @@ class YandexBucketsController extends Controller
         $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
         $this->yandexBucketsRepository->createBucket($request);
+
+        return redirect()->route('backups.yandex.buckets.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function destroy(Request $request)
+    {
+        BackupYandexBuckets::where('id', $request->id)->delete();
+
+        flash('Задание удалено.')->success();
 
         return redirect()->route('backups.yandex.buckets.index');
     }
