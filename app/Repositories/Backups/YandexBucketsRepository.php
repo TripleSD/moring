@@ -16,10 +16,12 @@ use App\Repositories\System\SystemLogRepository;
 class YandexBucketsRepository extends Repository
 {
     private $systemLog;
+    private $BackupYandexBuckets;
 
     public function __construct()
     {
-        $this->systemLog              = new SystemLogRepository();
+        $this->systemLog           = new SystemLogRepository();
+        $this->BackupYandexBuckets = new BackupYandexBuckets();
     }
 
     /**
