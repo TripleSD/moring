@@ -12,20 +12,23 @@ use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
+use App\Repositories\Backups\YandexTasksLogsRepository;
 
 /**
  * Class BackupYandexController.
  */
 class YandexTaskController extends Controller
 {
-    private $yandexRepository;
-    private $yandexConnectorsRepository;
+    private $YandexTasksRepository;
+    private $YandexConnectorsRepository;
+    private $YandexTasksLogsRepository;
 
     public function __construct()
     {
         parent::__construct();
-        $this->yandexRepository           = new YandexTaskRepository();
-        $this->yandexConnectorsRepository = new YandexConnectorRepository();
+        $this->YandexTasksRepository           = new YandexTaskRepository();
+        $this->YandexTasksLogsRepository = new YandexTasksLogsRepository();
+        $this->YandexConnectorsRepository      = new YandexConnectorRepository();
     }
 
     /**
@@ -33,13 +36,9 @@ class YandexTaskController extends Controller
      */
     public function index()
     {
-        $tasks = $this->yandexRepository->getList();
-        $logs  = BackupYandexTasksLogs::where('status', 0)
-            ->where('resolved', 0)
-            ->orderBy('id')
-            ->limit('50')
-            ->get();
-        $logCount = 0;
+        $tasks    = $this->YandexTasksRepository->getList();
+        $logs     = $this->YandexTasksLogsRepository->getList();
+        $logCount = $this->YandexTasksLogsRepository->getCount();
 
         return view('admin.backups.yandex.tasks.index', compact('tasks', 'logs', 'logCount'));
     }
@@ -50,8 +49,8 @@ class YandexTaskController extends Controller
      */
     public function edit(Request $request)
     {
-        $task       = $this->yandexRepository->getTask($request);
-        $connectors = $this->yandexConnectorsRepository->getPluckList();
+        $task       = $this->YandexTasksRepository->getTask($request);
+        $connectors = $this->YandexConnectorsRepository->getPluckList();
 
         return view('admin.backups.yandex.tasks.edit', compact('task', 'connectors'));
     }
@@ -87,14 +86,14 @@ class YandexTaskController extends Controller
      */
     public function create()
     {
-        $connectors = $this->yandexConnectorsRepository->getPluckList();
+        $connectors = $this->YandexConnectorsRepository->getPluckList();
 
         return view('admin.backups.yandex.tasks.create', compact('connectors'));
     }
 
     public function store(Request $request)
     {
-        $fill            = $this->validate(
+        $fill              = $this->validate(
             $request,
             [
                 'description' => 'required',
@@ -110,7 +109,7 @@ class YandexTaskController extends Controller
 
             ]
         );
-        $fill['enabled'] = 1;
+        $fill['enabled']   = 1;
         $fill['http_code'] = 200;
 
         BackupYandexTask::create($fill);
@@ -126,7 +125,7 @@ class YandexTaskController extends Controller
      */
     public function show(Request $request)
     {
-        $task = $this->yandexRepository->getTask($request);
+        $task = $this->YandexTasksRepository->getTask($request);
 
         return view('admin.backups.yandex.tasks.show', compact('task'));
     }
