@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use App\Models\BackupYandexBucketsLogs;
+use App\Repositories\System\SystemLogRepository;
 use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -20,11 +21,13 @@ class YandexBucketsController extends Controller
 {
     private $yandexBucketsRepository;
     private $yandexConnectorsRepository;
+    private $systemLog;
 
     public function __construct()
     {
-        $this->yandexBucketsRepository   = new YandexBucketsRepository();
+        $this->yandexBucketsRepository    = new YandexBucketsRepository();
         $this->yandexConnectorsRepository = new YandexConnectorRepository();
+        $this->systemLog                  = new SystemLogRepository();
     }
 
     /**
@@ -73,8 +76,10 @@ class YandexBucketsController extends Controller
         }
     }
 
-    public function create()
+    public function create(Request $request)
     {
+        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+
         $connectors = $this->yandexConnectorsRepository->getPluckList();
 
         return view('admin.backups.yandex.buckets.create', compact('connectors'));
