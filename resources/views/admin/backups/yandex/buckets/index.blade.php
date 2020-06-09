@@ -72,6 +72,7 @@
                                                         <i class="fas fa-dumpster"></i>
                                                         {{ $bucket->description }}
                                                     </b>
+                                                    <span class="small text-muted">#{{ $bucket->id }}</span>
                                                 </div>
                                             </div>
                                             <div class="row">
@@ -81,7 +82,6 @@
                                                             <b>Status:</b>
                                                         </div>
                                                         <div class="col-8">
-
                                                             @if($bucket->enabled === 1)
                                                                 <div class="badge badge-success">
                                                                     @lang('messages.network.device.enabled')
@@ -91,15 +91,14 @@
                                                                     @lang('messages.network.device.disabled')
                                                                 </div>
                                                             @endif
-                                                            {{--                                                    @if($bucket->logs->count() !== 0)--}}
-                                                            {{--                                                        <div class="badge badge-danger">--}}
-                                                            {{--                                                            <i class="fas fa-exclamation-triangle"></i>--}}
-                                                            {{--                                                            {{ $task->logs->count() }}--}}
-                                                            {{--                                                        </div>--}}
-                                                            {{--                                                    @endif--}}
+                                                            @if($bucket->logs->count() !== 0)
+                                                                <div class="badge badge-danger">
+                                                                    <i class="fas fa-exclamation-triangle"></i>
+                                                                    {{ $bucket->logs->count() }}
+                                                                </div>
+                                                            @endif
                                                         </div>
                                                     </div>
-
 
                                                     <div class="row small">
                                                         <div class="col-4">
@@ -122,7 +121,11 @@
                                                             Last check:
                                                         </div>
                                                         <div class="col-8">
-                                                            {{ $bucket->updated_at }}
+                                                            @empty($bucket->lastCheck)
+                                                                -
+                                                            @else
+                                                                {{ $bucket->lastCheck }}
+                                                            @endif
                                                         </div>
                                                     </div>
 
