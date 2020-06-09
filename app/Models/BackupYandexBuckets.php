@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasOne;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 /**
  * Class BackupYandexBuckets.
@@ -18,8 +19,23 @@ class BackupYandexBuckets extends Model
 
     protected $fillable = ['connector_id', 'interval', 'enabled', 'description', 'comment'];
 
+
+    public function logs(): HasMany
+    {
+        return $this->hasMany(BackupYandexBucketsLogs::class, 'bucket_id', 'id');
+    }
+
     public function connector(): HasOne
     {
         return $this->HasOne(BackupYandexConnectors::class, 'id', 'connector_id');
+    }
+
+    public function getLastCheckAttribute()
+    {
+        if ($this->logs()->count() > 0) {
+            return $this->logs()->orderBy('id', 'desc')->firstOrFail()->created_at;
+        }
+
+        return null;
     }
 }

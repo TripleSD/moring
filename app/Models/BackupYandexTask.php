@@ -54,4 +54,13 @@ class BackupYandexTask extends Model
     {
         return $this->HasOne(BackupYandexConnectors::class, 'id', 'connector_id');
     }
+
+    public function getLastCheckAttribute()
+    {
+        if ($this->logs()->count() > 0) {
+            return $this->logs()->orderBy('id', 'desc')->firstOrFail()->created_at;
+        }
+
+        return null;
+    }
 }
