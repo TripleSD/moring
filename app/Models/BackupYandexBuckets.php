@@ -12,6 +12,12 @@ class BackupYandexBuckets extends Model
 {
     protected $table = 'backup_yandex_buckets';
 
+    protected $attributes = [
+        'enabled' => 1,
+    ];
+
+    protected $fillable = ['connector_id', 'interval', 'enabled', 'description', 'comment'];
+
     public function connector(): HasOne
     {
         return $this->HasOne(BackupYandexConnectors::class, 'id', 'connector_id');
