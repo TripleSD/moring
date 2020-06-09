@@ -3,15 +3,14 @@
 namespace App\Http\Controllers\Admin\Backups;
 
 use Illuminate\Http\Request;
-use App\Models\BackupYandexBuckets;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
-use App\Models\BackupYandexBucketsLogs;
 use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\View\View;
 use App\Repositories\Backups\YandexConnectorRepository;
+use App\Repositories\Backups\YandexBucketsLogsRepository;
 use App\Http\Requests\Admin\Backups\Yandex\BucketsStoreUpdateRequest;
 
 /**
@@ -21,33 +20,27 @@ class YandexBucketsController extends Controller
 {
     private $yandexBucketsRepository;
     private $yandexConnectorsRepository;
+    private $yandexBucketsLogsRepository;
 
     public function __construct()
     {
         parent::__construct();
-        $this->yandexBucketsRepository    = new YandexBucketsRepository();
-        $this->yandexConnectorsRepository = new YandexConnectorRepository();
+        $this->yandexBucketsRepository     = new YandexBucketsRepository();
+        $this->yandexConnectorsRepository  = new YandexConnectorRepository();
+        $this->yandexBucketsLogsRepository = new YandexBucketsLogsRepository();
     }
 
     /**
      * @param Request $request
-     * @param YandexBucketsRepository $yandexBucketsRepository
      * @return Application|Factory|View
      */
-    public function index(Request $request, YandexBucketsRepository $yandexBucketsRepository)
+    public function index(Request $request)
     {
         $this->systemLog->createUserEvent(__FUNCTION__, $request);
 
-        $buckets = $yandexBucketsRepository->getList($request);
-        $logs    = BackupYandexBucketsLogs::where('status', 0)
-            ->where('resolved', 0)
-            ->orderBy('id')
-            ->limit('50')
-            ->get();
-
-        $logCount   = BackupYandexBucketsLogs::where('status', 0)
-            ->where('resolved', 0)
-            ->count();
+        $buckets  = $this->yandexBucketsRepository->getList($request);
+        $logs     = $this->yandexBucketsLogsRepository->getList($request);
+        $logCount = $this->yandexBucketsLogsRepository->getCount($request);
 
         return view('admin.backups.yandex.buckets.index', compact('buckets', 'logs', 'logCount'));
     }
