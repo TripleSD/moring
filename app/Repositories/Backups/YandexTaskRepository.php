@@ -25,6 +25,7 @@ class YandexTaskRepository extends Repository
                 },
             ]
         )
+            ->orderBy('id', 'desc')
             ->get();
     }
 
