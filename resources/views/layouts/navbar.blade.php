@@ -37,6 +37,14 @@
                     Connectors alerts
                     <span class="float-right text-muted text-xs">{{ $yandexConnectorsLogsLastEvent }}</span>
                 </a>
+                <a href="{{ route('backups.yandex.tasks.index') }}" class="dropdown-item">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span class="badge badge-{{ ($yandexTasksLogsCount >0 ? 'danger' : 'success') }}">
+                        {{ $yandexTasksLogsCount }}
+                    </span>
+                    Tasks alerts
+                    <span class="float-right text-muted text-xs">{{ $yandexTasksLogsLastEvent }}</span>
+                </a>
                 <a href="{{ route('backups.yandex.buckets.index') }}" class="dropdown-item">
                     <i class="fas fa-exclamation-triangle"></i>
                     <span class="badge badge-{{ ($yandexBucketsLogsCount >0 ? 'danger' : 'success') }}">
