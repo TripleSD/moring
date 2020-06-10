@@ -125,6 +125,8 @@ return [
     'backups.yandex.tasks.log.error' => 'Ошибка',
     'backups.yandex.tasks.log.no_file' => 'Отсутствует файл',
 
+    'backups.yandex.tasks.titles.errors' => 'Ошибки',
+
     /**
      * Yandex buckets page.
      */
