@@ -40,8 +40,8 @@ class YandexTaskController extends Controller
         SystemLog::createUserEvent(__FUNCTION__, $request);
 
         $tasks    = $this->YandexTasksRepository->getList($request);
-        $logs     = $this->YandexTasksLogsRepository->getList();
-        $logCount = $this->YandexTasksLogsRepository->getCount();
+        $logs     = $this->YandexTasksLogsRepository->getList($request);
+        $logCount = $this->YandexTasksLogsRepository->getCount($request);
 
         return view('admin.backups.yandex.tasks.index', compact('tasks', 'logs', 'logCount'));
     }
