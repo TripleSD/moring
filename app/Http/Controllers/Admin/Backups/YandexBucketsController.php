@@ -6,6 +6,7 @@ use App\Helpers\SystemLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
+use App\Models\BackupYandexBucketsLogs;
 use App\Repositories\Backups\YandexBucketsRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
@@ -115,6 +116,19 @@ class YandexBucketsController extends Controller
         $this->yandexBucketsRepository->destroyBucket($request);
 
         flash('Задание удалено.')->success();
+
+        return redirect()->route('backups.yandex.buckets.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function resolve(Request $request)
+    {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
+        BackupYandexBucketsLogs::where('resolved', 0)->update(['resolved' => 1]);
 
         return redirect()->route('backups.yandex.buckets.index');
     }
