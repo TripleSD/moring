@@ -2,29 +2,30 @@
 
 namespace App\Repositories\Backups;
 
+use App\Helpers\SystemLog;
 use App\Repositories\Repository;
 use App\Models\BackupYandexBucketsLogs;
-use App\Repositories\System\SystemLogRepository;
 
 /**
  * Class YandexBucketsRepository.
  */
 class YandexBucketsLogsRepository extends Repository
 {
-    private $systemLog;
     private $BackupYandexBucketsLogs;
 
     public function __construct()
     {
-        $this->systemLog           = new SystemLogRepository();
         $this->BackupYandexBucketsLogs = new BackupYandexBucketsLogs();
     }
 
     /**
+     * @param $request
      * @return mixed
      */
-    public function getList()
+    public function getList($request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexBucketsLogs::where('status', 0)
             ->where('resolved', 0)
             ->orderBy('id', 'desc')
@@ -33,10 +34,13 @@ class YandexBucketsLogsRepository extends Repository
     }
 
     /**
+     * @param $request
      * @return mixed
      */
-    public function getCount()
+    public function getCount($request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexBucketsLogs::where('status', 0)
             ->where('resolved', 0)
             ->count();
