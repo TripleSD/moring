@@ -32,7 +32,7 @@ class HeaderCounts
      */
     public function handle($request, Closure $next)
     {
-        $yandexBucketsLogs = $this->YandexBucketsLogsRepository->getList();
+        $yandexBucketsLogs = $this->YandexBucketsLogsRepository->getList($request);
         $yandexBucketsLogsCount = $yandexBucketsLogs->count();
 
         if ($yandexBucketsLogs->count() > 0) {
