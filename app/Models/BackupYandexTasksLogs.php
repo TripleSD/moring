@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 
 /**
- * Class BackupYandexTasksLogs
+ * Class BackupYandexTasksLogs.
  */
 class BackupYandexTasksLogs extends Model
 {

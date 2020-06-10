@@ -2,9 +2,9 @@
 
 namespace App\Http\Middleware;
 
-use App\Repositories\Backups\YandexTasksLogsRepository;
 use App\Repositories\Backups\YandexBucketsLogsRepository;
 use App\Repositories\Backups\YandexConnectorsLogsRepository;
+use App\Repositories\Backups\YandexTasksLogsRepository;
 use Carbon\Carbon;
 use Carbon\CarbonInterface;
 use Closure;
