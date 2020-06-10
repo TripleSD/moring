@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Admin\Backups;
 use App\Helpers\SystemLog;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexTask;
-use Illuminate\Validation\ValidationException;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexTaskRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -14,6 +13,7 @@ use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 use App\Repositories\Backups\YandexTasksLogsRepository;
+use App\Http\Requests\Admin\Backups\Yandex\TasksStoreUpdateRequest;
 
 /**
  * Class BackupYandexController.
@@ -60,34 +60,18 @@ class YandexTaskController extends Controller
         return view('admin.backups.yandex.tasks.edit', compact('task', 'connectors'));
     }
 
-    public function update(Request $request)
+    public function update(TasksStoreUpdateRequest $request)
     {
         SystemLog::createUserEvent(__FUNCTION__, $request);
 
-        $fill = $this->validate(
-            $request,
-            [
-                'description' => 'required',
-                'connector_id' => 'required',
-                'folder' => 'nullable',
-                'pre' => 'nullable',
-                'post' => 'nullable',
-                'filename' => 'required',
-                'interval' => 'required',
-                'comment' => 'nullable',
-            ],
-            [
+        $verifiedData = $request->validated();
 
-            ]
-        );
-
-        BackupYandexTask::where('id', $request->id)->update($fill);
+        BackupYandexTask::where('id', $request->id)->update($verifiedData);
 
         flash('Данные обновлены.')->success();
 
         return redirect()->route('backups.yandex.tasks.index');
     }
-
 
     /**
      * @param Request $request
@@ -103,34 +87,16 @@ class YandexTaskController extends Controller
     }
 
     /**
-     * @param Request $request
+     * @param TasksStoreUpdateRequest $request
      * @return RedirectResponse
-     * @throws ValidationException
      */
-    public function store(Request $request)
+    public function store(TasksStoreUpdateRequest $request)
     {
         SystemLog::createUserEvent(__FUNCTION__, $request);
 
-        $fill              = $this->validate(
-            $request,
-            [
-                'description' => 'required',
-                'connector_id' => 'required',
-                'folder' => 'nullable',
-                'pre' => 'nullable',
-                'post' => 'nullable',
-                'filename' => 'required',
-                'interval' => 'required',
-                'comment' => 'nullable',
-            ],
-            [
+        $verifiedData = $request->validated();
 
-            ]
-        );
-        $fill['enabled']   = 1;
-        $fill['http_code'] = 200;
-
-        BackupYandexTask::create($fill);
+        BackupYandexTask::create($verifiedData);
 
         flash('Задание добавлено.')->success();
 
