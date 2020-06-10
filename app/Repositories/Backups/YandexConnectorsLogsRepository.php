@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Backups;
 
+use App\Helpers\SystemLog;
 use App\Repositories\Repository;
 use App\Models\BackupYandexConnectorsLogs;
 
@@ -11,10 +12,13 @@ use App\Models\BackupYandexConnectorsLogs;
 class YandexConnectorsLogsRepository extends Repository
 {
     /**
+     * @param $request
      * @return mixed
      */
-    public function getList()
+    public function getList($request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexConnectorsLogs::where('status', 0)
             ->where('resolved', 0)
             ->orderBy('id', 'desc')
@@ -22,8 +26,14 @@ class YandexConnectorsLogsRepository extends Repository
             ->get();
     }
 
-    public function getCount()
+    /**
+     * @param $request
+     * @return mixed
+     */
+    public function getCount($request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexConnectorsLogs::where('status', 0)
             ->where('resolved', 0)
             ->count();
