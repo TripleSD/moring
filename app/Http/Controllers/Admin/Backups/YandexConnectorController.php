@@ -2,23 +2,22 @@
 
 namespace App\Http\Controllers\Admin\Backups;
 
-use App;
-use Lang;
 use App\Helpers\SystemLog;
-use App\Models\BackupYandexTask;
-use App\Models\BackupYandexBuckets;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Backups\Yandex\ConnectorsStoreUpdateRequest;
+use App\Models\BackupYandexBuckets;
 use App\Models\BackupYandexConnectors;
 use App\Models\BackupYandexConnectorsLogs;
-use App\Repositories\Backups\YandexConnectorRepository;
+use App\Models\BackupYandexTask;
 use App\Repositories\Backups\YandexBucketsRepository;
+use App\Repositories\Backups\YandexConnectorRepository;
+use App\Repositories\Backups\YandexConnectorsLogsRepository;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
-use App\Repositories\Backups\YandexConnectorsLogsRepository;
-use App\Http\Requests\Admin\Backups\Yandex\ConnectorsStoreUpdateRequest;
+use Lang;
 
 /**
  * Class YandexConnectorsController.

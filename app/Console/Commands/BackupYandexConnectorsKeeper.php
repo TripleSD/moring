@@ -3,8 +3,8 @@
 namespace App\Console\Commands;
 
 use App\Models\BackupYandexConnectors;
-use Illuminate\Console\Command;
 use App\Models\BackupYandexConnectorsLogs;
+use Illuminate\Console\Command;
 
 class BackupYandexConnectorsKeeper extends Command
 {
@@ -49,7 +49,7 @@ class BackupYandexConnectorsKeeper extends Command
                     ]
                 );
 
-                BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1,]);
+                BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1]);
             } else {
                 BackupYandexConnectors::where('id', $connector->id)->update(
                     [
@@ -58,7 +58,7 @@ class BackupYandexConnectorsKeeper extends Command
                     ]
                 );
 
-                BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0,]);
+                BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0]);
             }
         }
     }

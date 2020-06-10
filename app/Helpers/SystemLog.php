@@ -28,7 +28,7 @@ class SystemLog
             'status' => $request->server('REDIRECT_STATUS'),
             'user_id' => $userId,
             'route' => \Route::getCurrentRoute()->getActionName() . PHP_EOL,
-            'callable_function' => $functionName
+            'callable_function' => $functionName,
         ];
 
         return SystemLogs::create($logArray);
@@ -59,7 +59,7 @@ class SystemLog
             'status' => $status,
             'user_id' => $userId,
             'route' => \Route::getCurrentRoute()->getActionName() . PHP_EOL,
-            'callable_function' => $functionName
+            'callable_function' => $functionName,
         ];
 
         return SystemLogs::create($logArray);
