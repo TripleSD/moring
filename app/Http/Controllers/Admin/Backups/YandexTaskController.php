@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin\Backups;
 use App\Helpers\SystemLog;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexTask;
+use App\Models\BackupYandexTasksLogs;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexTaskRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -127,6 +128,19 @@ class YandexTaskController extends Controller
         BackupYandexTask::where('id', $request->id)->delete();
 
         flash('Задание удалено.')->success();
+
+        return redirect()->route('backups.yandex.tasks.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function resolve(Request $request)
+    {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
+        BackupYandexTasksLogs::where('resolved', 0)->update(['resolved' => 1]);
 
         return redirect()->route('backups.yandex.tasks.index');
     }
