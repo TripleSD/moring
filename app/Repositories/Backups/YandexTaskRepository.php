@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Backups;
 
+use App\Helpers\SystemLog;
 use App\Models\BackupYandexTask;
 use App\Repositories\Repository;
 use Illuminate\Database\Eloquent\Builder;
@@ -13,10 +14,13 @@ use Illuminate\Database\Eloquent\Collection;
 class YandexTaskRepository extends Repository
 {
     /**
+     * @param $request
      * @return Builder[]|Collection
      */
-    public function getList()
+    public function getList($request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexTask::with(
             [
                 'connector',
@@ -35,6 +39,8 @@ class YandexTaskRepository extends Repository
      */
     public function getTask($request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexTask::with('connector')->where('id', $request->id)->firstOrFail();
     }
 }
