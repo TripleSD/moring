@@ -136,7 +136,7 @@ class YandexConnectorController extends Controller
         SystemLog::createUserEvent(__FUNCTION__, $request);
 
         $verifiedData = $request->validated();
-        $this->yandexConnectorsRepository->store($verifiedData);
+        $this->yandexConnectorsRepository->store($request, $verifiedData);
         $this->yandexConnectorsRepository->refreshState($request);
 
         flash('Коннектор добавлен')->success();
