@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 
 /**
  * Class BackupYandexBuckets.
@@ -18,7 +18,6 @@ class BackupYandexBuckets extends Model
     ];
 
     protected $fillable = ['connector_id', 'interval', 'enabled', 'description', 'comment'];
-
 
     public function logs(): HasMany
     {

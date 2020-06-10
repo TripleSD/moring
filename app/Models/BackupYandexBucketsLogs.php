@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class BackupYandexBucketsLogs
- * @package App\Models
  */
 class BackupYandexBucketsLogs extends Model
 {

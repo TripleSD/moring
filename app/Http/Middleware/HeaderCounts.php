@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware;
 
-use Carbon\CarbonInterface;
-use Carbon\Carbon;
-use Closure;
-use Illuminate\Support\Facades\View;
 use App\Repositories\Backups\YandexTasksLogsRepository;
 use App\Repositories\Backups\YandexBucketsLogsRepository;
 use App\Repositories\Backups\YandexConnectorsLogsRepository;
+use Carbon\Carbon;
+use Carbon\CarbonInterface;
+use Closure;
+use Illuminate\Support\Facades\View;
 
 /**
  * Class HeaderCounts.

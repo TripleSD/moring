@@ -2,11 +2,11 @@
 
 namespace App\Repositories\Backups;
 
-use GuzzleHttp\Client;
 use App\Helpers\SystemLog;
 use App\Models\BackupYandexBuckets;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
+use GuzzleHttp\Client;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Collection;
 
@@ -58,8 +58,8 @@ class YandexBucketsRepository extends Repository
             $url,
             [
                 'headers' => [
-                    "Authorization" => "OAuth $connector->token",
-                ]
+                    'Authorization' => "OAuth $connector->token",
+                ],
             ]
         );
 

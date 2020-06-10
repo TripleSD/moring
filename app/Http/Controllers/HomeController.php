@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Repositories\AdminSitesRepository;
 use App\Repositories\ItemsSortRepository;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Contracts\Support\Renderable;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {

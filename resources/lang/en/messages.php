@@ -82,7 +82,6 @@ return [
 
     'flash.success' => 'Data updated',
 
-
     /**
      * Yandex page.
      */
@@ -127,10 +126,10 @@ return [
     'backups.yandex.tasks.log.no_file' => 'Missing file',
 
     'backups.yandex.tasks.titles.errors' => 'Errors',
+
     /**
      * Yandex buckets page.
      */
-
     'backups.yandex.buckets.titles.errors' => 'Errors',
 
     /**

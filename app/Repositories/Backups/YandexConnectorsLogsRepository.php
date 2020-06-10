@@ -3,8 +3,8 @@
 namespace App\Repositories\Backups;
 
 use App\Helpers\SystemLog;
-use App\Repositories\Repository;
 use App\Models\BackupYandexConnectorsLogs;
+use App\Repositories\Repository;
 
 /**
  * Class YandexConnectorsLogsRepository.

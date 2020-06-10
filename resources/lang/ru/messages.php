@@ -130,7 +130,6 @@ return [
     /**
      * Yandex buckets page.
      */
-
     'backups.yandex.buckets.titles.errors' => 'Ошибки',
 
     /**

@@ -2,12 +2,12 @@
 
 namespace App\Http\Controllers\Admin\Settings;
 
-use Illuminate\View\View;
-use App\Models\SystemLogs;
 use App\Http\Controllers\Controller;
+use App\Models\SystemLogs;
 use App\Repositories\BridgeRepository;
-use Illuminate\Contracts\View\Factory;
 use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\View\View;
 
 /**
  * Class SystemController.

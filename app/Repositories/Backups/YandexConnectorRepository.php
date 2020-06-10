@@ -3,12 +3,12 @@
 namespace App\Repositories\Backups;
 
 use App\Helpers\SystemLog;
-use Illuminate\Http\Request;
 use App\Models\BackupYandexConnectors;
+use App\Models\BackupYandexConnectorsLogs;
 use App\Repositories\Repository;
 use Illuminate\Database\Eloquent\Builder;
-use App\Models\BackupYandexConnectorsLogs;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Request;
 
 /**
  * Class YandexConnectorsRepository.
@@ -87,7 +87,7 @@ class YandexConnectorRepository extends Repository
             );
 
             // Insert event to fail log
-            BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1,]);
+            BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1]);
 
             // Insert event to system log
             SystemLog::createServiceEvent(
@@ -108,7 +108,7 @@ class YandexConnectorRepository extends Repository
             ]
         );
 
-        BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0,]);
+        BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0]);
 
         // Insert event to system log
         SystemLog::createServiceEvent(
