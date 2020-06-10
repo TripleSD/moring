@@ -95,7 +95,11 @@
                                     </div>
                                 </td>
                                 <td class="col-2">
-                                    <span class="text-xs">{{ $log->user->name }}</span>
+                                    @empty($log->user)
+                                        -
+                                    @else
+                                        <span class="text-xs">{{ $log->user->name }}</span>
+                                    @endif
                                 </td>
                             </tr>
                         @endforeach
