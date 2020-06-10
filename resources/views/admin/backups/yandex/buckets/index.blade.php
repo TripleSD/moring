@@ -182,7 +182,7 @@
                                                 <i class="fas fa-eye"></i> Все записи
                                             </a>
                                             @if($logCount > 0)
-                                                <a href="#"
+                                                <a href="{{ route('backups.yandex.backups.yandex.buckets.resolve') }}"
                                                    class="btn btn-xs btn-outline-info"
                                                    title="Добавление нового устройства">
                                                     <i class="fas fa-fire-extinguisher"></i> Прочитать все
