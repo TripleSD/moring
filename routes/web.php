@@ -97,6 +97,8 @@ Route::group(
                     ['prefix' => 'yandex', 'as' => 'yandex.'],
                     function () {
                         $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
+                        Route::get('/tasks/resolve', 'YandexTaskController@resolve')
+                            ->name('backups.yandex.tasks.resolve');
                         Route::resource('tasks', 'YandexTaskController',
                                         ['parameters' => ['tasks' => 'id']])->only($methods);
                         Route::get('/connectors/resolve', 'YandexConnectorController@resolve')
@@ -107,6 +109,8 @@ Route::group(
                             ->name('backups.yandex.connectors.clean');
                         Route::get('/connectors/{id}/refresh', 'YandexConnectorController@refresh')
                             ->name('backups.yandex.connectors.refresh');
+                        Route::get('/buckets/resolve', 'YandexBucketsController@resolve')
+                            ->name('backups.yandex.buckets.resolve');
                         Route::resource('buckets', 'YandexBucketsController',
                                         ['parameters' => ['buckets' => 'id']])->only($methods);
                     }
