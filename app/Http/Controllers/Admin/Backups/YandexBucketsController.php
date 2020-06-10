@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin\Backups;
 
+use App\Helpers\SystemLog;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
@@ -24,7 +25,6 @@ class YandexBucketsController extends Controller
 
     public function __construct()
     {
-        parent::__construct();
         $this->yandexBucketsRepository     = new YandexBucketsRepository();
         $this->yandexConnectorsRepository  = new YandexConnectorRepository();
         $this->yandexBucketsLogsRepository = new YandexBucketsLogsRepository();
@@ -36,7 +36,7 @@ class YandexBucketsController extends Controller
      */
     public function index(Request $request)
     {
-        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+        SystemLog::createUserEvent(__FUNCTION__, $request);
 
         $buckets  = $this->yandexBucketsRepository->getList($request);
         $logs     = $this->yandexBucketsLogsRepository->getList($request);
@@ -51,10 +51,10 @@ class YandexBucketsController extends Controller
      */
     public function edit(Request $request)
     {
-        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+        SystemLog::createUserEvent(__FUNCTION__, $request);
 
         $bucket     = $this->yandexBucketsRepository->getBucket($request);
-        $connectors = $this->yandexConnectorsRepository->getPluckList();
+        $connectors = $this->yandexConnectorsRepository->getPluckList($request);
 
         return view('admin.backups.yandex.buckets.edit', compact('bucket', 'connectors'));
     }
@@ -65,7 +65,7 @@ class YandexBucketsController extends Controller
      */
     public function update(BucketsStoreUpdateRequest $request)
     {
-        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+        SystemLog::createUserEvent(__FUNCTION__, $request);
 
         try {
             $this->yandexBucketsRepository->updateBucket($request);
@@ -84,9 +84,9 @@ class YandexBucketsController extends Controller
      */
     public function create(Request $request)
     {
-        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+        SystemLog::createUserEvent(__FUNCTION__, $request);
 
-        $connectors = $this->yandexConnectorsRepository->getPluckList();
+        $connectors = $this->yandexConnectorsRepository->getPluckList($request);
 
         return view('admin.backups.yandex.buckets.create', compact('connectors'));
     }
@@ -97,7 +97,7 @@ class YandexBucketsController extends Controller
      */
     public function store(BucketsStoreUpdateRequest $request)
     {
-        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+        SystemLog::createUserEvent(__FUNCTION__, $request);
 
         $this->yandexBucketsRepository->createBucket($request);
 
@@ -110,7 +110,7 @@ class YandexBucketsController extends Controller
      */
     public function destroy(Request $request)
     {
-        $this->systemLog->createUserEvent(__FUNCTION__, $request);
+        SystemLog::createUserEvent(__FUNCTION__, $request);
 
         $this->yandexBucketsRepository->destroyBucket($request);
 
