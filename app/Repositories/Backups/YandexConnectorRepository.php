@@ -2,13 +2,13 @@
 
 namespace App\Repositories\Backups;
 
+use App\Helpers\SystemLog;
 use Illuminate\Http\Request;
 use App\Models\BackupYandexConnectors;
 use App\Repositories\Repository;
 use Illuminate\Database\Eloquent\Builder;
 use App\Models\BackupYandexConnectorsLogs;
 use Illuminate\Database\Eloquent\Collection;
-use App\Repositories\System\SystemLogRepository;
 
 /**
  * Class YandexConnectorsRepository.
@@ -16,19 +16,20 @@ use App\Repositories\System\SystemLogRepository;
 class YandexConnectorRepository extends Repository
 {
     private $backupYandexConnectors;
-    private $systemLog;
 
     public function __construct()
     {
-        $this->systemLog              = new SystemLogRepository();
         $this->backupYandexConnectors = new BackupYandexConnectors();
     }
 
     /**
+     * @param $request
      * @return Builder[]|Collection
      */
-    public function getList()
+    public function getList($request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexConnectors::with(
             [
                 'logs' => function ($q) {
@@ -41,10 +42,13 @@ class YandexConnectorRepository extends Repository
     }
 
     /**
+     * @param $request
      * @return mixed
      */
-    public function getPluckList()
+    public function getPluckList($request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return BackupYandexConnectors::pluck('description', 'id');
     }
 
@@ -55,6 +59,8 @@ class YandexConnectorRepository extends Repository
     public function refreshState($request)
     {
         /* @var $request Request */
+
+        SystemLog::createUserEvent(__FUNCTION__, $request);
 
         $connector = BackupYandexConnectors::find($request->id);
         $url       = 'https://cloud-api.yandex.net/v1/disk/';
@@ -84,7 +90,7 @@ class YandexConnectorRepository extends Repository
             BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 1, 'resolved' => 1,]);
 
             // Insert event to system log
-            $this->systemLog->createServiceEvent(
+            SystemLog::createServiceEvent(
                 __FUNCTION__,
                 \Config::get('moring.service_yandex_disk'),
                 $httpcode,
@@ -105,7 +111,7 @@ class YandexConnectorRepository extends Repository
         BackupYandexConnectorsLogs::create(['connector_id' => $connector->id, 'status' => 0, 'resolved' => 0,]);
 
         // Insert event to system log
-        $this->systemLog->createServiceEvent(
+        SystemLog::createServiceEvent(
             __FUNCTION__,
             \Config::get('moring.service_yandex_disk'),
             $httpcode,
@@ -116,11 +122,14 @@ class YandexConnectorRepository extends Repository
     }
 
     /**
+     * @param $request
      * @param $data
      * @return mixed
      */
-    public function store($data)
+    public function store($request, $data)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         return $this->backupYandexConnectors->create($data);
     }
 
@@ -131,6 +140,8 @@ class YandexConnectorRepository extends Repository
      */
     public function update($request, $data)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         $this->backupYandexConnectors->where('id', $request->id)->update($data);
 
         return $this->backupYandexConnectors->update($data);
