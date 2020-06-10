@@ -27,6 +27,11 @@ class BackupYandexTask extends Model
         'http_code',
     ];
 
+    protected $attributes = [
+        'enabled' => 0,
+        'http_code' => 200,
+    ];
+
     public function logs(): HasMany
     {
         return $this->hasMany(BackupYandexTasksLogs::class, 'task_id', 'id');
