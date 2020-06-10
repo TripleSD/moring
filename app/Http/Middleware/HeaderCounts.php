@@ -6,6 +6,7 @@ use Carbon\CarbonInterface;
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Support\Facades\View;
+use App\Repositories\Backups\YandexTasksLogsRepository;
 use App\Repositories\Backups\YandexBucketsLogsRepository;
 use App\Repositories\Backups\YandexConnectorsLogsRepository;
 
@@ -16,11 +17,13 @@ class HeaderCounts
 {
     private $YandexConnectorsLogsRepository;
     private $YandexBucketsLogsRepository;
+    private $YandexTasksLogsRepository;
 
     public function __construct()
     {
         $this->YandexConnectorsLogsRepository = new YandexConnectorsLogsRepository();
-        $this->YandexBucketsLogsRepository = new YandexBucketsLogsRepository();
+        $this->YandexBucketsLogsRepository    = new YandexBucketsLogsRepository();
+        $this->YandexTasksLogsRepository      = new YandexTasksLogsRepository();
     }
 
     /**
@@ -32,7 +35,21 @@ class HeaderCounts
      */
     public function handle($request, Closure $next)
     {
-        $yandexBucketsLogs = $this->YandexBucketsLogsRepository->getList($request);
+        $yandexTasksLogs      = $this->YandexTasksLogsRepository->getList($request);
+        $yandexTasksLogsCount = $yandexTasksLogs->count();
+
+        if ($yandexTasksLogs->count() > 0) {
+            $yandexTasksLogsLastEvent = Carbon::parse(
+                $yandexTasksLogs->last()->created_at
+            )->diffForHumans(
+                Carbon::now(),
+                ['syntax' => CarbonInterface::DIFF_RELATIVE_TO_NOW]
+            );
+        } else {
+            $yandexTasksLogsLastEvent = null;
+        }
+
+        $yandexBucketsLogs      = $this->YandexBucketsLogsRepository->getList($request);
         $yandexBucketsLogsCount = $yandexBucketsLogs->count();
 
         if ($yandexBucketsLogs->count() > 0) {
@@ -46,7 +63,7 @@ class HeaderCounts
             $yandexBucketsLogsLastEvent = null;
         }
 
-        $yandexConnectorsLogs = $this->YandexConnectorsLogsRepository->getList();
+        $yandexConnectorsLogs      = $this->YandexConnectorsLogsRepository->getList($request);
         $yandexConnectorsLogsCount = $yandexConnectorsLogs->count();
 
         if ($yandexConnectorsLogs->count() > 0) {
@@ -60,7 +77,10 @@ class HeaderCounts
             $yandexConnectorsLogsLastEvent = null;
         }
 
-        $totalCount = $yandexConnectorsLogsCount + $yandexBucketsLogsCount;
+        $totalCount = $yandexConnectorsLogsCount + $yandexBucketsLogsCount + $yandexTasksLogsCount;
+
+        View::share('yandexTasksLogsCount', $yandexTasksLogsCount);
+        View::share('yandexTasksLogsLastEvent', $yandexTasksLogsLastEvent);
 
         View::share('yandexBucketsLogsCount', $yandexBucketsLogsCount);
         View::share('yandexBucketsLogsLastEvent', $yandexBucketsLogsLastEvent);
