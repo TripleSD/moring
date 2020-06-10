@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers\Admin\Backups;
 
+use App\Helpers\SystemLog;
 use App\Http\Controllers\Controller;
 use App\Models\BackupYandexTask;
-use App\Models\BackupYandexTasksLogs;
+use Illuminate\Validation\ValidationException;
 use App\Repositories\Backups\YandexConnectorRepository;
 use App\Repositories\Backups\YandexTaskRepository;
 use Illuminate\Contracts\Foundation\Application;
@@ -25,18 +26,20 @@ class YandexTaskController extends Controller
 
     public function __construct()
     {
-        parent::__construct();
-        $this->YandexTasksRepository           = new YandexTaskRepository();
-        $this->YandexTasksLogsRepository = new YandexTasksLogsRepository();
-        $this->YandexConnectorsRepository      = new YandexConnectorRepository();
+        $this->YandexTasksRepository      = new YandexTaskRepository();
+        $this->YandexTasksLogsRepository  = new YandexTasksLogsRepository();
+        $this->YandexConnectorsRepository = new YandexConnectorRepository();
     }
 
     /**
+     * @param Request $request
      * @return Application|Factory|View
      */
-    public function index()
+    public function index(Request $request)
     {
-        $tasks    = $this->YandexTasksRepository->getList();
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
+        $tasks    = $this->YandexTasksRepository->getList($request);
         $logs     = $this->YandexTasksLogsRepository->getList();
         $logCount = $this->YandexTasksLogsRepository->getCount();
 
@@ -49,14 +52,18 @@ class YandexTaskController extends Controller
      */
     public function edit(Request $request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         $task       = $this->YandexTasksRepository->getTask($request);
-        $connectors = $this->YandexConnectorsRepository->getPluckList();
+        $connectors = $this->YandexConnectorsRepository->getPluckList($request);
 
         return view('admin.backups.yandex.tasks.edit', compact('task', 'connectors'));
     }
 
     public function update(Request $request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         $fill = $this->validate(
             $request,
             [
@@ -81,18 +88,29 @@ class YandexTaskController extends Controller
         return redirect()->route('backups.yandex.tasks.index');
     }
 
+
     /**
+     * @param Request $request
      * @return Application|Factory|View
      */
-    public function create()
+    public function create(Request $request)
     {
-        $connectors = $this->YandexConnectorsRepository->getPluckList();
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
+        $connectors = $this->YandexConnectorsRepository->getPluckList($request);
 
         return view('admin.backups.yandex.tasks.create', compact('connectors'));
     }
 
+    /**
+     * @param Request $request
+     * @return RedirectResponse
+     * @throws ValidationException
+     */
     public function store(Request $request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         $fill              = $this->validate(
             $request,
             [
@@ -125,6 +143,8 @@ class YandexTaskController extends Controller
      */
     public function show(Request $request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         $task = $this->YandexTasksRepository->getTask($request);
 
         return view('admin.backups.yandex.tasks.show', compact('task'));
@@ -136,6 +156,8 @@ class YandexTaskController extends Controller
      */
     public function destroy(Request $request)
     {
+        SystemLog::createUserEvent(__FUNCTION__, $request);
+
         BackupYandexTask::where('id', $request->id)->delete();
 
         flash('Задание удалено.')->success();
