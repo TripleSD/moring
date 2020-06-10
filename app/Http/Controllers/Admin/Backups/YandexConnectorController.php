@@ -45,8 +45,8 @@ class YandexConnectorController extends Controller
         SystemLog::createUserEvent(__FUNCTION__, $request);
 
         $connectors = $this->yandexConnectorsRepository->getList($request);
-        $logs       = $this->yandexConnectorsLogsRepository->getList();
-        $logCount   = $this->yandexConnectorsLogsRepository->getCount();
+        $logs       = $this->yandexConnectorsLogsRepository->getList($request);
+        $logCount   = $this->yandexConnectorsLogsRepository->getCount($request);
 
         return view('admin.backups.yandex.connectors.index', compact('connectors', 'logs', 'logCount'));
     }
