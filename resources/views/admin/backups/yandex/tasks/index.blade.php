@@ -160,7 +160,10 @@
                             <div class="card">
                                 <div class="card-header">
                                     <span class="text-muted text-sm">
-                                        @lang('messages.network.device.notifications_and_errors')
+                                        @lang('messages.backups.yandex.tasks.titles.errors')
+                                    </span>
+                                    <span class="badge badge-{{ ($logCount > 0) ? 'danger' : 'success'}}">
+                                        {{ $logCount }}
                                     </span>
                                     <div class="float-right">
                                         <div class="btn-group">
@@ -169,7 +172,7 @@
                                                 <i class="fas fa-eye"></i> Все записи
                                             </a>
                                             @if($logCount > 0)
-                                                <a href="#"
+                                                <a href="{{ route('backups.yandex.backups.yandex.tasks.resolve') }}"
                                                    class="btn btn-xs btn-outline-info"
                                                    title="Добавление нового устройства">
                                                     <i class="fas fa-fire-extinguisher"></i> Прочитать все
