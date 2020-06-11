@@ -224,7 +224,7 @@
                                                 <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
                                                    class="btn btn-xs btn-outline-dark"
                                                    title="Добавление нового устройства">
-                                                    <i class="fas fa-fire-extinguisher"></i> Прочитать все
+                                                    @lang('messages.backups.yandex.buttons.read_all')
                                                 </a>
                                             @endif
                                         </div>
