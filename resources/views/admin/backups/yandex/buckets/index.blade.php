@@ -177,12 +177,12 @@
                                     <div class="float-right">
                                         <div class="btn-group">
                                             <a href="#"
-                                               class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                                <i class="fas fa-eye"></i> Все записи
+                                               class="btn btn-xs btn-outline-dark" title="Добавление нового устройства">
+                                                @lang('messages.backups.yandex.buttons.all_records')
                                             </a>
                                             @if($logCount > 0)
                                                 <a href="{{ route('backups.yandex.backups.yandex.buckets.resolve') }}"
-                                                   class="btn btn-xs btn-outline-info"
+                                                   class="btn btn-xs btn-outline-dark"
                                                    title="Добавление нового устройства">
                                                     <i class="fas fa-fire-extinguisher"></i> Прочитать все
                                                 </a>
