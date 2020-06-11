@@ -7,13 +7,12 @@
 
     <ul class="navbar-nav ml-auto">
         @if($currentBuild < $latestBuild)
-            <span class="badge badge-warning text-sm">
-                <i class="fas fa-info-circle"></i>
-                @lang('messages.top_menu.new_version') ({{ $latestBuild }} @lang('messages.top_menu.from') {{ $latestBuildDate }}г.)
+            <span class="bg-warning text-xs rounded">
+                ~~~ <b>@lang('messages.top_menu.new_version')</b> {{ $latestBuild }} @lang('messages.top_menu.from') {{ $latestBuildDate }} ~~~
             </span>
         @else
-            <span class="badge badge-success text-sm">
-                @lang('messages.top_menu.current_version')
+            <span class="bg-success text-xs disabled rounded">
+                ~~~ @lang('messages.top_menu.current_version') ~~~
             </span>
         @endif
     </ul>
