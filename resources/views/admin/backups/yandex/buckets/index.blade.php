@@ -49,7 +49,7 @@
                                     </a>
                                 </div>
                                 <div class="btn-group">
-                                    <a href="#"
+                                    <a href="https://github.com/TripleSD/moring-documentation/blob/master/en/Backups/Yandex/Buckets/README.md"
                                        class="btn btn-xs btn-outline-dark" title="Добавление нового устройства"
                                        target="_blank">
                                         Help
