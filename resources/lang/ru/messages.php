@@ -113,8 +113,6 @@ return [
     'backups.yandex.buttons.title.add_bucket' => 'Добавить новую корзину',
     'backups.yandex.buttons.title.help' => 'Помощь',
 
-
-
     'backups.yandex.fields.connector' => 'ID коннектора',
     'backups.yandex.fields.status' => 'Статус',
     'backups.yandex.fields.last_check' => 'Последняя проверка',
