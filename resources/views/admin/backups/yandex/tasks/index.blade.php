@@ -50,7 +50,7 @@
                                     <a href="https://github.com/TripleSD/moring-documentation/blob/master/en/Backups/Yandex/Tasks/README.md"
                                        class="btn btn-xs btn-outline-dark" title="Добавление нового устройства"
                                        target="_blank">
-                                        Help
+                                        @lang('messages.backups.yandex.buttons.help')
                                     </a>
                                 </div>
                             </div>
