@@ -103,6 +103,18 @@ return [
     'backups.yandex.buttons.all_records' => 'Все записи',
     'backups.yandex.buttons.read_all' => 'Прочитать все',
 
+    'backups.yandex.buttons.titles.all_records' => 'Отметить прочитанными все сообщения',
+    'backups.yandex.buttons.titles.read_all' => 'Показать все сообщения',
+    'backups.yandex.buttons.title.connectors' => 'Показать все коннекторы',
+    'backups.yandex.buttons.title.tasks' => 'Показать все задачи',
+    'backups.yandex.buttons.title.buckets' => 'Показать все корзины',
+    'backups.yandex.buttons.title.add_connector' => 'Добавить новый коннектор',
+    'backups.yandex.buttons.title.add_task' => 'Добавить новую задачу',
+    'backups.yandex.buttons.title.add_bucket' => 'Добавить новую корзину',
+    'backups.yandex.buttons.title.help' => 'Помощь',
+
+
+
     'backups.yandex.fields.connector' => 'ID коннектора',
     'backups.yandex.fields.status' => 'Статус',
     'backups.yandex.fields.last_check' => 'Последняя проверка',

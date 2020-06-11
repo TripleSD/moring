@@ -103,6 +103,16 @@ return [
     'backups.yandex.buttons.all_records' => 'All records',
     'backups.yandex.buttons.read_all' => 'Read all',
 
+    'backups.yandex.buttons.titles.all_records' => 'Отметить прочитанными все сообщения',
+    'backups.yandex.buttons.titles.read_all' => 'Show all messages',
+    'backups.yandex.buttons.title.connectors' => 'Show all connectors',
+    'backups.yandex.buttons.title.tasks' => 'Show all tasks',
+    'backups.yandex.buttons.title.buckets' => 'Show all buckets',
+    'backups.yandex.buttons.title.add_connector' => 'Add new connector',
+    'backups.yandex.buttons.title.add_task' => 'Add new task',
+    'backups.yandex.buttons.title.add_bucket' => 'Add new bucket',
+    'backups.yandex.buttons.title.help' => 'Help',
+
     'backups.yandex.fields.connector' => 'Connector ID',
     'backups.yandex.fields.status' => 'Status',
     'backups.yandex.fields.last_check' => 'Last check',
