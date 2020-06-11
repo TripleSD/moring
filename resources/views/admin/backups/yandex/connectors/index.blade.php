@@ -43,8 +43,7 @@
                                 @include('admin.backups.yandex.menu')
                                 <div class="btn-group">
                                     <a href="{{route('backups.yandex.connectors.create')}}"
-                                       class="btn btn-xs btn-success" title="Добавление нового устройства">
-                                        <i class="fas fa-plus-square"></i>
+                                       class="btn btn-xs btn-outline-success" title="Добавление нового устройства">
                                         @lang('messages.backups.yandex.buttons.add')
                                     </a>
                                 </div>
