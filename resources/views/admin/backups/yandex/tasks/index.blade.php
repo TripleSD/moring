@@ -41,13 +41,15 @@
                                 @include('admin.backups.yandex.menu')
                                 <div class="btn-group">
                                     <a href="{{route('backups.yandex.tasks.create')}}"
-                                       class="btn btn-xs btn-outline-success" title="Добавление нового устройства">
+                                       class="btn btn-xs btn-outline-success"
+                                       title="@lang('messages.backups.yandex.buttons.title.add_task')">
                                         @lang('messages.backups.yandex.buttons.add')
                                     </a>
                                 </div>
                                 <div class="btn-group">
                                     <a href="https://github.com/TripleSD/moring-documentation/blob/master/en/Backups/Yandex/Tasks/README.md"
-                                       class="btn btn-xs btn-outline-dark" title="Добавление нового устройства"
+                                       class="btn btn-xs btn-outline-dark"
+                                       title="@lang('messages.backups.yandex.buttons.title.help')"
                                        target="_blank">
                                         @lang('messages.backups.yandex.buttons.help')
                                     </a>
