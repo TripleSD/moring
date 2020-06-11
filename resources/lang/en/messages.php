@@ -100,6 +100,7 @@ return [
 
     'backups.yandex.buttons.add' => 'Add',
     'backups.yandex.buttons.help' => 'Help',
+    'backups.yandex.buttons.all_records' => 'All records',
 
     'backups.yandex.fields.connector' => 'Connector ID',
     'backups.yandex.fields.status' => 'Status',
