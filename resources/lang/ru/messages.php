@@ -99,6 +99,7 @@ return [
     'backups.yandex.titles.errors' => 'Ошибки',
 
     'backups.yandex.buttons.add' => 'Добавить',
+    'backups.yandex.buttons.help' => 'Помощь',
 
     'backups.yandex.fields.connector' => 'ID коннектора',
     'backups.yandex.fields.status' => 'Статус',
