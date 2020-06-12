@@ -127,6 +127,16 @@
                                                     <div class="row small">
                                                         <div class="col-4">
                                                             <b>
+                                                                @lang('messages.backups.yandex.fields.added'):
+                                                            </b>
+                                                        </div>
+                                                        <div class="col-8">
+                                                            {{ $bucket->created_at }}
+                                                        </div>
+                                                    </div>
+                                                    <div class="row small">
+                                                        <div class="col-4">
+                                                            <b>
                                                                 @lang('messages.backups.yandex.fields.last_check'):
                                                             </b>
                                                         </div>
@@ -136,16 +146,6 @@
                                                             @else
                                                                 {{ $bucket->lastCheck }}
                                                             @endif
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row small">
-                                                        <div class="col-4">
-                                                            <b>
-                                                                @lang('messages.backups.yandex.fields.added'):</b>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            {{ $bucket->created_at }}
                                                         </div>
                                                     </div>
                                                 </div>
