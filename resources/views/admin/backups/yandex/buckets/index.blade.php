@@ -80,16 +80,18 @@
                                                 <div class="col-11">
                                                     <div class="row small">
                                                         <div class="col-4">
-                                                            <b>Status:</b>
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.status'):
+                                                            </b>
                                                         </div>
                                                         <div class="col-8">
                                                             @if($bucket->enabled === 1)
                                                                 <div class="badge badge-success">
-                                                                    @lang('messages.network.device.enabled')
+                                                                    @lang('messages.backups.yandex.fields.enabled')
                                                                 </div>
                                                             @else
                                                                 <div class="small badge badge-secondary">
-                                                                    @lang('messages.network.device.disabled')
+                                                                    @lang('messages.backups.yandex.fields.disabled')
                                                                 </div>
                                                             @endif
                                                             @if($bucket->logs->count() !== 0)
@@ -103,7 +105,9 @@
 
                                                     <div class="row small">
                                                         <div class="col-4">
-                                                            <b>Коннектор:</b>
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.connector'):
+                                                            </b>
                                                         </div>
                                                         <div class="col-8">
                                                             {{ $bucket->connector->description }}
@@ -111,7 +115,9 @@
                                                     </div>
                                                     <div class="row small">
                                                         <div class="col-4">
-                                                            <b>Интервал проверки:</b>
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.interval'):
+                                                            </b>
                                                         </div>
                                                         <div class="col-8">
                                                             {{ $bucket->interval }} час.
@@ -119,7 +125,9 @@
                                                     </div>
                                                     <div class="row small">
                                                         <div class="col-4">
-                                                            Last check:
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.last_check'):
+                                                            </b>
                                                         </div>
                                                         <div class="col-8">
                                                             @empty($bucket->lastCheck)
@@ -132,18 +140,11 @@
 
                                                     <div class="row small">
                                                         <div class="col-4">
-                                                            <b>Корзина добавлена:</b>
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.added'):</b>
                                                         </div>
                                                         <div class="col-8">
                                                             {{ $bucket->created_at }}
-                                                        </div>
-                                                    </div>
-                                                    <div class="row small">
-                                                        <div class="col-4">
-                                                            <b>Описание:</b>
-                                                        </div>
-                                                        <div class="col-8">
-                                                            {{ $bucket->description }}
                                                         </div>
                                                     </div>
                                                 </div>
