@@ -120,7 +120,8 @@
                                                             </b>
                                                         </div>
                                                         <div class="col-8">
-                                                            {{ $bucket->interval }} час.
+                                                            {{ $bucket->interval }}
+                                                            @lang('messages.backups.yandex.fields.hour')
                                                         </div>
                                                     </div>
                                                     <div class="row small">
