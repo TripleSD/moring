@@ -140,12 +140,12 @@
                                                 <div class="col-1">
                                                     <div class="btn-group-vertical float-right">
                                                         <a href="{{route('backups.yandex.tasks.show',$task->id)}}"
-                                                           class="btn btn-xs bg-gradient-info"
+                                                           class="btn btn-xs btn-outline-info"
                                                            title="Просмотр устройства">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
-                                                           class="btn btn-xs bg-gradient-warning"
+                                                           class="btn btn-xs btn-outline-warning"
                                                            title="Редактирование устройства">
                                                             <i class="fa fa-edit"></i></a>
                                                     </div>
