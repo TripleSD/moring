@@ -123,6 +123,10 @@ return [
     'backups.yandex.fields.used' => 'Using',
     'backups.yandex.fields.online' => 'Online',
     'backups.yandex.fields.offline' => 'Offline',
+    'backups.yandex.fields.enabled' => 'Enabled',
+    'backups.yandex.fields.disabled' => 'Disabled',
+    'backups.yandex.fields.interval' => 'Interval',
+    'backups.yandex.fields.added' => 'Added',
 
     /**
      * Yandex connectors page.
