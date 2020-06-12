@@ -149,7 +149,7 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-1">
-                                                    <div class="btn-group-vertical">
+                                                    <div class="btn-group-vertical float-right">
                                                         <a href="{{route('backups.yandex.buckets.show',$bucket->id)}}"
                                                            class="btn btn-xs btn-outline-info"
                                                            title="Просмотр устройства">
