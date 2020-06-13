@@ -19,8 +19,13 @@
                                     <span class="text-muted text-sm">Backup</span>
                                     <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
                                     <span class="text-muted text-sm">
-                                        <a href="{{ route('backups.yandex.tasks.index') }}">
                                             @lang('messages.backups.yandex.breadcrumbs.yandex')
+                                    </span>
+                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+
+                                    <span class="text-muted text-sm">
+                                        <a href="{{ route('backups.yandex.buckets.index') }}">
+                                            @lang('messages.backups.yandex.breadcrumbs.buckets.list')
                                         </a>
                                     </span>
                                     <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
