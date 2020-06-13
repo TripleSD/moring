@@ -100,11 +100,11 @@ return [
 
     'backups.yandex.buttons.add' => 'Add',
     'backups.yandex.buttons.help' => 'Help',
-    'backups.yandex.buttons.all_records' => 'All records',
+    'backups.yandex.buttons.all_records' => 'All events',
     'backups.yandex.buttons.read_all' => 'Read all',
 
-    'backups.yandex.buttons.titles.all_records' => 'Отметить прочитанными все сообщения',
-    'backups.yandex.buttons.titles.read_all' => 'Show all messages',
+    'backups.yandex.buttons.titles.all_records' => 'Show all events',
+    'backups.yandex.buttons.titles.read_all' => 'Read all messages',
     'backups.yandex.buttons.title.connectors' => 'Show all connectors',
     'backups.yandex.buttons.title.tasks' => 'Show all tasks',
     'backups.yandex.buttons.title.buckets' => 'Show all buckets',
