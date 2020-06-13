@@ -89,6 +89,7 @@ return [
     'backups.yandex.breadcrumbs.backups' => 'Бэкапы',
     'backups.yandex.breadcrumbs.yandex' => 'Яндекс диск',
     'backups.yandex.breadcrumbs.connectors.list' => 'Список коннекторов',
+    'backups.yandex.breadcrumbs.connectors.edit' => 'Редактирование коннектора',
     'backups.yandex.breadcrumbs.buckets.list' => 'Список корзин',
     'backups.yandex.breadcrumbs.buckets.edit' => 'Редактирование корзины',
     'backups.yandex.breadcrumbs.tasks.list' => 'Список задач',
@@ -145,6 +146,7 @@ return [
     'backups.yandex.fields.folder' => 'Папка',
     'backups.yandex.fields.post_suffix' => 'Post суффикс',
     'backups.yandex.fields.pre_suffix' => 'Pre суффикс',
+    'backups.yandex.fields.token' => 'API токен',
 
     /**
      * Yandex connectors page.

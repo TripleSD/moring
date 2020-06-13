@@ -89,6 +89,7 @@ return [
     'backups.yandex.breadcrumbs.backups' => 'Backups',
     'backups.yandex.breadcrumbs.yandex' => 'Yandex disk',
     'backups.yandex.breadcrumbs.connectors.list' => 'Connectors list',
+    'backups.yandex.breadcrumbs.connectors.edit' => 'Edit connector',
     'backups.yandex.breadcrumbs.buckets.list' => 'Buckets list',
     'backups.yandex.breadcrumbs.buckets.edit' => 'Edit bucket',
     'backups.yandex.breadcrumbs.tasks.list' => 'Tasks list',
@@ -145,6 +146,7 @@ return [
     'backups.yandex.fields.folder' => 'Folder',
     'backups.yandex.fields.post_suffix' => 'Post suffix',
     'backups.yandex.fields.pre_suffix' => 'Pre suffix',
+    'backups.yandex.fields.token' => 'API token',
 
     /**
      * Yandex connectors page.
