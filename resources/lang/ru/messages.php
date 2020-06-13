@@ -90,6 +90,7 @@ return [
     'backups.yandex.breadcrumbs.yandex' => 'Яндекс диск',
     'backups.yandex.breadcrumbs.connectors.list' => 'Список коннекторов',
     'backups.yandex.breadcrumbs.buckets.list' => 'Список корзин',
+    'backups.yandex.breadcrumbs.buckets.edit' => 'Редактирование корзины',
     'backups.yandex.breadcrumbs.tasks.list' => 'Список задач',
 
     'backups.yandex.breadcrumbs.small.connectors' => 'Коннекторы',
@@ -115,6 +116,9 @@ return [
     'backups.yandex.buttons.title.view' => 'Просмотр',
     'backups.yandex.buttons.title.edit' => 'Редактирование',
     'backups.yandex.buttons.title.update_status' => 'Обновить статус',
+    'backups.yandex.buttons.title.back' => 'Назад',
+    'backups.yandex.buttons.title.save' => 'Сохранить',
+    'backups.yandex.buttons.title.delete' => 'Удалить',
 
     'backups.yandex.fields.connector' => 'Коннектор',
     'backups.yandex.fields.status' => 'Статус',
@@ -132,6 +136,10 @@ return [
     'backups.yandex.fields.added' => 'Добавлено',
     'backups.yandex.fields.hour' => 'час.',
     'backups.yandex.fields.file' => 'Файл',
+    'backups.yandex.fields.description' => 'Описание',
+    'backups.yandex.fields.required' => 'обязательно для заполнения',
+    'backups.yandex.fields.comment' => 'Комментарий',
+    'backups.yandex.fields.more_details' => 'Подробнее',
 
     /**
      * Yandex connectors page.

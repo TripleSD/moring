@@ -90,6 +90,7 @@ return [
     'backups.yandex.breadcrumbs.yandex' => 'Yandex disk',
     'backups.yandex.breadcrumbs.connectors.list' => 'Connectors list',
     'backups.yandex.breadcrumbs.buckets.list' => 'Buckets list',
+    'backups.yandex.breadcrumbs.buckets.edit' => 'Edit bucket',
     'backups.yandex.breadcrumbs.tasks.list' => 'Tasks list',
 
     'backups.yandex.breadcrumbs.small.connectors' => 'Connectors',
@@ -115,6 +116,9 @@ return [
     'backups.yandex.buttons.title.view' => 'View',
     'backups.yandex.buttons.title.edit' => 'Edit',
     'backups.yandex.buttons.title.update_status' => 'Update status',
+    'backups.yandex.buttons.title.back' => 'Back',
+    'backups.yandex.buttons.title.save' => 'Save',
+    'backups.yandex.buttons.title.delete' => 'Delete',
 
     'backups.yandex.fields.connector' => 'Connector',
     'backups.yandex.fields.status' => 'Status',
@@ -132,6 +136,10 @@ return [
     'backups.yandex.fields.added' => 'Added',
     'backups.yandex.fields.hour' => 'h.',
     'backups.yandex.fields.file' => 'File',
+    'backups.yandex.fields.description' => 'Description',
+    'backups.yandex.fields.required' => 'required',
+    'backups.yandex.fields.comment' => 'Comment',
+    'backups.yandex.fields.more_details' => 'More details',
 
     /**
      * Yandex connectors page.
