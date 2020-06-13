@@ -111,6 +111,7 @@
                                                         </div>
                                                         <div class="col-8">
                                                             {{ $bucket->connector->description }}
+                                                            (id: {{ $bucket->connector->id }})
                                                         </div>
                                                     </div>
                                                     <div class="row small">
