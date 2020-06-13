@@ -86,11 +86,21 @@
 
                                 <div class="form-group">
                                     <b>
-                                        @lang('messages.backups.yandex.fields.comment')
+                                        @lang('messages.backups.yandex.fields.interval')
                                     </b>
                                     <span class="small text-danger">*</span>
-                                    {{ Form::textarea('comment', $bucket->comment, ['class' => 'form-control',
-                                            'rows' => 5, 'placeholder' => 'Комментарий...']) }}
+                                    <div>
+                                        {{ Form::radio('interval', '1', $bucket->interval === 1) }}
+                                        1 @lang('messages.backups.yandex.fields.hour')
+                                        {{ Form::radio('interval', '3', $bucket->interval === 3) }}
+                                        3 @lang('messages.backups.yandex.fields.hour')
+                                        {{ Form::radio('interval', '6', $bucket->interval === 6) }}
+                                        6 @lang('messages.backups.yandex.fields.hour')
+                                        {{ Form::radio('interval', '12', $bucket->interval === 12) }}
+                                        12 @lang('messages.backups.yandex.fields.hour')
+                                        {{ Form::radio('interval', '24', $bucket->interval === 24) }}
+                                        @lang('messages.backups.yandex.fields.day')
+                                    </div>
                                     <details class="mt--3 small">
                                         <summary>
                                             @lang('messages.backups.yandex.fields.more_details')
@@ -101,16 +111,11 @@
 
                                 <div class="form-group">
                                     <b>
-                                        @lang('messages.backups.yandex.fields.interval')
+                                        @lang('messages.backups.yandex.fields.comment')
                                     </b>
                                     <span class="small text-danger">*</span>
-                                    <div>
-                                        {{ Form::radio('interval', '1', $bucket->interval === 1) }} every 1h
-                                        {{ Form::radio('interval', '3', $bucket->interval === 3) }} every 3h
-                                        {{ Form::radio('interval', '6', $bucket->interval === 6) }} every 6h
-                                        {{ Form::radio('interval', '12', $bucket->interval === 12) }} every 12h
-                                        {{ Form::radio('interval', '24', $bucket->interval === 24) }} every day
-                                    </div>
+                                    {{ Form::textarea('comment', $bucket->comment, ['class' => 'form-control',
+                                            'rows' => 5, 'placeholder' => 'Комментарий...']) }}
                                     <details class="mt--3 small">
                                         <summary>
                                             @lang('messages.backups.yandex.fields.more_details')
@@ -127,11 +132,13 @@
                                         {{ Form::close() }}
                                     </div>
                                     <div class="col-1">
-                                        {{Form::open([ 'url' => route('backups.yandex.buckets.destroy', $bucket->id), 'method' => 'delete'])}}
-                                        <button type="submit" class="btn btn-xs btn-danger">
-                                            @lang('messages.backups.yandex.buttons.title.delete')
-                                        </button>
-                                        {{ Form::close() }}
+                                        <div class="float-right">
+                                            {{Form::open([ 'url' => route('backups.yandex.buckets.destroy', $bucket->id), 'method' => 'delete'])}}
+                                            <button type="submit" class="btn btn-xs btn-danger">
+                                                @lang('messages.backups.yandex.buttons.title.delete')
+                                            </button>
+                                            {{ Form::close() }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -140,6 +147,5 @@
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
