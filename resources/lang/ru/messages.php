@@ -90,10 +90,13 @@ return [
     'backups.yandex.breadcrumbs.yandex' => 'Яндекс диск',
     'backups.yandex.breadcrumbs.connectors.list' => 'Список коннекторов',
     'backups.yandex.breadcrumbs.connectors.edit' => 'Редактирование коннектора',
+    'backups.yandex.breadcrumbs.connectors.create' => 'Новый коннектор',
     'backups.yandex.breadcrumbs.buckets.list' => 'Список корзин',
     'backups.yandex.breadcrumbs.buckets.edit' => 'Редактирование корзины',
+    'backups.yandex.breadcrumbs.buckets.create' => 'Новая корзина',
     'backups.yandex.breadcrumbs.tasks.list' => 'Список задач',
     'backups.yandex.breadcrumbs.tasks.edit' => 'Редактирование задачи',
+    'backups.yandex.breadcrumbs.tasks.create' => 'Новая задача',
 
     'backups.yandex.breadcrumbs.small.connectors' => 'Коннекторы',
     'backups.yandex.breadcrumbs.small.tasks' => 'Задачи',

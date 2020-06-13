@@ -90,10 +90,13 @@ return [
     'backups.yandex.breadcrumbs.yandex' => 'Yandex disk',
     'backups.yandex.breadcrumbs.connectors.list' => 'Connectors list',
     'backups.yandex.breadcrumbs.connectors.edit' => 'Edit connector',
+    'backups.yandex.breadcrumbs.connectors.create' => 'New connector',
     'backups.yandex.breadcrumbs.buckets.list' => 'Buckets list',
     'backups.yandex.breadcrumbs.buckets.edit' => 'Edit bucket',
+    'backups.yandex.breadcrumbs.buckets.create' => 'New bucket',
     'backups.yandex.breadcrumbs.tasks.list' => 'Tasks list',
     'backups.yandex.breadcrumbs.tasks.edit' => 'Task edit',
+    'backups.yandex.breadcrumbs.tasks.create' => 'New task',
 
     'backups.yandex.breadcrumbs.small.connectors' => 'Connectors',
     'backups.yandex.breadcrumbs.small.tasks' => 'Tasks',
