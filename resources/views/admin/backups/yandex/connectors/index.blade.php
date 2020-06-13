@@ -219,13 +219,14 @@
                                     <div class="float-right">
                                         <div class="btn-group">
                                             <a href="#"
-                                               class="btn btn-xs btn-outline-dark" title="Добавление нового устройства">
+                                               class="btn btn-xs btn-outline-dark"
+                                               title="@lang('messages.backups.yandex.buttons.titles.all_records')">
                                                 @lang('messages.backups.yandex.buttons.all_records')
                                             </a>
                                             @if($logCount > 0)
                                                 <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
                                                    class="btn btn-xs btn-outline-dark"
-                                                   title="Добавление нового устройства">
+                                                   title="@lang('messages.backups.yandex.buttons.titles.read_all')">
                                                     @lang('messages.backups.yandex.buttons.read_all')
                                                 </a>
                                             @endif
