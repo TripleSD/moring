@@ -112,6 +112,9 @@ return [
     'backups.yandex.buttons.title.add_task' => 'Добавить новую задачу',
     'backups.yandex.buttons.title.add_bucket' => 'Добавить новую корзину',
     'backups.yandex.buttons.title.help' => 'Помощь',
+    'backups.yandex.buttons.title.view' => 'Просмотр',
+    'backups.yandex.buttons.title.edit' => 'Редактирование',
+    'backups.yandex.buttons.title.update_status' => 'Обновить статус',
 
     'backups.yandex.fields.connector' => 'ID коннектора',
     'backups.yandex.fields.status' => 'Статус',
@@ -127,6 +130,7 @@ return [
     'backups.yandex.fields.disabled' => 'Выключено',
     'backups.yandex.fields.interval' => 'Интервал',
     'backups.yandex.fields.added' => 'Добавлено',
+    'backups.yandex.fields.hour' => 'час.',
 
     /**
      * Yandex connectors page.
