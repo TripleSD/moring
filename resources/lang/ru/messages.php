@@ -131,6 +131,7 @@ return [
     'backups.yandex.fields.interval' => 'Интервал',
     'backups.yandex.fields.added' => 'Добавлено',
     'backups.yandex.fields.hour' => 'час.',
+    'backups.yandex.fields.file' => 'Файл',
 
     /**
      * Yandex connectors page.
