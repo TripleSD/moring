@@ -116,7 +116,7 @@ return [
     'backups.yandex.buttons.title.edit' => 'Редактирование',
     'backups.yandex.buttons.title.update_status' => 'Обновить статус',
 
-    'backups.yandex.fields.connector' => 'ID коннектора',
+    'backups.yandex.fields.connector' => 'Коннектор',
     'backups.yandex.fields.status' => 'Статус',
     'backups.yandex.fields.last_check' => 'Последняя проверка',
     'backups.yandex.fields.total' => 'Всего',

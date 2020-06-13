@@ -116,7 +116,7 @@ return [
     'backups.yandex.buttons.title.edit' => 'Edit',
     'backups.yandex.buttons.title.update_status' => 'Update status',
 
-    'backups.yandex.fields.connector' => 'Connector ID',
+    'backups.yandex.fields.connector' => 'Connector',
     'backups.yandex.fields.status' => 'Status',
     'backups.yandex.fields.last_check' => 'Last check',
     'backups.yandex.fields.total' => 'Total',
