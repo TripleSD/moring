@@ -92,6 +92,7 @@ return [
     'backups.yandex.breadcrumbs.buckets.list' => 'Buckets list',
     'backups.yandex.breadcrumbs.buckets.edit' => 'Edit bucket',
     'backups.yandex.breadcrumbs.tasks.list' => 'Tasks list',
+    'backups.yandex.breadcrumbs.tasks.edit' => 'Task edit',
 
     'backups.yandex.breadcrumbs.small.connectors' => 'Connectors',
     'backups.yandex.breadcrumbs.small.tasks' => 'Tasks',
@@ -135,11 +136,15 @@ return [
     'backups.yandex.fields.interval' => 'Interval',
     'backups.yandex.fields.added' => 'Added',
     'backups.yandex.fields.hour' => 'h.',
+    'backups.yandex.fields.day' => 'day',
     'backups.yandex.fields.file' => 'File',
     'backups.yandex.fields.description' => 'Description',
     'backups.yandex.fields.required' => 'required',
     'backups.yandex.fields.comment' => 'Comment',
     'backups.yandex.fields.more_details' => 'More details',
+    'backups.yandex.fields.folder' => 'Folder',
+    'backups.yandex.fields.post_suffix' => 'Post suffix',
+    'backups.yandex.fields.pre_suffix' => 'Pre suffix',
 
     /**
      * Yandex connectors page.

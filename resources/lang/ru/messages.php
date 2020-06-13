@@ -92,6 +92,7 @@ return [
     'backups.yandex.breadcrumbs.buckets.list' => 'Список корзин',
     'backups.yandex.breadcrumbs.buckets.edit' => 'Редактирование корзины',
     'backups.yandex.breadcrumbs.tasks.list' => 'Список задач',
+    'backups.yandex.breadcrumbs.tasks.edit' => 'Редактирование задачи',
 
     'backups.yandex.breadcrumbs.small.connectors' => 'Коннекторы',
     'backups.yandex.breadcrumbs.small.tasks' => 'Задачи',
@@ -135,11 +136,15 @@ return [
     'backups.yandex.fields.interval' => 'Интервал',
     'backups.yandex.fields.added' => 'Добавлено',
     'backups.yandex.fields.hour' => 'час.',
+    'backups.yandex.fields.day' => 'день',
     'backups.yandex.fields.file' => 'Файл',
     'backups.yandex.fields.description' => 'Описание',
     'backups.yandex.fields.required' => 'обязательно для заполнения',
     'backups.yandex.fields.comment' => 'Комментарий',
     'backups.yandex.fields.more_details' => 'Подробнее',
+    'backups.yandex.fields.folder' => 'Папка',
+    'backups.yandex.fields.post_suffix' => 'Post суффикс',
+    'backups.yandex.fields.pre_suffix' => 'Pre суффикс',
 
     /**
      * Yandex connectors page.
