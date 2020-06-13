@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Backups;
 
 use App\Helpers\SystemLog;
+use App\Models\BackupYandexBuckets;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Backups\Yandex\BucketsStoreUpdateRequest;
 use App\Models\BackupYandexBucketsLogs;
@@ -131,5 +132,17 @@ class YandexBucketsController extends Controller
         BackupYandexBucketsLogs::where('resolved', 0)->update(['resolved' => 1]);
 
         return redirect()->route('backups.yandex.buckets.index');
+    }
+
+    /**
+     * @param Request $request
+     * @return Application|Factory|View
+     */
+    public function show(Request $request)
+    {
+        $bucket = BackupYandexBuckets::find($request->id);
+
+        return view('admin.backups.yandex.buckets.show', compact('bucket'));
+
     }
 }
