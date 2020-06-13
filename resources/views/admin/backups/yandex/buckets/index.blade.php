@@ -27,9 +27,7 @@
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                     <span class="text-muted text-sm d-none d-sm-block">
-                                        <a href="{{ route('backups.yandex.tasks.index') }}">
-                                            @lang('messages.backups.yandex.breadcrumbs.yandex')
-                                        </a>
+                                        @lang('messages.backups.yandex.breadcrumbs.yandex')
                                     </span>
                                     <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>

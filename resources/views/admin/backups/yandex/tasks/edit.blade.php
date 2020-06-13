@@ -63,8 +63,9 @@
                         <div class="card-body">
                             <div class="col-sm-6">
                                 <span class="small text-danger float-right">
-                                    * - @lang('messages.backups.yandex.fields.required')
+                                    * @lang('messages.backups.yandex.fields.required')
                                 </span>
+
                                 {{ Form::open([ 'url' => route('backups.yandex.tasks.update', $task->id), 'method' => 'patch']) }}
                                 <div class="form-group">
                                     <b>

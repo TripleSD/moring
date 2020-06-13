@@ -15,32 +15,42 @@
                                 </div>
                                 <div class="btn-group">
                                     <span class="text-muted text-sm d-none d-sm-block">
-                                        Dashboard
+                                        @lang('messages.backups.yandex.breadcrumbs.dashboard')
                                     </span>
                                     <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                     <span class="text-muted text-sm d-none d-sm-block">
-                                        Backup
+                                        @lang('messages.backups.yandex.breadcrumbs.backups')
                                     </span>
                                     <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                     <span class="text-muted text-sm d-none d-sm-block">
-                                        <a href="{{ route('backups.yandex.tasks.index') }}">
-                                            Яндекс Диск
+                                        @lang('messages.backups.yandex.breadcrumbs.yandex')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        <a href="{{ route('backups.yandex.connectors.index') }}">
+                                            @lang('messages.backups.yandex.breadcrumbs.connectors.list')
                                         </a>
                                     </span>
                                     <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
-                                    <span class="text-sm">Новый коннектор</span>
+                                    <span class="text-sm">
+                                        @lang('messages.backups.yandex.breadcrumbs.connectors.create')
+                                    </span>
                                 </div>
                             </div>
                             <div class="card-tools">
                                 <a href="{{route('backups.yandex.connectors.index')}}"
                                    class="btn btn-xs btn-outline-info" title="Вернуться">
-                                    <i class="fa fa-arrow-left"></i> Назад</a>
+                                    <i class="fa fa-arrow-left"></i>
+                                    @lang('messages.backups.yandex.buttons.title.back')
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -52,52 +62,62 @@
                     <div class="card card-info">
                         <div class="card-body">
                             <div class="col-sm-6">
-                                    <span class="small text-danger float-right">
-                                        * - обязательно для заполнения
-                                    </span>
+                                <span class="small text-danger float-right">
+                                    * @lang('messages.backups.yandex.fields.required')
+                                </span>
 
                                 {{ Form::open([ 'url' => route('backups.yandex.connectors.store'), 'method' => 'post']) }}
                                 <div class="form-group">
-                                    <b>Краткое описание</b>
+                                    <b>
+                                        @lang('messages.backups.yandex.fields.description')
+                                    </b>
                                     <span class="small text-danger">*</span>
                                     {{ Form::text('description', null, ['class' => 'form-control',
                                         'required', 'placeholder' => 'Пример: Аккаунт клиента или disk@site.local']) }}
                                     <details class="mt--3 small">
                                         <summary>
-                                            Дополнительная информация
+                                            @lang('messages.backups.yandex.fields.more_details')
                                         </summary>
                                         ...
                                     </details>
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Токен</b>
+                                    <b>
+                                        @lang('messages.backups.yandex.fields.token')
+                                    </b>
                                     <span class="small text-danger">*</span>
                                     {{ Form::text('token', null, ['class' => 'form-control',
                                         'required', 'placeholder' => 'Пример: Hhs7JushsksTgJdls']) }}
                                     <details class="mt--3 small">
                                         <summary>
-                                            Дополнительная информация
+                                            @lang('messages.backups.yandex.fields.more_details')
                                         </summary>
                                         ...
                                     </details>
                                 </div>
 
                                 <div class="form-group">
-                                    <b>Комментарий</b>
+                                    <b>
+                                        @lang('messages.backups.yandex.fields.comment')
+                                    </b>
                                     {{ Form::textarea('comment', null, ['class' => 'form-control',
                                         'rows' => 5, 'placeholder' => 'Комментарий...']) }}
                                     <details class="mt--3 small">
                                         <summary>
-                                            Дополнительная информация
+                                            @lang('messages.backups.yandex.fields.more_details')
                                         </summary>
                                         ...
                                     </details>
                                 </div>
 
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-xs bg-gradient-success">Сохранить</button>
-                                    {{ Form::close() }}
+                                    <div class="btn-group">
+                                        <button type="submit" class="btn btn-xs bg-gradient-success">
+                                            @lang('messages.backups.yandex.buttons.title.save')
+                                        </button>
+                                        {{ Form::close() }}
+                                    </div>
                                 </div>
                             </div>
                         </div>
