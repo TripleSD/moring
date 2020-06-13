@@ -14,24 +14,24 @@
                                         <i class="fa fa-home"></i></a>
                                 </div>
                                 <div class="btn-group">
-                                    <span class="text-muted text-sm">
+                                    <span class="text-muted text-sm d-none d-sm-block">
                                         @lang('messages.backups.yandex.breadcrumbs.dashboard')
                                     </span>
-                                    <span class="text-muted text-sm px-1">
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
-                                    <span class="text-muted text-sm">
+                                    <span class="text-muted text-sm d-none d-sm-block">
                                         @lang('messages.backups.yandex.breadcrumbs.backups')
                                     </span>
-                                    <span class="text-muted text-sm px-1">
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
-                                    <span class="text-muted text-sm">
+                                    <span class="text-muted text-sm d-none d-sm-block">
                                         <a href="{{ route('backups.yandex.tasks.index') }}">
                                             @lang('messages.backups.yandex.breadcrumbs.yandex')
                                         </a>
                                     </span>
-                                    <span class="text-muted text-sm px-1">
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                     <span class="text-sm">

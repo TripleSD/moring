@@ -1,40 +1,58 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class=" text-dark"><i class="nav-icon fas fa-box-open"></i> Backups</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="{{route('home')}}">Home</a></li>
-                        <li class="breadcrumb-item">Backups</li>
-                        <li class="breadcrumb-item active">Ftp</li>
-                    </ol>
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    <div class="card mt-3">
                         <div class="card-header">
-                            <h3 class="card-title">
-                                Просмотр профиля
-                            </h3>
+                            <div class="card-title">
+                                <div class="btn-group">
+                                    <a href="{{route('home')}}"
+                                       class="btn btn-xs btn-outline-secondary" title="Вернуться">
+                                        <i class="fa fa-home"></i></a>
+                                </div>
+                                <div class="btn-group">
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.dashboard')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.backups')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.yandex')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        <a href="{{ route('backups.yandex.buckets.index') }}">
+                                            @lang('messages.backups.yandex.breadcrumbs.buckets.list')
+                                        </a>
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-sm">
+                                        Редактирование корзины
+                                    </span>
+                                </div>
+                            </div>
                             <span class="float-right">
-                                                            <a href="{{route('backups.ftp.index')}}"
-                                                               class="btn btn-sm bg-gradient-info" title="Вернуться">
-                                                                <i class="fa fa-arrow-left"></i></a>
-                                                            <a href="{{route('backups.ftp.edit', $task->id)}}"
-                                                               class="btn btn-sm bg-gradient-warning"
-                                                               title="Редактиование профиля">
-                                                                <i class="fa fa-user-edit"></i></a>
+                                <a href="{{route('backups.ftp.index')}}"
+                                   class="btn btn-xs bg-gradient-info" title="Вернуться">
+                                    <i class="fa fa-arrow-left"></i></a>
+                                <a href="{{route('backups.ftp.edit', $bucket->id)}}"
+                                   class="btn btn-xs bg-gradient-warning"
+                                   title="Редактиование профиля">
+                                    <i class="fa fa-user-edit"></i></a>
                             </span>
                         </div>
                     </div>
@@ -42,7 +60,7 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="card card-info">
                         <div class="card-header">
                             <dt>@lang('messages.network.device.summary_information')</dt>
@@ -118,7 +136,7 @@
                                 <li class="small">
                                     Комментарий:
                                     <span class="float-right">
-                                        {{ $task->description }}
+{{--                                        {{ $task->description }}--}}
                                     </span>
                                 </li>
                             </ul>
@@ -126,70 +144,70 @@
                     </div>
                 </div>
 
-                <div class="col-6">
+                <div class="col-sm-6">
 
-                    @if($task->logs->count() !== 0)
-                        <div class="card card-warning">
-                            <div class="card-header">
-                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>
-                            </div>
-                            @if($task->logs !== null)
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover">
-                                        <tbody>
-                                        @foreach($task->logs as $log)
-                                            <tr>
-                                                <td class="small">
-                                                    @if($log->resolved === 1)
-                                                        <span class="badge badge-secondary">
-                                                            <i class="fas fa-eye"></i>
-                                                        </span>
-                                                        <span class="badge badge-secondary">
-                                                            @lang('messages.network.device.type_status.alert')
-                                                        </span>
-                                                    @else
-                                                        <span class="badge badge-danger">
-                                                            <i class="fas fa-eye"></i>
-                                                        </span>
-                                                        @if($log->type === 1)
-                                                            <span class="badge badge-danger">
-                                                                @lang('messages.network.device.type_status.alert')
-                                                            </span>
-                                                        @else
-                                                            <span class="badge badge-success">
-                                                                @lang('messages.network.device.type_status.info')
-                                                            </span>
-                                                        @endif
-                                                    @endif
-                                                </td>
-                                                <td class="small">
-                                                    @if($log->type === 1)
-                                                        @lang('messages.network.device.snmp.device.log.down')
-                                                    @else
-                                                        @lang('messages.network.device.snmp.device.log.up')
-                                                    @endif
-                                                </td>
-                                                <td class="small">
-                                                    {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-" href=""></a>
-                                                    <i class="fas fa-eye"></i>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                        </div>
-                    @else
-                        <div class="card card-gray">
-                            <div class="card-header">
-                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>
-                            </div>
-                        </div>
-                    @endif
+{{--                    @if($task->logs->count() !== 0)--}}
+{{--                        <div class="card card-warning">--}}
+{{--                            <div class="card-header">--}}
+{{--                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>--}}
+{{--                            </div>--}}
+{{--                            @if($task->logs !== null)--}}
+{{--                                <div class="card-body table-responsive p-0">--}}
+{{--                                    <table class="table table-hover">--}}
+{{--                                        <tbody>--}}
+{{--                                        @foreach($task->logs as $log)--}}
+{{--                                            <tr>--}}
+{{--                                                <td class="small">--}}
+{{--                                                    @if($log->resolved === 1)--}}
+{{--                                                        <span class="badge badge-secondary">--}}
+{{--                                                            <i class="fas fa-eye"></i>--}}
+{{--                                                        </span>--}}
+{{--                                                        <span class="badge badge-secondary">--}}
+{{--                                                            @lang('messages.network.device.type_status.alert')--}}
+{{--                                                        </span>--}}
+{{--                                                    @else--}}
+{{--                                                        <span class="badge badge-danger">--}}
+{{--                                                            <i class="fas fa-eye"></i>--}}
+{{--                                                        </span>--}}
+{{--                                                        @if($log->type === 1)--}}
+{{--                                                            <span class="badge badge-danger">--}}
+{{--                                                                @lang('messages.network.device.type_status.alert')--}}
+{{--                                                            </span>--}}
+{{--                                                        @else--}}
+{{--                                                            <span class="badge badge-success">--}}
+{{--                                                                @lang('messages.network.device.type_status.info')--}}
+{{--                                                            </span>--}}
+{{--                                                        @endif--}}
+{{--                                                    @endif--}}
+{{--                                                </td>--}}
+{{--                                                <td class="small">--}}
+{{--                                                    @if($log->type === 1)--}}
+{{--                                                        @lang('messages.network.device.snmp.device.log.down')--}}
+{{--                                                    @else--}}
+{{--                                                        @lang('messages.network.device.snmp.device.log.up')--}}
+{{--                                                    @endif--}}
+{{--                                                </td>--}}
+{{--                                                <td class="small">--}}
+{{--                                                    {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}--}}
+{{--                                                </td>--}}
+{{--                                                <td>--}}
+{{--                                                    <a class="btn btn-" href=""></a>--}}
+{{--                                                    <i class="fas fa-eye"></i>--}}
+{{--                                                </td>--}}
+{{--                                            </tr>--}}
+{{--                                        @endforeach--}}
+{{--                                        </tbody>--}}
+{{--                                    </table>--}}
+{{--                                </div>--}}
+{{--                            @endif--}}
+{{--                        </div>--}}
+{{--                    @else--}}
+{{--                        <div class="card card-gray">--}}
+{{--                            <div class="card-header">--}}
+{{--                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    @endif--}}
                 </div>
             </div>
         </div>

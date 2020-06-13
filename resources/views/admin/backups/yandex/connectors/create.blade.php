@@ -14,20 +14,32 @@
                                         <i class="fa fa-home"></i></a>
                                 </div>
                                 <div class="btn-group">
-                                    <span class="text-muted text-sm">Dashboard</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">Backup</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">
-                                        <a href="{{ route('backups.yandex.tasks.index') }}">Яндекс Диск</a>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        Dashboard
                                     </span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        Backup
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        <a href="{{ route('backups.yandex.tasks.index') }}">
+                                            Яндекс Диск
+                                        </a>
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
                                     <span class="text-sm">Новый коннектор</span>
                                 </div>
                             </div>
                             <div class="card-tools">
                                 <a href="{{route('backups.yandex.connectors.index')}}"
-                                   class="btn btn-xs bg-gradient-info" title="Вернуться">
+                                   class="btn btn-xs btn-outline-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i> Назад</a>
                             </div>
                         </div>

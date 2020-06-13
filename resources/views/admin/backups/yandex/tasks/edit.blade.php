@@ -14,20 +14,32 @@
                                         <i class="fa fa-home"></i></a>
                                 </div>
                                 <div class="btn-group">
-                                    <span class="text-muted text-sm">Dashboard</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">Backup</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.dashboard')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.backups')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
                                         @lang('messages.backups.yandex.breadcrumbs.yandex')
                                     </span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
                                         <a href="{{ route('backups.yandex.tasks.index') }}">
                                             @lang('messages.backups.yandex.breadcrumbs.tasks.list')
                                         </a>
                                     </span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
                                     <span class="text-sm">
                                         @lang('messages.backups.yandex.breadcrumbs.tasks.edit')
                                     </span>
@@ -175,20 +187,18 @@
                                 </div>
 
                                 <div class="row form-group">
-                                    <div class="col-1">
+                                    <div class="col-sm-1">
                                         <button type="submit" class="btn btn-xs btn-success">
                                             @lang('messages.backups.yandex.buttons.title.save')
                                         </button>
                                         {{ Form::close() }}
                                     </div>
-                                    <div class="col-1">
-                                        <div class="float-right">
-                                            {{Form::open([ 'url' => route('backups.yandex.tasks.destroy', $task->id), 'method' => 'delete'])}}
-                                            <button type="submit" class="btn btn-xs btn-danger">
-                                                @lang('messages.backups.yandex.buttons.title.delete')
-                                            </button>
-                                            {{ Form::close() }}
-                                        </div>
+                                    <div class="col-sm-1">
+                                        {{Form::open([ 'url' => route('backups.yandex.tasks.destroy', $task->id), 'method' => 'delete'])}}
+                                        <button type="submit" class="btn btn-xs btn-danger">
+                                            @lang('messages.backups.yandex.buttons.title.delete')
+                                        </button>
+                                        {{ Form::close() }}
                                     </div>
                                 </div>
                             </div>

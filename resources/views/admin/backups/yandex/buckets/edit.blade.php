@@ -11,24 +11,36 @@
                                 <div class="btn-group">
                                     <a href="{{route('home')}}"
                                        class="btn btn-xs btn-outline-secondary" title="Вернуться">
-                                        <i class="fa fa-home"></i></a>
+                                        <i class="fa fa-home"></i>
+                                    </a>
                                 </div>
                                 <div class="btn-group">
-                                    <span class="text-muted text-sm">Dashboard</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">Backup</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">
-                                            @lang('messages.backups.yandex.breadcrumbs.yandex')
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.dashboard')
                                     </span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-
-                                    <span class="text-muted text-sm">
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.backups')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.yandex')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
                                         <a href="{{ route('backups.yandex.buckets.index') }}">
                                             @lang('messages.backups.yandex.breadcrumbs.buckets.list')
                                         </a>
                                     </span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
                                     <span class="text-sm">
                                         @lang('messages.backups.yandex.breadcrumbs.buckets.edit')
                                     </span>
@@ -124,21 +136,19 @@
                                     </details>
                                 </div>
 
-                                <div class="row form-group">
-                                    <div class="col-1">
+                                <div class="form-group">
+                                    <div class="btn-group">
                                         <button type="submit" class="btn btn-xs btn-success">
                                             @lang('messages.backups.yandex.buttons.title.save')
                                         </button>
                                         {{ Form::close() }}
                                     </div>
-                                    <div class="col-1">
-                                        <div class="float-right">
-                                            {{Form::open([ 'url' => route('backups.yandex.buckets.destroy', $bucket->id), 'method' => 'delete'])}}
-                                            <button type="submit" class="btn btn-xs btn-danger">
-                                                @lang('messages.backups.yandex.buttons.title.delete')
-                                            </button>
-                                            {{ Form::close() }}
-                                        </div>
+                                    <div class="btn-group">
+                                        {{Form::open([ 'url' => route('backups.yandex.buckets.destroy', $bucket->id), 'method' => 'delete'])}}
+                                        <button type="submit" class="btn btn-xs btn-danger">
+                                            @lang('messages.backups.yandex.buttons.title.delete')
+                                        </button>
+                                        {{ Form::close() }}
                                     </div>
                                 </div>
                             </div>

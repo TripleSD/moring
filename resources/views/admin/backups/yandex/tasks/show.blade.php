@@ -33,7 +33,7 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="card card-info">
                         <div class="card-header">
                             <dt>@lang('messages.network.device.summary_information')</dt>
@@ -105,8 +105,7 @@
                     </div>
                 </div>
 
-                <div class="col-6">
-
+                <div class="col-sm-6">
                     @if($task->logs->count() !== 0)
                         <div class="card card-warning">
                             <div class="card-header">
