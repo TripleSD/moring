@@ -77,16 +77,18 @@
                                                 <div class="col-11">
                                                     <div class="row small">
                                                         <div class="col-3">
-                                                            <b>Status:</b>
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.status'):
+                                                            </b>
                                                         </div>
                                                         <div class="col-9">
                                                             @if($task->enabled === 1)
                                                                 <div class="badge badge-success">
-                                                                    @lang('messages.network.device.enabled')
+                                                                    @lang('messages.backups.yandex.fields.enabled')
                                                                 </div>
                                                             @else
                                                                 <div class="small badge badge-secondary">
-                                                                    @lang('messages.network.device.disabled')
+                                                                    @lang('messages.backups.yandex.fields.disabled')
                                                                 </div>
                                                             @endif
 
@@ -101,7 +103,9 @@
 
                                                     <div class="row small">
                                                         <div class="col-3">
-                                                            <b>Коннектор:</b>
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.connector'):
+                                                            </b>
                                                         </div>
                                                         <div class="col-9">
                                                             {{ $task->connector->description }}
@@ -110,12 +114,22 @@
                                                     </div>
                                                     <div class="row small">
                                                         <div class="col-3">
-                                                            <b>Интервал:</b>
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.interval'):
+                                                            </b>
                                                         </div>
                                                         <div class="col-9">
                                                             {{ $task->interval }} час.
-                                                            <i class="fas fa-chevron-right"></i>
-                                                            <b>Last update:</b>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row small">
+                                                        <div class="col-3">
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.last_check'):
+                                                            </b>
+                                                        </div>
+                                                        <div class="col-9">
                                                             @empty($task->lastCheck)
                                                                 -
                                                             @else
@@ -126,7 +140,9 @@
 
                                                     <div class="row small">
                                                         <div class="col-3">
-                                                            <b>Файл:</b>
+                                                            <b>
+                                                                @lang('messages.backups.yandex.fields.file'):
+                                                            </b>
                                                         </div>
                                                         <div class="col-9">
                                                             @empty($task->folder)
