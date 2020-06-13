@@ -143,6 +143,5 @@ class YandexBucketsController extends Controller
         $bucket = BackupYandexBuckets::find($request->id);
 
         return view('admin.backups.yandex.buckets.show', compact('bucket'));
-
     }
 }
