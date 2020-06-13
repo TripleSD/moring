@@ -141,12 +141,12 @@
                                                     <div class="btn-group-vertical float-right">
                                                         <a href="{{route('backups.yandex.tasks.show',$task->id)}}"
                                                            class="btn btn-xs btn-outline-info"
-                                                           title="Просмотр устройства">
+                                                           title="@lang('messages.backups.yandex.buttons.title.view')">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
                                                            class="btn btn-xs btn-outline-warning"
-                                                           title="Редактирование устройства">
+                                                           title="@lang('messages.backups.yandex.buttons.title.edit')">
                                                             <i class="fa fa-edit"></i></a>
                                                     </div>
                                                 </div>

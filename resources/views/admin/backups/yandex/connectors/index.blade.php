@@ -135,17 +135,17 @@
                                                     <span class="btn-group-vertical float-right">
                                                 <a href="{{route('backups.yandex.connectors.show',$connector->id)}}"
                                                    class="btn btn-xs btn-outline-info"
-                                                   title="Просмотр устройства">
+                                                   title="@lang('messages.backups.yandex.buttons.title.view')">
                                                     <i class="fa fa-eye"></i>
                                                 </a>
                                                 <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
                                                    class="btn btn-xs btn-outline-warning"
-                                                   title="Редактирование устройства">
+                                                   title="@lang('messages.backups.yandex.buttons.title.edit')">
                                                     <i class="fas fa-pencil-alt"></i></a>
 
                                                 <a href="{{route('backups.yandex.backups.yandex.connectors.refresh', $connector->id)}}"
                                                    class="btn btn-xs btn-outline-success"
-                                                   title="Обновить данные">
+                                                   title="@lang('messages.backups.yandex.buttons.title.update_status')">
                                                     <i class="fas fa-sync-alt"></i></a>
 
                                                 @if($connector->trash_size > 0)

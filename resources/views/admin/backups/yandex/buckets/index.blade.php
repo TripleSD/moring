@@ -153,12 +153,12 @@
                                                     <div class="btn-group-vertical float-right">
                                                         <a href="{{route('backups.yandex.buckets.show',$bucket->id)}}"
                                                            class="btn btn-xs btn-outline-info"
-                                                           title="Просмотр устройства">
+                                                           title="@lang('messages.backups.yandex.buttons.title.view')">
                                                             <i class="fa fa-eye"></i>
                                                         </a>
                                                         <a href="{{route('backups.yandex.buckets.edit', $bucket->id)}}"
                                                            class="btn btn-xs btn-outline-warning"
-                                                           title="Редактирование устройства">
+                                                           title="@lang('messages.backups.yandex.buttons.title.edit')">
                                                             <i class="fa fa-edit"></i></a>
                                                     </div>
                                                 </div>
