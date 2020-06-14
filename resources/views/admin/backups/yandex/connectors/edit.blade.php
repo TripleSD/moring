@@ -119,6 +119,7 @@
                                             </button>
                                             {{ Form::close() }}
                                         </div>
+
                                         <div class="col-lg-2 mt-2">
                                             {{Form::open([ 'url' => route('backups.yandex.connectors.destroy', $connector->id), 'method' => 'delete'])}}
                                             <button type="submit" class="btn btn-xs btn-danger btn-block">
