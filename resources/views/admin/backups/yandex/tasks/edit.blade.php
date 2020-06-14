@@ -187,16 +187,16 @@
                                     </details>
                                 </div>
 
-                                <div class="row form-group">
-                                    <div class="col-sm-1">
-                                        <button type="submit" class="btn btn-xs btn-success">
+                                <div class="row">
+                                    <div class="col-lg-2 mt-2">
+                                        <button type="submit" class="btn btn-xs btn-success btn-block">
                                             @lang('messages.backups.yandex.buttons.title.save')
                                         </button>
                                         {{ Form::close() }}
                                     </div>
-                                    <div class="col-sm-1">
+                                    <div class="col-lg-2 mt-2">
                                         {{Form::open([ 'url' => route('backups.yandex.tasks.destroy', $task->id), 'method' => 'delete'])}}
-                                        <button type="submit" class="btn btn-xs btn-danger">
+                                        <button type="submit" class="btn btn-xs btn-danger btn-block">
                                             @lang('messages.backups.yandex.buttons.title.delete')
                                         </button>
                                         {{ Form::close() }}
