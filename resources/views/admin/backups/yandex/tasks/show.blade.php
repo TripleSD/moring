@@ -7,25 +7,52 @@
                 <div class="col-12">
                     <div class="card mt-3">
                         <div class="card-header">
-                            <h3 class="card-title">
-                                <span class="text-muted text-sm">Dashboard</span>
-                                <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                <span class="text-muted text-sm">Backup</span>
-                                <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                <span class="text-muted text-sm">
-                                        <a href="{{ route('backups.yandex.tasks.index') }}">Яндекс Диск</a>
+                            <div class="card-title">
+                                <div class="btn-group">
+                                    <a href="{{route('home')}}"
+                                       class="btn btn-xs btn-outline-secondary" title="Вернуться">
+                                        <i class="fa fa-home"></i></a>
+                                </div>
+                                <div class="btn-group">
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.dashboard')
                                     </span>
-                                <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                <span class="text-sm">Просмотр проверки</span>
-                            </h3>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.backups')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.yandex')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        <a href="{{ route('backups.yandex.tasks.index') }}">
+                                            @lang('messages.backups.yandex.breadcrumbs.tasks.list')
+                                        </a>
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-sm">
+                                        Просмотр проверки
+                                    </span>
+                                </div>
+                            </div>
                             <span class="float-right">
                                 <a href="{{ url()->previous() }}"
-                                   class="btn btn-xs bg-gradient-info" title="Вернуться">
+                                   class="btn btn-xs btn-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i> Назад</a>
                                 <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
-                                   class="btn btn-xs bg-gradient-warning"
+                                   class="btn btn-xs btn-warning"
                                    title="Редактиование профиля">
-                                    <i class="fa fa-user-edit"></i> Правка</a>
+                                    <i class="fa fa-edit"></i> Правка</a>
                             </span>
                         </div>
                     </div>
@@ -83,7 +110,7 @@
                                     </span>
                                 </li>
                                 <li class="small">
-                                  Interval
+                                    Interval
                                     <span class="float-right">
                                         {{ $task->interval }}
                                     </span>

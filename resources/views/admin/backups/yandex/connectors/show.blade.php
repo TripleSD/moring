@@ -14,23 +14,43 @@
                                         <i class="fa fa-home"></i></a>
                                 </div>
                                 <div class="btn-group">
-                                    <span class="text-muted text-sm">Dashboard</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">Backup</span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-muted text-sm">
-                                        <a href="{{ route('backups.yandex.tasks.index') }}">Яндекс Диск</a>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.dashboard')
                                     </span>
-                                    <span class="text-muted text-sm px-1"><i class="fas fa-chevron-right"></i></span>
-                                    <span class="text-sm">Просмотр коннектора</span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.backups')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        @lang('messages.backups.yandex.breadcrumbs.yandex')
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-muted text-sm d-none d-sm-block">
+                                        <a href="{{ route('backups.yandex.connectors.index') }}">
+                                            @lang('messages.backups.yandex.breadcrumbs.connectors.list')
+                                        </a>
+                                    </span>
+                                    <span class="text-muted text-sm px-1 d-none d-sm-block">
+                                        <i class="fas fa-chevron-right"></i>
+                                    </span>
+                                    <span class="text-sm">
+                                        Просмотр коннектора
+                                    </span>
                                 </div>
                             </div>
                             <span class="float-right">
                                 <a href="{{ url()->previous() }}"
-                                   class="btn btn-xs bg-gradient-info" title="Вернуться">
+                                   class="btn btn-xs btn-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i> Назад</a>
                                 <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
-                                   class="btn btn-xs bg-gradient-warning"
+                                   class="btn btn-xs btn-warning"
                                    title="Редактиование профиля">
                                     <i class="fas fa-edit"></i> Правка</a>
                             </span>
@@ -40,7 +60,7 @@
             </div>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="row">
                         <div class="col-12">
                             <div class="card card-info">
@@ -127,18 +147,18 @@
                                     <span class="text-muted text-sm">
                                         Связанные задачи
                                     </span>
-                                    <span class="float-right">
+                                    <div class="float-right">
                                         <div class="btn-group">
-                                    <a href="#"
-                                       class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                        <i class="fas fa-eye"></i> Все записи
-                                    </a>
+                                            <a href="#"
+                                               class="btn btn-xs btn-outline-dark" title="Добавление нового устройства">
+                                                Все записи
+                                            </a>
                                             <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
-                                               class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                        <i class="fas fa-fire-extinguisher"></i> Прочитать все
-                                    </a>
+                                               class="btn btn-xs btn-outline-dark" title="Добавление нового устройства">
+                                                Прочитать все
+                                            </a>
                                         </div>
-                                    </span>
+                                    </div>
                                 </div>
                                 @if($tasks !== null)
                                     <div class="card-body table-responsive p-0">
@@ -186,18 +206,18 @@
                                     <span class="text-muted text-sm">
                                         Связанные корзины
                                     </span>
-                                    <span class="float-right">
+                                    <div class="float-right">
                                         <div class="btn-group">
-                                    <a href="#"
-                                       class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                        <i class="fas fa-eye"></i> Все записи
-                                    </a>
+                                            <a href="#"
+                                               class="btn btn-xs btn-outline-dark" title="Добавление нового устройства">
+                                                Все записи
+                                            </a>
                                             <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
-                                               class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                        <i class="fas fa-fire-extinguisher"></i> Прочитать все
-                                    </a>
+                                               class="btn btn-xs btn-outline-dark" title="Добавление нового устройства">
+                                                Прочитать все
+                                            </a>
                                         </div>
-                                    </span>
+                                    </div>
                                 </div>
                                 @if($tasks !== null)
                                     <div class="card-body table-responsive p-0">
@@ -239,24 +259,24 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-sm-6">
                     <div class="card">
                         <div class="card-header">
-                                    <span class="text-muted text-sm">
-                                      Логи
-                                    </span>
-                            <span class="float-right">
-                                        <div class="btn-group">
+                            <span class="text-muted text-sm">
+                              Логи
+                            </span>
+                            <div class="float-right">
+                                <div class="btn-group">
                                     <a href="#"
-                                       class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                        <i class="fas fa-eye"></i> Все записи
+                                       class="btn btn-xs btn-outline-dark" title="Добавление нового устройства">
+                                        Все записи
                                     </a>
-                                            <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
-                                               class="btn btn-xs btn-outline-info" title="Добавление нового устройства">
-                                        <i class="fas fa-fire-extinguisher"></i> Прочитать все
+                                    <a href="{{ route('backups.yandex.backups.yandex.connectors.resolve') }}"
+                                       class="btn btn-xs btn-outline-dark" title="Добавление нового устройства">
+                                        Прочитать все
                                     </a>
-                                        </div>
-                                    </span>
+                                </div>
+                            </div>
                         </div>
                         @if($tasks !== null)
                             <div class="card-body table-responsive p-0">

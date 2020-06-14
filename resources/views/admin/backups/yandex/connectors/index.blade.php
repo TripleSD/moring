@@ -41,7 +41,7 @@
                                 @include('admin.backups.yandex.menu')
                                 <div class="btn-group">
                                     <a href="{{route('backups.yandex.connectors.create')}}"
-                                       class="btn btn-xs btn-outline-success"
+                                       class="btn btn-xs btn-success"
                                        title="@lang('messages.backups.yandex.buttons.title.add_connector')">
                                         @lang('messages.backups.yandex.buttons.add')
                                     </a>
