@@ -41,18 +41,22 @@
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                     <span class="text-sm">
-                                        Редактирование корзины
+                                        @lang('messages.backups.yandex.breadcrumbs.buckets.show')
                                     </span>
                                 </div>
                             </div>
                             <span class="float-right">
                                 <a href="{{ url()->previous() }}"
                                    class="btn btn-xs bg-gradient-info" title="Вернуться">
-                                    <i class="fa fa-arrow-left"></i></a>
+                                    <i class="fa fa-arrow-left"></i>
+                                    @lang('messages.backups.yandex.buttons.title.back')
+                                </a>
                                 <a href="{{route('backups.ftp.edit', $bucket->id)}}"
                                    class="btn btn-xs bg-gradient-warning"
                                    title="Редактиование профиля">
-                                    <i class="fa fa-user-edit"></i></a>
+                                    <i class="fas fa-edit"></i>
+                                    @lang('messages.backups.yandex.buttons.title.edit')
+                                </a>
                             </span>
                         </div>
                     </div>

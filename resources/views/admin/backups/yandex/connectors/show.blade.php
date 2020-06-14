@@ -41,18 +41,22 @@
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                     <span class="text-sm">
-                                        Просмотр коннектора
+                                        @lang('messages.backups.yandex.breadcrumbs.connectors.show')
                                     </span>
                                 </div>
                             </div>
                             <span class="float-right">
                                 <a href="{{ url()->previous() }}"
                                    class="btn btn-xs btn-info" title="Вернуться">
-                                    <i class="fa fa-arrow-left"></i> Назад</a>
+                                    <i class="fa fa-arrow-left"></i>
+                                    @lang('messages.backups.yandex.buttons.title.back')
+                                </a>
                                 <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"
                                    class="btn btn-xs btn-warning"
                                    title="Редактиование профиля">
-                                    <i class="fas fa-edit"></i> Правка</a>
+                                    <i class="fas fa-edit"></i>
+                                    @lang('messages.backups.yandex.buttons.title.edit')
+                                </a>
                             </span>
                         </div>
                     </div>

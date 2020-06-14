@@ -41,18 +41,22 @@
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
                                     <span class="text-sm">
-                                        Просмотр проверки
+                                        @lang('messages.backups.yandex.breadcrumbs.tasks.show')
                                     </span>
                                 </div>
                             </div>
                             <span class="float-right">
                                 <a href="{{ url()->previous() }}"
                                    class="btn btn-xs btn-info" title="Вернуться">
-                                    <i class="fa fa-arrow-left"></i> Назад</a>
+                                    <i class="fa fa-arrow-left"></i>
+                                    @lang('messages.backups.yandex.buttons.title.back')
+                                </a>
                                 <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
                                    class="btn btn-xs btn-warning"
                                    title="Редактиование профиля">
-                                    <i class="fa fa-edit"></i> Правка</a>
+                                    <i class="fa fa-edit"></i>
+                                    @lang('messages.backups.yandex.buttons.title.edit')
+                                </a>
                             </span>
                         </div>
                     </div>
