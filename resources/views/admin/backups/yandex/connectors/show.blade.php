@@ -26,7 +26,7 @@
                                 </div>
                             </div>
                             <span class="float-right">
-                                <a href="{{route('backups.yandex.connectors.index')}}"
+                                <a href="{{ url()->previous() }}"
                                    class="btn btn-xs bg-gradient-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i> Назад</a>
                                 <a href="{{route('backups.yandex.connectors.edit', $connector->id)}}"

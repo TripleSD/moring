@@ -46,7 +46,7 @@
                                 </div>
                             </div>
                             <span class="float-right">
-                                <a href="{{route('backups.ftp.index')}}"
+                                <a href="{{ url()->previous() }}"
                                    class="btn btn-xs bg-gradient-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i></a>
                                 <a href="{{route('backups.ftp.edit', $bucket->id)}}"

@@ -19,7 +19,7 @@
                                 <span class="text-sm">Просмотр проверки</span>
                             </h3>
                             <span class="float-right">
-                                <a href="{{route('backups.yandex.tasks.index')}}"
+                                <a href="{{ url()->previous() }}"
                                    class="btn btn-xs bg-gradient-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i> Назад</a>
                                 <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
