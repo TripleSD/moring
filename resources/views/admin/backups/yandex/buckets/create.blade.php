@@ -135,11 +135,13 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <div class="btn-group">
-                                        <button type="submit" class="btn btn-xs bg-gradient-success">
+                                    <div class="row">
+                                        <div class="col-lg-2 mt-2">
+                                        <button type="submit" class="btn btn-xs bg-gradient-success btn-block">
                                             @lang('messages.backups.yandex.buttons.title.save')
                                         </button>
                                         {{ Form::close() }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
