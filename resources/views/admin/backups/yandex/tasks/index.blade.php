@@ -32,28 +32,38 @@
                                     <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
-                                    <span class="text-sm">
+                                    <span class="text-sm d-none d-sm-block">
                                         @lang('messages.backups.yandex.breadcrumbs.tasks.list')
                                     </span>
                                 </div>
                             </div>
                             <div class="card-tools">
-                                @include('admin.backups.yandex.menu')
                                 <div class="btn-group">
                                     <a href="{{route('backups.yandex.tasks.create')}}"
-                                       class="btn btn-xs btn-outline-success"
+                                       class="btn btn-xs btn-success"
                                        title="@lang('messages.backups.yandex.buttons.title.add_task')">
                                         @lang('messages.backups.yandex.buttons.add')
                                     </a>
                                 </div>
                                 <div class="btn-group">
+                                    @include('admin.backups.yandex.menu')
+                                </div>
+                                <div class="btn-group">
                                     <a href="https://github.com/TripleSD/moring-documentation/blob/master/en/Backups/Yandex/Tasks/README.md"
-                                       class="btn btn-xs btn-outline-dark"
+                                       class="btn btn-xs btn-outline-dark d-none d-sm-block"
                                        title="@lang('messages.backups.yandex.buttons.title.help')"
                                        target="_blank">
                                         @lang('messages.backups.yandex.buttons.help')
                                     </a>
                                 </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="d-block d-xl-none">
+                                <h3>@lang('messages.backups.yandex.breadcrumbs.tasks.list')</h3>
                             </div>
                         </div>
                     </div>
