@@ -77,20 +77,20 @@
                                         <div class="col-12">
                                             <div class="row">
                                                 <div class="col-12">
-                                                    <b>
+                                                    <span class="text-bold">
                                                         <i class="fas fa-plug"></i>
                                                         {{ $connector->description }}
-                                                    </b>
+                                                    </span>
                                                 </div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-11">
                                                     <div class="row small">
                                                         <div class="col-4">
-                                                            <b>
+                                                            <span class="text-bold">
                                                                 @lang('messages.backups.yandex.fields.connector')
                                                                 :
-                                                            </b>
+                                                            </span>
                                                         </div>
                                                         <div class="col-8">
                                                             #{{ $connector->id }}
@@ -98,9 +98,9 @@
                                                     </div>
                                                     <div class="row small">
                                                         <div class="col-4">
-                                                            <b>
+                                                            <span class="text-bold">
                                                                 @lang('messages.backups.yandex.fields.status'):
-                                                            </b>
+                                                            </span>
                                                         </div>
                                                         <div class="col-8">
                                                             @if($connector->status === 1)
@@ -126,9 +126,9 @@
                                                     </div>
                                                     <div class="row small">
                                                         <div class="col-4">
-                                                            <b>
+                                                            <span class="text-bold">
                                                                 @lang('messages.backups.yandex.fields.last_check'):
-                                                            </b>
+                                                            </span>
                                                         </div>
                                                         <div class="col-8">
                                                             @empty($connector->lastCheck)
@@ -183,7 +183,7 @@
                                                              style="width: {{ $connector->percent_used }}%">
                                                                 <span class="text-dark">
                                                                     @lang('messages.backups.yandex.fields.used')
-                                                                    {{ $connector->percentused }}%
+                                                                    {{ $connector->percent_used }}%
                                                                 </span>
                                                         </div>
                                                     </div>
