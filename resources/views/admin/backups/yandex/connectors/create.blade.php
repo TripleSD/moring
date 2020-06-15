@@ -40,7 +40,7 @@
                                     <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
-                                    <span class="text-sm">
+                                    <span class="text-muted text-sm d-none d-sm-block">
                                         @lang('messages.backups.yandex.breadcrumbs.connectors.create')
                                     </span>
                                 </div>
@@ -53,6 +53,14 @@
                                 </a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-block d-xl-none">
+                        <h3>@lang('messages.backups.yandex.breadcrumbs.connectors.create')</h3>
                     </div>
                 </div>
             </div>

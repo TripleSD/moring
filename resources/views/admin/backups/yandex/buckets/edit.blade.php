@@ -41,19 +41,27 @@
                                     <span class="text-muted text-sm px-1 d-none d-sm-block">
                                         <i class="fas fa-chevron-right"></i>
                                     </span>
-                                    <span class="text-sm">
+                                    <span class="text-muted text-sm d-none d-sm-block">
                                         @lang('messages.backups.yandex.breadcrumbs.buckets.edit')
                                     </span>
                                 </div>
                             </div>
                             <div class="card-tools">
                                 <a href="{{ url()->previous() }}"
-                                   class="btn btn-xs btn-outline-info" title="Вернуться">
+                                   class="btn btn-xs btn-info" title="Вернуться">
                                     <i class="fa fa-arrow-left"></i>
                                     @lang('messages.backups.yandex.buttons.title.back')
                                 </a>
                             </div>
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <div class="d-block d-xl-none">
+                        <h3>@lang('messages.backups.yandex.breadcrumbs.buckets.edit')</h3>
                     </div>
                 </div>
             </div>
