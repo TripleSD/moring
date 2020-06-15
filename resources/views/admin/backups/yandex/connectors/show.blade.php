@@ -70,7 +70,7 @@
                             <div class="card card-info">
                                 <div class="card-header">
                                     <span class="text-muted text-sm">
-                                        @lang('messages.network.device.summary_information')
+                                        @lang('messages.backups.yandex.connectors.titles.summary_information')
                                     </span>
                                 </div>
                                 <div class="card-body">

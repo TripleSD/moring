@@ -67,86 +67,142 @@
                 <div class="col-sm-6">
                     <div class="card card-info">
                         <div class="card-header">
-                            <dt>@lang('messages.network.device.summary_information')</dt>
+                              <span class="text-muted text-sm">
+                                  @lang('messages.backups.yandex.tasks.titles.summary_information')
+                              </span>
                         </div>
                         <div class="card-body">
-                            <ul class="nav nav-pills flex-column">
-                                <li class="small">
-                                    Краткое описание
-                                    <span class="float-right">
-                                        {{ $task->description }}
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                        @lang('messages.backups.yandex.fields.description'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    ID:
-                                    <span class="float-right">
-                                        {{ $task->id }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->description }}
+                                </div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                        @lang('messages.backups.yandex.fields.status'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    Коннектор:
-                                    <span class="float-right">
-                                        {{ $task->connector->description }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    @if($task->enabled === 1)
+                                        <div class="badge badge-success">
+                                            @lang('messages.backups.yandex.fields.enabled')
+                                        </div>
+                                    @else
+                                        <div class="small badge badge-secondary">
+                                            @lang('messages.backups.yandex.fields.disabled')
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                        @lang('messages.backups.yandex.fields.connector'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    Папка
-                                    <span class="float-right">
-                                         {{ $task->folder }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->connector->description }}
+                                </div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                        @lang('messages.backups.yandex.fields.folder'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    Pre
-                                    <span class="float-right">
-                                         {{ $task->pre }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->folder }}
+                                </div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                        @lang('messages.backups.yandex.fields.pre_suffix'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    Post
-                                    <span class="float-right">
-                                        {{ $task->post }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->pre }}
+                                </div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                        @lang('messages.backups.yandex.fields.post_suffix'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    File
-                                    <span class="float-right">
-                                        {{ $task->file }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->post }}
+                                </div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                        @lang('messages.backups.yandex.fields.file'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    Interval
-                                    <span class="float-right">
-                                        {{ $task->interval }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->filename }}
+                                </div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                       @lang('messages.backups.yandex.fields.interval'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    Last update:
-                                    <span class="float-right">
-                                        {{ $task->updated_at }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->interval }}
+                                </div>
+                            </div>
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                       @lang('messages.backups.yandex.fields.last_check'):
                                     </span>
-                                </li>
-                                <li class="small">
-                                    Комментарий:
-                                    <span class="float-right">
-                                        {{ $task->comment }}
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->updated_at }}
+                                </div>
+                            </div>
+
+                            <hr/>
+
+                            <div class="row small">
+                                <div class="col-lg-4 col-5">
+                                    <span class="text-bold">
+                                        @lang('messages.backups.yandex.fields.comment'):
                                     </span>
-                                </li>
-                            </ul>
+                                </div>
+                                <div class="col-lg-8 col-7">
+                                    {{ $task->comment }}
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <div class="col-sm-6">
-                    @if($task->logs->count() !== 0)
+                    @if($task->active_logs->count() !== 0)
                         <div class="card card-warning">
                             <div class="card-header">
-                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>
+                                <span class="text-muted text-sm">
+                                    @lang('messages.backups.yandex.tasks.titles.errors')
+                                </span>
+                                <span class="badge badge-{{ ($task->active_logs->count() > 0) ? 'danger' : 'success'}}">
+                                {{ $task->active_logs->count() }}
+                            </span>
                             </div>
-                            @if($task->logs !== null)
+                            @if($task->active_logs !== null)
                                 <div class="card-body table-responsive p-0">
                                     <table class="table table-hover">
                                         <tbody>
-                                        @foreach($task->logs as $log)
+                                        @foreach($task->active_logs as $log)
                                             <tr>
                                                 <td class="small">
                                                     @if($log->resolved === 1)

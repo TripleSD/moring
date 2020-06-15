@@ -158,7 +158,7 @@
                                                             @empty($task->folder)
                                                                 {{ $task->FullFilename }}
                                                             @else
-                                                                /{{ $task->folder }}/{{ $task->FullFilename }}
+                                                                {{ $task->folder }}/{{ $task->FullFilename }}
                                                             @endempty
                                                         </div>
                                                     </div>
