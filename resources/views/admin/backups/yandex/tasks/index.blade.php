@@ -129,7 +129,8 @@
                                                             </b>
                                                         </div>
                                                         <div class="col-9">
-                                                            {{ $task->interval }} час.
+                                                            {{ $task->interval }}
+                                                            @lang('messages.backups.yandex.fields.hour')
                                                         </div>
                                                     </div>
 
