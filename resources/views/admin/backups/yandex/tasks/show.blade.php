@@ -46,14 +46,15 @@
                                 </div>
                             </div>
                             <span class="float-right">
-                                <a href="{{ url()->previous() }}"
-                                   class="btn btn-xs btn-info" title="Вернуться">
+                                <a href="{{ route('backups.yandex.tasks.index') }}"
+                                   class="btn btn-xs btn-info"
+                                   title="@lang('messages.backups.yandex.buttons.title.back')">
                                     <i class="fa fa-arrow-left"></i>
                                     @lang('messages.backups.yandex.buttons.title.back')
                                 </a>
                                 <a href="{{route('backups.yandex.tasks.edit', $task->id)}}"
                                    class="btn btn-xs btn-warning"
-                                   title="Редактиование профиля">
+                                   title="@lang('messages.backups.yandex.buttons.title.edit')">
                                     <i class="fa fa-edit"></i>
                                     @lang('messages.backups.yandex.buttons.title.edit')
                                 </a>

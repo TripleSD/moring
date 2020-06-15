@@ -46,8 +46,9 @@
                                 </div>
                             </div>
                             <div class="card-tools">
-                                <a href="{{ url()->previous() }}"
-                                   class="btn btn-xs btn-info" title="Вернуться">
+                                <a href="{{ route('backups.yandex.tasks.index') }}"
+                                   class="btn btn-xs btn-info"
+                                   title="@lang('messages.backups.yandex.buttons.title.back')">
                                     <i class="fa fa-arrow-left"></i>
                                     @lang('messages.backups.yandex.buttons.title.back')
                                 </a>

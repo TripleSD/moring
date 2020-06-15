@@ -47,8 +47,9 @@
                                 </div>
                             </div>
                             <div class="card-tools">
-                                <a href="{{ url()->previous() }}"
-                                   class="btn btn-xs btn-info" title="Вернуться">
+                                <a href="{{ route('backups.yandex.buckets.show', $bucket->id) }}"
+                                   class="btn btn-xs btn-info"
+                                   title="@lang('messages.backups.yandex.buttons.title.back')">
                                     <i class="fa fa-arrow-left"></i>
                                     @lang('messages.backups.yandex.buttons.title.back')
                                 </a>
