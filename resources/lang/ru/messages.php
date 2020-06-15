@@ -122,7 +122,7 @@ return [
     'backups.yandex.buttons.title.add_bucket' => 'Добавить новую корзину',
     'backups.yandex.buttons.title.help' => 'Помощь',
     'backups.yandex.buttons.title.view' => 'Просмотр',
-    'backups.yandex.buttons.title.edit' => 'Редактирование',
+    'backups.yandex.buttons.title.edit' => 'Правка',
     'backups.yandex.buttons.title.update_status' => 'Обновить статус',
     'backups.yandex.buttons.title.back' => 'Назад',
     'backups.yandex.buttons.title.save' => 'Сохранить',
@@ -160,6 +160,9 @@ return [
     'backups.yandex.connectors.log.connector' => 'Коннектор',
     'backups.yandex.connectors.log.error' => 'Ошибка',
     'backups.yandex.connectors.log.down' => 'Ошибка соединения',
+    'backups.yandex.connectors.titles.related_tasks' => 'Связанные задачи',
+    'backups.yandex.connectors.titles.related_buckets' => 'Связанные корзины',
+    'backups.yandex.connectors.titles.errors' => 'Ошибки',
 
     /**
      * Yandex tasks page.
@@ -167,7 +170,6 @@ return [
     'backups.yandex.tasks.log.task' => 'Задача',
     'backups.yandex.tasks.log.error' => 'Ошибка',
     'backups.yandex.tasks.log.no_file' => 'Отсутствует файл',
-
     'backups.yandex.tasks.titles.errors' => 'Ошибки',
 
     /**

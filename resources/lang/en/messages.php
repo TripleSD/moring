@@ -160,6 +160,9 @@ return [
     'backups.yandex.connectors.log.connector' => 'Connector',
     'backups.yandex.connectors.log.error' => 'Error',
     'backups.yandex.connectors.log.down' => 'Connection failed',
+    'backups.yandex.connectors.titles.related_tasks' => 'Related tasks',
+    'backups.yandex.connectors.titles.related_buckets' => 'Related buckets',
+    'backups.yandex.connectors.titles.errors' => 'Errors',
 
     /**
      * Yandex tasks page.
