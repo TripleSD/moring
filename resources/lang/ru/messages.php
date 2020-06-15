@@ -163,6 +163,7 @@ return [
     'backups.yandex.connectors.titles.related_tasks' => 'Связанные задачи',
     'backups.yandex.connectors.titles.related_buckets' => 'Связанные корзины',
     'backups.yandex.connectors.titles.errors' => 'Ошибки',
+    'backups.yandex.connectors.titles.summary_information' => 'Сводная информация',
 
     /**
      * Yandex tasks page.
@@ -171,6 +172,7 @@ return [
     'backups.yandex.tasks.log.error' => 'Ошибка',
     'backups.yandex.tasks.log.no_file' => 'Отсутствует файл',
     'backups.yandex.tasks.titles.errors' => 'Ошибки',
+    'backups.yandex.tasks.titles.summary_information' => 'Сводная информация',
 
     /**
      * Yandex buckets page.

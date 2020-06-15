@@ -163,6 +163,7 @@ return [
     'backups.yandex.connectors.titles.related_tasks' => 'Related tasks',
     'backups.yandex.connectors.titles.related_buckets' => 'Related buckets',
     'backups.yandex.connectors.titles.errors' => 'Errors',
+    'backups.yandex.connectors.titles.summary_information' => 'Summary information',
 
     /**
      * Yandex tasks page.
@@ -170,8 +171,8 @@ return [
     'backups.yandex.tasks.log.task' => 'Task',
     'backups.yandex.tasks.log.error' => 'Error',
     'backups.yandex.tasks.log.no_file' => 'Missing file',
-
     'backups.yandex.tasks.titles.errors' => 'Errors',
+    'backups.yandex.tasks.titles.summary_information' => 'Summary information',
 
     /**
      * Yandex buckets page.
