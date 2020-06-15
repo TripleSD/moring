@@ -76,7 +76,7 @@
                                 <div class="card-body">
                                     <div class="row small">
                                         <div class="col-lg-4 col-5">
-                                             <span class="text-bold">
+                                            <span class="text-bold">
                                                 @lang('messages.backups.yandex.fields.description'):
                                             </span>
                                         </div>
@@ -101,10 +101,19 @@
                                             </span>
                                         </div>
                                         <div class="col-lg-8 col-7">
-                                            <span
-                                                class="badge {{ ($connector->status) ? 'badge-success' : 'badge-danger' }}">Активен
-                                                    </span>
-                                            {{ $connector->http_code }}
+                                            @if($connector->status === 1)
+                                                <span class="badge badge-success">
+                                                    @lang('messages.backups.yandex.fields.online')
+                                                    |
+                                                    {{ $connector->http_code }}
+                                                </span>
+                                            @else
+                                                <span class="badge badge-danger">
+                                                    @lang('messages.backups.yandex.fields.offline')
+                                                    |
+                                                    {{ $connector->http_code }}
+                                                </span>
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="row small">
@@ -253,6 +262,9 @@
                         <div class="card-header">
                             <span class="text-muted text-sm">
                               @lang('messages.backups.yandex.connectors.titles.errors')
+                            </span>
+                            <span class="badge badge-{{ ($logs->count() > 0) ? 'danger' : 'success'}}">
+                                {{ $logs->count() }}
                             </span>
                             <div class="float-right">
                                 <div class="btn-group">
