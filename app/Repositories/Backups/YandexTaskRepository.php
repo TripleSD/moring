@@ -41,6 +41,6 @@ class YandexTaskRepository extends Repository
     {
         SystemLog::createUserEvent(__FUNCTION__, $request);
 
-        return BackupYandexTask::with('connector')->where('id', $request->id)->firstOrFail();
+        return BackupYandexTask::with('connector', 'active_logs')->where('id', $request->id)->firstOrFail();
     }
 }
