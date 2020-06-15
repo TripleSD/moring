@@ -241,42 +241,41 @@
                                         </div>
                                     </div>
                                 </div>
-                                @if($logs !== null)
-                                    <div class="card-body table-responsive p-0">
-                                        <table class="table table-hover">
-                                            <tbody>
-                                            @foreach($logs as $log)
-                                                <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
-                                                    <td class="small">
+
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                        @foreach($logs as $log)
+                                            <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
+                                                <td class="small">
                                                         <span
                                                             class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
                                                             @lang('messages.backups.yandex.connectors.log.error')
                                                         </span>
-                                                    </td>
-                                                    <td class="small">
+                                                </td>
+                                                <td class="small">
                                                         <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
                                                             @lang('messages.backups.yandex.connectors.log.connector')
                                                             #{{ $log->connector_id }} |
                                                             @lang('messages.backups.yandex.connectors.log.down')
                                                         </span>
-                                                    </td>
-                                                    <td class="small">
+                                                </td>
+                                                <td class="small">
                                                         <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
                                                             {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
                                                         </span>
-                                                    </td>
-                                                    <td class="small">
+                                                </td>
+                                                <td class="small">
                                                         <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
                                                             <a class="btn btn-" href=""></a>
                                                             <i class="fas fa-eye"></i>
                                                         </span>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
