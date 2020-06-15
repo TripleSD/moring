@@ -274,7 +274,7 @@
                                 <table class="table table-hover">
                                     <tbody>
                                     @foreach($logs as $log)
-                                        <tr class="table-row" {{ ($log->resolved === 1) ? 'style=background:#f3b7bd' : '' }}>
+                                        <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
                                             <td class="small">
                                                 <span
                                                     class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
