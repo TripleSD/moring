@@ -85,8 +85,11 @@ class YandexConnectorController extends Controller
         $connector = BackupYandexConnectors::with('logs')->find($request->id);
         $tasks     = BackupYandexTask::where('connector_id', $request->id)->get();
         $buckets   = BackupYandexBuckets::where('connector_id', $request->id)->get();
+        $logs      = BackupYandexConnectorsLogs::where('connector_id', $request->id)
+            ->where('resolved', 0)
+            ->get();
 
-        return view('admin.backups.yandex.connectors.show', compact('connector', 'tasks', 'buckets'));
+        return view('admin.backups.yandex.connectors.show', compact('connector', 'tasks', 'buckets', 'logs'));
     }
 
     /**
