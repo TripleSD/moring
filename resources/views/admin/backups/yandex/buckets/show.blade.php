@@ -81,76 +81,87 @@
                         <div class="card-body">
                             <ul class="nav nav-pills flex-column">
                                 <li class="small">
-                                    Наименование
-                                    <span class="float-right">
-
-                                    </span>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-5 text-bold">
+                                            @lang('messages.backups.yandex.fields.description'):
+                                        </div>
+                                        <div class="col-lg-8 col-7">
+                                            {{ $bucket->description }}
+                                        </div>
+                                    </div>
                                 </li>
                                 <li class="small">
-                                    ID:
-                                    <span class="float-right">
-
-                                    </span>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-5 text-bold">
+                                            @lang('messages.backups.yandex.fields.status'):
+                                        </div>
+                                        <div class="col-lg-8 col-7">
+                                            @if($bucket->enabled === 1)
+                                                <div class="badge badge-success">
+                                                    @lang('messages.backups.yandex.fields.enabled')
+                                                </div>
+                                            @else
+                                                <div class="small badge badge-secondary">
+                                                    @lang('messages.backups.yandex.fields.disabled')
+                                                </div>
+                                            @endif
+                                        </div>
+                                    </div>
                                 </li>
                                 <li class="small">
-                                    URL
-                                    <span class="float-right">
-
-                                    </span>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-5 text-bold">
+                                            @lang('messages.backups.yandex.fields.connector'):
+                                        </div>
+                                        <div class="col-lg-8 col-7">
+                                            {{ $bucket->connector->description }}
+                                            (id: {{ $bucket->connector->id }})
+                                        </div>
+                                    </div>
                                 </li>
                                 <li class="small">
-                                    Мониторинг состояния сайта
-                                    <span class="float-right">
-
-                                    </span>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-5 text-bold">
+                                            @lang('messages.backups.yandex.fields.interval'):
+                                        </div>
+                                        <div class="col-lg-8 col-7">
+                                            {{ $bucket->interval }}
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="small" style="word-wrap:">
+                                    <div class="row">
+                                        <div class="col-lg-4 col-5 text-bold">
+                                            @lang('messages.backups.yandex.fields.created'):
+                                        </div>
+                                        <div class="col-lg-8 col-7">
+                                            {{ \Carbon\Carbon::parse($bucket->created_at)->format('Y-m-d_H:i:s') }}
+                                        </div>
+                                    </div>
                                 </li>
                                 <li class="small">
-                                    Файл мониторинга
-                                    <span class="float-right">
-
-                                    </span>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-5 text-bold">
+                                            @lang('messages.backups.yandex.fields.last_check'):
+                                        </div>
+                                        <div class="col-lg-8 col-7">
+                                            @empty($bucket->lastCheck)
+                                                -
+                                            @else
+                                                {{ \Carbon\Carbon::parse($bucket->lastCheck)->format('Y-m-d_H:i:s') }}
+                                            @endif
+                                        </div>
+                                    </div>
                                 </li>
                                 <li class="small">
-                                    Используется HTTPS
-                                    <span class="float-right">
-
-                                    </span>
-                                </li>
-                                <li class="small">
-                                    Контроль SSL
-                                    <span class="float-right">
-
-                                    </span>
-                                </li>
-                                <li class="small">
-                                    HTTP ответ сервера
-                                    <span class="float-right">
-
-                                    </span>
-                                </li>
-                                <li class="small">
-                                    Версия Web сервера
-                                    <span class="float-right">
-
-                                    </span>
-                                </li>
-                                <li class="small">
-                                    Контроль версии PHP
-                                    <span class="float-right">
-
-                                    </span>
-                                </li>
-                                <li class="small">
-                                    Last update:
-                                    <span class="float-right">
-
-                                    </span>
-                                </li>
-                                <li class="small">
-                                    Комментарий:
-                                    <span class="float-right">
-{{--                                        {{ $task->description }}--}}
-                                    </span>
+                                    <div class="row">
+                                        <div class="col-lg-4 col-5 text-bold">
+                                            @lang('messages.backups.yandex.fields.comment'):
+                                        </div>
+                                        <div class="col-lg-8 col-7">
+                                            {{ $bucket->comment }}
+                                        </div>
+                                    </div>
                                 </li>
                             </ul>
                         </div>
@@ -158,69 +169,81 @@
                 </div>
 
                 <div class="col-sm-6">
-
-{{--                    @if($task->logs->count() !== 0)--}}
-{{--                        <div class="card card-warning">--}}
-{{--                            <div class="card-header">--}}
-{{--                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>--}}
-{{--                            </div>--}}
-{{--                            @if($task->logs !== null)--}}
-{{--                                <div class="card-body table-responsive p-0">--}}
-{{--                                    <table class="table table-hover">--}}
-{{--                                        <tbody>--}}
-{{--                                        @foreach($task->logs as $log)--}}
-{{--                                            <tr>--}}
-{{--                                                <td class="small">--}}
-{{--                                                    @if($log->resolved === 1)--}}
-{{--                                                        <span class="badge badge-secondary">--}}
-{{--                                                            <i class="fas fa-eye"></i>--}}
-{{--                                                        </span>--}}
-{{--                                                        <span class="badge badge-secondary">--}}
-{{--                                                            @lang('messages.network.device.type_status.alert')--}}
-{{--                                                        </span>--}}
-{{--                                                    @else--}}
-{{--                                                        <span class="badge badge-danger">--}}
-{{--                                                            <i class="fas fa-eye"></i>--}}
-{{--                                                        </span>--}}
-{{--                                                        @if($log->type === 1)--}}
-{{--                                                            <span class="badge badge-danger">--}}
-{{--                                                                @lang('messages.network.device.type_status.alert')--}}
-{{--                                                            </span>--}}
-{{--                                                        @else--}}
-{{--                                                            <span class="badge badge-success">--}}
-{{--                                                                @lang('messages.network.device.type_status.info')--}}
-{{--                                                            </span>--}}
-{{--                                                        @endif--}}
-{{--                                                    @endif--}}
-{{--                                                </td>--}}
-{{--                                                <td class="small">--}}
-{{--                                                    @if($log->type === 1)--}}
-{{--                                                        @lang('messages.network.device.snmp.device.log.down')--}}
-{{--                                                    @else--}}
-{{--                                                        @lang('messages.network.device.snmp.device.log.up')--}}
-{{--                                                    @endif--}}
-{{--                                                </td>--}}
-{{--                                                <td class="small">--}}
-{{--                                                    {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}--}}
-{{--                                                </td>--}}
-{{--                                                <td>--}}
-{{--                                                    <a class="btn btn-" href=""></a>--}}
-{{--                                                    <i class="fas fa-eye"></i>--}}
-{{--                                                </td>--}}
-{{--                                            </tr>--}}
-{{--                                        @endforeach--}}
-{{--                                        </tbody>--}}
-{{--                                    </table>--}}
-{{--                                </div>--}}
-{{--                            @endif--}}
-{{--                        </div>--}}
-{{--                    @else--}}
-{{--                        <div class="card card-gray">--}}
-{{--                            <div class="card-header">--}}
-{{--                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>--}}
-{{--                            </div>--}}
-{{--                        </div>--}}
-{{--                    @endif--}}
+                    @if($bucket->active_logs->count() !== 0)
+                        <div class="card card">
+                            <div class="card-header">
+                                 <span class="text-muted text-sm">
+                                    @lang('messages.backups.yandex.tasks.titles.errors')
+                                 </span>
+                                <span
+                                    class="badge badge-{{ ($bucket->active_logs->count() > 0) ? 'danger' : 'success'}}">
+                                    {{ $bucket->active_logs->count() }}
+                                </span>
+                            </div>
+                            @if($bucket->active_logs !== null)
+                                <div class="card-body table-responsive p-0">
+                                    <table class="table table-hover">
+                                        <tbody>
+                                        @foreach($bucket->active_logs as $log)
+                                            <tr>
+                                                <td class="small">
+                                                    @if($log->resolved === 1)
+                                                        <span
+                                                            class="badge badge-secondary">
+                                                                                                <i class="fas fa-eye"></i>
+                                                                                            </span>
+                                                        <span
+                                                            class="badge badge-secondary">
+                                                                                                @lang('messages.network.device.type_status.alert')
+                                                                                            </span>
+                                                    @else
+                                                        <span
+                                                            class="badge badge-danger">
+                                                                                                <i class="fas fa-eye"></i>
+                                                                                            </span>
+                                                        @if($log->type === 1)
+                                                            <span
+                                                                class="badge badge-danger">
+                                                                                                    @lang('messages.network.device.type_status.alert')
+                                                                                                </span>
+                                                        @else
+                                                            <span
+                                                                class="badge badge-success">
+                                                                                                    @lang('messages.network.device.type_status.info')
+                                                                                                </span>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                                <td class="small">
+                                                    @if($log->type === 1)
+                                                        @lang('messages.network.device.snmp.device.log.down')
+                                                    @else
+                                                        @lang('messages.network.device.snmp.device.log.up')
+                                                    @endif
+                                                </td>
+                                                <td class="small">
+                                                    {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                </td>
+                                                <td>
+                                                    <a class="btn btn-" href=""></a>
+                                                    <i class="fas fa-eye"></i>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            @endif
+                        </div>
+                    @else
+                        <div class="card card-gray">
+                            <div class="card-header">
+                                <span class="text-muted text-sm">
+                                    @lang('messages.backups.yandex.tasks.titles.errors')
+                                </span>
+                            </div>
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
