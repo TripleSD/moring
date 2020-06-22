@@ -136,7 +136,7 @@
                                                     <div class="row small">
                                                         <div class="col-4">
                                                             <b>
-                                                                @lang('messages.backups.yandex.fields.added'):
+                                                                @lang('messages.backups.yandex.fields.created'):
                                                             </b>
                                                         </div>
                                                         <div class="col-8">
