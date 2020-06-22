@@ -140,7 +140,9 @@ class YandexBucketsController extends Controller
      */
     public function show(Request $request)
     {
-        $bucket = BackupYandexBuckets::find($request->id);
+        $bucket = BackupYandexBuckets::with('connector', 'active_logs')
+            ->where('id', $request->id)
+            ->firstOrFail();
 
         return view('admin.backups.yandex.buckets.show', compact('bucket'));
     }
