@@ -141,7 +141,7 @@ return [
     'backups.yandex.fields.enabled' => 'Включено',
     'backups.yandex.fields.disabled' => 'Выключено',
     'backups.yandex.fields.interval' => 'Интервал',
-    'backups.yandex.fields.added' => 'Добавлено',
+    'backups.yandex.fields.created' => 'Создано',
     'backups.yandex.fields.hour' => 'час.',
     'backups.yandex.fields.day' => 'день',
     'backups.yandex.fields.file' => 'Файл',

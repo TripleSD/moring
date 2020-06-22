@@ -130,7 +130,7 @@ return [
 
     'backups.yandex.fields.connector' => 'Connector',
     'backups.yandex.fields.status' => 'Status',
-    'backups.yandex.fields.last_check' => 'Last check',
+    'backups.yandex.fields.last_check' => 'Last_check',
     'backups.yandex.fields.total' => 'Total',
     'backups.yandex.fields.bucket' => 'Bucket',
     'backups.yandex.fields.gb' => 'GB',
@@ -141,7 +141,7 @@ return [
     'backups.yandex.fields.enabled' => 'Enabled',
     'backups.yandex.fields.disabled' => 'Disabled',
     'backups.yandex.fields.interval' => 'Interval',
-    'backups.yandex.fields.added' => 'Added',
+    'backups.yandex.fields.created' => 'Created',
     'backups.yandex.fields.hour' => 'h.',
     'backups.yandex.fields.day' => 'day',
     'backups.yandex.fields.file' => 'File',
@@ -150,8 +150,8 @@ return [
     'backups.yandex.fields.comment' => 'Comment',
     'backups.yandex.fields.more_details' => 'More details',
     'backups.yandex.fields.folder' => 'Folder',
-    'backups.yandex.fields.post_suffix' => 'Post suffix',
-    'backups.yandex.fields.pre_suffix' => 'Pre suffix',
+    'backups.yandex.fields.post_suffix' => 'Post_Suffix',
+    'backups.yandex.fields.pre_suffix' => 'Pre_Suffix',
     'backups.yandex.fields.token' => 'API token',
 
     /**
