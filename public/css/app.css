@@ -1364,4 +1364,8 @@ a.ui-button:active,
     background-image: linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,1)),url(/images/background.jpg?f53769af531f604da2d99e6761b768f4);
 }
 
+.card {
+    word-wrap: unset;
+}
+
 
