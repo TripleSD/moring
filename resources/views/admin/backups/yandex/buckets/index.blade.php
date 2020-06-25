@@ -72,7 +72,7 @@
                         <div class="col-sm-6">
                             @foreach($buckets as $bucket)
                                 <div class="callout callout-{{ ($bucket->enabled) ? 'success' : 'warning' }}"
-                                     style="background: {{ ($bucket->status) ? 'white' : '#FFF5EE' }}">
+                                     style="background: {{ ($bucket->enabled) ? 'white' : '#FFF5EE' }}">
                                     <div class="row">
                                         <div class="col-12">
                                             <div class="row">
