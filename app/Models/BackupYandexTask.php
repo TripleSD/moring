@@ -74,6 +74,6 @@ class BackupYandexTask extends Model
      */
     public function active_logs()
     {
-        return $this->logs()->where('resolved',0);
+        return $this->logs()->where('resolved', 0);
     }
 }
