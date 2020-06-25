@@ -217,76 +217,67 @@
                 </div>
 
                 <div class="col-sm-6">
-                    @if($task->active_logs->count() !== 0)
-                        <div class="card">
-                            <div class="card-header">
-                                <span class="text-muted text-sm">
-                                    @lang('messages.backups.yandex.tasks.titles.errors')
-                                </span>
-                                <span class="badge badge-{{ ($task->active_logs->count() > 0) ? 'danger' : 'success'}}">
+                    <div class="card">
+                        <div class="card-header">
+                            <span class="text-muted text-sm">
+                                @lang('messages.backups.yandex.tasks.titles.errors')
+                            </span>
+                            <span class="badge badge-{{ ($task->active_logs->count() > 0) ? 'danger' : 'success'}}">
                                     {{ $task->active_logs->count() }}
-                                </span>
-                            </div>
-                            @if($task->active_logs !== null)
-                                <div class="card-body table-responsive p-0">
-                                    <table class="table table-hover">
-                                        <tbody>
-                                        @foreach($task->active_logs as $log)
-                                            <tr>
-                                                <td class="small">
-                                                    @if($log->resolved === 1)
-                                                        <span class="badge badge-secondary">
+                            </span>
+                        </div>
+                        @if($task->active_logs !== null)
+                            <div class="card-body table-responsive p-0">
+                                <table class="table table-hover">
+                                    <tbody>
+                                    @foreach($task->active_logs as $log)
+                                        <tr>
+                                            <td class="small">
+                                                @if($log->resolved === 1)
+                                                    <span class="badge badge-secondary">
                                                             <i class="fas fa-eye"></i>
-                                                        </span>
-                                                        <span class="badge badge-secondary">
+                                                    </span>
+                                                    <span class="badge badge-secondary">
                                                             @lang('messages.network.device.type_status.alert')
-                                                        </span>
-                                                    @else
-                                                        <span class="badge badge-danger">
+                                                    </span>
+                                                @else
+                                                    <span class="badge badge-danger">
                                                             <i class="fas fa-eye"></i>
-                                                        </span>
-                                                        @if($log->type === 1)
-                                                            <span class="badge badge-danger">
-                                                                @lang('messages.network.device.type_status.alert')
-                                                            </span>
-                                                        @else
-                                                            <span class="badge badge-success">
-                                                                @lang('messages.network.device.type_status.info')
-                                                            </span>
-                                                        @endif
-                                                    @endif
-                                                </td>
-                                                <td class="small">
+                                                    </span>
                                                     @if($log->type === 1)
-                                                        @lang('messages.network.device.snmp.device.log.down')
+                                                        <span class="badge badge-danger">
+                                                                @lang('messages.network.device.type_status.alert')
+                                                        </span>
                                                     @else
-                                                        @lang('messages.network.device.snmp.device.log.up')
+                                                        <span class="badge badge-success">
+                                                                @lang('messages.network.device.type_status.info')
+                                                        </span>
                                                     @endif
-                                                </td>
-                                                <td class="small">
-                                                    {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
-                                                </td>
-                                                <td>
-                                                    <a class="btn btn-" href=""></a>
-                                                    <i class="fas fa-eye"></i>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endif
-                        </div>
-                    @else
-                        <div class="card">
-                            <div class="card-header">
-                                <dt>@lang('messages.network.device.notifications_and_errors')</dt>
+                                                @endif
+                                            </td>
+                                            <td class="small">
+                                                @if($log->type === 1)
+                                                    @lang('messages.network.device.snmp.device.log.down')
+                                                @else
+                                                    @lang('messages.network.device.snmp.device.log.up')
+                                                @endif
+                                            </td>
+                                            <td class="small">
+                                                {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-" href=""></a>
+                                                <i class="fas fa-eye"></i>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                    </tbody>
+                                </table>
                             </div>
-                        </div>
-                    @endif
+                        @endif
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
     </div>
 @endsection
