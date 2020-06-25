@@ -76,7 +76,9 @@
                 <div class="col-sm-6">
                     <div class="card card-info">
                         <div class="card-header">
-                            <dt>@lang('messages.network.device.summary_information')</dt>
+                            <span class="text-muted text-sm">
+                                  @lang('messages.backups.yandex.tasks.titles.summary_information')
+                              </span>
                         </div>
                         <div class="card-body">
                             <ul class="nav nav-pills flex-column">
@@ -170,7 +172,6 @@
                 </div>
 
                 <div class="col-sm-6">
-                    @if($bucket->active_logs->count() !== 0)
                         <div class="card card">
                             <div class="card-header">
                                  <span class="text-muted text-sm">
@@ -236,15 +237,6 @@
                                 </div>
                             @endif
                         </div>
-                    @else
-                        <div class="card card-gray">
-                            <div class="card-header">
-                                <span class="text-muted text-sm">
-                                    @lang('messages.backups.yandex.tasks.titles.errors')
-                                </span>
-                            </div>
-                        </div>
-                    @endif
                 </div>
             </div>
         </div>
