@@ -152,7 +152,7 @@ return [
     'backups.yandex.fields.folder' => 'Folder',
     'backups.yandex.fields.post_suffix' => 'Post_Suffix',
     'backups.yandex.fields.pre_suffix' => 'Pre_Suffix',
-    'backups.yandex.fields.token' => 'API token',
+    'backups.yandex.fields.token' => 'API_Token',
 
     /**
      * Yandex connectors page.
