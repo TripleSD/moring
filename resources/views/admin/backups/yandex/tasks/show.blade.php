@@ -231,43 +231,31 @@
                                 <table class="table table-hover">
                                     <tbody>
                                     @foreach($task->active_logs as $log)
-                                        <tr>
+                                        <tr class="table-row" {{ ($log->resolved === 0) ? 'style=background:#f3b7bd' : '' }}>
                                             <td class="small">
-                                                @if($log->resolved === 1)
-                                                    <span class="badge badge-secondary">
-                                                            <i class="fas fa-eye"></i>
-                                                    </span>
-                                                    <span class="badge badge-secondary">
-                                                            @lang('messages.network.device.type_status.alert')
-                                                    </span>
-                                                @else
-                                                    <span class="badge badge-danger">
-                                                            <i class="fas fa-eye"></i>
-                                                    </span>
-                                                    @if($log->type === 1)
-                                                        <span class="badge badge-danger">
-                                                                @lang('messages.network.device.type_status.alert')
+                                                        <span
+                                                            class="px-2 badge badge-{{ ($log->resolved === 1) ? 'secondary' : 'danger' }}">
+                                                            @lang('messages.backups.yandex.tasks.log.error')
                                                         </span>
-                                                    @else
-                                                        <span class="badge badge-success">
-                                                                @lang('messages.network.device.type_status.info')
+                                            </td>
+                                            <td class="small">
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            @lang('messages.backups.yandex.tasks.log.task')
+                                                            #{{ $log->task_id }} |
+                                                            @lang('messages.backups.yandex.tasks.log.no_file')
                                                         </span>
-                                                    @endif
-                                                @endif
                                             </td>
                                             <td class="small">
-                                                @if($log->type === 1)
-                                                    @lang('messages.network.device.snmp.device.log.down')
-                                                @else
-                                                    @lang('messages.network.device.snmp.device.log.up')
-                                                @endif
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
+                                                        </span>
                                             </td>
                                             <td class="small">
-                                                {{\Carbon\Carbon::parse($log->created_at)->format('Y-m-d H:i:s')}}
-                                            </td>
-                                            <td>
-                                                <a class="btn btn-" href=""></a>
-                                                <i class="fas fa-eye"></i>
+                                                        <span {{ ($log->resolved === 1) ? 'class=text-muted' : '' }}>
+                                                            <a class="btn btn-"
+                                                               href=""></a>
+                                                            <i class="fas fa-eye"></i>
+                                                        </span>
                                             </td>
                                         </tr>
                                     @endforeach
