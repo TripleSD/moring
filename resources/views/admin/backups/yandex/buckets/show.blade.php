@@ -126,6 +126,7 @@
                                         </div>
                                         <div class="col-lg-8 col-7">
                                             {{ $bucket->interval }}
+                                            @lang('messages.backups.yandex.fields.hour')
                                         </div>
                                     </div>
                                 </li>
