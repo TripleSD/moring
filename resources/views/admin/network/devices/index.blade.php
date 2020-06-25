@@ -94,6 +94,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="row">
