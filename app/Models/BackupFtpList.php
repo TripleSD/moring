@@ -47,6 +47,10 @@ class BackupFtpList extends Model
 
         $filename = explode('.', $this->attributes['filename']);
 
-        return $this->attributes['pre'] . $filename[0] . $this->attributes['post'] . '.' . $filename[1];
+        if (isset($filename[1])) {
+            return $this->attributes['pre'] . $filename[0] . $this->attributes['post'] . '.' . $filename[1];
+        }
+
+        return $this->attributes['pre'] . $filename[0] . $this->attributes['post'];
     }
 }

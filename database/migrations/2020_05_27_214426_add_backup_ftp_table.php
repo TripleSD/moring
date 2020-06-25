@@ -26,8 +26,9 @@ class AddBackupFtpTable extends Migration
                 $table->string('folder')->nullable()->comment('Folder path');
                 $table->smallInteger('port')->comment('Connection port');
                 $table->smallInteger('interval')->comment('Check interval');
-                $table->boolean('enabled')->default(0)->comment('Enable/disable status');
+                $table->boolean('enabled')->comment('Enable/disable status');
                 $table->string('description')->comment('Task description');
+                $table->text('comment')->nullable()->comment('User comment');
                 $table->timestamps();
             }
         );

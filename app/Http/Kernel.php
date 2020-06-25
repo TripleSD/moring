@@ -38,6 +38,7 @@ class Kernel extends HttpKernel
             \App\Http\Middleware\MoringBridgeInfo::class,
             \App\Http\Middleware\MoringVersionInfo::class,
             \App\Http\Middleware\Localization::class,
+            \App\Http\Middleware\HeaderCounts::class,
         ],
 
         'api' => [

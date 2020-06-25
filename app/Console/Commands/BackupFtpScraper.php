@@ -31,6 +31,8 @@ class BackupFtpScraper extends Command
             $interval = 6;
         } elseif ($this->option('interval') === '12') {
             $interval = 12;
+        } elseif ($this->option('interval') === '24') {
+            $interval = 24;
         } elseif ($this->option('interval') === '1') {
             $interval = 1;
         } else {

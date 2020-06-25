@@ -5,7 +5,7 @@ return [
      * Top menu.
      */
     'top_menu.exit' => 'Exit',
-    'top_menu.current_version' => 'You have up to date version.',
+    'top_menu.current_version' => 'You have up to date version',
     'top_menu.new_version' => 'Available new version',
     'top_menu.from' => 'from',
 
@@ -43,7 +43,7 @@ return [
     /**
      * Device card page.
      */
-    'network.device.notifications_and_errors' => 'Notifications & errors',
+    'network.device.notifications_and_errors' => 'Notifications | Errors',
     'network.device.poll_information' => 'Device poll information',
     'network.device.errors' => 'Errors',
     'network.device.snmp.device.log.down' => 'Connection down',
@@ -81,4 +81,107 @@ return [
     'network.device.breadcrumbs.devices' => 'Devices',
 
     'flash.success' => 'Data updated',
+
+    /**
+     * Yandex page.
+     */
+    'backups.yandex.breadcrumbs.dashboard' => 'Dashboard',
+    'backups.yandex.breadcrumbs.backups' => 'Backups',
+    'backups.yandex.breadcrumbs.yandex' => 'Yandex disk',
+    'backups.yandex.breadcrumbs.connectors.list' => 'Connectors list',
+    'backups.yandex.breadcrumbs.connectors.edit' => 'Edit connector',
+    'backups.yandex.breadcrumbs.connectors.create' => 'New connector',
+    'backups.yandex.breadcrumbs.connectors.show' => 'Connector card',
+    'backups.yandex.breadcrumbs.buckets.list' => 'Buckets list',
+    'backups.yandex.breadcrumbs.buckets.edit' => 'Edit bucket',
+    'backups.yandex.breadcrumbs.buckets.create' => 'New bucket',
+    'backups.yandex.breadcrumbs.buckets.show' => 'Bucket card',
+    'backups.yandex.breadcrumbs.tasks.list' => 'Tasks list',
+    'backups.yandex.breadcrumbs.tasks.edit' => 'Task edit',
+    'backups.yandex.breadcrumbs.tasks.create' => 'New task',
+    'backups.yandex.breadcrumbs.tasks.show' => 'Task card',
+
+    'backups.yandex.breadcrumbs.small.connectors' => 'Connectors',
+    'backups.yandex.breadcrumbs.small.tasks' => 'Tasks',
+    'backups.yandex.breadcrumbs.small.buckets' => 'Buckets',
+
+    'backups.yandex.titles.errors' => 'Errors',
+
+    'backups.yandex.buttons.add' => 'Add',
+    'backups.yandex.buttons.help' => 'Help',
+    'backups.yandex.buttons.all_records' => 'All events',
+    'backups.yandex.buttons.read_all' => 'Read all',
+
+    'backups.yandex.buttons.titles.all_records' => 'Show all events',
+    'backups.yandex.buttons.titles.read_all' => 'Read all messages',
+    'backups.yandex.buttons.title.connectors' => 'Show all connectors',
+    'backups.yandex.buttons.title.tasks' => 'Show all tasks',
+    'backups.yandex.buttons.title.buckets' => 'Show all buckets',
+    'backups.yandex.buttons.title.add_connector' => 'Add new connector',
+    'backups.yandex.buttons.title.add_task' => 'Add new task',
+    'backups.yandex.buttons.title.add_bucket' => 'Add new bucket',
+    'backups.yandex.buttons.title.help' => 'Help',
+    'backups.yandex.buttons.title.view' => 'View',
+    'backups.yandex.buttons.title.edit' => 'Edit',
+    'backups.yandex.buttons.title.update_status' => 'Update status',
+    'backups.yandex.buttons.title.back' => 'Back',
+    'backups.yandex.buttons.title.save' => 'Save',
+    'backups.yandex.buttons.title.delete' => 'Delete',
+
+    'backups.yandex.fields.connector' => 'Connector',
+    'backups.yandex.fields.status' => 'Status',
+    'backups.yandex.fields.last_check' => 'Last_check',
+    'backups.yandex.fields.total' => 'Total',
+    'backups.yandex.fields.bucket' => 'Bucket',
+    'backups.yandex.fields.gb' => 'GB',
+    'backups.yandex.fields.of' => 'of',
+    'backups.yandex.fields.used' => 'Using',
+    'backups.yandex.fields.online' => 'Online',
+    'backups.yandex.fields.offline' => 'Offline',
+    'backups.yandex.fields.enabled' => 'Enabled',
+    'backups.yandex.fields.disabled' => 'Disabled',
+    'backups.yandex.fields.interval' => 'Interval',
+    'backups.yandex.fields.created' => 'Created',
+    'backups.yandex.fields.hour' => 'h.',
+    'backups.yandex.fields.day' => 'day',
+    'backups.yandex.fields.file' => 'File',
+    'backups.yandex.fields.description' => 'Description',
+    'backups.yandex.fields.required' => 'required',
+    'backups.yandex.fields.comment' => 'Comment',
+    'backups.yandex.fields.more_details' => 'More details',
+    'backups.yandex.fields.folder' => 'Folder',
+    'backups.yandex.fields.post_suffix' => 'Post_Suffix',
+    'backups.yandex.fields.pre_suffix' => 'Pre_Suffix',
+    'backups.yandex.fields.token' => 'API_Token',
+
+    /**
+     * Yandex connectors page.
+     */
+    'backups.yandex.connectors.log.connector' => 'Connector',
+    'backups.yandex.connectors.log.error' => 'Error',
+    'backups.yandex.connectors.log.down' => 'Connection failed',
+    'backups.yandex.connectors.titles.related_tasks' => 'Related tasks',
+    'backups.yandex.connectors.titles.related_buckets' => 'Related buckets',
+    'backups.yandex.connectors.titles.errors' => 'Errors',
+    'backups.yandex.connectors.titles.summary_information' => 'Summary information',
+
+    /**
+     * Yandex tasks page.
+     */
+    'backups.yandex.tasks.log.task' => 'Task',
+    'backups.yandex.tasks.log.error' => 'Error',
+    'backups.yandex.tasks.log.no_file' => 'Missing file',
+    'backups.yandex.tasks.titles.errors' => 'Errors',
+    'backups.yandex.tasks.titles.summary_information' => 'Summary information',
+
+    /**
+     * Yandex buckets page.
+     */
+    'backups.yandex.buckets.titles.errors' => 'Errors',
+
+    /**
+     *  System Logs.
+     */
+    'system_logs.errors.error' => 'Error. Check system log',
+    'system_logs.errors.mysql.foreign_key' => 'Foreign key',
 ];

@@ -31,6 +31,13 @@
                                        class="btn btn-sm btn-success" title="Добавление нового устройства">
                                         <i class="fa fa-plus-square"></i></a>
                                 </div>
+                                <div class="btn-group">
+                                        <a class="btn btn-sm btn-danger" href="#" class="btn btn-xs bg-gradient-info" title="Просмотр устройства">
+                                            Проверки
+                                        </a>
+                                        <a class="btn btn-sm btn-dark" href="#" class="btn btn-xs bg-gradient-warning" title="Редактирование устройства">
+                                            Задачи</a>
+                                </div>
                             </div>
                         </div>
                     </div>

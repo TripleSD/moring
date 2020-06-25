@@ -93,6 +93,28 @@ Route::group(
             function () {
                 $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
                 Route::resource('ftp', 'BackupFtpController')->only($methods);
+                Route::group(
+                    ['prefix' => 'yandex', 'as' => 'yandex.'],
+                    function () {
+                        $methods = ['index', 'create', 'store', 'edit', 'update', 'destroy', 'show'];
+                        Route::get('/tasks/resolve', 'YandexTaskController@resolve')
+                            ->name('backups.yandex.tasks.resolve');
+                        Route::resource('tasks', 'YandexTaskController',
+                                        ['parameters' => ['tasks' => 'id']])->only($methods);
+                        Route::get('/connectors/resolve', 'YandexConnectorController@resolve')
+                            ->name('backups.yandex.connectors.resolve');
+                        Route::resource('connectors', 'YandexConnectorController',
+                                        ['parameters' => ['connectors' => 'id']])->only($methods);
+                        Route::get('/connectors/{id}/clean', 'YandexConnectorController@clean')
+                            ->name('backups.yandex.connectors.clean');
+                        Route::get('/connectors/{id}/refresh', 'YandexConnectorController@refresh')
+                            ->name('backups.yandex.connectors.refresh');
+                        Route::get('/buckets/resolve', 'YandexBucketsController@resolve')
+                            ->name('backups.yandex.buckets.resolve');
+                        Route::resource('buckets', 'YandexBucketsController',
+                                        ['parameters' => ['buckets' => 'id']])->only($methods);
+                    }
+                );
             }
         );
 

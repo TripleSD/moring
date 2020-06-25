@@ -227,10 +227,26 @@
                                                                            title="SSL сертификат не установлен / Не включена SSL проверка"></i>
                                                                     @endif
                                                                 @endif
-
                                                                 <a href="https://{{$site->url}}" target="_blank">
                                                                     <i class="fas fa-globe"></i>
                                                                 </a>
+                                                                <div class="text-muted small">
+                                                                    Check URL:
+                                                                    @if($site->https === 1)
+                                                                        @if($site->checksList->use_file === 1)
+                                                                            https://{{ $site->url }}
+                                                                            /{{ $site->file_url}}
+                                                                        @else
+                                                                            https://{{ $site->url }}
+                                                                        @endif
+                                                                    @else
+                                                                        @if($site->checksList->use_file === 1)
+                                                                            http://{{ $site->url }}/{{ $site->file_url}}
+                                                                        @else
+                                                                            http://{{ $site->url }}
+                                                                        @endif
+                                                                    @endif
+                                                                </div>
 
                                                                 @isset($site->getSslCertification->getSSL->expiration_days)
                                                                     <div class="text-gray">
@@ -243,25 +259,13 @@
                                                                         <i class="fas fa-flag-checkered"></i>
                                                                         {{ $site->getSslCertification->getSSL->updated_at }}
                                                                     </div>
+                                                                @else
+                                                                    <div>
+                                                                        <br/><br/>
+                                                                    </div>
                                                                 @endif
                                                             @endif
                                                         </div>
-                                                    </div>
-                                                    <div class="text-muted">
-                                                        Check URL:
-                                                        @if($site->https === 1)
-                                                            @if($site->checksList->use_file === 1)
-                                                                https://{{ $site->url }}/{{ $site->file_url}}
-                                                            @else
-                                                                https://{{ $site->url }}
-                                                            @endif
-                                                        @else
-                                                            @if($site->checksList->use_file === 1)
-                                                                http://{{ $site->url }}/{{ $site->file_url}}
-                                                            @else
-                                                                http://{{ $site->url }}
-                                                            @endif
-                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
@@ -276,26 +280,35 @@
                                                                         <i class="fa fa-exclamation-triangle"></i>
                                                                 </span>
                                                             @else
-                                                                @if(preg_match('/nginx/', $site->getWebServer->web_server))
+                                                                @if(preg_match('/Nginx|nginx/', $site->getWebServer->web_server))
                                                                     <div class="badge badge-success">
                                                                         Nginx
                                                                     </div>
-                                                                    {{$site->getWebServer->web_server}}
-                                                                @elseif(preg_match('/Apache/', $site->getWebServer->web_server))
+                                                                    <div>
+                                                                        {{$site->getWebServer->web_server}}
+                                                                    </div>
+                                                                @elseif(preg_match('/Apache|apache/', $site->getWebServer->web_server))
                                                                     <div class="badge badge-success">
                                                                         Apache
                                                                     </div>
-                                                                    {{$site->getWebServer->web_server}}
-                                                                @elseif(preg_match('/IIS/', $site->getWebServer->web_server))
+                                                                    <div>
+                                                                        {{$site->getWebServer->web_server}}
+                                                                    </div>
+
+                                                                @elseif(preg_match('/IIS|iis/', $site->getWebServer->web_server))
                                                                     <div class="badge badge-success">
                                                                         IIS
                                                                     </div>
-                                                                    {{$site->getWebServer->web_server}}
+                                                                    <div class="text-break">
+                                                                        {{$site->getWebServer->web_server}}
+                                                                    </div>
                                                                 @else
                                                                     <div class="badge badge-dark">
                                                                         Unknown
                                                                     </div>
-                                                                    {{$site->getWebServer->web_server}}
+                                                                    <div>
+                                                                        {{$site->getWebServer->web_server}}
+                                                                    </div>
                                                                 @endif
                                                             @endempty
                                                         </div>
@@ -386,25 +399,28 @@
                                                                             <span class="text-gray">
                                                                             {{ $site->getPhpVersion->version }}
                                                                         </span>
-
                                                                             <span class="text-danger"
                                                                                   title="Отсутствуют данные от бриджа об актуальной версии PHP в данной ветке">
                                                                                 <i class="fa fa-exclamation-triangle"></i>
                                                                         </span>
                                                                         @endif
                                                                     </div>
+                                                                    <div>
+                                                                        <br/>
+                                                                    </div>
                                                                 @else
                                                                     <div>
                                                                         <i class="far fa-question-circle"
-                                                                           title=" Не был получен ответ сервера об
-                                                                           установленной версии"></i>
+                                                                           title=" Не был получен ответ сервера об установленной версии"></i>
                                                                         Unknown
                                                                     </div>
                                                                     <div>
-                                                                        <br>
+                                                                        <br/>
+                                                                        <br/>
                                                                     </div>
                                                                 @endif
                                                             @endif
+
                                                             <div class="text-gray">
                                                                 <i class="fas fa-flag-checkered"></i>
                                                                 {{optional($site->getPhpVersion)->updated_at}}
@@ -529,7 +545,7 @@
                                                             @endempty
                                                         </div>
                                                         <div>
-                                                            <br>
+                                                            <br/><br/>
                                                         </div>
                                                         <div class="text-gray">
                                                             @empty(!$site->getHttpCode)

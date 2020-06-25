@@ -127,7 +127,6 @@
                 </div>
 
                 <div class="col-6">
-
                     @if($task->logs->count() !== 0)
                         <div class="card card-warning">
                             <div class="card-header">
