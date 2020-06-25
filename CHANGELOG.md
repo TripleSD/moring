@@ -1,3 +1,10 @@
+[v.0.1.10 (Build.032)](https://github.com/TripleSD/moring/releases/tag/0.1.10)
+- **(New)** - Enabled site's check from moring file.
+- **(New)** - Added Backup FTP section.
+- **(New)** - Added Backup Yandex Disk section (connectors/tasks/buckets)
+- **(New)** - Added alerts on a header.
+- **(Fix)** - Bug fixes and other improvements.
+
 [v.0.1.9 (Build.029)](https://github.com/TripleSD/moring/releases/tag/0.1.9)
 - **(Upd)** - Refactoring sites repository.
 - **(Upd)** - Refactoring old migrations.

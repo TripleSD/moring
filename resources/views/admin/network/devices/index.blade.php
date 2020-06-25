@@ -94,12 +94,13 @@
                                                             </div>
                                                         </div>
                                                     </div>
+                                                </div>
                                             </td>
                                             <td>
                                                 <div class="row">
                                                     <div class="col">
                                                         <div class="small">
-                                                            <b>Имя/IP адрес устройства:</b>
+                                                            <b>Адрес подключения:</b>
                                                             {{ $device->hostname }}:{{ $device->port }}
                                                         </div>
                                                         <div class="small">

@@ -17,6 +17,8 @@
 <img src="docs/img/moring_readme_2.png" alt="drawing" width="300"/>
 </p>
 
+PHP | Laravel 6 | AdminLTE
+
 MoRiNg - opensource система мониторинга. На данный момент реализованы следуюшие функции:
  - Мониторинг сайтов
     - проверка кода ответа сайта

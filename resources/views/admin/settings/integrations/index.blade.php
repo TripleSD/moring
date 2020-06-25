@@ -42,7 +42,7 @@
                                     <div class="tab-content" id="vert-tabs-tabContent">
                                         <div class="tab-pane text-left fade active show" id="vert-tabs-home"
                                              role="tabpanel" aria-labelledby="vert-tabs-home-tab">
-                                            {{ Form::open([ 'route' => 'settings.integrations.telegram.update', 'method' => 'post', 'enctype' => "multipart/form-data"]) }}
+                                            {{ Form::open(['url' => route('settings.integrations.telegram.update'), 'method' => 'patch']) }}
                                             <p>
                                                 <dt>Bot API Token</dt>
                                                 {{ Form::text('telegram_api_key', $apiToken , ['class' => 'form-control',

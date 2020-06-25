@@ -38,7 +38,83 @@
                             <dd>{{env('TIMEZONE')}}</dd>
                         </div>
                     </div>
+                </div>
+            </div>
 
+            <div class="row">
+                <div class="col-12">
+                    {{ Form::open(['url' => route('settings.integrations.telegram.update'), 'method' => 'post']) }}
+                    {{ Form::select('service', $services , ['class' => 'form-control',
+                                                    'placeholder' => 'Пример: -101xxxxxx']) }}
+                    <button type="submit" class="btn btn-xs bg-gradient-cyan mt-3">
+                        Обновить
+                    </button>
+                    {{ Form::close() }}
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-12">
+                    <table class="table table-responsive">
+                        <thead>
+                        <th>Datetime</th>
+                        <th>Service</th>
+                        <th>Status</th>
+                        <th>Description</th>
+                        <th>User</th>
+                        </thead>
+                        @foreach($logs as $log)
+                            <tr>
+                                <td class="col-2">
+                                    <span class="text-xs">{{ $log->created_at }}</span>
+                                </td>
+                                <td class="col-2">
+                                    <span class="text-xs">{{ $log->service }}</span>
+                                </td>
+                                <td class="col-1">
+                                    <span class="text-xs">@lang($log->status)</span>
+                                </td>
+                                <td class="col-5">
+                                    <div class="text-xs">
+                                        <span class="badge badge-success">
+                                            Route:
+                                        </span>
+                                        {{ $log->route }}
+                                    </div>
+                                    <div class="text-xs">
+                                        <span class="badge badge-info">
+                                            Callable function:
+                                        </span>
+                                        {{ $log->callable_function }}
+                                    </div>
+                                    <div class="text-xs">
+                                        <span class="badge badge-dark">
+                                            Info:
+                                        </span>
+                                        {{ $log->debug_info }}
+                                    </div>
+                                </td>
+                                <td class="col-2">
+                                    @empty($log->user)
+                                        -
+                                    @else
+                                        <span class="text-xs">{{ $log->user->name }}</span>
+                                    @endif
+                                </td>
+                            </tr>
+                        @endforeach
+                    </table>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    @if($logs instanceof \Illuminate\Pagination\LengthAwarePaginator)
+                        <ul class="pagination pagination-xs">
+                            @if ($logs->lastPage() >= $logs->currentPage() && $logs->lastPage() > 1)
+                                {{ $logs->links('vendor.pagination.bootstrap-4') }}
+                            @endif
+                        </ul>
+                    @endif
                 </div>
             </div>
         </div>

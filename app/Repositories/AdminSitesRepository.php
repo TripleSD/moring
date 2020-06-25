@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Sites;
 use App\Models\SitesChecksList;
 use App\Models\SitesPingResponses;
+use GuzzleHttp\Client;
 
 class AdminSitesRepository extends Repository
 {
@@ -57,20 +58,18 @@ class AdminSitesRepository extends Repository
     {
         // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
         if (isset($fillable['https']) === false) {
-            $fillable['https'] = 0;
+            $fillable['https']       = 0;
             $fillable['check_ssl']   = 0;
             $fillable['check_https'] = 0;
         } else {
             $fillable['check_https'] = 1;
         }
 
+        $fillable['enabled'] = 1;
+
         // Get ip address
         $fillable['ip_address'] = gethostbyname($fillable['url']);
 
-        //    Now we activate Moring file usage, if path has been added
-        if (strlen($fillable['file_url']) >= 5) {
-            $fillable['use_file'] = 1;
-        }
         // Add pending status until first check is running
         $fillable['pending'] = 1;
 
@@ -91,12 +90,18 @@ class AdminSitesRepository extends Repository
 
     public function update($fillable, int $id)
     {
-        // Now we check, if checkbox https selected otherwise we set check_ssl and check_https to zero
-        if ((int) ($fillable['https']) === 0) {
+        if (! isset($fillable['https'])) {
+            $fillable['https']       = 0;
             $fillable['check_ssl']   = 0;
             $fillable['check_https'] = 0;
-        } else {
-            $fillable['check_https'] = 1;
+        }
+
+        if (! isset($fillable['enabled'])) {
+            $fillable['enabled'] = 0;
+        }
+
+        if (! isset($fillable['use_file'])) {
+            $fillable['use_file'] = 0;
         }
 
         // Get ip address
@@ -180,5 +185,40 @@ class AdminSitesRepository extends Repository
         $result        = $site->update();
 
         return $result;
+    }
+
+    public function checkUrl($array)
+    {
+        $url      = $array['url'];
+        $file_url = $array['file_url'];
+        $https    = $array['https'];
+
+        $url = ($https) ? 'https://' . $url . '/' . $file_url : 'http://' . $url . '/' . $file_url;
+
+        try {
+            $httpClient = new Client();
+            $response   = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+
+            if ($response->getStatusCode() === 200) {
+                return true;
+            }
+
+            return false;
+        } catch (\Exception $e) {
+            return false;
+        }
+    }
+
+    /**
+     * @param $request
+     * @return bool
+     */
+    public function checkErrorDnsDomain($request)
+    {
+        if (checkdnsrr($request->url, 'A')) {
+            return false;
+        }
+
+        return true;
     }
 }

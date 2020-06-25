@@ -36,37 +36,42 @@
                                             <i class="fas fa-globe" title="Мониторинг приостановлен"></i>
                                         </small>
                                     @endif
-                                    {{$site->url}}
+                                    <span class="small">
+                                        {{$site->url}}
+                                    </span>
                                 </td>
                                 <td class="d-none d-sm-table-cell">
+                                    <span class="small">
                                     @if(isset($site->getHttpCode))
-                                        @if($site->getHttpCode->http_code == 200)
-                                            <span class="badge badge-success"
-                                                  title="Сайт полностью рабочий">
+                                            @if($site->getHttpCode->http_code == 200)
+                                                <span class="badge badge-success"
+                                                      title="Сайт полностью рабочий">
                                                             {{ $site->getHttpCode->http_code }}
                                                             </span>
-                                        @elseif($site->getHttpCode->http_code == 301)
-                                            <span class="badge badge-warning"
-                                                  title="На сайте установлен редирект">
+                                            @elseif($site->getHttpCode->http_code == 301)
+                                                <span class="badge badge-warning"
+                                                      title="На сайте установлен редирект">
                                                             {{ $site->getHttpCode->http_code }}
                                                             </span>
-                                        @elseif($site->getHttpCode->http_code == 302)
-                                            <span class="badge badge-warning"
-                                                  title="На сайте установлен редирект">
+                                            @elseif($site->getHttpCode->http_code == 302)
+                                                <span class="badge badge-warning"
+                                                      title="На сайте установлен редирект">
                                                             {{ $site->getHttpCode->http_code }}
                                                             </span>
-                                        @else
-                                            <span class="text-warning" title="Неопознанный код ответа">
+                                            @else
+                                                <span class="text-warning" title="Неопознанный код ответа">
                                                                 <i class="fa fa-exclamation-triangle"></i>
                                                             </span>
-                                        @endif
-                                    @else
-                                        <span class="text-warning" title="Код ответа не был получен">
+                                            @endif
+                                        @else
+                                            <span class="text-warning" title="Код ответа не был получен">
                                                             <i class="fa fa-exclamation-triangle"></i>
                                                         </span>
-                                    @endif
+                                        @endif
+                                    </span>
                                 </td>
                                 <td class="d-none d-sm-table-cell">
+                                    <span class="small">
                                             <span
                                                 @if($site->enabled === 1)
                                                 class="pt-1 text-success">
@@ -75,6 +80,7 @@
                                                 @endif
                                                 {{$site->getHttpCode->updated_at}}
                                             </span>
+                                        </span>
                                 </td>
                                 <td>
                                     <a href="{{route('admin.sites.show',$site->id)}}"

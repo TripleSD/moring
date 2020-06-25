@@ -12,6 +12,7 @@ use Carbon\Carbon;
 use Exception;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
+use Illuminate\Support\Facades\Config;
 use Str;
 
 class SitesChecker extends Command
@@ -58,10 +59,10 @@ class SitesChecker extends Command
         }
 
         if ($site_id === null) {
-            $sites     = Sites::where('enabled', 1)->get();
+            $sites     = Sites::where('enabled', 1)->with('checksList')->get();
             $tgMessage = 0;
         } else {
-            $sites[]   = Sites::find($site_id);
+            $sites[]   = Sites::where('id', $site_id)->with('checksList')->firstOrFail();
             $tgMessage = 1;
         }
 
@@ -119,19 +120,34 @@ class SitesChecker extends Command
         Sites::where('id', $site->id)->update(['ip_address' => gethostbyname($site->url)]);
         try {
             if ($site->checksList->use_file === 1) {
-                $httpClient    = new Client();
-                $url           = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->file_url : 'http://' . $site->file_url;
-                $request       = $httpClient->request('GET', $url, ['allow_redirects' => false]);
-                $response      = $request->getBody();
-                $responseArray = json_decode($response, true);
-                $phpVersion    = $responseArray['php-version'];
-                $statusCode    = $request->getStatusCode();
-                $webServerType = $responseArray['web-server'];
-                $phpBranch     = $responseArray['php-branch'];
+                if ($site->file_url === null) {
+                    $phpVersion    = 0;
+                    $statusCode    = 999;
+                    $webServerType = 0;
+                    $phpBranch     = 0;
+                } else {
+                    $httpClient = new Client();
+                    $url        = ($site->https === 1) ? 'https://' . $site->url . '/' . $site->file_url : 'http://' . $site->url . '/' . $site->file_url;
+                    $request    = $httpClient->request('GET', $url, ['allow_redirects' => false]);
+                    if ($request->getStatusCode() === 200) {
+                        $response      = $request->getBody();
+                        $responseArray = json_decode($response, true);
+                        $phpVersion    = $responseArray['php-version'];
+                        $statusCode    = $request->getStatusCode();
+                        $webServerType = $responseArray['web-server'];
+                        $phpBranch     = $responseArray['php-branch'];
+                    } else {
+                        $phpVersion    = 0;
+                        $statusCode    = $request->getStatusCode();
+                        $webServerType = 0;
+                        $phpBranch     = 0;
+                    }
+                }
             } else {
                 $url = ($site->https === 1 && $site->checksList->check_https === 1) ? 'https://' . $site->url : 'http://' . $site->url;
                 $ch  = curl_init();
                 curl_setopt($ch, CURLOPT_URL, $url);
+                curl_setopt($ch, CURLOPT_USERAGENT, Config::get('moring.userAgent'));
                 curl_setopt($ch, CURLOPT_HEADER, true);
                 curl_setopt($ch, CURLOPT_NOBODY, true);
                 curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
